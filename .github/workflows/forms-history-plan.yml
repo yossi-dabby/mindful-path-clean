@@ -1,0 +1,71 @@
+name: Prepare forms history cleanup (read only)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/forms-history-plan.yml
+      - scripts/maintenance/prepare_forms_history_cleanup.py
+      - scripts/maintenance/publish_forms_history_cleanup.py
+      - test/maintenance/test_forms_history_cleanup.py
+  workflow_dispatch:
+    inputs:
+      expected_main:
+        description: Full current main SHA; abort if it has moved
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: forms-history-plan
+  cancel-in-progress: false
+
+jobs:
+  test:
+    name: History cleanup guardrails
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install verified git-filter-repo
+        run: |
+          curl --fail --location --silent --show-error https://raw.githubusercontent.com/newren/git-filter-repo/v2.47.0/git-filter-repo -o "$RUNNER_TEMP/git-filter-repo.py"
+          printf '67447413e273fc76809289111748870b6f6072f08b17efe94863a92d810b7d94  %s\n' "$RUNNER_TEMP/git-filter-repo.py" | sha256sum --check
+      - name: Test history guards on synthetic repositories
+        env:
+          FORMS_FILTER_REPO: ${{ runner.temp }}/git-filter-repo.py
+        run: python -m unittest discover -s test/maintenance -v
+  prepare:
+    needs: test
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install verified git-filter-repo
+        run: |
+          curl --fail --location --silent --show-error https://raw.githubusercontent.com/newren/git-filter-repo/v2.47.0/git-filter-repo -o "$RUNNER_TEMP/git-filter-repo.py"
+          printf '67447413e273fc76809289111748870b6f6072f08b17efe94863a92d810b7d94  %s\n' "$RUNNER_TEMP/git-filter-repo.py" | sha256sum --check
+      - name: Test history guards on synthetic repositories
+        env:
+          FORMS_FILTER_REPO: ${{ runner.temp }}/git-filter-repo.py
+        run: python -m unittest discover -s test/maintenance -v
+      - name: Prepare and verify a disposable mirror
+        env:
+          EXPECTED_MAIN: ${{ inputs.expected_main }}
+        run: |
+          git clone --mirror https://github.com/yossi-dabby/mindful-path.git "$RUNNER_TEMP/forms-history.git"
+          python scripts/maintenance/prepare_forms_history_cleanup.py --mirror "$RUNNER_TEMP/forms-history.git" --expected-main "$EXPECTED_MAIN" --output-dir "$RUNNER_TEMP/forms-history-plan" --filter-repo "$RUNNER_TEMP/git-filter-repo.py"
+      - name: Save sanitized history and verification report
+        uses: actions/upload-artifact@v4
+        with:
+          name: forms-history-plan-${{ github.run_id }}
+          path: ${{ runner.temp }}/forms-history-plan/
+          retention-days: 3
+          if-no-files-found: error

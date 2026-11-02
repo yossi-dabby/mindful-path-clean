@@ -1,0 +1,62 @@
+name: Branch Cleanup Wave 4
+
+# IMPORTANT: This workflow only runs via manual dispatch.
+# It will NOT run automatically on push, PR, or schedule.
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: >
+          Type CONFIRM_DELETE_SAFE_MERGED_BRANCHES_WAVE_4 to proceed.
+          Any other value will abort the run immediately.
+        required: true
+        default: ''
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  cleanup:
+    name: Safe Branch Cleanup Wave 4
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch all remote branches
+        run: git fetch --prune origin
+
+      - name: Verify confirmation input
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "CONFIRM_DELETE_SAFE_MERGED_BRANCHES_WAVE_4" ]; then
+            echo "ERROR: Confirmation input did not match."
+            echo "Expected: CONFIRM_DELETE_SAFE_MERGED_BRANCHES_WAVE_4"
+            echo "Received: ${{ github.event.inputs.confirm }}"
+            exit 1
+          fi
+          echo "Confirmation accepted."
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Run branch cleanup script
+        id: cleanup
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/branch-cleanup-wave-4.mjs
+
+      - name: Upload cleanup report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: branch-cleanup-wave-4-report
+          path: branch-cleanup-wave-4-report.md
+          retention-days: 90
+          if-no-files-found: warn

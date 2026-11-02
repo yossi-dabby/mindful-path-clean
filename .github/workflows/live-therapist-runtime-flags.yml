@@ -1,0 +1,39 @@
+name: Live Therapist Runtime Flags
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: live-therapist-runtime-flags-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  live-therapist-runtime-flags:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'pull_request' && startsWith(github.head_ref, 'codex/run-live-therapist-permission-experiment-'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'
+      BASE44_LIVE_TEST_EMAIL: ${{ secrets.BASE44_LIVE_TEST_EMAIL }}
+      BASE44_LIVE_TEST_PASSWORD: ${{ secrets.BASE44_LIVE_TEST_PASSWORD }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Verify application-owned therapist persistence flags
+        run: node scripts/check-live-therapist-runtime-flags.mjs

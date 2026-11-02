@@ -9,9 +9,9 @@ on:
 
 jobs:
   e2e:
-    name: E2E ${{ matrix.project }}
-    # Full mobile coverage plus install/build exceeded 30 minutes in run 5053.
-    # Keep all cases enabled and leave enough time to upload failure artifacts.
+    name: E2E ${{ matrix.project }} (${{ matrix.shard }}/${{ matrix.shards }})
+    # Private-repository runners have fewer CPUs than public-repository runners.
+    # Shard the full suites to retain every case within the existing time budget.
     timeout-minutes: 40
     # Playwright 1.58 supports Ubuntu 24.04; ubuntu-latest can move ahead of it.
     runs-on: ubuntu-24.04
@@ -21,7 +21,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [smoke-production-critical, web-desktop, mobile-390x844]
+        project: [web-desktop, mobile-390x844]
+        shard: [1, 2, 3, 4]
+        shards: [4]
+        include:
+          - project: smoke-production-critical
+            shard: 1
+            shards: 1
 
     steps:
       - name: Checkout code
@@ -90,7 +96,7 @@ jobs:
           done
 
       - name: Run Playwright E2E
-        run: npm run test:e2e -- --project=${{ matrix.project }}
+        run: npm run test:e2e -- --project=${{ matrix.project }} --shard=${{ matrix.shard }}/${{ matrix.shards }}
         env:
           CI: true
           BASE_URL: http://127.0.0.1:5173
@@ -102,7 +108,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: devserver-log-${{ matrix.project }}
+          name: devserver-log-${{ matrix.project }}-${{ matrix.shard }}of${{ matrix.shards }}
           path: devserver.log
           retention-days: 7
 
@@ -110,7 +116,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: playwright-report-${{ matrix.project }}
+          name: playwright-report-${{ matrix.project }}-${{ matrix.shard }}of${{ matrix.shards }}
           path: playwright-report/
           retention-days: 30
           if-no-files-found: ignore
@@ -119,7 +125,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: test-results-${{ matrix.project }}
+          name: test-results-${{ matrix.project }}-${{ matrix.shard }}of${{ matrix.shards }}
           path: test-results/
           retention-days: 14
           if-no-files-found: ignore

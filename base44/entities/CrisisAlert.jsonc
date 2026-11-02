@@ -1,0 +1,67 @@
+{
+  "name": "CrisisAlert",
+  "type": "object",
+  "properties": {
+    "surface": {
+      "type": "string",
+      "enum": [
+        "chat",
+        "companion",
+        "coach"
+      ],
+      "description": "Which AI surface triggered the alert"
+    },
+    "conversation_id": {
+      "type": "string",
+      "description": "Reference to the agent conversation ID"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "Reference to CoachingSession ID if applicable"
+    },
+    "reason_code": {
+      "type": "string",
+      "enum": [
+        "self_harm",
+        "suicide",
+        "overdose",
+        "immediate_danger",
+        "general_crisis"
+      ],
+      "description": "General category of detected language"
+    },
+    "user_email": {
+      "type": "string",
+      "description": "Email of user who triggered alert (for admin review)"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional admin notes about this alert record"
+    }
+  },
+  "required": [
+    "surface",
+    "reason_code"
+  ],
+  "rls": {
+    "create": {
+      "data.user_email": "{{user.email}}"
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "VideoProgress",
+  "type": "object",
+  "properties": {
+    "video_id": {
+      "type": "string",
+      "description": "Reference to Video"
+    },
+    "progress": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 0,
+      "description": "Percentage watched (0-100)"
+    },
+    "completed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether video is fully watched"
+    },
+    "last_watched_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last watch timestamp"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this video progress record"
+    }
+  },
+  "required": [
+    "video_id"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

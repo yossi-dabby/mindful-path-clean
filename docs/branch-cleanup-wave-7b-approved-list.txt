@@ -1,0 +1,69 @@
+# Branch Cleanup Wave 7B — Approved List (Archive Tag + Delete)
+#
+# Wave 7B continues the archive-tag-and-delete strategy for abandoned WIP Copilot branches.
+# Wave 7A succeeded with no skips or failures (25/25), so Wave 7B may use a cap of 50 branches.
+# Scope: only abandoned [WIP] Copilot attempts older than 90 days.
+#
+# Rules:
+#   - Maximum 50 branches
+#   - Do not include main, staging-fresh, current branch, or protected/special branches
+#   - Do not include open PR branches
+#   - Do not include no-PR stale branches
+#   - Do not include closed-unmerged non-WIP branches
+#   - Do not include branches already deleted in Waves 1-6 or archived in Wave 7A
+#
+# Sorted by age (oldest first). All branches are ≥ 133 days old.
+#
+# Last updated: 2026-06-10
+# Approved by: repository owner before dispatching the workflow
+
+copilot/enhance-e2e-chat-test
+copilot/enhance-send-button-locator
+copilot/fix-chat-send-button-flakiness
+copilot/fix-chat-send-button-selector
+copilot/fix-chat-smoke-test
+copilot/fix-chat-smoke-test-failures
+copilot/fix-chat-smoke-test-flake
+copilot/fix-chat-smoke-test-flakiness
+copilot/fix-chat-ui-send-button
+copilot/fix-e2e-playwright-chat-test
+copilot/improve-chat-message-test-robustness
+copilot/improve-chat-send-button-reliability
+copilot/improve-chat-smoke-test-reliability
+copilot/improve-chat-smoke-test-robustness
+copilot/improve-e2e-test-stability
+copilot/improve-error-handling-send-button
+copilot/improve-safe-click-helper
+copilot/increase-send-button-timeout
+copilot/increase-timeout-send-button
+copilot/robustify-handle-send-message
+copilot/update-chat-e2e-test-resilience
+copilot/update-e2e-reliability-tests
+copilot/update-playwright-config-again
+copilot/update-playwright-config-projects
+copilot/update-playwright-projects
+copilot/update-playwright-workflow
+copilot/add-advanced-diagnostics-send-button
+copilot/add-advanced-diagnostics-to-tests
+copilot/add-debugging-error-handling
+copilot/add-enhanced-diagnostics-e2e-chat
+copilot/add-error-handling-logging
+copilot/enhance-chat-diagnostics
+copilot/enhance-e2e-chat-diagnostics
+copilot/fix-chat-smoke-test-issues
+copilot/fix-e2e-smoke-test-errors
+copilot/fix-e2e-smoke-test-issue
+copilot/fix-e2e-test-flakiness
+copilot/fix-e2e-test-flakiness-again
+copilot/harden-fallback-logic
+copilot/improve-e2e-test-robustness
+copilot/reduce-test-flakiness-send-message
+copilot/stabilize-e2e-chat-test
+copilot/update-playwright-smoke-test
+copilot/add-playwright-e2e-tests-another-one
+copilot/update-chat-input-wait-function
+copilot/improve-e2e-test-resilience
+copilot/refactor-e2e-test-stability
+copilot/revise-e2e-tests-for-stability
+copilot/update-e2e-smoke-tests
+copilot/update-playwright-e2e-setup

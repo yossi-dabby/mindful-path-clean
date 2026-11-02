@@ -1,0 +1,77 @@
+# Branch Cleanup Wave 4 — Approved Deletion List
+#
+# IMPORTANT: This file is read by scripts/branch-cleanup-wave-4.mjs.
+#
+# Rules:
+#   - Lines starting with '#' are comments and are ignored.
+#   - Empty lines are ignored.
+#   - Branch names must be exact (no trailing spaces, no origin/ prefix).
+#   - All entries must be SAFE_DELETE_MERGED candidates:
+#       remote branch exists, fully merged into main, older than 14 days,
+#       no open PRs, not main/staging-fresh, not protected/referenced.
+#   - This list must not exceed 50 entries.
+#
+# Wave 4 contains 50 branches from the fresh post-Wave-3 / post-empty-run refresh.
+# Verified on 2026-06-10:
+#   - 384 remote heads observed on origin
+#   - 142 remote branches were merged into origin/main at refresh time
+#   - gh pr list --state open returned 0 open PRs
+#   - Each approved branch exists on origin, is fully merged into origin/main,
+#     is older than 14 days, and has no references in workflows, docs, README,
+#     package.json, or deployment config files
+#   - None of the Wave 1, Wave 2, or Wave 3 deleted branches are included
+# If additional branches become eligible later, create a separate Wave 5 PR and list.
+#
+# Last updated: 2026-06-10
+# Approved by: repository owner before dispatching the workflow
+
+copilot/add-internal-automated-tests-again
+copilot/finish-lucide-inventory-automation
+copilot/create-implementation-plan
+copilot/fix-notification-bell-crash
+copilot/copilotfix-white-screen-error-another-one
+copilot/copilotfix-white-screen-error-another-one-again
+copilot/copilotimplement-shared-layer-fix-again
+copilot/fix-base44-appid-fallback-conflicts-again
+copilot/fix-base44-login-redirect-context
+copilot/fix-e2e-test-chat-page-404-again
+copilot/fix-home-setup-completion-failure
+copilot/fix-home-setup-completion-flow
+copilot/fix-home-setup-completion-flow-another-one
+copilot/fix-invalid-json-escape
+copilot/fix-onboarding-flow-error
+copilot/fix-railway-spa-routing
+copilot/fix-shared-appid-resolution
+copilot/fix-shared-client-routing-again
+copilot/fix-undefined-app-id-in-api-url
+copilot/fix-white-screen-error
+copilot/fix-white-screen-error-again
+copilot/implement-shared-layer-fix
+copilot/ensure-no-e2e-test-failures
+copilot/fix-login-error-after-registration
+copilot/fix-settings-page-loading-issue
+copilot/fix-user-account-deletion-issues
+copilot/fix-app-registration-issues
+copilot/fix-auth-redirect-callback-loop
+copilot/fix-registration-loop
+copilot/set-env-variable-for-app-id
+copilot/fix-duplicate-import-active-ai-companion-wiring
+copilot/fix-phase-2-chat-stall
+copilot/resolve-ai-flag-state-mismatch
+copilot/497-resolve-import-ready-batch-conflicts
+copilot/fix-e2e-chat-smoke-test-timeout
+copilot/fix-json-validation-errors
+copilot/fix-aggregate-band-unknown
+copilot/fix-stuck-response-bug
+copilot/fix-chat-attachment-support
+copilot/mvp-single-file-attachment
+copilot/stabilize-chat-runtime-path
+copilot/fix-audio-transcription-failure
+copilot/fix-audio-transcription-request
+copilot/fix-android-voice-to-text-toast-behavior
+copilot/fix-test-failures-pr-659
+copilot/implement-mobile-transcription-path
+copilot/fix-syntax-error-chat-jsx
+copilot/fix-form-registry-issue
+copilot/implement-hebrew-cbt-ocd-form
+copilot/integrate-children-cbt-worksheet-packs

@@ -1,0 +1,45 @@
+{
+  "name": "GroupMembership",
+  "type": "object",
+  "properties": {
+    "group_id": {
+      "type": "string",
+      "description": "Reference to CommunityGroup"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "member",
+        "moderator",
+        "admin"
+      ],
+      "default": "member",
+      "description": "User role in group"
+    },
+    "joined_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When user joined"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this group membership"
+    }
+  },
+  "required": [
+    "group_id"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

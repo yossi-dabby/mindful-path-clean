@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#26a69a" />
+    <script>
+      (function () {
+        var storedLanguage = localStorage.getItem('language') || 'en';
+        document.documentElement.lang = storedLanguage;
+        document.documentElement.dir = storedLanguage === 'he' ? 'rtl' : 'ltr';
+        var stored = localStorage.getItem('theme');
+        var isDark = stored === 'dark' || (stored !== 'light' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) document.documentElement.classList.add('dark');
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', isDark ? '#0c121c' : '#f8f8f6');
+      })();
+    </script>
+    <script>
+      (function () {
+        var state = { mounted: false, errors: [], watchdogId: null };
+        window.__MINDFUL_PATH_DIAGNOSTICS__ = state;
+
+        function describe(value) {
+          if (!value) return 'Unknown startup error';
+          if (typeof value === 'string') return value;
+          return value.stack || value.message || String(value);
+        }
+
+        function showFailure(record) {
+          if (state.mounted) return;
+
+          function render() {
+            if (state.mounted) return;
+            var root = document.getElementById('root');
+            if (!root) return;
+
+            var isHebrew = document.documentElement.lang === 'he';
+            root.innerHTML = [
+              '<main id="startup-error-fallback" role="alert" style="box-sizing:border-box;min-height:100vh;padding:24px;display:flex;align-items:center;justify-content:center;background:#f8f8f6;color:#172033;font-family:Arial,sans-serif">',
+              '<section style="box-sizing:border-box;width:100%;max-width:440px;padding:24px;border:1px solid #d9e0e7;border-radius:18px;background:#fff;text-align:center">',
+              '<h1 style="margin:0 0 12px;font-size:22px"></h1>',
+              '<p data-startup-message style="margin:0 0 16px;line-height:1.6;color:#52606d"></p>',
+              '<pre data-startup-detail style="box-sizing:border-box;margin:0 0 18px;padding:12px;max-height:160px;overflow:auto;white-space:pre-wrap;word-break:break-word;border-radius:10px;background:#f1f5f9;color:#475569;text-align:left;font-size:11px"></pre>',
+              '<button type="button" style="min-height:44px;padding:10px 20px;border:0;border-radius:12px;background:#0f766e;color:#fff;font-size:16px;font-weight:600"></button>',
+              '</section></main>'
+            ].join('');
+
+            root.querySelector('h1').textContent = isHebrew
+              ? 'לא הצלחנו להפעיל את Mindful Path'
+              : 'Mindful Path could not start';
+            root.querySelector('[data-startup-message]').textContent = isHebrew
+              ? 'אירעה תקלה בזמן הפעלת האפליקציה. נסה לטעון אותה מחדש.'
+              : 'The app encountered a startup error. Please reload and try again.';
+            root.querySelector('[data-startup-detail]').textContent = 'Diagnostic code: ' + record.kind;
+            var button = root.querySelector('button');
+            button.textContent = isHebrew ? 'טען מחדש' : 'Reload';
+            button.addEventListener('click', function () { window.location.reload(); });
+          }
+
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', render, { once: true });
+          } else {
+            render();
+          }
+        }
+
+        function capture(kind, value) {
+          var record = {
+            kind: kind,
+            detail: describe(value).slice(0, 2000),
+            timestamp: new Date().toISOString()
+          };
+          state.errors.push(record);
+          console.error('[Mindful Path startup]', record);
+          showFailure(record);
+        }
+
+        window.__MINDFUL_PATH_MARK_MOUNTED__ = function () {
+          state.mounted = true;
+          if (state.watchdogId) window.clearTimeout(state.watchdogId);
+        };
+
+        window.addEventListener('error', function (event) {
+          var target = event.target;
+          var isCriticalResource = target && (
+            (target.tagName === 'SCRIPT' && target.type === 'module') ||
+            (target.tagName === 'LINK' && target.rel === 'stylesheet')
+          );
+
+          if (isCriticalResource) {
+            capture('resource_error', target.src || target.href);
+            return;
+          }
+
+          capture('javascript_error', event.error || event.message);
+        }, true);
+
+        window.addEventListener('unhandledrejection', function (event) {
+          capture('unhandled_rejection', event.reason);
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+          state.watchdogId = window.setTimeout(function () {
+            if (!state.mounted) capture('startup_timeout', 'React did not mount within 20 seconds');
+          }, 20000);
+        }, { once: true });
+      })();
+    </script>
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Mindful Path" />
+    <meta name="description" content="Mindful Path is a mental wellness support app for guided mindfulness, journaling, and CBT-informed self-help tools." />
+    <link rel="manifest" href="/manifest.json?v=app-icon-v1" />
+    <title>Mindful Path</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

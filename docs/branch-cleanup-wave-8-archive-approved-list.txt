@@ -1,0 +1,47 @@
+# Branch Cleanup Wave 8 — Archive Then Delete Approved List
+#
+# Scope: ARCHIVE_THEN_DELETE_CLOSED_UNMERGED_OLDER_THAN_90D only.
+# Cap: maximum 40 branches.
+#
+# Last updated: 2026-06-10
+
+copilot/audit-vitest-configuration
+copilot/fix-issues-in-test-folder
+copilot/fix-numeric-safety-test-errors
+copilot/fix-test-suite-issues
+copilot/fix-test-suite-issues-again
+copilot/improve-inefficient-code
+copilot/stabilize-test-suite
+copilot/verify-test-suite-passing
+copilot/fix-numeric-safety-import-error
+copilot/fix-numeric-safety-import-error-again
+copilot/create-numeric-safety-file
+copilot/fix-workflows-run-issues
+copilot/add-numeric-safety-module
+copilot/add-numeric-safety-module-again
+copilot/create-numeric-safety-module
+copilot/fix-delete-icon-in-sessions-list
+copilot/fix-delete-session-bug
+copilot/fix-delete-session-bug-again
+copilot/fix-delete-session-button
+copilot/fix-numeric-safety-import
+copilot/fix-sessions-delete-e2e
+copilot/fix-sessions-delete-e2e-again
+copilot/fix-trash-icon-interactivity
+copilot/mobile-first-coach-improvements
+copilot/ci-add-playwright-workflow
+copilot/add-production-smoke-test-suite
+copilot/implement-i18n-for-mind-games
+copilot/prepare-app-for-store-submission
+copilot/check-fix-performance-issues
+copilot/fix-screen-animations-transitions
+copilot/add-playwright-test-suite
+copilot/diagnose-performance-issue
+copilot/fix-api-endpoint-construction
+copilot/fix-e2e-pull-refresh-tests
+copilot/fix-e2e-test-chat-page
+copilot/add-accessibility-tests-community-page
+copilot/add-forum-post-card-tests
+copilot/clone-and-push-repository
+copilot/refactor-mobile-compatibility-issues
+copilot/ci-validation-wiring-checks

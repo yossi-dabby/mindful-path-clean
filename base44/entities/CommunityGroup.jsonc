@@ -1,0 +1,68 @@
+{
+  "name": "CommunityGroup",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Group name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Group description"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "anxiety",
+        "depression",
+        "stress_management",
+        "goal_achievement",
+        "mindfulness",
+        "fitness",
+        "sleep",
+        "relationships",
+        "work_life_balance",
+        "other"
+      ],
+      "description": "Group focus area"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Group image"
+    },
+    "member_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of members"
+    },
+    "post_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of posts"
+    },
+    "is_private": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether group is private"
+    },
+    "guidelines": {
+      "type": "string",
+      "description": "Group guidelines"
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "category"
+  ],
+  "rls": {
+    "create": {},
+    "read": {},
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

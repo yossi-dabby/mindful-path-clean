@@ -1,0 +1,102 @@
+{
+  "name": "MindGameActivity",
+  "type": "object",
+  "properties": {
+    "game_id": {
+      "type": "string",
+      "description": "ID of the mind game played"
+    },
+    "game_slug": {
+      "type": "string",
+      "description": "Slug identifier for the game"
+    },
+    "game_title": {
+      "type": "string",
+      "description": "Display title of the game"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "CBT",
+        "DBT",
+        "ACT"
+      ],
+      "description": "Therapeutic category"
+    },
+    "skill_focus": {
+      "type": "string",
+      "enum": [
+        "cognitive_restructuring",
+        "distress_tolerance",
+        "emotion_regulation",
+        "behavioral_activation",
+        "mindfulness",
+        "defusion",
+        "grounding"
+      ],
+      "description": "Primary skill practiced"
+    },
+    "completed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether user completed the game"
+    },
+    "duration_seconds": {
+      "type": "number",
+      "description": "Time spent on the game"
+    },
+    "rating": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "User rating (optional)"
+    },
+    "difficulty_level": {
+      "type": "string",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "default": "beginner",
+      "description": "Difficulty level played"
+    },
+    "success_rate": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Performance score (0-100)"
+    },
+    "attempts": {
+      "type": "number",
+      "default": 1,
+      "description": "Number of attempts/questions answered"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this game activity record"
+    }
+  },
+  "required": [
+    "game_id",
+    "game_slug",
+    "game_title",
+    "category",
+    "skill_focus"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

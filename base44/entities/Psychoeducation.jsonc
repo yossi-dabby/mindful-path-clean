@@ -1,0 +1,285 @@
+{
+  "name": "Psychoeducation",
+  "type": "object",
+  "description": "Structured psychoeducational content records for future AI content-aware retrieval. Each record represents a standalone educational unit (e.g., 'What is catastrophizing?', 'The CBT triangle', 'Understanding panic attacks').",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title of the psychoeducational unit (e.g., 'What is catastrophizing?')"
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL-safe unique identifier for stable content addressing and retrieval system reference"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "cbt_basics",
+        "cognitive_distortions",
+        "anxiety",
+        "depression",
+        "stress",
+        "anger",
+        "relationships",
+        "self_esteem",
+        "sleep",
+        "mindfulness",
+        "emotional_regulation",
+        "behavioral_activation",
+        "trauma",
+        "crisis_safety",
+        "general"
+      ],
+      "description": "Primary topic category for classification and retrieval"
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "More specific grouping within the category (e.g., 'thought_distortions > all_or_nothing_thinking')"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Short AI-optimized one-paragraph summary of the content \u2014 used as the primary retrieval snippet when injecting context into an agent prompt"
+    },
+    "content": {
+      "type": "string",
+      "description": "Full educational text body \u2014 the complete psychoeducational explanation, written for lay users at an appropriate reading level"
+    },
+    "key_concepts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Core concepts covered in this unit (e.g., ['automatic thoughts', 'cognitive distortion', 'evidence testing'])"
+    },
+    "example_scenarios": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Concrete example situations illustrating the concept \u2014 used by agents to make explanations relatable"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "he",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt"
+      ],
+      "default": "en",
+      "description": "Language of this content record"
+    },
+    "translation_group_id": {
+      "type": "string",
+      "description": "Stable identifier shared by the canonical source and all language variants"
+    },
+    "source_record_id": {
+      "type": "string",
+      "description": "ID of the canonical source-language record"
+    },
+    "source_language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "he",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt"
+      ],
+      "default": "en",
+      "description": "Language of the canonical source record"
+    },
+    "variant_language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "he",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt"
+      ],
+      "default": "en",
+      "description": "Language of this specific content variant"
+    },
+    "translation_status": {
+      "type": "string",
+      "enum": [
+        "source",
+        "draft",
+        "in_review",
+        "approved",
+        "rejected",
+        "excluded"
+      ],
+      "default": "source",
+      "description": "Translation lifecycle state; translated variants remain non-approved until review"
+    },
+    "clinical_review_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_review",
+        "approved",
+        "changes_requested"
+      ],
+      "default": "pending",
+      "description": "Clinical review state for this language variant"
+    },
+    "translation_version": {
+      "type": "number",
+      "minimum": 1,
+      "default": 1,
+      "description": "Version of this language variant"
+    },
+    "canonical_status": {
+      "type": "string",
+      "enum": [
+        "canonical",
+        "review_required",
+        "duplicate",
+        "excluded"
+      ],
+      "default": "review_required",
+      "description": "Canonicalization state used to block duplicate or unresolved sources from translation"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "default": "beginner",
+      "description": "Reading or conceptual complexity level"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Keywords for retrieval (e.g., 'catastrophizing', 'panic', 'negative thinking', 'CBT')"
+    },
+    "goal_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Therapeutic goal types this content is relevant for (e.g., anxiety_reduction, mood_improvement, cognitive_restructuring)"
+    },
+    "mood_targets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Mood states this content is particularly relevant for (e.g., anxious, low, angry, overwhelmed)"
+    },
+    "when_to_use": {
+      "type": "string",
+      "description": "Explicit natural-language guidance for AI on when to surface this content to a user (e.g., 'When user identifies catastrophizing thoughts during thought record work')"
+    },
+    "contraindications": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Situations where this content should NOT be introduced (e.g., 'Do not use during acute crisis' or 'Avoid with users who are destabilised by detailed trauma content')"
+    },
+    "related_exercises": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs or slugs of Exercise records that pair with this psychoeducational content"
+    },
+    "related_resources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs or slugs of Resource records that extend or complement this content"
+    },
+    "evidence_base": {
+      "type": "string",
+      "description": "Clinical or research basis for this content (e.g., 'Based on Beck's cognitive model, 1976; supported by multiple RCTs in anxiety disorders')"
+    },
+    "source": {
+      "type": "string",
+      "description": "Original source, textbook, clinical manual, or attribution"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "draft",
+        "archived"
+      ],
+      "default": "draft",
+      "description": "Content lifecycle status \u2014 only 'active' records should be used in AI retrieval pipelines"
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "description": "Content version number \u2014 increment when content is materially updated"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "description": "Name or role of the clinical reviewer who approved this content (e.g., 'Dr. Jane Smith, CBT Supervisor')"
+    },
+    "last_reviewed_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date this content was last clinically reviewed"
+    }
+  },
+  "required": [
+    "title",
+    "category",
+    "summary",
+    "content"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "role": "user"
+              }
+            },
+            {
+              "data.status": "active"
+            }
+          ]
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "target": "populated-MoodTracker",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-MoodTracker",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  }
+]

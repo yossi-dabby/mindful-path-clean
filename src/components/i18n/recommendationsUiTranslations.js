@@ -1,0 +1,53 @@
+const languages = ['en', 'he', 'es', 'fr', 'de', 'it', 'pt'];
+
+const rows = [
+  ['recommendations.premium.modal_description', 'Suggestions shaped by your goals, recent check-ins and practice history.', 'הצעות המותאמות למטרות, לדיווחים האחרונים ולהיסטוריית התרגול שלכם.', 'Sugerencias adaptadas a tus objetivos, registros recientes e historial de práctica.', 'Des suggestions adaptées à vos objectifs, à vos bilans récents et à votre pratique.', 'Vorschläge passend zu Ihren Zielen, letzten Check-ins und bisherigen Übungen.', 'Suggerimenti basati sui tuoi obiettivi, sui check-in recenti e sulla pratica.', 'Sugestões adaptadas aos seus objetivos, registros recentes e histórico de prática.'],
+  ['recommendations.premium.open_aria', 'Open personalized recommendations', 'פתיחת ההמלצות המותאמות אישית', 'Abrir recomendaciones personalizadas', 'Ouvrir les recommandations personnalisées', 'Personalisierte Empfehlungen öffnen', 'Apri i consigli personalizzati', 'Abrir recomendações personalizadas'],
+  ['recommendations.premium.close_aria', 'Close personalized recommendations', 'סגירת ההמלצות המותאמות אישית', 'Cerrar recomendaciones personalizadas', 'Fermer les recommandations personnalisées', 'Personalisierte Empfehlungen schließen', 'Chiudi i consigli personalizzati', 'Fechar recomendações personalizadas'],
+  ['recommendations.premium.loading_title', 'Creating your recommendations', 'יוצרים עבורכם המלצות', 'Creando tus recomendaciones', 'Création de vos recommandations', 'Ihre Empfehlungen werden erstellt', 'Creazione dei tuoi consigli', 'Criando suas recomendações'],
+  ['recommendations.premium.loading_description', 'Reviewing your recent progress securely. This may take a moment.', 'סוקרים בבטחה את ההתקדמות האחרונה שלכם. התהליך עשוי להימשך רגע.', 'Revisando tu progreso reciente de forma segura. Puede tardar un momento.', 'Analyse sécurisée de vos progrès récents. Cela peut prendre un instant.', 'Ihr letzter Fortschritt wird sicher ausgewertet. Dies kann einen Moment dauern.', 'Stiamo esaminando in sicurezza i tuoi progressi recenti. Potrebbe volerci un momento.', 'Analisando com segurança seu progresso recente. Isso pode levar um instante.'],
+  ['recommendations.premium.feed_subtitle', 'Chosen for where you are right now', 'נבחר במיוחד למקום שבו אתם נמצאים כעת', 'Elegido para el momento en que te encuentras', 'Choisi pour votre situation actuelle', 'Passend zu Ihrer aktuellen Situation ausgewählt', 'Scelto per il momento che stai vivendo', 'Escolhido para o momento em que você está agora'],
+  ['recommendations.premium.refresh_aria', 'Refresh recommendations', 'רענון ההמלצות', 'Actualizar recomendaciones', 'Actualiser les recommandations', 'Empfehlungen aktualisieren', 'Aggiorna i consigli', 'Atualizar recomendações'],
+  ['recommendations.premium.refreshing', 'Refreshing recommendations', 'מרעננים את ההמלצות', 'Actualizando recomendaciones', 'Actualisation des recommandations', 'Empfehlungen werden aktualisiert', 'Aggiornamento dei consigli', 'Atualizando recomendações'],
+  ['recommendations.premium.insights_label', 'A helpful pattern we noticed', 'דפוס מועיל שזיהינו', 'Un patrón útil que observamos', 'Une tendance utile repérée', 'Ein hilfreiches Muster, das uns aufgefallen ist', 'Uno schema utile che abbiamo notato', 'Um padrão útil que percebemos'],
+  ['recommendations.premium.why_now', 'Why this may help now', 'למה זה עשוי לעזור עכשיו', 'Por qué puede ayudarte ahora', 'Pourquoi cela peut aider maintenant', 'Warum das jetzt helfen kann', 'Perché può aiutarti adesso', 'Por que isso pode ajudar agora'],
+  ['recommendations.premium.best_match', 'Best match', 'ההתאמה הטובה ביותר', 'Mejor opción', 'Meilleure correspondance', 'Beste Übereinstimmung', 'Scelta migliore', 'Melhor opção'],
+  ['recommendations.premium.type_exercise', 'Exercise', 'תרגיל', 'Ejercicio', 'Exercice', 'Übung', 'Esercizio', 'Exercício'],
+  ['recommendations.premium.type_resource', 'Resource', 'משאב', 'Recurso', 'Ressource', 'Ressource', 'Risorsa', 'Recurso'],
+  ['recommendations.premium.type_video', 'Video', 'סרטון', 'Vídeo', 'Vidéo', 'Video', 'Video', 'Vídeo'],
+  ['recommendations.premium.type_journal_prompt', 'Reflection', 'התבוננות', 'Reflexión', 'Réflexion', 'Reflexion', 'Riflessione', 'Reflexão'],
+  ['recommendations.premium.open_item', 'Open {{type}}: {{title}}', 'פתיחת {{type}}: {{title}}', 'Abrir {{type}}: {{title}}', 'Ouvrir {{type}} : {{title}}', '{{type}} öffnen: {{title}}', 'Apri {{type}}: {{title}}', 'Abrir {{type}}: {{title}}'],
+  ['recommendations.premium.data_error_title', 'We could not review your activity', 'לא הצלחנו לסקור את הפעילות שלכם', 'No pudimos revisar tu actividad', 'Impossible d’analyser votre activité', 'Ihre Aktivität konnte nicht ausgewertet werden', 'Non siamo riusciti a esaminare la tua attività', 'Não foi possível analisar sua atividade'],
+  ['recommendations.premium.data_error_description', 'Your information was not changed. Please try loading the recommendations again.', 'המידע שלכם לא השתנה. נסו לטעון שוב את ההמלצות.', 'Tu información no cambió. Intenta cargar de nuevo las recomendaciones.', 'Vos informations n’ont pas été modifiées. Essayez de recharger les recommandations.', 'Ihre Daten wurden nicht verändert. Laden Sie die Empfehlungen bitte erneut.', 'Le tue informazioni non sono state modificate. Prova a ricaricare i consigli.', 'Suas informações não foram alteradas. Tente carregar as recomendações novamente.'],
+  ['recommendations.premium.generation_error_title', 'Recommendations are temporarily unavailable', 'ההמלצות אינן זמינות כרגע', 'Las recomendaciones no están disponibles temporalmente', 'Les recommandations sont temporairement indisponibles', 'Empfehlungen sind vorübergehend nicht verfügbar', 'I consigli non sono temporaneamente disponibili', 'As recomendações estão temporariamente indisponíveis'],
+  ['recommendations.premium.generation_error_description', 'Your activity is safe. Please try again in a moment.', 'הפעילות שלכם שמורה בבטחה. נסו שוב בעוד רגע.', 'Tu actividad está segura. Inténtalo de nuevo en un momento.', 'Votre activité est en sécurité. Réessayez dans un instant.', 'Ihre Aktivität ist sicher. Versuchen Sie es gleich erneut.', 'La tua attività è al sicuro. Riprova tra poco.', 'Sua atividade está segura. Tente novamente em instantes.'],
+  ['recommendations.premium.empty_title', 'No recommendations yet', 'עדיין אין המלצות', 'Aún no hay recomendaciones', 'Pas encore de recommandations', 'Noch keine Empfehlungen', 'Nessun consiglio per ora', 'Ainda não há recomendações'],
+  ['recommendations.premium.empty_description', 'Refresh to create a new set of suggestions for today.', 'רעננו כדי ליצור מערך חדש של הצעות להיום.', 'Actualiza para crear nuevas sugerencias para hoy.', 'Actualisez pour créer de nouvelles suggestions pour aujourd’hui.', 'Aktualisieren Sie, um neue Vorschläge für heute zu erstellen.', 'Aggiorna per creare nuovi suggerimenti per oggi.', 'Atualize para criar novas sugestões para hoje.'],
+  ['recommendations.premium.try_again', 'Try again', 'נסו שוב', 'Intentar de nuevo', 'Réessayer', 'Erneut versuchen', 'Riprova', 'Tentar novamente'],
+  ['recommendations.premium.new_user_insights', 'A gentle first step can make it easier to build a steady practice.', 'צעד ראשון ועדין יכול להקל על בניית שגרת תרגול יציבה.', 'Un primer paso suave puede facilitar una práctica constante.', 'Un premier pas en douceur peut aider à installer une pratique régulière.', 'Ein sanfter erster Schritt erleichtert den Aufbau einer beständigen Übungsroutine.', 'Un primo passo graduale può aiutare a creare una pratica costante.', 'Um primeiro passo leve pode facilitar a criação de uma prática constante.'],
+  ['recommendations.premium.starter_exercise_title', 'Calming breathing practice', 'תרגול נשימה מרגיעה', 'Práctica de respiración calmante', 'Exercice de respiration apaisante', 'Beruhigende Atemübung', 'Pratica di respirazione calmante', 'Prática de respiração calmante'],
+  ['recommendations.premium.starter_exercise_description', 'Take a short pause and settle your breathing.', 'עצרו לרגע קצר ואפשרו לנשימה להירגע.', 'Haz una breve pausa y calma tu respiración.', 'Faites une courte pause et apaisez votre respiration.', 'Nehmen Sie sich kurz Zeit und beruhigen Sie Ihren Atem.', 'Fai una breve pausa e calma il respiro.', 'Faça uma breve pausa e acalme sua respiração.'],
+  ['recommendations.premium.starter_exercise_reason', 'A simple way to begin building calm and awareness.', 'דרך פשוטה להתחיל לבנות רוגע ומודעות.', 'Una forma sencilla de empezar a desarrollar calma y conciencia.', 'Une façon simple de commencer à développer calme et conscience.', 'Ein einfacher Einstieg in mehr Ruhe und Achtsamkeit.', 'Un modo semplice per iniziare a coltivare calma e consapevolezza.', 'Uma forma simples de começar a desenvolver calma e consciência.'],
+  ['recommendations.premium.starter_reflection_title', 'A moment to reflect', 'רגע להתבוננות', 'Un momento para reflexionar', 'Un moment de réflexion', 'Ein Moment zum Nachdenken', 'Un momento per riflettere', 'Um momento para refletir'],
+  ['recommendations.premium.starter_reflection_description', 'Notice one thing that helped today and one thing you would like to support tomorrow.', 'שימו לב לדבר אחד שעזר היום ולדבר אחד שתרצו לחזק מחר.', 'Observa algo que te ayudó hoy y algo que quieres apoyar mañana.', 'Repérez une chose qui vous a aidé aujourd’hui et une à soutenir demain.', 'Achten Sie auf etwas, das heute geholfen hat, und etwas, das Sie morgen stärken möchten.', 'Nota una cosa che ti ha aiutato oggi e una che vuoi sostenere domani.', 'Observe algo que ajudou hoje e algo que deseja fortalecer amanhã.'],
+  ['recommendations.premium.starter_reflection_reason', 'Brief reflection helps you recognize useful patterns.', 'התבוננות קצרה עוזרת לזהות דפוסים מועילים.', 'Una breve reflexión ayuda a reconocer patrones útiles.', 'Une brève réflexion aide à repérer les tendances utiles.', 'Kurze Reflexion hilft, hilfreiche Muster zu erkennen.', 'Una breve riflessione aiuta a riconoscere schemi utili.', 'Uma breve reflexão ajuda a reconhecer padrões úteis.']
+];
+
+function setNested(target, path, value) {
+  const parts = path.split('.');
+  let cursor = target;
+  for (let index = 0; index < parts.length - 1; index += 1) {
+    cursor[parts[index]] = cursor[parts[index]] || {};
+    cursor = cursor[parts[index]];
+  }
+  cursor[parts[parts.length - 1]] = value;
+}
+
+export function applyRecommendationsUiTranslations(translations) {
+  rows.forEach((row) => {
+    languages.forEach((language, index) => {
+      const root = translations[language]?.translation;
+      if (root) setNested(root, row[0], row[index + 1]);
+    });
+  });
+}

@@ -1,0 +1,39 @@
+{
+  "capturedAt": "2026-10-09",
+  "sourceCommit": "fd648bca376354e0c510b71f83c35b7247fc0fd6",
+  "purpose": "Immutable comparison baseline before any model experiment or therapist prompt compaction.",
+  "agents": {
+    "ai_coach": {
+      "model": "automatic",
+      "instructionCharacters": 5078,
+      "instructionWords": 721,
+      "instructionLines": 54,
+      "instructionSha256": "782e8055af1fac31c6bcb700f4199b895fae6cfad101ed2988032b45d673d1b5",
+      "configuredTools": 7,
+      "memory": {
+        "enabled": true,
+        "scope": "user",
+        "includeOtherConversationContext": false
+      }
+    },
+    "cbt_therapist": {
+      "model": "automatic",
+      "instructionCharacters": 142779,
+      "instructionWords": 20021,
+      "instructionLines": 2048,
+      "instructionSha256": "e9c3fa6812c7dcb9245b2b1373501cd5990d8730619e0d95042d43837bf6f8e1",
+      "configuredTools": 13,
+      "memory": {
+        "enabled": true,
+        "scope": "user",
+        "includeOtherConversationContext": false
+      }
+    }
+  },
+  "changePolicy": {
+    "modelChangeAllowed": false,
+    "therapistCompactionAllowed": false,
+    "unlockCondition": "Complete the same multilingual benchmark against baseline and candidate, retain zero critical hard-gate failures, complete bilingual clinical review, and preserve immediate rollback."
+  }
+}
+

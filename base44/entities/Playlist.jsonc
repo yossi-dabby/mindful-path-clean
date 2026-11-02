@@ -1,0 +1,36 @@
+{
+  "name": "Playlist",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Playlist name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional playlist description"
+    },
+    "video_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of videos in this playlist"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "name": "Video",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Video title"
+    },
+    "videoUrl": {
+      "type": "string",
+      "description": "URL to the video file"
+    },
+    "thumbnailUrl": {
+      "type": "string",
+      "description": "Video thumbnail image URL"
+    },
+    "order": {
+      "type": "number",
+      "description": "Display order for therapeutic progression"
+    },
+    "category": {
+      "type": "string",
+      "description": "Video category"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "description": "Video duration in minutes"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "default": "beginner",
+      "description": "Difficulty level"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional description of the video"
+    }
+  },
+  "required": [
+    "title",
+    "videoUrl",
+    "order"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

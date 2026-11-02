@@ -1,0 +1,268 @@
+{
+  "name": "CaseFormulation",
+  "type": "object",
+  "properties": {
+    "conversation_id": {
+      "type": "string",
+      "description": "Reference to agent conversation"
+    },
+    "session_instance_id": {
+      "type": "string",
+      "description": "Canonical therapy/session-instance identifier (V10 Phase 6b). Generated once per agent conversation at creation (stored in conversation metadata), persisted on the first formulation write, and LOCKED on the record thereafter. Distinct from conversation_id, source_message_id and source_turn_id. The producer `session_id` fields are stamped with this value (NOT a message id) by the upsertCaseFormulation writer. Fail-closed: a continuation opener that cannot match a record's session_instance_id leaves every readiness signal false. A record's session_instance_id is immutable once set; mismatched writes are rejected."
+    },
+    "source_last_message_id": {
+      "type": "string",
+      "description": "Provenance: the verified finalized assistant message id whose structured CaseFormulationUpdate produced the most recent state mutation. Used for idempotency by the upsertCaseFormulation writer (via update_log) \u2014 never stored, returned, or compared as a session id. Distinct from session_instance_id."
+    },
+    "cbt_domain": {
+      "type": "string",
+      "enum": [
+        "anxiety",
+        "depression",
+        "trauma",
+        "anger",
+        "relationship",
+        "ocd",
+        "grief",
+        "self_esteem",
+        "panic",
+        "social_anxiety",
+        "phobia",
+        "general"
+      ],
+      "description": "Canonical CBT planner domain for bounded V10 knowledge-retrieval scoping. Optional; absence remains fail-closed (NO_DOMAIN). Validated against the exact 12-value enum by the upsertCaseFormulation writer; invalid/unsupported values are omitted rather than defaulted. MUST be selected from a CaseFormulation record whose conversation_id matches the active conversation \u2014 never inherited from another conversation's record."
+    },
+    "treatment_phase": {
+      "type": "string",
+      "enum": [
+        "early",
+        "middle",
+        "late"
+      ],
+      "description": "Optional canonical treatment-arc phase for bounded V10 knowledge-retrieval arc scoping. Consumed by the CBT knowledge planner (extractFormulationHintsForPlanner) to refine unit-type preference by arc. Absence remains valid; the planner infers the arc from LTS or defaults to 'any'."
+    },
+    "presenting_themes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "User's own language for presenting concerns"
+    },
+    "triggers_situations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Identified trigger situations"
+    },
+    "automatic_thought_themes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Common automatic thought patterns (non-diagnostic)"
+    },
+    "cognitive_distortions_observed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Thinking patterns noticed (working hypothesis)"
+    },
+    "maintaining_behaviors": {
+      "type": "object",
+      "properties": {
+        "avoidance": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "safety_behaviors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reassurance_seeking": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Behaviors that may maintain difficulties"
+    },
+    "core_belief_hypotheses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "belief": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "working_hypothesis",
+              "supported",
+              "revised"
+            ]
+          }
+        }
+      },
+      "description": "Working hypotheses about core beliefs (non-diagnostic)"
+    },
+    "strengths_resources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Identified strengths and resources"
+    },
+    "goals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Therapy goals in user's language"
+    },
+    "risk_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Safety considerations (non-diagnostic tracking)"
+    },
+    "understanding_confirmed": {
+      "type": "object",
+      "properties": {
+        "confirmed": {
+          "type": "boolean",
+          "description": "True only from a structured confirmation that the user acknowledged/confirmed the therapist's understanding."
+        },
+        "session_id": {
+          "type": "string",
+          "description": "Provenance: the canonical session_instance_id in which this confirmation occurred (stamped by the writer \u2014 NEVER a message id). Distinct from source_message_id."
+        },
+        "turn_id": {
+          "type": "string",
+          "description": "Optional provenance: the turn id within the session_instance_id (source_turn_id), if one exists."
+        },
+        "confirmed_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Provenance: ISO-8601 timestamp stamped by the server writer \u2014 never from the client."
+        }
+      },
+      "description": "Optional structured producer for the L5 person_feels_understood signal. Absence => false (fail-closed). A signal whose provenance session_id (session_instance_id) does not match the active continuation session is treated as stale and remains false."
+    },
+    "pending_move": {
+      "type": "object",
+      "properties": {
+        "ready": {
+          "type": "boolean",
+          "description": "True only from explicit readiness/consent for the proposed therapeutic step."
+        },
+        "rationale_clear": {
+          "type": "boolean",
+          "description": "True only when a concrete intervention/micro-step is selected with an explicit rationale bound to a formulation goal/treatment target."
+        },
+        "move_id": {
+          "type": "string",
+          "description": "Identifier of the selected intervention/micro-step."
+        },
+        "target_ref": {
+          "type": "string",
+          "description": "Identifier of the canonical formulation goal or treatment target this move maps to. Must match an entry in goals[] or a core_belief_hypotheses[].belief."
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Explicit rationale text for the move (non-empty)."
+        },
+        "session_id": {
+          "type": "string",
+          "description": "Provenance: the canonical session_instance_id in which this pending move was established (stamped by the writer \u2014 NEVER a message id)."
+        },
+        "set_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Provenance: ISO-8601 timestamp stamped by the server writer."
+        }
+      },
+      "description": "Optional structured producer for the L5 readiness_signal and rationale_is_clear signals. Both are move-bound and rejected unless their provenance session_id (session_instance_id) matches the active continuation session."
+    },
+    "holding_complete": {
+      "type": "object",
+      "properties": {
+        "complete": {
+          "type": "boolean",
+          "description": "True only from the existing structured safety/containment workflow after the required holding step completed."
+        },
+        "session_id": {
+          "type": "string",
+          "description": "Provenance: the canonical session_instance_id in which the holding step completed (stamped by the writer \u2014 NEVER a message id)."
+        },
+        "case_type": {
+          "type": "string",
+          "description": "The protected case type for which holding completed (e.g. grief_loss, trauma, first_disclosure)."
+        },
+        "completed_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Provenance: ISO-8601 timestamp stamped by the server writer."
+        }
+      },
+      "description": "Optional structured producer for the L5 holding_complete signal. Required only for HIGH-protection case types (grief_loss, trauma, first_disclosure). Absence or stale provenance => false."
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last formulation update"
+    },
+    "update_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "change": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Audit trail of formulation changes. The writer appends `{ change: 'case_formulation_update', evidence: source_message_id, date: server_now }` per accepted write and uses the log for idempotency (verified source_message_id)."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional admin notes about this formulation record"
+    }
+  },
+  "required": [
+    "conversation_id"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

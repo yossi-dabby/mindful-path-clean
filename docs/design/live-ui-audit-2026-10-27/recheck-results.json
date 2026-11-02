@@ -1,0 +1,196 @@
+[
+  {
+    "target": "populated-KnowledgeStudio",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Coach",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-MoodTracker",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 4,
+    "documentOverflow": 0
+  },
+  {
+    "target": "health-form",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-KnowledgeStudio",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Coach",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-MoodTracker",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "health-form",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-KnowledgeStudio",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Coach",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-MoodTracker",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "failure": "page.screenshot: Timeout 30000ms exceeded.",
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "health-form",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-KnowledgeStudio",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Coach",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-MoodTracker",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 5,
+    "documentOverflow": 0
+  },
+  {
+    "target": "health-form",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-KnowledgeStudio",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Coach",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-MoodTracker",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "health-form",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-KnowledgeStudio",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Coach",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-MoodTracker",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "failure": "page.screenshot: Timeout 30000ms exceeded.",
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "health-form",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  }
+]

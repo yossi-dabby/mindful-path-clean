@@ -1,0 +1,154 @@
+{
+  "name": "JournalTemplate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Template name"
+    },
+    "description": {
+      "type": "string",
+      "description": "What this template is for"
+    },
+    "entry_type": {
+      "type": "string",
+      "enum": [
+        "cbt_standard",
+        "gratitude",
+        "anxiety_log",
+        "mood_journal",
+        "custom"
+      ],
+      "default": "custom",
+      "description": "Template type"
+    },
+    "icon": {
+      "type": "string",
+      "description": "Icon name for the template"
+    },
+    "color": {
+      "type": "string",
+      "description": "Color theme for the template"
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "textarea",
+              "number",
+              "rating",
+              "tags"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "placeholder": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Custom fields for this template"
+    },
+    "is_default": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a default system template"
+    },
+    "slug": {
+      "type": "string",
+      "description": "[AI-CONTENT] URL-safe unique identifier for content addressing and stable reference in retrieval systems"
+    },
+    "summary": {
+      "type": "string",
+      "description": "[AI-CONTENT] Short AI-optimized one-paragraph summary for retrieval context injection \u2014 distinct from user-facing description"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "he",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt"
+      ],
+      "default": "en",
+      "description": "[AI-CONTENT] Language of this template"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "[AI-CONTENT] Keywords for AI retrieval and future search indexing"
+    },
+    "goal_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "[AI-CONTENT] Therapeutic goal types this template is designed to support"
+    },
+    "mood_targets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "[AI-CONTENT] Mood states this template is particularly suited for"
+    },
+    "when_to_use": {
+      "type": "string",
+      "description": "[AI-CONTENT] Explicit natural-language guidance for AI on when to suggest this template to a user"
+    },
+    "guidance_text": {
+      "type": "string",
+      "description": "[AI-CONTENT] Extended instructions or therapeutic framing that an AI agent can use when introducing this template to a user"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "draft",
+        "archived"
+      ],
+      "default": "active",
+      "description": "[AI-CONTENT] Content lifecycle status \u2014 only 'active' templates should be used in AI retrieval"
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "description": "[AI-CONTENT] Content version number"
+    }
+  },
+  "required": [
+    "name",
+    "entry_type"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

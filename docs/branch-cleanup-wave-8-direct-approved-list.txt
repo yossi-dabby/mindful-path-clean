@@ -1,0 +1,22 @@
+# Branch Cleanup Wave 8 — Direct Delete Approved List
+#
+# Scope: DIRECT_DELETE_SAFE_MERGED only.
+# Cap: maximum 15 branches.
+#
+# Last updated: 2026-06-10
+
+copilot/update-playwright-config
+copilot/fix-data-sync-issue-goals-page
+copilot/add-internal-automated-tests-another-one
+copilot/update-repo-workflow-guidance
+copilot/clean-production-audit
+copilot/audit-phase-3
+copilot/audit-therapeutic-quality
+copilot/investigate-production-readiness
+copilot/rollout-advanced-ai-capabilities
+copilot/root-cause-audit-production-upgrades
+copilot/audit-and-refresh-trusted-cbt
+copilot/integrate-hebrew-cbt-worksheets
+copilot/cleanup-wave-1-executor
+copilot/pr-8-playwright-mock-assertion-hardening
+copilot/pr-11-english-language-parity-tests

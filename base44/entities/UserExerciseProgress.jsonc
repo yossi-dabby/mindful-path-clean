@@ -1,0 +1,49 @@
+{
+  "name": "UserExerciseProgress",
+  "type": "object",
+  "properties": {
+    "exercise_id": {
+      "type": "string",
+      "description": "Stable Exercise record or local catalog identifier"
+    },
+    "favorite": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the current user marked this exercise as a favorite"
+    },
+    "completed_count": {
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "description": "Number of completions recorded by the current user"
+    },
+    "last_completed": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Most recent completion time for the current user"
+    },
+    "total_time_practiced": {
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "description": "Total minutes practiced by the current user"
+    }
+  },
+  "required": [
+    "exercise_id"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

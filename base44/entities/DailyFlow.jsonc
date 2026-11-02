@@ -1,0 +1,79 @@
+{
+  "name": "DailyFlow",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of this daily flow"
+    },
+    "check_in_completed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether daily check-in is completed"
+    },
+    "check_in_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When check-in was completed"
+    },
+    "exercise_completed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether daily exercise is completed"
+    },
+    "exercise_id": {
+      "type": "string",
+      "description": "ID of the exercise assigned for today"
+    },
+    "exercise_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When exercise was completed"
+    },
+    "reflection_completed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether daily reflection is completed"
+    },
+    "reflection_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When reflection was completed"
+    },
+    "key_insight": {
+      "type": "string",
+      "description": "AI-generated key insight from today's exercise"
+    },
+    "daily_takeaway": {
+      "type": "string",
+      "description": "User-selected action or focus for the day"
+    },
+    "mood_snapshot": {
+      "type": "object",
+      "description": "Summary of mood data from check-in"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this daily flow record"
+    }
+  },
+  "required": [
+    "date"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

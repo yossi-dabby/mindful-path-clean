@@ -1,0 +1,78 @@
+{
+  "name": "ProactiveReminder",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Brief title for the reminder"
+    },
+    "message": {
+      "type": "string",
+      "description": "The check-in message from the AI"
+    },
+    "reminder_type": {
+      "type": "string",
+      "enum": [
+        "goal_follow_up",
+        "mood_trend",
+        "exercise_follow_up",
+        "journal_insight",
+        "general"
+      ],
+      "description": "Type of proactive reminder"
+    },
+    "reference_id": {
+      "type": "string",
+      "description": "ID of related goal, exercise, or journal entry"
+    },
+    "scheduled_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When to show this reminder"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "shown",
+        "dismissed",
+        "completed"
+      ],
+      "default": "pending",
+      "description": "Current status of the reminder"
+    },
+    "suggested_action": {
+      "type": "string",
+      "description": "Recommended next step for the user"
+    },
+    "context": {
+      "type": "object",
+      "description": "Additional context about what triggered this reminder"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this reminder"
+    }
+  },
+  "required": [
+    "title",
+    "message",
+    "reminder_type",
+    "scheduled_date"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

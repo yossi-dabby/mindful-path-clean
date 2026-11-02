@@ -1,0 +1,51 @@
+# Branch Cleanup Wave 9B — Archive Then Delete Approved List
+#
+# Scope: ARCHIVE_THEN_DELETE_CLOSED_UNMERGED_30_TO_90D only.
+# Cap: maximum 40 branches.
+#
+# Selection criteria: oldest branches first (80d → 79d → 78d → 77d → 76d → 75d).
+# All branches have closed-without-merge PRs aged 30–90 days per the post-Wave-7C audit.
+# None of these branches were processed in Waves 1–9A.
+#
+# Last updated: 2026-06-10
+
+copilot/stabilize-runtime-behavior
+copilot/stabilize-runtime-behavior-again
+copilot/verify-fix-shared-appid-resolution
+copilot/fix-404-app-logs-endpoint
+copilot/fix-base44-appid-fallback
+copilot/fix-base44-appid-fallback-again
+copilot/fix-base44-appid-fallback-again-again
+copilot/fix-base44-appid-fallback-conflicts
+copilot/fix-e2e-test-chat-page-404
+copilot/fix-null-app-id-in-api-url
+copilot/fix-screenshot-issues
+copilot/fix-staging-branch-issues
+copilot/fix-undefined-app-id-error
+copilot/resolve-conflicts-fix-null-app-id-in-api-url
+copilot/resolve-staging-merge-issues
+copilot/update-staging-add-base44-url
+copilot/fix-registration-issue
+copilot/add-temp-diagnostics-bootstrap-failure
+copilot/commit-last-pr-again
+copilot/fix-ai-coach-agent-wiring
+copilot/fix-ai-coach-agent-wiring-again
+copilot/fix-ai-coach-agent-wiring-another-one
+copilot/phase-3-audit-recommendation
+copilot/reapply-phase-2-chat-stall-fix
+copilot/reapply-phase-2-chat-stall-fix-again
+copilot/reapply-phase-2-chat-stall-fix-again-again
+copilot/reapply-phase-2-chat-stall-fix-another-one
+copilot/resolve-conflicts-production-readiness
+copilot/verify-harden-ai-production-flow
+copilot/452-resolve-conflicts-between-copilot-and-staging
+copilot/fix-duplicate-function-definition
+copilot/fix-first-message-loss-therapist
+copilot/fix-first-message-loss-therapist-again
+copilot/fix-therapist-worksheet-bot-behavior
+copilot/normalize-trusted-cbt-batch-1-schema
+copilot/resolve-merge-conflicts-again
+copilot/audit-and-refresh-import-file-again
+copilot/create-batch-3-json
+copilot/create-trusted-cbt-batch-3
+copilot/update-trusted-cbt-chunk-import-files

@@ -1,0 +1,133 @@
+{
+  "name": "AudioContent",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Audio content title"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "meditation",
+        "sleep_story",
+        "exercise_guide",
+        "soundscape",
+        "breathing_guide"
+      ],
+      "description": "Type of audio content"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "breathing",
+        "grounding",
+        "cognitive_restructuring",
+        "behavioral_activation",
+        "mindfulness",
+        "exposure",
+        "sleep",
+        "focus",
+        "stress_relief"
+      ],
+      "description": "Content category"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "description": "Duration in minutes"
+    },
+    "audio_url": {
+      "type": "string",
+      "description": "URL to audio file"
+    },
+    "transcript": {
+      "type": "string",
+      "description": "Full text transcript"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description"
+    },
+    "narrator": {
+      "type": "string",
+      "description": "Narrator name or voice type"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "default": "beginner",
+      "description": "Difficulty level"
+    },
+    "download_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Allow offline download"
+    },
+    "background_music": {
+      "type": "boolean",
+      "default": false,
+      "description": "Has background music"
+    },
+    "play_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of times played"
+    },
+    "thumbnail_url": {
+      "type": "string",
+      "description": "Thumbnail image"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Search tags"
+    },
+    "linked_exercise_id": {
+      "type": "string",
+      "description": "Reference to Exercise entity"
+    }
+  },
+  "required": [
+    "title",
+    "type",
+    "category",
+    "duration_minutes"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

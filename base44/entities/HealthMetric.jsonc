@@ -1,0 +1,97 @@
+{
+  "name": "HealthMetric",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the metric"
+    },
+    "sleep_hours": {
+      "type": "number",
+      "description": "Hours of sleep"
+    },
+    "sleep_quality": {
+      "type": "string",
+      "enum": [
+        "poor",
+        "fair",
+        "good",
+        "excellent"
+      ],
+      "description": "Subjective sleep quality"
+    },
+    "steps": {
+      "type": "number",
+      "description": "Number of steps"
+    },
+    "active_minutes": {
+      "type": "number",
+      "description": "Minutes of physical activity"
+    },
+    "heart_rate_avg": {
+      "type": "number",
+      "description": "Average heart rate (bpm)"
+    },
+    "heart_rate_resting": {
+      "type": "number",
+      "description": "Resting heart rate (bpm)"
+    },
+    "calories_burned": {
+      "type": "number",
+      "description": "Calories burned"
+    },
+    "weight": {
+      "type": "number",
+      "description": "Weight in kg"
+    },
+    "water_intake": {
+      "type": "number",
+      "description": "Water intake in ml"
+    },
+    "exercise_type": {
+      "type": "string",
+      "description": "Type of exercise performed"
+    },
+    "exercise_duration": {
+      "type": "number",
+      "description": "Exercise duration in minutes"
+    },
+    "caffeine_mg": {
+      "type": "number",
+      "description": "Caffeine intake in mg"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "manual",
+        "apple_health",
+        "google_fit",
+        "other"
+      ],
+      "default": "manual",
+      "description": "Data source"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  },
+  "required": [
+    "date"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

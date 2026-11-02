@@ -1,0 +1,91 @@
+{
+  "name": "GoalReminder",
+  "type": "object",
+  "properties": {
+    "goal_id": {
+      "type": "string",
+      "description": "Reference to Goal entity"
+    },
+    "reminder_type": {
+      "type": "string",
+      "enum": [
+        "goal_deadline",
+        "milestone_deadline",
+        "weekly_checkin",
+        "custom"
+      ],
+      "description": "Type of reminder"
+    },
+    "days_before": {
+      "type": "number",
+      "description": "Days before deadline to send reminder (for deadline types)"
+    },
+    "milestone_index": {
+      "type": "number",
+      "description": "Index of milestone (for milestone reminders)"
+    },
+    "frequency": {
+      "type": "string",
+      "enum": [
+        "once",
+        "daily",
+        "weekly",
+        "monthly"
+      ],
+      "default": "once",
+      "description": "How often to send reminder"
+    },
+    "notification_method": {
+      "type": "string",
+      "enum": [
+        "email",
+        "in_app",
+        "both"
+      ],
+      "default": "both",
+      "description": "How to send the reminder"
+    },
+    "custom_message": {
+      "type": "string",
+      "description": "Custom message for the reminder"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether reminder is active"
+    },
+    "last_sent": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last time reminder was sent"
+    },
+    "next_send_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Next scheduled send date"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this reminder"
+    }
+  },
+  "required": [
+    "goal_id",
+    "reminder_type"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

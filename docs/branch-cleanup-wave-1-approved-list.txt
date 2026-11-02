@@ -1,0 +1,29 @@
+# Branch Cleanup Wave 1 — Approved Deletion List
+#
+# IMPORTANT: This file is read by scripts/branch-cleanup-wave-1.mjs.
+#
+# Rules:
+#   - Lines starting with '#' are comments and are ignored.
+#   - Empty lines are ignored.
+#   - Branch names must be exact (no trailing spaces, no origin/ prefix).
+#   - All entries must be SAFE_DELETE_MERGED candidates:
+#       remote branch exists, fully merged into main, older than 14 days,
+#       no open PRs, not main/staging-fresh, not protected/referenced.
+#   - This list must not exceed 50 entries.
+#
+# Wave 1 contains 10 branches from the audit.
+# If additional branches are to be deleted, create a separate Wave 2 PR and list.
+#
+# Last updated: 2026-06-09
+# Approved by: repository owner before dispatching the workflow
+
+copilot/featmobile-coach-content-depth
+copilot/featmobile-coach-content-depth-again
+copilot/featmobile-coach-header-cta-fab
+copilot/improve-coach-screen-mobile-copy
+feat/mobile-coach-header-cta-fab
+copilot/add-ci-playwright-integration
+add-playwright-workflow
+copilot/add-e2e-test-documentation
+copilot/add-playwright-e2e-tests
+copilot/add-playwright-e2e-tests-again

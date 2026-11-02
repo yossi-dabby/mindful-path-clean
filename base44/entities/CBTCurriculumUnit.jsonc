@@ -1,0 +1,305 @@
+{
+  "name": "CBTCurriculumUnit",
+  "type": "object",
+  "properties": {
+    "unit_type": {
+      "type": "string",
+      "enum": [
+        "concept",
+        "psychoeducation",
+        "intervention",
+        "micro_step_ladder",
+        "blocker_resolution",
+        "outcome_interpretation",
+        "phrasing_pattern",
+        "multilingual_response_pattern"
+      ],
+      "description": "Functional type of curriculum unit \u2014 determines how the agent uses it"
+    },
+    "title": {
+      "type": "string",
+      "description": "Short internal title for admin identification"
+    },
+    "clinical_topic": {
+      "type": "string",
+      "enum": [
+        "avoidance",
+        "flooding",
+        "panic",
+        "worry",
+        "rumination",
+        "perfectionism",
+        "self_criticism",
+        "social_anxiety",
+        "driving_anxiety",
+        "exam_anxiety",
+        "sleep_anxiety",
+        "general_anxiety",
+        "depression",
+        "behavioral_activation",
+        "cognitive_restructuring",
+        "grounding",
+        "exposure",
+        "safety_behavior",
+        "coping",
+        "general"
+      ],
+      "description": "Primary clinical topic this unit addresses"
+    },
+    "linked_hierarchy_level": {
+      "type": "string",
+      "enum": [
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6",
+        "L7",
+        "L8",
+        "L9",
+        "L10",
+        "any"
+      ],
+      "description": "Which Hierarchy of Intervention level this unit supports"
+    },
+    "linked_outcome_patterns": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "completed_step_with_distress",
+          "completed_step_with_learning",
+          "partial_completion",
+          "avoidance_or_noncompletion",
+          "step_too_hard",
+          "step_too_easy",
+          "emotional_flooding",
+          "no_clear_change",
+          "increased_confidence",
+          "new_specific_fear_discovered",
+          "return_after_two_steps",
+          "any"
+        ]
+      },
+      "description": "Which outcome patterns this unit is useful after"
+    },
+    "when_to_use": {
+      "type": "string",
+      "description": "Natural language: exact clinical situation that should trigger retrieval of this unit"
+    },
+    "clinical_purpose": {
+      "type": "string",
+      "description": "What therapeutic function this unit serves \u2014 1 sentence"
+    },
+    "content": {
+      "type": "string",
+      "description": "Core clinical content: rules, decision patterns, step sequences, or phrasing. Plain text. No source dumping."
+    },
+    "agent_usage_rules": {
+      "type": "string",
+      "description": "How the agent must use this unit \u2014 paraphrase, apply, adapt. Never quote verbatim. Never expose unit labels."
+    },
+    "directive_rewrite_pattern": {
+      "type": "string",
+      "description": "For phrasing_pattern and multilingual_response_pattern units: the exact directive rewrite this unit enforces"
+    },
+    "contraindications": {
+      "type": "string",
+      "description": "When NOT to use this unit \u2014 conditions, states, or scenarios where it is inappropriate"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "en",
+          "he",
+          "es",
+          "fr",
+          "de",
+          "it",
+          "pt",
+          "all"
+        ]
+      },
+      "description": "Languages this unit applies to. 'all' means language-agnostic content."
+    },
+    "language_variants": {
+      "type": "object",
+      "description": "Optional: language-specific versions of content or directive_rewrite_pattern keyed by language code (he, es, fr, de, it, pt)",
+      "properties": {
+        "he": {
+          "type": "string"
+        },
+        "es": {
+          "type": "string"
+        },
+        "fr": {
+          "type": "string"
+        },
+        "de": {
+          "type": "string"
+        },
+        "it": {
+          "type": "string"
+        },
+        "pt": {
+          "type": "string"
+        }
+      }
+    },
+    "priority_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "default": 5,
+      "description": "Admin-set priority for retrieval ranking (0\u201310, higher = preferred)"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Only active units are retrieved. Set false to retire a unit without deleting."
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "description": "Increment when content is materially updated"
+    },
+    "source_chunk_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Optional: IDs of TrustedCBTChunk records this unit was derived from, for traceability"
+    },
+    "intervention_family": {
+      "type": "string",
+      "enum": [
+        "cognitive",
+        "behavioral",
+        "acceptance",
+        "psychoeducation",
+        "mixed",
+        "other"
+      ],
+      "description": "Wave 4A.2 \u2014 Primary CBT intervention family this unit belongs to. Used to match retrieval context to appropriate technique type."
+    },
+    "treatment_arc_position": {
+      "type": "string",
+      "enum": [
+        "early",
+        "middle",
+        "late",
+        "any"
+      ],
+      "default": "any",
+      "description": "Wave 4A.2 \u2014 Optimal position in the treatment arc for this unit. Mirrors CBT_TREATMENT_ARC_FILTERS. any = arc-agnostic."
+    },
+    "admin_notes": {
+      "type": "string",
+      "description": "Internal admin notes \u2014 never retrieved by agent"
+    },
+    "planner_domain": {
+      "type": "string",
+      "enum": [
+        "anxiety",
+        "depression",
+        "trauma",
+        "anger",
+        "relationship",
+        "ocd",
+        "grief",
+        "self_esteem",
+        "panic",
+        "social_anxiety",
+        "phobia",
+        "general"
+      ],
+      "description": "Wave 4 planner domain \u2014 maps clinical_topic to a CBT_KNOWLEDGE_DOMAINS value for retrieval scoping. Must be set to activate runtime retrieval for this unit."
+    },
+    "distress_suitability": {
+      "type": "string",
+      "enum": [
+        "any",
+        "low_only",
+        "mild_and_below",
+        "not_in_crisis"
+      ],
+      "default": "any",
+      "description": "Which distress levels this unit is suitable for. 'low_only' = retrieve only when distress is tier_low. 'not_in_crisis' = suitable unless containment is active. 'any' = no distress-level restriction."
+    },
+    "evidence_level": {
+      "type": "string",
+      "enum": [
+        "anecdotal",
+        "emerging",
+        "established",
+        "expert_consensus",
+        "unclassified",
+        "gold_standard"
+      ],
+      "default": "established",
+      "description": "Clinical evidence quality for this unit's content. Only 'established', 'expert_consensus', and 'gold_standard' units are eligible for Wave 4 runtime retrieval."
+    },
+    "safety_tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "contraindicated_in_crisis",
+          "requires_therapist_supervision",
+          "not_for_acute_trauma",
+          "not_for_active_suicidality",
+          "not_for_psychosis",
+          "not_for_bipolar_acute",
+          "cardiac_precaution",
+          "respiratory_precaution",
+          "safe_for_self_guided",
+          "not_for_crisis",
+          "requires_rapport",
+          "psychoeducation_safe",
+          "validated_protocol",
+          "not_for_high_distress",
+          "exposure_adjacent"
+        ]
+      },
+      "description": "Bounded set of import-time safety tags. During V10 Preview, any non-empty safety_tags array makes the unit ineligible for runtime retrieval. An empty array means no specific safety restrictions beyond standard CBT contraindications."
+    },
+    "runtime_eligible_first_wave": {
+      "type": "boolean",
+      "default": false,
+      "description": "Explicit Wave 4 first-wave activation gate. Must be true AND planner_domain must be in the allowed first-wave domain set for this unit to be retrieved at runtime. Always false for deferred/high-risk domains. Set by admin after ingest validation."
+    }
+  },
+  "required": [
+    "unit_type",
+    "title",
+    "clinical_topic",
+    "when_to_use",
+    "clinical_purpose",
+    "content",
+    "agent_usage_rules"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

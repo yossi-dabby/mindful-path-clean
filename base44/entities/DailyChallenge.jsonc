@@ -1,0 +1,80 @@
+{
+  "name": "DailyChallenge",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Challenge title"
+    },
+    "description": {
+      "type": "string",
+      "description": "What the user needs to do"
+    },
+    "challenge_type": {
+      "type": "string",
+      "enum": [
+        "mood_check",
+        "journal",
+        "exercise",
+        "meditation",
+        "goal_action",
+        "gratitude"
+      ],
+      "description": "Type of activity"
+    },
+    "target_value": {
+      "type": "number",
+      "default": 1,
+      "description": "How many times to complete"
+    },
+    "current_progress": {
+      "type": "number",
+      "default": 0,
+      "description": "Current completion count"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Challenge date"
+    },
+    "completed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether challenge is completed"
+    },
+    "points": {
+      "type": "number",
+      "default": 10,
+      "description": "Points earned for completion"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "easy",
+        "medium",
+        "hard"
+      ],
+      "default": "medium",
+      "description": "Challenge difficulty"
+    }
+  },
+  "required": [
+    "title",
+    "challenge_type",
+    "date"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

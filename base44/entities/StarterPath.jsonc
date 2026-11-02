@@ -1,0 +1,55 @@
+{
+  "name": "StarterPath",
+  "type": "object",
+  "properties": {
+    "current_day": {
+      "type": "number",
+      "default": 0,
+      "description": "Current day in the 7-day path (0 = not started)"
+    },
+    "started_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the user started the path"
+    },
+    "last_completed_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Last day a step was completed"
+    },
+    "completed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether all 7 days are completed"
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the path was completed"
+    },
+    "day_exercises": {
+      "type": "object",
+      "description": "Map of day number to exercise ID completed"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this starter path record"
+    }
+  },
+  "required": [],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

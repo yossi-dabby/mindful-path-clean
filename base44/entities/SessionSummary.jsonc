@@ -1,0 +1,72 @@
+{
+  "name": "SessionSummary",
+  "type": "object",
+  "properties": {
+    "conversation_id": {
+      "type": "string",
+      "description": "ID of the AI conversation this summary belongs to"
+    },
+    "session_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time of the summarized session"
+    },
+    "summary_content": {
+      "type": "string",
+      "description": "The full AI-generated session summary (markdown)"
+    },
+    "key_takeaways": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Key insights from the session"
+    },
+    "actionable_advice": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Actionable steps suggested by the AI"
+    },
+    "recommended_resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Resources recommended by the AI"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this session summary record"
+    }
+  },
+  "required": [
+    "conversation_id",
+    "session_date",
+    "summary_content"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

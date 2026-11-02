@@ -1,0 +1,52 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "onboarding_completed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether user has completed the onboarding tour"
+    },
+    "focus_areas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Wellbeing areas selected during onboarding"
+    },
+    "onboarding_mood": {
+      "type": "string",
+      "enum": [
+        "very_low",
+        "low",
+        "okay",
+        "good",
+        "great"
+      ],
+      "description": "Self-reported mood selected during onboarding"
+    },
+    "support_style": {
+      "type": "string",
+      "enum": [
+        "listen",
+        "practical",
+        "guided"
+      ],
+      "description": "Preferred support style selected during onboarding"
+    },
+    "preferences": {
+      "type": "object",
+      "properties": {
+        "theme": {
+          "type": "string",
+          "default": "default"
+        },
+        "notifications_enabled": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    }
+  },
+  "required": []
+}

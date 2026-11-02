@@ -1,0 +1,69 @@
+{
+  "name": "CompanionMemory",
+  "type": "object",
+  "properties": {
+    "memory_type": {
+      "type": "string",
+      "enum": [
+        "preference",
+        "goal",
+        "milestone",
+        "concern",
+        "pattern",
+        "relationship",
+        "achievement"
+      ],
+      "description": "Category of memory"
+    },
+    "content": {
+      "type": "string",
+      "description": "The memory or fact to remember"
+    },
+    "importance": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10,
+      "default": 5,
+      "description": "Importance score for prioritizing recall"
+    },
+    "last_referenced": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this memory was last used in conversation"
+    },
+    "context_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for contextual retrieval (e.g., 'anxiety', 'work', 'family')"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this memory should be recalled"
+    },
+    "source_conversation_id": {
+      "type": "string",
+      "description": "The conversation where this memory originated"
+    }
+  },
+  "required": [
+    "memory_type",
+    "content"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+# Branch Cleanup Wave 2 — Approved Deletion List
+#
+# IMPORTANT: This file is read by scripts/branch-cleanup-wave-2.mjs.
+#
+# Rules:
+#   - Lines starting with '#' are comments and are ignored.
+#   - Empty lines are ignored.
+#   - Branch names must be exact (no trailing spaces, no origin/ prefix).
+#   - All entries must be SAFE_DELETE_MERGED candidates:
+#       remote branch exists, fully merged into main, older than 14 days,
+#       no open PRs, not main/staging-fresh, not protected/referenced.
+#   - This list must not exceed 50 entries.
+#
+# Wave 2 contains 50 branches selected from the post-Wave-1 inventory.
+# All branches were verified on 2026-06-10:
+#   - Remote branch exists on origin
+#   - Fully merged into main (confirmed via merged PR history)
+#   - No open PRs (gh pr list --state open returned 0)
+#   - Older than 14 days (oldest: 2026-01-25, newest: 2026-02-26)
+#   - None are main, staging-fresh, or the current branch
+#   - None were deleted in Wave 1
+# If additional branches are to be deleted, create a separate Wave 3 PR and list.
+#
+# Last updated: 2026-06-10
+# Approved by: repository owner before dispatching the workflow
+
+copilot/add-e2e-tests-daily-checkin
+copilot/add-e2e-tests-journal-thought
+copilot/add-e2e-tests-double-submit
+copilot/add-data-testid-attributes
+copilot/add-playwright-e2e-testing
+copilot/update-playwright-config-another-one
+copilot/configure-playwright-reports
+copilot/fix-playwright-report-upload
+copilot/fix-playwright-report-upload-issue
+copilot/fix-playwright-artifact-warnings
+copilot/fix-smoke-tests-issue
+copilot/extend-production-smoke-tests
+copilot/add-smoke-test-suite
+copilot/fix-milestone-checkbox-bug
+copilot/add-android-e2e-testing-infrastructure
+copilot/prepare-app-for-production
+copilot/add-android-playwright-tests
+copilot/fix-milestone-checkbox-issues
+copilot/fix-checkbox-disappearing-issue
+copilot/fix-data-sync-issue-goals-page
+copilot/fix-query-definition-error
+copilot/fix-query-synchronization-issues
+copilot/fix-query-errors-and-suggestions
+copilot/fix-goals-display-issue
+copilot/fix-goals-page-issues
+copilot/fix-goals-page-issues-again
+copilot/fix-calendar-ui-issue
+copilot/fix-goals-milestones-drawer
+copilot/fix-translation-issues
+copilot/implement-i18n-for-mind-games-again
+copilot/localize-dbt-stop-game-hebrew
+copilot/localize-reframe-pick-to-hebrew
+copilot/qa-polish-hebrew-localization
+copilot/add-value-compass-hebrew
+copilot/prepare-app-for-google-play
+copilot/fix-action-runs-failure
+copilot/track-mobile-viewport-audit
+copilot/docsmobile-overflow-audit
+copilot/enhance-mobile-experience
+copilot/enhance-mobile-experience-again
+copilot/add-pull-to-refresh-mechanism
+copilot/enhance-mobile-experience-another-one
+copilot/fix-pull-to-refresh-warnings
+copilot/add-mobile-compatibility-features
+copilot/enhance-mobile-compliance
+copilot/fix-navigation-warnings
+copilot/fix-ios-accessibility-warnings
+copilot/fix-ios-accessibility-warnings-again
+copilot/fix-ios-user-account-deletion-warnings
+copilot/fix-ios-navigation-warnings

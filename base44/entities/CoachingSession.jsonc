@@ -1,0 +1,132 @@
+{
+  "name": "CoachingSession",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Session title"
+    },
+    "focus_area": {
+      "type": "string",
+      "enum": [
+        "mood_improvement",
+        "stress_management",
+        "goal_achievement",
+        "behavior_change",
+        "relationship",
+        "self_esteem",
+        "general"
+      ],
+      "description": "Main focus of the coaching session"
+    },
+    "current_challenge": {
+      "type": "string",
+      "description": "The specific challenge user wants to work on"
+    },
+    "desired_outcome": {
+      "type": "string",
+      "description": "What the user wants to achieve"
+    },
+    "action_plan": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "timeline": {
+            "type": "string"
+          },
+          "completed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "description": "Specific action steps"
+    },
+    "related_goals": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of related goals"
+    },
+    "related_mood_patterns": {
+      "type": "object",
+      "description": "Mood patterns identified"
+    },
+    "related_journal_entries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs of related journal entries"
+    },
+    "agent_conversation_id": {
+      "type": "string",
+      "description": "Reference to AI conversation"
+    },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "discovery",
+        "planning",
+        "action",
+        "review",
+        "completed"
+      ],
+      "default": "discovery",
+      "description": "Current stage of coaching"
+    },
+    "progress_notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Progress tracking notes"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "paused",
+        "completed"
+      ],
+      "default": "active",
+      "description": "Session status"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this coaching session"
+    }
+  },
+  "required": [
+    "title",
+    "focus_area"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

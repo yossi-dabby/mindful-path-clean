@@ -1,0 +1,122 @@
+{
+  "name": "RegressionLog",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the session occurred"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "he",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt",
+        "other"
+      ],
+      "description": "Language of the session"
+    },
+    "scenario_type": {
+      "type": "string",
+      "enum": [
+        "partial_completion",
+        "worry_overthinking",
+        "avoidance",
+        "panic",
+        "social_anxiety",
+        "sleep_anxiety",
+        "work_task",
+        "driving_anxiety",
+        "continuity_return",
+        "session_opener",
+        "other"
+      ],
+      "description": "Clinical scenario type observed"
+    },
+    "user_prompt": {
+      "type": "string",
+      "description": "Exact user message that triggered the regression"
+    },
+    "model_reply": {
+      "type": "string",
+      "description": "Exact model reply that exhibited the regression"
+    },
+    "regression_category": {
+      "type": "string",
+      "enum": [
+        "hand-back / ask-back",
+        "gather-info-first",
+        "continuity contamination",
+        "domain contamination",
+        "permission phrasing",
+        "ending with a question",
+        "panic too long / not immediate",
+        "social anxiety too theory-heavy",
+        "partial completion drift",
+        "worry not action-first",
+        "internal leakage",
+        "other"
+      ],
+      "description": "Category of observed regression"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "description": "low = noticeable but recoverable | medium = clear regression, direction lost | high = safety or major clinical failure"
+    },
+    "repeated_regression": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if this is the 2nd+ independent confirmed instance of the same regression category + scenario_type combination"
+    },
+    "fix_triggered": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if a micro-fix was applied as a result of this and prior repeated instance"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional reviewer notes \u2014 context, mitigation, or resolution"
+    }
+  },
+  "required": [
+    "date",
+    "language",
+    "scenario_type",
+    "user_prompt",
+    "model_reply",
+    "regression_category",
+    "severity"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

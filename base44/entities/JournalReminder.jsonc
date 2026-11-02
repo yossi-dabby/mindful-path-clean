@@ -1,0 +1,80 @@
+{
+  "name": "JournalReminder",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Reminder title"
+    },
+    "entry_type": {
+      "type": "string",
+      "enum": [
+        "cbt_standard",
+        "gratitude",
+        "anxiety_log",
+        "mood_journal",
+        "custom",
+        "any"
+      ],
+      "default": "any",
+      "description": "Type of journaling to remind about"
+    },
+    "template_id": {
+      "type": "string",
+      "description": "Specific template to use (optional)"
+    },
+    "frequency": {
+      "type": "string",
+      "enum": [
+        "daily",
+        "weekly",
+        "custom"
+      ],
+      "default": "daily",
+      "description": "How often to remind"
+    },
+    "time": {
+      "type": "string",
+      "description": "Time of day (HH:MM format)"
+    },
+    "days": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Days of week for weekly reminders"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether reminder is active"
+    },
+    "message": {
+      "type": "string",
+      "description": "Custom reminder message"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this journal reminder"
+    }
+  },
+  "required": [
+    "title",
+    "time"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

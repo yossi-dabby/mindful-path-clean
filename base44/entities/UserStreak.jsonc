@@ -1,0 +1,65 @@
+{
+  "name": "UserStreak",
+  "type": "object",
+  "properties": {
+    "current_streak": {
+      "type": "number",
+      "default": 0,
+      "description": "Current consecutive days of activity"
+    },
+    "longest_streak": {
+      "type": "number",
+      "default": 0,
+      "description": "Longest streak ever achieved"
+    },
+    "last_activity_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Last date user was active"
+    },
+    "streak_type": {
+      "type": "string",
+      "enum": [
+        "mood_check",
+        "journal",
+        "exercise",
+        "overall"
+      ],
+      "default": "overall",
+      "description": "Type of activity streak"
+    },
+    "total_days_active": {
+      "type": "number",
+      "default": 0,
+      "description": "Total days user has been active"
+    },
+    "streak_frozen": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether streak is protected for today"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this streak record"
+    }
+  },
+  "required": [
+    "current_streak",
+    "streak_type"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

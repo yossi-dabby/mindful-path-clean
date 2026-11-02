@@ -1,0 +1,144 @@
+{
+  "name": "ExternalKnowledgeChunk",
+  "type": "object",
+  "properties": {
+    "chunk_id": {
+      "type": "string",
+      "description": "Stable chunk identifier within the source"
+    },
+    "source_id": {
+      "type": "string",
+      "description": "Stable registry identifier of the parent source"
+    },
+    "external_source_record_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Base44 record ID of the parent ExternalKnowledgeSource record"
+    },
+    "chunk_text": {
+      "type": "string",
+      "description": "Plain-text content of the chunk"
+    },
+    "chunk_index": {
+      "type": "number",
+      "description": "0-based chunk position within the source"
+    },
+    "total_chunks": {
+      "type": "number",
+      "description": "Total number of chunks generated for the source"
+    },
+    "source_url": {
+      "type": "string",
+      "description": "Canonical source URL"
+    },
+    "source_title": {
+      "type": "string",
+      "description": "Human-readable source title"
+    },
+    "publisher": {
+      "type": "string",
+      "description": "Publishing organization or authority"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Registered domain of the publisher"
+    },
+    "retrieval_date": {
+      "type": "string",
+      "description": "ISO timestamp when the source was retrieved"
+    },
+    "publication_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Original publication date when known"
+    },
+    "section_context": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Section or heading context when available"
+    },
+    "page_number": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Source page number when available"
+    },
+    "content_source_type": {
+      "type": "string",
+      "enum": [
+        "external_trusted"
+      ],
+      "default": "external_trusted",
+      "description": "Separation marker for external trusted knowledge"
+    },
+    "character_count": {
+      "type": "number",
+      "description": "Character count of chunk_text"
+    },
+    "language": {
+      "type": "string",
+      "default": "en",
+      "description": "Language of the chunk content"
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "description": "Schema/version marker for forward compatibility"
+    },
+    "entity_type": {
+      "type": "string",
+      "description": "Compatibility marker for later retrieval orchestration"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Structured provenance and indexing-compatible metadata"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this knowledge chunk"
+    }
+  },
+  "required": [
+    "chunk_id",
+    "source_id",
+    "chunk_text",
+    "chunk_index",
+    "total_chunks",
+    "source_url",
+    "source_title",
+    "publisher",
+    "domain",
+    "retrieval_date",
+    "content_source_type"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

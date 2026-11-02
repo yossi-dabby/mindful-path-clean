@@ -1,0 +1,36 @@
+{
+  "name": "CommunityReaction",
+  "properties": {
+    "target_id": {
+      "description": "Target entity record id",
+      "type": "string"
+    },
+    "target_type": {
+      "description": "Community item type",
+      "enum": [
+        "forum_post",
+        "shared_progress"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "target_type",
+    "target_id"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    }
+  },
+  "type": "object"
+}

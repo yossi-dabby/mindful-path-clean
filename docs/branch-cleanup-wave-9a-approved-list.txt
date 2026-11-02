@@ -1,0 +1,36 @@
+# Branch Cleanup Wave 9A — Archive Then Delete Approved List
+#
+# Scope: ARCHIVE_THEN_DELETE_CLOSED_UNMERGED_30_TO_90D only.
+# Cap: maximum 25 branches.
+#
+# Selection criteria: oldest branches first (85d → 84d → 80d).
+# All branches have closed-without-merge PRs aged 30–90 days per the post-Wave-7C audit.
+# None of these branches were processed in Waves 1–8.
+#
+# Last updated: 2026-06-10
+
+copilot/add-e2e-tests-and-ci-improvements
+copilot/fix-lucide-inventory-workflow
+copilot/fix-spa-navigation-offline-error
+copilot/fix-create-post-heading-visibility
+copilot/fix-e2e-tests-android-back-button
+copilot/fix-e2e-tests-button-locators
+copilot/fix-forum-post-form-ui-issues
+copilot/fix-post-button-visibility
+copilot/fix-pull-to-refresh-indicator
+copilot/fix-ui-element-selections
+copilot/update-app-for-compliance
+copilot/update-delete-account-feature
+copilot/fix-auth-redirect-loop-staging
+copilot/fix-branch-conflicts
+copilot/fix-e2e-test-chat-page-log-url
+copilot/fix-home-setup-completion-flow-again
+copilot/fix-home-setup-completion-flow-again-again
+copilot/fix-home-setup-completion-flow-again-again-again
+copilot/fix-railway-auth-flow-staging
+copilot/fix-shared-client-routing
+copilot/fix-white-screen-error-another-one
+copilot/harden-runtime-paths
+copilot/implement-shared-layer-fix-again
+copilot/investigate-runtime-data-integration
+copilot/stability-sweep-runtime-issues

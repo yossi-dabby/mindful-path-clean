@@ -1,0 +1,77 @@
+# Branch Cleanup Wave 3 — Approved Deletion List
+#
+# IMPORTANT: This file is read by scripts/branch-cleanup-wave-3.mjs.
+#
+# Rules:
+#   - Lines starting with '#' are comments and are ignored.
+#   - Empty lines are ignored.
+#   - Branch names must be exact (no trailing spaces, no origin/ prefix).
+#   - All entries must be SAFE_DELETE_MERGED candidates:
+#       remote branch exists, fully merged into main, older than 14 days,
+#       no open PRs, not main/staging-fresh, not protected/referenced.
+#   - This list must not exceed 50 entries.
+#
+# Wave 3 contains 50 branches selected from the post-Wave-2 inventory.
+# All branches were verified on 2026-06-10:
+#   - Remote branch exists on origin
+#   - Fully merged into main (confirmed via git branch -r --merged origin/main)
+#   - No open PRs (gh pr list --state open returned 0)
+#   - Older than 14 days (oldest: 2026-01-13, newest: 2026-03-04)
+#   - None are main, staging-fresh, or the current branch
+#   - None were deleted in Wave 1
+#   - None were deleted in Wave 2
+# If additional branches are to be deleted, create a separate Wave 4 PR and list.
+#
+# Last updated: 2026-06-10
+# Approved by: repository owner before dispatching the workflow
+
+copilot/replace-goalcoach-spec
+copilot/stabilize-e2e-waits
+copilot/add-static-page-components
+copilot/fix-e2e-404-errors
+copilot/fix-e2e-test-errors
+copilot/fix-e2e-test-issues
+copilot/fix-e2e-tests-goalcoach
+copilot/fix-goalcoach-test-timeouts
+copilot/fix-next-button-test
+copilot/fix-playwright-e2e-tests
+copilot/stabilize-playwright-e2e-tests
+copilot/update-e2e-tests-navigation
+copilot/add-spa-fallback-for-vite
+copilot/fix-playwright-e2e-404-errors
+copilot/enhance-mobile-compatibility
+copilot/fix-ios-warnings
+copilot/add-hebrew-translation-support
+copilot/fix-bottom-tabs-warnings
+copilot/fix-reference-error-t-undefined
+copilot/check-hebrew-translation-tabs
+copilot/add-missing-language-translations
+copilot/audit-fix-hardcoded-strings
+copilot/continue-mindful-path-job
+copilot/fix-dark-mode-issues
+copilot/fix-missing-translations
+copilot/fix-native-layouts-android-ios-web
+copilot/fix-overflow-status-mobile
+copilot/implement-translation-feature
+copilot/translate-home-page-content
+copilot/translate-home-page-content-09228d1f-fba9-4e4a-a550-60b383967e9f
+copilot/translate-home-page-content-again
+copilot/translate-home-page-content-another-one
+copilot/translate-home-page-content-one-more-time
+copilot/translate-home-page-content-yet-again
+copilot/check-fix-accessibility-ux
+copilot/check-fix-responsiveness
+copilot/fix-app-readiness-test
+copilot/fix-bottom-tabs-stack-preservation
+copilot/fix-chat-scroll-issues
+copilot/fix-conversations-list-component
+copilot/fix-lint-errors-md-json-files
+copilot/fix-optimistic-ui-updates
+copilot/fix-overscroll-sticky-elements
+copilot/fix-pull-to-refresh-functionality
+copilot/fix-safe-area-handling
+copilot/fix-system-gestures-selection
+copilot/fix-unified-navigation-back-stack
+copilot/fix-user-account-deletion
+copilot/test-fix-dropdowns-selection-controls
+copilot/merge-repos-mindful-path

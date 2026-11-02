@@ -1,0 +1,38 @@
+{
+  "name": "RevenueCatProcessedEvent",
+  "type": "object",
+  "properties": {
+    "revenuecat_event_id": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "RevenueCat webhook event ID used for idempotency"
+    },
+    "event_type": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "RevenueCat event type"
+    },
+    "app_user_id": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "RevenueCat app user ID associated with the event"
+    },
+    "processed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time the event completed processing"
+    }
+  },
+  "required": [
+    "revenuecat_event_id",
+    "event_type",
+    "app_user_id",
+    "processed_at"
+  ],
+  "rls": {
+    "create": false,
+    "read": false,
+    "update": false,
+    "delete": false
+  }
+}

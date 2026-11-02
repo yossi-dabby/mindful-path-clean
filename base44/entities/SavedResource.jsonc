@@ -1,0 +1,36 @@
+{
+  "name": "SavedResource",
+  "type": "object",
+  "properties": {
+    "resource_id": {
+      "type": "string",
+      "description": "Reference to the Resource entity"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Personal notes about the resource"
+    },
+    "completed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether user has completed/consumed the resource"
+    }
+  },
+  "required": [
+    "resource_id"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

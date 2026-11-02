@@ -1,0 +1,85 @@
+{
+  "name": "UserJourneyProgress",
+  "type": "object",
+  "properties": {
+    "journey_id": {
+      "type": "string",
+      "description": "Reference to Journey"
+    },
+    "journey_title": {
+      "type": "string",
+      "description": "Journey title (cached)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "in_progress",
+        "completed",
+        "paused"
+      ],
+      "default": "in_progress",
+      "description": "Current status"
+    },
+    "started_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When journey was started"
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When journey was completed"
+    },
+    "current_step": {
+      "type": "number",
+      "default": 0,
+      "description": "Index of current step (0-based)"
+    },
+    "completed_steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "step_index": {
+            "type": "number"
+          },
+          "completed_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reflection": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Steps completed with timestamps"
+    },
+    "total_steps": {
+      "type": "number",
+      "description": "Total steps in journey"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this journey progress record"
+    }
+  },
+  "required": [
+    "journey_id",
+    "journey_title"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

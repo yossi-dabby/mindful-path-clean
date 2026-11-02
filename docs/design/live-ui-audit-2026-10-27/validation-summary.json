@@ -1,0 +1,58 @@
+{
+  "base_commit": "296ba8d0e8ad6e00cca4b724d91d0cfb32976936",
+  "unit": {
+    "passed": 11004,
+    "skipped": 267
+  },
+  "regressions": {
+    "passed": 18
+  },
+  "lint": "passed",
+  "typecheck": "passed",
+  "build": "passed",
+  "batches": {
+    "review": {
+      "views": 450,
+      "screens": 765,
+      "capture_failures": 1,
+      "javascript_errors": 0
+    },
+    "states-final": {
+      "views": 408,
+      "screens": 408,
+      "capture_failures": 4,
+      "javascript_errors": 0
+    },
+    "populated": {
+      "views": 60,
+      "screens": 111,
+      "capture_failures": 2,
+      "javascript_errors": 0
+    },
+    "details-verified": {
+      "views": 72,
+      "screens": 139,
+      "capture_failures": 0,
+      "javascript_errors": 0
+    },
+    "recheck": {
+      "views": 24,
+      "screens": 53,
+      "capture_failures": 2,
+      "javascript_errors": 0
+    },
+    "renderer-retry": {
+      "views": 2,
+      "screens": 6,
+      "capture_failures": 0,
+      "javascript_errors": 0
+    },
+    "matrix-retry": {
+      "views": 1,
+      "screens": 1,
+      "capture_failures": 0,
+      "javascript_errors": 0
+    }
+  },
+  "unresolved_capture_failures": []
+}

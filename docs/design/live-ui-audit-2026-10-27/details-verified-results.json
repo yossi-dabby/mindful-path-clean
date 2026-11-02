@@ -1,0 +1,578 @@
+[
+  {
+    "target": "goal-detail-chart",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 4,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-board",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 4,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-journal",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-ai_adjust",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-reminders",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-edit_aria",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "journal-full-record",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "journal-edit-record",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-1",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-2",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-3",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-4",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-chart",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-board",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-journal",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-ai_adjust",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-reminders",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-edit_aria",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "journal-full-record",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "journal-edit-record",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-1",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-2",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-3",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-4",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-chart",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-board",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-journal",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-ai_adjust",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-reminders",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-edit_aria",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "journal-full-record",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "journal-edit-record",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-1",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-2",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-3",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-4",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-chart",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 4,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-board",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 4,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-journal",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-ai_adjust",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-reminders",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-edit_aria",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "journal-full-record",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "journal-edit-record",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-1",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-2",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-3",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-4",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-chart",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-board",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-journal",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-ai_adjust",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-reminders",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-edit_aria",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "journal-full-record",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "journal-edit-record",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-1",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-2",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-3",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-4",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-chart",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-board",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-journal",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-ai_adjust",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-reminders",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "goal-detail-edit_aria",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "journal-full-record",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "journal-edit-record",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-1",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-2",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-3",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "onboarding-step-4",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  }
+]

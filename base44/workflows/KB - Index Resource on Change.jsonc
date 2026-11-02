@@ -1,0 +1,39 @@
+{
+  "name": "KB: Index Resource on Change",
+  "description": "Stage 3 \u2014 Knowledge Base. Calls indexContentRecord when a Resource record is created, updated, or deleted. No-ops safely when KNOWLEDGE_INDEX_ENABLED is not 'true'. Never affects user-facing behavior.",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "entity",
+      "events": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "entity_name": "Resource"
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "kb_index_resource_on_change",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_function": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "indexContentRecord",
+            "args": {}
+          },
+          "then": "end"
+        }
+      }
+    ]
+  },
+  "x-base44-migrated-from-automation": {
+    "legacy_payload_function": "indexContentRecord"
+  }
+}

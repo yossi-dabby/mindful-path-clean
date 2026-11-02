@@ -1,0 +1,161 @@
+{
+  "name": "ExternalKnowledgeSource",
+  "type": "object",
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "description": "Stable registry identifier for the approved external source"
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable title of the source document"
+    },
+    "url": {
+      "type": "string",
+      "description": "Canonical approved source URL"
+    },
+    "publisher": {
+      "type": "string",
+      "description": "Publishing organization or authority"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Registered domain of the publisher"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "html",
+        "pdf",
+        "pdf_text"
+      ],
+      "description": "Document format for the approved source"
+    },
+    "content_source_type": {
+      "type": "string",
+      "enum": [
+        "external_trusted"
+      ],
+      "default": "external_trusted",
+      "description": "Separation marker for external trusted knowledge"
+    },
+    "retrieval_date": {
+      "type": "string",
+      "description": "ISO timestamp when the source was retrieved"
+    },
+    "publication_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Original publication date when known"
+    },
+    "ingestion_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_progress",
+        "complete",
+        "failed",
+        "skipped"
+      ],
+      "default": "pending",
+      "description": "Current ingestion pipeline status"
+    },
+    "source_status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "deprecated",
+        "error"
+      ],
+      "default": "active",
+      "description": "Lifecycle status of the source record"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "deprecated",
+        "error"
+      ],
+      "default": "active",
+      "description": "Compatibility lifecycle field preserved for existing runtime writes"
+    },
+    "error_state": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Non-blocking persistence-safe error state"
+    },
+    "source_fingerprint": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Stable identity fingerprint for repeated-ingestion safety"
+    },
+    "chunk_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of chunk records generated from this source"
+    },
+    "language": {
+      "type": "string",
+      "default": "en",
+      "description": "Language of the source content"
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "description": "Schema/version marker for forward compatibility"
+    },
+    "last_ingested_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Timestamp of the most recent successful ingestion write"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this knowledge source"
+    }
+  },
+  "required": [
+    "source_id",
+    "title",
+    "url",
+    "publisher",
+    "domain",
+    "source_type",
+    "content_source_type",
+    "retrieval_date",
+    "ingestion_status",
+    "source_status"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

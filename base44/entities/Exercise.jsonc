@@ -1,0 +1,278 @@
+{
+  "name": "Exercise",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Exercise name"
+    },
+    "description": {
+      "type": "string",
+      "description": "What this exercise does"
+    },
+    "detailed_description": {
+      "type": "string",
+      "description": "Extended information about the exercise benefits and background"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "breathing",
+        "grounding",
+        "cognitive_restructuring",
+        "behavioral_activation",
+        "mindfulness",
+        "exposure",
+        "sleep",
+        "relationships",
+        "stress_management"
+      ],
+      "description": "Type of CBT technique"
+    },
+    "duration_options": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "description": "Available duration options in minutes"
+    },
+    "instructions": {
+      "type": "string",
+      "description": "Step-by-step guide"
+    },
+    "detailed_steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "step_number": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "duration_seconds": {
+            "type": "number"
+          }
+        }
+      },
+      "description": "Detailed step-by-step instructions"
+    },
+    "video_url": {
+      "type": "string",
+      "description": "URL to demonstration video"
+    },
+    "audio_url": {
+      "type": "string",
+      "description": "URL to guided audio"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Thumbnail or demonstration image"
+    },
+    "tips": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Helpful tips for practicing the exercise"
+    },
+    "benefits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Key benefits of this exercise"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "default": "beginner"
+    },
+    "completed_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Times completed by user"
+    },
+    "last_completed": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last time user did this"
+    },
+    "total_time_practiced": {
+      "type": "number",
+      "default": 0,
+      "description": "Total minutes practiced"
+    },
+    "favorite": {
+      "type": "boolean",
+      "default": false,
+      "description": "User marked as favorite"
+    },
+    "breathing_pattern": {
+      "type": "object",
+      "properties": {
+        "inhale": {
+          "type": "number"
+        },
+        "hold1": {
+          "type": "number"
+        },
+        "exhale": {
+          "type": "number"
+        },
+        "hold2": {
+          "type": "number"
+        }
+      },
+      "description": "Breathing pattern in seconds (for breathing exercises)"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Keywords for searchability (e.g., anxiety, stress, sleep)"
+    },
+    "media_type": {
+      "type": "string",
+      "enum": [
+        "text",
+        "audio",
+        "video",
+        "visualization"
+      ],
+      "default": "text",
+      "description": "Primary media type for this exercise"
+    },
+    "visualization_script": {
+      "type": "string",
+      "description": "Guided visualization script if applicable"
+    },
+    "slug": {
+      "type": "string",
+      "description": "[AI-CONTENT] URL-safe unique identifier for content addressing and stable reference in retrieval systems"
+    },
+    "summary": {
+      "type": "string",
+      "description": "[AI-CONTENT] Short AI-optimized one-paragraph summary for retrieval context injection \u2014 distinct from user-facing description"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "he",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt"
+      ],
+      "default": "en",
+      "description": "[AI-CONTENT] Language of this content record"
+    },
+    "goal_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "[AI-CONTENT] Therapeutic goal types this exercise is designed to support (e.g., anxiety_reduction, mood_improvement, behavior_change)"
+    },
+    "mood_targets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "[AI-CONTENT] Mood states this exercise is designed to help (e.g., anxious, low, overwhelmed, angry)"
+    },
+    "when_to_use": {
+      "type": "string",
+      "description": "[AI-CONTENT] Explicit natural-language guidance for AI on when to recommend this exercise based on user state, symptoms, or context"
+    },
+    "contraindications": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "[AI-CONTENT] Conditions, states, or situations where this exercise should NOT be recommended (critical for safe AI retrieval)"
+    },
+    "evidence_base": {
+      "type": "string",
+      "description": "[AI-CONTENT] Clinical or research basis for this technique (e.g., 'Randomised controlled trials support use in GAD \u2014 Beck 1979')"
+    },
+    "source": {
+      "type": "string",
+      "description": "[AI-CONTENT] Original source, clinical reference, or attribution (e.g., 'DBT Skills Training Manual, Linehan 1993')"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "draft",
+        "archived"
+      ],
+      "default": "active",
+      "description": "[AI-CONTENT] Content lifecycle status \u2014 only 'active' records should be used in AI retrieval"
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "description": "[AI-CONTENT] Content version number \u2014 increment when instructions or guidance are materially updated"
+    }
+  },
+  "required": [
+    "title",
+    "category",
+    "instructions"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "role": "user"
+              }
+            },
+            {
+              "data.status": {
+                "$nin": [
+                  "draft",
+                  "archived"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "name": "AppNotification",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Notification title"
+    },
+    "message": {
+      "type": "string",
+      "description": "Notification body text"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "goal_reminder",
+        "progress_update",
+        "exercise_reminder",
+        "daily_checkin",
+        "streak_alert",
+        "session_summary",
+        "mention",
+        "system"
+      ],
+      "description": "Notification type"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the user has read this notification"
+    },
+    "action_url": {
+      "type": "string",
+      "description": "Optional deep link URL within the app"
+    },
+    "reference_id": {
+      "type": "string",
+      "description": "ID of related entity (goal, exercise, session, etc.)"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "normal",
+        "high",
+        "critical"
+      ],
+      "default": "normal",
+      "description": "Notification priority level"
+    },
+    "email_sent": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether an email was also sent for this notification"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this notification"
+    }
+  },
+  "required": [
+    "title",
+    "message",
+    "type"
+  ],
+  "rls": {
+    "create": {},
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

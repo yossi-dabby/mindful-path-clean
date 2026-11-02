@@ -1,0 +1,54 @@
+{
+  "name": "TherapyFeedback",
+  "type": "object",
+  "properties": {
+    "conversation_id": {
+      "type": "string",
+      "description": "Reference to agent conversation"
+    },
+    "message_index": {
+      "type": "number",
+      "description": "Index of the message in conversation"
+    },
+    "feedback_type": {
+      "type": "string",
+      "enum": [
+        "helpful",
+        "not_helpful"
+      ],
+      "description": "User feedback on the message"
+    },
+    "agent_name": {
+      "type": "string",
+      "description": "Which agent provided the message (cbt_therapist, ai_coach, etc.)"
+    },
+    "session_context": {
+      "type": "string",
+      "description": "Context where feedback was given (chat, companion, coach)"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this feedback record"
+    }
+  },
+  "required": [
+    "conversation_id",
+    "message_index",
+    "feedback_type"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

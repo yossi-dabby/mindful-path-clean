@@ -1,0 +1,3776 @@
+{
+  "src/components/ai/AiCompanion.jsx": [
+    {
+      "imported": "MessageCircle",
+      "local": "MessageCircle"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Send",
+      "local": "Send"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "MinusCircle",
+      "local": "MinusCircle"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    }
+  ],
+  "src/components/ai/DraggableAiCompanion.jsx": [
+    {
+      "imported": "MessageCircle",
+      "local": "MessageCircle"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Send",
+      "local": "Send"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "MinusCircle",
+      "local": "MinusCircle"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "GripVertical",
+      "local": "GripVertical"
+    }
+  ],
+  "src/components/audio/AudioPlayer.jsx": [
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "Pause",
+      "local": "Pause"
+    },
+    {
+      "imported": "SkipBack",
+      "local": "SkipBack"
+    },
+    {
+      "imported": "SkipForward",
+      "local": "SkipForward"
+    },
+    {
+      "imported": "Volume2",
+      "local": "Volume2"
+    },
+    {
+      "imported": "VolumeX",
+      "local": "VolumeX"
+    },
+    {
+      "imported": "Download",
+      "local": "Download"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    }
+  ],
+  "src/components/chat/ConversationsList.jsx": [
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "MessageCircle",
+      "local": "MessageCircle"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    }
+  ],
+  "src/components/chat/CrisisSafetyPanel.jsx": [
+    {
+      "imported": "AlertTriangle",
+      "local": "AlertTriangle"
+    },
+    {
+      "imported": "Phone",
+      "local": "Phone"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/chat/InformedConsentModal.jsx": [
+    {
+      "imported": "AlertCircle",
+      "local": "AlertCircle"
+    }
+  ],
+  "src/components/chat/InlineConsentBanner.jsx": [
+    {
+      "imported": "Info",
+      "local": "Info"
+    },
+    {
+      "imported": "ExternalLink",
+      "local": "ExternalLink"
+    }
+  ],
+  "src/components/chat/InlineRiskPanel.jsx": [
+    {
+      "imported": "AlertTriangle",
+      "local": "AlertTriangle"
+    },
+    {
+      "imported": "Phone",
+      "local": "Phone"
+    },
+    {
+      "imported": "MessageSquare",
+      "local": "MessageSquare"
+    }
+  ],
+  "src/components/chat/JournalAutoRun.jsx": [
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    }
+  ],
+  "src/components/chat/MessageFeedback.jsx": [
+    {
+      "imported": "ThumbsUp",
+      "local": "ThumbsUp"
+    },
+    {
+      "imported": "ThumbsDown",
+      "local": "ThumbsDown"
+    }
+  ],
+  "src/components/chat/ProactiveCheckIn.jsx": [
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "TrendingDown",
+      "local": "TrendingDown"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "Bell",
+      "local": "Bell"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    }
+  ],
+  "src/components/chat/ProfileSpecificDisclaimer.jsx": [
+    {
+      "imported": "AlertCircle",
+      "local": "AlertCircle"
+    }
+  ],
+  "src/components/chat/SessionSummary.jsx": [
+    {
+      "imported": "FileText",
+      "local": "FileText"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "ExternalLink",
+      "local": "ExternalLink"
+    },
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    }
+  ],
+  "src/components/chat/TherapyEntryOptions.jsx": [
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Cloud",
+      "local": "Cloud"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Leaf",
+      "local": "Leaf"
+    }
+  ],
+  "src/components/chat/TherapyFlowHandler.jsx": [
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    }
+  ],
+  "src/components/chat/TherapyStateMachine.jsx": [
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    }
+  ],
+  "src/components/chat/ThoughtWorkSaveHandler.jsx": [
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "AlertCircle",
+      "local": "AlertCircle"
+    }
+  ],
+  "src/components/coaching/ActionPlanPanel.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    },
+    {
+      "imported": "Circle",
+      "local": "Circle"
+    }
+  ],
+  "src/components/coaching/CoachingChat.jsx": [
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "Send",
+      "local": "Send"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    }
+  ],
+  "src/components/coaching/CoachingSessionList.jsx": [
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    }
+  ],
+  "src/components/coaching/CoachingSessionWizard.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    }
+  ],
+  "src/components/coaching/PersonalizedInsights.jsx": [
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Book",
+      "local": "Book"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "AlertCircle",
+      "local": "AlertCircle"
+    }
+  ],
+  "src/components/community/ForumPostCard.jsx": [
+    {
+      "imported": "MessageCircle",
+      "local": "MessageCircle"
+    },
+    {
+      "imported": "ThumbsUp",
+      "local": "ThumbsUp"
+    },
+    {
+      "imported": "Pin",
+      "local": "Pin"
+    },
+    {
+      "imported": "User",
+      "local": "User"
+    },
+    {
+      "imported": "Shield",
+      "local": "Shield"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    }
+  ],
+  "src/components/community/ForumPostForm.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    }
+  ],
+  "src/components/community/GroupCard.jsx": [
+    {
+      "imported": "Users",
+      "local": "Users"
+    },
+    {
+      "imported": "Lock",
+      "local": "Lock"
+    },
+    {
+      "imported": "MessageSquare",
+      "local": "MessageSquare"
+    }
+  ],
+  "src/components/community/GroupForm.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/community/ModerationTools.jsx": [
+    {
+      "imported": "Shield",
+      "local": "Shield"
+    },
+    {
+      "imported": "Flag",
+      "local": "Flag"
+    },
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    },
+    {
+      "imported": "XCircle",
+      "local": "XCircle"
+    },
+    {
+      "imported": "AlertTriangle",
+      "local": "AlertTriangle"
+    }
+  ],
+  "src/components/community/ProgressShareForm.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/exercises/AiExerciseCoaching.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    }
+  ],
+  "src/components/exercises/AiExerciseRecommendations.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "RefreshCw",
+      "local": "RefreshCw"
+    },
+    {
+      "imported": "Wind",
+      "local": "Wind"
+    },
+    {
+      "imported": "Anchor",
+      "local": "Anchor"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "ThumbsUp",
+      "local": "ThumbsUp"
+    },
+    {
+      "imported": "ThumbsDown",
+      "local": "ThumbsDown"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    }
+  ],
+  "src/components/exercises/BreathingVisual.jsx": [
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "Pause",
+      "local": "Pause"
+    },
+    {
+      "imported": "RotateCcw",
+      "local": "RotateCcw"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Volume2",
+      "local": "Volume2"
+    },
+    {
+      "imported": "VolumeX",
+      "local": "VolumeX"
+    }
+  ],
+  "src/components/exercises/ExerciseDetail.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    },
+    {
+      "imported": "Clock",
+      "local": "Clock"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    },
+    {
+      "imported": "Star",
+      "local": "Star"
+    },
+    {
+      "imported": "Video",
+      "local": "Video"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Headphones",
+      "local": "Headphones"
+    },
+    {
+      "imported": "Eye",
+      "local": "Eye"
+    },
+    {
+      "imported": "Download",
+      "local": "Download"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    }
+  ],
+  "src/components/exercises/ExerciseLibrary.jsx": [
+    {
+      "imported": "Clock",
+      "local": "Clock"
+    },
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    }
+  ],
+  "src/components/exercises/ExerciseMediaBadge.jsx": [
+    {
+      "imported": "Headphones",
+      "local": "Headphones"
+    },
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "Eye",
+      "local": "Eye"
+    },
+    {
+      "imported": "FileText",
+      "local": "FileText"
+    }
+  ],
+  "src/components/exercises/InteractiveBreathingTool.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "Pause",
+      "local": "Pause"
+    },
+    {
+      "imported": "RotateCcw",
+      "local": "RotateCcw"
+    },
+    {
+      "imported": "Volume2",
+      "local": "Volume2"
+    },
+    {
+      "imported": "VolumeX",
+      "local": "VolumeX"
+    },
+    {
+      "imported": "Settings",
+      "local": "Settings"
+    },
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    }
+  ],
+  "src/components/exercises/QuickStartPanel.jsx": [
+    {
+      "imported": "Zap",
+      "local": "Zap"
+    },
+    {
+      "imported": "Clock",
+      "local": "Clock"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "Headphones",
+      "local": "Headphones"
+    },
+    {
+      "imported": "Eye",
+      "local": "Eye"
+    },
+    {
+      "imported": "Wind",
+      "local": "Wind"
+    },
+    {
+      "imported": "Anchor",
+      "local": "Anchor"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Moon",
+      "local": "Moon"
+    },
+    {
+      "imported": "Users",
+      "local": "Users"
+    },
+    {
+      "imported": "Activity",
+      "local": "Activity"
+    }
+  ],
+  "src/components/experiential_games/CalmBingo.jsx": [
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    }
+  ],
+  "src/components/experiential_games/FocusFlow.jsx": [
+    {
+      "imported": "Zap",
+      "local": "Zap"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    }
+  ],
+  "src/components/experiential_games/GameCard.jsx": [
+    {
+      "imported": "Puzzle",
+      "local": "Puzzle"
+    },
+    {
+      "imported": "Info",
+      "local": "Info"
+    }
+  ],
+  "src/components/experiential_games/GameInfoModal.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Clock",
+      "local": "Clock"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    },
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "Star",
+      "local": "Star"
+    }
+  ],
+  "src/components/experiential_games/MemoryMatch.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    }
+  ],
+  "src/components/experiential_games/MindGameRecommendations.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    }
+  ],
+  "src/components/experiential_games/NumberSequence.jsx": [
+    {
+      "imported": "Hash",
+      "local": "Hash"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    },
+    {
+      "imported": "XCircle",
+      "local": "XCircle"
+    }
+  ],
+  "src/components/experiential_games/PatternShift.jsx": [
+    {
+      "imported": "Shuffle",
+      "local": "Shuffle"
+    },
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    }
+  ],
+  "src/components/experiential_games/QuickWin.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    }
+  ],
+  "src/components/experiential_games/ReframePick.jsx": [
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    },
+    {
+      "imported": "XCircle",
+      "local": "XCircle"
+    }
+  ],
+  "src/components/experiential_games/ThoughtQuiz.jsx": [
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    },
+    {
+      "imported": "XCircle",
+      "local": "XCircle"
+    }
+  ],
+  "src/components/experiential_games/WordAssociation.jsx": [
+    {
+      "imported": "Link",
+      "local": "Link"
+    },
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    }
+  ],
+  "src/components/feed/FeedFilters.jsx": [
+    {
+      "imported": "Filter",
+      "local": "Filter"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/feed/FeedPreferences.jsx": [
+    {
+      "imported": "Settings",
+      "local": "Settings"
+    },
+    {
+      "imported": "Check",
+      "local": "Check"
+    }
+  ],
+  "src/components/gamification/BadgeDisplay.jsx": [
+    {
+      "imported": "Award",
+      "local": "Award"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Trophy",
+      "local": "Trophy"
+    }
+  ],
+  "src/components/gamification/DailyChallenges.jsx": [
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    },
+    {
+      "imported": "Circle",
+      "local": "Circle"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Trophy",
+      "local": "Trophy"
+    }
+  ],
+  "src/components/gamification/GamificationHub.jsx": [
+    {
+      "imported": "Flame",
+      "local": "Flame"
+    },
+    {
+      "imported": "Award",
+      "local": "Award"
+    },
+    {
+      "imported": "Zap",
+      "local": "Zap"
+    },
+    {
+      "imported": "Trophy",
+      "local": "Trophy"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "Lock",
+      "local": "Lock"
+    }
+  ],
+  "src/components/gamification/StreakWidget.jsx": [
+    {
+      "imported": "Flame",
+      "local": "Flame"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Award",
+      "local": "Award"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    }
+  ],
+  "src/components/goals/AiGoalAdjustment.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "AlertCircle",
+      "local": "AlertCircle"
+    }
+  ],
+  "src/components/goals/AiGoalBreakdown.jsx": [
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    },
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    }
+  ],
+  "src/components/goals/AiGoalCoaching.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    }
+  ],
+  "src/components/goals/AiGoalSuggestions.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    }
+  ],
+  "src/components/goals/EnhancedGoalCard.jsx": [
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "AlertTriangle",
+      "local": "AlertTriangle"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "ChevronDown",
+      "local": "ChevronDown"
+    },
+    {
+      "imported": "ChevronUp",
+      "local": "ChevronUp"
+    }
+  ],
+  "src/components/goals/GoalCalendar.jsx": [
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Flag",
+      "local": "Flag"
+    }
+  ],
+  "src/components/goals/GoalCard.jsx": [
+    {
+      "imported": "Edit",
+      "local": "Edit"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    },
+    {
+      "imported": "ChevronDown",
+      "local": "ChevronDown"
+    },
+    {
+      "imported": "ChevronUp",
+      "local": "ChevronUp"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Bell",
+      "local": "Bell"
+    },
+    {
+      "imported": "LayoutGrid",
+      "local": "LayoutGrid"
+    }
+  ],
+  "src/components/goals/GoalCoachWizard.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "HeartHandshake",
+      "local": "HeartHandshake"
+    },
+    {
+      "imported": "Users",
+      "local": "Users"
+    },
+    {
+      "imported": "ListChecks",
+      "local": "ListChecks"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Shapes",
+      "local": "Shapes"
+    },
+    {
+      "imported": "GraduationCap",
+      "local": "GraduationCap"
+    },
+    {
+      "imported": "HeartPulse",
+      "local": "HeartPulse"
+    },
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "Minus",
+      "local": "Minus"
+    }
+  ],
+  "src/components/goals/GoalForm.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    }
+  ],
+  "src/components/goals/GoalKanbanBoard.jsx": [
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "GripVertical",
+      "local": "GripVertical"
+    }
+  ],
+  "src/components/goals/GoalMotivation.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/goals/GoalProgressChart.jsx": [
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    }
+  ],
+  "src/components/goals/GoalsDashboardWidget.jsx": [
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "AlertCircle",
+      "local": "AlertCircle"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    },
+    {
+      "imported": "User",
+      "local": "User"
+    }
+  ],
+  "src/components/goals/GoalTemplateLibrary.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Users",
+      "local": "Users"
+    },
+    {
+      "imported": "Briefcase",
+      "local": "Briefcase"
+    }
+  ],
+  "src/components/goals/GoalTrackingPanel.jsx": [
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    },
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/goals/LinkedJournalEntries.jsx": [
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "TrendingDown",
+      "local": "TrendingDown"
+    }
+  ],
+  "src/components/goals/MilestonesTimeline.jsx": [
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    },
+    {
+      "imported": "AlertCircle",
+      "local": "AlertCircle"
+    },
+    {
+      "imported": "Clock",
+      "local": "Clock"
+    },
+    {
+      "imported": "Filter",
+      "local": "Filter"
+    }
+  ],
+  "src/components/goals/ReminderSettings.jsx": [
+    {
+      "imported": "Bell",
+      "local": "Bell"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    },
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "Mail",
+      "local": "Mail"
+    },
+    {
+      "imported": "AppWindow",
+      "local": "AppWindow"
+    },
+    {
+      "imported": "Check",
+      "local": "Check"
+    }
+  ],
+  "src/components/goals/SixStepGoalWizard.jsx": [
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "Check",
+      "local": "Check"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "AlertTriangle",
+      "local": "AlertTriangle"
+    },
+    {
+      "imported": "Map",
+      "local": "Map"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "RefreshCw",
+      "local": "RefreshCw"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/health/HealthDashboard.jsx": [
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "Activity",
+      "local": "Activity"
+    },
+    {
+      "imported": "Moon",
+      "local": "Moon"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    }
+  ],
+  "src/components/health/HealthDataForm.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Activity",
+      "local": "Activity"
+    },
+    {
+      "imported": "Moon",
+      "local": "Moon"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Droplet",
+      "local": "Droplet"
+    }
+  ],
+  "src/components/health/HealthInsights.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Activity",
+      "local": "Activity"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    }
+  ],
+  "src/components/home/AiPersonalizedFeed.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "ArrowRight",
+      "local": "ArrowRight"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "RefreshCw",
+      "local": "RefreshCw"
+    }
+  ],
+  "src/components/home/DailyProgram.jsx": [
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "Clock",
+      "local": "Clock"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Headphones",
+      "local": "Headphones"
+    }
+  ],
+  "src/components/home/DailyReflection.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    }
+  ],
+  "src/components/home/EnhancedMoodCheckIn.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "ChevronDown",
+      "local": "ChevronDown"
+    },
+    {
+      "imported": "ChevronUp",
+      "local": "ChevronUp"
+    },
+    {
+      "imported": "Edit2",
+      "local": "Edit2"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    }
+  ],
+  "src/components/home/MoodCheckIn.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/home/PersonalizedContentFeed.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "ExternalLink",
+      "local": "ExternalLink"
+    },
+    {
+      "imported": "Quote",
+      "local": "Quote"
+    },
+    {
+      "imported": "Users",
+      "local": "Users"
+    },
+    {
+      "imported": "RefreshCw",
+      "local": "RefreshCw"
+    }
+  ],
+  "src/components/home/PersonalizedFeed.jsx": [
+    {
+      "imported": "Headphones",
+      "local": "Headphones"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "ThumbsUp",
+      "local": "ThumbsUp"
+    },
+    {
+      "imported": "ThumbsDown",
+      "local": "ThumbsDown"
+    },
+    {
+      "imported": "Clock",
+      "local": "Clock"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    }
+  ],
+  "src/components/home/ProactiveNudges.jsx": [
+    {
+      "imported": "Bell",
+      "local": "Bell"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Activity",
+      "local": "Activity"
+    },
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    }
+  ],
+  "src/components/home/QuickActions.jsx": [
+    {
+      "imported": "MessageCircle",
+      "local": "MessageCircle"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Puzzle",
+      "local": "Puzzle"
+    },
+    {
+      "imported": "User",
+      "local": "User"
+    },
+    {
+      "imported": "Compass",
+      "local": "Compass"
+    },
+    {
+      "imported": "RefreshCw",
+      "local": "RefreshCw"
+    },
+    {
+      "imported": "ArrowRight",
+      "local": "ArrowRight"
+    }
+  ],
+  "src/components/home/RecentProgress.jsx": [
+    {
+      "imported": "ArrowRight",
+      "local": "ArrowRight"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    }
+  ],
+  "src/components/home/StandaloneDailyCheckIn.jsx": [
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "ChevronDown",
+      "local": "ChevronDown"
+    },
+    {
+      "imported": "ChevronUp",
+      "local": "ChevronUp"
+    },
+    {
+      "imported": "Edit2",
+      "local": "Edit2"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "User",
+      "local": "User"
+    }
+  ],
+  "src/components/home/StarterPathCard.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "ArrowRight",
+      "local": "ArrowRight"
+    }
+  ],
+  "src/components/home/TodaysFocus.jsx": [
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "User",
+      "local": "User"
+    }
+  ],
+  "src/components/home/VideoModal.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/journal/AiDistortionAnalysis.jsx": [
+    {
+      "imported": "AlertCircle",
+      "local": "AlertCircle"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    }
+  ],
+  "src/components/journal/AiEntrySummary.jsx": [
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    }
+  ],
+  "src/components/journal/AiJournalPrompts.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "RefreshCw",
+      "local": "RefreshCw"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/journal/AiJournalSuggestions.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "MessageSquare",
+      "local": "MessageSquare"
+    },
+    {
+      "imported": "BarChart3",
+      "local": "BarChart3"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    }
+  ],
+  "src/components/journal/AiTrendsSummary.jsx": [
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "TrendingDown",
+      "local": "TrendingDown"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "BarChart3",
+      "local": "BarChart3"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/journal/JournalFilters.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/journal/JournalInsightsPanel.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    }
+  ],
+  "src/components/journal/ReminderManager.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "Bell",
+      "local": "Bell"
+    },
+    {
+      "imported": "Clock",
+      "local": "Clock"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    },
+    {
+      "imported": "Edit",
+      "local": "Edit"
+    }
+  ],
+  "src/components/journal/SessionSummaryCard.jsx": [
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    },
+    {
+      "imported": "ClipboardList",
+      "local": "ClipboardList"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Download",
+      "local": "Download"
+    }
+  ],
+  "src/components/journal/TemplateManager.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "FileText",
+      "local": "FileText"
+    },
+    {
+      "imported": "Edit",
+      "local": "Edit"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    }
+  ],
+  "src/components/journal/ThoughtCoachWizard.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Frown",
+      "local": "Frown"
+    },
+    {
+      "imported": "AlertCircle",
+      "local": "AlertCircle"
+    },
+    {
+      "imported": "Zap",
+      "local": "Zap"
+    },
+    {
+      "imported": "Flame",
+      "local": "Flame"
+    },
+    {
+      "imported": "Users",
+      "local": "Users"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Cloud",
+      "local": "Cloud"
+    },
+    {
+      "imported": "HeartCrack",
+      "local": "HeartCrack"
+    },
+    {
+      "imported": "HelpCircle",
+      "local": "HelpCircle"
+    }
+  ],
+  "src/components/journal/ThoughtRecordCard.jsx": [
+    {
+      "imported": "ChevronDown",
+      "local": "ChevronDown"
+    },
+    {
+      "imported": "ChevronUp",
+      "local": "ChevronUp"
+    },
+    {
+      "imported": "Edit",
+      "local": "Edit"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    },
+    {
+      "imported": "TrendingDown",
+      "local": "TrendingDown"
+    },
+    {
+      "imported": "Image",
+      "local": "ImageIcon"
+    },
+    {
+      "imported": "Mic",
+      "local": "Mic"
+    },
+    {
+      "imported": "Tag",
+      "local": "Tag"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Download",
+      "local": "Download"
+    }
+  ],
+  "src/components/journal/ThoughtRecordForm.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Image",
+      "local": "ImageIcon"
+    },
+    {
+      "imported": "Mic",
+      "local": "Mic"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    },
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "Link2",
+      "local": "Link2"
+    }
+  ],
+  "src/components/journeys/JourneyCard.jsx": [
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    }
+  ],
+  "src/components/journeys/JourneyDetail.jsx": [
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    },
+    {
+      "imported": "Circle",
+      "local": "Circle"
+    },
+    {
+      "imported": "Lock",
+      "local": "Lock"
+    },
+    {
+      "imported": "Play",
+      "local": "Play"
+    }
+  ],
+  "src/components/layout/BottomNav.jsx": [
+    {
+      "imported": "Home",
+      "local": "Home"
+    },
+    {
+      "imported": "MessageCircle",
+      "local": "MessageCircle"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Activity",
+      "local": "Activity"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    }
+  ],
+  "src/components/layout/MobileHeader.jsx": [
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    }
+  ],
+  "src/components/layout/MobileMenu.jsx": [
+    {
+      "imported": "Menu",
+      "local": "Menu"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Users",
+      "local": "Users"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Settings",
+      "local": "Settings"
+    }
+  ],
+  "src/components/layout/Sidebar.jsx": [
+    {
+      "imported": "Home",
+      "local": "Home"
+    },
+    {
+      "imported": "MessageCircle",
+      "local": "MessageCircle"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Activity",
+      "local": "Activity"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Users",
+      "local": "Users"
+    },
+    {
+      "imported": "Settings",
+      "local": "Settings"
+    }
+  ],
+  "src/components/mood/DetailedMoodForm.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "Battery",
+      "local": "Battery"
+    },
+    {
+      "imported": "Moon",
+      "local": "Moon"
+    },
+    {
+      "imported": "Zap",
+      "local": "Zap"
+    }
+  ],
+  "src/components/mood/MoodCalendar.jsx": [
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    }
+  ],
+  "src/components/mood/MoodInsights.jsx": [
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "AlertTriangle",
+      "local": "AlertTriangle"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    }
+  ],
+  "src/components/mood/MoodTrendChart.jsx": [
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "TrendingDown",
+      "local": "TrendingDown"
+    },
+    {
+      "imported": "Activity",
+      "local": "Activity"
+    }
+  ],
+  "src/components/mood/TriggerAnalysis.jsx": [
+    {
+      "imported": "AlertTriangle",
+      "local": "AlertTriangle"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Activity",
+      "local": "Activity"
+    }
+  ],
+  "src/components/notifications/NotificationBell.jsx": [
+    {
+      "imported": "Bell",
+      "local": "Bell"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "CheckCheck",
+      "local": "CheckCheck"
+    },
+    {
+      "imported": "ExternalLink",
+      "local": "ExternalLink"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "Flame",
+      "local": "Flame"
+    },
+    {
+      "imported": "FileText",
+      "local": "FileText"
+    },
+    {
+      "imported": "AtSign",
+      "local": "AtSign"
+    },
+    {
+      "imported": "Info",
+      "local": "Info"
+    }
+  ],
+  "src/components/onboarding/OnboardingTour.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    }
+  ],
+  "src/components/onboarding/WelcomeWizard.jsx": [
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Activity",
+      "local": "Activity"
+    }
+  ],
+  "src/components/playlists/AddToPlaylistModal.jsx": [
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "Check",
+      "local": "Check"
+    },
+    {
+      "imported": "List",
+      "local": "List"
+    }
+  ],
+  "src/components/progress/AIInsights.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "AlertTriangle",
+      "local": "AlertTriangle"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "RefreshCw",
+      "local": "RefreshCw"
+    }
+  ],
+  "src/components/progress/CorrelationInsights.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "Activity",
+      "local": "Activity"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    }
+  ],
+  "src/components/progress/EnhancedProgressDashboard.jsx": [
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "TrendingDown",
+      "local": "TrendingDown"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "Award",
+      "local": "Award"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Flame",
+      "local": "Flame"
+    },
+    {
+      "imported": "Zap",
+      "local": "Zap"
+    }
+  ],
+  "src/components/progress/ExerciseTracker.jsx": [
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    }
+  ],
+  "src/components/progress/GoalsProgressTracker.jsx": [
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    },
+    {
+      "imported": "Circle",
+      "local": "Circle"
+    },
+    {
+      "imported": "Clock",
+      "local": "Clock"
+    }
+  ],
+  "src/components/progress/InsightsPanel.jsx": [
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    }
+  ],
+  "src/components/progress/JournalTracker.jsx": [
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "TrendingDown",
+      "local": "TrendingDown"
+    }
+  ],
+  "src/components/progress/StatsOverview.jsx": [
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "MessageCircle",
+      "local": "MessageCircle"
+    }
+  ],
+  "src/components/resources/AIResourceRecommendations.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "ExternalLink",
+      "local": "ExternalLink"
+    },
+    {
+      "imported": "Bookmark",
+      "local": "Bookmark"
+    },
+    {
+      "imported": "BookmarkCheck",
+      "local": "BookmarkCheck"
+    }
+  ],
+  "src/components/resources/ResourceCard.jsx": [
+    {
+      "imported": "ExternalLink",
+      "local": "ExternalLink"
+    },
+    {
+      "imported": "Bookmark",
+      "local": "Bookmark"
+    },
+    {
+      "imported": "BookmarkCheck",
+      "local": "BookmarkCheck"
+    },
+    {
+      "imported": "FileText",
+      "local": "FileText"
+    },
+    {
+      "imported": "Video",
+      "local": "Video"
+    },
+    {
+      "imported": "Headphones",
+      "local": "Headphones"
+    },
+    {
+      "imported": "Smartphone",
+      "local": "Smartphone"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Globe",
+      "local": "Globe"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Users",
+      "local": "Users"
+    }
+  ],
+  "src/components/settings/DataPrivacy.jsx": [
+    {
+      "imported": "Shield",
+      "local": "Shield"
+    },
+    {
+      "imported": "Download",
+      "local": "Download"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    },
+    {
+      "imported": "AlertCircle",
+      "local": "AlertCircle"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    }
+  ],
+  "src/components/settings/LanguageSelector.jsx": [
+    {
+      "imported": "Languages",
+      "local": "Languages"
+    },
+    {
+      "imported": "Check",
+      "local": "Check"
+    }
+  ],
+  "src/components/settings/NotificationSettings.jsx": [
+    {
+      "imported": "Bell",
+      "local": "Bell"
+    },
+    {
+      "imported": "Mail",
+      "local": "Mail"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Dumbbell",
+      "local": "Dumbbell"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "Flame",
+      "local": "Flame"
+    },
+    {
+      "imported": "AtSign",
+      "local": "AtSign"
+    },
+    {
+      "imported": "AlertCircle",
+      "local": "AlertCircle"
+    }
+  ],
+  "src/components/settings/ThemeSelector.jsx": [
+    {
+      "imported": "Palette",
+      "local": "Palette"
+    },
+    {
+      "imported": "Check",
+      "local": "Check"
+    }
+  ],
+  "src/components/starterpath/PersonalizationSetup.jsx": [
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "ArrowRight",
+      "local": "ArrowRight"
+    }
+  ],
+  "src/components/subscription/PremiumBadge.jsx": [
+    {
+      "imported": "Crown",
+      "local": "Crown"
+    },
+    {
+      "imported": "Lock",
+      "local": "Lock"
+    }
+  ],
+  "src/components/subscription/PremiumPaywall.jsx": [
+    {
+      "imported": "Crown",
+      "local": "Crown"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Check",
+      "local": "Check"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/ui/accordion.jsx": [
+    {
+      "imported": "ChevronDown",
+      "local": "ChevronDown"
+    }
+  ],
+  "src/components/ui/breadcrumb.jsx": [
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "MoreHorizontal",
+      "local": "MoreHorizontal"
+    }
+  ],
+  "src/components/ui/calendar.jsx": [
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    }
+  ],
+  "src/components/ui/carousel.jsx": [
+    {
+      "imported": "ArrowLeft",
+      "local": "ArrowLeft"
+    },
+    {
+      "imported": "ArrowRight",
+      "local": "ArrowRight"
+    }
+  ],
+  "src/components/ui/checkbox.jsx": [
+    {
+      "imported": "Check",
+      "local": "Check"
+    }
+  ],
+  "src/components/ui/command.jsx": [
+    {
+      "imported": "Search",
+      "local": "Search"
+    }
+  ],
+  "src/components/ui/context-menu.jsx": [
+    {
+      "imported": "Check",
+      "local": "Check"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "Circle",
+      "local": "Circle"
+    }
+  ],
+  "src/components/ui/date-picker-mobile.jsx": [
+    {
+      "imported": "Calendar",
+      "local": "CalendarIcon"
+    }
+  ],
+  "src/components/ui/dialog.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/ui/dropdown-menu.jsx": [
+    {
+      "imported": "Check",
+      "local": "Check"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "Circle",
+      "local": "Circle"
+    }
+  ],
+  "src/components/ui/input-otp.jsx": [
+    {
+      "imported": "Minus",
+      "local": "Minus"
+    }
+  ],
+  "src/components/ui/menubar.jsx": [
+    {
+      "imported": "Check",
+      "local": "Check"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "Circle",
+      "local": "Circle"
+    }
+  ],
+  "src/components/ui/navigation-menu.jsx": [
+    {
+      "imported": "ChevronDown",
+      "local": "ChevronDown"
+    }
+  ],
+  "src/components/ui/pagination.jsx": [
+    {
+      "imported": "ChevronLeft",
+      "local": "ChevronLeft"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "MoreHorizontal",
+      "local": "MoreHorizontal"
+    }
+  ],
+  "src/components/ui/radio-group.jsx": [
+    {
+      "imported": "Circle",
+      "local": "Circle"
+    }
+  ],
+  "src/components/ui/resizable.jsx": [
+    {
+      "imported": "GripVertical",
+      "local": "GripVertical"
+    }
+  ],
+  "src/components/ui/select.jsx": [
+    {
+      "imported": "Check",
+      "local": "Check"
+    },
+    {
+      "imported": "ChevronDown",
+      "local": "ChevronDown"
+    },
+    {
+      "imported": "ChevronUp",
+      "local": "ChevronUp"
+    }
+  ],
+  "src/components/ui/sheet.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/ui/sidebar.jsx": [
+    {
+      "imported": "PanelLeft",
+      "local": "PanelLeft"
+    }
+  ],
+  "src/components/ui/toast.jsx": [
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/components/utils/AgeGateModal.jsx": [
+    {
+      "imported": "ShieldCheck",
+      "local": "ShieldCheck"
+    }
+  ],
+  "src/components/utils/AgeRestrictedMessage.jsx": [
+    {
+      "imported": "ShieldAlert",
+      "local": "ShieldAlert"
+    }
+  ],
+  "src/components/utils/AuthErrorBanner.jsx": [
+    {
+      "imported": "AlertCircle",
+      "local": "AlertCircle"
+    }
+  ],
+  "src/components/utils/PullToRefresh.jsx": [
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    }
+  ],
+  "src/pages/AdvancedAnalytics.jsx": [
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Activity",
+      "local": "Activity"
+    },
+    {
+      "imported": "Download",
+      "local": "Download"
+    },
+    {
+      "imported": "Crown",
+      "local": "Crown"
+    },
+    {
+      "imported": "Lock",
+      "local": "Lock"
+    },
+    {
+      "imported": "ArrowLeft",
+      "local": "ArrowLeft"
+    }
+  ],
+  "src/pages/Chat.jsx": [
+    {
+      "imported": "Send",
+      "local": "Send"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    },
+    {
+      "imported": "Menu",
+      "local": "Menu"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "ArrowLeft",
+      "local": "ArrowLeft"
+    }
+  ],
+  "src/pages/Coach.jsx": [
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "MessageCircle",
+      "local": "MessageCircle"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "BarChart3",
+      "local": "BarChart3"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "ArrowLeft",
+      "local": "ArrowLeft"
+    }
+  ],
+  "src/pages/CoachingAnalytics.jsx": [
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    },
+    {
+      "imported": "Users",
+      "local": "Users"
+    },
+    {
+      "imported": "ArrowLeft",
+      "local": "ArrowLeft"
+    }
+  ],
+  "src/pages/Community.jsx": [
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "Users",
+      "local": "Users"
+    },
+    {
+      "imported": "MessageSquare",
+      "local": "MessageSquare"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Search",
+      "local": "Search"
+    },
+    {
+      "imported": "ThumbsUp",
+      "local": "ThumbsUp"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    }
+  ],
+  "src/pages/CrisisAlerts.jsx": [
+    {
+      "imported": "AlertTriangle",
+      "local": "AlertTriangle"
+    },
+    {
+      "imported": "Filter",
+      "local": "Filter"
+    },
+    {
+      "imported": "MessageCircle",
+      "local": "MessageCircle"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    }
+  ],
+  "src/pages/Exercises.jsx": [
+    {
+      "imported": "Wind",
+      "local": "Wind"
+    },
+    {
+      "imported": "Anchor",
+      "local": "Anchor"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Search",
+      "local": "Search"
+    },
+    {
+      "imported": "Star",
+      "local": "Star"
+    },
+    {
+      "imported": "Moon",
+      "local": "Moon"
+    },
+    {
+      "imported": "Users",
+      "local": "Users"
+    },
+    {
+      "imported": "Zap",
+      "local": "Zap"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    }
+  ],
+  "src/pages/ExerciseView.jsx": [
+    {
+      "imported": "ArrowLeft",
+      "local": "ArrowLeft"
+    },
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "CheckCircle",
+      "local": "CheckCircle"
+    },
+    {
+      "imported": "Clock",
+      "local": "Clock"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    },
+    {
+      "imported": "Star",
+      "local": "Star"
+    },
+    {
+      "imported": "Video",
+      "local": "Video"
+    },
+    {
+      "imported": "Heart",
+      "local": "Heart"
+    },
+    {
+      "imported": "Headphones",
+      "local": "Headphones"
+    },
+    {
+      "imported": "Eye",
+      "local": "Eye"
+    }
+  ],
+  "src/pages/ExperientialGames.jsx": [
+    {
+      "imported": "ArrowLeft",
+      "local": "ArrowLeft"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/pages/Goals.jsx": [
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Calendar",
+      "local": "CalendarIcon"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Lightbulb",
+      "local": "Lightbulb"
+    },
+    {
+      "imported": "Clock",
+      "local": "Clock"
+    },
+    {
+      "imported": "LayoutGrid",
+      "local": "LayoutGrid"
+    }
+  ],
+  "src/pages/Home.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    }
+  ],
+  "src/pages/Journal.jsx": [
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "Search",
+      "local": "Search"
+    },
+    {
+      "imported": "Settings",
+      "local": "Settings"
+    },
+    {
+      "imported": "Bell",
+      "local": "Bell"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "BarChart2",
+      "local": "BarChart2"
+    }
+  ],
+  "src/pages/JournalDashboard.jsx": [
+    {
+      "imported": "ArrowLeft",
+      "local": "ArrowLeft"
+    },
+    {
+      "imported": "TrendingDown",
+      "local": "TrendingDown"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Minus",
+      "local": "Minus"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "BookOpen",
+      "local": "BookOpen"
+    },
+    {
+      "imported": "BarChart2",
+      "local": "BarChart2"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    }
+  ],
+  "src/pages/Journeys.jsx": [
+    {
+      "imported": "Compass",
+      "local": "Compass"
+    }
+  ],
+  "src/pages/MoodTracker.jsx": [
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    }
+  ],
+  "src/pages/PersonalizedFeed.jsx": [
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    }
+  ],
+  "src/pages/PlaylistDetail.jsx": [
+    {
+      "imported": "ArrowLeft",
+      "local": "ArrowLeft"
+    },
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "X",
+      "local": "X"
+    }
+  ],
+  "src/pages/Playlists.jsx": [
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "List",
+      "local": "List"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    },
+    {
+      "imported": "ArrowLeft",
+      "local": "ArrowLeft"
+    }
+  ],
+  "src/pages/Progress.jsx": [
+    {
+      "imported": "TrendingUp",
+      "local": "TrendingUp"
+    },
+    {
+      "imported": "Calendar",
+      "local": "Calendar"
+    },
+    {
+      "imported": "Activity",
+      "local": "Activity"
+    },
+    {
+      "imported": "Trophy",
+      "local": "Trophy"
+    }
+  ],
+  "src/pages/Resources.jsx": [
+    {
+      "imported": "Search",
+      "local": "Search"
+    },
+    {
+      "imported": "Bookmark",
+      "local": "Bookmark"
+    },
+    {
+      "imported": "Library",
+      "local": "Library"
+    }
+  ],
+  "src/pages/Settings.jsx": [
+    {
+      "imported": "User",
+      "local": "User"
+    },
+    {
+      "imported": "CreditCard",
+      "local": "CreditCard"
+    },
+    {
+      "imported": "LogOut",
+      "local": "LogOut"
+    },
+    {
+      "imported": "Crown",
+      "local": "Crown"
+    },
+    {
+      "imported": "Shield",
+      "local": "Shield"
+    },
+    {
+      "imported": "Layout",
+      "local": "LayoutIcon"
+    },
+    {
+      "imported": "Trash2",
+      "local": "Trash2"
+    }
+  ],
+  "src/pages/StarterPath.jsx": [
+    {
+      "imported": "ArrowLeft",
+      "local": "ArrowLeft"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "CheckCircle2",
+      "local": "CheckCircle2"
+    },
+    {
+      "imported": "Loader2",
+      "local": "Loader2"
+    }
+  ],
+  "src/pages/TestSetupGuide.jsx": [
+    {
+      "imported": "Copy",
+      "local": "Copy"
+    },
+    {
+      "imported": "Check",
+      "local": "Check"
+    },
+    {
+      "imported": "Terminal",
+      "local": "Terminal"
+    },
+    {
+      "imported": "Github",
+      "local": "Github"
+    },
+    {
+      "imported": "FileCode",
+      "local": "FileCode"
+    }
+  ],
+  "src/pages/ThoughtCoach.jsx": [
+    {
+      "imported": "ArrowLeft",
+      "local": "ArrowLeft"
+    },
+    {
+      "imported": "ChevronRight",
+      "local": "ChevronRight"
+    },
+    {
+      "imported": "Sparkles",
+      "local": "Sparkles"
+    },
+    {
+      "imported": "Brain",
+      "local": "Brain"
+    },
+    {
+      "imported": "Frown",
+      "local": "Frown"
+    },
+    {
+      "imported": "AlertCircle",
+      "local": "AlertCircle"
+    },
+    {
+      "imported": "Zap",
+      "local": "Zap"
+    },
+    {
+      "imported": "Flame",
+      "local": "Flame"
+    },
+    {
+      "imported": "Users",
+      "local": "Users"
+    },
+    {
+      "imported": "Target",
+      "local": "Target"
+    },
+    {
+      "imported": "Cloud",
+      "local": "Cloud"
+    },
+    {
+      "imported": "HeartCrack",
+      "local": "HeartCrack"
+    },
+    {
+      "imported": "HelpCircle",
+      "local": "HelpCircle"
+    }
+  ],
+  "src/pages/VideoPlayer.jsx": [
+    {
+      "imported": "ArrowLeft",
+      "local": "ArrowLeft"
+    }
+  ],
+  "src/pages/Videos.jsx": [
+    {
+      "imported": "Play",
+      "local": "Play"
+    },
+    {
+      "imported": "Plus",
+      "local": "Plus"
+    },
+    {
+      "imported": "List",
+      "local": "List"
+    }
+  ]
+}

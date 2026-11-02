@@ -1,0 +1,432 @@
+name: "Manual: Graded CBT QA Protocol"
+
+# Phase 1: Manual execution only.
+# This workflow MUST NOT be triggered automatically.
+# Trigger only via the GitHub Actions tab → "Run workflow".
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to validate (staging | production | local-build)"
+        required: false
+        default: "staging"
+        type: choice
+        options:
+          - staging
+          - production
+          - local-build
+      notes:
+        description: "Optional notes for this run (e.g. release version, tester name)"
+        required: false
+        default: ""
+        type: string
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Job 1: Run the existing Vitest unit test suite
+  # ---------------------------------------------------------------------------
+  existing-tests:
+    name: "Existing Unit Tests"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run existing unit test suite
+        id: unit_tests
+        run: |
+          echo "Running existing Vitest unit test suite..."
+          npx vitest run --reporter=verbose 2>&1 | tee /tmp/unit-test-output.txt
+          EXIT_CODE=${PIPESTATUS[0]}
+          echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
+          exit $EXIT_CODE
+
+      - name: Report unit test status
+        if: always()
+        run: |
+          STATUS="${{ steps.unit_tests.outcome }}"
+          if [ "$STATUS" = "success" ]; then
+            echo "✅ Existing unit tests: PASS" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "❌ Existing unit tests: FAIL — see logs above" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload unit test output
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: unit-test-output
+          path: /tmp/unit-test-output.txt
+          retention-days: 30
+
+  # ---------------------------------------------------------------------------
+  # Job 2: Validate QA asset files are present and well-formed
+  # ---------------------------------------------------------------------------
+  validate-qa-assets:
+    name: "Validate QA Assets"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: existing-tests
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required QA files exist
+        id: check_files
+        run: |
+          MISSING=0
+          FILES=(
+            "qa/graded-qa-protocol.md"
+            "qa/test-matrix.json"
+            "qa/manual-checklist.md"
+            "qa/runbook.md"
+            "qa/automated/cbt-behavioral.test.js"
+            ".github/workflows/manual-graded-qa.yml"
+          )
+          for f in "${FILES[@]}"; do
+            if [ -f "$f" ]; then
+              echo "✅ Found: $f"
+            else
+              echo "❌ MISSING: $f"
+              MISSING=$((MISSING + 1))
+            fi
+          done
+          echo "missing_count=$MISSING" >> "$GITHUB_OUTPUT"
+          if [ "$MISSING" -gt 0 ]; then
+            echo "Some QA files are missing. See log above."
+            exit 1
+          fi
+
+      - name: Validate test-matrix.json is valid JSON
+        id: validate_json
+        run: |
+          if python3 -c "import json, sys; json.load(open('qa/test-matrix.json'))" 2>/dev/null; then
+            echo "✅ test-matrix.json is valid JSON"
+          else
+            echo "❌ test-matrix.json is NOT valid JSON"
+            exit 1
+          fi
+
+      - name: Validate test matrix structure
+        id: validate_matrix
+        run: |
+          python3 << 'EOF'
+          import json, sys
+
+          with open('qa/test-matrix.json') as f:
+              m = json.load(f)
+
+          errors = []
+
+          # Check meta
+          if 'meta' not in m:
+              errors.append("Missing 'meta' block")
+          elif m['meta'].get('applies_to') != 'cbt_therapist':
+              errors.append("meta.applies_to must be 'cbt_therapist'")
+
+          # Check 5 levels
+          if len(m.get('levels', [])) != 5:
+              errors.append(f"Expected 5 levels, found {len(m.get('levels', []))}")
+
+          # Check level 3 has all 7 languages
+          l3 = next((l for l in m['levels'] if l['level'] == 3), None)
+          if l3:
+              langs = l3.get('languages', [])
+              for lang in ['en', 'he', 'es', 'fr', 'de', 'it', 'pt']:
+                  if lang not in langs:
+                      errors.append(f"Level 3 missing language: {lang}")
+
+          # Check all test IDs are unique
+          ids = []
+          for level in m['levels']:
+              items = level.get('tests') or level.get('gate_items') or []
+              for item in items:
+                  if 'id' in item:
+                      ids.append(item['id'])
+          if len(ids) != len(set(ids)):
+              errors.append("Duplicate test IDs found")
+
+          if errors:
+              for e in errors:
+                  print(f"❌ {e}")
+              sys.exit(1)
+          else:
+              print("✅ test-matrix.json structure is valid")
+              print(f"   Levels: {len(m['levels'])}")
+              level_summaries = []
+              for lv in m['levels']:
+                  count = len(lv.get('tests') or lv.get('gate_items') or [])
+                  level_summaries.append(f"L{lv['level']} ({lv['name']}): {count} items")
+              for s in level_summaries:
+                  print(f"   {s}")
+          EOF
+
+      - name: Report QA asset validation to step summary
+        if: always()
+        run: |
+          STATUS_FILES="${{ steps.check_files.outcome }}"
+          STATUS_JSON="${{ steps.validate_json.outcome }}"
+          STATUS_MATRIX="${{ steps.validate_matrix.outcome }}"
+
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "## QA Asset Validation" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+
+          if [ "$STATUS_FILES" = "success" ]; then
+            echo "✅ All required QA files present" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "❌ One or more QA files missing" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          if [ "$STATUS_JSON" = "success" ]; then
+            echo "✅ test-matrix.json is valid JSON" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "❌ test-matrix.json has JSON syntax errors" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          if [ "$STATUS_MATRIX" = "success" ]; then
+            echo "✅ Test matrix structure is valid (5 levels, 7 languages)" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "❌ Test matrix has structural errors" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+  # ---------------------------------------------------------------------------
+  # Job 3: Run Level 1 automated scaffolding tests
+  # ---------------------------------------------------------------------------
+  qa-level1-scaffold:
+    name: "QA Level 1 — Automated Scaffold"
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: validate-qa-assets
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Level 1 QA scaffold tests
+        id: scaffold_tests
+        run: |
+          echo "Running QA Level 1 automated scaffold..."
+          npx vitest run --config qa/automated/vitest.qa.config.js --reporter=verbose 2>&1 | tee /tmp/qa-scaffold-output.txt
+          EXIT_CODE=${PIPESTATUS[0]}
+          echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
+          exit $EXIT_CODE
+
+      - name: Report scaffold test status
+        if: always()
+        run: |
+          STATUS="${{ steps.scaffold_tests.outcome }}"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "## QA Level 1 — Automated Scaffold" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$STATUS" = "success" ]; then
+            echo "✅ All Level 1 automated scaffold tests passed" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "❌ Level 1 automated scaffold tests FAILED — see logs" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload scaffold test output
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-scaffold-output
+          path: /tmp/qa-scaffold-output.txt
+          retention-days: 30
+
+  # ---------------------------------------------------------------------------
+  # Job 4: Print all items requiring manual verification
+  # ---------------------------------------------------------------------------
+  print-manual-items:
+    name: "Print Manual Verification Items"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: qa-level1-scaffold
+    if: always()
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Parse and print manual items from test matrix
+        run: |
+          python3 << 'EOF'
+          import json
+
+          with open('qa/test-matrix.json') as f:
+              m = json.load(f)
+
+          print("=" * 70)
+          print("ITEMS REQUIRING MANUAL VERIFICATION")
+          print("=" * 70)
+          print()
+
+          for level in m['levels']:
+              lvl = level['level']
+              name = level['name']
+              requires_live = level.get('requires_live_agent', False)
+              requires_human = level.get('requires_human_review', False)
+
+              if not requires_live and not requires_human:
+                  continue
+
+              print(f"--- Level {lvl}: {name} ---")
+              items = level.get('tests') or level.get('gate_items') or []
+              for item in items:
+                  item_id = item.get('id', '?')
+                  item_name = item.get('name', item.get('condition', ''))
+                  rubric = item.get('rubric', '')
+                  print(f"  [{item_id}] {item_name}")
+                  print(f"         Rubric: {rubric}")
+              print()
+
+          print("=" * 70)
+          print("LEVEL 5 RELEASE GATE")
+          print("All gate items must be PASS before release approval.")
+          print("=" * 70)
+          EOF
+
+      - name: Write manual items to step summary
+        run: |
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "## Items Requiring Manual Verification" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "The following levels require human execution. See \`qa/manual-checklist.md\`." >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Level | Name | Manual? | Live Agent? |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|-------|------|---------|-------------|" >> "$GITHUB_STEP_SUMMARY"
+
+          python3 << 'EOF' >> "$GITHUB_STEP_SUMMARY"
+          import json
+
+          with open('qa/test-matrix.json') as f:
+              m = json.load(f)
+
+          for level in m['levels']:
+              lvl = level['level']
+              name = level['name']
+              requires_live = "Yes" if level.get('requires_live_agent', False) else "No"
+              requires_human = "Yes" if level.get('requires_human_review', False) else "No"
+              items = level.get('tests') or level.get('gate_items') or []
+              count = len(items)
+              print(f"| {lvl} — {name} | {count} items | {requires_human} | {requires_live} |")
+          EOF
+
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "### 📋 Checklist file: \`qa/manual-checklist.md\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "### 📖 Runbook: \`qa/runbook.md\`" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload manual checklist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-checklist
+          path: qa/manual-checklist.md
+          retention-days: 30
+
+      - name: Upload full QA folder as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-assets
+          path: |
+            qa/graded-qa-protocol.md
+            qa/test-matrix.json
+            qa/manual-checklist.md
+            qa/runbook.md
+          retention-days: 30
+
+  # ---------------------------------------------------------------------------
+  # Job 5: Write final summary
+  # ---------------------------------------------------------------------------
+  write-summary:
+    name: "Write Final Summary"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs:
+      - existing-tests
+      - validate-qa-assets
+      - qa-level1-scaffold
+      - print-manual-items
+    if: always()
+    permissions: {}
+
+    steps:
+      - name: Write final summary to step summary
+        run: |
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "---" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "## Final Summary" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Section | Status |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---------|--------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Existing unit tests | ${{ needs.existing-tests.result == 'success' && '✅ PASS' || '❌ FAIL' }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| QA asset validation | ${{ needs.validate-qa-assets.result == 'success' && '✅ PASS' || '❌ FAIL' }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Level 1 automated scaffold | ${{ needs.qa-level1-scaffold.result == 'success' && '✅ PASS' || '❌ FAIL' }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Level 2 — Core Behavioral | ⚠️ Requires manual execution |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Level 3 — Multilingual Parity | ⚠️ Requires manual execution |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Level 4 — Cross-Chat Consistency | ⚠️ Requires human review |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Level 5 — Release Gate | ⚠️ Requires human sign-off |" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Environment tested:** \`${{ inputs.environment }}\`" >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "${{ inputs.notes }}" ]; then
+            echo "**Notes:** ${{ inputs.notes }}" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Next steps" >> "$GITHUB_STEP_SUMMARY"
+          echo "1. Download the \`qa-checklist\` artifact from this run" >> "$GITHUB_STEP_SUMMARY"
+          echo "2. Execute Level 2–4 manually using \`qa/runbook.md\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "3. Fill in \`qa/manual-checklist.md\` and get sign-off for Level 5 gate" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Print summary to console
+        run: |
+          echo "======================================================="
+          echo "GRADED CBT QA PROTOCOL — RUN COMPLETE"
+          echo "======================================================="
+          echo ""
+          echo "Automated results:"
+          echo "  Existing unit tests:       ${{ needs.existing-tests.result }}"
+          echo "  QA asset validation:       ${{ needs.validate-qa-assets.result }}"
+          echo "  Level 1 scaffold:          ${{ needs.qa-level1-scaffold.result }}"
+          echo ""
+          echo "Requires manual execution:"
+          echo "  Level 2 — Core Behavioral"
+          echo "  Level 3 — Multilingual Parity"
+          echo "  Level 4 — Cross-Chat Consistency"
+          echo "  Level 5 — Release Gate (human sign-off)"
+          echo ""
+          echo "Artifacts uploaded:"
+          echo "  qa-checklist      → qa/manual-checklist.md"
+          echo "  qa-assets         → all QA documents"
+          echo "  unit-test-output  → Vitest run output"
+          echo "  qa-scaffold-output → Level 1 scaffold output"
+          echo ""
+          echo "To execute manually: see qa/runbook.md"
+          echo "======================================================="

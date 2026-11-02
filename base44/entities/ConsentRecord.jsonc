@@ -1,0 +1,59 @@
+{
+  "name": "ConsentRecord",
+  "type": "object",
+  "properties": {
+    "document": {
+      "type": "string",
+      "enum": [
+        "ai_chat_terms_and_privacy"
+      ],
+      "description": "The consent document or bundle accepted by the user"
+    },
+    "version": {
+      "type": "string",
+      "description": "Immutable version identifier of the accepted document"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "he",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt"
+      ],
+      "description": "Language shown when consent was accepted"
+    },
+    "surface": {
+      "type": "string",
+      "enum": [
+        "chat"
+      ],
+      "description": "Application surface where consent was accepted"
+    },
+    "accepted_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Client-observed acceptance time in ISO 8601 format"
+    }
+  },
+  "required": [
+    "document",
+    "version",
+    "language",
+    "surface",
+    "accepted_at"
+  ],
+  "rls": {
+    "create": true,
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": false,
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

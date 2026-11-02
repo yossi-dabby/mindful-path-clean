@@ -1,0 +1,55 @@
+name: Live Agent Routing Production Retest
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: live-agent-routing-production-retest
+  cancel-in-progress: false
+
+jobs:
+  routing-benchmark:
+    if: vars.RUN_LIVE_AGENT_ROUTING_RETEST == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      RUN_LIVE_AGENT_ROUTING_RETEST: 'true'
+      PLAYWRIGHT_JSON_OUTPUT_NAME: test-results/live-agent-routing-results.json
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx playwright install --with-deps chromium
+
+      - name: Validate benchmark catalog
+        run: npm run check:agent-benchmark
+
+      - name: Run deployed production routing benchmark
+        run: >-
+          npx playwright test
+          tests/e2e/live-agent-routing-production-retest.spec.ts
+          --project=web-desktop
+          --workers=4
+          --reporter=line,json
+
+      - name: Upload machine-readable evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-agent-routing-production-retest
+          path: |
+            test-results/live-agent-routing-results.json
+            test-results/**/*.png
+            test-results/**/*.webm
+          if-no-files-found: warn
+          retention-days: 30

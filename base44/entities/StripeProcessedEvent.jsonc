@@ -1,0 +1,32 @@
+{
+  "name": "StripeProcessedEvent",
+  "type": "object",
+  "properties": {
+    "stripe_event_id": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Stripe event ID used for webhook idempotency"
+    },
+    "event_type": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Stripe event type"
+    },
+    "processed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time the event completed processing"
+    }
+  },
+  "required": [
+    "stripe_event_id",
+    "event_type",
+    "processed_at"
+  ],
+  "rls": {
+    "create": false,
+    "read": false,
+    "update": false,
+    "delete": false
+  }
+}

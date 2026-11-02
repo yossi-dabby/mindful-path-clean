@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Mindful Path</string>
+    <string name="title_activity_main">Mindful Path</string>
+    <string name="package_name">me.mindfulpath.app</string>
+    <string name="custom_url_scheme">me.mindfulpath.app</string>
+</resources>

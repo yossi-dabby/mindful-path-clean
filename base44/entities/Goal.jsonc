@@ -1,0 +1,412 @@
+{
+  "name": "Goal",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Goal title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "behavioral",
+        "emotional",
+        "social",
+        "cognitive",
+        "lifestyle"
+      ],
+      "description": "Type of goal"
+    },
+    "target_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When to achieve this by"
+    },
+    "progress": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 0,
+      "description": "Progress percentage"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "completed",
+        "paused"
+      ],
+      "default": "active",
+      "description": "Current status"
+    },
+    "problem_definition": {
+      "type": "object",
+      "properties": {
+        "situation": {
+          "type": "string",
+          "description": "What is the current problem or situation?"
+        },
+        "impact": {
+          "type": "string",
+          "description": "How does this affect your life?"
+        },
+        "thoughts": {
+          "type": "string",
+          "description": "Thoughts about the situation"
+        },
+        "emotions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Emotions related to this problem"
+        },
+        "behaviors": {
+          "type": "string",
+          "description": "Current behaviors related to the problem"
+        }
+      },
+      "description": "Step 1: Problem definition using CBT framework"
+    },
+    "smart_criteria": {
+      "type": "object",
+      "properties": {
+        "specific": {
+          "type": "string",
+          "description": "What exactly will you accomplish?"
+        },
+        "measurable": {
+          "type": "string",
+          "description": "How will you measure progress?"
+        },
+        "achievable": {
+          "type": "string",
+          "description": "Why is this goal realistic?"
+        },
+        "relevant": {
+          "type": "string",
+          "description": "Why does this goal matter to you?"
+        },
+        "time_bound": {
+          "type": "string",
+          "description": "When will you achieve this?"
+        }
+      },
+      "description": "Step 2: SMART goal criteria"
+    },
+    "obstacles": {
+      "type": "object",
+      "properties": {
+        "identified_obstacles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "External and internal barriers"
+        },
+        "automatic_thoughts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Negative automatic thoughts about achieving the goal"
+        },
+        "cognitive_distortions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Identified thinking patterns that may interfere"
+        },
+        "core_beliefs": {
+          "type": "string",
+          "description": "Underlying beliefs that may impact success"
+        },
+        "balanced_thoughts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "More realistic, balanced perspectives"
+        }
+      },
+      "description": "Step 3: Obstacle identification and cognitive restructuring"
+    },
+    "action_plan": {
+      "type": "object",
+      "properties": {
+        "strategies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "strategy": {
+                "type": "string"
+              },
+              "cbt_technique": {
+                "type": "string"
+              },
+              "behavioral_experiment": {
+                "type": "string"
+              }
+            }
+          },
+          "description": "Specific strategies to overcome obstacles"
+        },
+        "coping_skills": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Emotion regulation and distress tolerance techniques"
+        },
+        "alternative_behaviors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "New behaviors to replace old patterns"
+        },
+        "support_system": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "People or resources to help"
+        }
+      },
+      "description": "Step 4: Action plan with CBT techniques"
+    },
+    "milestones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "due_date": {
+            "type": "string"
+          },
+          "completed": {
+            "type": "boolean"
+          },
+          "completed_date": {
+            "type": "string"
+          },
+          "quantitative_metric": {
+            "type": "object",
+            "properties": {
+              "metric_name": {
+                "type": "string"
+              },
+              "target_value": {
+                "type": "number"
+              },
+              "current_value": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "description": "Step 5: Smaller steps toward the goal with metrics"
+    },
+    "tracking": {
+      "type": "object",
+      "properties": {
+        "daily_check_ins": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "effort_rating": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 10
+              },
+              "mood_rating": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 10
+              },
+              "progress_notes": {
+                "type": "string"
+              },
+              "obstacles_faced": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "coping_strategies_used": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "description": "Daily check-in entries"
+        },
+        "quantitative_metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metric_name": {
+                "type": "string"
+              },
+              "frequency": {
+                "type": "string",
+                "enum": [
+                  "daily",
+                  "weekly",
+                  "monthly"
+                ]
+              },
+              "data_points": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": "Quantitative tracking metrics"
+        }
+      },
+      "description": "Step 5: Progress tracking"
+    },
+    "review_and_adjust": {
+      "type": "object",
+      "properties": {
+        "review_schedule": {
+          "type": "string",
+          "enum": [
+            "weekly",
+            "biweekly",
+            "monthly"
+          ],
+          "default": "weekly"
+        },
+        "reviews": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "format": "date"
+              },
+              "progress_assessment": {
+                "type": "string"
+              },
+              "what_worked": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "what_didnt_work": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "cognitive_shifts": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "adjustments_made": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "ai_insights": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "description": "Step 6: Regular review and adjustment"
+    },
+    "motivation": {
+      "type": "string",
+      "description": "Personal motivation for this goal"
+    },
+    "rewards": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Rewards for milestone completion"
+    },
+    "ai_conversation_insights": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "agent_name": {
+            "type": "string"
+          },
+          "insight": {
+            "type": "string"
+          },
+          "suggested_adjustment": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "AI-generated insights from conversations"
+    }
+  },
+  "required": [
+    "title",
+    "category"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

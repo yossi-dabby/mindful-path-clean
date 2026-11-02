@@ -1,0 +1,41 @@
+# Branch Cleanup Wave 7A — Approved List (Archive Tag + Delete)
+#
+# Wave 7A is intentionally small and conservative.
+# Scope: only abandoned [WIP] Copilot attempts older than 90 days.
+#
+# Rules:
+#   - Maximum 25 branches
+#   - Do not include main, staging-fresh, current branch, or protected/special branches
+#   - Do not include open PR branches
+#   - Do not include no-PR stale branches
+#   - Do not include closed-unmerged non-WIP branches
+#   - Do not include branches already deleted in Waves 1-6
+#
+# Last updated: 2026-06-10
+# Approved by: repository owner before dispatching the workflow
+
+copilot/fix-e2e-tests-playwright
+copilot/fix-playwright-e2e-tests-again
+copilot/improve-e2e-tests-robustness
+copilot/fix-404-errors-e2e-tests
+copilot/fix-e2e-job-404-errors
+copilot/fix-spa-fallback-routes
+copilot/fix-e2e-test-goalcoach
+copilot/fix-next-button-enable-issue
+copilot/add-console-error-logging
+copilot/add-debugging-step-to-ci
+copilot/add-debugging-step-to-workflow
+copilot/add-debugging-steps-to-playwright-workflow
+copilot/add-deep-diagnostics-chat-e2e
+copilot/add-deep-diagnostics-web-chat
+copilot/add-deep-diagnostics-web-chat-e2e
+copilot/fix-e2e-playwright-tests
+copilot/fix-playwright-ci-test-structure
+copilot/fix-playwright-e2e-tests-another-one
+copilot/fix-syntax-error-in-ui-tests
+copilot/fix-syntax-error-in-ui-tests-again
+copilot/move-tests-to-top-level-directory
+copilot/patch-chat-page-improvements
+copilot/patch-e2e-smoke-tests
+copilot/remove-invalid-code-block
+copilot/restore-missing-e2e-tests

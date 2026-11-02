@@ -1,0 +1,167 @@
+{
+  "name": "ThoughtJournal",
+  "type": "object",
+  "properties": {
+    "template_id": {
+      "type": "string",
+      "description": "Reference to the template used"
+    },
+    "template_name": {
+      "type": "string",
+      "description": "Name of the template used"
+    },
+    "entry_type": {
+      "type": "string",
+      "enum": [
+        "cbt_standard",
+        "gratitude",
+        "anxiety_log",
+        "mood_journal",
+        "custom"
+      ],
+      "default": "cbt_standard",
+      "description": "Type of journal entry"
+    },
+    "situation": {
+      "type": "string",
+      "description": "What happened (the triggering situation)"
+    },
+    "automatic_thoughts": {
+      "type": "string",
+      "description": "Initial automatic thoughts"
+    },
+    "emotions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Emotions felt"
+    },
+    "emotion_intensity": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "How intense were the emotions (1-10)"
+    },
+    "emotion_ratings": {
+      "type": "object",
+      "description": "Structured emotion ratings (additive field for analytics)",
+      "properties": {
+        "anxiety": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "depression": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        },
+        "anger": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        }
+      }
+    },
+    "cognitive_distortions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Identified thinking patterns"
+    },
+    "evidence_for": {
+      "type": "string",
+      "description": "Evidence supporting the thought"
+    },
+    "evidence_against": {
+      "type": "string",
+      "description": "Evidence against the thought"
+    },
+    "balanced_thought": {
+      "type": "string",
+      "description": "More balanced, realistic perspective"
+    },
+    "outcome_emotion_intensity": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "Emotion intensity after reframing (1-10)"
+    },
+    "homework_tasks": {
+      "type": "array",
+      "description": "Behavioral experiments or coping actions assigned (additive field)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "task": {
+            "type": "string"
+          },
+          "duration_minutes": {
+            "type": "number"
+          },
+          "success_criteria": {
+            "type": "string"
+          },
+          "user_committed": {
+            "type": "boolean"
+          },
+          "completed": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      }
+    },
+    "custom_fields": {
+      "type": "object",
+      "description": "Custom fields from templates"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Custom tags for categorization"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Attached image URLs"
+    },
+    "audio_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Attached audio note URLs"
+    },
+    "ai_summary": {
+      "type": "string",
+      "description": "AI-generated summary of the entry for quick review"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this journal entry record"
+    }
+  },
+  "required": [],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

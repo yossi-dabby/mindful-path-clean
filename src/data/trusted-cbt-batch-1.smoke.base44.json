@@ -1,0 +1,80 @@
+[
+  {
+    "title": "Diaphragmatic Breathing for Panic Attacks",
+    "topic": "panic",
+    "subtopic": "breathing techniques",
+    "population": "adults experiencing panic disorder or acute anxiety",
+    "clinical_goal": "Reduce physiological arousal during a panic attack by activating the parasympathetic nervous system through slow, diaphragmatic breathing",
+    "content": "Diaphragmatic breathing (belly breathing) is a first-line technique for interrupting the fight-or-flight response during a panic attack.\n\nSteps:\n1. Find a comfortable seated or lying position.\n2. Place one hand on your chest and one hand on your abdomen.\n3. Inhale slowly through your nose for 4 counts, allowing your abdomen to rise while keeping your chest relatively still.\n4. Hold for 1–2 counts.\n5. Exhale slowly through pursed lips for 6–8 counts, feeling your abdomen fall.\n6. Repeat for 5–10 breath cycles.\n\nRationale: Slow, deep breathing lowers carbon dioxide-driven hyperventilation, reduces heart rate, and signals safety to the brain. Practice daily, not only during panic, to build the skill as a reliable coping tool.\n\nCommon pitfalls: chest breathing, breath-holding, or using it as avoidance rather than as a grounding tool.",
+    "short_summary": "A step-by-step diaphragmatic breathing exercise to interrupt panic symptoms by activating the parasympathetic nervous system.",
+    "tags": [
+      "panic",
+      "breathing",
+      "anxiety",
+      "grounding",
+      "parasympathetic",
+      "hyperventilation",
+      "coping"
+    ],
+    "source_name": "CBT for Anxiety Disorders — Adapted Clinical Protocol",
+    "source_type": "adapted",
+    "license_status": "open",
+    "safety_notes": "If dizziness worsens during breathing exercises, encourage the client to pause and breathe normally. Not a substitute for emergency care if panic co-occurs with cardiac symptoms.",
+    "contraindications": "Exercise-induced asthma (consult physician before use); clients who find breath focus increases anxiety may need to start with grounding alternatives.",
+    "language": "en",
+    "priority_score": 9,
+    "is_active": false
+  },
+  {
+    "title": "Behavioral Activation: Scheduling Pleasant Activities",
+    "topic": "behavioral activation",
+    "subtopic": "activity scheduling",
+    "population": "adults with depression or low mood",
+    "clinical_goal": "Increase engagement in rewarding activities to counteract depression-driven withdrawal and rebuild positive reinforcement patterns",
+    "content": "Behavioral Activation (BA) is an evidence-based treatment for depression that targets the cycle of avoidance and low mood.\n\nCore concept: Depression leads to withdrawal, which reduces positive reinforcement, which deepens depression. BA breaks this cycle by deliberately increasing activity.\n\nHow to use activity scheduling:\n1. With the client, build a list of previously enjoyed activities and a list of mastery/pleasure activities (on a 0–10 scale).\n2. Identify at least 2–3 activities per day to schedule for the coming week, starting small (a 10-minute walk counts).\n3. Record actual completion and rate mood before and after each activity.\n4. Review results: note whether activities led to any mood improvement, however small.\n5. Gradually increase activity frequency and challenge level over subsequent weeks.\n\nImportant: The goal is not to 'feel like doing it first'. Action precedes motivation in BA — the client acts first and the mood shift follows.\n\nCommon pitfalls: Scheduling too many activities, choosing activities that feel overwhelming, or abandoning the plan after a missed day.",
+    "short_summary": "An evidence-based approach to depression that uses structured activity scheduling to rebuild engagement and positive reinforcement.",
+    "tags": [
+      "depression",
+      "behavioral activation",
+      "activity scheduling",
+      "mood",
+      "avoidance",
+      "reinforcement",
+      "motivation"
+    ],
+    "source_name": "Behavioral Activation for Depression — Adapted Clinical Protocol",
+    "source_type": "adapted",
+    "license_status": "open",
+    "safety_notes": "Monitor for anhedonia severity; clients with severe depression may need therapist support to initiate even small activities. Suicidality should be assessed before starting BA.",
+    "contraindications": "Active psychosis or severe cognitive impairment may limit the self-monitoring component; adapt accordingly.",
+    "language": "en",
+    "priority_score": 9,
+    "is_active": false
+  },
+  {
+    "title": "Cognitive Restructuring for Catastrophizing",
+    "topic": "catastrophizing",
+    "subtopic": "cognitive restructuring",
+    "population": "adults with anxiety, GAD, or health anxiety",
+    "clinical_goal": "Help clients identify and challenge catastrophic thinking patterns by evaluating evidence and generating balanced alternative thoughts",
+    "content": "Catastrophizing is a cognitive distortion in which the mind jumps to the worst possible outcome and treats it as inevitable.\n\nRecognition: Common signals include 'What if…' spirals, overestimating probability of disaster, and underestimating one's coping ability.\n\nCognitive restructuring steps:\n1. Identify the catastrophic thought: Write it down exactly as it appears ('My headache means I have a brain tumor and I'm going to die').\n2. Rate distress (0–10) and belief strength (0–100%) in the thought.\n3. Examine evidence FOR and AGAINST the thought (use a two-column worksheet).\n4. Generate a realistic best-case, worst-case, and most-likely scenario.\n5. Ask: 'Even if the worst happened, could I cope?' Build a coping statement.\n6. Write a balanced alternative thought.\n7. Re-rate distress and belief strength.\n\nSample balanced thought: 'I have a headache. Most headaches are tension-related. I can monitor it and see a doctor if it doesn't improve.'\n\nSocratic questions to use:\n- What evidence supports this thought? What contradicts it?\n- How many times has this feared outcome actually happened before?\n- What would you tell a close friend who had this thought?",
+    "short_summary": "A structured cognitive restructuring technique for identifying and challenging catastrophic thoughts using evidence evaluation and Socratic questioning.",
+    "tags": [
+      "catastrophizing",
+      "cognitive restructuring",
+      "anxiety",
+      "GAD",
+      "Socratic questioning",
+      "thought record",
+      "cognitive distortion"
+    ],
+    "source_name": "Cognitive Therapy: Basics and Beyond — Adapted Clinical Protocol",
+    "source_type": "adapted",
+    "license_status": "open",
+    "safety_notes": "For health anxiety, avoid repeatedly reassuring the client about specific symptoms. The goal is tolerating uncertainty, not resolving it through reassurance.",
+    "contraindications": "Clients in acute trauma should not be pushed into cognitive restructuring before sufficient stabilisation.",
+    "language": "en",
+    "priority_score": 9,
+    "is_active": false
+  }
+]

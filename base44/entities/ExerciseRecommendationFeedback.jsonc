@@ -1,0 +1,51 @@
+{
+  "name": "ExerciseRecommendationFeedback",
+  "type": "object",
+  "properties": {
+    "exercise_id": {
+      "type": "string",
+      "description": "Reference to Exercise entity"
+    },
+    "recommendation_reason": {
+      "type": "string",
+      "description": "Why it was recommended"
+    },
+    "feedback_type": {
+      "type": "string",
+      "enum": [
+        "helpful",
+        "not_relevant",
+        "too_easy",
+        "too_hard"
+      ],
+      "description": "User feedback on the recommendation"
+    },
+    "context": {
+      "type": "object",
+      "description": "Context when recommendation was given (mood, goals, etc)"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this feedback record"
+    }
+  },
+  "required": [
+    "exercise_id",
+    "feedback_type"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

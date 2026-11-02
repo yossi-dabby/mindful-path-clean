@@ -1,0 +1,4050 @@
+[
+  {
+    "target": "AdvancedAnalytics",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "AdvancedAnalytics",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Chat",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Chat",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Coach",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Coach",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "CoachingAnalytics",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "CoachingAnalytics",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Community",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Community",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "CrisisAlerts",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ExerciseView",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "CrisisAlerts",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ExerciseView",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Exercises",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 10,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Exercises",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 18,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ExperientialGames",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 8,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "GoalCoach",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Goals",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ExperientialGames",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 13,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Home",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "GoalCoach",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Journal",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Goals",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "JournalDashboard",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Journeys",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Home",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "MoodTracker",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Journal",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "MyPath",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "JournalDashboard",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "PersonalizedFeed",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "PlaylistDetail",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Journeys",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Playlists",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "MoodTracker",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "MyPath",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "PersonalizedFeed",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Progress",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 6,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Resources",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "PlaylistDetail",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Playlists",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Settings",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 8,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Progress",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 7,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "StarterPath",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Resources",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TestSetupGuide",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 7,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ThoughtCoach",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Settings",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 11,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "VideoPlayer",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "StarterPath",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Videos",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TherapeuticForms",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Tools",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TestSetupGuide",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 9,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ThoughtCoach",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "root",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "KnowledgeStudio",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "VideoPlayer",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "AdminFeatureFlags",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Videos",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TherapistTraining",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TherapeuticForms",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "pdf-viewer",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Tools",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "login",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "register",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "root",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "forgot-password",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "KnowledgeStudio",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "reset-password",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "about",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "AdminFeatureFlags",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "privacy",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TherapistTraining",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "terms",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "pdf-viewer",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "contact",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "login",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "account-deletion",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "register",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "data-deletion",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "forgot-password",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "not-a-real-page",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "reset-password",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "about",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-thought-quiz",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "privacy",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "terms",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-reframe-pick",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "contact",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-value-compass",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "account-deletion",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-tiny-experiment",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "data-deletion",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "not-a-real-page",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-quick-win",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-thought-quiz",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-calm-bingo",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-reframe-pick",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-dbt-stop",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-value-compass",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-tiny-experiment",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-opposite-action",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-urge-surfing",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-quick-win",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-worry-time",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-calm-bingo",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-evidence-balance",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-dbt-stop",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-defusion-cards",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-opposite-action",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-tipp-skills",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-urge-surfing",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-worry-time",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-accepts",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-evidence-balance",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-willing-hands",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-defusion-cards",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-half-smile",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-tipp-skills",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-improve",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-leaves-on-stream",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-accepts",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-expansion",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-willing-hands",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-values-check",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-half-smile",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-pros-and-cons",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-improve",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-check-the-facts",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-leaves-on-stream",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-self-soothe",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-expansion",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-mountain-meditation",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-values-check",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-memory-match",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-pros-and-cons",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-focus-flow",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-check-the-facts",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-pattern-shift",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-self-soothe",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-word-association",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-mountain-meditation",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-number-sequence",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-memory-match",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-focus-flow",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "AdvancedAnalytics",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-pattern-shift",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Chat",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-word-association",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Coach",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-number-sequence",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "CoachingAnalytics",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Community",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "AdvancedAnalytics",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "CrisisAlerts",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Chat",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ExerciseView",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Coach",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "CoachingAnalytics",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Exercises",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 6,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Community",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "CrisisAlerts",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ExperientialGames",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 4,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ExerciseView",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "GoalCoach",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Goals",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Home",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Journal",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "JournalDashboard",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Exercises",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 18,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Journeys",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "MoodTracker",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "MyPath",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "PersonalizedFeed",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ExperientialGames",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 13,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "PlaylistDetail",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "GoalCoach",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Playlists",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Goals",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Home",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Progress",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Journal",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Resources",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "JournalDashboard",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Journeys",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Settings",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 6,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "MoodTracker",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "StarterPath",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "MyPath",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "PersonalizedFeed",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "PlaylistDetail",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TestSetupGuide",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 7,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ThoughtCoach",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Playlists",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "VideoPlayer",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Videos",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Progress",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 6,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TherapeuticForms",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Resources",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Tools",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "root",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "KnowledgeStudio",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Settings",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 11,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "AdminFeatureFlags",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TherapistTraining",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "StarterPath",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "pdf-viewer",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "login",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "register",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TestSetupGuide",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 9,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "forgot-password",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ThoughtCoach",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "reset-password",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "VideoPlayer",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "about",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "privacy",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Videos",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "terms",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TherapeuticForms",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "contact",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Tools",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "account-deletion",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "data-deletion",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "root",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "not-a-real-page",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "KnowledgeStudio",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-thought-quiz",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "AdminFeatureFlags",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-reframe-pick",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TherapistTraining",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-value-compass",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "pdf-viewer",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-tiny-experiment",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "login",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "register",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "forgot-password",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-quick-win",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "reset-password",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "about",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-calm-bingo",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "privacy",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-dbt-stop",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "terms",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "contact",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "account-deletion",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-opposite-action",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "data-deletion",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "not-a-real-page",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-urge-surfing",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-thought-quiz",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-worry-time",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-reframe-pick",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-evidence-balance",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-value-compass",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-defusion-cards",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-tiny-experiment",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-tipp-skills",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-quick-win",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-calm-bingo",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-accepts",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-dbt-stop",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-willing-hands",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-opposite-action",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-half-smile",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-urge-surfing",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-improve",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-worry-time",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-leaves-on-stream",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-evidence-balance",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-expansion",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-defusion-cards",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-values-check",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-pros-and-cons",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-tipp-skills",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-check-the-facts",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-self-soothe",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-accepts",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-mountain-meditation",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-willing-hands",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-memory-match",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-half-smile",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-focus-flow",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-pattern-shift",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-improve",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-word-association",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-leaves-on-stream",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-number-sequence",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-expansion",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "failure": "page.screenshot: Timeout 15000ms exceeded."
+  },
+  {
+    "target": "game-values-check",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "AdvancedAnalytics",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-pros-and-cons",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Chat",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-check-the-facts",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Coach",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-self-soothe",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "CoachingAnalytics",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-mountain-meditation",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Community",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-memory-match",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "CrisisAlerts",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-focus-flow",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ExerciseView",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-pattern-shift",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-word-association",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-number-sequence",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Exercises",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 9,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "AdvancedAnalytics",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Chat",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ExperientialGames",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 8,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Coach",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "GoalCoach",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "CoachingAnalytics",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Goals",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Community",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "CrisisAlerts",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Home",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ExerciseView",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Journal",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "JournalDashboard",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Journeys",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Exercises",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 6,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "MoodTracker",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "MyPath",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "PersonalizedFeed",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ExperientialGames",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 4,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "PlaylistDetail",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "GoalCoach",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Playlists",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Goals",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Home",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Progress",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 5,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Journal",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Resources",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "JournalDashboard",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Journeys",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "MoodTracker",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "MyPath",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Settings",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 8,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "PersonalizedFeed",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "StarterPath",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "PlaylistDetail",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Playlists",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TestSetupGuide",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 7,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ThoughtCoach",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Progress",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "VideoPlayer",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Videos",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Resources",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TherapeuticForms",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Tools",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "root",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Settings",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 6,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "KnowledgeStudio",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "StarterPath",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "AdminFeatureFlags",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TherapistTraining",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "pdf-viewer",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TestSetupGuide",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 7,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "login",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "ThoughtCoach",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "register",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "VideoPlayer",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "forgot-password",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Videos",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "reset-password",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TherapeuticForms",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "about",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "Tools",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "privacy",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "root",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "terms",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "KnowledgeStudio",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "contact",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "account-deletion",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "AdminFeatureFlags",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "data-deletion",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "TherapistTraining",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "pdf-viewer",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "not-a-real-page",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "login",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-thought-quiz",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "register",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-reframe-pick",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "forgot-password",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-value-compass",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "reset-password",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "about",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-tiny-experiment",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "privacy",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "terms",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-quick-win",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "contact",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-calm-bingo",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "account-deletion",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "data-deletion",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-dbt-stop",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "not-a-real-page",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-opposite-action",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-urge-surfing",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-thought-quiz",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-worry-time",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-reframe-pick",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-evidence-balance",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-value-compass",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-defusion-cards",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-tiny-experiment",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-tipp-skills",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-quick-win",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-accepts",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-calm-bingo",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-willing-hands",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-dbt-stop",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-half-smile",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-opposite-action",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-improve",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-urge-surfing",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-leaves-on-stream",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-worry-time",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-expansion",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-evidence-balance",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-values-check",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-defusion-cards",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-pros-and-cons",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-tipp-skills",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-check-the-facts",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-self-soothe",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-accepts",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-mountain-meditation",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-memory-match",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-willing-hands",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-focus-flow",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-half-smile",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-pattern-shift",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-improve",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-word-association",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-leaves-on-stream",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-number-sequence",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-expansion",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-values-check",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-pros-and-cons",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-check-the-facts",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-self-soothe",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-mountain-meditation",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-memory-match",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-focus-flow",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-pattern-shift",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-word-association",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  },
+  {
+    "target": "game-number-sequence",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0,
+    "contentOverflow": 0
+  }
+]

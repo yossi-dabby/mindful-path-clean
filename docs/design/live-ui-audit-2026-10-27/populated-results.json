@@ -1,0 +1,484 @@
+[
+  {
+    "target": "populated-Goals",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Journal",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-JournalDashboard",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-MoodTracker",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 4,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Coach",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-CoachingAnalytics",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Playlists",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-PlaylistDetail",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-ExerciseView",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-KnowledgeStudio",
+    "width": 390,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Goals",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Journal",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-JournalDashboard",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-MoodTracker",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Coach",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-CoachingAnalytics",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Playlists",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-PlaylistDetail",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-ExerciseView",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-KnowledgeStudio",
+    "width": 768,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Goals",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Journal",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-JournalDashboard",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-MoodTracker",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "failure": "page.screenshot: Timeout 30000ms exceeded.",
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Coach",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-CoachingAnalytics",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Playlists",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-PlaylistDetail",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-ExerciseView",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-KnowledgeStudio",
+    "width": 1440,
+    "language": "en",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Goals",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Journal",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-JournalDashboard",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-MoodTracker",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 5,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Coach",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-CoachingAnalytics",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Playlists",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-PlaylistDetail",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-ExerciseView",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-KnowledgeStudio",
+    "width": 390,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Goals",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Journal",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-JournalDashboard",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-MoodTracker",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Coach",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-CoachingAnalytics",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Playlists",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-PlaylistDetail",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-ExerciseView",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-KnowledgeStudio",
+    "width": 768,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Goals",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Journal",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-JournalDashboard",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-MoodTracker",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "failure": "page.screenshot: Timeout 30000ms exceeded.",
+    "verticalScreens": 3,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Coach",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-CoachingAnalytics",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 2,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-Playlists",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-PlaylistDetail",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-ExerciseView",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  },
+  {
+    "target": "populated-KnowledgeStudio",
+    "width": 1440,
+    "language": "he",
+    "errors": [],
+    "verticalScreens": 1,
+    "documentOverflow": 0
+  }
+]

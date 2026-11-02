@@ -1,0 +1,36 @@
+{
+  "name": "UserDeletedConversations",
+  "type": "object",
+  "properties": {
+    "agent_conversation_id": {
+      "type": "string",
+      "description": "ID of the deleted agent conversation"
+    },
+    "conversation_title": {
+      "type": "string",
+      "description": "Title of the deleted conversation (for reference)"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this deletion record"
+    }
+  },
+  "required": [
+    "agent_conversation_id"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

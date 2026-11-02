@@ -1,0 +1,948 @@
+/* globals.css — comprehensive design-system tokens and utilities
+ *
+ * This file is imported in main.jsx after index.css.  Its @layer base tokens
+ * override the basic index.css defaults via CSS cascade (last wins within a
+ * layer).  The safe-bottom / safe-bottom-nav utility classes defined here are
+ * required by multiple page components.
+ *
+ * The @tailwind directives below are required because PostCSS / Tailwind CSS v3
+ * processes each JS-imported CSS file independently.  Tailwind deduplicates the
+ * generated output, so having them in two files does not meaningfully bloat the
+ * final bundle.
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-family: Inter, "Noto Sans Hebrew", "Noto Sans", "Segoe UI", Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+}
+
+body,
+button,
+input,
+textarea,
+select,
+label {
+  font-family: inherit;
+}
+
+@layer base {
+  :root {
+    --background: 44 33% 96.4%;
+    --foreground: 188 20% 22%;
+    --card: 42 31% 98.2%;
+    --card-foreground: 188 20% 22%;
+    --popover: 42 31% 98.2%;
+    --popover-foreground: 188 20% 22%;
+    --surface-tint: 154 34% 94.1%;
+    --surface-nested: 154 27% 92.2%;
+    --overlay: 195 19% 20%;
+    --primary: 175 77% 27%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 156 30% 90.4%;
+    --secondary-foreground: 170 28% 28%;
+    --accent: 37 86% 65%;
+    --accent-2: 39 80% 73%;
+    --accent-foreground: 28 42% 18%;
+    --muted: 154 23% 92.8%;
+    --muted-foreground: 190 11% 43%;
+    --destructive: 0 67% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 156 20% 81.5%;
+    --input: 156 20% 81.5%;
+    --ring: 175 77% 27%;
+    --surface-2: 154 25% 92.8%;
+    --success: 145 35% 47%;
+    --warning: 38 88% 58%;
+    --danger: 0 67% 58%;
+    --chart-1: 168 34% 42%;
+    --chart-2: 190 34% 46%;
+    --chart-3: 37 82% 61%;
+    --chart-4: 152 24% 62%;
+    --chart-5: 198 18% 56%;
+    --sidebar-background: 48 30% 96%;
+    --sidebar-foreground: 164 18% 27%;
+    --sidebar-primary: 168 34% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 145 22% 89%;
+    --sidebar-accent-foreground: 170 27% 27%;
+    --sidebar-border: 160 16% 86%;
+    --sidebar-ring: 168 34% 42%;
+    --radius-nested: 0.75rem;
+    --radius-control: 0.875rem;
+    --radius-card: 1rem;
+    --radius-chip: 999px;
+    --radius: var(--radius-control);
+    --shadow-sm: 0 1px 2px rgba(57, 74, 69, 0.05), 0 1px 1px rgba(57, 74, 69, 0.035);
+    --shadow-md: 0 10px 28px rgba(71, 95, 86, 0.08), 0 3px 10px rgba(71, 95, 86, 0.045);
+    --shadow-lg: 0 20px 48px rgba(71, 95, 86, 0.11), 0 8px 20px rgba(71, 95, 86, 0.06);
+
+    /* Legacy compatibility tokens kept for existing theme hooks */
+    --color-primary: 104 176 162;
+    --color-secondary: 142 189 179;
+    --color-accent: 238 181 92;
+    --color-background: 245 248 246;
+    --color-text: 41 54 59;
+
+    /* Radius aliases for any older class usage */
+    --r-xs: var(--radius-nested);
+    --r-sm: var(--radius-control);
+    --r-md: var(--radius-control);
+    --r-lg: var(--radius-card);
+    --r-xl: 1.5rem;
+
+    /* Spacing scale (white space as a feature) */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-7: 32px;
+    --space-8: 40px;
+    --space-9: 48px;
+    --space-10: 64px;
+
+    /* Motion (slow, nervous-system aware) */
+    --ease-calm: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --dur-fast: 150ms;
+    --dur-med: 240ms;
+    --dur-slow: 420ms;
+
+    /* Legacy spacing aliases */
+    --spacing-page: 2rem;
+    --spacing-card: 2rem;
+    --spacing-section: 3rem;
+    --radius-lg: 1.25rem;
+    --radius-xl: 1.5rem;
+
+    /* Safe area insets exposed as custom properties so JavaScript can read them
+       via getComputedStyle(el).getPropertyValue('--sab') etc. */
+    --sat: env(safe-area-inset-top, 0px);
+    --sar: env(safe-area-inset-right, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
+    --native-keyboard-height: 0px;
+    --app-viewport-height: 100dvh;
+    --app-viewport-width: 100vw;
+  }
+
+  .dark {
+    --background: 205 34% 10%;
+    --foreground: 210 22% 94%;
+    --card: 204 28% 14%;
+    --card-foreground: 210 22% 94%;
+    --popover: 204 28% 14%;
+    --popover-foreground: 210 22% 94%;
+    --surface-tint: 204 22% 18%;
+    --surface-nested: 204 18% 20%;
+    --overlay: 210 22% 6%;
+    --primary: 168 39% 54%;
+    --primary-foreground: 185 32% 12%;
+    --secondary: 204 18% 20%;
+    --secondary-foreground: 210 18% 90%;
+    --accent: 37 88% 64%;
+    --accent-2: 39 84% 72%;
+    --accent-foreground: 28 42% 16%;
+    --muted: 204 18% 18%;
+    --muted-foreground: 210 14% 69%;
+    --destructive: 0 74% 64%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 205 18% 24%;
+    --input: 205 18% 24%;
+    --ring: 168 39% 54%;
+    --surface-2: 204 21% 17%;
+    --success: 148 39% 58%;
+    --warning: 39 90% 66%;
+    --danger: 0 74% 64%;
+    --chart-1: 168 39% 54%;
+    --chart-2: 194 37% 59%;
+    --chart-3: 37 88% 64%;
+    --chart-4: 152 28% 64%;
+    --chart-5: 210 20% 70%;
+    --sidebar-background: 204 29% 13%;
+    --sidebar-foreground: 210 22% 94%;
+    --sidebar-primary: 168 39% 54%;
+    --sidebar-primary-foreground: 185 32% 12%;
+    --sidebar-accent: 204 21% 17%;
+    --sidebar-accent-foreground: 210 18% 90%;
+    --sidebar-border: 205 18% 24%;
+    --sidebar-ring: 168 39% 54%;
+    --shadow-sm: 0 1px 2px rgba(2, 8, 23, 0.32), 0 1px 1px rgba(2, 8, 23, 0.24);
+    --shadow-md: 0 10px 26px rgba(2, 8, 23, 0.32), 0 2px 10px rgba(2, 8, 23, 0.22);
+    --shadow-lg: 0 20px 48px rgba(2, 8, 23, 0.36), 0 8px 24px rgba(2, 8, 23, 0.24);
+    --color-primary: 112 198 181;
+    --color-secondary: 126 164 158;
+    --color-accent: 242 190 110;
+    --color-background: 18 26 37;
+    --color-text: 235 240 246;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: -0.003em;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Premium, calm text hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    color: hsl(var(--foreground));
+    font-weight: 600;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  
+  h1 {
+    font-size: clamp(2rem, 1.6rem + 1.5vw, 2.75rem);
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    font-size: clamp(1.5rem, 1.25rem + 0.9vw, 2rem);
+    margin-bottom: 0.875rem;
+  }
+  
+  h3 {
+    font-size: clamp(1.125rem, 1.02rem + 0.45vw, 1.375rem);
+    margin-bottom: 0.75rem;
+    line-height: 1.26;
+    letter-spacing: -0.015em;
+  }
+
+  h4 {
+    font-size: 1rem;
+    margin-bottom: 0.625rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+
+  h5,
+  h6 {
+    font-size: 0.9375rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    letter-spacing: -0.006em;
+  }
+  
+  p {
+    line-height: 1.72;
+    margin-bottom: 1rem;
+    color: hsl(var(--foreground));
+  }
+
+  small {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: hsl(var(--muted-foreground));
+  }
+
+  ::placeholder {
+    color: hsl(var(--muted-foreground));
+    opacity: 1;
+  }
+
+  :lang(he) {
+    letter-spacing: 0;
+  }
+
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] h4,
+  [dir="rtl"] h5,
+  [dir="rtl"] h6,
+  [dir="rtl"] p,
+  [dir="rtl"] small,
+  [dir="rtl"] button,
+  [dir="rtl"] input,
+  [dir="rtl"] textarea,
+  [dir="rtl"] label {
+    letter-spacing: 0;
+  }
+  
+  /* Link text uses the readable foreground palette in every theme. */
+  a {
+    transition: color var(--dur-med) var(--ease-calm);
+    color: hsl(var(--primary));
+  }
+  
+  a:hover {
+    color: hsl(var(--foreground));
+  }
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Soft gradient backgrounds - calm, warm, premium */
+  .bg-warm-gradient {
+    background: linear-gradient(180deg, hsl(150 30% 96.5%) 0%, hsl(var(--background)) 44%, hsl(38 56% 94.8%) 100%);
+  }
+  
+  .bg-calm-gradient {
+    background: linear-gradient(180deg, hsl(168 28% 95.8%) 0%, hsl(var(--background)) 48%, hsl(194 34% 95%) 100%);
+  }
+  
+  .bg-energy-gradient {
+    background: linear-gradient(180deg, hsl(42 54% 95.6%) 0%, hsl(var(--background)) 46%, hsl(35 60% 94.4%) 100%);
+  }
+
+  .bg-theme-forest {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(155 30% 94%) 100%);
+  }
+
+  .bg-theme-lavender {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(245 35% 95%) 100%);
+  }
+
+  .bg-theme-minimal {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--surface-2)) 100%);
+  }
+
+  .dark .bg-warm-gradient,
+  .dark .bg-calm-gradient,
+  .dark .bg-energy-gradient,
+  .dark .bg-theme-forest,
+  .dark .bg-theme-lavender,
+  .dark .bg-theme-minimal {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--surface-2)) 100%);
+  }
+
+  .surface-primary {
+    background-color: hsl(var(--card) / 0.94);
+    border: 1px solid hsl(var(--border) / 0.9);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(14px);
+  }
+
+  .surface-secondary {
+    background-color: hsl(var(--surface-tint) / 0.9);
+    border: 1px solid hsl(var(--border) / 0.86);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(10px);
+  }
+
+  .surface-nested {
+    background-color: hsl(var(--surface-nested) / 0.88);
+    border: 1px solid hsl(var(--border) / 0.8);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(8px);
+  }
+  
+  /* Enhanced spacing utilities */
+  .page-container {
+    padding: var(--space-6);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  
+  .card-spacing {
+    padding: var(--space-6);
+  }
+  
+  .section-spacing {
+    margin-bottom: var(--space-7);
+  }
+  
+  /* Calm transitions (nervous system aware) */
+  .transition-calm {
+    transition: all var(--dur-med) var(--ease-calm);
+  }
+  
+  /* Breathing animation - slow, parasympathetic */
+  @keyframes breathe {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.08);
+      opacity: 1;
+    }
+  }
+  
+  .animate-breathe {
+    animation: breathe 6s var(--ease-calm) infinite;
+  }
+  
+  /* Icon stroke utilities */
+  .icon-default {
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Text truncation utilities */
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Safe area utilities for mobile */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    margin-bottom: 80px; /* Bottom nav height */
+  }
+
+  @media (min-width: 768px) {
+    .safe-bottom {
+      margin-bottom: 0; /* No bottom nav on desktop */
+    }
+  }
+
+  /* Wizard action bar utilities */
+  .safe-bottom-nav {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+
+  @media (min-width: 768px) {
+    .safe-bottom-nav {
+      padding-bottom: calc(12px + env(safe-area-inset-bottom, 0));
+    }
+  }
+}
+
+
+/* Responsive rich-text toolbar: fixed icon size and touch-friendly controls. */
+.ql-toolbar.ql-snow { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 8px; }
+.ql-toolbar.ql-snow .ql-formats { display: inline-flex; flex-wrap: nowrap; align-items: center; gap: 2px; margin: 0 !important; }
+.ql-toolbar.ql-snow .ql-formats button {
+  display: inline-flex; align-items: center; justify-content: center; float: none;
+  width: 32px; height: 32px; min-width: 32px; min-height: 32px;
+  padding: 7px; border-radius: 8px; flex: 0 0 auto;
+}
+.ql-toolbar.ql-snow .ql-formats button svg {
+  display: block; width: 18px; height: 18px; min-width: 18px; max-width: 18px; flex: 0 0 18px;
+}
+.ql-toolbar.ql-snow .ql-formats button:hover,
+.ql-toolbar.ql-snow .ql-formats button.ql-active { background: hsl(var(--primary) / 0.1); }
+.ql-toolbar.ql-snow .ql-formats button:focus-visible { outline: 2px solid hsl(var(--primary)); outline-offset: 1px; }
+.journal-rich-text .ql-container { height: auto; min-height: 128px; }
+.journal-rich-text .ql-editor { min-height: 128px; max-height: 320px; overflow-y: auto; }
+@media (max-width: 1024px), (pointer: coarse) {
+  .ql-toolbar.ql-snow .ql-formats button { width: 44px; height: 44px; min-width: 44px; min-height: 44px; padding: 13px; }
+}
+
+
+/* Shared premium shells for product overlays, independent of their parent page. */
+.premium-overlay {
+  position: fixed;
+  inset: 0;
+  isolation: isolate;
+  overflow-x: hidden;
+  background: hsl(var(--overlay) / 0.32) !important;
+  backdrop-filter: blur(8px);
+  padding-top: max(1rem, env(safe-area-inset-top, 0px)) !important;
+  padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px)) !important;
+}
+.premium-overlay > [data-ui="card"],
+.premium-overlay > div > [data-ui="card"] {
+  border-radius: 28px;
+  border: 1px solid hsl(var(--border) / 0.7);
+  background: hsl(var(--card));
+  box-shadow: var(--shadow-lg);
+  max-height: calc(100dvh - 2rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+}
+.premium-overlay [data-ui="card-header"] {
+  background: linear-gradient(135deg, hsl(var(--surface-tint) / 0.94), hsl(var(--card)));
+  border-bottom: 1px solid hsl(var(--border) / 0.6);
+}
+.premium-overlay [data-ui="card-title"] {
+  color: hsl(var(--foreground));
+  line-height: 1.35;
+}
+.premium-overlay [data-ui="card-content"] { min-width: 0; }
+@media (max-width: 640px) {
+  .premium-overlay { padding-inline: 0.75rem; }
+  .premium-overlay > [data-ui="card"],
+  .premium-overlay > div > [data-ui="card"] { border-radius: 24px; }
+}
+
+/* Calm Oasis rich text editor styling */
+.ql-toolbar.ql-snow {
+  border: 1px solid hsl(var(--border) / 0.86) !important;
+  border-bottom: 0 !important;
+  background: hsl(var(--surface-tint) / 0.82);
+  border-top-left-radius: var(--radius-control);
+  border-top-right-radius: var(--radius-control);
+}
+
+.ql-container.ql-snow {
+  border: 1px solid hsl(var(--border) / 0.86) !important;
+  background: hsl(var(--card) / 0.9);
+  color: hsl(var(--foreground));
+  border-bottom-left-radius: var(--radius-control);
+  border-bottom-right-radius: var(--radius-control);
+}
+
+.ql-editor.ql-blank::before {
+  color: hsl(var(--muted-foreground)) !important;
+  font-style: normal !important;
+}
+
+.dark .ql-toolbar.ql-snow,
+.dark .ql-container.ql-snow {
+  backdrop-filter: none;
+}
+
+/* Scrollbar styling - soft and unobtrusive */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.22);
+  border-radius: var(--r-xs);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.34);
+}
+
+/* Mobile: Hide scrollbars for native look */
+@media (max-width: 768px) {
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  *::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Mobile touch optimization */
+button, a, [role="button"], svg, .icon, [class*="Button"], [class*="badge"] {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+[role="button"],
+[role="tab"],
+[role="menuitem"],
+[role="option"],
+[role="switch"],
+summary,
+[data-app-chrome],
+[data-app-chrome] * {
+  -webkit-touch-callout: none;
+}
+
+/* Prevent native drag on images and icons */
+img, svg {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Prevent 300ms tap delay on iOS for interactive elements */
+button, a, [role="button"], input, select, textarea, label {
+  touch-action: manipulation;
+}
+
+/* Keep all content text selectable */
+p, span:not([class*="badge"]), h1, h2, h3, h4, h5, h6, li, td, th, label, article, div[class*="content"], [class*="description"],
+p[class*="text"], span[class*="text"], div[class*="text"] {
+  user-select: auto;
+  -webkit-user-select: auto;
+  /* Re-enable iOS callout for content text so users can copy chat/journal text */
+  -webkit-touch-callout: default;
+}
+
+input,
+textarea,
+select,
+[contenteditable=""],
+[contenteditable="true"],
+[contenteditable="plaintext-only"] {
+  user-select: text;
+  -webkit-user-select: text;
+  -webkit-touch-callout: default;
+}
+
+/* Ensure minimum 44px touch targets on mobile */
+@media (max-width: 768px) {
+  button, a[role="button"], [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Prevent overscroll bounce on document level (prevents browser chrome bounce)
+   but allow it on internal scroll containers for pull-to-refresh */
+html {
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  /* NOTE: touch-action and -webkit-touch-callout are intentionally NOT set on
+     <html> — doing so blocks pinch-to-zoom and the iOS long-press callout
+     globally (P0 App Store review blockers).  Scoped suppression is in
+     index.css and on specific interactive elements (button, [role="button"],
+     etc.). */
+}
+
+body {
+  overscroll-behavior: none;
+}
+
+/* Focus styles - warm ring, no sharp edges */
+*:focus-visible {
+  outline: 3px solid hsl(var(--ring) / 0.8);
+  outline-offset: 3px;
+  border-radius: var(--r-xs);
+}
+
+/* Ensure focus is always visible for keyboard users */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid hsl(var(--ring) / 0.8) !important;
+  outline-offset: 2px;
+}
+
+/* Selection - brand mint */
+::selection {
+  background-color: hsl(var(--primary) / 0.16);
+  color: hsl(var(--foreground));
+}
+
+/* Exercise surfaces use the same quiet card material as the garden hubs.
+   Keep catalog images inside their explicit thumbnail elements. */
+.exercise-card-art,
+.exercise-card-art--subtle {
+  background-color: hsl(var(--card));
+  background-image: none;
+}
+
+/* Stage 13 accessibility foundation */
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body,
+#root,
+main,
+[data-app-page-transition] {
+  min-inline-size: 0;
+}
+
+button:not([role="switch"]):not([role="checkbox"]),
+[role="button"],
+[role="tab"],
+[role="menuitem"],
+[role="option"],
+nav a,
+input,
+select,
+textarea {
+  min-block-size: 2.75rem;
+}
+
+button:not([role="switch"]):not([role="checkbox"]),
+[role="button"],
+[role="tab"],
+[role="menuitem"],
+[role="option"] {
+  min-inline-size: 2.75rem;
+}
+
+input,
+select,
+textarea {
+  max-inline-size: 100%;
+  font: inherit;
+}
+
+[dir="auto"],
+[data-user-content],
+.bidi-plaintext {
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+
+time,
+.tabular-nums,
+[data-bidi-isolate] {
+  unicode-bidi: isolate;
+}
+
+input[type="email"],
+input[type="tel"],
+input[type="url"] {
+  direction: ltr;
+  text-align: start;
+  unicode-bidi: isolate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .app-page-transition {
+    transform: none !important;
+  }
+}
+
+/* Prevent Safari/WKWebView from zooming the page when an editable
+   control receives focus. iOS auto-zooms controls whose computed font is
+   smaller than 16px. */
+@media (max-width: 768px), (pointer: coarse) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Native iOS viewport and keyboard geometry.
+   viewport-fit=cover exposes the safe-area variables; the native bridge keeps
+   the visual viewport height current while the software keyboard animates. */
+html[data-native-platform="ios"],
+html[data-native-platform="ios"] body,
+html[data-native-platform="ios"] #root {
+  min-height: var(--app-viewport-height, 100dvh);
+}
+
+html[data-native-platform="ios"],
+html[data-native-platform="ios"] #app-scroll-container {
+  scroll-padding-top: var(--sat, 0px);
+  scroll-padding-bottom: calc(var(--sab, 0px) + var(--native-keyboard-height, 0px));
+}
+
+html[data-native-platform="ios"][data-native-keyboard="open"] {
+  overscroll-behavior-y: contain;
+}
+
+/* Settings surfaces share a softer, premium radius across breakpoints. */
+.settings-surface {
+  border-radius: 1.75rem;
+}
+
+@media (max-width: 639px) {
+  .settings-surface {
+    border-radius: 1.5rem;
+  }
+}
+/* Mobile action captions: captions remain visible, wrap, and keep touch targets. */
+@media (max-width: 767px) {
+  [data-ui="button"], button:has(> .mobile-action-label), [role="tab"] {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.25;
+    min-height: 44px;
+    height: auto;
+    max-width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .mobile-labeled-button, button:has(> .mobile-action-label) {
+    width: auto !important;
+    min-width: 44px;
+    flex-direction: column;
+    gap: 4px;
+    padding-inline: 8px;
+    border-radius: var(--radius-control);
+  }
+  .mobile-action-label { display: block; max-width: 96px; font-size: 11px; line-height: 1.2; white-space: normal; overflow-wrap: anywhere; }
+  [role="tablist"] { height: auto; flex-wrap: wrap; }
+  button > span.inline { white-space: normal; }
+}
+
+@media (max-width: 767px) {
+  button:has(> .mobile-action-label) { min-height: 44px !important; height: auto !important; }
+  [data-app-chrome] .mobile-action-label { max-width: 64px; font-size: 10px; }
+  [data-ui="button"].mobile-labeled-button > svg { flex-shrink: 0; }
+  [role="tab"] { gap: 4px; min-width: 0; }
+}
+
+@media (max-width: 767px) {
+html:lang(en) .journal-rich-text { --format-bold: "Bold"; --format-italic: "Italic"; --format-underline: "Underline"; --format-strike: "Strike"; --format-quote: "Quote"; --format-bullets: "Bullets"; --format-numbers: "Numbers"; --format-clean: "Clear"; --format-link: "Link"; }
+html:lang(he) .journal-rich-text { --format-bold: "מודגש"; --format-italic: "נטוי"; --format-underline: "קו תחתון"; --format-strike: "קו חוצה"; --format-quote: "ציטוט"; --format-bullets: "תבליטים"; --format-numbers: "מספור"; --format-clean: "ניקוי"; --format-link: "קישור"; }
+html:lang(es) .journal-rich-text { --format-bold: "Negrita"; --format-italic: "Cursiva"; --format-underline: "Subrayar"; --format-strike: "Tachar"; --format-quote: "Cita"; --format-bullets: "Viñetas"; --format-numbers: "Numerar"; --format-clean: "Limpiar"; --format-link: "Enlace"; }
+html:lang(fr) .journal-rich-text { --format-bold: "Gras"; --format-italic: "Italique"; --format-underline: "Souligner"; --format-strike: "Barrer"; --format-quote: "Citation"; --format-bullets: "Puces"; --format-numbers: "Numéros"; --format-clean: "Effacer"; --format-link: "Lien"; }
+html:lang(de) .journal-rich-text { --format-bold: "Fett"; --format-italic: "Kursiv"; --format-underline: "Unterstrich"; --format-strike: "Durchstreichen"; --format-quote: "Zitat"; --format-bullets: "Liste"; --format-numbers: "Nummern"; --format-clean: "Löschen"; --format-link: "Link"; }
+html:lang(it) .journal-rich-text { --format-bold: "Grassetto"; --format-italic: "Corsivo"; --format-underline: "Sottolinea"; --format-strike: "Barrato"; --format-quote: "Citazione"; --format-bullets: "Elenco"; --format-numbers: "Numeri"; --format-clean: "Pulisci"; --format-link: "Link"; }
+html:lang(pt) .journal-rich-text { --format-bold: "Negrito"; --format-italic: "Itálico"; --format-underline: "Sublinhar"; --format-strike: "Riscar"; --format-quote: "Citação"; --format-bullets: "Lista"; --format-numbers: "Números"; --format-clean: "Limpar"; --format-link: "Link"; }
+.journal-rich-text .ql-toolbar button.ql-bold::after { content: var(--format-bold); }
+.journal-rich-text .ql-toolbar button.ql-italic::after { content: var(--format-italic); }
+.journal-rich-text .ql-toolbar button.ql-underline::after { content: var(--format-underline); }
+.journal-rich-text .ql-toolbar button.ql-strike::after { content: var(--format-strike); }
+.journal-rich-text .ql-toolbar button.ql-blockquote::after { content: var(--format-quote); }
+.journal-rich-text .ql-toolbar button.ql-list[value="bullet"]::after { content: var(--format-bullets); }
+.journal-rich-text .ql-toolbar button.ql-list[value="ordered"]::after { content: var(--format-numbers); }
+.journal-rich-text .ql-toolbar button.ql-clean::after { content: var(--format-clean); }
+.journal-rich-text .ql-toolbar button.ql-link::after { content: var(--format-link); }
+.journal-rich-text .ql-toolbar button { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; width: auto !important; min-width: 44px; height: auto !important; min-height: 52px; padding: 6px !important; }
+.journal-rich-text .ql-toolbar button::after { font-family: inherit; font-size: 10px; line-height: 1.2; max-width: 76px; white-space: normal; overflow-wrap: anywhere; }
+.journal-rich-text .ql-toolbar button svg { flex-shrink: 0; }
+}
+
+/* Media practice is always a dark canvas, independent of the page theme. */
+.breathing-practice :is(h2, p, span, button, svg) { color: #fff; }
+.breathing-practice button { background-color: rgb(0 0 0 / 0.85); }
+@media (max-width: 767px) {
+  [data-mobile-header] .mobile-action-label { font-size: 0.625rem; }
+  [data-mobile-header] button svg { flex-shrink: 0; width: 20px; height: 20px; }
+  [data-mobile-header] button { max-width: 64px; }
+}
+.breathing-practice { background: #000 !important; }
+
+/* Reflow the brand to a separate row when enlarged text needs more room. */
+[data-mobile-header], .botanical-home-hero { container-type: inline-size; }
+@container (max-width: 22rem) {
+  [data-mobile-header] > div { grid-template-columns: 36px minmax(0, 1fr); }
+  [data-mobile-header] > div > :nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+  [data-mobile-header] > div > :last-child { grid-column: 2; grid-row: 1; }
+}
+@container (max-width: 14rem) {
+  .botanical-home-hero .botanical-home-hero-art { display: none; }
+}
+@media (max-width: 767px) {
+  [data-mobile-bottom-nav] { overflow-x: auto; scroll-behavior: auto; }
+  [data-mobile-bottom-nav] > div { display: flex; width: max-content; min-width: 100%; }
+  [data-mobile-bottom-nav] a { flex: 1; min-width: max-content; }
+  [data-mobile-bottom-nav] a > span { white-space: nowrap; overflow-wrap: normal; }
+}
+@media (max-width: 640px) {
+  .exercise-detail-tabs [role="tab"] { flex-direction: column; gap: 4px; padding-inline: 4px; }
+  .exercise-detail-tabs [role="tab"] span { overflow-wrap: normal; }
+}
+@media (max-width: 767px) {
+  /* Enlarged support text belongs in the scroll flow, clear of page actions. */
+  html[data-expanded-mobile-chrome] [data-testid="persistent-human-support"] {
+    position: static;
+    display: flex;
+    justify-content: center;
+    max-width: calc(100% - 32px);
+    margin: 16px;
+  }
+}
+
+/* Saved appearance palettes use the active semantic tokens in both display modes. */
+:root[data-appearance="ocean"] {
+  --primary: 190 70% 27%;
+  --ring: 190 70% 27%;
+  --secondary: 190 22% 91%;
+  --secondary-foreground: 190 25% 25%;
+  --sidebar-primary: 190 70% 27%;
+}
+:root.dark[data-appearance="ocean"] {
+  --primary: 190 70% 68%;
+  --ring: 190 70% 68%;
+  --secondary: 190 20% 18%;
+  --secondary-foreground: 190 20% 88%;
+  --sidebar-primary: 190 70% 68%;
+}
+:root[data-appearance="sunset"] {
+  --primary: 28 60% 30%;
+  --ring: 28 60% 30%;
+  --secondary: 28 22% 91%;
+  --secondary-foreground: 28 25% 25%;
+  --sidebar-primary: 28 60% 30%;
+}
+:root.dark[data-appearance="sunset"] {
+  --primary: 28 60% 70%;
+  --ring: 28 60% 70%;
+  --secondary: 28 20% 18%;
+  --secondary-foreground: 28 20% 88%;
+  --sidebar-primary: 28 60% 70%;
+}
+:root[data-appearance="forest"] {
+  --primary: 155 50% 28%;
+  --ring: 155 50% 28%;
+  --secondary: 155 22% 91%;
+  --secondary-foreground: 155 25% 25%;
+  --sidebar-primary: 155 50% 28%;
+}
+:root.dark[data-appearance="forest"] {
+  --primary: 155 50% 68%;
+  --ring: 155 50% 68%;
+  --secondary: 155 20% 18%;
+  --secondary-foreground: 155 20% 88%;
+  --sidebar-primary: 155 50% 68%;
+}
+:root[data-appearance="lavender"] {
+  --primary: 255 35% 38%;
+  --ring: 255 35% 38%;
+  --secondary: 255 22% 91%;
+  --secondary-foreground: 255 25% 25%;
+  --sidebar-primary: 255 35% 38%;
+}
+:root.dark[data-appearance="lavender"] {
+  --primary: 255 35% 76%;
+  --ring: 255 35% 76%;
+  --secondary: 255 20% 18%;
+  --secondary-foreground: 255 20% 88%;
+  --sidebar-primary: 255 35% 76%;
+}
+:root[data-appearance="minimal"] {
+  --primary: 200 15% 32%;
+  --ring: 200 15% 32%;
+  --secondary: 200 22% 91%;
+  --secondary-foreground: 200 25% 25%;
+  --sidebar-primary: 200 15% 32%;
+}
+:root.dark[data-appearance="minimal"] {
+  --primary: 200 15% 72%;
+  --ring: 200 15% 72%;
+  --secondary: 200 20% 18%;
+  --secondary-foreground: 200 20% 88%;
+  --sidebar-primary: 200 15% 72%;
+}

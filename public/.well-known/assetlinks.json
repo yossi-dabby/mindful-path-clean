@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "me.mindfulpath.app",
+      "sha256_cert_fingerprints": [
+        "CE:1B:14:79:1E:6B:EA:F6:4B:82:5E:49:75:0D:3E:F9:F5:2A:ED:0A:A4:FB:1F:C9:AD:9C:0B:86:0B:97:72:3F"
+      ]
+    }
+  }
+]

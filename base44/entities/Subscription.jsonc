@@ -1,0 +1,143 @@
+{
+  "name": "Subscription",
+  "type": "object",
+  "properties": {
+    "owner_user_id": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Stable Base44 user ID used for authoritative billing reconciliation"
+    },
+    "plan_type": {
+      "type": "string",
+      "enum": [
+        "free",
+        "premium",
+        "premium_plus"
+      ],
+      "default": "free",
+      "description": "Subscription tier"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "cancelled",
+        "expired",
+        "trial",
+        "grace_period",
+        "past_due",
+        "paused"
+      ],
+      "default": "trial",
+      "description": "Authoritative billing status"
+    },
+    "entitlement_active": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether premium access is currently granted by the verified billing provider"
+    },
+    "billing_provider": {
+      "type": "string",
+      "enum": [
+        "stripe",
+        "revenuecat",
+        "manual"
+      ],
+      "description": "Provider that most recently verified this entitlement"
+    },
+    "store": {
+      "type": "string",
+      "enum": [
+        "web",
+        "app_store",
+        "play_store",
+        "promotional",
+        "unknown"
+      ],
+      "description": "Store of the active purchase"
+    },
+    "product_id": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Verified Stripe, Apple or Google product identifier"
+    },
+    "entitlement_id": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "Verified RevenueCat entitlement identifier"
+    },
+    "stripe_customer_id": {
+      "type": "string",
+      "description": "Stripe customer ID"
+    },
+    "stripe_subscription_id": {
+      "type": "string",
+      "description": "Stripe subscription ID"
+    },
+    "revenuecat_app_user_id": {
+      "type": "string",
+      "maxLength": 255,
+      "description": "RevenueCat subscriber ID; always the stable Base44 user ID"
+    },
+    "latest_transaction_id": {
+      "type": "string",
+      "maxLength": 512,
+      "description": "Latest provider transaction identifier when available"
+    },
+    "current_period_start": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Billing period start"
+    },
+    "current_period_end": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Billing period end"
+    },
+    "trial_end": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Trial expiration date"
+    },
+    "cancelled_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When subscription was cancelled"
+    },
+    "last_verified_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last successful authoritative provider verification"
+    },
+    "will_renew": {
+      "type": "boolean",
+      "description": "Whether the provider reports that the subscription will renew"
+    },
+    "environment": {
+      "type": "string",
+      "enum": [
+        "sandbox",
+        "production",
+        "unknown"
+      ],
+      "description": "Billing environment of the verified purchase"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this subscription record"
+    }
+  },
+  "required": [
+    "plan_type",
+    "status"
+  ],
+  "rls": {
+    "create": false,
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": false,
+    "delete": false
+  }
+}

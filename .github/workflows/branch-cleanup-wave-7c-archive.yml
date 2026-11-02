@@ -1,0 +1,66 @@
+name: Branch Cleanup Wave 7C Archive
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: >
+          Type CONFIRM_ARCHIVE_AND_DELETE_ABANDONED_WIP_WAVE_7C to proceed.
+          Any other value will abort the run immediately.
+        required: true
+        default: ''
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  cleanup:
+    name: Archive + Delete Abandoned WIP Branches (Wave 7C)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch all remote branches and tags
+        run: |
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*' --prune
+          git fetch origin --tags --prune
+
+      - name: Verify confirmation input
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "CONFIRM_ARCHIVE_AND_DELETE_ABANDONED_WIP_WAVE_7C" ]; then
+            echo "ERROR: Confirmation input did not match."
+            echo "Expected: CONFIRM_ARCHIVE_AND_DELETE_ABANDONED_WIP_WAVE_7C"
+            echo "Received: ${{ github.event.inputs.confirm }}"
+            exit 1
+          fi
+          echo "Confirmation accepted."
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Configure git identity for archive tags
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Run branch archive cleanup script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/branch-cleanup-wave-7c-archive.mjs
+
+      - name: Upload cleanup report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: branch-cleanup-wave-7c-report
+          path: branch-cleanup-wave-7c-report.md
+          retention-days: 90
+          if-no-files-found: warn

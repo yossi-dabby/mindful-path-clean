@@ -1,0 +1,7 @@
+[build]
+buildCommand = "npm run build"
+
+[deploy]
+# -s enables single-page app mode: unknown routes are served index.html (200)
+# $PORT is injected by Railway at runtime
+startCommand = "npx serve -s dist -l $PORT"

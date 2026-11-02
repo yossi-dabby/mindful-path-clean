@@ -1,0 +1,130 @@
+{
+  "name": "GoalTemplate",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Template title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Template description"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "behavioral",
+        "emotional",
+        "social",
+        "cognitive",
+        "lifestyle"
+      ],
+      "description": "Goal category"
+    },
+    "motivation": {
+      "type": "string",
+      "description": "Why this goal matters"
+    },
+    "smart_criteria": {
+      "type": "object",
+      "properties": {
+        "specific": {
+          "type": "string"
+        },
+        "measurable": {
+          "type": "string"
+        },
+        "achievable": {
+          "type": "string"
+        },
+        "relevant": {
+          "type": "string"
+        },
+        "time_bound": {
+          "type": "string"
+        }
+      },
+      "description": "SMART goal criteria template"
+    },
+    "milestones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Suggested milestone templates"
+    },
+    "tips": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tips for achieving this goal"
+    },
+    "icon": {
+      "type": "string",
+      "description": "Icon name for the template"
+    },
+    "duration_weeks": {
+      "type": "number",
+      "description": "Suggested duration in weeks"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "default": "beginner",
+      "description": "Difficulty level"
+    },
+    "is_popular": {
+      "type": "boolean",
+      "default": false,
+      "description": "Mark as popular template"
+    }
+  },
+  "required": [
+    "title",
+    "category"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "name": "ForumComment",
+  "type": "object",
+  "properties": {
+    "post_id": {
+      "type": "string",
+      "description": "Reference to ForumPost"
+    },
+    "content": {
+      "type": "string",
+      "description": "Comment content"
+    },
+    "is_anonymous": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to hide author identity"
+    },
+    "author_display_name": {
+      "type": "string",
+      "description": "Display name (anonymous or real)"
+    },
+    "upvotes": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of upvotes"
+    },
+    "parent_comment_id": {
+      "type": "string",
+      "description": "For threaded replies"
+    }
+  },
+  "required": [
+    "post_id",
+    "content"
+  ],
+  "rls": {
+    "create": {},
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

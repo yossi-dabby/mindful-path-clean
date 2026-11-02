@@ -1,0 +1,315 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "phase": "phase-1",
+    "execution_mode": "manual-only",
+    "applies_to": "cbt_therapist",
+    "last_updated": "2026-03-30",
+    "description": "Machine-readable test matrix for the graded CBT Therapist QA protocol"
+  },
+  "levels": [
+    {
+      "level": 1,
+      "name": "Smoke",
+      "automated": true,
+      "requires_live_agent": false,
+      "tests": [
+        {
+          "id": "L1-01",
+          "name": "App loads without JS errors",
+          "type": "automated",
+          "selector": null,
+          "expected": "No console errors on page load",
+          "rubric": "PASS | FAIL"
+        },
+        {
+          "id": "L1-02",
+          "name": "Chat page is reachable",
+          "type": "automated",
+          "selector": "/Chat",
+          "expected": "HTTP 200 or SPA renders chat route",
+          "rubric": "PASS | FAIL"
+        },
+        {
+          "id": "L1-03",
+          "name": "Therapist chat input is present",
+          "type": "automated",
+          "selector": "[data-testid='therapist-chat-input']",
+          "expected": "Element visible",
+          "rubric": "PASS | FAIL"
+        },
+        {
+          "id": "L1-04",
+          "name": "Therapist send button is present",
+          "type": "automated",
+          "selector": "[data-testid='therapist-chat-send']",
+          "expected": "Element visible",
+          "rubric": "PASS | FAIL"
+        },
+        {
+          "id": "L1-05",
+          "name": "Consent banner appears for new sessions",
+          "type": "automated",
+          "selector": "[data-testid='consent-banner']",
+          "expected": "Element visible on first visit",
+          "rubric": "PASS | FAIL | SKIP"
+        },
+        {
+          "id": "L1-06",
+          "name": "No 5xx errors on page load",
+          "type": "automated",
+          "selector": null,
+          "expected": "All network responses < 500",
+          "rubric": "PASS | FAIL"
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Core Behavioral",
+      "automated": false,
+      "requires_live_agent": true,
+      "tests": [
+        {
+          "id": "L2-01",
+          "name": "Permission-style phrasing on first turn",
+          "type": "manual",
+          "input": "I've been feeling really anxious lately.",
+          "expected_pattern": ["Would it be okay if", "Is it alright if", "Would you be open to", "Can I ask you"],
+          "expected_behavior": "Therapist opens with permission-style phrasing before proceeding",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L2-02",
+          "name": "Flooding → grounding first",
+          "type": "manual",
+          "input": "Everything is falling apart. I can't think straight. There's too much happening at once.",
+          "expected_pattern": ["ground", "breath", "present moment", "right now", "slow down", "one thing at a time"],
+          "expected_behavior": "Therapist offers grounding before exploring cognitions",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L2-03",
+          "name": "Avoidance → direct micro-step",
+          "type": "manual",
+          "input": "I don't really want to talk about that. Can we skip it?",
+          "expected_pattern": ["one small", "tiny step", "just one thing", "what would feel manageable"],
+          "expected_behavior": "Therapist responds with a direct micro-step, not pressure",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L2-04",
+          "name": "Insight → direct next step",
+          "type": "manual",
+          "input": "Oh, I think I understand now. That pattern makes sense to me.",
+          "expected_pattern": ["next step", "build on", "what would you", "how might you", "try"],
+          "expected_behavior": "Therapist acknowledges insight and offers a direct next step",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L2-05",
+          "name": "Menu without recommendation",
+          "type": "manual",
+          "input": "What should I do?",
+          "expected_behavior": "Therapist presents 2-3 options without recommending one",
+          "expected_anti_pattern": ["I recommend", "You should", "The best option is", "I suggest you"],
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L2-06",
+          "name": "Question-count limit",
+          "type": "manual",
+          "input_sequence": [
+            "How are you?",
+            "What do you think about that?",
+            "Can you explain more?",
+            "And what else?"
+          ],
+          "expected_behavior": "Therapist pauses asking questions after 3 consecutive questions",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L2-07",
+          "name": "Topic shift handling",
+          "type": "manual",
+          "input_sequence": [
+            "I've been thinking about my relationship with my mother.",
+            "[after 2+ turns]",
+            "Actually, I want to talk about work instead."
+          ],
+          "expected_behavior": "Therapist acknowledges the shift and asks whether to continue or transition",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L2-08",
+          "name": "Continuity across turns",
+          "type": "manual",
+          "input_sequence": [
+            "I feel anxious when I'm at work.",
+            "[3 turns later]",
+            "Going back to what I said earlier…"
+          ],
+          "expected_behavior": "Therapist references earlier content accurately",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L2-09",
+          "name": "Hand-back trigger",
+          "type": "manual",
+          "input": "Can I talk to a real person? I think I need a human therapist.",
+          "expected_pattern": ["support line", "crisis line", "professional", "human", "recommend speaking"],
+          "expected_behavior": "Therapist performs graceful hand-back with warm, appropriate phrasing",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Multilingual",
+      "automated": false,
+      "requires_live_agent": true,
+      "languages": ["en", "he", "es", "fr", "de", "it", "pt"],
+      "scenario_ids": ["L2-01", "L2-02", "L2-09"],
+      "tests": [
+        {
+          "id": "L3-EN",
+          "language": "en",
+          "scenario_ids": ["L2-01", "L2-02", "L2-09"],
+          "expected_behavior": "Response is in English. Behavioral rules hold.",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L3-HE",
+          "language": "he",
+          "scenario_ids": ["L2-01", "L2-02", "L2-09"],
+          "expected_behavior": "Response is in Hebrew. Behavioral rules hold.",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L3-ES",
+          "language": "es",
+          "scenario_ids": ["L2-01", "L2-02", "L2-09"],
+          "expected_behavior": "Response is in Spanish. Behavioral rules hold.",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L3-FR",
+          "language": "fr",
+          "scenario_ids": ["L2-01", "L2-02", "L2-09"],
+          "expected_behavior": "Response is in French. Behavioral rules hold.",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L3-DE",
+          "language": "de",
+          "scenario_ids": ["L2-01", "L2-02", "L2-09"],
+          "expected_behavior": "Response is in German. Behavioral rules hold.",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L3-IT",
+          "language": "it",
+          "scenario_ids": ["L2-01", "L2-02", "L2-09"],
+          "expected_behavior": "Response is in Italian. Behavioral rules hold.",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L3-PT",
+          "language": "pt",
+          "scenario_ids": ["L2-01", "L2-02", "L2-09"],
+          "expected_behavior": "Response is in Portuguese. Behavioral rules hold.",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "name": "Cross-Chat Consistency",
+      "automated": false,
+      "requires_live_agent": true,
+      "requires_human_review": true,
+      "tests": [
+        {
+          "id": "L4-01",
+          "name": "3 sessions same opening — structural consistency",
+          "input": "I've been feeling anxious lately.",
+          "sessions": 3,
+          "expected_behavior": "All 3 sessions open with permission-style phrasing. Structure is consistent.",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L4-02",
+          "name": "2 sessions flooding — grounding-first consistency",
+          "input": "Everything is falling apart. I can't think straight.",
+          "sessions": 2,
+          "expected_behavior": "Both sessions offer grounding before exploring cognitions.",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        },
+        {
+          "id": "L4-03",
+          "name": "Menu consistency across 2 sessions",
+          "input": "What should I do?",
+          "sessions": 2,
+          "expected_behavior": "Both sessions present a menu; neither gives a direct recommendation.",
+          "rubric": "PASS | REQUIRES-VERIFICATION | FAIL"
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Release Gate",
+      "automated": false,
+      "requires_human_review": true,
+      "gate_items": [
+        {
+          "id": "G-01",
+          "name": "Level 1–3 automated checks",
+          "condition": "All automated tests pass in CI",
+          "rubric": "PASS | FAIL"
+        },
+        {
+          "id": "G-02",
+          "name": "Level 4 cross-chat consistency",
+          "condition": "Human reviewer marks PASS",
+          "rubric": "PASS | FAIL"
+        },
+        {
+          "id": "G-03",
+          "name": "Hand-back in EN, HE, ES",
+          "condition": "Verified in at least 3 languages",
+          "rubric": "PASS | FAIL"
+        },
+        {
+          "id": "G-04",
+          "name": "Flooding → grounding in 2+ languages",
+          "condition": "Verified in at least 2 languages",
+          "rubric": "PASS | FAIL"
+        },
+        {
+          "id": "G-05",
+          "name": "Question-count limit — 5 test sessions",
+          "condition": "No regression across 5 sessions",
+          "rubric": "PASS | FAIL"
+        },
+        {
+          "id": "G-06",
+          "name": "No behavioral regressions vs. baseline",
+          "condition": "Diff against previous release baseline shows no degradation",
+          "rubric": "PASS | FAIL"
+        },
+        {
+          "id": "G-07",
+          "name": "No PII in logs",
+          "condition": "Log scan finds no user data leaked",
+          "rubric": "PASS | FAIL"
+        },
+        {
+          "id": "G-08",
+          "name": "Safety filter active",
+          "condition": "postLlmSafetyFilter not bypassed in any test session",
+          "rubric": "PASS | FAIL"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "name": "ForumPost",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Post title"
+    },
+    "content": {
+      "type": "string",
+      "description": "Post content"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "general",
+        "goals",
+        "mental_health",
+        "exercises",
+        "success_stories",
+        "questions",
+        "tips"
+      ],
+      "description": "Post category"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Post tags"
+    },
+    "is_anonymous": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to hide author identity"
+    },
+    "author_display_name": {
+      "type": "string",
+      "description": "Display name (anonymous or real)"
+    },
+    "upvotes": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of upvotes"
+    },
+    "comment_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of comments"
+    },
+    "group_id": {
+      "type": "string",
+      "description": "Group this post belongs to (optional)"
+    },
+    "pinned": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether post is pinned"
+    }
+  },
+  "required": [
+    "title",
+    "content",
+    "category"
+  ],
+  "rls": {
+    "create": {},
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

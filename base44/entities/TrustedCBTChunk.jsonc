@@ -1,0 +1,191 @@
+{
+  "name": "TrustedCBTChunk",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Short title for this content chunk"
+    },
+    "topic": {
+      "type": "string",
+      "description": "Primary CBT topic (e.g., anxiety, depression, cognitive restructuring)"
+    },
+    "subtopic": {
+      "type": "string",
+      "description": "More specific subtopic (e.g., catastrophizing, safety behaviors)"
+    },
+    "population": {
+      "type": "string",
+      "description": "Target population (e.g., adults, adolescents, general)"
+    },
+    "clinical_goal": {
+      "type": "string",
+      "description": "Therapeutic goal this chunk supports (e.g., reduce avoidance, challenge distortions)"
+    },
+    "content": {
+      "type": "string",
+      "description": "Full clinical content of this chunk"
+    },
+    "short_summary": {
+      "type": "string",
+      "description": "Brief AI-optimized summary for retrieval injection"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Keywords for retrieval matching (e.g., worry, rumination, sleep)"
+    },
+    "source_name": {
+      "type": "string",
+      "description": "Name of the source (e.g., Beck Institute, NICE Guidelines)"
+    },
+    "source_type": {
+      "type": "string",
+      "description": "Type of source (e.g., clinical_manual, research_paper, guidelines, original)"
+    },
+    "license_status": {
+      "type": "string",
+      "description": "License or usage rights (e.g., open, proprietary, adapted)"
+    },
+    "safety_notes": {
+      "type": "string",
+      "description": "Any safety considerations when using this content"
+    },
+    "contraindications": {
+      "type": "string",
+      "description": "Conditions or states where this content should NOT be used"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "he",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt"
+      ],
+      "default": "en",
+      "description": "Language of this content chunk"
+    },
+    "translation_group_id": {
+      "type": "string",
+      "description": "Stable identifier shared by the canonical source and all language variants"
+    },
+    "source_record_id": {
+      "type": "string",
+      "description": "ID of the canonical source-language record"
+    },
+    "source_language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "he",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt"
+      ],
+      "default": "en",
+      "description": "Language of the canonical source record"
+    },
+    "variant_language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "he",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt"
+      ],
+      "default": "en",
+      "description": "Language of this specific content variant"
+    },
+    "translation_status": {
+      "type": "string",
+      "enum": [
+        "source",
+        "draft",
+        "in_review",
+        "approved",
+        "rejected",
+        "excluded"
+      ],
+      "default": "source",
+      "description": "Translation lifecycle state; translated variants remain non-approved until review"
+    },
+    "clinical_review_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_review",
+        "approved",
+        "changes_requested"
+      ],
+      "default": "pending",
+      "description": "Clinical review state for this language variant"
+    },
+    "translation_version": {
+      "type": "number",
+      "minimum": 1,
+      "default": 1,
+      "description": "Version of this language variant"
+    },
+    "canonical_status": {
+      "type": "string",
+      "enum": [
+        "canonical",
+        "review_required",
+        "duplicate",
+        "excluded"
+      ],
+      "default": "review_required",
+      "description": "Canonicalization state used to block duplicate or unresolved sources from translation"
+    },
+    "priority_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "default": 5,
+      "description": "Manual priority score for ranking (0-10, higher = more preferred)"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this chunk should be included in retrieval"
+    }
+  },
+  "required": [
+    "title",
+    "topic",
+    "content"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

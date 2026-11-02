@@ -1,0 +1,72 @@
+{
+  "name": "UserPoints",
+  "type": "object",
+  "properties": {
+    "total_points": {
+      "type": "number",
+      "default": 0,
+      "description": "Total points earned"
+    },
+    "weekly_points": {
+      "type": "number",
+      "default": 0,
+      "description": "Points earned this week"
+    },
+    "level": {
+      "type": "number",
+      "default": 1,
+      "description": "Current level (based on total points)"
+    },
+    "points_to_next_level": {
+      "type": "number",
+      "default": 100,
+      "description": "Points needed for next level"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date"
+    },
+    "activity_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "activity": {
+            "type": "string"
+          },
+          "points": {
+            "type": "number"
+          },
+          "date": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Recent activity log"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this points record"
+    }
+  },
+  "required": [
+    "total_points",
+    "level"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "name": "Resource",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Resource title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the resource"
+    },
+    "url": {
+      "type": "string",
+      "description": "External link to the resource (optional for AI-generated content)"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "article",
+        "video",
+        "podcast",
+        "app",
+        "book",
+        "website",
+        "meditation",
+        "scenario",
+        "interview",
+        "guide"
+      ],
+      "description": "Type of resource"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "anxiety",
+        "depression",
+        "stress",
+        "mindfulness",
+        "relationships",
+        "self-esteem",
+        "sleep",
+        "general",
+        "coping_skills",
+        "communication",
+        "emotional_regulation"
+      ],
+      "description": "Mental health category"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags for searchability"
+    },
+    "difficulty_level": {
+      "type": "string",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "default": "beginner",
+      "description": "Complexity level"
+    },
+    "estimated_time": {
+      "type": "string",
+      "description": "Estimated time to consume (e.g., '5 min read', '30 min video')"
+    },
+    "thumbnail_url": {
+      "type": "string",
+      "description": "Image thumbnail URL"
+    },
+    "content": {
+      "type": "string",
+      "description": "Full content for AI-generated resources (meditation scripts, scenarios, interviews)"
+    },
+    "author": {
+      "type": "string",
+      "description": "Author or expert name"
+    },
+    "is_ai_generated": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this content was AI-generated"
+    },
+    "slug": {
+      "type": "string",
+      "description": "[AI-CONTENT] URL-safe unique identifier for content addressing and stable reference in retrieval systems"
+    },
+    "summary": {
+      "type": "string",
+      "description": "[AI-CONTENT] Short AI-optimized one-paragraph summary for retrieval context injection \u2014 distinct from user-facing description"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "he",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt"
+      ],
+      "default": "en",
+      "description": "[AI-CONTENT] Language of this content record"
+    },
+    "goal_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "[AI-CONTENT] Therapeutic goal types this resource is designed to support"
+    },
+    "mood_targets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "[AI-CONTENT] Mood states this resource is particularly relevant for"
+    },
+    "when_to_use": {
+      "type": "string",
+      "description": "[AI-CONTENT] Explicit natural-language guidance for AI on when to recommend this resource"
+    },
+    "contraindications": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "[AI-CONTENT] Situations where this resource should NOT be recommended"
+    },
+    "source": {
+      "type": "string",
+      "description": "[AI-CONTENT] Clinical reference, journal, organization, or book this resource draws from (distinct from url)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "draft",
+        "archived"
+      ],
+      "default": "active",
+      "description": "[AI-CONTENT] Content lifecycle status \u2014 only 'active' records should be used in AI retrieval"
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "description": "[AI-CONTENT] Content version number"
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "type",
+    "category"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "role": "user"
+              }
+            },
+            {
+              "data.status": {
+                "$nin": [
+                  "draft",
+                  "archived"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

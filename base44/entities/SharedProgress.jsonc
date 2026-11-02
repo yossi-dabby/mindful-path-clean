@@ -1,0 +1,63 @@
+{
+  "name": "SharedProgress",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Progress update title"
+    },
+    "content": {
+      "type": "string",
+      "description": "Progress description"
+    },
+    "progress_type": {
+      "type": "string",
+      "enum": [
+        "goal_completed",
+        "milestone_reached",
+        "streak_achievement",
+        "mood_improvement",
+        "exercise_completion",
+        "general_update"
+      ],
+      "description": "Type of progress"
+    },
+    "is_anonymous": {
+      "type": "boolean",
+      "default": true,
+      "description": "Share anonymously"
+    },
+    "author_display_name": {
+      "type": "string",
+      "description": "Display name"
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Anonymized metrics (e.g., days count, percentage)"
+    },
+    "upvotes": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of upvotes"
+    },
+    "group_id": {
+      "type": "string",
+      "description": "Group to share with (optional)"
+    }
+  },
+  "required": [
+    "title",
+    "content",
+    "progress_type"
+  ],
+  "rls": {
+    "create": {},
+    "read": {},
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+# Branch Cleanup Wave 5 — Approved List
+#
+# These branches are freshly verified SAFE_DELETE_MERGED candidates as of 2026-06-10.
+# All branches were confirmed:
+#   - fully merged into origin/main
+#   - older than 14 days
+#   - not in Waves 1, 2, 3, or 4 deleted lists
+#   - not main, staging-fresh, or the current branch
+#   - no open pull requests
+#
+# Maximum allowed: 75 branches (Wave 5 cap).
+# DO NOT add main, staging-fresh, or any unmerged branch.
+# DO NOT run Wave 5 until this PR is merged and approved.
+#
+copilot/update-playwright-config
+copilot/prepare-deployment-for-staging
+copilot/setup-staging-deployment-workflow
+copilot/update-repo-workflow-guidance
+copilot/fix-production-issues-railway-app
+copilot/prepare-staging-deployment-runbook
+copilot/resolve-merge-conflict-chat
+copilot/resolve-merge-conflict-notification-bell
+copilot/resolve-merge-conflicts-staging
+copilot/stabilize-railway-production-app
+copilot/audit-staging-branch
+copilot/copilotresolve-conflicts-fix-null-app-id-in-api-ur
+copilot/fix-missing-environment-variable
+copilot/fix-production-auth-login-routing
+copilot/fix-staging-branch-issues-again
+copilot/fix-issues-in-staging-branch
+copilot/fix-pr-conflicts-with-staging
+copilot/update-account-deletion-workflow
+copilot/update-staging-to-maintain-e2e-tests
+revert-444-copilot/fix-app-registration-issues
+copilot/clean-production-audit
+copilot/fix-conflicts-with-staging
+copilot/fix-production-ai-flow
+copilot/improve-production-ai-flow
+copilot/investigate-production-readiness
+copilot/merge-staging-fresh-into-copilot
+copilot/production-ai-phase-1-verification
+copilot/rollout-advanced-ai-capabilities
+copilot/update-ci-workflow-for-staging-fresh
+copilot/audit-phase-3
+copilot/audit-therapeutic-quality
+copilot/fix-merge-conflicts-staging-fresh
+copilot/refine-therapist-opening-workflow
+copilot/resolve-merge-conflicts
+copilot/root-cause-audit-production-upgrades
+copilot/upgrade-therapist-cbt-formulator
+copilot/upgrade-therapist-cbt-formulator-again
+copilot/upgrade-therapist-to-cbt-super-agent
+copilot/audit-and-refresh-import-file
+copilot/audit-and-refresh-trusted-cbt
+copilot/create-trustedcbt-batch-2
+copilot/fix-cbt-therapist-wiring-v6-undefined
+copilot/fix-update-trusted-cbt-chunk-import-files
+copilot/resolve-conflicts-latest-pr
+copilot/resolve-merge-conflicts-trustedcbt
+copilot/staging-fresh-create-assets
+copilot/create-trusted-cbt-batch-3-again
+copilot/minimal-risk-store-readiness-fixes
+copilot/add-workflow-dispatch-trigger
+copilot/explain-repository-structure
+copilot/research-ai-agent-architecture
+copilot/add-super-agent-routing-activation
+copilot/explore-ai-agents-architecture
+copilot/explore-codebase-upgrade-ai-agents
+copilot/implement-upgrade-roadmap
+copilot/research-current-architecture
+copilot/upgrade-ai-agents
+copilot/audit-chat-lifecycle-safety
+copilot/plan-wave-3-architecture
+copilot/wave-2-architecture-planning
+copilot/add-wave-5b-evaluator-feature-extractor
+copilot/design-cbt-knowledge-architecture
+copilot/integrate-lts-inputs-therapist-strategy
+copilot/merge-staging-fresh-into-main
+copilot/wave-5-quality-evaluator-layer
+copilot/wave-5b-feature-extractor
+copilot/fix-root-cause-language-architecture
+copilot/recovery-stage-1-identify-blockers
+copilot/stage-1-map-voice-message-support
+copilot/stage-3-audio-upload-transcription
+copilot/understanding-codebase-structure
+copilot/explain-repository-structure-again
+copilot/explain-repository-structure-another-one
+copilot/audit-therapeutic-forms
+copilot/audit-environment-mismatch

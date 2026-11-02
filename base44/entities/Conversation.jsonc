@@ -1,0 +1,114 @@
+{
+  "name": "Conversation",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Conversation title or topic"
+    },
+    "session_number": {
+      "type": "number",
+      "description": "Session count"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "description": "How long the session lasted"
+    },
+    "mood_before": {
+      "type": "string",
+      "enum": [
+        "excellent",
+        "good",
+        "okay",
+        "low",
+        "very_low"
+      ],
+      "description": "Mood at start"
+    },
+    "mood_after": {
+      "type": "string",
+      "enum": [
+        "excellent",
+        "good",
+        "okay",
+        "low",
+        "very_low"
+      ],
+      "description": "Mood at end"
+    },
+    "topics_discussed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Main themes covered"
+    },
+    "key_insights": {
+      "type": "string",
+      "description": "Important realizations or takeaways"
+    },
+    "agent_conversation_id": {
+      "type": "string",
+      "description": "Reference to the AI agent conversation"
+    },
+    "is_pinned": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the owner pinned this conversation in the chat list"
+    },
+    "session_summary": {
+      "type": "string",
+      "description": "AI-generated summary of the session"
+    },
+    "suggested_exercises": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Exercise IDs recommended based on the conversation"
+    },
+    "recommended_resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Curated resources for the user"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Optional notes about this conversation record"
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "created_by": "{{user.email}}"
+    },
+    "update": {
+      "created_by": "{{user.email}}"
+    },
+    "delete": {
+      "created_by": "{{user.email}}"
+    }
+  }
+}

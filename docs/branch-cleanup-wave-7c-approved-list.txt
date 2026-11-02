@@ -1,0 +1,31 @@
+# Branch Cleanup Wave 7C — Approved List (Archive Tag + Delete)
+#
+# Wave 7C is the final archive-tag-and-delete wave for abandoned WIP Copilot branches.
+# All 12 remaining abandoned WIP Copilot branches not yet archived by Wave 7A or 7B.
+# Scope: only abandoned [WIP] Copilot attempts older than 90 days.
+#
+# Rules:
+#   - Maximum 25 branches
+#   - Do not include main, staging-fresh, current branch, or protected/special branches
+#   - Do not include open PR branches
+#   - Do not include no-PR stale branches
+#   - Do not include closed-unmerged non-WIP branches
+#   - Do not include branches already deleted in Waves 1-6 or archived in Wave 7A or Wave 7B
+#
+# Sorted by age (oldest first). All branches are ≥ 98 days old.
+#
+# Last updated: 2026-06-10
+# Approved by: repository owner before dispatching the workflow
+
+copilot/fix-e2e-playwright-errors
+copilot/translate-home-page-content-please-work
+copilot/translate-mind-games-content
+copilot/update-query-and-state-usage
+copilot/add-chat-smoke-test-instrumentation
+copilot/add-e2e-test-helper
+copilot/add-e2e-test-helpers-file
+copilot/add-page-closed-check
+copilot/add-playwright-e2e-test-files
+copilot/fix-e2e-chat-test-closure
+copilot/fix-e2e-test-errors-again
+copilot/fix-e2e-test-failure

@@ -1,0 +1,22 @@
+# Branch Cleanup Wave 6 — Approved List
+#
+# Fresh post-PR-781 inventory checks confirmed 271 remote branches and 0 open PRs.
+# Wave 6 is restricted to direct-safe branches only after applying all Wave 6 rules:
+#   - direct-safe classification only (git-merged or audit-approved PR-merged)
+#   - older than 14 days
+#   - not main, staging-fresh, or the current branch
+#   - no open pull requests
+#   - no blocking references outside this approved-list file
+#
+# Final Wave 6 count after the fresh re-check: 8 branches.
+# DO NOT add abandoned WIP, closed-unmerged, no-PR stale, or recent branches.
+# DO NOT run Wave 6 until this PR is merged and approved.
+#
+copilot/audit-existing-app-architecture
+copilot/audit-global-ai-forms-failure
+copilot/add-playwright-e2e-workflow
+copilot/fix-e2e-routing-issue
+copilot/fix-e2e-test-404-errors
+copilot/fix-e2e-test-selectors
+copilot/restore-missing-features-fix-routing
+copilot/stabilize-e2e-tests-for-ci

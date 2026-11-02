@@ -1,0 +1,178 @@
+{
+  "name": "Journey",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Journey title"
+    },
+    "description": {
+      "type": "string",
+      "description": "What this journey helps with"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "he",
+        "es",
+        "fr",
+        "de",
+        "it",
+        "pt"
+      ],
+      "default": "en",
+      "description": "Language of the source title, description, outcomes, and steps"
+    },
+    "content_key": {
+      "type": "string",
+      "description": "Stable language-independent key for this journey"
+    },
+    "localizations": {
+      "type": "object",
+      "description": "Localized journey content. Every published locale must provide title, description, outcomes, and a complete steps array matching the source steps.",
+      "properties": {
+        "en": {
+          "type": "object",
+          "description": "English localized content"
+        },
+        "he": {
+          "type": "object",
+          "description": "Hebrew localized content"
+        },
+        "es": {
+          "type": "object",
+          "description": "Spanish localized content"
+        },
+        "fr": {
+          "type": "object",
+          "description": "French localized content"
+        },
+        "de": {
+          "type": "object",
+          "description": "German localized content"
+        },
+        "it": {
+          "type": "object",
+          "description": "Italian localized content"
+        },
+        "pt": {
+          "type": "object",
+          "description": "Portuguese localized content"
+        }
+      }
+    },
+    "duration_days": {
+      "type": "number",
+      "description": "Expected duration in days"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "anxiety",
+        "depression",
+        "stress",
+        "distress_tolerance",
+        "emotion_regulation",
+        "mindfulness"
+      ],
+      "description": "Primary focus area"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "beginner",
+        "intermediate",
+        "advanced"
+      ],
+      "default": "beginner",
+      "description": "Recommended skill level"
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "game_id": {
+            "type": "string"
+          },
+          "game_slug": {
+            "type": "string"
+          },
+          "reflection_prompt": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Ordered sequence of games"
+    },
+    "outcomes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Expected benefits"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether journey is available"
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "duration_days",
+    "category",
+    "steps"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "role": "user"
+              }
+            },
+            {
+              "data.is_active": {
+                "$ne": false
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

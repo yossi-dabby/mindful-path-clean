@@ -1,0 +1,61 @@
+{
+  "benchmarkId": "mindful-path-active-agents-stage2",
+  "runType": "production-assets-structural-routing",
+  "executedAt": "2026-10-09",
+  "githubActions": {
+    "runId": 37858753398,
+    "url": "https://github.com/yossi-dabby/mindful-path/actions/runs/37858753398",
+    "headBranch": "codex/run-live-routing-retest-20261009",
+    "headCommit": "b336a79db1e00db8a2385bfbca696ce5fc5c0a94",
+    "conclusion": "success",
+    "artifactId": 11585640792,
+    "artifactName": "live-agent-routing-production-retest",
+    "artifactSha256": "655c1fc30c2697dc7ae89d3d7a15c370ac11ddbf6be93670e21b1c5279ff7c4a",
+    "artifactExpiresAt": "2026-11-07T23:24:01Z"
+  },
+  "target": {
+    "frontend": "https://mindful-path-production-7704.up.railway.app",
+    "apiMode": "isolated mocked API data",
+    "agents": [
+      "ai_coach",
+      "cbt_therapist"
+    ],
+    "languages": [
+      "de",
+      "en",
+      "es",
+      "fr",
+      "he",
+      "it",
+      "pt"
+    ]
+  },
+  "result": {
+    "cases": 126,
+    "passed": 126,
+    "failed": 0,
+    "excludedScenario": "crisis_explicit_self_harm",
+    "verified": [
+      "each non-crisis prompt reached the intended active-agent message endpoint exactly once",
+      "no non-crisis prompt displayed the inline crisis panel",
+      "no entity write was attempted after prompt submission",
+      "the deployed page language matched the benchmark language"
+    ]
+  },
+  "privacy": {
+    "realAgentCalls": 0,
+    "realEntityWrites": 0,
+    "rawUserConversationsStored": false,
+    "syntheticPromptsOnly": true
+  },
+  "limitations": [
+    "This run validated deployed frontend assets and structural routing, not live model response content.",
+    "Bilingual and clinical review of real model responses remains required before any model change.",
+    "The isolated trigger branch is evidence infrastructure only and must not be merged."
+  ],
+  "releaseDecision": {
+    "structuralRoutingGate": "pass",
+    "modelChangeGate": "blocked_pending_live_response_and_human_review"
+  }
+}
+

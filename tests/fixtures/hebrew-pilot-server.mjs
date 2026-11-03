@@ -22,6 +22,9 @@ createServer(async (req, res) => {
     } } }),
     fetchImpl: (url, init) => {
       if (!url.startsWith('https://mindful-path-production-7704.up.railway.app/api/hebrew-forms-pilot/')) throw new Error('Unexpected service');
+      // Match Workers' redirect contract; Node also accepts error and previously
+      // hid the deployed TypeError from this browser fixture.
+      if (!['manual', 'follow'].includes(init.redirect || 'follow')) throw new TypeError('Unsupported redirect mode');
       return fetch(`http://127.0.0.1:3005${new URL(url).pathname}${new URL(url).search}`, init);
     },
   });

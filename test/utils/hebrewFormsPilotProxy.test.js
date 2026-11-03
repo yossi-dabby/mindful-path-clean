@@ -1,5 +1,6 @@
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { createHash } from 'node:crypto';
+import { createServer } from 'node:http';
 import { createAppServer } from '../../server/index.mjs';
 import { loadPilot } from '../../server/hebrew-pilot.mjs';
 import { handleHebrewFormsPilot } from '../../base44/functions/getHebrewFormsPilot/handler.js';
@@ -188,7 +189,7 @@ describe('Base44 pilot proxy authorization and transport', () => {
     const [url, init] = fetchImpl.mock.calls[0];
     expect(url).toBe('https://mindful-path-production-7704.up.railway.app/api/hebrew-forms-pilot/files/MP-BASE-B00-ALL-HE?download=1');
     expect(init.headers).toEqual({ Authorization: 'Bearer fixture-session' });
-    expect(init.redirect).toBe('error');
+    expect(init.redirect).toBe('manual');
     expect(init.cache).toBe('no-store');
     expect(fetchImpl).toHaveBeenCalledTimes(1);
     expect(init.signal).toBeInstanceOf(AbortSignal);
@@ -228,23 +229,74 @@ describe('Base44 proxy to the real private PDF server', () => {
   const dependencies = () => ({ createClientFromRequest: client(), fetchImpl: (url, init) => fetch(`${origin}${new URL(url).pathname}${new URL(url).search}`, init) });
 
   it('returns the catalog and all 154 PDFs byte-for-byte through the Base44 transport', async () => {
-    const catalog = await (await handleHebrewFormsPilot(request(), dependencies())).json();
-    expect(catalog.kind).toBe('catalog');
-    expect(catalog.catalog).toEqual(pilot.catalog);
-    for (const form of pilot.catalog.forms) {
-      const response = await handleHebrewFormsPilot(request({ path: `files/${form.id}` }), dependencies());
-      expect(response.status).toBe(200);
-      const data = await response.json();
-      const bytes = Buffer.from(data.base64, 'base64');
-      expect(data.id).toBe(form.id);
-      expect(bytes.length).toBe(form.bytes);
-      expect(createHash('sha256').update(bytes).digest('hex')).toBe(form.sha256);
-    }
+    // Match the deployed Workers incompatibility: Node otherwise accepts error.
+    const NativeRequest = Request;
+    vi.stubGlobal('Request', class {
+      constructor(url, options = {}) {
+        if (options.redirect === 'error') throw new TypeError('Unsupported redirect mode');
+        return new NativeRequest(url, options);
+      }
+    });
+    try {
+      const catalog = await (await handleHebrewFormsPilot(request(), dependencies())).json();
+      expect(catalog.kind).toBe('catalog');
+      expect(catalog.catalog).toEqual(pilot.catalog);
+      for (const form of pilot.catalog.forms) {
+        const response = await handleHebrewFormsPilot(request({ path: `files/${form.id}` }), dependencies());
+        expect(response.status).toBe(200);
+        const data = await response.json();
+        const bytes = Buffer.from(data.base64, 'base64');
+        expect(data.id).toBe(form.id);
+        expect(bytes.length).toBe(form.bytes);
+        expect(createHash('sha256').update(bytes).digest('hex')).toBe(form.sha256);
+      }
+    } finally { vi.unstubAllGlobals(); }
   });
 
   it('retains Railway permission checks even after Base44 admits the request', async () => {
     role = 'user';
     try { expect((await handleHebrewFormsPilot(request(), dependencies())).status).toBe(403); }
     finally { role = 'admin'; }
+  });
+});
+
+describe('manual redirects keep the session on the fixed service', () => {
+  it('rejects all 3xx responses and never contacts same-origin or cross-origin redirect destinations', async () => {
+    let status = 302, location = '/destination', sameOriginHits = 0, crossOriginHits = 0;
+    const sourceAuths = [];
+    const target = createServer((_req, res) => { crossOriginHits++; res.end('must not be requested'); });
+    const source = createServer((req, res) => {
+      if (req.url === '/destination') { sameOriginHits++; res.end('must not be requested'); return; }
+      sourceAuths.push(req.headers.authorization);
+      res.writeHead(status, { Location: location });
+      res.end('private redirect body');
+    });
+    await new Promise((resolve) => target.listen(0, '127.0.0.1', resolve));
+    await new Promise((resolve) => source.listen(0, '127.0.0.1', resolve));
+    const logFailure = vi.fn();
+    const fetchImpl = vi.fn((_url, options) => fetch(`http://127.0.0.1:${source.address().port}/redirect`, options));
+    try {
+      for (const destination of ['/destination', `http://127.0.0.1:${target.address().port}/destination`]) {
+        location = destination;
+        for (const code of [300, 301, 302, 303, 304, 305, 306, 307, 308, 399]) {
+          status = code;
+          const response = await handleHebrewFormsPilot(request(), { createClientFromRequest: client(), fetchImpl, logFailure });
+          expect(response.status).toBe(503);
+          expect(await response.json()).toEqual({ error: 'PILOT_UNAVAILABLE' });
+          expect(response.headers.get('Location')).toBeNull();
+          expect(response.headers.get('Cache-Control')).toBe('private, no-store');
+          expect(logFailure).toHaveBeenLastCalledWith({ ...diagnosticDefaults, stage: 'upstream_response', errorType: 'other', upstreamStatus: code });
+        }
+      }
+      expect(fetchImpl).toHaveBeenCalledTimes(20);
+      expect(sourceAuths).toEqual(Array(20).fill('Bearer fixture-session'));
+      expect(sameOriginHits).toBe(0);
+      expect(crossOriginHits).toBe(0);
+      expect(logFailure).toHaveBeenCalledTimes(20);
+      expect(JSON.stringify(logFailure.mock.calls)).not.toMatch(/fixture-session|private redirect|destination|http:/);
+    } finally {
+      source.closeAllConnections(); target.closeAllConnections();
+      await Promise.all([new Promise((resolve) => source.close(resolve)), new Promise((resolve) => target.close(resolve))]);
+    }
   });
 });

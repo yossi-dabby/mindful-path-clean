@@ -1,9 +1,9 @@
 # Hebrew forms administrator review pilot
 
-Last updated: 2026-11-03. PRs #2 through #5 are merged. Railway's restored
-transport is deployed. Base44 preview now reports diagnostic version 2 with
-`request / TypeError` and `timeoutAvailable: true`. The option checks below
-await review/deployment; they are not a repair of that error.
+Last updated: 2026-11-03. PRs #2 through #6 are merged. Railway's restored
+transport is deployed. Base44 preview and published logs now isolate the
+unsupported `redirect: 'error'` option. The compatibility fix below awaits
+review/deployment; authenticated success still requires a post-deploy check.
 
 ## Scope and content provenance
 
@@ -70,7 +70,8 @@ app ID, a user ID and the current administrator role. It forwards only the
 caller's bearer token to the fixed Railway API origin; the Railway server
 independently rechecks authorization. No service-role credential, cookie,
 caller-selected destination or public PDF URL is forwarded. Redirects are
-disabled, requests time out after 15 seconds, and response sizes are bounded.
+never followed: the function uses `redirect: 'manual'` and rejects every 3xx
+response. Requests time out after 15 seconds, and response sizes are bounded.
 PDFs travel in a base64 JSON envelope to work with SDK `invoke`; the browser
 decodes them and retains the original byte-length/SHA-256 checks.
 
@@ -184,6 +185,38 @@ to the client, or forwarded elsewhere. Client errors remain generic. After
 reviewed deployment, repeat the preview/published reads with an existing admin
 session and use the version-3 booleans to select the smallest evidence-based fix.
 
+### Confirmed redirect compatibility failure and fix
+
+PR #6 merged as `dae952ae7567cd154b21de87208b34fdd6006b8f`. Version-3 logs from
+the **published** environment at 15:39:39 UTC and **preview** at 15:39:51 and
+15:39:52 UTC show `redirect: false` and `withoutRedirect: true`; baseline,
+headers, signal and cache each pass. The full request is accepted when only
+the redirect option is removed. This isolates the `redirect: 'error'` setting
+in both live environments, rather than a DNS, TLS, cache or missing-timeout issue.
+
+The [Workers Request documentation](https://developers.cloudflare.com/workers/runtime-apis/request/)
+confirms that its supported redirect modes are `manual` and `follow`;
+`error` throws during construction, including construction inside fetch.
+The fix changes only the Base44 function's redirect option to `manual`.
+Its existing non-OK response guard rejects every 3xx with generic 503 and
+does not forward a Location header or redirect body. There is one fetch to
+the fixed private origin and no follow-up request. This preserves the original
+policy that caller authorization must never reach a redirect destination.
+The Railway Node verifier and browser transport retain their supported modes.
+
+The all-154-PDF integration test now emulates Workers rejecting `error`, so
+the old code reproduces the failure under Node. The E2E server fixture also
+enforces Workers' supported redirect modes before its real local fetch, closing
+the previous test-environment gap. A separate real HTTP test rejects 20 cases
+covering all 3xx classes and both relative/same-origin and cross-origin targets,
+with zero requests reaching either redirect destination. Catalog/PDF contents,
+authentication, timeouts, no-store behavior and failure diagnostics are unchanged.
+
+After merge and publication, test an administrator's catalog count of 154 and
+one original PDF's rendering/download/hash separately in preview and published
+Base44 hosts. Successful local fixtures and this confirmed compatibility cause
+do not replace those live checks or rule out a later failure in the request path.
+
 This PR does not change service sources, environment variables, public access,
 or publish settings. Review and passing CI precede merge/deployment. Runtime
 startup overrides in Railway must be checked before rollout, because an
@@ -222,10 +255,16 @@ to PR #2 retains Railway's private API but restores the Base44-host limitation.
   scenarios fail against PR #4 and pass with the change. Local Chromium
   crashes before test execution; dedicated and full E2E CI remain required.
 - [x] PR #5 dedicated pilot, full desktop/mobile E2E and Test Suite CI passed.
+- [x] PR #6 required CI passed; version-3 live logs isolate redirect mode in
+  both preview and published environments.
 - [x] Version-3 option diagnostics: 353 unit files / 11,062 tests, lint,
   typecheck, configured build and forms-index checks pass locally. New cases
   cover signal incompatibility, option interaction, constructor failure,
   redaction and absence of extra fetch calls. Required E2E CI remains pending.
+- [x] Redirect compatibility fix: 353 unit files / 11,063 tests, lint,
+  typecheck, configured build and forms-index checks pass locally. The Worker
+  compatibility regression fails before the fix; all 154 PDFs and 20 redirect
+  rejection cases pass after it. Updated fixture E2E CI remains pending.
 - [ ] Authenticated live PDF open/download checks in each deployment.
 - [ ] Human review and authenticated Base44 preview/public-host smoke checks.
 

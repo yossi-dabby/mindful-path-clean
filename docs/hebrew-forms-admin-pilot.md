@@ -1,9 +1,9 @@
 # Hebrew forms administrator review pilot
 
-Last updated: 2026-11-03. PRs #2, #3 and #4 are merged. PR #4 restored the
-Railway transport: its live catalog returned 200 after deployment. Base44
-function requests still return 503 with `upstream / TypeError`. The focused
-diagnostics below await review/deployment; they are not a repair of that error.
+Last updated: 2026-11-03. PRs #2 through #5 are merged. Railway's restored
+transport is deployed. Base44 preview now reports diagnostic version 2 with
+`request / TypeError` and `timeoutAvailable: true`. The option checks below
+await review/deployment; they are not a repair of that error.
 
 ## Scope and content provenance
 
@@ -151,6 +151,39 @@ Do not change transcription, network policy or other functions on this evidence.
 Completion still requires live catalog count 154 and PDF byte-length/SHA-256
 checks on both Base44 hosts. Node fixture tests cannot certify platform egress.
 
+### Request option isolation (version 3)
+
+PR #5 merged as `dbfa872a076df3b9e29500febc183402ccd34e5d`; its Railway
+deployment succeeded. Base44's synced source matches its version-2 handler.
+Preview logs at 14:57:20 and 14:58:12 UTC report `request / TypeError` with
+`timeoutAvailable: true`, so timeout creation completed and native Request
+construction failed before fetch. No cause code or cache-specific category
+was identified. The inspected published-environment log window was empty;
+the user's publication confirmation is not an authenticated published smoke test.
+
+Version 3 adds local option checks **only after that constructor failure**.
+Each check constructs a Request without sending it. It tests the URL alone,
+each of headers/signal/redirect/cache alone, and the full options with each
+one omitted in turn. `requestChecks` contains only these nine fixed boolean
+fields: `baseline`, `headers`, `signal`, `redirect`, `cache`, `withoutHeaders`,
+`withoutSignal`, `withoutRedirect`, `withoutCache`. `true` means the local
+constructor accepted that combination; it does not mean a network call worked.
+
+For example, `cache: false` with `withoutCache: true` isolates a cache-option
+incompatibility. `signal: false` with `withoutSignal: true` isolates signal
+acceptance, even if the timeout method exists. Individual checks all passing
+with only selected omission checks passing indicates an option interaction.
+If `baseline` fails, the problem is not established as one of those options.
+These probes are diagnostic evidence, not automatic permission to remove a
+security control or change network settings.
+
+There are no extra fetch calls, retries, fallback requests or constructor checks
+on a successful path. The existing full-options preflight and one fetch attempt
+remain unchanged. Probe exceptions and option values are never logged, returned
+to the client, or forwarded elsewhere. Client errors remain generic. After
+reviewed deployment, repeat the preview/published reads with an existing admin
+session and use the version-3 booleans to select the smallest evidence-based fix.
+
 This PR does not change service sources, environment variables, public access,
 or publish settings. Review and passing CI precede merge/deployment. Runtime
 startup overrides in Railway must be checked before rollout, because an
@@ -188,6 +221,11 @@ to PR #2 retains Railway's private API but restores the Base44-host limitation.
   configured build and forms-index checks pass locally. Four new diagnostic
   scenarios fail against PR #4 and pass with the change. Local Chromium
   crashes before test execution; dedicated and full E2E CI remain required.
+- [x] PR #5 dedicated pilot, full desktop/mobile E2E and Test Suite CI passed.
+- [x] Version-3 option diagnostics: 353 unit files / 11,062 tests, lint,
+  typecheck, configured build and forms-index checks pass locally. New cases
+  cover signal incompatibility, option interaction, constructor failure,
+  redaction and absence of extra fetch calls. Required E2E CI remains pending.
 - [ ] Authenticated live PDF open/download checks in each deployment.
 - [ ] Human review and authenticated Base44 preview/public-host smoke checks.
 

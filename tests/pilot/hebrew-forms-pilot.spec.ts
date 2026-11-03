@@ -3,6 +3,12 @@ import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { loadPilot } from '../../server/hebrew-pilot.mjs';
 
+test.afterEach(async ({ page }) => {
+  // Navigation can leave a catalog proxy request in flight. Complete its route
+  // handler before Playwright closes the page; handler errors still fail tests.
+  await page.unrouteAll({ behavior: 'wait' });
+});
+
 async function session(page, role = 'admin', token = 'pilot-admin-fixture') {
   await page.addInitScript((value) => { localStorage.setItem('base44_access_token', value); }, token);
   // Only the external identity provider is stubbed. Catalog, authorization,

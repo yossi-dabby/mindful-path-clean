@@ -61,6 +61,9 @@ test.describe('Premium mind games hub', () => {
     await expect(infoDialog).toContainText('התאמת זיכרון');
     await page.keyboard.press('Escape');
     await expect(infoDialog).not.toBeVisible();
+    // Dialog focus restoration runs after unmount. Wait for its observable
+    // completion before moving focus, otherwise it can overwrite the next focus.
+    await expect(infoButton).toBeFocused();
 
     const gameButton = page.getByTestId('mindgame-card-memory-match').last();
     await gameButton.focus();
@@ -69,6 +72,7 @@ test.describe('Premium mind games hub', () => {
     await expect(page.getByTestId('mindgame-modal-memory-match')).toBeVisible();
     await page.keyboard.press('Escape');
     await expect(page.getByTestId('mindgame-modal-memory-match')).not.toBeVisible();
+    await expect(gameButton).toBeFocused();
   });
 
   test('keeps the hub and game dialog inside mobile and desktop viewports', async ({ page }) => {

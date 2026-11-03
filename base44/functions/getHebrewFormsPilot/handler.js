@@ -3,6 +3,13 @@
 const PILOT_URL = 'https://mindful-path-production-7704.up.railway.app/api/hebrew-forms-pilot';
 const APP_ID = '69504b725a07f5aa75aeaf7d';
 const PRIVATE_HEADERS = { 'Cache-Control': 'private, no-store', 'Vary': 'Authorization', 'X-Content-Type-Options': 'nosniff' };
+const SAFE_CAUSE_CODES = new Set([
+  'ENOTFOUND', 'EAI_AGAIN', 'ECONNREFUSED', 'ECONNRESET', 'ETIMEDOUT',
+  'UND_ERR_CONNECT_TIMEOUT', 'UND_ERR_HEADERS_TIMEOUT', 'UND_ERR_SOCKET',
+  'ERR_TLS_CERT_ALTNAME_INVALID', 'DEPTH_ZERO_SELF_SIGNED_CERT',
+  'UNABLE_TO_VERIFY_LEAF_SIGNATURE', 'CERT_HAS_EXPIRED',
+  'ERR_INVALID_ARG_TYPE', 'ERR_INVALID_URL',
+]);
 
 async function readBounded(response, limit) {
   const reader = response.body?.getReader();
@@ -35,11 +42,22 @@ export async function handleHebrewFormsPilot(req, { createClientFromRequest, fet
   if (!/^Bearer [^\s]{1,8192}$/.test(authorization)) return fail(401);
   if (req.headers.get('Base44-App-Id') !== APP_ID) return fail(403);
   let stage = 'client';
-  // Only closed-set stages/error types and numeric HTTP statuses are logged.
-  // Never log SDK errors, request headers, identities, paths or response bodies.
+  // Emit closed-set categories only. Raw errors, messages, headers, identities,
+  // paths and response bodies must never reach logs or client responses.
   const report = (error, upstreamStatus) => {
-    const errorType = ['AbortError', 'TimeoutError', 'TypeError', 'SyntaxError'].includes(error?.name) ? error.name : 'other';
-    try { logFailure({ stage, errorType, ...(Number.isInteger(upstreamStatus) && upstreamStatus >= 100 && upstreamStatus <= 599 ? { upstreamStatus } : {}) }); }
+    try {
+      const errorType = ['AbortError', 'TimeoutError', 'TypeError', 'SyntaxError', 'ReferenceError'].includes(error?.name) ? error.name : 'other';
+      const causeCode = [error?.cause?.code, error?.code].find((code) => SAFE_CAUSE_CODES.has(code)) || 'unknown';
+      // Recognize these runtime compatibility errors without exposing their text.
+      const message = typeof error?.message === 'string' ? error.message : '';
+      const reason = /^The '?cache'? field on '?RequestInitializerDict'? is not implemented\b/.test(message) || /^Unsupported cache mode:/.test(message)
+        ? 'cache_option_unsupported' : 'unknown';
+      logFailure({
+        diagnosticVersion: 2, stage, errorType, causeCode, reason,
+        timeoutAvailable: typeof globalThis.AbortSignal?.timeout === 'function',
+        ...(Number.isInteger(upstreamStatus) && upstreamStatus >= 100 && upstreamStatus <= 599 ? { upstreamStatus } : {}),
+      });
+    }
     catch { /* Diagnostics must not change request behavior. */ }
   };
   try {
@@ -61,11 +79,20 @@ export async function handleHebrewFormsPilot(req, { createClientFromRequest, fet
     const isCatalog = input.path === 'catalog';
     const fileMatch = typeof input.path === 'string' && /^files\/(MP-[A-Z0-9-]{1,80}-HE)$/.exec(input.path);
     if (!isCatalog && !fileMatch) return fail(400);
-    stage = 'upstream';
-    const response = await fetchImpl(`${PILOT_URL}/${input.path}${input.download ? '?download=1' : ''}`, {
+    stage = 'timeout';
+    const signal = AbortSignal.timeout(15000);
+    stage = 'request';
+    const upstreamUrl = `${PILOT_URL}/${input.path}${input.download ? '?download=1' : ''}`;
+    const options = {
       headers: { Authorization: authorization },
-      signal: AbortSignal.timeout(15000), redirect: 'error', cache: 'no-store',
-    });
+      signal, redirect: 'error', cache: 'no-store',
+    };
+    // Local construction only: distinguish Request option validation from fetch.
+    // Keep the actual URL/options call unchanged; do not retry or relax options.
+    new Request(upstreamUrl, options);
+    stage = 'fetch';
+    const response = await fetchImpl(upstreamUrl, options);
+    stage = 'upstream_response';
     if (!response.ok) {
       if ([401, 403, 404].includes(response.status)) return fail(response.status);
       report(null, response.status);

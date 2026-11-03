@@ -1,9 +1,9 @@
 # Hebrew forms administrator review pilot
 
-Last updated: 2026-11-03. PRs #2 and #3 are merged. PR #3 deployed successfully,
-but real Base44 function requests return 503. Its transport change also made
-Railway depend on that function. The correction below awaits review/deployment;
-authenticated live rendering has not yet been verified.
+Last updated: 2026-11-03. PRs #2, #3 and #4 are merged. PR #4 restored the
+Railway transport: its live catalog returned 200 after deployment. Base44
+function requests still return 503 with `upstream / TypeError`. The focused
+diagnostics below await review/deployment; they are not a repair of that error.
 
 ## Scope and content provenance
 
@@ -98,8 +98,8 @@ The merged commit `021a54e1d3f031f2c99ad3076f20bfc4b03dc77a` was deployed by
 Railway successfully. Base44's synced entry, handler and frontend match it.
 On November 3 at 13:10 UTC, function logs recorded 503s while Railway's HTTP
 logs showed the forms UI loading successfully and no pilot API requests in
-that window. This places the observed failure before the Railway API; it does
-not yet identify the exact exception. The local fixture substitutes Base44
+that window. No corresponding HTTP request was recorded by Railway; this does
+not alone prove where the connection failed. The local fixture substitutes Base44
 identity verification, so passing fixture tests cannot prove live SDK auth.
 
 Unexpected function failures now log only a closed-set stage/error type and
@@ -110,6 +110,46 @@ upstream fetch, response reading and decoding failures. Base44's underlying
 503 is still unresolved until that evidence and an authenticated smoke check
 confirm the cause and repair. Do not treat restored Railway access as proof
 that the Base44 hosts are repaired.
+
+### Focused runtime diagnostics (version 2)
+
+PR #4 merged as `9673d2cf9a984434e7a7cda4d6031f8c8c2cd9a7`. Railway deployment
+`69dd28c2-fd8b-42e9-9847-dcd654f00f2b` succeeded, and its catalog returned 200
+at 13:53:43 UTC. Base44 logged `upstream / TypeError` at 14:02:55 and 14:03:20
+UTC, with no matching Railway pilot HTTP requests in the inspected interval.
+The old `upstream` stage covered both timeout construction and the fetch call.
+
+The diagnostic-only change separates these operations:
+
+| Stage | Meaning |
+|---|---|
+| `timeout` | Constructing `AbortSignal.timeout(15000)` failed. |
+| `request` | Preparing URL/options or validating them with the runtime's native `Request` constructor failed; fetch has not been called. |
+| `fetch` | Request construction passed, but fetch threw. This can still be fetch-specific validation, redirect, DNS, TLS or another network/runtime failure. |
+| `upstream_response` | Fetch returned an HTTP response; the numeric error status is available. |
+
+`new Request(url, options)` performs local validation only. The subsequent
+fetch still uses the original URL and options. There is one network attempt,
+no fallback, no relaxed cache/redirect policy and no alternate host. The extra
+validation may fail earlier on a runtime with an incompatible Request API;
+that is logged separately, without claiming a network outage.
+
+Every unexpected failure includes `diagnosticVersion: 2`, the closed-set stage
+and error type, `timeoutAvailable` (whether the timeout method exists), a
+strictly allowlisted direct/nested `causeCode` or `unknown`, and a `reason` of
+`cache_option_unsupported` or `unknown`. Cache-error text is classified locally
+and never printed. These are diagnostic hints, not proof of a platform setting.
+No URL, credentials, identity, stack, raw exception, free-form error code or
+response body is logged. Missing cause codes are expected on some runtimes.
+
+After reviewed deployment, have an already authenticated administrator repeat
+the catalog and one PDF read separately in Base44 preview and published hosts.
+Confirm version-2 logs for the actual environment, correlate UTC timestamps
+with Railway HTTP logs, and use the stage/category to select the next narrow
+fix. Do not test by creating users, changing roles, or using service-role auth.
+Do not change transcription, network policy or other functions on this evidence.
+Completion still requires live catalog count 154 and PDF byte-length/SHA-256
+checks on both Base44 hosts. Node fixture tests cannot certify platform egress.
 
 This PR does not change service sources, environment variables, public access,
 or publish settings. Review and passing CI precede merge/deployment. Runtime
@@ -143,7 +183,12 @@ to PR #2 retains Railway's private API but restores the Base44-host limitation.
   typecheck, configured production build and forms-index checks pass locally.
   The new real-server transport regression fails against PR #3 and passes
   with the correction. This run does not substitute for live authentication.
-- [ ] Railway regression correction: required CI and authenticated live check.
+- [x] PR #4 required CI; deployed Railway catalog returned 200.
+- [x] Diagnostic version 2: 353 unit files / 11,060 tests, lint, typecheck,
+  configured build and forms-index checks pass locally. Four new diagnostic
+  scenarios fail against PR #4 and pass with the change. Local Chromium
+  crashes before test execution; dedicated and full E2E CI remain required.
+- [ ] Authenticated live PDF open/download checks in each deployment.
 - [ ] Human review and authenticated Base44 preview/public-host smoke checks.
 
 The dedicated Playwright configuration uses an isolated component harness and

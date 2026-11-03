@@ -1,4 +1,5 @@
 import { base44 } from '@/api/base44Client';
+import { EXPANDED_CATALOG_PATH, isPilotCatalogPath, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
 
 const RAILWAY_ORIGIN = 'https://mindful-path-production-7704.up.railway.app';
 
@@ -6,9 +7,12 @@ const checkAbort = (signal) => {
   if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
 };
 
+const requestError = (status, path) => new Error([401, 403].includes(status) ? 'PILOT_AUTH'
+  : path === EXPANDED_CATALOG_PATH && [400, 404].includes(status) ? 'PILOT_RELEASE_UNAVAILABLE' : 'PILOT_UNAVAILABLE');
+
 export async function requestPilot(path, { signal, download = false } = {}) {
   checkAbort(signal);
-  if (path !== 'catalog' && !/^files\/(MP-[A-Z0-9-]{1,80}-HE)$/.test(path)) throw new Error('PILOT_INVALID');
+  if (!isPilotCatalogPath(path) && !/^files\/(MP-[A-Z0-9-]{1,80}-HE)$/.test(path)) throw new Error('PILOT_INVALID');
   // This host already serves the private API. Keep it independent of Base44's
   // function runtime; Base44's static hosts still use the SDK transport below.
   if (window.location.origin === RAILWAY_ORIGIN) {
@@ -26,7 +30,7 @@ export async function requestPilot(path, { signal, download = false } = {}) {
       throw new Error('PILOT_UNAVAILABLE');
     }
     checkAbort(signal);
-    if (!response.ok) throw new Error([401, 403].includes(response.status) ? 'PILOT_AUTH' : 'PILOT_UNAVAILABLE');
+    if (!response.ok) throw requestError(response.status, path);
     return response;
   }
   let data;
@@ -37,13 +41,30 @@ export async function requestPilot(path, { signal, download = false } = {}) {
     data = response.data;
   } catch (error) {
     checkAbort(signal);
-    throw new Error([401, 403].includes(error?.response?.status ?? error?.status) ? 'PILOT_AUTH' : 'PILOT_UNAVAILABLE');
+    throw requestError(error?.response?.status ?? error?.status, path);
   }
   checkAbort(signal);
-  if (path === 'catalog' && data?.kind === 'catalog') return Response.json(data.catalog);
+  if (isPilotCatalogPath(path) && data?.kind === 'catalog') return Response.json(data.catalog);
   if (data?.kind !== 'pdf' || `files/${data.id}` !== path || typeof data.base64 !== 'string' || data.base64.length > 1400000) throw new Error('PILOT_INVALID');
   const bytes = Uint8Array.from(atob(data.base64), (character) => character.charCodeAt(0));
   return new Response(bytes, { headers: { 'Content-Type': 'application/pdf' } });
+}
+
+export async function requestPilotCatalog(options = {}) {
+  let path = EXPANDED_CATALOG_PATH;
+  let response;
+  try { response = await requestPilot(path, options); }
+  catch (error) {
+    // Partial deployments may still run the previous handler/server. Only an
+    // unsupported endpoint permits fallback; auth, network and integrity fail closed.
+    if (error.message !== 'PILOT_RELEASE_UNAVAILABLE') throw error;
+    path = 'catalog';
+    response = await requestPilot(path, options);
+  }
+  const catalog = await response.json();
+  if (!await validatePilotCatalog(catalog, path)) throw new Error('PILOT_INVALID');
+  checkAbort(options.signal);
+  return { catalog, expansionPending: path === 'catalog' };
 }
 
 export async function requestPilotPdf(form, options = {}) {

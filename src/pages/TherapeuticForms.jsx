@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, ArrowRight, ClipboardList } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
+import { useAuth } from '@/lib/AuthContext';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { SUPPORTED_LANGUAGES, ALL_FORMS, resolveFormWithLanguage } from '@/data/therapeuticForms/index.js';
@@ -18,10 +19,7 @@ import FormsBreadcrumb from '@/components/forms/FormsBreadcrumb';
 import FormsViewModeToggle, { FORMS_VIEW_MODES } from '@/components/forms/FormsViewModeToggle';
 import FormsNavigationControls from '@/components/forms/FormsNavigationControls';
 import FormsCombinedPdfCard from '@/components/forms/FormsCombinedPdfCard';
-import {
-  THERAPEUTIC_FORMS_CONTENT_AVAILABLE,
-  getTherapeuticFormsAvailabilityCopy,
-} from '@/data/therapeuticForms/availability.js';
+import { THERAPEUTIC_FORMS_CONTENT_AVAILABLE } from '@/data/therapeuticForms/availability.js';
 
 const AUDIENCE_ORDER = ['children', 'adolescents', 'adults', 'older_adults'];
 const COLLECTION_TYPE_ORDER = { core: 0, specialized: 1 };
@@ -819,9 +817,10 @@ function TherapeuticFormsLibrary() {
 
 function TherapeuticFormsUnavailable() {
   const { t, i18n } = useTranslation();
+  const { user } = useAuth();
   const lang = normalizeLanguageCode(i18n.resolvedLanguage || i18n.language || 'en');
   const uiLabels = FORMS_PAGE_LABELS[lang] || FORMS_PAGE_LABELS.en;
-  const copy = getTherapeuticFormsAvailabilityCopy(lang);
+  const hasReviewPilot = lang === 'he' && user?.role === 'admin';
   const isRtl = i18n.dir ? i18n.dir() === 'rtl' : lang === 'he';
 
   return (
@@ -841,36 +840,9 @@ function TherapeuticFormsUnavailable() {
 
       <HebrewFormsPilot />
 
-      <section
-        className="mb-8 rounded-[var(--radius-card)] border border-amber-300 bg-amber-50 p-5 shadow-[var(--shadow-sm)]"
-        data-testid="forms-under-revision"
-        aria-labelledby="forms-under-revision-title"
-      >
-        <h2 id="forms-under-revision-title" className="mb-2 text-xl font-semibold text-amber-900">
-          {copy.title}
-        </h2>
-        <p className="text-amber-950">{copy.message}</p>
-        <p className="mt-3 text-sm text-amber-900">{copy.metadata}</p>
-      </section>
-
-      <section className="rounded-[var(--radius-card)] border border-border bg-[hsl(var(--card)/0.97)] p-5">
-        <h2 className="mb-4 text-lg font-semibold text-foreground">{copy.catalog}</h2>
-        <div className="mb-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4" data-testid="forms-audience-architecture">
-          {AUDIENCE_ORDER.map((audience) => (
-            <div key={audience} className="rounded-lg border border-border bg-secondary/70 p-4">
-              <p className="font-medium text-primary">{t(`therapeutic_forms.audience.${audience}`)}</p>
-            </div>
-          ))}
-        </div>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2" data-testid="forms-collection-architecture">
-          <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-            <p className="font-medium text-foreground">{uiLabels.core}</p>
-          </div>
-          <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-            <p className="font-medium text-foreground">{uiLabels.specialized}</p>
-          </div>
-        </div>
-      </section>
+      {!hasReviewPilot && <p role="status" data-testid="forms-empty-state" className="my-6 text-muted-foreground">
+        {t('therapeutic_forms.empty_state.title')}
+      </p>}
 
       <div className="mt-6 rounded-lg border border-border bg-[hsl(var(--card)/0.97)] p-4 text-sm text-foreground">
         <Link className="underline underline-offset-2 text-primary hover:text-primary" to="/Chat">

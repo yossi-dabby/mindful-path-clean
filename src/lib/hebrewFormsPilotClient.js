@@ -1,5 +1,5 @@
 import { base44 } from '@/api/base44Client';
-import { EXPANDED_CATALOG_PATH, isPilotCatalogPath, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
+import { EXPANDED_CATALOG_PATH, P3_CATALOG_PATH, isPilotCatalogPath, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
 
 const RAILWAY_ORIGIN = 'https://mindful-path-production-7704.up.railway.app';
 
@@ -8,7 +8,7 @@ const checkAbort = (signal) => {
 };
 
 const requestError = (status, path) => new Error([401, 403].includes(status) ? 'PILOT_AUTH'
-  : path === EXPANDED_CATALOG_PATH && [400, 404].includes(status) ? 'PILOT_RELEASE_UNAVAILABLE' : 'PILOT_UNAVAILABLE');
+  : isPilotCatalogPath(path) && path !== 'catalog' && [400, 404].includes(status) ? 'PILOT_RELEASE_UNAVAILABLE' : 'PILOT_UNAVAILABLE');
 
 export async function requestPilot(path, { signal, download = false } = {}) {
   checkAbort(signal);
@@ -51,20 +51,21 @@ export async function requestPilot(path, { signal, download = false } = {}) {
 }
 
 export async function requestPilotCatalog(options = {}) {
-  let path = EXPANDED_CATALOG_PATH;
-  let response;
-  try { response = await requestPilot(path, options); }
-  catch (error) {
-    // Partial deployments may still run the previous handler/server. Only an
-    // unsupported endpoint permits fallback; auth, network and integrity fail closed.
-    if (error.message !== 'PILOT_RELEASE_UNAVAILABLE') throw error;
-    path = 'catalog';
-    response = await requestPilot(path, options);
+  // Preserve both installed generations during staggered publication. Validate
+  // before returning; a corrupt 200 response must never select an older release.
+  for (const path of [P3_CATALOG_PATH, EXPANDED_CATALOG_PATH, 'catalog']) {
+    let response;
+    try { response = await requestPilot(path, options); }
+    catch (error) {
+      if (error.message !== 'PILOT_RELEASE_UNAVAILABLE') throw error;
+      continue;
+    }
+    const catalog = await response.json();
+    if (!await validatePilotCatalog(catalog, path)) throw new Error('PILOT_INVALID');
+    checkAbort(options.signal);
+    return { catalog, expansionPending: path !== P3_CATALOG_PATH };
   }
-  const catalog = await response.json();
-  if (!await validatePilotCatalog(catalog, path)) throw new Error('PILOT_INVALID');
-  checkAbort(options.signal);
-  return { catalog, expansionPending: path === 'catalog' };
+  throw new Error('PILOT_UNAVAILABLE');
 }
 
 export async function requestPilotPdf(form, options = {}) {

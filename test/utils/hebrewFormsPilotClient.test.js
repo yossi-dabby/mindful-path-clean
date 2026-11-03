@@ -41,7 +41,10 @@ describe('pilot host transports with the real private server', () => {
   });
 
   it('loads the pinned expansion on Railway and falls back only for an older endpoint', async () => {
-    expect(await requestPilotCatalog()).toEqual({ catalog: pilot.expandedCatalog, expansionPending: false });
+    expect(await requestPilotCatalog()).toEqual({ catalog: pilot.p3Catalog, expansionPending: false });
+    fetch.mockResolvedValueOnce(new Response(null, { status: 404 }));
+    expect(await requestPilotCatalog()).toEqual({ catalog: pilot.expandedCatalog, expansionPending: true });
+    fetch.mockResolvedValueOnce(new Response(null, { status: 404 }));
     fetch.mockResolvedValueOnce(new Response(null, { status: 404 }));
     expect(await requestPilotCatalog()).toEqual({ catalog: pilot.catalog, expansionPending: true });
     expect(fetch.mock.calls.at(-1)[0]).toBe('/api/hebrew-forms-pilot/catalog');
@@ -52,7 +55,7 @@ describe('pilot host transports with the real private server', () => {
       expect(fetch).toHaveBeenCalledTimes(1);
     }
     fetch.mockClear();
-    const altered = structuredClone(pilot.expandedCatalog);
+    const altered = structuredClone(pilot.p3Catalog);
     altered.forms[0].sha256 = '0'.repeat(64);
     fetch.mockResolvedValueOnce(Response.json(altered));
     await expect(requestPilotCatalog()).rejects.toThrow('PILOT_INVALID');
@@ -62,12 +65,18 @@ describe('pilot host transports with the real private server', () => {
   it('supports old Base44 handlers during publication, without bypassing authorization or cancellation', async () => {
     window.location.origin = 'https://mindful-path-75aeaf7d.base44.app';
     invoke.mockRejectedValueOnce({ response: { status: 400 } });
+    invoke.mockResolvedValueOnce({ data: { kind: 'catalog', catalog: pilot.expandedCatalog } });
+    expect(await requestPilotCatalog()).toEqual({ catalog: pilot.expandedCatalog, expansionPending: true });
+    expect(invoke.mock.calls.map((call) => call[1].path)).toEqual(['catalog-p3-01', 'catalog-mood-01']);
+    invoke.mockReset();
+    invoke.mockRejectedValueOnce({ response: { status: 400 } });
+    invoke.mockRejectedValueOnce({ response: { status: 400 } });
     invoke.mockResolvedValueOnce({ data: { kind: 'catalog', catalog: pilot.catalog } });
     expect(await requestPilotCatalog()).toEqual({ catalog: pilot.catalog, expansionPending: true });
-    expect(invoke.mock.calls.map((call) => call[1].path)).toEqual(['catalog-mood-01', 'catalog']);
+    expect(invoke.mock.calls.map((call) => call[1].path)).toEqual(['catalog-p3-01', 'catalog-mood-01', 'catalog']);
     invoke.mockReset();
-    invoke.mockResolvedValueOnce({ data: { kind: 'catalog', catalog: pilot.expandedCatalog } });
-    expect(await requestPilotCatalog()).toEqual({ catalog: pilot.expandedCatalog, expansionPending: false });
+    invoke.mockResolvedValueOnce({ data: { kind: 'catalog', catalog: pilot.p3Catalog } });
+    expect(await requestPilotCatalog()).toEqual({ catalog: pilot.p3Catalog, expansionPending: false });
     invoke.mockReset();
     invoke.mockRejectedValueOnce({ response: { status: 403 } });
     await expect(requestPilotCatalog()).rejects.toThrow('PILOT_AUTH');
@@ -75,6 +84,23 @@ describe('pilot host transports with the real private server', () => {
     const controller = new AbortController();
     invoke.mockImplementationOnce(async () => { controller.abort(); throw { status: 400 }; });
     await expect(requestPilotCatalog({ signal: controller.signal })).rejects.toMatchObject({ name: 'AbortError' });
+    expect(invoke).toHaveBeenCalledTimes(2);
+  });
+
+  it('does not hide auth, network or integrity failures on the intermediate fallback release', async () => {
+    window.location.origin = 'https://mindful-path-75aeaf7d.base44.app';
+    for (const status of [401, 403, 500, 502, 503]) {
+      invoke.mockReset();
+      invoke.mockRejectedValueOnce({ response: { status: 404 } });
+      invoke.mockRejectedValueOnce({ response: { status } });
+      await expect(requestPilotCatalog()).rejects.toThrow(status < 500 ? 'PILOT_AUTH' : 'PILOT_UNAVAILABLE');
+      expect(invoke.mock.calls.map((call) => call[1].path)).toEqual(['catalog-p3-01', 'catalog-mood-01']);
+    }
+    invoke.mockReset();
+    invoke.mockRejectedValueOnce({ response: { status: 404 } });
+    const altered = structuredClone(pilot.expandedCatalog); altered.forms[0].title = 'untrusted';
+    invoke.mockResolvedValueOnce({ data: { kind: 'catalog', catalog: altered } });
+    await expect(requestPilotCatalog()).rejects.toThrow('PILOT_INVALID');
     expect(invoke).toHaveBeenCalledTimes(2);
   });
 

@@ -31,7 +31,8 @@ test.describe('Forms Library — Spanish empty architecture', () => {
       return;
     }
 
-    await expect(page.getByTestId('forms-under-revision')).toContainText('Los formularios se están actualizando');
+    await expect(page.getByTestId('forms-empty-state')).toContainText('No hay formularios disponibles');
+    await expect(page.getByTestId('forms-under-revision')).toHaveCount(0);
     await expect(page.getByTestId('collections-grid')).toHaveCount(0);
     await expect(page.locator('a[href$=".pdf" i]')).toHaveCount(0);
   });

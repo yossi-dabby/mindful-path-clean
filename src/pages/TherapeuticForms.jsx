@@ -1,3 +1,4 @@
+import HebrewFormsPilot from '@/components/forms/HebrewFormsPilot';
 import BotanicalAccent from '@/components/brand/BotanicalAccent';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ClipboardList } from 'lucide-react';
@@ -659,6 +660,8 @@ function TherapeuticFormsLibrary() {
         <p className="text-foreground">{t('therapeutic_forms.page_subtitle')}</p>
       </div>
 
+      <HebrewFormsPilot />
+
       <div className="mb-6 rounded-lg border border-border bg-[hsl(var(--card)/0.97)] p-4 text-sm text-foreground" data-testid="ai-forms-callout">
         <p>
           {calloutText}{' '}
@@ -823,6 +826,8 @@ function TherapeuticFormsUnavailable() {
         </h1><BotanicalAccent variant="leaves" className="botanical-title-art" /></div>
         <p className="text-foreground">{t('therapeutic_forms.page_subtitle')}</p>
       </div>
+
+      <HebrewFormsPilot />
 
       <section
         className="mb-8 rounded-[var(--radius-card)] border border-amber-300 bg-amber-50 p-5 shadow-[var(--shadow-sm)]"

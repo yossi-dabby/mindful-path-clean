@@ -92,7 +92,9 @@ describe('production security hardening', () => {
     const headers = Object.fromEntries(serveConfig.headers[0].headers.map(({ key, value }) => [key, value]));
     expect(headers['Content-Security-Policy']).toBe("frame-ancestors 'none'");
     expect(headers['X-Frame-Options']).toBe('DENY');
-    expect(read('railway.toml')).toContain('npx serve -s dist -l $PORT');
+    expect(read('railway.toml')).toContain('startCommand = "node server/index.mjs"');
+    expect(read('server/index.mjs')).toContain('headers: securityHeaders');
+    expect(read('server/index.mjs')).toContain("new URL('../serve.json', import.meta.url)");
   });
 
   it('keeps emergency contacts available locally while protecting the legacy backend mirror', () => {

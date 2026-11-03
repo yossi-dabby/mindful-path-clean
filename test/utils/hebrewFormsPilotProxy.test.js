@@ -13,6 +13,29 @@ const request = (body = { path: 'catalog' }, headers = {}, method = 'POST') => n
 const client = (me = user) => () => ({ auth: { me: async () => me } });
 
 describe('Base44 pilot proxy authorization and transport', () => {
+  it('reports the failing stage without credentials, identities or raw exception details', async () => {
+    const privateError = Object.assign(new TypeError('secret token and user email'), { status: 502, config: { headers: { Authorization: 'Bearer never-log' } } });
+    for (const [stage, dependencies] of [
+      ['client', { createClientFromRequest: () => { throw privateError; } }],
+      ['auth', { createClientFromRequest: () => ({ auth: { me: async () => { throw privateError; } } }) }],
+      ['upstream', { createClientFromRequest: client(), fetchImpl: async () => { throw privateError; } }],
+      ['read', { createClientFromRequest: client(), fetchImpl: async () => new Response(new ReadableStream({ start(controller) { controller.error(privateError); } }), { headers: { 'Content-Type': 'application/json' } }) }],
+      ['catalog', { createClientFromRequest: client(), fetchImpl: async () => new Response('{', { headers: { 'Content-Type': 'application/json' } }) }],
+    ]) {
+      const logFailure = vi.fn();
+      const response = await handleHebrewFormsPilot(request(), { ...dependencies, logFailure });
+      expect(response.status).toBe(503);
+      expect(await response.json()).toEqual({ error: 'PILOT_UNAVAILABLE' });
+      expect(logFailure).toHaveBeenCalledTimes(1);
+      expect(logFailure).toHaveBeenCalledWith({ stage, errorType: stage === 'catalog' ? 'SyntaxError' : 'TypeError', ...(stage === 'auth' ? { upstreamStatus: 502 } : {}) });
+    }
+    const logFailure = vi.fn();
+    await handleHebrewFormsPilot(request(), { createClientFromRequest: client(), fetchImpl: async () => new Response('private upstream body', { status: 504 }), logFailure });
+    expect(logFailure).toHaveBeenCalledTimes(1);
+    expect(logFailure).toHaveBeenCalledWith({ stage: 'upstream', errorType: 'other', upstreamStatus: 504 });
+    expect((await handleHebrewFormsPilot(request(), { createClientFromRequest: () => { throw privateError; }, logFailure: () => { throw privateError; } })).status).toBe(503);
+  });
+
   it('denies missing auth, other apps, ordinary/premium users and stale administrator roles before fetching assets', async () => {
     const fetchImpl = vi.fn();
     for (const [req, me, status] of [

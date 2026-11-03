@@ -1,7 +1,9 @@
 # Hebrew forms administrator review pilot
 
-Last updated: 2026-11-03. PR #2 is merged and its Railway service is deployed.
-The Base44-host transport correction described below is awaiting review/deployment.
+Last updated: 2026-11-03. PRs #2 and #3 are merged. PR #3 deployed successfully,
+but real Base44 function requests return 503. Its transport change also made
+Railway depend on that function. The correction below awaits review/deployment;
+authenticated live rendering has not yet been verified.
 
 ## Scope and content provenance
 
@@ -53,7 +55,15 @@ Downloads use `?download=1` and attachment disposition; open uses inline.
 Both server and browser check file integrity. Session tokens stay in request
 headers and are not embedded in PDF URLs.
 
-The browser calls `base44.functions.invoke('getHebrewFormsPilot', { path,
+On the exact `https://mindful-path-production-7704.up.railway.app` origin, the
+browser uses the existing same-origin private API with the current stored
+Base44 session token. This restores the working PR #2 transport independently
+of Base44 function availability. No hostname suffix matching, cross-origin
+fallback or caller-selected destination is allowed. Missing credentials fail
+closed; every API request retains the server-side administrator verification.
+
+On Base44 preview/published hosts, the browser calls
+`base44.functions.invoke('getHebrewFormsPilot', { path,
 download })` using the existing SDK's current session and functions version.
 The Base44 function rechecks the caller with `auth.me()` and requires the fixed
 app ID, a user ID and the current administrator role. It forwards only the
@@ -82,6 +92,25 @@ display a retry message; only authentication failures request a new login.
 An HTTP 401 probe alone does not prove administrator access or successful
 rendering. Authenticated preview and public-host smoke checks remain required.
 
+### PR #3 regression evidence and diagnostics
+
+The merged commit `021a54e1d3f031f2c99ad3076f20bfc4b03dc77a` was deployed by
+Railway successfully. Base44's synced entry, handler and frontend match it.
+On November 3 at 13:10 UTC, function logs recorded 503s while Railway's HTTP
+logs showed the forms UI loading successfully and no pilot API requests in
+that window. This places the observed failure before the Railway API; it does
+not yet identify the exact exception. The local fixture substitutes Base44
+identity verification, so passing fixture tests cannot prove live SDK auth.
+
+Unexpected function failures now log only a closed-set stage/error type and
+an optional numeric upstream HTTP status. Credentials, SDK error messages,
+request data, identities and response bodies are never logged. After deployment,
+read `hebrew_forms_pilot_failure` to distinguish client initialization, auth,
+upstream fetch, response reading and decoding failures. Base44's underlying
+503 is still unresolved until that evidence and an authenticated smoke check
+confirm the cause and repair. Do not treat restored Railway access as proof
+that the Base44 hosts are repaired.
+
 This PR does not change service sources, environment variables, public access,
 or publish settings. Review and passing CI precede merge/deployment. Runtime
 startup overrides in Railway must be checked before rollout, because an
@@ -109,7 +138,12 @@ to PR #2 retains Railway's private API but restores the Base44-host limitation.
   production build and forms-index checks pass locally.
 - [x] Transport correction: ten dedicated desktop/mobile Playwright scenarios
   pass locally with real PDF rendering and downloads.
-- [ ] Transport correction: existing full desktop/mobile E2E CI.
+- [x] PR #3: existing full desktop/mobile E2E CI passed before merge.
+- [x] Railway regression correction: 353 unit files / 11,056 tests, lint,
+  typecheck, configured production build and forms-index checks pass locally.
+  The new real-server transport regression fails against PR #3 and passes
+  with the correction. This run does not substitute for live authentication.
+- [ ] Railway regression correction: required CI and authenticated live check.
 - [ ] Human review and authenticated Base44 preview/public-host smoke checks.
 
 The dedicated Playwright configuration uses an isolated component harness and

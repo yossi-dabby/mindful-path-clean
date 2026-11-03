@@ -1,11 +1,34 @@
 import { base44 } from '@/api/base44Client';
 
+const RAILWAY_ORIGIN = 'https://mindful-path-production-7704.up.railway.app';
+
 const checkAbort = (signal) => {
   if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
 };
 
 export async function requestPilot(path, { signal, download = false } = {}) {
   checkAbort(signal);
+  if (path !== 'catalog' && !/^files\/(MP-[A-Z0-9-]{1,80}-HE)$/.test(path)) throw new Error('PILOT_INVALID');
+  // This host already serves the private API. Keep it independent of Base44's
+  // function runtime; Base44's static hosts still use the SDK transport below.
+  if (window.location.origin === RAILWAY_ORIGIN) {
+    let token;
+    try { token = window.localStorage.getItem('base44_access_token'); }
+    catch { throw new Error('PILOT_AUTH'); }
+    if (!token) throw new Error('PILOT_AUTH');
+    let response;
+    try {
+      response = await fetch(`/api/hebrew-forms-pilot/${path}${download ? '?download=1' : ''}`, {
+        headers: { Authorization: `Bearer ${token}` }, signal, cache: 'no-store', redirect: 'error',
+      });
+    } catch {
+      checkAbort(signal);
+      throw new Error('PILOT_UNAVAILABLE');
+    }
+    checkAbort(signal);
+    if (!response.ok) throw new Error([401, 403].includes(response.status) ? 'PILOT_AUTH' : 'PILOT_UNAVAILABLE');
+    return response;
+  }
   let data;
   try {
     // The SDK carries the current session and preview/published function version.

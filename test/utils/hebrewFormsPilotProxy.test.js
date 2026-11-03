@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { createHash } from 'node:crypto';
 import { createAppServer } from '../../server/index.mjs';
 import { loadPilot } from '../../server/hebrew-pilot.mjs';
@@ -11,14 +11,17 @@ const request = (body = { path: 'catalog' }, headers = {}, method = 'POST') => n
   ...(method === 'POST' ? { body: typeof body === 'string' ? body : JSON.stringify(body) } : {}),
 });
 const client = (me = user) => () => ({ auth: { me: async () => me } });
+const diagnosticDefaults = { diagnosticVersion: 2, causeCode: 'unknown', reason: 'unknown', timeoutAvailable: true };
 
 describe('Base44 pilot proxy authorization and transport', () => {
+  afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); });
+
   it('reports the failing stage without credentials, identities or raw exception details', async () => {
     const privateError = Object.assign(new TypeError('secret token and user email'), { status: 502, config: { headers: { Authorization: 'Bearer never-log' } } });
     for (const [stage, dependencies] of [
       ['client', { createClientFromRequest: () => { throw privateError; } }],
       ['auth', { createClientFromRequest: () => ({ auth: { me: async () => { throw privateError; } } }) }],
-      ['upstream', { createClientFromRequest: client(), fetchImpl: async () => { throw privateError; } }],
+      ['fetch', { createClientFromRequest: client(), fetchImpl: async () => { throw privateError; } }],
       ['read', { createClientFromRequest: client(), fetchImpl: async () => new Response(new ReadableStream({ start(controller) { controller.error(privateError); } }), { headers: { 'Content-Type': 'application/json' } }) }],
       ['catalog', { createClientFromRequest: client(), fetchImpl: async () => new Response('{', { headers: { 'Content-Type': 'application/json' } }) }],
     ]) {
@@ -27,29 +30,89 @@ describe('Base44 pilot proxy authorization and transport', () => {
       expect(response.status).toBe(503);
       expect(await response.json()).toEqual({ error: 'PILOT_UNAVAILABLE' });
       expect(logFailure).toHaveBeenCalledTimes(1);
-      expect(logFailure).toHaveBeenCalledWith({ stage, errorType: stage === 'catalog' ? 'SyntaxError' : 'TypeError', ...(stage === 'auth' ? { upstreamStatus: 502 } : {}) });
+      expect(logFailure).toHaveBeenCalledWith({ ...diagnosticDefaults, stage, errorType: stage === 'catalog' ? 'SyntaxError' : 'TypeError', ...(stage === 'auth' ? { upstreamStatus: 502 } : {}) });
     }
     const logFailure = vi.fn();
     await handleHebrewFormsPilot(request(), { createClientFromRequest: client(), fetchImpl: async () => new Response('private upstream body', { status: 504 }), logFailure });
     expect(logFailure).toHaveBeenCalledTimes(1);
-    expect(logFailure).toHaveBeenCalledWith({ stage: 'upstream', errorType: 'other', upstreamStatus: 504 });
+    expect(logFailure).toHaveBeenCalledWith({ ...diagnosticDefaults, stage: 'upstream_response', errorType: 'other', upstreamStatus: 504 });
     expect((await handleHebrewFormsPilot(request(), { createClientFromRequest: () => { throw privateError; }, logFailure: () => { throw privateError; } })).status).toBe(503);
+  });
+
+  it('distinguishes missing timeout support and timeout construction failures without sending a request', async () => {
+    const req = request(), fetchImpl = vi.fn(), logFailure = vi.fn();
+    vi.stubGlobal('AbortSignal', {});
+    expect((await handleHebrewFormsPilot(req, { createClientFromRequest: client(), fetchImpl, logFailure })).status).toBe(503);
+    expect(fetchImpl).not.toHaveBeenCalled();
+    expect(logFailure.mock.calls).toEqual([[{ ...diagnosticDefaults, stage: 'timeout', errorType: 'TypeError', timeoutAvailable: false }]]);
+    vi.unstubAllGlobals();
+    logFailure.mockClear();
+    vi.spyOn(AbortSignal, 'timeout').mockImplementation(() => { throw new TypeError('private runtime details'); });
+    expect((await handleHebrewFormsPilot(request(), { createClientFromRequest: client(), fetchImpl, logFailure })).status).toBe(503);
+    expect(fetchImpl).not.toHaveBeenCalled();
+    expect(logFailure.mock.calls).toEqual([[{ ...diagnosticDefaults, stage: 'timeout', errorType: 'TypeError' }]]);
+  });
+
+  it('identifies Request option validation separately and never retries with relaxed options', async () => {
+    const req = request(), fetchImpl = vi.fn(), logFailure = vi.fn();
+    vi.stubGlobal('Request', class {
+      constructor(url, options) {
+        expect(url).toBe('https://mindful-path-production-7704.up.railway.app/api/hebrew-forms-pilot/catalog');
+        expect(options).toMatchObject({ cache: 'no-store', redirect: 'error', headers: { Authorization: 'Bearer fixture-session' } });
+        throw new TypeError("The 'cache' field on 'RequestInitializerDict' is not implemented. private details");
+      }
+    });
+    const response = await handleHebrewFormsPilot(req, { createClientFromRequest: client(), fetchImpl, logFailure });
+    expect(response.status).toBe(503);
+    expect(await response.json()).toEqual({ error: 'PILOT_UNAVAILABLE' });
+    expect(fetchImpl).not.toHaveBeenCalled();
+    expect(logFailure.mock.calls).toEqual([[{ ...diagnosticDefaults, stage: 'request', errorType: 'TypeError', reason: 'cache_option_unsupported' }]]);
+  });
+
+  it('reports only allowlisted direct or nested cause codes, even when exceptions contain secrets', async () => {
+    for (const code of ['ENOTFOUND', 'EAI_AGAIN', 'ECONNREFUSED', 'ECONNRESET', 'ETIMEDOUT', 'UND_ERR_CONNECT_TIMEOUT', 'UND_ERR_HEADERS_TIMEOUT', 'UND_ERR_SOCKET', 'ERR_TLS_CERT_ALTNAME_INVALID', 'DEPTH_ZERO_SELF_SIGNED_CERT', 'UNABLE_TO_VERIFY_LEAF_SIGNATURE', 'CERT_HAS_EXPIRED', 'ERR_INVALID_ARG_TYPE', 'ERR_INVALID_URL', 'Bearer private-session', { token: 'private-session' }]) {
+      for (const nested of [false, true]) {
+        const error = Object.assign(new TypeError('user@example.test private-session'), nested ? { cause: { code } } : { code });
+        error.config = { headers: { Authorization: 'Bearer private-session' } };
+        const logFailure = vi.fn(), fetchImpl = vi.fn(async () => { throw error; });
+        const response = await handleHebrewFormsPilot(request(), { createClientFromRequest: client(), fetchImpl, logFailure });
+        expect(response.status).toBe(503);
+        expect(await response.json()).toEqual({ error: 'PILOT_UNAVAILABLE' });
+        expect(fetchImpl).toHaveBeenCalledTimes(1);
+        expect(logFailure.mock.calls).toEqual([[{ ...diagnosticDefaults, stage: 'fetch', errorType: 'TypeError', causeCode: typeof code === 'string' && code !== 'Bearer private-session' ? code : 'unknown' }]]);
+        expect(JSON.stringify(logFailure.mock.calls)).not.toMatch(/private-session|user@example|Authorization/);
+      }
+    }
+  });
+
+  it('classifies runtime cache failures without printing their message or inventing a network cause', async () => {
+    const logFailure = vi.fn();
+    const error = Object.assign(new TypeError('Unsupported cache mode: private-session'), { cause: { code: 'private-session' } });
+    const response = await handleHebrewFormsPilot(request(), { createClientFromRequest: client(), fetchImpl: async () => { throw error; }, logFailure });
+    expect(response.status).toBe(503);
+    expect(logFailure.mock.calls).toEqual([[{ ...diagnosticDefaults, stage: 'fetch', errorType: 'TypeError', reason: 'cache_option_unsupported' }]]);
+    logFailure.mockClear();
+    Object.defineProperty(error, 'cause', { get() { throw new Error('private diagnostic details'); } });
+    expect((await handleHebrewFormsPilot(request(), { createClientFromRequest: client(), fetchImpl: async () => { throw error; }, logFailure })).status).toBe(503);
+    expect(logFailure).not.toHaveBeenCalled();
   });
 
   it('denies missing auth, other apps, ordinary/premium users and stale administrator roles before fetching assets', async () => {
     const fetchImpl = vi.fn();
+    const logFailure = vi.fn();
     for (const [req, me, status] of [
       [request({}, { Authorization: '' }), user, 401],
       [request({}, { 'Base44-App-Id': 'another-app' }), user, 403],
       [request(), { id: 'regular', role: 'user' }, 403],
       [request(), { id: 'premium', role: 'premium' }, 403],
       [request(), { role: 'admin' }, 403],
-    ]) expect((await handleHebrewFormsPilot(req, { createClientFromRequest: client(me), fetchImpl })).status).toBe(status);
+    ]) expect((await handleHebrewFormsPilot(req, { createClientFromRequest: client(me), fetchImpl, logFailure })).status).toBe(status);
     let currentRole = 'admin';
-    const dependencies = { createClientFromRequest: () => ({ auth: { me: async () => ({ id: 'same-user', role: currentRole }) } }), fetchImpl };
+    const dependencies = { createClientFromRequest: () => ({ auth: { me: async () => ({ id: 'same-user', role: currentRole }) } }), fetchImpl, logFailure };
     currentRole = 'user';
     expect((await handleHebrewFormsPilot(request(), dependencies)).status).toBe(403);
     expect(fetchImpl).not.toHaveBeenCalled();
+    expect(logFailure).not.toHaveBeenCalled();
   });
 
   it('preserves auth errors and fails closed on identity-provider outages', async () => {
@@ -79,6 +142,8 @@ describe('Base44 pilot proxy authorization and transport', () => {
     expect(url).toBe('https://mindful-path-production-7704.up.railway.app/api/hebrew-forms-pilot/files/MP-BASE-B00-ALL-HE?download=1');
     expect(init.headers).toEqual({ Authorization: 'Bearer fixture-session' });
     expect(init.redirect).toBe('error');
+    expect(init.cache).toBe('no-store');
+    expect(fetchImpl).toHaveBeenCalledTimes(1);
     expect(init.signal).toBeInstanceOf(AbortSignal);
     expect(response.headers.get('cache-control')).toBe('private, no-store');
     expect(response.headers.get('vary')).toBe('Authorization');

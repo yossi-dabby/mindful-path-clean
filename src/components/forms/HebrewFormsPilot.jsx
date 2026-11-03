@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { ArrowRight } from 'lucide-react';
 import { useAuth } from '@/lib/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -119,7 +119,7 @@ export default function HebrewFormsPilot() {
   return (
     <section dir="rtl" className="my-6 min-w-0 rounded-[var(--radius-card)] border border-border bg-card p-4 md:p-6" data-testid="hebrew-forms-pilot">
       <h2 className="text-xl font-semibold text-primary">פיילוט טפסים בעברית — למנהל בלבד</h2>
-      <p className="my-3 text-sm">{catalog && <>{t('therapeutic_forms.pilot_release.summary', { count: catalog.forms.length, version: catalog.version })} </>}טיוטות לסקירה מקצועית בלבד — לא להפצה וללא אישור קליני או אישור זכויות סופי.</p>
+      <p className="my-3 text-sm">{catalog && <><Trans i18nKey="therapeutic_forms.pilot_release.summary" values={{ count: catalog.forms.length, version: catalog.version }} components={{ version: <bdi dir="ltr" /> }} /> </>}טיוטות לסקירה מקצועית בלבד — לא להפצה וללא אישור קליני או אישור זכויות סופי.</p>
       {expansionPending && <p role="status" data-testid="pilot-expansion-pending" className="my-3 text-sm">{t('therapeutic_forms.pilot_release.pending')}</p>}
       {error && <p role="alert" className="my-3 text-destructive">{error}</p>}
       {!catalog && !error && <p role="status">טוען את חבילת הפיילוט…</p>}

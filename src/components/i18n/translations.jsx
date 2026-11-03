@@ -1649,7 +1649,7 @@ export const translations = {
       therapeutic_forms: {
         pilot_release: {
           mood: "MOOD - low mood and avoidance",
-          summary: "{{count}} forms, version {{version}}.",
+          summary: "{{count}} forms, version <version>{{version}}</version>.",
           pending: "The existing package is available. The MOOD expansion is waiting for the update to finish.",
         },
         pilot_navigation: {
@@ -3356,7 +3356,7 @@ export const translations = {
       therapeutic_forms: {
         pilot_release: {
           mood: "MOOD — מצב רוח נמוך והימנעות",
-          summary: "{{count}} טפסים, גרסה {{version}}.",
+          summary: "{{count}} טפסים, גרסה <version>{{version}}</version>.",
           pending: "החבילה הקיימת זמינה. הרחבת MOOD ממתינה להשלמת העדכון.",
         },
         pilot_navigation: {
@@ -5019,7 +5019,7 @@ export const translations = {
       therapeutic_forms: {
         pilot_release: {
           mood: "MOOD - ánimo bajo y evitación",
-          summary: "{{count}} formularios, versión {{version}}.",
+          summary: "{{count}} formularios, versión <version>{{version}}</version>.",
           pending: "El paquete existente está disponible. La ampliación MOOD espera a que finalice la actualización.",
         },
         pilot_navigation: {
@@ -6679,7 +6679,7 @@ export const translations = {
       therapeutic_forms: {
         pilot_release: {
           mood: "MOOD - humeur basse et évitement",
-          summary: "{{count}} formulaires, version {{version}}.",
+          summary: "{{count}} formulaires, version <version>{{version}}</version>.",
           pending: "Le contenu existant est disponible. L’extension MOOD attend la fin de la mise à jour.",
         },
         pilot_navigation: {
@@ -8339,7 +8339,7 @@ export const translations = {
       therapeutic_forms: {
         pilot_release: {
           mood: "MOOD - gedrückte Stimmung und Vermeidung",
-          summary: "{{count}} Formulare, Version {{version}}.",
+          summary: "{{count}} Formulare, Version <version>{{version}}</version>.",
           pending: "Das bestehende Paket ist verfügbar. Die MOOD-Erweiterung wartet auf den Abschluss der Aktualisierung.",
         },
         pilot_navigation: {
@@ -9999,7 +9999,7 @@ export const translations = {
       therapeutic_forms: {
         pilot_release: {
           mood: "MOOD - umore basso ed evitamento",
-          summary: "{{count}} moduli, versione {{version}}.",
+          summary: "{{count}} moduli, versione <version>{{version}}</version>.",
           pending: "Il pacchetto esistente è disponibile. L’estensione MOOD attende il completamento dell’aggiornamento.",
         },
         pilot_navigation: {
@@ -11659,7 +11659,7 @@ export const translations = {
       therapeutic_forms: {
         pilot_release: {
           mood: "MOOD - humor baixo e evitação",
-          summary: "{{count}} formulários, versão {{version}}.",
+          summary: "{{count}} formulários, versão <version>{{version}}</version>.",
           pending: "O pacote existente está disponível. A expansão MOOD aguarda a conclusão da atualização.",
         },
         pilot_navigation: {

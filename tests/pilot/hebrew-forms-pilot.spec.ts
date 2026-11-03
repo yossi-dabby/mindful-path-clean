@@ -19,6 +19,7 @@ for (const age of ['CH', 'TE', 'AD', 'OA']) {
     await session(page);
     await page.goto(preview);
     await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('163 טפסים, גרסה 0.3-mood-01');
+    await expect(page.getByTestId('hebrew-forms-pilot').locator('bdi[dir="ltr"]')).toHaveText('0.3-mood-01');
     await page.getByTestId(`pilot-age-${age}`).click();
     await page.getByTestId('pilot-track-mood').click();
     await page.getByTestId('pilot-unit-MOOD-01').click();

@@ -2,6 +2,6 @@
 buildCommand = "npm run build"
 
 [deploy]
-# -s enables single-page app mode: unknown routes are served index.html (200)
+# Node serves dist with SPA fallback and authenticates the private review pilot.
 # $PORT is injected by Railway at runtime
-startCommand = "npx serve -s dist -l $PORT"
+startCommand = "node server/index.mjs"

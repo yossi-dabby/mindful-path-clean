@@ -1,0 +1,125 @@
+import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useAuth } from '@/lib/AuthContext';
+import { Button } from '@/components/ui/button';
+import PdfJsViewer from '@/components/forms/PdfJsViewer';
+import { requestPilot, requestPilotPdf } from '@/lib/hebrewFormsPilotClient';
+
+const AGES = ['CH', 'TE', 'AD', 'OA'];
+const TRACKS = { shared: 'טפסים משותפים', core: 'Core — יסודות', anxiety: 'Specialized — חרדה ודאגנות' };
+
+// This review surface is intentionally Hebrew-only. Its private server catalog
+// is never registered in ALL_FORMS or the AI attachment/search index.
+export default function HebrewFormsPilot() {
+  const { i18n, t } = useTranslation();
+  const isHebrew = (i18n.resolvedLanguage || i18n.language || '').split('-')[0] === 'he';
+  const { user } = useAuth();
+  const isAdmin = user?.role === 'admin';
+  const [catalog, setCatalog] = useState(null);
+  const [age, setAge] = useState(null);
+  const [track, setTrack] = useState(null);
+  const [unit, setUnit] = useState(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const [preview, setPreview] = useState(null);
+  const activeUrl = useRef(null);
+  const actionAbort = useRef(null);
+
+  const clearPreview = () => {
+    if (activeUrl.current) URL.revokeObjectURL(activeUrl.current);
+    activeUrl.current = null;
+    setPreview(null);
+  };
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setCatalog(null); setPreview(null); setBusy(false); setError('');
+    if (isHebrew && isAdmin) {
+      (async () => {
+        try {
+          const response = await requestPilot('catalog', { signal: controller.signal });
+          const data = await response.json();
+          if (!controller.signal.aborted && data.language === 'he' && data.forms?.length === 154) setCatalog(data);
+          else if (!controller.signal.aborted) setError('חבילת הפיילוט אינה זמינה כרגע.');
+        } catch {
+          if (!controller.signal.aborted) setError('חבילת הפיילוט אינה זמינה כרגע. נסו שוב לאחר התחברות מחדש.');
+        }
+      })();
+    }
+    return () => {
+      controller.abort(); actionAbort.current?.abort();
+      if (activeUrl.current) URL.revokeObjectURL(activeUrl.current);
+      activeUrl.current = null;
+    };
+  }, [isHebrew, isAdmin, user?.id]);
+
+  const fileAction = async (form, download) => {
+    actionAbort.current?.abort();
+    const controller = new AbortController();
+    actionAbort.current = controller;
+    setBusy(true); setError(''); clearPreview();
+    try {
+      const blob = await requestPilotPdf(form, { signal: controller.signal, download });
+      if (controller.signal.aborted) return;
+      const url = URL.createObjectURL(blob);
+      if (download) {
+        const link = document.createElement('a');
+        link.href = url; link.download = `${form.id}.pdf`;
+        document.body.appendChild(link); link.click(); link.remove();
+        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+      } else {
+        activeUrl.current = url;
+        setPreview({ url, title: form.title });
+      }
+    } catch (failure) {
+      if (!controller.signal.aborted) setError(failure.message === 'PILOT_AUTH'
+        ? 'אין הרשאת מנהל תקפה. יש להתחבר מחדש.'
+        : 'לא ניתן לפתוח את הטופס. הקובץ לא הורד; נסו שוב.');
+    } finally {
+      if (!controller.signal.aborted) setBusy(false);
+    }
+  };
+
+  if (!isHebrew || !isAdmin) return null;
+  const forms = (catalog?.forms || []).filter((form) => form.age === age || form.age === 'ALL');
+  const selectedForms = forms.filter((form) => form.track === track && form.unit === unit);
+  const units = [...new Map(forms.filter((form) => form.track === track).map((form) => [form.unit, form.unitTitle])).entries()];
+  const goBack = () => { clearPreview(); setError(''); if (unit) setUnit(null); else if (track) setTrack(null); else setAge(null); };
+
+  return (
+    <section dir="rtl" className="my-6 min-w-0 rounded-[var(--radius-card)] border border-border bg-card p-4 md:p-6" data-testid="hebrew-forms-pilot">
+      <h2 className="text-xl font-semibold text-primary">פיילוט טפסים בעברית — למנהל בלבד</h2>
+      <p className="my-3 text-sm">154 טפסים, גרסה 0.2. טיוטות לסקירה מקצועית בלבד — לא להפצה וללא אישור קליני או אישור זכויות סופי.</p>
+      {error && <p role="alert" className="my-3 text-destructive">{error}</p>}
+      {!catalog && !error && <p role="status">טוען את חבילת הפיילוט…</p>}
+      {catalog && <>
+        <nav aria-label="מיקום בפיילוט" className="my-4 flex flex-wrap items-center gap-2 text-sm">
+          <span>גיל</span>{age && <span>← {catalog.ageGroups[age].label}</span>}
+          {track && <span>← {TRACKS[track]}</span>}{unit && <span>← {units.find(([id]) => id === unit)?.[1]}</span>}
+          {age && <Button type="button" variant="outline" disabled={busy} onClick={goBack}>חזרה</Button>}
+        </nav>
+        {busy && <p role="status">בודק הרשאה וטוען קובץ…</p>}
+        {preview && <div className="my-4 min-w-0" data-testid="pilot-pdf-preview">
+          <h3 className="mb-3 font-semibold">{preview.title}</h3>
+          <Button type="button" variant="outline" onClick={clearPreview}>סגירת התצוגה</Button>
+          <PdfJsViewer fileUrl={preview.url} />
+        </div>}
+        <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {!age && AGES.map((id) => <Button key={id} type="button" variant="outline" className="h-auto whitespace-normal p-5" onClick={() => setAge(id)} data-testid={`pilot-age-${id}`}>{catalog.ageGroups[id].label}</Button>)}
+          {age && !track && Object.entries(TRACKS).map(([id, title]) => <Button key={id} type="button" variant="outline" className="h-auto whitespace-normal p-5" onClick={() => setTrack(id)} data-testid={`pilot-track-${id}`}>{title}</Button>)}
+          {track && !unit && units.map(([id, title]) => <Button key={id} type="button" variant="outline" className="h-auto whitespace-normal p-5" onClick={() => setUnit(id)} data-testid={`pilot-unit-${id}`}>{id} — {title}</Button>)}
+          {unit && selectedForms.map((form) => <article key={form.id} className="min-w-0 rounded-lg border border-border p-4" data-testid={`pilot-form-${form.id}`}>
+            <h3 className="font-semibold text-primary">{form.title}</h3>
+            <p className="my-2 text-sm">{form.kind} · {form.audience}</p>
+            <p className="break-all text-xs" dir="ltr">{form.id}</p>
+            <p className="my-2 text-xs">{form.status}</p>
+            <div className="flex flex-wrap gap-2">
+              <Button type="button" disabled={busy} onClick={() => fileAction(form, false)}>{t('therapeutic_forms.open_form')}</Button>
+              <Button type="button" variant="outline" disabled={busy} onClick={() => fileAction(form, true)}>{t('therapeutic_forms.download_form')}</Button>
+            </div>
+          </article>)}
+        </div>
+      </>}
+    </section>
+  );
+}

@@ -1,0 +1,83 @@
+import { readFile, readdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+
+export const PILOT_PREFIX = '/api/hebrew-forms-pilot';
+const privateRoot = new URL('./private/', import.meta.url);
+
+export async function loadPilot() {
+  const catalog = JSON.parse(await readFile(new URL('hebrew-pilot-catalog.json', privateRoot), 'utf8'));
+  const formsRoot = new URL('forms/', privateRoot);
+  const filenames = new Set(await readdir(formsRoot));
+  const files = new Map();
+  for (const form of catalog.forms) {
+    if (!/^MP-[A-Z0-9-]+-HE$/.test(form.id) || !filenames.has(`${form.id}.pdf`)) {
+      throw new Error('Invalid Hebrew pilot asset');
+    }
+    const data = await readFile(new URL(`${form.id}.pdf`, formsRoot));
+    if (files.has(form.id) || !data.subarray(0, 5).equals(Buffer.from('%PDF-')) ||
+        data.length !== form.bytes || createHash('sha256').update(data).digest('hex') !== form.sha256) {
+      throw new Error('Invalid Hebrew pilot asset');
+    }
+    files.set(form.id, data);
+  }
+  if (files.size !== 154 || filenames.size !== files.size) throw new Error('Invalid pilot count');
+  return { catalog, files };
+}
+
+// Match the installed Base44 SDK auth.me endpoint. The app ID is server-owned;
+// never accept an app, role, user ID, upstream URL or token from query parameters.
+export function createAdminVerifier(appId, fetchImpl = fetch) {
+  return async (token) => {
+    if (!/^[a-f0-9]{24}$/i.test(appId || '')) return { status: 503 };
+    try {
+      const response = await fetchImpl(`https://base44.app/api/apps/${appId}/entities/User/me`, {
+        headers: { Authorization: `Bearer ${token}`, 'X-App-Id': appId },
+        signal: AbortSignal.timeout(8000),
+        redirect: 'error',
+        cache: 'no-store',
+      });
+      if (response.status === 401 || response.status === 403) return { status: 401 };
+      if (!response.ok) return { status: 503 };
+      const user = await response.json();
+      return { status: user?.id && user.role === 'admin' ? 200 : 403 };
+    } catch {
+      return { status: 503 };
+    }
+  };
+}
+
+export function createPilotHandler({ pilot, verifyAdmin }) {
+  return async (req, res) => {
+    const url = new URL(req.url, 'http://localhost');
+    if (url.pathname !== PILOT_PREFIX && !url.pathname.startsWith(`${PILOT_PREFIX}/`)) return false;
+    res.setHeader('Cache-Control', 'private, no-store');
+    res.setHeader('Vary', 'Authorization');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
+    const fail = (status) => { res.writeHead(status); res.end(); return true; };
+    if (!['GET', 'HEAD'].includes(req.method)) {
+      res.setHeader('Allow', 'GET, HEAD');
+      return fail(405);
+    }
+    const match = /^Bearer ([^\s]{1,8192})$/.exec(req.headers.authorization || '');
+    if (!match) return fail(401);
+    const access = await verifyAdmin(match[1]);
+    if (access.status !== 200) return fail(access.status);
+    if (url.pathname === `${PILOT_PREFIX}/catalog`) {
+      res.setHeader('Content-Type', 'application/json; charset=utf-8');
+      res.writeHead(200);
+      res.end(req.method === 'HEAD' ? undefined : JSON.stringify(pilot.catalog));
+      return true;
+    }
+    const id = url.pathname.slice(`${PILOT_PREFIX}/files/`.length);
+    if (!url.pathname.startsWith(`${PILOT_PREFIX}/files/`) || !/^MP-[A-Z0-9-]+-HE$/.test(id)) return fail(404);
+    const data = pilot.files.get(id);
+    if (!data) return fail(404);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Length', data.length);
+    res.setHeader('Content-Disposition', `${url.searchParams.get('download') === '1' ? 'attachment' : 'inline'}; filename="${id}.pdf"`);
+    res.writeHead(200);
+    res.end(req.method === 'HEAD' ? undefined : data);
+    return true;
+  };
+}

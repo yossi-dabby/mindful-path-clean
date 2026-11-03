@@ -1,15 +1,20 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { EXPANDED_CATALOG_PATH, PILOT_RELEASES, validatePilotCatalog } from '../base44/functions/getHebrewFormsPilot/releases.js';
 
 export const PILOT_PREFIX = '/api/hebrew-forms-pilot';
 const privateRoot = new URL('./private/', import.meta.url);
 
 export async function loadPilot() {
   const catalog = JSON.parse(await readFile(new URL('hebrew-pilot-catalog.json', privateRoot), 'utf8'));
+  const expandedCatalog = JSON.parse(await readFile(new URL('hebrew-pilot-mood-catalog.json', privateRoot), 'utf8'));
+  if (!await validatePilotCatalog(catalog, 'catalog') || !await validatePilotCatalog(expandedCatalog, EXPANDED_CATALOG_PATH)) {
+    throw new Error('Invalid pilot release');
+  }
   const formsRoot = new URL('forms/', privateRoot);
   const filenames = new Set(await readdir(formsRoot));
   const files = new Map();
-  for (const form of catalog.forms) {
+  for (const form of expandedCatalog.forms) {
     if (!/^MP-[A-Z0-9-]+-HE$/.test(form.id) || !filenames.has(`${form.id}.pdf`)) {
       throw new Error('Invalid Hebrew pilot asset');
     }
@@ -20,8 +25,8 @@ export async function loadPilot() {
     }
     files.set(form.id, data);
   }
-  if (files.size !== 154 || filenames.size !== files.size) throw new Error('Invalid pilot count');
-  return { catalog, files };
+  if (files.size !== PILOT_RELEASES[EXPANDED_CATALOG_PATH].count || filenames.size !== files.size) throw new Error('Invalid pilot count');
+  return { catalog, expandedCatalog, files };
 }
 
 // Match the installed Base44 SDK auth.me endpoint. The app ID is server-owned;
@@ -63,10 +68,12 @@ export function createPilotHandler({ pilot, verifyAdmin }) {
     if (!match) return fail(401);
     const access = await verifyAdmin(match[1]);
     if (access.status !== 200) return fail(access.status);
-    if (url.pathname === `${PILOT_PREFIX}/catalog`) {
+    if (url.pathname === `${PILOT_PREFIX}/catalog` || url.pathname === `${PILOT_PREFIX}/${EXPANDED_CATALOG_PATH}`) {
+      const catalog = url.pathname.endsWith(`/${EXPANDED_CATALOG_PATH}`) ? pilot.expandedCatalog : pilot.catalog;
+      if (!catalog) return fail(404);
       res.setHeader('Content-Type', 'application/json; charset=utf-8');
       res.writeHead(200);
-      res.end(req.method === 'HEAD' ? undefined : JSON.stringify(pilot.catalog));
+      res.end(req.method === 'HEAD' ? undefined : JSON.stringify(catalog));
       return true;
     }
     const id = url.pathname.slice(`${PILOT_PREFIX}/files/`.length);

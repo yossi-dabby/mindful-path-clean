@@ -16,7 +16,7 @@ export async function createAppServer({ verifyAdmin, pilot, distRoot } = {}) {
       // Only dist is public. Source files, private bundles and unknown API URLs
       // must never fall through to SPA fallback or directory listings.
       const pathname = new URL(req.url, 'http://localhost').pathname;
-      if (pathname.startsWith('/api/') || /^\/(server|base44|src|node_modules)(\/|$)/.test(pathname)) {
+      if (pathname.startsWith('/api/') || /^\/(server|base44|content|src|node_modules)(\/|$)/.test(pathname)) {
         res.writeHead(404); res.end(); return;
       }
       await serveHandler(req, res, {

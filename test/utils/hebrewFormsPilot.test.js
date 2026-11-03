@@ -27,16 +27,17 @@ describe('Hebrew review pilot HTTP boundary', () => {
   const auth = { Authorization: 'Bearer test-session' };
 
   it('has exactly 154 original IDs, 18 shared files and no public/AI registrations', () => {
-    expect(pilot.files.size).toBe(154);
+    expect(pilot.catalog.forms).toHaveLength(154);
+    expect(pilot.files.size).toBe(163);
     expect(pilot.catalog.forms.filter((f) => f.age === 'ALL')).toHaveLength(18);
     for (const age of ['CH', 'TE', 'AD', 'OA']) expect(pilot.catalog.forms.filter((f) => f.age === age)).toHaveLength(34);
-    for (const form of pilot.catalog.forms) {
+    for (const form of pilot.expandedCatalog.forms) {
       expect(ALL_FORMS.find((entry) => entry.id === form.id)).toBeUndefined();
       expect(form.status).toContain('לא להפצה');
     }
   });
   it('rejects missing, query-string, forged-role and invalid credentials for both metadata and files', async () => {
-    for (const path of ['/catalog', `/files/${pilot.catalog.forms[0].id}`]) {
+    for (const path of ['/catalog', '/catalog-mood-01', `/files/${pilot.catalog.forms[0].id}`, '/files/MP-MOOD-01-W-CH-HE']) {
       for (const init of [{}, { headers: { 'X-User-Role': 'admin' } }, { headers: { Authorization: 'Bearer invalid' } }]) {
         expect((await request(`/api/hebrew-forms-pilot${path}?token=test-session&role=admin`, init)).status).toBe(401);
       }
@@ -47,11 +48,13 @@ describe('Hebrew review pilot HTTP boundary', () => {
     role = 'premium';
     try {
       expect((await request('/api/hebrew-forms-pilot/catalog', { headers: auth })).status).toBe(403);
+      expect((await request('/api/hebrew-forms-pilot/catalog-mood-01', { headers: auth })).status).toBe(403);
+      expect((await request('/api/hebrew-forms-pilot/files/MP-MOOD-01-W-CH-HE', { headers: auth })).status).toBe(403);
       expect((await request(`/api/hebrew-forms-pilot/files/${pilot.catalog.forms[0].id}`, { headers: auth })).status).toBe(403);
     } finally { role = 'admin'; }
   });
   it('serves every source PDF byte-for-byte only after authorization', async () => {
-    for (const form of pilot.catalog.forms) {
+    for (const form of pilot.expandedCatalog.forms) {
       const response = await request(`/api/hebrew-forms-pilot/files/${form.id}`, { headers: auth });
       expect(response.status).toBe(200);
       expect(response.headers.get('cache-control')).toBe('private, no-store');
@@ -73,7 +76,7 @@ describe('Hebrew review pilot HTTP boundary', () => {
     expect((await request('/api/hebrew-forms-pilot/files/%2e%2e%2fprivate', { headers: auth })).status).toBe(404);
   });
   it('keeps private/source paths inaccessible and preserves SPA routes and security headers', async () => {
-    for (const path of [`/server/private/forms/${pilot.catalog.forms[0].id}.pdf`, '/server/private/forms/', '/server/private/hebrew-pilot-catalog.json', '/src/pages/TherapeuticForms.jsx', '/api/unknown']) {
+    for (const path of [`/server/private/forms/${pilot.catalog.forms[0].id}.pdf`, '/server/private/forms/', '/server/private/hebrew-pilot-catalog.json', '/server/private/hebrew-pilot-mood-catalog.json', '/content/hebrew-forms/mood-01/forms/MP-MOOD-01-W-CH-HE.html', '/src/pages/TherapeuticForms.jsx', '/api/unknown']) {
       expect((await request(path)).status).toBe(404);
     }
     const response = await request('/Tools');

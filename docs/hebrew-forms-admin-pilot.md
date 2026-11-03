@@ -268,13 +268,25 @@ to PR #2 retains Railway's private API but restores the Base44-host limitation.
 - [ ] Authenticated live PDF open/download checks in each deployment.
 - [ ] Human review and authenticated Base44 preview/public-host smoke checks.
 
-The dedicated Playwright configuration uses an isolated component harness and
+## Back navigation
+
+The forms page includes a visible return button on desktop and mobile. It uses
+the app's router history, with Tools as the fallback for a direct entry.
+Within the pilot, a sticky, RTL navigation bar names the destination at each
+level: forms, units, tracks, or age groups. It sits below the mobile header and
+uses the existing page scroll container rather than adding a PDF scroll pane.
+Returning from a PDF closes it and restores focus to its Open button, preserving
+the selected age, track, and unit. Returning while a PDF is loading cancels the
+action so a late response cannot reopen the preview. Blob URLs are still revoked.
+
+The dedicated Playwright configuration uses an isolated forms-page harness and
 the real SDK request, Base44 handler and Node API/PDF bundle. Only external
 identity verification and the fixed service location are substituted with local
 fixtures. There is deliberately no Vite `/api/hebrew-forms-pilot` proxy, which
 masked the host mismatch in the original test harness. There is no production
-auth-bypass environment flag. The workflow executes ten scenarios for desktop
-and mobile, including corrupted PDFs, expired sessions and backend outages.
+auth-bypass environment flag. The workflow executes sixteen scenarios for desktop
+and mobile, including a four-page PDF return flow, cancellation during loading,
+page return/direct entry, corrupted PDFs, expired sessions and backend outages.
 The regular E2E suite is not weakened or skipped.
 
 Run `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`,

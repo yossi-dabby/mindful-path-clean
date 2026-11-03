@@ -1647,6 +1647,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        pilot_navigation: {
+          forms: "Back to forms",
+          units: "Back to units",
+          tracks: "Back to tracks",
+          ages: "Back to age groups",
+        },
         card_title: "Therapeutic Forms",
         card_subtitle: "Personal practice worksheets",
         page_title: "Therapeutic Forms",
@@ -3343,6 +3349,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        pilot_navigation: {
+          forms: "חזרה לרשימת הטפסים",
+          units: "חזרה ליחידות",
+          tracks: "חזרה למסלולים",
+          ages: "חזרה לקבוצות הגיל",
+        },
         card_title: "טפסים טיפוליים",
         card_subtitle: "דפי עבודה לתרגול אישי",
         page_title: "טפסים טיפוליים",
@@ -4995,6 +5007,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        pilot_navigation: {
+          forms: "Volver a los formularios",
+          units: "Volver a las unidades",
+          tracks: "Volver a los itinerarios",
+          ages: "Volver a los grupos de edad",
+        },
         card_title: "Formularios Terapéuticos",
         card_subtitle: "Hojas de trabajo para práctica personal",
         page_title: "Formularios Terapéuticos",
@@ -6644,6 +6662,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        pilot_navigation: {
+          forms: "Retour aux formulaires",
+          units: "Retour aux unités",
+          tracks: "Retour aux parcours",
+          ages: "Retour aux tranches d’âge",
+        },
         card_title: "Formulaires Thérapeutiques",
         card_subtitle: "Fiches de travail pour la pratique personnelle",
         page_title: "Formulaires Thérapeutiques",
@@ -8293,6 +8317,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        pilot_navigation: {
+          forms: "Zurück zu den Formularen",
+          units: "Zurück zu den Einheiten",
+          tracks: "Zurück zu den Pfaden",
+          ages: "Zurück zu den Altersgruppen",
+        },
         card_title: "Therapeutische Formulare",
         card_subtitle: "Arbeitsblätter für die persönliche Praxis",
         page_title: "Therapeutische Formulare",
@@ -9942,6 +9972,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        pilot_navigation: {
+          forms: "Torna ai moduli",
+          units: "Torna alle unità",
+          tracks: "Torna ai percorsi",
+          ages: "Torna alle fasce di età",
+        },
         card_title: "Moduli Terapeutici",
         card_subtitle: "Fogli di lavoro per la pratica personale",
         page_title: "Moduli Terapeutici",
@@ -11591,6 +11627,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        pilot_navigation: {
+          forms: "Voltar aos formulários",
+          units: "Voltar às unidades",
+          tracks: "Voltar aos percursos",
+          ages: "Voltar às faixas etárias",
+        },
         card_title: "Formulários Terapêuticos",
         card_subtitle: "Folhas de trabalho para prática pessoal",
         page_title: "Formulários Terapêuticos",

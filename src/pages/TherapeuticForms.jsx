@@ -1,7 +1,7 @@
 import HebrewFormsPilot from '@/components/forms/HebrewFormsPilot';
 import BotanicalAccent from '@/components/brand/BotanicalAccent';
 import React, { useEffect, useMemo, useState } from 'react';
-import { ClipboardList } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ClipboardList } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
@@ -27,6 +27,16 @@ const AUDIENCE_ORDER = ['children', 'adolescents', 'adults', 'older_adults'];
 const COLLECTION_TYPE_ORDER = { core: 0, specialized: 1 };
 export const FORMS_VIEW_MODE_STORAGE_KEY = 'mindfulPath.formsLibrary.viewMode';
 export const DEFAULT_FORMS_VIEW_MODE = 'medium';
+
+function FormsPageBackButton() {
+  const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const BackIcon = i18n.dir() === 'rtl' ? ArrowRight : ArrowLeft;
+  return <Button type="button" variant="outline" className="mb-4 min-h-11" data-testid="forms-page-back" onClick={() => {
+    if (window.history.state?.idx > 0) navigate(-1);
+    else navigate('/Tools', { replace: true });
+  }}><BackIcon className="h-4 w-4" aria-hidden="true" />{t('common.go_back_aria')}</Button>;
+}
 
 function getDefaultFormsNavigationState() {
   return {
@@ -653,6 +663,7 @@ function TherapeuticFormsLibrary() {
   return (
     <div className="forms-library-teal mx-auto p-4 w-full box-border md:p-8 max-w-7xl min-h-dvh safe-bottom" dir={isRtl ? 'rtl' : 'ltr'} data-testid="therapeutic-forms-page">
       <div className="mb-8 mt-4">
+        <FormsPageBackButton />
         <div className="botanical-title-row"><h1 className="text-3xl md:text-4xl font-semibold mb-2 flex items-center gap-3 text-foreground">
           <ClipboardList className="w-8 h-8 text-primary" />
           {t('therapeutic_forms.page_title')}
@@ -820,6 +831,7 @@ function TherapeuticFormsUnavailable() {
       data-testid="therapeutic-forms-page"
     >
       <div className="mb-8 mt-4">
+        <FormsPageBackButton />
         <div className="botanical-title-row"><h1 className="text-3xl md:text-4xl font-semibold mb-2 flex items-center gap-3 text-foreground">
           <ClipboardList className="w-8 h-8 text-primary" aria-hidden="true" />
           {t('therapeutic_forms.page_title')}

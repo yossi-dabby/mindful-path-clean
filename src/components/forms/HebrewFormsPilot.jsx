@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ArrowRight } from 'lucide-react';
 import { useAuth } from '@/lib/AuthContext';
 import { Button } from '@/components/ui/button';
 import PdfJsViewer from '@/components/forms/PdfJsViewer';
@@ -24,6 +25,19 @@ export default function HebrewFormsPilot() {
   const [preview, setPreview] = useState(null);
   const activeUrl = useRef(null);
   const actionAbort = useRef(null);
+  const navigationRef = useRef(null);
+  const returnFocus = useRef(null);
+  const hadPreview = useRef(false);
+
+  useEffect(() => {
+    if (preview) {
+      navigationRef.current?.scrollIntoView({ block: 'start' });
+      navigationRef.current?.focus({ preventScroll: true });
+    } else if (hadPreview.current) {
+      returnFocus.current?.focus();
+    }
+    hadPreview.current = Boolean(preview);
+  }, [preview]);
 
   const clearPreview = () => {
     if (activeUrl.current) URL.revokeObjectURL(activeUrl.current);
@@ -86,7 +100,17 @@ export default function HebrewFormsPilot() {
   const forms = (catalog?.forms || []).filter((form) => form.age === age || form.age === 'ALL');
   const selectedForms = forms.filter((form) => form.track === track && form.unit === unit);
   const units = [...new Map(forms.filter((form) => form.track === track).map((form) => [form.unit, form.unitTitle])).entries()];
-  const goBack = () => { clearPreview(); setError(''); if (unit) setUnit(null); else if (track) setTrack(null); else setAge(null); };
+  const goBack = () => {
+    actionAbort.current?.abort();
+    setBusy(false); setError('');
+    // A PDF (including one still loading) is one level above its form list.
+    // Returning from it must preserve the selected age, track and unit.
+    if (preview || busy) { clearPreview(); return; }
+    if (unit) setUnit(null);
+    else if (track) setTrack(null);
+    else setAge(null);
+  };
+  const backLabel = t(`therapeutic_forms.pilot_navigation.${preview || busy ? 'forms' : unit ? 'units' : track ? 'tracks' : 'ages'}`);
 
   return (
     <section dir="rtl" className="my-6 min-w-0 rounded-[var(--radius-card)] border border-border bg-card p-4 md:p-6" data-testid="hebrew-forms-pilot">
@@ -95,15 +119,18 @@ export default function HebrewFormsPilot() {
       {error && <p role="alert" className="my-3 text-destructive">{error}</p>}
       {!catalog && !error && <p role="status">טוען את חבילת הפיילוט…</p>}
       {catalog && <>
-        <nav aria-label="מיקום בפיילוט" className="my-4 flex flex-wrap items-center gap-2 text-sm">
+        <nav aria-label="מיקום בפיילוט" className="sticky top-[var(--mobile-header-height,60px)] z-20 my-4 rounded-lg border border-border bg-card p-3 text-sm md:top-0" data-testid="pilot-navigation">
+          {age && <Button ref={navigationRef} type="button" variant="outline" className="mb-2 min-h-11 w-full justify-start sm:w-auto scroll-mt-[var(--mobile-header-height,60px)] md:scroll-mt-0" onClick={goBack} data-testid="pilot-back">
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />{backLabel}
+          </Button>}
+          <div className="flex flex-wrap items-center gap-2">
           <span>גיל</span>{age && <span>← {catalog.ageGroups[age].label}</span>}
           {track && <span>← {TRACKS[track]}</span>}{unit && <span>← {units.find(([id]) => id === unit)?.[1]}</span>}
-          {age && <Button type="button" variant="outline" disabled={busy} onClick={goBack}>חזרה</Button>}
+          </div>
         </nav>
         {busy && <p role="status">בודק הרשאה וטוען קובץ…</p>}
         {preview && <div className="my-4 min-w-0" data-testid="pilot-pdf-preview">
           <h3 className="mb-3 font-semibold">{preview.title}</h3>
-          <Button type="button" variant="outline" onClick={clearPreview}>סגירת התצוגה</Button>
           <PdfJsViewer fileUrl={preview.url} />
         </div>}
         <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -116,7 +143,7 @@ export default function HebrewFormsPilot() {
             <p className="break-all text-xs" dir="ltr">{form.id}</p>
             <p className="my-2 text-xs">{form.status}</p>
             <div className="flex flex-wrap gap-2">
-              <Button type="button" disabled={busy} onClick={() => fileAction(form, false)}>{t('therapeutic_forms.open_form')}</Button>
+              <Button type="button" disabled={busy} onClick={(event) => { returnFocus.current = event.currentTarget; fileAction(form, false); }}>{t('therapeutic_forms.open_form')}</Button>
               <Button type="button" variant="outline" disabled={busy} onClick={() => fileAction(form, true)}>{t('therapeutic_forms.download_form')}</Button>
             </div>
           </article>)}

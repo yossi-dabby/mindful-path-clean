@@ -105,7 +105,9 @@ export async function handleHebrewFormsPilot(req, { createClientFromRequest, fet
     const upstreamUrl = `${PILOT_URL}/${input.path}${input.download ? '?download=1' : ''}`;
     const options = {
       headers: { Authorization: authorization },
-      signal, redirect: 'error', cache: 'no-store',
+      // Workers supports manual/follow, not error. Manual never follows a
+      // Location; every 3xx is rejected by the non-OK response guard below.
+      signal, redirect: 'manual', cache: 'no-store',
     };
     requestContext = { url: upstreamUrl, options };
     // Local construction only: distinguish Request option validation from fetch.

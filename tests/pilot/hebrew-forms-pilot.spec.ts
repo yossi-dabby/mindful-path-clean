@@ -14,6 +14,93 @@ async function session(page, role = 'admin', token = 'pilot-admin-fixture') {
 }
 const preview = '/tests/fixtures/hebrew-pilot-preview.html';
 
+for (const age of ['CH', 'TE', 'AD', 'OA']) {
+  test(`MOOD ${age} opens and downloads both age variants with a single shared guide`, async ({ page }) => {
+    await session(page);
+    await page.goto(preview);
+    await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('163 טפסים, גרסה 0.3-mood-01');
+    await page.getByTestId(`pilot-age-${age}`).click();
+    await page.getByTestId('pilot-track-mood').click();
+    await page.getByTestId('pilot-unit-MOOD-01').click();
+    await expect(page.locator('[data-testid^="pilot-form-"]')).toHaveCount(3);
+    await expect(page.getByTestId('pilot-form-MP-MOOD-01-G-ALL-HE')).toHaveCount(1);
+    const pilot = await loadPilot();
+    for (const kind of ['W', 'P']) {
+      const id = `MP-MOOD-01-${kind}-${age}-HE`;
+      const card = page.getByTestId(`pilot-form-${id}`);
+      const open = card.getByRole('button', { name: 'פתח', exact: true });
+      await open.click();
+      await expect(page.getByTestId('pilot-pdf-preview').locator('canvas')).toHaveCount(1, { timeout: 20000 });
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      await page.getByTestId('pilot-back').click();
+      await expect(open).toBeFocused();
+      await expect(page.getByTestId('pilot-pdf-preview')).toHaveCount(0);
+      const pending = page.waitForEvent('download');
+      await card.getByRole('button', { name: 'הורד', exact: true }).click();
+      const download = await pending;
+      expect(download.suggestedFilename()).toBe(`${id}.pdf`);
+      const bytes = await readFile((await download.path())!);
+      const form = pilot.expandedCatalog.forms.find((f) => f.id === id)!;
+      expect(bytes.length).toBe(form.bytes);
+      expect(createHash('sha256').update(bytes).digest('hex')).toBe(form.sha256);
+    }
+    for (let i = 0; i < 3; i++) await page.getByTestId('pilot-back').click();
+    await expect(page.getByTestId(`pilot-age-${age}`)).toBeVisible();
+  });
+}
+
+test('MOOD guide has four pages and preserves the selected age and unit on return', async ({ page }) => {
+  await session(page);
+  await page.goto(preview);
+  await page.getByTestId('pilot-age-OA').click();
+  await page.getByTestId('pilot-track-mood').click();
+  await page.getByTestId('pilot-unit-MOOD-01').click();
+  await page.getByTestId('pilot-form-MP-MOOD-01-G-ALL-HE').getByRole('button', { name: 'פתח', exact: true }).click();
+  const canvases = page.getByTestId('pilot-pdf-preview').locator('canvas');
+  await expect(canvases).toHaveCount(4, { timeout: 20000 });
+  await canvases.last().scrollIntoViewIfNeeded();
+  await expect(page.getByTestId('pilot-back')).toBeInViewport();
+  await page.getByTestId('pilot-back').click();
+  await expect(page.getByTestId('pilot-form-MP-MOOD-01-W-OA-HE')).toBeVisible();
+});
+
+for (const status of [400, 404]) {
+  test(`partial deployment (${status}) keeps the original package usable`, async ({ page }) => {
+    await session(page);
+    await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
+      if (route.request().postDataJSON().path === 'catalog-mood-01') {
+        await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
+      } else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
+    });
+    await page.goto(preview);
+    await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
+    await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('154 טפסים, גרסה 0.2');
+    await page.getByTestId('pilot-age-AD').click();
+    await expect(page.getByTestId('pilot-track-mood')).toHaveCount(0);
+    await page.getByTestId('pilot-track-core').click();
+    await page.getByTestId('pilot-unit-CORE-02').click();
+    await page.getByTestId('pilot-form-MP-CORE-02-W-AD-HE').getByRole('button', { name: 'פתח', exact: true }).click();
+    await expect(page.getByTestId('pilot-pdf-preview').locator('canvas')).toHaveCount(1, { timeout: 20000 });
+  });
+}
+
+test('an altered catalog is rejected without silently falling back', async ({ page }) => {
+  await session(page);
+  let calls = 0;
+  await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
+    calls++;
+    const response = await route.fetch({ url: 'http://127.0.0.1:3006/' });
+    const body = await response.json();
+    body.catalog.forms[0].sha256 = '0'.repeat(64);
+    await route.fulfill({ json: body });
+  });
+  await page.goto(preview);
+  await expect(page.getByRole('alert')).toBeVisible();
+  await expect(page.getByTestId('pilot-age-AD')).toHaveCount(0);
+  await expect(page.getByTestId('pilot-expansion-pending')).toHaveCount(0);
+  expect(calls).toBe(1);
+});
+
 test('forms page returns to its entry page and direct links fall back to Tools', async ({ page }) => {
   await session(page);
   await page.goto(preview);
@@ -129,7 +216,9 @@ test('back cancels a pending PDF without leaving the unit or reopening it later'
 test('regular user and English mode never receive pilot catalog', async ({ page }) => {
   await session(page, 'user', 'pilot-user-fixture');
   const requests: string[] = [];
-  page.on('request', (request) => { if (/hebrew-forms-pilot|functions\/getHebrewFormsPilot/.test(request.url())) requests.push(request.url()); });
+  // Count API traffic, including both releases, rather than Vite's static import
+  // of the shared public fingerprint contract under base44/functions/.
+  page.on('request', (request) => { if (/\/api\/hebrew-forms-pilot(?:\/|$)|\/api\/apps\/[^/]+\/functions\/getHebrewFormsPilot(?:\?|$)/.test(request.url())) requests.push(request.url()); });
   await page.goto(preview);
   await expect(page.locator('main')).toBeVisible();
   await expect(page.getByTestId('hebrew-forms-pilot')).toHaveCount(0);

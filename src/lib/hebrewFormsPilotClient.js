@@ -1,15 +1,26 @@
-const PREFIX = '/api/hebrew-forms-pilot';
+import { base44 } from '@/api/base44Client';
+
+const checkAbort = (signal) => {
+  if (signal?.aborted) throw new DOMException('Aborted', 'AbortError');
+};
 
 export async function requestPilot(path, { signal, download = false } = {}) {
-  const token = window.localStorage.getItem('base44_access_token');
-  if (!token) throw new Error('PILOT_AUTH');
-  const response = await fetch(`${PREFIX}/${path}${download ? '?download=1' : ''}`, {
-    headers: { Authorization: `Bearer ${token}` },
-    cache: 'no-store',
-    signal,
-  });
-  if (!response.ok) throw new Error([401, 403].includes(response.status) ? 'PILOT_AUTH' : 'PILOT_UNAVAILABLE');
-  return response;
+  checkAbort(signal);
+  let data;
+  try {
+    // The SDK carries the current session and preview/published function version.
+    // Same-origin /api routes are not available on Base44's static frontend hosts.
+    const response = await base44.functions.invoke('getHebrewFormsPilot', { path, download });
+    data = response.data;
+  } catch (error) {
+    checkAbort(signal);
+    throw new Error([401, 403].includes(error?.response?.status ?? error?.status) ? 'PILOT_AUTH' : 'PILOT_UNAVAILABLE');
+  }
+  checkAbort(signal);
+  if (path === 'catalog' && data?.kind === 'catalog') return Response.json(data.catalog);
+  if (data?.kind !== 'pdf' || `files/${data.id}` !== path || typeof data.base64 !== 'string' || data.base64.length > 1400000) throw new Error('PILOT_INVALID');
+  const bytes = Uint8Array.from(atob(data.base64), (character) => character.charCodeAt(0));
+  return new Response(bytes, { headers: { 'Content-Type': 'application/pdf' } });
 }
 
 export async function requestPilotPdf(form, options = {}) {

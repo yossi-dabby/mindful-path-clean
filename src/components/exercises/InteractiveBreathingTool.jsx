@@ -334,6 +334,7 @@ export default function InteractiveBreathingTool({ onClose, onComplete }) {
 
   return (
     <PremiumDialog
+      localEscape
       onClose={onClose}
       label={t('breathing_tool.title')}
       className="fixed inset-0 flex flex-col"

@@ -110,6 +110,29 @@ for (const language of ['en', 'he']) test(`Interactive breathing contains focus 
   }
 });
 
+test('Breathing closes when Escape arrives with initial dialog focus', async ({ page }) => {
+  await prepare(page);
+  await page.getByTestId('daily-path-action').click();
+  const trigger = page.getByRole('tab', { name: 'Breathing', exact: true });
+  await page.evaluate(() => {
+    (window as any).__breathingEarlyEscapeSent = false;
+    // Reproduce the CI timing window: focus can enter a newly mounted portal
+    // before Radix's passive layer registration is ready to dismiss it.
+    const dismissOnFocus = (event: FocusEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest('[role="dialog"]')?.querySelector('[data-testid="interactive-breathing-surface"]')) return;
+      document.removeEventListener('focusin', dismissOnFocus, true);
+      target.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', code: 'Escape', bubbles: true, cancelable: true }));
+      (window as any).__breathingEarlyEscapeSent = true;
+    };
+    document.addEventListener('focusin', dismissOnFocus, true);
+  });
+  await trigger.click();
+  await expect.poll(() => page.evaluate(() => (window as any).__breathingEarlyEscapeSent)).toBe(true);
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await expect(trigger).toBeFocused();
+});
+
 test('Library completion failure remains visible and successful retry persists progress', async ({ page }) => {
   const state = await prepare(page);
   await page.getByTestId('daily-path-action').click();

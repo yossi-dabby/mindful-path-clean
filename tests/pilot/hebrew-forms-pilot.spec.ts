@@ -8,6 +8,9 @@ async function session(page, role = 'admin', token = 'pilot-admin-fixture') {
   // Only the external identity provider is stubbed. Catalog, authorization,
   // real PDF bytes, integrity checks and PDF.js rendering run through real code.
   await page.route('**/api/apps/*/entities/User/me', (route) => route.fulfill({ json: { id: 'fixture-user', role } }));
+  await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
+    await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
+  });
 }
 const preview = '/tests/fixtures/hebrew-pilot-preview.html';
 
@@ -44,7 +47,7 @@ test('administrator browses ages, shared guides, units, opens real PDF and downl
 test('regular user and English mode never receive pilot catalog', async ({ page }) => {
   await session(page, 'user', 'pilot-user-fixture');
   const requests: string[] = [];
-  page.on('request', (request) => { if (request.url().includes('/api/hebrew-forms-pilot')) requests.push(request.url()); });
+  page.on('request', (request) => { if (/hebrew-forms-pilot|functions\/getHebrewFormsPilot/.test(request.url())) requests.push(request.url()); });
   await page.goto(preview);
   await expect(page.locator('main')).toBeVisible();
   await expect(page.getByTestId('hebrew-forms-pilot')).toHaveCount(0);
@@ -64,7 +67,10 @@ test('expired session clears preview and blocks opening/downloading a file', asy
   const card = page.getByTestId('pilot-form-MP-CORE-02-W-AD-HE');
   await card.getByRole('button', { name: 'פתח', exact: true }).click();
   await expect(page.getByTestId('pilot-pdf-preview').locator('canvas').first()).toBeVisible({ timeout: 20000 });
-  await page.evaluate(() => localStorage.setItem('base44_access_token', 'expired-fixture'));
+  await page.evaluate(async () => {
+    const { base44 } = await import('/src/api/base44Client.js');
+    base44.auth.setToken('expired-fixture');
+  });
   await card.getByRole('button', { name: 'הורד', exact: true }).click();
   await expect(page.getByRole('alert')).toContainText('אין הרשאת מנהל תקפה');
   await page.getByTestId('pilot-form-MP-CORE-02-W-AD-HE').getByRole('button', { name: 'פתח', exact: true }).click();
@@ -79,9 +85,20 @@ test('a corrupted PDF response never opens or downloads', async ({ page }) => {
   await page.getByTestId('pilot-age-CH').click();
   await page.getByTestId('pilot-track-anxiety').click();
   await page.getByTestId('pilot-unit-ANX-01').click();
-  await page.route('**/api/hebrew-forms-pilot/files/*', (route) => route.fulfill({ contentType: 'application/pdf', body: '%PDF-corrupt' }));
+  await page.route('**/api/apps/*/functions/getHebrewFormsPilot', (route) => route.fulfill({ json: { kind: 'pdf', id: 'MP-ANX-01-W-CH-HE', base64: Buffer.from('%PDF-corrupt').toString('base64') } }));
   const card = page.getByTestId('pilot-form-MP-ANX-01-W-CH-HE');
   await card.getByRole('button', { name: 'פתח', exact: true }).click();
   await expect(page.getByRole('alert')).toContainText('הקובץ לא הורד');
   await expect(page.getByTestId('pilot-pdf-preview')).toHaveCount(0);
+});
+
+test('unavailable backend is distinguished from an expired session and never falls back to a same-origin API', async ({ page }) => {
+  await session(page);
+  await page.route('**/api/apps/*/functions/getHebrewFormsPilot', (route) => route.fulfill({ status: 503, json: { error: 'PILOT_UNAVAILABLE' } }));
+  const oldEndpointRequests: string[] = [];
+  page.on('request', (request) => { if (request.url().includes('/api/hebrew-forms-pilot')) oldEndpointRequests.push(request.url()); });
+  await page.goto(preview);
+  await expect(page.getByRole('alert')).toContainText('נסו שוב בעוד זמן קצר');
+  await expect(page.getByRole('alert')).not.toContainText('התחברות מחדש');
+  expect(oldEndpointRequests).toEqual([]);
 });

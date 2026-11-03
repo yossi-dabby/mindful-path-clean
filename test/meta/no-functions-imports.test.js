@@ -1,5 +1,5 @@
 /**
- * Guard test: no test file may import from functions/**
+ * Guard test: no test file may import platform-runtime code from functions/**
  *
  * The functions/ directory contains Deno runtime code. Vitest runs in Node.js,
  * so any import of functions/ code inside test/**\/*.test.js will either crash
@@ -7,6 +7,8 @@
  *
  * This test recursively scans all *.test.js files under test/ and fails if any
  * of them contain an import or require path that includes "functions/".
+ * One explicitly named, dependency-free Web API helper is portable to Node;
+ * its separate entry.ts still contains the platform SDK and remains forbidden.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -34,13 +36,19 @@ function collectTestFiles(dir) {
   return files;
 }
 
-const FUNCTIONS_IMPORT_RE = /(from\s+['"].*functions\/|require\(['"].*functions\/)/;
+const FUNCTIONS_IMPORT_RE = /(?:from\s+|require\(\s*|import\(\s*)['"]([^'"]*functions\/[^'"]*)['"]/g;
+const PORTABLE_HELPER = path.resolve(TEST_DIR, '../base44/functions/getHebrewFormsPilot/handler.js');
 
 describe('meta: no test file imports from functions/ (Deno runtime code)', () => {
   const testFiles = collectTestFiles(TEST_DIR);
 
   it('found at least one test file to scan', () => {
     expect(testFiles.length).toBeGreaterThan(0);
+  });
+
+  it('the portable pilot helper has no imports or platform runtime dependencies', () => {
+    const source = fs.readFileSync(PORTABLE_HELPER, 'utf8');
+    expect(source).not.toMatch(/\b(?:import|require|Deno)\b/);
   });
 
   for (const filePath of testFiles) {
@@ -53,11 +61,12 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
 
     it(`${relativePath} does not import from functions/`, () => {
       const source = fs.readFileSync(filePath, 'utf8');
-      const match = FUNCTIONS_IMPORT_RE.exec(source);
-      expect(
-        match,
-        `Found forbidden functions/ import in ${relativePath}: "${match?.[0]}"`
-      ).toBeNull();
+      for (const match of source.matchAll(FUNCTIONS_IMPORT_RE)) {
+        expect(
+          path.resolve(path.dirname(filePath), match[1]),
+          `Found forbidden platform functions/ import in ${relativePath}: "${match[0]}"`
+        ).toBe(PORTABLE_HELPER);
+      }
     });
   }
 });

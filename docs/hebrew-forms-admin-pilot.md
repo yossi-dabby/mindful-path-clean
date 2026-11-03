@@ -1,6 +1,7 @@
 # Hebrew forms administrator review pilot
 
-Last updated: 2026-11-03. Status: proposed change; not deployed.
+Last updated: 2026-11-03. PR #2 is merged and its Railway service is deployed.
+The Base44-host transport correction described below is awaiting review/deployment.
 
 ## Scope and content provenance
 
@@ -26,7 +27,8 @@ status and multilingual catalog behavior remain unchanged.
 `server/index.mjs` replaces the prior standalone static server for Railway.
 It still serves only `dist/`, uses SPA fallback, and applies `serve.json`
 security headers. Directory listings, source routes and unknown API routes
-are denied. No backend Base44 function or schema deployment is needed.
+are denied. The Base44-host correction adds one backend function,
+`base44/functions/getHebrewFormsPilot/entry.ts`, with no schema changes.
 
 `server/private/hebrew-pilot-catalog.json` and
 `server/private/forms/{original-id}.pdf` are server-only repository files,
@@ -51,6 +53,17 @@ Downloads use `?download=1` and attachment disposition; open uses inline.
 Both server and browser check file integrity. Session tokens stay in request
 headers and are not embedded in PDF URLs.
 
+The browser calls `base44.functions.invoke('getHebrewFormsPilot', { path,
+download })` using the existing SDK's current session and functions version.
+The Base44 function rechecks the caller with `auth.me()` and requires the fixed
+app ID, a user ID and the current administrator role. It forwards only the
+caller's bearer token to the fixed Railway API origin; the Railway server
+independently rechecks authorization. No service-role credential, cookie,
+caller-selected destination or public PDF URL is forwarded. Redirects are
+disabled, requests time out after 15 seconds, and response sizes are bounded.
+PDFs travel in a base64 JSON envelope to work with SDK `invoke`; the browser
+decodes them and retains the original byte-length/SHA-256 checks.
+
 ## User interface and rollout
 
 The existing forms page includes `HebrewFormsPilot` inside its current shell.
@@ -60,17 +73,24 @@ the original PDF on mobile and desktop; downloading retains its original ID
 as the filename. Preview blobs are revoked when closed/unmounted or when
 the active identity/language changes. Failed authorization clears the preview.
 
-This endpoint exists on the Node/Railway host, not on Base44's frontend host
-or a static-only preview. An administrator on a host without the endpoint sees
-an unavailable message. Review the pilot on the Railway-hosted app before
-considering other hosts, mobile native origins or therapist access. Do not
-configure permissive cross-origin access to work around that limitation.
+The original same-origin `/api/hebrew-forms-pilot` request only worked on the
+Node/Railway host. Base44 preview and published frontend hosts do not implement
+that Node route, which caused the reported unavailable message after PR #2.
+The SDK function transport supports these hosts without browser-to-Railway
+cross-origin requests or permissive CORS. Backend availability failures now
+display a retry message; only authentication failures request a new login.
+An HTTP 401 probe alone does not prove administrator access or successful
+rendering. Authenticated preview and public-host smoke checks remain required.
 
 This PR does not change service sources, environment variables, public access,
 or publish settings. Review and passing CI precede merge/deployment. Runtime
 startup overrides in Railway must be checked before rollout, because an
 override of `railway.toml` would keep the old static server and disable the API.
-Rollback uses the preceding application version and its static start command.
+Deploy the backend function and frontend from the same reviewed commit. Verify
+the function version in both preview and published Base44 environments. If
+Base44 GitHub sync does not deploy backend functions automatically, deploy the
+reviewed function through the platform before publishing the frontend. Rollback
+to PR #2 retains Railway's private API but restores the Base44-host limitation.
 
 ## Validation and review checklist
 
@@ -83,19 +103,23 @@ Rollback uses the preceding application version and its static start command.
 - [x] Public forms index remains empty/under revision; no pilot IDs in AI registry.
 - [x] Existing anti-framing test now checks the new launch command and retained
   security-header configuration; HTTP assertions independently verify headers.
-- [x] Local full unit suite: 351 files / 11,041 tests passed.
-- [x] Local lint, typecheck, production build and forms-index checks passed.
-- [x] Eight dedicated desktop/mobile browser scenarios passed locally using
-  Chromium 153, including real PDF rendering and byte-for-byte downloads.
-- [ ] Dedicated desktop/mobile Playwright scenarios pass in CI.
-- [ ] Existing full desktop/mobile E2E CI passes for this PR.
-- [ ] Human review and authenticated Railway-host smoke check before rollout.
+- [x] PR #2 unit suite, lint, typecheck, build, forms-index and all CI passed.
+- [x] Base44 proxy tests verify both authorization boundaries and all 154 PDF hashes.
+- [x] Transport correction: 352 unit files / 11,050 tests, lint, typecheck,
+  production build and forms-index checks pass locally.
+- [x] Transport correction: ten dedicated desktop/mobile Playwright scenarios
+  pass locally with real PDF rendering and downloads.
+- [ ] Transport correction: existing full desktop/mobile E2E CI.
+- [ ] Human review and authenticated Base44 preview/public-host smoke checks.
 
 The dedicated Playwright configuration uses an isolated component harness and
-the real Node API/PDF bundle. Only external identity verification is stubbed
-with synthetic accounts. There is no production auth-bypass environment flag.
-The new workflow installs browsers and executes eight scenarios for desktop and
-mobile. The regular E2E suite is not weakened or skipped.
+the real SDK request, Base44 handler and Node API/PDF bundle. Only external
+identity verification and the fixed service location are substituted with local
+fixtures. There is deliberately no Vite `/api/hebrew-forms-pilot` proxy, which
+masked the host mismatch in the original test harness. There is no production
+auth-bypass environment flag. The workflow executes ten scenarios for desktop
+and mobile, including corrupted PDFs, expired sessions and backend outages.
+The regular E2E suite is not weakened or skipped.
 
 Run `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`,
 `npm run check:forms-index`, and

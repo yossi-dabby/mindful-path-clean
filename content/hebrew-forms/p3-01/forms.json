@@ -1,0 +1,488 @@
+[
+  {
+    "id": "MP-MOOD-02-G-ALL-HE",
+    "title": "הנחיות למטפל: להבין מה מצמצם את היום",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "MOOD-02",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-02-W-CH-HE",
+    "title": "מה היה קשה לי לעשות?",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-02",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-02-W-TE-HE",
+    "title": "כשמשהו ביום שלי הצטמצם",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-02",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-02-W-AD-HE",
+    "title": "מה מגביל את ההשתתפות שלי?",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-02",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-02-W-OA-HE",
+    "title": "מה הקשה על משהו שרציתי?",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-02",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-02-P-CH-HE",
+    "title": "לגלות מה יכול לעזור",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-02",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-02-P-TE-HE",
+    "title": "לשים לב לקושי ולתמיכה",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-02",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-02-P-AD-HE",
+    "title": "תצפית על חסם ותמיכה",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-02",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-02-P-OA-HE",
+    "title": "לשים לב למה שמקל עליי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-02",
+    "track": "mood"
+  },
+  {
+    "id": "MP-SELF-01-G-ALL-HE",
+    "title": "הנחיות למטפל: להפריד בין אירוע לבין ערך עצמי",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "SELF-01",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-01-W-CH-HE",
+    "title": "מה קרה ומה אמרתי לעצמי?",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-01",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-01-W-TE-HE",
+    "title": "אירוע אחד אינו כל הסיפור שלי",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-01",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-01-W-AD-HE",
+    "title": "ביקורת עצמית מול תיאור מדויק",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-01",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-01-W-OA-HE",
+    "title": "לראות את עצמי מעבר לרגע קשה",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-01",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-01-P-CH-HE",
+    "title": "משפט הוגן יותר לעצמי",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-01",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-01-P-TE-HE",
+    "title": "לנסות דיבור עצמי מדויק",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-01",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-01-P-AD-HE",
+    "title": "לבדוק ניסוח מכבד ביומיום",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-01",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-01-P-OA-HE",
+    "title": "מילים שמתאימות לי יותר",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-01",
+    "track": "self"
+  },
+  {
+    "id": "MP-PERF-01-G-ALL-HE",
+    "title": "הנחיות למטפל: לבדוק כלל שמכביד עליי",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "PERF-01",
+    "track": "perf"
+  },
+  {
+    "id": "MP-PERF-01-W-CH-HE",
+    "title": "מתי אני דורש מעצמי יותר מדי?",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "PERF-01",
+    "track": "perf"
+  },
+  {
+    "id": "MP-PERF-01-W-TE-HE",
+    "title": "הכלל שלי: מועיל או מכביד?",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "PERF-01",
+    "track": "perf"
+  },
+  {
+    "id": "MP-PERF-01-W-AD-HE",
+    "title": "סטנדרט מתאים למשימה",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "PERF-01",
+    "track": "perf"
+  },
+  {
+    "id": "MP-PERF-01-W-OA-HE",
+    "title": "מה באמת נדרש ממני כאן?",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "PERF-01",
+    "track": "perf"
+  },
+  {
+    "id": "MP-PERF-01-P-CH-HE",
+    "title": "לנסות דרך קצת יותר גמישה",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "PERF-01",
+    "track": "perf"
+  },
+  {
+    "id": "MP-PERF-01-P-TE-HE",
+    "title": "בדיקה קטנה של כלל מכביד",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "PERF-01",
+    "track": "perf"
+  },
+  {
+    "id": "MP-PERF-01-P-AD-HE",
+    "title": "ניסיון מוגבל בגמישות",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "PERF-01",
+    "track": "perf"
+  },
+  {
+    "id": "MP-PERF-01-P-OA-HE",
+    "title": "לבדוק דרך שמתאימה לי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "PERF-01",
+    "track": "perf"
+  },
+  {
+    "id": "MP-REG-01-G-ALL-HE",
+    "title": "הנחיות למטפל: לזהות סימן ולבחור תגובה",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "REG-01",
+    "track": "reg"
+  },
+  {
+    "id": "MP-REG-01-W-CH-HE",
+    "title": "איך אדע שהרגש מתחזק?",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "REG-01",
+    "track": "reg"
+  },
+  {
+    "id": "MP-REG-01-W-TE-HE",
+    "title": "הסימן שלי לפני תגובה",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "REG-01",
+    "track": "reg"
+  },
+  {
+    "id": "MP-REG-01-W-AD-HE",
+    "title": "סימנים, צרכים ובחירת תגובה",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "REG-01",
+    "track": "reg"
+  },
+  {
+    "id": "MP-REG-01-W-OA-HE",
+    "title": "לשים לב ולבחור מה נחוץ לי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "REG-01",
+    "track": "reg"
+  },
+  {
+    "id": "MP-REG-01-P-CH-HE",
+    "title": "הסימן שלי והעזרה שאבחר",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "REG-01",
+    "track": "reg"
+  },
+  {
+    "id": "MP-REG-01-P-TE-HE",
+    "title": "להתנסות בתגובה שנבחרה מראש",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "REG-01",
+    "track": "reg"
+  },
+  {
+    "id": "MP-REG-01-P-AD-HE",
+    "title": "בדיקה של תגובה מותאמת",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "REG-01",
+    "track": "reg"
+  },
+  {
+    "id": "MP-REG-01-P-OA-HE",
+    "title": "תגובה אחת שמתאימה לי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "REG-01",
+    "track": "reg"
+  },
+  {
+    "id": "MP-EXEC-01-G-ALL-HE",
+    "title": "הנחיות למטפל: להכין התחלה שמתאימה לי",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "EXEC-01",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-01-W-CH-HE",
+    "title": "מה יעזור לי להתחיל?",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-01",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-01-W-TE-HE",
+    "title": "להפוך משימה להתחלה אפשרית",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-01",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-01-W-AD-HE",
+    "title": "התחלה ברורה ותנאים תומכים",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-01",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-01-W-OA-HE",
+    "title": "להתארגן בדרך שנוחה לי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-01",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-01-P-CH-HE",
+    "title": "ניסיון אחד להתחיל",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-01",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-01-P-TE-HE",
+    "title": "לבדוק מה עוזר להתחלה",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-01",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-01-P-AD-HE",
+    "title": "ניסיון קצר בתנאים מותאמים",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-01",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-01-P-OA-HE",
+    "title": "לנסות התחלה שמתאימה לי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-01",
+    "track": "exec"
+  },
+  {
+    "id": "MP-SOC-01-G-ALL-HE",
+    "title": "הנחיות למטפל: לבקש צורך ולשמור על גבול",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "SOC-01",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-01-W-CH-HE",
+    "title": "איך אבקש מה שאני צריך?",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-01",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-01-W-TE-HE",
+    "title": "לומר מה חשוב לי בדרך שמתאימה לי",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-01",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-01-W-AD-HE",
+    "title": "צורך, בקשה וגבול בשיחה",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-01",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-01-W-OA-HE",
+    "title": "להשמיע בקשה בדרך שלי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-01",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-01-P-CH-HE",
+    "title": "להתאמן בבקשה אחת",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-01",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-01-P-TE-HE",
+    "title": "ניסיון בטוח בביטוי צורך",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-01",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-01-P-AD-HE",
+    "title": "תרגול בקשה או גבול",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-01",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-01-P-OA-HE",
+    "title": "לנסות לומר מה נחוץ לי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-01",
+    "track": "soc"
+  }
+]

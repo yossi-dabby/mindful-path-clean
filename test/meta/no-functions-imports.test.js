@@ -7,7 +7,8 @@
  *
  * This test recursively scans all *.test.js files under test/ and fails if any
  * of them contain an import or require path that includes "functions/".
- * One explicitly named, dependency-free Web API helper is portable to Node;
+ * Two explicitly named Web API modules are portable to Node; the handler may
+ * import only the dependency-free release contract, checked below.
  * its separate entry.ts still contains the platform SDK and remains forbidden.
  */
 
@@ -38,6 +39,7 @@ function collectTestFiles(dir) {
 
 const FUNCTIONS_IMPORT_RE = /(?:from\s+|require\(\s*|import\(\s*)['"]([^'"]*functions\/[^'"]*)['"]/g;
 const PORTABLE_HELPER = path.resolve(TEST_DIR, '../base44/functions/getHebrewFormsPilot/handler.js');
+const PORTABLE_RELEASE = path.resolve(TEST_DIR, '../base44/functions/getHebrewFormsPilot/releases.js');
 
 describe('meta: no test file imports from functions/ (Deno runtime code)', () => {
   const testFiles = collectTestFiles(TEST_DIR);
@@ -46,9 +48,12 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
     expect(testFiles.length).toBeGreaterThan(0);
   });
 
-  it('the portable pilot helper has no imports or platform runtime dependencies', () => {
+  it('the portable pilot helper imports only the dependency-free Web API release contract', () => {
     const source = fs.readFileSync(PORTABLE_HELPER, 'utf8');
-    expect(source).not.toMatch(/\b(?:import|require|Deno)\b/);
+    const allowedImport = "import { isPilotCatalogPath, validatePilotCatalog } from './releases.js';";
+    expect(source.split(allowedImport)).toHaveLength(2);
+    expect(source.replace(allowedImport, '')).not.toMatch(/\b(?:import|require|Deno)\b/);
+    expect(fs.readFileSync(PORTABLE_RELEASE, 'utf8')).not.toMatch(/\b(?:import|require|Deno)\b/);
   });
 
   for (const filePath of testFiles) {
@@ -63,9 +68,9 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
       const source = fs.readFileSync(filePath, 'utf8');
       for (const match of source.matchAll(FUNCTIONS_IMPORT_RE)) {
         expect(
-          path.resolve(path.dirname(filePath), match[1]),
+          [PORTABLE_HELPER, PORTABLE_RELEASE],
           `Found forbidden platform functions/ import in ${relativePath}: "${match[0]}"`
-        ).toBe(PORTABLE_HELPER);
+        ).toContain(path.resolve(path.dirname(filePath), match[1]));
       }
     });
   }

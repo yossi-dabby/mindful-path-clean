@@ -1,3 +1,5 @@
+import { isPilotCatalogPath, validatePilotCatalog } from './releases.js';
+
 // Only this app's existing private Railway service may receive the caller's token.
 // No service-role credentials, public asset URLs or caller-selected upstreams.
 const PILOT_URL = 'https://mindful-path-production-7704.up.railway.app/api/hebrew-forms-pilot';
@@ -96,7 +98,7 @@ export async function handleHebrewFormsPilot(req, { createClientFromRequest, fet
     if (!input || typeof input !== 'object' || Array.isArray(input) ||
         Object.keys(input).some((key) => !['path', 'download'].includes(key)) ||
         (input.download !== undefined && typeof input.download !== 'boolean')) return fail(400);
-    const isCatalog = input.path === 'catalog';
+    const isCatalog = isPilotCatalogPath(input.path);
     const fileMatch = typeof input.path === 'string' && /^files\/(MP-[A-Z0-9-]{1,80}-HE)$/.exec(input.path);
     if (!isCatalog && !fileMatch) return fail(400);
     stage = 'timeout';
@@ -128,7 +130,7 @@ export async function handleHebrewFormsPilot(req, { createClientFromRequest, fet
     if (isCatalog) {
       stage = 'catalog';
       const catalog = JSON.parse(new TextDecoder().decode(bytes));
-      if (catalog.language !== 'he' || !Array.isArray(catalog.forms) || catalog.forms.length !== 154) return fail(502);
+      if (!await validatePilotCatalog(catalog, input.path)) return fail(502);
       return json({ kind: 'catalog', catalog });
     }
     stage = 'pdf';

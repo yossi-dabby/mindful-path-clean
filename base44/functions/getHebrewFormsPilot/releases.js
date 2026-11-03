@@ -1,0 +1,30 @@
+// Shared by Workers, Railway and the browser. Only reviewed, pinned catalogs
+// are accepted; the original endpoint stays on 0.2 for older deployed clients.
+export const EXPANDED_CATALOG_PATH = 'catalog-mood-01';
+export const PILOT_RELEASES = Object.freeze({
+  catalog: Object.freeze({ version: '0.2', count: 154, sha256: '2c1df7644d778508b37d2a5076d902906b241166e09f93d388295a8a9983d90b' }),
+  [EXPANDED_CATALOG_PATH]: Object.freeze({ version: '0.3-mood-01', count: 163, sha256: 'a9da2978a3d29b8c62a50e3ce9219d4b214d3bfd881ba6eb872e6bacab9885cf' }),
+});
+
+export function isPilotCatalogPath(path) {
+  return typeof path === 'string' && Object.hasOwn(PILOT_RELEASES, path);
+}
+
+// Key order is not part of the transport contract; array order is intentional.
+export function canonicalCatalog(value) {
+  if (Array.isArray(value)) return `[${value.map(canonicalCatalog).join(',')}]`;
+  if (value !== null && typeof value === 'object') {
+    return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonicalCatalog(value[key])}`).join(',')}}`;
+  }
+  return JSON.stringify(value);
+}
+
+export async function validatePilotCatalog(catalog, path) {
+  if (!isPilotCatalogPath(path)) return false;
+  const release = PILOT_RELEASES[path];
+  if (catalog?.language !== 'he' || catalog.version !== release.version ||
+      !Array.isArray(catalog.forms) || catalog.forms.length !== release.count) return false;
+  const digest = await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(canonicalCatalog(catalog)));
+  const hex = Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
+  return hex === release.sha256;
+}

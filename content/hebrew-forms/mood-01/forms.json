@@ -1,0 +1,65 @@
+[
+  {
+    "id": "MP-MOOD-01-G-ALL-HE",
+    "title": "הנחיות למטפל: לראות את היום ואת מה שמשפיע עליו",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4
+  },
+  {
+    "id": "MP-MOOD-01-W-CH-HE",
+    "title": "רגע אחד מהיום שלי",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1
+  },
+  {
+    "id": "MP-MOOD-01-W-TE-HE",
+    "title": "היום שלי: מה עשיתי ומה הרגשתי",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1
+  },
+  {
+    "id": "MP-MOOD-01-W-AD-HE",
+    "title": "פעילות, תחושה ותמיכה ביום שלי",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1
+  },
+  {
+    "id": "MP-MOOD-01-W-OA-HE",
+    "title": "רגע מהיום ומה השפיע עליו",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1
+  },
+  {
+    "id": "MP-MOOD-01-P-CH-HE",
+    "title": "לשים לב לרגע אחד",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1
+  },
+  {
+    "id": "MP-MOOD-01-P-TE-HE",
+    "title": "רגע אחד לבדיקה עד הפגישה הבאה",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1
+  },
+  {
+    "id": "MP-MOOD-01-P-AD-HE",
+    "title": "תצפית קצרה ביום יום",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1
+  },
+  {
+    "id": "MP-MOOD-01-P-OA-HE",
+    "title": "משהו אחד שאשים לב אליו",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1
+  }
+]

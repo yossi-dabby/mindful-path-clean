@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - 'server/**'
+      - 'content/hebrew-forms/**'
+      - 'scripts/render-hebrew-mood.mjs'
       - 'base44/functions/getHebrewFormsPilot/**'
       - 'test/utils/hebrewFormsPilot*.test.js'
       - 'src/components/forms/**'
@@ -29,6 +31,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      - run: node scripts/render-hebrew-mood.mjs
       - run: npm run build
         env:
           VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'

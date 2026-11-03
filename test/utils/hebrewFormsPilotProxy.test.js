@@ -11,7 +11,7 @@ const request = (body = { path: 'catalog' }, headers = {}, method = 'POST') => n
   ...(method === 'POST' ? { body: typeof body === 'string' ? body : JSON.stringify(body) } : {}),
 });
 const client = (me = user) => () => ({ auth: { me: async () => me } });
-const diagnosticDefaults = { diagnosticVersion: 2, causeCode: 'unknown', reason: 'unknown', timeoutAvailable: true };
+const diagnosticDefaults = { diagnosticVersion: 3, causeCode: 'unknown', reason: 'unknown', timeoutAvailable: true };
 
 describe('Base44 pilot proxy authorization and transport', () => {
   afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); });
@@ -55,18 +55,65 @@ describe('Base44 pilot proxy authorization and transport', () => {
 
   it('identifies Request option validation separately and never retries with relaxed options', async () => {
     const req = request(), fetchImpl = vi.fn(), logFailure = vi.fn();
+    const NativeRequest = Request;
     vi.stubGlobal('Request', class {
-      constructor(url, options) {
+      constructor(url, options = {}) {
         expect(url).toBe('https://mindful-path-production-7704.up.railway.app/api/hebrew-forms-pilot/catalog');
-        expect(options).toMatchObject({ cache: 'no-store', redirect: 'error', headers: { Authorization: 'Bearer fixture-session' } });
-        throw new TypeError("The 'cache' field on 'RequestInitializerDict' is not implemented. private details");
+        if ('cache' in options) throw new TypeError("The 'cache' field on 'RequestInitializerDict' is not implemented. private details");
+        return new NativeRequest(url, options);
       }
     });
     const response = await handleHebrewFormsPilot(req, { createClientFromRequest: client(), fetchImpl, logFailure });
     expect(response.status).toBe(503);
     expect(await response.json()).toEqual({ error: 'PILOT_UNAVAILABLE' });
     expect(fetchImpl).not.toHaveBeenCalled();
-    expect(logFailure.mock.calls).toEqual([[{ ...diagnosticDefaults, stage: 'request', errorType: 'TypeError', reason: 'cache_option_unsupported' }]]);
+    expect(logFailure.mock.calls).toEqual([[{ ...diagnosticDefaults, stage: 'request', errorType: 'TypeError', reason: 'cache_option_unsupported', requestChecks: {
+      baseline: true, headers: true, signal: true, redirect: true, cache: false,
+      withoutHeaders: false, withoutSignal: false, withoutRedirect: false, withoutCache: true,
+    } }]]);
+  });
+
+  it('distinguishes incompatible signals, option interactions and an unavailable Request constructor without network probes', async () => {
+    const NativeRequest = Request;
+    const cases = [
+      { rejects: (options) => 'signal' in options, expected: { baseline: true, headers: true, signal: false, redirect: true, cache: true, withoutHeaders: false, withoutSignal: true, withoutRedirect: false, withoutCache: false } },
+      { rejects: (options) => 'headers' in options && 'signal' in options, expected: { baseline: true, headers: true, signal: true, redirect: true, cache: true, withoutHeaders: true, withoutSignal: true, withoutRedirect: false, withoutCache: false } },
+      { rejects: () => true, expected: { baseline: false, headers: false, signal: false, redirect: false, cache: false, withoutHeaders: false, withoutSignal: false, withoutRedirect: false, withoutCache: false } },
+    ];
+    for (const { rejects, expected } of cases) {
+      const req = request(), fetchImpl = vi.fn(), logFailure = vi.fn();
+      let constructions = 0;
+      vi.stubGlobal('Request', class {
+        constructor(url, options = {}) {
+          constructions++;
+          if (rejects(options)) throw new TypeError(`private-session user@example.test ${url}`);
+          return new NativeRequest(url, options);
+        }
+      });
+      try {
+        const response = await handleHebrewFormsPilot(req, { createClientFromRequest: client(), fetchImpl, logFailure });
+        expect(response.status).toBe(503);
+        expect(await response.json()).toEqual({ error: 'PILOT_UNAVAILABLE' });
+        expect(fetchImpl).not.toHaveBeenCalled();
+        expect(constructions).toBe(10);
+        expect(logFailure.mock.calls).toEqual([[{ ...diagnosticDefaults, stage: 'request', errorType: 'TypeError', requestChecks: expected }]]);
+        expect(JSON.stringify(logFailure.mock.calls)).not.toMatch(/private-session|user@example|https:|Authorization/);
+      } finally { vi.unstubAllGlobals(); }
+    }
+  });
+
+  it('never runs the option probes when Request construction succeeds', async () => {
+    const req = request(), NativeRequest = Request, logFailure = vi.fn();
+    let constructions = 0;
+    vi.stubGlobal('Request', class {
+      constructor(url, options) { constructions++; return new NativeRequest(url, options); }
+    });
+    const fetchImpl = vi.fn(async () => { throw new TypeError('private fetch error'); });
+    const response = await handleHebrewFormsPilot(req, { createClientFromRequest: client(), fetchImpl, logFailure });
+    expect(response.status).toBe(503);
+    expect(constructions).toBe(1);
+    expect(fetchImpl).toHaveBeenCalledTimes(1);
+    expect(logFailure.mock.calls).toEqual([[{ ...diagnosticDefaults, stage: 'fetch', errorType: 'TypeError' }]]);
   });
 
   it('reports only allowlisted direct or nested cause codes, even when exceptions contain secrets', async () => {

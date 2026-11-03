@@ -11,6 +11,24 @@ const SAFE_CAUSE_CODES = new Set([
   'ERR_INVALID_ARG_TYPE', 'ERR_INVALID_URL',
 ]);
 
+// Run only after Request construction has failed. These constructors perform
+// no network I/O; fixed boolean labels are the only information returned.
+function probeRequestOptions(url, options) {
+  const { headers, signal, redirect, cache } = options;
+  const variants = {
+    baseline: {}, headers: { headers }, signal: { signal },
+    redirect: { redirect }, cache: { cache },
+    withoutHeaders: { signal, redirect, cache },
+    withoutSignal: { headers, redirect, cache },
+    withoutRedirect: { headers, signal, cache },
+    withoutCache: { headers, signal, redirect },
+  };
+  return Object.fromEntries(Object.entries(variants).map(([name, init]) => {
+    try { new Request(url, init); return [name, true]; }
+    catch { return [name, false]; }
+  }));
+}
+
 async function readBounded(response, limit) {
   const reader = response.body?.getReader();
   if (!reader) throw new Error('Missing response body');
@@ -42,6 +60,7 @@ export async function handleHebrewFormsPilot(req, { createClientFromRequest, fet
   if (!/^Bearer [^\s]{1,8192}$/.test(authorization)) return fail(401);
   if (req.headers.get('Base44-App-Id') !== APP_ID) return fail(403);
   let stage = 'client';
+  let requestContext;
   // Emit closed-set categories only. Raw errors, messages, headers, identities,
   // paths and response bodies must never reach logs or client responses.
   const report = (error, upstreamStatus) => {
@@ -53,8 +72,9 @@ export async function handleHebrewFormsPilot(req, { createClientFromRequest, fet
       const reason = /^The '?cache'? field on '?RequestInitializerDict'? is not implemented\b/.test(message) || /^Unsupported cache mode:/.test(message)
         ? 'cache_option_unsupported' : 'unknown';
       logFailure({
-        diagnosticVersion: 2, stage, errorType, causeCode, reason,
+        diagnosticVersion: 3, stage, errorType, causeCode, reason,
         timeoutAvailable: typeof globalThis.AbortSignal?.timeout === 'function',
+        ...(stage === 'request' && requestContext ? { requestChecks: probeRequestOptions(requestContext.url, requestContext.options) } : {}),
         ...(Number.isInteger(upstreamStatus) && upstreamStatus >= 100 && upstreamStatus <= 599 ? { upstreamStatus } : {}),
       });
     }
@@ -87,6 +107,7 @@ export async function handleHebrewFormsPilot(req, { createClientFromRequest, fet
       headers: { Authorization: authorization },
       signal, redirect: 'error', cache: 'no-store',
     };
+    requestContext = { url: upstreamUrl, options };
     // Local construction only: distinguish Request option validation from fetch.
     // Keep the actual URL/options call unchanged; do not retry or relax options.
     new Request(upstreamUrl, options);

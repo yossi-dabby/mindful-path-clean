@@ -4,6 +4,8 @@ on:
     branches: [main]
     paths:
       - 'server/**'
+      - 'base44/functions/getHebrewFormsPilot/**'
+      - 'test/utils/hebrewFormsPilot*.test.js'
       - 'src/components/forms/**'
       - 'src/lib/hebrewFormsPilotClient.js'
       - 'src/pages/TherapeuticForms.jsx'

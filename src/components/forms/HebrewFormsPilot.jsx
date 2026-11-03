@@ -41,8 +41,10 @@ export default function HebrewFormsPilot() {
           const data = await response.json();
           if (!controller.signal.aborted && data.language === 'he' && data.forms?.length === 154) setCatalog(data);
           else if (!controller.signal.aborted) setError('חבילת הפיילוט אינה זמינה כרגע.');
-        } catch {
-          if (!controller.signal.aborted) setError('חבילת הפיילוט אינה זמינה כרגע. נסו שוב לאחר התחברות מחדש.');
+        } catch (failure) {
+          if (!controller.signal.aborted) setError(failure.message === 'PILOT_AUTH'
+            ? 'אין הרשאת מנהל תקפה. יש להתחבר מחדש.'
+            : 'חבילת הפיילוט אינה זמינה כרגע. נסו שוב בעוד זמן קצר.');
         }
       })();
     }

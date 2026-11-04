@@ -192,6 +192,24 @@ for (const language of ['en', 'he']) for (const width of [360, 390]) {
   });
 }
 
+for (const language of ['en', 'he']) {
+  test(`Home keeps the focused tab visible after enlarged text finishes animating ${language}`, async ({ page }) => {
+    await prepare(page, { language, viewport: { width: 360, height: 844 }, longName: true });
+    // Slow the existing transition to reproduce keyboard focus during a text
+    // resize. Layout animation used to move the tab after focus scrolled to it.
+    await page.addStyleTag({ content: '[data-mobile-bottom-nav] a { --dur-med: 2s; }' });
+    await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+    await expect.poll(() => page.locator('[data-mobile-header]').evaluate(el => Math.abs(el.getBoundingClientRect().height - parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--mobile-header-height'))))).toBeLessThan(1);
+    const tabs = page.locator('[data-mobile-bottom-nav] a');
+    for (const tab of await tabs.all()) await tab.focus();
+    const focused = tabs.last();
+    await expect.poll(() => focused.evaluate(el => el.getAnimations().filter(animation => animation.playState === 'running' || animation.pending).length)).toBe(0);
+    await expect(focused).toBeFocused();
+    await expect(focused).toBeInViewport({ ratio: 0.99 });
+    expect(await focused.evaluate(el => el.scrollWidth <= el.clientWidth + 2)).toBe(true);
+  });
+}
+
 test('Home displays a visible data failure and retries it', async ({ page }) => {
   const state = await prepare(page, { loadError: true });
   await expect(page.getByRole('alert').filter({ hasText: 'Some of your activity' })).toBeVisible({ timeout: 15000 });

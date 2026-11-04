@@ -11,7 +11,7 @@ import argparse
 
 ROOT = Path(__file__).resolve().parent.parent
 parser = argparse.ArgumentParser()
-parser.add_argument('--wave', choices=['p4-01', 'p4-02', 'series-01'], default='p4-01')
+parser.add_argument('--wave', choices=['p4-01', 'p4-02', 'series-01', 'series-02'], default='p4-01')
 wave = parser.parse_args().wave
 SOURCE = ROOT / 'content/hebrew-forms' / wave
 BASE = ROOT / 'content/hebrew-forms/mood-01'
@@ -54,12 +54,14 @@ for unit in spec['units']:
         section('בחירה והתאמה', 'בחרו בדף לאחר הערכה מקצועית ובהסכמה. אפשר לדלג, להשיב בעל פה או לבחור כלי אחר. זהו חומר מקורי מוצע לסקירה; אין ציון, אבחון או הבטחה לתוצאה.') +
         section('גבולות ייחודיים ליחידה', unit['limits']) +
         section('שימוש חוזר בחומר הקיים', unit['overlap']) +
+        (section('דוגמה בדויה לשיחה', unit['fictionalExample']) if 'fictionalExample' in unit else '') +
         '<div class="note">טיוטה לסקירת מנהל. סקירה קלינית ואישור זכויות סופיים טרם הושלמו.</div>')]
     prompts = unit['worksheet']['AD']
     pages.append(sheet(unit, guide, 'לעבוד יחד עם דף העבודה', '2 | שיחה סביב מצב אחד',
         section('פתיחה', 'בחרו מצב שהאדם מעוניין לבדוק. אין צורך לבחור את המצב הקשה ביותר. ודאו שהשאלה מובנת ושהמילים מתאימות לאדם; תיאורו קודם לפרשנות המטפל.') +
         ''.join(section(f'{i + 1} | שאלה לשיחה', prompt) for i, prompt in enumerate(prompts)) +
-        section('סיום', 'סכמו מה הובן ומה נשאר פתוח. היעזרו ב־SES-S01 וב־SES-S02 הקיימים למעטפת המפגש. אין צורך למלא שוב הערכה או תוכנית שכבר תועדה.'), 2))
+        section('סיום', 'סכמו מה הובן ומה נשאר פתוח. היעזרו ב־SES-S01 וב־SES-S02 הקיימים למעטפת המפגש. אין צורך למלא שוב הערכה או תוכנית שכבר תועדה.') +
+        (section('קשיים אפשריים', unit['difficulties']) if 'difficulties' in unit else ''), 2))
     pages.append(sheet(unit, guide, 'התאמה לארבע קבוצות גיל', '3 | גיל הוא נקודת מוצא, לא הנחה על יכולת',
         section(unit.get('childHeading', 'CH | ילדים, בקירוב 6 עד 11'), unit['adaptations']['CH'], 'הציעו שאלה אחת בכל פעם ומעט כתיבה. תיווך מבוגר לא יחליף את קול הילד.') +
         section('TE | מתבגרים, בקירוב 12 עד 17', unit['adaptations']['TE'], 'סכמו מראש מה משתפים ועם מי, ואת גבולות הפרטיות במסגרת. אין להבטיח סודיות מוחלטת.') +

@@ -44,3 +44,10 @@ The private-library transport test now checks all 370 PDFs in five bounded group
 Merge through GitHub. Wait for the Railway deployment containing the private PDFs and new pinned catalog. Sync the Base44 source, including `getHebrewFormsPilot/releases.js`, save/sync the function and publish the frontend. The client retains the previous 289-form release if the new endpoint has not yet reached a host.
 
 As an authenticated administrator, independently verify both Base44 preview and published site: exact heading, bold warning and working terms anchor, count 370/version `0.7-series-01`, six MOOD and six SELF units for each age, opening/downloading a new W/P form and all four pages of a new guide, and retained old forms. Match at least one downloaded PDF's bytes and SHA-256 against the new catalog. Then update [progress](hebrew-series-progress.md) and begin batch 2 (90 PDFs: PERF/REG). Local fixtures and CI do not prove production egress, the deployed function version or clinical approval.
+
+
+## Completed publication record — PR 19
+
+PR 19 was merged into main as `6c81ac4621927432aec6739b7750d93803c769ac` and published by the owner on 2026-11-04. Final PR CI passed: Test Suite run 41865080933 (11,082 tests on each Node 20/22 job, typecheck clean), E2E run 41865081227 (all nine jobs), and Hebrew Forms Pilot run 41865081059 (141 cases on each desktop/mobile project). Main runs 41869760680 and 41869760751 also passed. Earlier billing/queue failures no longer describe that final result.
+
+Authenticated administrator verification of the published Base44 site confirmed count 370, version `0.7-series-01`, the requested heading and bold warning, the complete forms terms anchor, opening a new MOOD-03 child worksheet and returning to the list with focus. The downloaded `MP-MOOD-03-W-CH-HE.pdf` was 21,806 bytes, SHA-256 `13a2ad3389158c2b545d1b5b23497316fcf202dd6fa0d1cb4610b912e3b59da2`, matching the catalog. This record does not claim a separate preview-session verification or professional/rights approval. The owner authorized continuation to batch 2.

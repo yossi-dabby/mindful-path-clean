@@ -101,7 +101,7 @@ export default function HebrewFormsPilot() {
 
   if (!isHebrew || !isAdmin) return null;
   const tracks = { ...TRACKS, ...Object.fromEntries(
-    ['mood', 'self', 'perf', 'reg', 'exec', 'soc'].map((id) => [id, t(`therapeutic_forms.pilot_release.${id}`)]),
+    ['mood', 'self', 'perf', 'reg', 'exec', 'soc', 'sleep', 'change', 'family', 'screen'].map((id) => [id, t(`therapeutic_forms.pilot_release.${id}`)]),
   ) };
   const forms = (catalog?.forms || []).filter((form) => form.age === age || form.age === 'ALL');
   const selectedForms = forms.filter((form) => form.track === track && form.unit === unit);

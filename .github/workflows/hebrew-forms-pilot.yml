@@ -23,16 +23,19 @@ on:
       - '.github/workflows/hebrew-forms-pilot.yml'
       - 'package*.json'
       - 'railway.toml'
+# Cancel superseded CI runs only within the same workflow/event/ref.
+# Manual runs keep an independent group so they never cancel PR or push checks.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event_name == 'workflow_dispatch' && github.run_id || github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 jobs:
-  pilot:
+  validate:
+    name: Validate Hebrew forms sources and PDFs
     runs-on: ubuntu-24.04
     timeout-minutes: 20
-    strategy:
-      fail-fast: false
-      matrix:
-        project: [pilot-desktop, pilot-mobile]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -59,6 +62,23 @@ jobs:
       - run: npm run build
         env:
           VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'
+  pilot:
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [pilot-desktop, pilot-mobile]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run generate:forms-index
       - run: npx playwright test --config hebrew-pilot.playwright.config.ts --project=${{ matrix.project }}
         env:
           VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'

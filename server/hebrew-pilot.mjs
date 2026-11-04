@@ -1,6 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { EXPANDED_CATALOG_PATH, PILOT_RELEASES, validatePilotCatalog } from '../base44/functions/getHebrewFormsPilot/releases.js';
+import { P3_CATALOG_PATH, PILOT_RELEASES, isPilotCatalogPath, validatePilotCatalog } from '../base44/functions/getHebrewFormsPilot/releases.js';
 
 export const PILOT_PREFIX = '/api/hebrew-forms-pilot';
 const privateRoot = new URL('./private/', import.meta.url);
@@ -8,13 +8,15 @@ const privateRoot = new URL('./private/', import.meta.url);
 export async function loadPilot() {
   const catalog = JSON.parse(await readFile(new URL('hebrew-pilot-catalog.json', privateRoot), 'utf8'));
   const expandedCatalog = JSON.parse(await readFile(new URL('hebrew-pilot-mood-catalog.json', privateRoot), 'utf8'));
-  if (!await validatePilotCatalog(catalog, 'catalog') || !await validatePilotCatalog(expandedCatalog, EXPANDED_CATALOG_PATH)) {
-    throw new Error('Invalid pilot release');
+  const p3Catalog = JSON.parse(await readFile(new URL('hebrew-pilot-p3-catalog.json', privateRoot), 'utf8'));
+  const catalogs = { catalog, 'catalog-mood-01': expandedCatalog, [P3_CATALOG_PATH]: p3Catalog };
+  for (const [path, release] of Object.entries(catalogs)) {
+    if (!await validatePilotCatalog(release, path)) throw new Error('Invalid pilot release');
   }
   const formsRoot = new URL('forms/', privateRoot);
   const filenames = new Set(await readdir(formsRoot));
   const files = new Map();
-  for (const form of expandedCatalog.forms) {
+  for (const form of p3Catalog.forms) {
     if (!/^MP-[A-Z0-9-]+-HE$/.test(form.id) || !filenames.has(`${form.id}.pdf`)) {
       throw new Error('Invalid Hebrew pilot asset');
     }
@@ -25,8 +27,8 @@ export async function loadPilot() {
     }
     files.set(form.id, data);
   }
-  if (files.size !== PILOT_RELEASES[EXPANDED_CATALOG_PATH].count || filenames.size !== files.size) throw new Error('Invalid pilot count');
-  return { catalog, expandedCatalog, files };
+  if (files.size !== PILOT_RELEASES[P3_CATALOG_PATH].count || filenames.size !== files.size) throw new Error('Invalid pilot count');
+  return { catalog, expandedCatalog, p3Catalog, catalogs, files };
 }
 
 // Match the installed Base44 SDK auth.me endpoint. The app ID is server-owned;
@@ -68,8 +70,9 @@ export function createPilotHandler({ pilot, verifyAdmin }) {
     if (!match) return fail(401);
     const access = await verifyAdmin(match[1]);
     if (access.status !== 200) return fail(access.status);
-    if (url.pathname === `${PILOT_PREFIX}/catalog` || url.pathname === `${PILOT_PREFIX}/${EXPANDED_CATALOG_PATH}`) {
-      const catalog = url.pathname.endsWith(`/${EXPANDED_CATALOG_PATH}`) ? pilot.expandedCatalog : pilot.catalog;
+    const path = url.pathname.slice(`${PILOT_PREFIX}/`.length);
+    if (isPilotCatalogPath(path)) {
+      const catalog = pilot.catalogs?.[path];
       if (!catalog) return fail(404);
       res.setHeader('Content-Type', 'application/json; charset=utf-8');
       res.writeHead(200);

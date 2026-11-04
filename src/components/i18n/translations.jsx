@@ -1650,7 +1650,12 @@ export const translations = {
         pilot_release: {
           mood: "MOOD - low mood and avoidance",
           summary: "{{count}} forms, version <version>{{version}}</version>.",
-          pending: "The existing package is available. The MOOD expansion is waiting for the update to finish.",
+          pending: "The existing package is available. The additional forms are waiting for the update to finish.",
+          self: "SELF - self-worth and self-criticism",
+          perf: "PERF - perfectionism and mistakes",
+          reg: "REG - emotional regulation and anger",
+          exec: "EXEC - organization, procrastination and attention",
+          soc: "SOC - relationships, assertiveness and communication",
         },
         pilot_navigation: {
           forms: "Back to forms",
@@ -3357,7 +3362,12 @@ export const translations = {
         pilot_release: {
           mood: "MOOD — מצב רוח נמוך והימנעות",
           summary: "{{count}} טפסים, גרסה <version>{{version}}</version>.",
-          pending: "החבילה הקיימת זמינה. הרחבת MOOD ממתינה להשלמת העדכון.",
+          pending: "החבילה הקיימת זמינה. הטפסים הנוספים ממתינים להשלמת העדכון.",
+          self: "SELF — ערך עצמי וביקורת עצמית",
+          perf: "PERF — פרפקציוניזם וטעויות",
+          reg: "REG — ויסות רגשי וכעס",
+          exec: "EXEC — התארגנות, דחיינות וקשב",
+          soc: "SOC — קשרים, אסרטיביות ותקשורת",
         },
         pilot_navigation: {
           forms: "חזרה לרשימת הטפסים",
@@ -5020,7 +5030,12 @@ export const translations = {
         pilot_release: {
           mood: "MOOD - ánimo bajo y evitación",
           summary: "{{count}} formularios, versión <version>{{version}}</version>.",
-          pending: "El paquete existente está disponible. La ampliación MOOD espera a que finalice la actualización.",
+          pending: "El paquete existente está disponible. Los formularios adicionales esperan a que finalice la actualización.",
+          self: "SELF - autoestima y autocrítica",
+          perf: "PERF - perfeccionismo y errores",
+          reg: "REG - regulación emocional e ira",
+          exec: "EXEC - organización, procrastinación y atención",
+          soc: "SOC - relaciones, asertividad y comunicación",
         },
         pilot_navigation: {
           forms: "Volver a los formularios",
@@ -6680,7 +6695,12 @@ export const translations = {
         pilot_release: {
           mood: "MOOD - humeur basse et évitement",
           summary: "{{count}} formulaires, version <version>{{version}}</version>.",
-          pending: "Le contenu existant est disponible. L’extension MOOD attend la fin de la mise à jour.",
+          pending: "Le contenu existant est disponible. Les formulaires supplémentaires attendent la fin de la mise à jour.",
+          self: "SELF - estime de soi et autocritique",
+          perf: "PERF - perfectionnisme et erreurs",
+          reg: "REG - régulation émotionnelle et colère",
+          exec: "EXEC - organisation, procrastination et attention",
+          soc: "SOC - relations, affirmation de soi et communication",
         },
         pilot_navigation: {
           forms: "Retour aux formulaires",
@@ -8340,7 +8360,12 @@ export const translations = {
         pilot_release: {
           mood: "MOOD - gedrückte Stimmung und Vermeidung",
           summary: "{{count}} Formulare, Version <version>{{version}}</version>.",
-          pending: "Das bestehende Paket ist verfügbar. Die MOOD-Erweiterung wartet auf den Abschluss der Aktualisierung.",
+          pending: "Das bestehende Paket ist verfügbar. Die zusätzlichen Formulare warten auf den Abschluss der Aktualisierung.",
+          self: "SELF - Selbstwert und Selbstkritik",
+          perf: "PERF - Perfektionismus und Fehler",
+          reg: "REG - Emotionsregulation und Ärger",
+          exec: "EXEC - Organisation, Aufschieben und Aufmerksamkeit",
+          soc: "SOC - Beziehungen, Selbstbehauptung und Kommunikation",
         },
         pilot_navigation: {
           forms: "Zurück zu den Formularen",
@@ -10000,7 +10025,12 @@ export const translations = {
         pilot_release: {
           mood: "MOOD - umore basso ed evitamento",
           summary: "{{count}} moduli, versione <version>{{version}}</version>.",
-          pending: "Il pacchetto esistente è disponibile. L’estensione MOOD attende il completamento dell’aggiornamento.",
+          pending: "Il pacchetto esistente è disponibile. I moduli aggiuntivi attendono il completamento dell’aggiornamento.",
+          self: "SELF - autostima e autocritica",
+          perf: "PERF - perfezionismo ed errori",
+          reg: "REG - regolazione emotiva e rabbia",
+          exec: "EXEC - organizzazione, procrastinazione e attenzione",
+          soc: "SOC - relazioni, assertività e comunicazione",
         },
         pilot_navigation: {
           forms: "Torna ai moduli",
@@ -11660,7 +11690,12 @@ export const translations = {
         pilot_release: {
           mood: "MOOD - humor baixo e evitação",
           summary: "{{count}} formulários, versão <version>{{version}}</version>.",
-          pending: "O pacote existente está disponível. A expansão MOOD aguarda a conclusão da atualização.",
+          pending: "O pacote existente está disponível. Os formulários adicionais aguardam a conclusão da atualização.",
+          self: "SELF - autoestima e autocrítica",
+          perf: "PERF - perfeccionismo e erros",
+          reg: "REG - regulação emocional e raiva",
+          exec: "EXEC - organização, procrastinação e atenção",
+          soc: "SOC - relações, assertividade e comunicação",
         },
         pilot_navigation: {
           forms: "Voltar aos formulários",

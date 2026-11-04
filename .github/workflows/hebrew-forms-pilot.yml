@@ -6,6 +6,8 @@ on:
       - 'server/**'
       - 'content/hebrew-forms/**'
       - 'scripts/render-hebrew-mood.mjs'
+      - 'scripts/render-hebrew-p3.mjs'
+      - 'scripts/build-hebrew-p3.py'
       - 'base44/functions/getHebrewFormsPilot/**'
       - 'test/utils/hebrewFormsPilot*.test.js'
       - 'src/components/forms/**'
@@ -32,6 +34,8 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: node scripts/render-hebrew-mood.mjs
+      - run: python3 scripts/build-hebrew-p3.py && git diff --exit-code -- content/hebrew-forms/p3-01
+      - run: node scripts/render-hebrew-p3.mjs
       - run: npm run build
         env:
           VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'

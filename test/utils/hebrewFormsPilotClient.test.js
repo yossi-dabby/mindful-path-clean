@@ -40,7 +40,7 @@ describe('pilot host transports with the real private server', () => {
     expect(invoke).not.toHaveBeenCalled();
   });
 
-  const releases = [["catalog-series-01", "series01Catalog"], ["catalog-p4-02", "p4bCatalog"], ["catalog-p4-01", "p4aCatalog"], ["catalog-p3-01", "p3Catalog"], ["catalog-mood-01", "expandedCatalog"], ["catalog", "catalog"]];
+  const releases = [["catalog-series-02", "series02Catalog"], ["catalog-series-01", "series01Catalog"], ["catalog-p4-02", "p4bCatalog"], ["catalog-p4-01", "p4aCatalog"], ["catalog-p3-01", "p3Catalog"], ["catalog-mood-01", "expandedCatalog"], ["catalog", "catalog"]];
   it('selects each installed pinned release on Railway only after unsupported endpoints', async () => {
     for (const status of [400, 404]) for (let selected = 0; selected < releases.length; selected++) {
       fetch.mockClear();

@@ -3,11 +3,13 @@
 export const EXPANDED_CATALOG_PATH = 'catalog-mood-01';
 export const P3_CATALOG_PATH = 'catalog-p3-01';
 export const P4A_CATALOG_PATH = 'catalog-p4-01';
+export const P4B_CATALOG_PATH = 'catalog-p4-02';
 export const PILOT_RELEASES = Object.freeze({
   catalog: Object.freeze({ version: '0.2', count: 154, sha256: '2c1df7644d778508b37d2a5076d902906b241166e09f93d388295a8a9983d90b' }),
   [EXPANDED_CATALOG_PATH]: Object.freeze({ version: '0.3-mood-01', count: 163, sha256: 'a9da2978a3d29b8c62a50e3ce9219d4b214d3bfd881ba6eb872e6bacab9885cf' }),
   [P3_CATALOG_PATH]: Object.freeze({ version: '0.4-p3-01', count: 217, sha256: '10f62544559448b462f06b0b0dbea342306bc5af85daa4f2ce9fc022531b3c4f' }),
   [P4A_CATALOG_PATH]: Object.freeze({ version: '0.5-p4-01', count: 253, sha256: 'cd5ea0cba02bb8e3f896bfadaecfa439be65bdcc3ef1c6c72fe0c5b6b3a3d104' }),
+  [P4B_CATALOG_PATH]: Object.freeze({ version: '0.6-p4-02', count: 289, sha256: '459f0727b598e2e8a5ef7eb31b9b6d5d636f63d223586e4b9029890e0c7652a6' }),
 });
 
 export function isPilotCatalogPath(path) {

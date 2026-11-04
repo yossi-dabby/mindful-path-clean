@@ -20,14 +20,14 @@ async function session(page, role = 'admin', token = 'pilot-admin-fixture') {
 }
 const preview = '/tests/fixtures/hebrew-pilot-preview.html';
 
-const p3Units = ['MOOD-02', 'SELF-01', 'PERF-01', 'REG-01', 'EXEC-01', 'SOC-01'];
-for (const unit of p3Units) {
+const reviewUnits = ['MOOD-02', 'SELF-01', 'PERF-01', 'REG-01', 'EXEC-01', 'SOC-01', 'SLEEP-01', 'CHANGE-01', 'FAMILY-01', 'SCREEN-01'];
+for (const unit of reviewUnits) {
   for (const age of ['CH', 'TE', 'AD', 'OA']) {
     test(`${unit} ${age} opens and downloads both new variants with exact bytes and back focus`, async ({ page }) => {
       await session(page);
       await page.goto(preview);
       await page.getByTestId(`pilot-age-${age}`).click();
-      await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(9);
+      await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(13);
       await page.getByTestId(`pilot-track-${unit.split('-')[0].toLowerCase()}`).click();
       await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(unit === 'MOOD-02' ? 2 : 1);
       await page.getByTestId(`pilot-unit-${unit}`).click();
@@ -49,7 +49,7 @@ for (const unit of p3Units) {
         const download = await pending;
         expect(download.suggestedFilename()).toBe(`${id}.pdf`);
         const bytes = await readFile((await download.path())!);
-        const form = pilot.p3Catalog.forms.find((f) => f.id === id)!;
+        const form = pilot.p4aCatalog.forms.find((f) => f.id === id)!;
         expect(bytes.length).toBe(form.bytes);
         expect(createHash('sha256').update(bytes).digest('hex')).toBe(form.sha256);
       }
@@ -77,7 +77,7 @@ for (const unit of p3Units) {
     const download = await pending;
     expect(download.suggestedFilename()).toBe(`${id}.pdf`);
     const bytes = await readFile((await download.path())!);
-    const form = (await loadPilot()).p3Catalog.forms.find((f) => f.id === id)!;
+    const form = (await loadPilot()).p4aCatalog.forms.find((f) => f.id === id)!;
     expect(bytes.length).toBe(form.bytes);
     expect(createHash('sha256').update(bytes).digest('hex')).toBe(form.sha256);
   });
@@ -90,7 +90,7 @@ test('active pilot replaces obsolete maintenance and planned-library blocks', as
   for (const id of ['forms-under-revision', 'forms-audience-architecture', 'forms-collection-architecture', 'forms-empty-state']) {
     await expect(page.getByTestId(id)).toHaveCount(0);
   }
-  await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('217 טפסים');
+  await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('253 טפסים');
   await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('טיוטות לסקירה מקצועית בלבד');
 });
 
@@ -101,13 +101,13 @@ for (const status of [400, 404]) {
     await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
       const path = route.request().postDataJSON().path;
       paths.push(path);
-      if (path === 'catalog-p3-01') await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
+      if (['catalog-p4-01', 'catalog-p3-01'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
       else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
     });
     await page.goto(preview);
     await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
     await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('163 טפסים, גרסה 0.3-mood-01');
-    expect(paths).toEqual(['catalog-p3-01', 'catalog-mood-01']);
+    expect(paths).toEqual(['catalog-p4-01', 'catalog-p3-01', 'catalog-mood-01']);
     await page.getByTestId('pilot-age-CH').click();
     await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(4);
     await expect(page.getByTestId('pilot-track-self')).toHaveCount(0);
@@ -123,8 +123,8 @@ for (const age of ['CH', 'TE', 'AD', 'OA']) {
   test(`MOOD ${age} opens and downloads both age variants with a single shared guide`, async ({ page }) => {
     await session(page);
     await page.goto(preview);
-    await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('217 טפסים, גרסה 0.4-p3-01');
-    await expect(page.getByTestId('hebrew-forms-pilot').locator('bdi[dir="ltr"]')).toHaveText('0.4-p3-01');
+    await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('253 טפסים, גרסה 0.5-p4-01');
+    await expect(page.getByTestId('hebrew-forms-pilot').locator('bdi[dir="ltr"]')).toHaveText('0.5-p4-01');
     await page.getByTestId(`pilot-age-${age}`).click();
     await page.getByTestId('pilot-track-mood').click();
     await page.getByTestId('pilot-unit-MOOD-01').click();
@@ -174,7 +174,7 @@ for (const status of [400, 404]) {
   test(`partial deployment (${status}) keeps the original package usable`, async ({ page }) => {
     await session(page);
     await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
-      if (['catalog-p3-01', 'catalog-mood-01'].includes(route.request().postDataJSON().path)) {
+      if (['catalog-p4-01', 'catalog-p3-01', 'catalog-mood-01'].includes(route.request().postDataJSON().path)) {
         await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
       } else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
     });
@@ -381,3 +381,26 @@ test('unavailable backend is distinguished from an expired session and never fal
   await expect(page.getByRole('alert')).not.toContainText('התחברות מחדש');
   expect(oldEndpointRequests).toEqual([]);
 });
+
+for (const status of [400, 404]) {
+  test(`p4-01 pending (${status}) preserves the previous 217 forms`, async ({ page }) => {
+    await session(page);
+    const paths: string[] = [];
+    await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
+      const path = route.request().postDataJSON().path; paths.push(path);
+      if (path === 'catalog-p4-01') await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
+      else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
+    });
+    await page.goto(preview);
+    await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
+    await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('217 טפסים, גרסה 0.4-p3-01');
+    expect(paths).toEqual(['catalog-p4-01', 'catalog-p3-01']);
+    await page.getByTestId('pilot-age-CH').click();
+    await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(9);
+    await expect(page.getByTestId('pilot-track-sleep')).toHaveCount(0);
+    await page.getByTestId('pilot-track-self').click();
+    await page.getByTestId('pilot-unit-SELF-01').click();
+    await page.getByTestId('pilot-form-MP-SELF-01-W-CH-HE').getByRole('button', { name: 'פתח', exact: true }).click();
+    await expect(page.getByTestId('pilot-pdf-preview').locator('canvas')).toHaveCount(1, { timeout: 20000 });
+  });
+}

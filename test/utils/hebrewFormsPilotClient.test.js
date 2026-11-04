@@ -40,68 +40,54 @@ describe('pilot host transports with the real private server', () => {
     expect(invoke).not.toHaveBeenCalled();
   });
 
-  it('loads the pinned expansion on Railway and falls back only for an older endpoint', async () => {
-    expect(await requestPilotCatalog()).toEqual({ catalog: pilot.p3Catalog, expansionPending: false });
-    fetch.mockResolvedValueOnce(new Response(null, { status: 404 }));
-    expect(await requestPilotCatalog()).toEqual({ catalog: pilot.expandedCatalog, expansionPending: true });
-    fetch.mockResolvedValueOnce(new Response(null, { status: 404 }));
-    fetch.mockResolvedValueOnce(new Response(null, { status: 404 }));
-    expect(await requestPilotCatalog()).toEqual({ catalog: pilot.catalog, expansionPending: true });
-    expect(fetch.mock.calls.at(-1)[0]).toBe('/api/hebrew-forms-pilot/catalog');
-    for (const status of [401, 403, 500, 502, 503]) {
+  const releases = [["catalog-p4-01", "p4aCatalog"], ["catalog-p3-01", "p3Catalog"], ["catalog-mood-01", "expandedCatalog"], ["catalog", "catalog"]];
+  it('selects each installed pinned release on Railway only after unsupported endpoints', async () => {
+    for (const status of [400, 404]) for (let selected = 0; selected < releases.length; selected++) {
       fetch.mockClear();
-      fetch.mockResolvedValueOnce(new Response(null, { status }));
-      await expect(requestPilotCatalog()).rejects.toThrow(status < 500 ? 'PILOT_AUTH' : 'PILOT_UNAVAILABLE');
-      expect(fetch).toHaveBeenCalledTimes(1);
+      for (let i = 0; i < selected; i++) fetch.mockResolvedValueOnce(new Response(null, { status }));
+      expect(await requestPilotCatalog()).toEqual({ catalog: pilot[releases[selected][1]], expansionPending: selected > 0 });
+      expect(fetch.mock.calls.map((call) => call[0])).toEqual(releases.slice(0, selected + 1).map(([path]) => `/api/hebrew-forms-pilot/${path}`));
     }
-    fetch.mockClear();
-    const altered = structuredClone(pilot.p3Catalog);
-    altered.forms[0].sha256 = '0'.repeat(64);
-    fetch.mockResolvedValueOnce(Response.json(altered));
-    await expect(requestPilotCatalog()).rejects.toThrow('PILOT_INVALID');
-    expect(fetch).toHaveBeenCalledTimes(1);
   });
-
-  it('supports old Base44 handlers during publication, without bypassing authorization or cancellation', async () => {
+  it('selects each pinned Base44 fallback and preserves cancellation', async () => {
     window.location.origin = 'https://mindful-path-75aeaf7d.base44.app';
-    invoke.mockRejectedValueOnce({ response: { status: 400 } });
-    invoke.mockResolvedValueOnce({ data: { kind: 'catalog', catalog: pilot.expandedCatalog } });
-    expect(await requestPilotCatalog()).toEqual({ catalog: pilot.expandedCatalog, expansionPending: true });
-    expect(invoke.mock.calls.map((call) => call[1].path)).toEqual(['catalog-p3-01', 'catalog-mood-01']);
+    for (const status of [400, 404]) for (let selected = 0; selected < releases.length; selected++) {
+      invoke.mockReset();
+      for (let i = 0; i < selected; i++) invoke.mockRejectedValueOnce({ response: { status } });
+      invoke.mockResolvedValueOnce({ data: { kind: 'catalog', catalog: pilot[releases[selected][1]] } });
+      expect(await requestPilotCatalog()).toEqual({ catalog: pilot[releases[selected][1]], expansionPending: selected > 0 });
+      expect(invoke.mock.calls.map((call) => call[1].path)).toEqual(releases.slice(0, selected + 1).map(([path]) => path));
+    }
     invoke.mockReset();
-    invoke.mockRejectedValueOnce({ response: { status: 400 } });
-    invoke.mockRejectedValueOnce({ response: { status: 400 } });
-    invoke.mockResolvedValueOnce({ data: { kind: 'catalog', catalog: pilot.catalog } });
-    expect(await requestPilotCatalog()).toEqual({ catalog: pilot.catalog, expansionPending: true });
-    expect(invoke.mock.calls.map((call) => call[1].path)).toEqual(['catalog-p3-01', 'catalog-mood-01', 'catalog']);
-    invoke.mockReset();
-    invoke.mockResolvedValueOnce({ data: { kind: 'catalog', catalog: pilot.p3Catalog } });
-    expect(await requestPilotCatalog()).toEqual({ catalog: pilot.p3Catalog, expansionPending: false });
-    invoke.mockReset();
-    invoke.mockRejectedValueOnce({ response: { status: 403 } });
-    await expect(requestPilotCatalog()).rejects.toThrow('PILOT_AUTH');
-    expect(invoke).toHaveBeenCalledTimes(1);
     const controller = new AbortController();
     invoke.mockImplementationOnce(async () => { controller.abort(); throw { status: 400 }; });
     await expect(requestPilotCatalog({ signal: controller.signal })).rejects.toMatchObject({ name: 'AbortError' });
-    expect(invoke).toHaveBeenCalledTimes(2);
+    expect(invoke).toHaveBeenCalledTimes(1);
   });
-
-  it('does not hide auth, network or integrity failures on the intermediate fallback release', async () => {
-    window.location.origin = 'https://mindful-path-75aeaf7d.base44.app';
-    for (const status of [401, 403, 500, 502, 503]) {
-      invoke.mockReset();
-      invoke.mockRejectedValueOnce({ response: { status: 404 } });
-      invoke.mockRejectedValueOnce({ response: { status } });
-      await expect(requestPilotCatalog()).rejects.toThrow(status < 500 ? 'PILOT_AUTH' : 'PILOT_UNAVAILABLE');
-      expect(invoke.mock.calls.map((call) => call[1].path)).toEqual(['catalog-p3-01', 'catalog-mood-01']);
+  it('never hides auth, network, server or integrity failure at any fallback depth on either host', async () => {
+    for (const host of [railway, 'https://mindful-path-75aeaf7d.base44.app']) {
+      window.location.origin = host;
+      const direct = host === railway;
+      for (let depth = 0; depth < releases.length; depth++) {
+        for (const failure of [401, 403, 500, 502, 503, 'network', 'integrity']) {
+          fetch.mockClear(); invoke.mockReset();
+          for (let i = 0; i < depth; i++) {
+            if (direct) fetch.mockResolvedValueOnce(new Response(null, { status: 404 }));
+            else invoke.mockRejectedValueOnce({ response: { status: 404 } });
+          }
+          if (failure === 'integrity') {
+            const altered = structuredClone(pilot[releases[depth][1]]); altered.forms[0].sha256 = '0'.repeat(64);
+            if (direct) fetch.mockResolvedValueOnce(Response.json(altered));
+            else invoke.mockResolvedValueOnce({ data: { kind: 'catalog', catalog: altered } });
+          } else if (failure === 'network') {
+            (direct ? fetch : invoke).mockRejectedValueOnce(new TypeError('network unavailable'));
+          } else if (direct) fetch.mockResolvedValueOnce(new Response(null, { status: failure }));
+          else invoke.mockRejectedValueOnce({ response: { status: failure } });
+          await expect(requestPilotCatalog()).rejects.toThrow(failure === 'integrity' ? 'PILOT_INVALID' : [401, 403].includes(failure) ? 'PILOT_AUTH' : 'PILOT_UNAVAILABLE');
+          expect(direct ? fetch : invoke).toHaveBeenCalledTimes(depth + 1);
+        }
+      }
     }
-    invoke.mockReset();
-    invoke.mockRejectedValueOnce({ response: { status: 404 } });
-    const altered = structuredClone(pilot.expandedCatalog); altered.forms[0].title = 'untrusted';
-    invoke.mockResolvedValueOnce({ data: { kind: 'catalog', catalog: altered } });
-    await expect(requestPilotCatalog()).rejects.toThrow('PILOT_INVALID');
-    expect(invoke).toHaveBeenCalledTimes(2);
   });
 
   it('rechecks current credentials and revoked roles for every direct request', async () => {

@@ -1,5 +1,5 @@
 import { base44 } from '@/api/base44Client';
-import { SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, EXPANDED_CATALOG_PATH, P3_CATALOG_PATH, isPilotCatalogPath, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
+import { SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, EXPANDED_CATALOG_PATH, P3_CATALOG_PATH, isPilotCatalogPath, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
 
 const RAILWAY_ORIGIN = 'https://mindful-path-production-7704.up.railway.app';
 
@@ -53,7 +53,7 @@ export async function requestPilot(path, { signal, download = false } = {}) {
 export async function requestPilotCatalog(options = {}) {
   // Preserve installed generations during staggered publication. Validate
   // before returning; a corrupt 200 response must never select an older release.
-  for (const path of [SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, P3_CATALOG_PATH, EXPANDED_CATALOG_PATH, 'catalog']) {
+  for (const path of [SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, P3_CATALOG_PATH, EXPANDED_CATALOG_PATH, 'catalog']) {
     let response;
     try { response = await requestPilot(path, options); }
     catch (error) {
@@ -63,7 +63,7 @@ export async function requestPilotCatalog(options = {}) {
     const catalog = await response.json();
     if (!await validatePilotCatalog(catalog, path)) throw new Error('PILOT_INVALID');
     checkAbort(options.signal);
-    return { catalog, expansionPending: path !== SERIES02_CATALOG_PATH };
+    return { catalog, expansionPending: path !== SERIES03_CATALOG_PATH };
   }
   throw new Error('PILOT_UNAVAILABLE');
 }

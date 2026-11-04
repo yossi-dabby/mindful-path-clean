@@ -11,7 +11,7 @@ import argparse
 
 ROOT = Path(__file__).resolve().parent.parent
 parser = argparse.ArgumentParser()
-parser.add_argument('--wave', choices=['p4-01', 'p4-02', 'series-01', 'series-02'], default='p4-01')
+parser.add_argument('--wave', choices=['p4-01', 'p4-02', 'series-01', 'series-02', 'series-03'], default='p4-01')
 wave = parser.parse_args().wave
 SOURCE = ROOT / 'content/hebrew-forms' / wave
 BASE = ROOT / 'content/hebrew-forms/mood-01'

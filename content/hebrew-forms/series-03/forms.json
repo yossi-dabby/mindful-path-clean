@@ -1,0 +1,812 @@
+[
+  {
+    "id": "MP-EXEC-02-G-ALL-HE",
+    "title": "הנחיות למטפל: פירוק משימה ותכנון זמן",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "EXEC-02",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-02-W-CH-HE",
+    "title": "המשימה שלי בצעדים קטנים",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-02",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-02-W-TE-HE",
+    "title": "לפרק משימה ולפנות לה זמן",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-02",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-02-W-AD-HE",
+    "title": "צעדים, זמן ומרווחים",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-02",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-02-W-OA-HE",
+    "title": "לתכנן בקצב שמתאים לי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-02",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-02-P-CH-HE",
+    "title": "מה למדתי מהצעדים שניסיתי",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-02",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-02-P-TE-HE",
+    "title": "זמן שתכננתי וזמן שהיה בפועל",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-02",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-02-P-AD-HE",
+    "title": "לבדוק תכנון מול ביצוע",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-02",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-02-P-OA-HE",
+    "title": "איך התאים לי הקצב",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-02",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-03-G-ALL-HE",
+    "title": "הנחיות למטפל: התאמת הסביבה ותזכורות",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "EXEC-03",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-03-W-CH-HE",
+    "title": "מה עוזר לי במקום שלי",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-03",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-03-W-TE-HE",
+    "title": "לבחור סביבה ותזכורת",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-03",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-03-W-AD-HE",
+    "title": "תנאים ועזרים למשימה",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-03",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-03-W-OA-HE",
+    "title": "עזר שנוח לי לבחור",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-03",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-03-P-CH-HE",
+    "title": "איך היה עם העזר שבחרתי",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-03",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-03-P-TE-HE",
+    "title": "לבדוק שינוי אחד בסביבה",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-03",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-03-P-AD-HE",
+    "title": "התאמה שניסיתי ומה גיליתי",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-03",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-03-P-OA-HE",
+    "title": "האם העזר שירת אותי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-03",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-04-G-ALL-HE",
+    "title": "הנחיות למטפל: רגש והימנעות לפני משימה",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "EXEC-04",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-04-W-CH-HE",
+    "title": "מה מקשה עליי להתחיל",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-04",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-04-W-TE-HE",
+    "title": "לפני שאני דוחה את המשימה",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-04",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-04-W-AD-HE",
+    "title": "להבין את החסם לפני התחלה",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-04",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-04-W-OA-HE",
+    "title": "להתחיל עם מה שנחוץ לי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-04",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-04-P-CH-HE",
+    "title": "מה עזר לי בצעד הראשון",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-04",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-04-P-TE-HE",
+    "title": "מה קרה כשעניתי לחסם",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-04",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-04-P-AD-HE",
+    "title": "ניסיון פתיחה והתאמה לחסם",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-04",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-04-P-OA-HE",
+    "title": "איך הייתה ההתחלה שבחרתי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-04",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-05-G-ALL-HE",
+    "title": "הנחיות למטפל: התמדה ושינוי תוכנית",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "EXEC-05",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-05-W-CH-HE",
+    "title": "להמשיך או לשנות את התוכנית",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-05",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-05-W-TE-HE",
+    "title": "לעצור ולבדוק מה מתאים עכשיו",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-05",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-05-W-AD-HE",
+    "title": "מעקב קצר ושינוי תוכנית",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-05",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-05-W-OA-HE",
+    "title": "להתאים תוכנית ליום משתנה",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-05",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-05-P-CH-HE",
+    "title": "מה בחרתי אחרי שהשתנה משהו",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-05",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-05-P-TE-HE",
+    "title": "לבדוק את השינוי בתוכנית",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-05",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-05-P-AD-HE",
+    "title": "מה למדתי מנקודת הבדיקה",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-05",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-05-P-OA-HE",
+    "title": "שינוי שעזר לי להמשיך בדרכי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-05",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-06-G-ALL-HE",
+    "title": "הנחיות למטפל: שגרה עצמאית והתאמות",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "EXEC-06",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-06-W-CH-HE",
+    "title": "הכלים שאני רוצה לשמור",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-06",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-06-W-TE-HE",
+    "title": "שגרה ותמיכה שאני בוחר",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-06",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-06-W-AD-HE",
+    "title": "שימור כלים ובקשת התאמות",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-06",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-06-W-OA-HE",
+    "title": "שגרה שאני מנהל עם עזרה רצויה",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "EXEC-06",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-06-P-CH-HE",
+    "title": "איך השתמשתי בכלי שבחרתי",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-06",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-06-P-TE-HE",
+    "title": "לבדוק שגרה כשמשהו משתנה",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-06",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-06-P-AD-HE",
+    "title": "לבחון שגרה ותיאום התאמה",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-06",
+    "track": "exec"
+  },
+  {
+    "id": "MP-EXEC-06-P-OA-HE",
+    "title": "מה מתאים לי לשמור בהמשך",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "EXEC-06",
+    "track": "exec"
+  },
+  {
+    "id": "MP-SOC-02-G-ALL-HE",
+    "title": "הנחיות למטפל: להקשיב ולבדוק פירוש",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "SOC-02",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-02-W-CH-HE",
+    "title": "מה שמעתי ומה הבנתי",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-02",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-02-W-TE-HE",
+    "title": "לבדוק לפני שמסיקים",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-02",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-02-W-AD-HE",
+    "title": "מסר, פירוש ובירור",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-02",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-02-W-OA-HE",
+    "title": "להבין שיחה בדרך שנוחה לי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-02",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-02-P-CH-HE",
+    "title": "מה גיליתי כשביררתי",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-02",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-02-P-TE-HE",
+    "title": "מסר שבדקתי מחדש",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-02",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-02-P-AD-HE",
+    "title": "ניסיון של הקשבה והבהרה",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-02",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-02-P-OA-HE",
+    "title": "איך התאים לי הבירור",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-02",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-03-G-ALL-HE",
+    "title": "הנחיות למטפל: בקשה, סירוב ומשא ומתן",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "SOC-03",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-03-W-CH-HE",
+    "title": "לבקש ולומר מה מתאים לי",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-03",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-03-W-TE-HE",
+    "title": "בקשה ברורה וגבול שלי",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-03",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-03-W-AD-HE",
+    "title": "בקשה, סירוב וחלק גמיש",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-03",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-03-W-OA-HE",
+    "title": "לומר מה חשוב לי ולבחור",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-03",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-03-P-CH-HE",
+    "title": "איך היה לבקש או לסרב",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-03",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-03-P-TE-HE",
+    "title": "מה קרה לניסוח שבחרתי",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-03",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-03-P-AD-HE",
+    "title": "לבדוק שיחה של בקשה או תיאום",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-03",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-03-P-OA-HE",
+    "title": "האם הבחירה שלי נשמרה",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-03",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-04-G-ALL-HE",
+    "title": "הנחיות למטפל: אי הסכמה וקונפליקט",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "SOC-04",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-04-W-CH-HE",
+    "title": "מה אעשה כשלא מסכימים",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-04",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-04-W-TE-HE",
+    "title": "לתכנן שיחה או לבחור הפסקה",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-04",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-04-W-AD-HE",
+    "title": "מחלוקת, תנאים ודרך יציאה",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-04",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-04-W-OA-HE",
+    "title": "לדבר על הבדל בקצב שלי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-04",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-04-P-CH-HE",
+    "title": "מה קרה כשבחרתי דרך למחלוקת",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-04",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-04-P-TE-HE",
+    "title": "לבדוק שיחה על אי הסכמה",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-04",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-04-P-AD-HE",
+    "title": "שיחה שניסיתי או בחרתי לדחות",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-04",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-04-P-OA-HE",
+    "title": "איך נשמרו התנאים שרציתי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-04",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-05-G-ALL-HE",
+    "title": "הנחיות למטפל: יוזמה ושימור קשר",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "SOC-05",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-05-W-CH-HE",
+    "title": "קשר שהייתי רוצה לטפח",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-05",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-05-W-TE-HE",
+    "title": "יוזמה לקשר שמתאים לי",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-05",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-05-W-AD-HE",
+    "title": "לבחור יוזמה והדדיות",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-05",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-05-W-OA-HE",
+    "title": "לשמור קשר בדרך הרצויה לי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-05",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-05-P-CH-HE",
+    "title": "איך היה לנסות קשר קטן",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-05",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-05-P-TE-HE",
+    "title": "מה למדתי מיוזמה לקשר",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-05",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-05-P-AD-HE",
+    "title": "יוזמה, תגובה ובחירה בהמשך",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-05",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-05-P-OA-HE",
+    "title": "האם הקשר התאים להעדפתי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-05",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-06-G-ALL-HE",
+    "title": "הנחיות למטפל: הכללה בין קשרים",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "SOC-06",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-06-W-CH-HE",
+    "title": "איזה כלי אקח לקשר אחר",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-06",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-06-W-TE-HE",
+    "title": "להתאים תקשורת בין קשרים",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-06",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-06-W-AD-HE",
+    "title": "מיומנות מוכרת בהקשר חדש",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-06",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-06-W-OA-HE",
+    "title": "לבחור איך לתקשר כשקשר משתנה",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SOC-06",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-06-P-CH-HE",
+    "title": "איך התאים הכלי במקום אחר",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-06",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-06-P-TE-HE",
+    "title": "לבדוק כלי בקשר נוסף",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-06",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-06-P-AD-HE",
+    "title": "מה נשמר ומה דרש התאמה",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-06",
+    "track": "soc"
+  },
+  {
+    "id": "MP-SOC-06-P-OA-HE",
+    "title": "מה עזר לי בשינוי בקשר",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SOC-06",
+    "track": "soc"
+  }
+]

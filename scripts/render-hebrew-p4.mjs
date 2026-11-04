@@ -4,7 +4,7 @@ import { readFile, mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 const root = new URL('../', import.meta.url);
 const wave = process.argv.find((arg) => arg.startsWith('--wave='))?.split('=')[1] || 'p4-01';
-if (!['p4-01', 'p4-02', 'series-01', 'series-02'].includes(wave)) throw new Error('Unknown review wave');
+if (!['p4-01', 'p4-02', 'series-01', 'series-02', 'series-03'].includes(wave)) throw new Error('Unknown review wave');
 const source = new URL(`content/hebrew-forms/${wave}/`, root);
 const forms = JSON.parse(await readFile(new URL('forms.json', source), 'utf8'));
 const output = new URL('server/private/forms/', root);

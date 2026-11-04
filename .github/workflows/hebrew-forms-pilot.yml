@@ -8,6 +8,8 @@ on:
       - 'scripts/render-hebrew-mood.mjs'
       - 'scripts/render-hebrew-p3.mjs'
       - 'scripts/build-hebrew-p3.py'
+      - 'scripts/build-hebrew-p4.py'
+      - 'scripts/render-hebrew-p4.mjs'
       - 'base44/functions/getHebrewFormsPilot/**'
       - 'test/utils/hebrewFormsPilot*.test.js'
       - 'src/components/forms/**'
@@ -36,6 +38,8 @@ jobs:
       - run: node scripts/render-hebrew-mood.mjs
       - run: python3 scripts/build-hebrew-p3.py && git diff --exit-code -- content/hebrew-forms/p3-01
       - run: node scripts/render-hebrew-p3.mjs
+      - run: python3 scripts/build-hebrew-p4.py --wave p4-01 && git diff --exit-code -- content/hebrew-forms/p4-01
+      - run: node scripts/render-hebrew-p4.mjs --wave=p4-01
       - run: npm run build
         env:
           VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'

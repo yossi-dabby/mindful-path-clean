@@ -65,4 +65,16 @@ describe('pinned Hebrew catalog releases', () => {
     // Fits the unchanged Base44 bounded reader with ample headroom.
     expect(new TextEncoder().encode(JSON.stringify(pilot.p3Catalog)).length).toBeLessThan(512 * 1024);
   });
+  it('pins p4-01: preserves 217 records and adds four complete units', () => {
+    expect(pilot.p4aCatalog.forms).toHaveLength(253);
+    expect(pilot.p4aCatalog.forms.slice(0, 217)).toEqual(pilot.p3Catalog.forms);
+    const units = ["SLEEP-01", "CHANGE-01", "FAMILY-01", "SCREEN-01"];
+    const additions = pilot.p4aCatalog.forms.slice(217);
+    expect(additions.map((f) => f.id).sort()).toEqual(units.flatMap((unit) => [
+      `MP-${unit}-G-ALL-HE`, ...['W', 'P'].flatMap((kind) => ['CH', 'TE', 'AD', 'OA'].map((age) => `MP-${unit}-${kind}-${age}-HE`)),
+    ]).sort());
+    expect(additions.every((f) => f.contentVersion === '0.1' && f.status.includes('לא להפצה'))).toBe(true);
+    expect(new TextEncoder().encode(JSON.stringify(pilot.p4aCatalog)).length).toBeLessThan(512 * 1024);
+  });
+
 });

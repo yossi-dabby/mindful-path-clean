@@ -66,12 +66,14 @@ export default function BottomNav({ currentPageName }) {
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.path;
+          // Text enlargement must settle tab geometry before focus scrolling.
           return (
             <Link
               key={item.path}
               to={createPageUrl(item.path)}
               onClick={(e) => handleTabClick(e, item)}
               onFocus={(e) => e.currentTarget.scrollIntoView({ block: 'nearest', inline: 'nearest' })}
+              style={{ transitionProperty: 'color, background-color, border-color, box-shadow' }}
               aria-current={isActive ? 'page' : undefined}
               aria-label={item.name}
               className={cn(

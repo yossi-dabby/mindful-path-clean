@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "lastUpdated": "2026-11-04",
+  "baselineCommit": "f698e7bc47bef5329d2bfe066f48a311549c40f6",
+  "status": "planning_review_required",
+  "sourcePlan": "https://chatgpt.com/space/page_02494d140b7c81919bc157e6f46862e6",
+  "clinicalApproval": false,
+  "rightsApproval": false,
+  "manifestFrozen": false,
+  "batches": [
+    {
+      "id": 1,
+      "scope": "MOOD 03–06 ו־SELF 02–06",
+      "newPdfCount": 81,
+      "cumulativePdfCount": 370,
+      "unitIds": [
+        "MOOD-03",
+        "MOOD-04",
+        "MOOD-05",
+        "MOOD-06",
+        "SELF-02",
+        "SELF-03",
+        "SELF-04",
+        "SELF-05",
+        "SELF-06"
+      ],
+      "status": "proposed_not_authorized_for_release"
+    },
+    {
+      "id": 2,
+      "scope": "PERF 02–06 ו־REG 02–06",
+      "newPdfCount": 90,
+      "cumulativePdfCount": 460,
+      "unitIds": [
+        "PERF-02",
+        "PERF-03",
+        "PERF-04",
+        "PERF-05",
+        "PERF-06",
+        "REG-02",
+        "REG-03",
+        "REG-04",
+        "REG-05",
+        "REG-06"
+      ],
+      "status": "proposed_not_authorized_for_release"
+    },
+    {
+      "id": 3,
+      "scope": "EXEC 02–06 ו־SOC 02–06",
+      "newPdfCount": 90,
+      "cumulativePdfCount": 550,
+      "unitIds": [
+        "EXEC-02",
+        "EXEC-03",
+        "EXEC-04",
+        "EXEC-05",
+        "EXEC-06",
+        "SOC-02",
+        "SOC-03",
+        "SOC-04",
+        "SOC-05",
+        "SOC-06"
+      ],
+      "status": "proposed_not_authorized_for_release"
+    },
+    {
+      "id": 4,
+      "scope": "SLEEP 02–06 ו־CHANGE 02–06",
+      "newPdfCount": 90,
+      "cumulativePdfCount": 640,
+      "unitIds": [
+        "SLEEP-02",
+        "SLEEP-03",
+        "SLEEP-04",
+        "SLEEP-05",
+        "SLEEP-06",
+        "CHANGE-02",
+        "CHANGE-03",
+        "CHANGE-04",
+        "CHANGE-05",
+        "CHANGE-06"
+      ],
+      "status": "proposed_not_authorized_for_release"
+    },
+    {
+      "id": 5,
+      "scope": "FAMILY 02–06 ו־SCREEN 02–06",
+      "newPdfCount": 90,
+      "cumulativePdfCount": 730,
+      "unitIds": [
+        "FAMILY-02",
+        "FAMILY-03",
+        "FAMILY-04",
+        "FAMILY-05",
+        "FAMILY-06",
+        "SCREEN-02",
+        "SCREEN-03",
+        "SCREEN-04",
+        "SCREEN-05",
+        "SCREEN-06"
+      ],
+      "status": "proposed_not_authorized_for_release"
+    },
+    {
+      "id": 6,
+      "scope": "SHAME 02–06 ו־MEANING 02–06",
+      "newPdfCount": 90,
+      "cumulativePdfCount": 820,
+      "unitIds": [
+        "SHAME-02",
+        "SHAME-03",
+        "SHAME-04",
+        "SHAME-05",
+        "SHAME-06",
+        "MEANING-02",
+        "MEANING-03",
+        "MEANING-04",
+        "MEANING-05",
+        "MEANING-06"
+      ],
+      "status": "proposed_not_authorized_for_release"
+    },
+    {
+      "id": 7,
+      "scope": "OCD 02–04 לגיל 8 ומעלה",
+      "newPdfCount": 27,
+      "cumulativePdfCount": 847,
+      "unitIds": [
+        "OCD-02",
+        "OCD-03",
+        "OCD-04"
+      ],
+      "status": "proposed_not_authorized_for_release"
+    },
+    {
+      "id": 8,
+      "scope": "OCD 05–08 לגיל 8 ומעלה",
+      "newPdfCount": 36,
+      "cumulativePdfCount": 883,
+      "unitIds": [
+        "OCD-05",
+        "OCD-06",
+        "OCD-07",
+        "OCD-08"
+      ],
+      "status": "proposed_not_authorized_for_release"
+    },
+    {
+      "id": 9,
+      "scope": "OCD לגילי 6–7 יחידות 1–4",
+      "newPdfCount": 12,
+      "cumulativePdfCount": 895,
+      "unitIds": [
+        "OCDYC-01",
+        "OCDYC-02",
+        "OCDYC-03",
+        "OCDYC-04"
+      ],
+      "status": "proposed_not_authorized_for_release"
+    },
+    {
+      "id": 10,
+      "scope": "OCD לגילי 6–7 יחידות 5–8",
+      "newPdfCount": 12,
+      "cumulativePdfCount": 907,
+      "unitIds": [
+        "OCDYC-05",
+        "OCDYC-06",
+        "OCDYC-07",
+        "OCDYC-08"
+      ],
+      "status": "proposed_not_authorized_for_release"
+    },
+    {
+      "id": 11,
+      "scope": "TRAUMA 02–04 בשני מסלולי הגיל",
+      "newPdfCount": 27,
+      "cumulativePdfCount": 934,
+      "unitIds": [
+        "TRAUMA-02",
+        "TRAUMA-03",
+        "TRAUMA-04"
+      ],
+      "status": "proposed_not_authorized_for_release"
+    },
+    {
+      "id": 12,
+      "scope": "TRAUMA 05–08 בשני מסלולי הגיל",
+      "newPdfCount": 36,
+      "cumulativePdfCount": 970,
+      "unitIds": [
+        "TRAUMA-05",
+        "TRAUMA-06",
+        "TRAUMA-07",
+        "TRAUMA-08"
+      ],
+      "status": "proposed_not_authorized_for_release"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "lastUpdated": "2026-11-04",
+  "baselineCommit": "f698e7bc47bef5329d2bfe066f48a311549c40f6",
+  "method": "Local file integrity audit and static contract analysis; no live requests, load benchmark or clinical validation",
+  "baseline": {
+    "version": "0.6-p4-02",
+    "pdfCount": 289,
+    "pdfBytes": 5780538,
+    "maxPdfBytes": 41182,
+    "catalogCompactUtf8Bytes": 133980,
+    "catalogCanonicalSha256": "459f0727b598e2e8a5ef7eb31b9b6d5d636f63d223586e4b9029890e0c7652a6",
+    "mappedExpansionPdfCount": 135,
+    "allPdfHashesVerified": true,
+    "allMappedHtmlHashesVerified": true
+  },
+  "planning": {
+    "unitPackages": 96,
+    "ageUnitRows": 360,
+    "componentMappingRows": 359,
+    "newPdfCount": 681,
+    "newGuides": 81,
+    "newSheets": 600,
+    "finalPdfCount": 970,
+    "manifestFrozen": false
+  },
+  "capacity": {
+    "proxyCatalogLimitBytes": 524288,
+    "proxyPdfLimitBytes": 1048576,
+    "projectedCatalogBytes": 451351,
+    "headroomBytes": 72937,
+    "projectionMethod": "Existing record schema, proposed unit titles, G/W/P title prefixes and current metadata; synthetic hashes have fixed length. Not actual future content.",
+    "stressCase": "Add 40 Hebrew characters to both title and unitTitle on every new record; +160 bytes per new record",
+    "stressCatalogBytes": 560311,
+    "stressExceedsCurrentLimit": true,
+    "batchEstimates": [
+      {
+        "batch": 1,
+        "count": 370,
+        "estimatedCompactUtf8Bytes": 172369
+      },
+      {
+        "batch": 2,
+        "count": 460,
+        "estimatedCompactUtf8Bytes": 213370
+      },
+      {
+        "batch": 3,
+        "count": 550,
+        "estimatedCompactUtf8Bytes": 254011
+      },
+      {
+        "batch": 4,
+        "count": 640,
+        "estimatedCompactUtf8Bytes": 295966
+      },
+      {
+        "batch": 5,
+        "count": 730,
+        "estimatedCompactUtf8Bytes": 336940
+      },
+      {
+        "batch": 6,
+        "count": 820,
+        "estimatedCompactUtf8Bytes": 378292
+      },
+      {
+        "batch": 7,
+        "count": 847,
+        "estimatedCompactUtf8Bytes": 390811
+      },
+      {
+        "batch": 8,
+        "count": 883,
+        "estimatedCompactUtf8Bytes": 407395
+      },
+      {
+        "batch": 9,
+        "count": 895,
+        "estimatedCompactUtf8Bytes": 414163
+      },
+      {
+        "batch": 10,
+        "count": 907,
+        "estimatedCompactUtf8Bytes": 420655
+      },
+      {
+        "batch": 11,
+        "count": 934,
+        "estimatedCompactUtf8Bytes": 433777
+      },
+      {
+        "batch": 12,
+        "count": 970,
+        "estimatedCompactUtf8Bytes": 451351
+      }
+    ],
+    "estimatedNewPdfBytes": 16632096,
+    "estimatedTotalPdfBytes": 22412634,
+    "pdfProjectionMethod": "81 guides and 600 sheets at existing expansion means; excludes extra companion PDFs, source HTML, code and backups",
+    "serverStorageBehavior": "loadPilot reads all PDFs into an in-memory Map at startup; raw byte estimate is not total process RAM",
+    "productionMemoryOrLatencyMeasured": false
+  },
+  "youngChildContract": {
+    "candidateUnitPrefix": "OCDYC",
+    "candidateGuideId": "MP-OCDYC-01-G-CH-HE",
+    "idsMatchCurrentFileRegex": true,
+    "track": "ocd",
+    "age": "CH",
+    "subAge": "6–7",
+    "matchingVisibilityCounts": {
+      "CH": 24,
+      "TE": 0,
+      "AD": 0,
+      "OA": 0
+    },
+    "validationType": "static predicate and identifier checks, not browser E2E",
+    "existingOcdCH": "Existing 8–11 materials remain distinct; no silent age relabeling"
+  },
+  "releaseConstraints": [
+    "new version/path/count/SHA must be pinned in shared releases.js",
+    "server loader/catalog registration and browser release fallback need a coordinated reviewed release",
+    "retain 512KiB catalog and 1MiB file bounds unless a separately reviewed bounded architecture is required",
+    "no live deployment, publish, auth change or treatment PDFs in Stage 0"
+  ]
+}

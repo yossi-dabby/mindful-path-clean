@@ -1,5 +1,7 @@
 # שלב 0 של השלמת סדרות הטפסים בעברית
 
+> Historical Stage 0 snapshot: the counts, proposed manifest and `audit.py` describe the 289-file baseline before continuation work. To reproduce that audit, use the PR 18 snapshot (`36c650b4cfd5a8c6975b7d26a48cbb03f821ac05`). The audit deliberately rejects newly produced PDFs; do not use it as the current release check. Current implementation and remaining batches are tracked in [series progress](../hebrew-series-progress.md) and the [batch 1 implementation record](../hebrew-forms-series-01-implementation.md). Clinical and rights decisions remain open.
+
 🟢 חבילת מיפוי ומפרטים לסקירה. אין בחבילה שינוי בקוד האפליקציה, בקטלוג הפעיל או בטופסי PDF. ההכנה ההנדסית הושלמה; שלב 0 עדיין פתוח להכרעות מקצועיות, זכויות והקפאת מניפסט.
 
 הבסיס הוא main לאחר PR 17, commit `f698e7bc47bef5329d2bfe066f48a311549c40f6`, וקטלוג `0.6-p4-02`. [תוכנית ההשלמה המוצעת](https://chatgpt.com/space/page_02494d140b7c81919bc157e6f46862e6) היא מקור ההיקף החדש. המספרים אינם מכסה שנקבעה בתוכנית המקורית ואינם מספר מפגשי טיפול. אימות האתר החי נמסר בידי בעל הפרויקט; בחבילה זו נערכה בדיקה מקומית, לא בדיקת ייצור חדשה.

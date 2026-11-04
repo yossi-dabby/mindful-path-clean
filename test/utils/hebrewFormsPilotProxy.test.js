@@ -228,7 +228,7 @@ describe('Base44 proxy to the real private PDF server', () => {
   afterAll(async () => { server.closeAllConnections(); await new Promise((resolve) => server.close(resolve)); });
   const dependencies = () => ({ createClientFromRequest: client(), fetchImpl: (url, init) => fetch(`${origin}${new URL(url).pathname}${new URL(url).search}`, init) });
 
-  it('returns all pinned catalogs and all 289 PDFs byte-for-byte through the Base44 transport', async () => {
+  const withWorkersRedirectContract = async (assertions) => {
     // Match the deployed Workers incompatibility: Node otherwise accepts error.
     const NativeRequest = Request;
     vi.stubGlobal('Request', class {
@@ -237,7 +237,12 @@ describe('Base44 proxy to the real private PDF server', () => {
         return new NativeRequest(url, options);
       }
     });
-    try {
+    try { await assertions(); }
+    finally { vi.unstubAllGlobals(); }
+  };
+
+  it('returns every pinned catalog through the Workers-compatible Base44 transport', async () => {
+    await withWorkersRedirectContract(async () => {
       const catalog = await (await handleHebrewFormsPilot(request(), dependencies())).json();
       expect(catalog.kind).toBe('catalog');
       expect(catalog.catalog).toEqual(pilot.catalog);
@@ -249,7 +254,15 @@ describe('Base44 proxy to the real private PDF server', () => {
         const response = await handleHebrewFormsPilot(request({ path }), dependencies());
         expect((await response.json()).catalog).toEqual(release);
       }
-      for (const form of pilot.p4bCatalog.forms) {
+    });
+  });
+
+  // Keep full byte/hash coverage as the library grows without extending test timeouts.
+  it.each([0, 75, 150, 225, 300])('returns a batch of pinned PDFs starting at %i byte-for-byte', async (start) => {
+    await withWorkersRedirectContract(async () => {
+      const forms = pilot.series01Catalog.forms.slice(start, start + 75);
+      expect(forms).toHaveLength(Math.min(75, 370 - start));
+      for (const form of forms) {
         const response = await handleHebrewFormsPilot(request({ path: `files/${form.id}` }), dependencies());
         expect(response.status).toBe(200);
         const data = await response.json();
@@ -258,7 +271,7 @@ describe('Base44 proxy to the real private PDF server', () => {
         expect(bytes.length).toBe(form.bytes);
         expect(createHash('sha256').update(bytes).digest('hex')).toBe(form.sha256);
       }
-    } finally { vi.unstubAllGlobals(); }
+    });
   });
 
   it('retains Railway permission checks even after Base44 admits the request', async () => {

@@ -1,4 +1,5 @@
 import HebrewFormsPilot from '@/components/forms/HebrewFormsPilot';
+import FormsUsageNotice from '@/components/forms/FormsUsageNotice';
 import BotanicalAccent from '@/components/brand/BotanicalAccent';
 import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, ArrowRight, ClipboardList } from 'lucide-react';
@@ -667,6 +668,7 @@ function TherapeuticFormsLibrary() {
           {t('therapeutic_forms.page_title')}
         </h1><BotanicalAccent variant="leaves" className="botanical-title-art" /></div>
         <p className="text-foreground">{t('therapeutic_forms.page_subtitle')}</p>
+        <FormsUsageNotice />
       </div>
 
       <HebrewFormsPilot />
@@ -836,6 +838,7 @@ function TherapeuticFormsUnavailable() {
           {t('therapeutic_forms.page_title')}
         </h1><BotanicalAccent variant="leaves" className="botanical-title-art" /></div>
         <p className="text-foreground">{t('therapeutic_forms.page_subtitle')}</p>
+        <FormsUsageNotice />
       </div>
 
       <HebrewFormsPilot />

@@ -1,4 +1,4 @@
-"""Build the editable P4 review sources from the authored unit specification.
+"""Build editable review sources from an authored P4 or series unit specification.
 
 No patient data, network access or PDF rewriting. Run the separate render command
 with --write-pdfs only when deliberately producing a new pinned catalog release.
@@ -11,7 +11,7 @@ import argparse
 
 ROOT = Path(__file__).resolve().parent.parent
 parser = argparse.ArgumentParser()
-parser.add_argument('--wave', choices=['p4-01', 'p4-02'], default='p4-01')
+parser.add_argument('--wave', choices=['p4-01', 'p4-02', 'series-01'], default='p4-01')
 wave = parser.parse_args().wave
 SOURCE = ROOT / 'content/hebrew-forms' / wave
 BASE = ROOT / 'content/hebrew-forms/mood-01'

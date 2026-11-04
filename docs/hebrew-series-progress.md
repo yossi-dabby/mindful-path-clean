@@ -1,0 +1,22 @@
+# Hebrew series implementation progress
+
+Updated: 2026-11-04. The Stage 0 proposal covers 681 additional PDFs in 12 batches, on top of the installed 289. This record separates drafted implementation from clinical/rights approval and live verification.
+
+| Batch | Units | New PDFs | Cumulative PDFs | Status |
+| --- | --- | ---: | ---: | --- |
+| 1 | MOOD-03–06, SELF-02–06 | 81 | 370 | Implemented for draft review; merge, publication and live verification pending. |
+| 2 | PERF-02–06, REG-02–06 | 90 | 460 | Next batch after verification of batch 1. |
+| 3 | EXEC-02–06, SOC-02–06 | 90 | 550 | Planned. |
+| 4 | SLEEP-02–06, CHANGE-02–06 | 90 | 640 | Planned. |
+| 5 | FAMILY-02–06, SCREEN-02–06 | 90 | 730 | Planned. |
+| 6 | SHAME-02–06, MEANING-02–06 | 90 | 820 | Planned. |
+| 7 | OCD-02–04 | 27 | 847 | Full manual, age-specific content and professional review decisions remain open. |
+| 8 | OCD-05–08 | 36 | 883 | Same specialist decisions apply. |
+| 9 | OCDYC-01–04, ages 6–7 | 12 | 895 | Separate child/caregiver plan and review remain open. |
+| 10 | OCDYC-05–08, ages 6–7 | 12 | 907 | Same young-child decisions apply. |
+| 11 | TRAUMA-02–04 | 27 | 934 | Full manual, scope and professional review decisions remain open. |
+| 12 | TRAUMA-05–08 | 36 | 970 | Same trauma decisions apply. |
+
+After batch 1, 600 proposed PDFs remain. The 970 total remains a planning estimate, not a clinically approved or frozen scope. The project owner intends to arrange review; this is not evidence that reviewers were appointed or that approvals occurred. The new terms of use do not change clinical, age-adaptation or rights status. No clinical approval is inferred from CI success, merging or publication.
+
+Each subsequent implementation should preserve every existing catalog and binary, add a pinned versioned catalog, verify file/page/layout/age/transport behavior, and receive live admin verification after publication. The existing access controls and exclusion from the public/AI forms registry continue. [Batch 1 details](hebrew-forms-series-01-implementation.md).

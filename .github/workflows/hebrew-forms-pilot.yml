@@ -12,6 +12,8 @@ on:
       - 'scripts/render-hebrew-p4.mjs'
       - 'base44/functions/getHebrewFormsPilot/**'
       - 'test/utils/hebrewFormsPilot*.test.js'
+      - 'src/components/legal/**'
+      - 'src/components/i18n/translations.jsx'
       - 'src/components/forms/**'
       - 'src/lib/hebrewFormsPilotClient.js'
       - 'src/pages/TherapeuticForms.jsx'
@@ -27,6 +29,10 @@ jobs:
   pilot:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [pilot-desktop, pilot-mobile]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -42,15 +48,17 @@ jobs:
       - run: node scripts/render-hebrew-p4.mjs --wave=p4-01
       - run: python3 scripts/build-hebrew-p4.py --wave p4-02 && git diff --exit-code -- content/hebrew-forms/p4-02
       - run: node scripts/render-hebrew-p4.mjs --wave=p4-02
+      - run: python3 scripts/build-hebrew-p4.py --wave series-01 && git diff --exit-code -- content/hebrew-forms/series-01
+      - run: node scripts/render-hebrew-p4.mjs --wave=series-01
       - run: npm run build
         env:
           VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'
-      - run: npx playwright test --config hebrew-pilot.playwright.config.ts
+      - run: npx playwright test --config hebrew-pilot.playwright.config.ts --project=${{ matrix.project }}
         env:
           VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: hebrew-pilot-failure
+          name: hebrew-pilot-failure-${{ matrix.project }}
           path: test-results/
           retention-days: 7

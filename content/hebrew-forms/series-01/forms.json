@@ -1,0 +1,731 @@
+[
+  {
+    "id": "MP-MOOD-03-G-ALL-HE",
+    "title": "הנחיות למטפל: בחירת פעולה והתאמתה ליכולת",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "MOOD-03",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-03-W-CH-HE",
+    "title": "משהו קטן שאוכל לבחור",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-03",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-03-W-TE-HE",
+    "title": "צעד שמתאים ליום שלי",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-03",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-03-W-AD-HE",
+    "title": "פעולה שמתאימה ליכולת שלי",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-03",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-03-W-OA-HE",
+    "title": "לבחור פעולה בקצב שלי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-03",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-03-P-CH-HE",
+    "title": "איך היה הצעד שבחרתי",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-03",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-03-P-TE-HE",
+    "title": "ללמוד מניסיון קטן",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-03",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-03-P-AD-HE",
+    "title": "לנסות, ללמוד ולהתאים",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-03",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-03-P-OA-HE",
+    "title": "מה התאפשר לי בניסיון",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-03",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-04-G-ALL-HE",
+    "title": "הנחיות למטפל: מחשבות ודפוסים שמשמרים נסיגה",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "MOOD-04",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-04-W-CH-HE",
+    "title": "מה חשבתי ומה קרה אחר כך",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-04",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-04-W-TE-HE",
+    "title": "כשהמחשבה גורמת לי להתרחק",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-04",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-04-W-AD-HE",
+    "title": "פירוש, רגש ונסיגה",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-04",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-04-W-OA-HE",
+    "title": "לבדוק פירוש בלי להקטין את הקושי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-04",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-04-P-CH-HE",
+    "title": "לנסות דרך נוספת להגיב",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-04",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-04-P-TE-HE",
+    "title": "מה למדתי מתגובה אחרת",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-04",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-04-P-AD-HE",
+    "title": "בחינת תגובה בחיי היום יום",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-04",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-04-P-OA-HE",
+    "title": "מה עזר לי לראות אפשרות נוספת",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-04",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-05-G-ALL-HE",
+    "title": "הנחיות למטפל: קשרים, הנאה ותחושת מסוגלות",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "MOOD-05",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-05-W-CH-HE",
+    "title": "מה חסר לי ביום שלי",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-05",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-05-W-TE-HE",
+    "title": "למצוא מקום לקשר ולעניין",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-05",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-05-W-AD-HE",
+    "title": "לשלב קשר, עניין ועשייה",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-05",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-05-W-OA-HE",
+    "title": "מה ארצה להחזיר ליום שלי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-05",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-05-P-CH-HE",
+    "title": "מה נתן לי משהו קטן",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-05",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-05-P-TE-HE",
+    "title": "ללמוד מהשילוב שבחרתי",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-05",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-05-P-AD-HE",
+    "title": "בדיקת איזון והתאמה",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-05",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-05-P-OA-HE",
+    "title": "מה היה בעל ערך בשבילי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-05",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-06-G-ALL-HE",
+    "title": "הנחיות למטפל: שימור והתמודדות עם ירידה חוזרת",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "MOOD-06",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-06-W-CH-HE",
+    "title": "מה עוזר לי כששוב קשה",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-06",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-06-W-TE-HE",
+    "title": "תוכנית שלי לתקופה פחות טובה",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-06",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-06-W-AD-HE",
+    "title": "לשמור על הכלים ולבקש תמיכה",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-06",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-06-W-OA-HE",
+    "title": "תוכנית המשך שמתאימה לחיי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MOOD-06",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-06-P-CH-HE",
+    "title": "לבדוק יחד את התוכנית",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-06",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-06-P-TE-HE",
+    "title": "התאמת התוכנית למציאות",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-06",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-06-P-AD-HE",
+    "title": "סקירת תוכנית ההמשך",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-06",
+    "track": "mood"
+  },
+  {
+    "id": "MP-MOOD-06-P-OA-HE",
+    "title": "מה מתאים לי לשמר עכשיו",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MOOD-06",
+    "track": "mood"
+  },
+  {
+    "id": "MP-SELF-02-G-ALL-HE",
+    "title": "הנחיות למטפל: כללים ותנאים לערך עצמי",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "SELF-02",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-02-W-CH-HE",
+    "title": "האם אני חייב להצליח תמיד",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-02",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-02-W-TE-HE",
+    "title": "מה אני דורש מעצמי כדי להיות בסדר",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-02",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-02-W-AD-HE",
+    "title": "הכללים שאני מציב לערך שלי",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-02",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-02-W-OA-HE",
+    "title": "לבדוק דרישה שהכבידה עליי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-02",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-02-P-CH-HE",
+    "title": "לשים לב לכלל ולבחור",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-02",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-02-P-TE-HE",
+    "title": "לנסות יותר מקום לעצמי",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-02",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-02-P-AD-HE",
+    "title": "בדיקה של כלל גמיש יותר",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-02",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-02-P-OA-HE",
+    "title": "מה למדתי על הדרישה מעצמי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-02",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-03-G-ALL-HE",
+    "title": "הנחיות למטפל: תיאור עצמי רחב ומבוסס",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "SELF-03",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-03-W-CH-HE",
+    "title": "יש בי יותר מדבר אחד",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-03",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-03-W-TE-HE",
+    "title": "תמונה רחבה יותר של עצמי",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-03",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-03-W-AD-HE",
+    "title": "לתאר את עצמי בלי תווית כוללת",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-03",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-03-W-OA-HE",
+    "title": "לתת מקום לחלקים שונים בי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-03",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-03-P-CH-HE",
+    "title": "לשים לב לעוד דבר עליי",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-03",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-03-P-TE-HE",
+    "title": "עובדה חדשה בתמונה שלי",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-03",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-03-P-AD-HE",
+    "title": "להרחיב את התיאור מתוך החיים",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-03",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-03-P-OA-HE",
+    "title": "תיאור שמתעדכן עם הזמן",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-03",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-04-G-ALL-HE",
+    "title": "הנחיות למטפל: תגובה לביקורת פנימית וחיצונית",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "SELF-04",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-04-W-CH-HE",
+    "title": "מה אעשה כשאומרים לי משהו קשה",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-04",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-04-W-TE-HE",
+    "title": "להגיב לביקורת בלי להקטין את עצמי",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-04",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-04-W-AD-HE",
+    "title": "משוב, גבול ותגובה לעצמי",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-04",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-04-W-OA-HE",
+    "title": "לבחור איך לקבל ולהגיב למשוב",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-04",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-04-P-CH-HE",
+    "title": "תגובה שבחרתי ועזרה לי",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-04",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-04-P-TE-HE",
+    "title": "מה למדתי מהתגובה לביקורת",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-04",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-04-P-AD-HE",
+    "title": "לבדוק תגובה מכבדת ומידתית",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-04",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-04-P-OA-HE",
+    "title": "מה התאים לי בתגובה שבחרתי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-04",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-05-G-ALL-HE",
+    "title": "הנחיות למטפל: בניית מסוגלות דרך פעולה",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "SELF-05",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-05-W-CH-HE",
+    "title": "לנסות משהו שחשוב לי",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-05",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-05-W-TE-HE",
+    "title": "ניסיון שמלמד אותי על היכולת שלי",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-05",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-05-W-AD-HE",
+    "title": "פעולה לפי ערך ולמידה מציאותית",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-05",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-05-W-OA-HE",
+    "title": "לבחור עשייה בעלת ערך עבורי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-05",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-05-P-CH-HE",
+    "title": "מה למדתי מהניסיון שלי",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-05",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-05-P-TE-HE",
+    "title": "ללמוד גם כשהניסיון לא מושלם",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-05",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-05-P-AD-HE",
+    "title": "מסוגלות שנבנית מתוך ניסיון",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-05",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-05-P-OA-HE",
+    "title": "מה הניסיון לימד אותי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-05",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-06-G-ALL-HE",
+    "title": "הנחיות למטפל: שימור יחס עצמי הוגן",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "SELF-06",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-06-W-CH-HE",
+    "title": "מה אזכור כשאהיה קשה עם עצמי",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-06",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-06-W-TE-HE",
+    "title": "תוכנית לימים של השוואה וביקורת",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-06",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-06-W-AD-HE",
+    "title": "לשמור על יחס עצמי מציאותי ומכבד",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-06",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-06-W-OA-HE",
+    "title": "יחס לעצמי לאורך שינויים",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SELF-06",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-06-P-CH-HE",
+    "title": "לבדוק מה עוזר לי לזכור",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-06",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-06-P-TE-HE",
+    "title": "לעדכן את התוכנית שלי",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-06",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-06-P-AD-HE",
+    "title": "סקירת הכלים והמשך התאמה",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-06",
+    "track": "self"
+  },
+  {
+    "id": "MP-SELF-06-P-OA-HE",
+    "title": "מה ארצה לשמור ולשנות",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SELF-06",
+    "track": "self"
+  }
+]

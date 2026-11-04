@@ -1,4 +1,5 @@
 import { additionalLegalCopies } from './legalContentAdditional';
+import { formsTermsCopies, FORMS_TERMS_EFFECTIVE_DATE } from './formsTermsContent';
 
 export const LEGAL_EFFECTIVE_DATE = '2026-09-03';
 export const LEGAL_CONSENT_VERSION = '2026-09-03';
@@ -258,5 +259,13 @@ const legalCopies = { en, he, ...additionalLegalCopies };
 
 export function getLegalCopy(language) {
   const normalized = String(language || 'en').toLowerCase().split('-')[0];
-  return legalCopies[normalized] || en;
+  const copy = legalCopies[normalized] || en;
+  return {
+    ...copy,
+    terms: {
+      ...copy.terms,
+      effectiveDate: FORMS_TERMS_EFFECTIVE_DATE,
+      sections: [...copy.terms.sections, { id: 'forms-terms', ...formsTermsCopies[copy.language] }],
+    },
+  };
 }

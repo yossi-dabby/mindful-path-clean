@@ -77,4 +77,27 @@ describe('pinned Hebrew catalog releases', () => {
     expect(new TextEncoder().encode(JSON.stringify(pilot.p4aCatalog)).length).toBeLessThan(512 * 1024);
   });
 
+  it('pins p4-02: preserves 253 records and adds four complete units', () => {
+    expect(pilot.p4bCatalog.forms).toHaveLength(289);
+    expect(pilot.p4bCatalog.forms.slice(0, 253)).toEqual(pilot.p4aCatalog.forms);
+    const units = ["SHAME-01", "MEANING-01", "OCD-01", "TRAUMA-01"];
+    const additions = pilot.p4bCatalog.forms.slice(253);
+    expect(additions.map((f) => f.id).sort()).toEqual(units.flatMap((unit) => [
+      `MP-${unit}-G-ALL-HE`, ...['W', 'P'].flatMap((kind) => ['CH', 'TE', 'AD', 'OA'].map((age) => `MP-${unit}-${kind}-${age}-HE`)),
+    ]).sort());
+    expect(additions.every((f) => f.contentVersion === '0.1' && f.status.includes('לא להפצה'))).toBe(true);
+    expect(new TextEncoder().encode(JSON.stringify(pilot.p4bCatalog)).length).toBeLessThan(512 * 1024);
+  });
+
+  it('keeps specialized preparation distinct and child age limits explicit', () => {
+    const forms = pilot.p4bCatalog.forms;
+    for (const unit of ['OCD-01', 'TRAUMA-01']) {
+      const preparation = forms.filter((f) => f.unit === unit && f.id.includes('-P-'));
+      expect(preparation).toHaveLength(4);
+      expect(preparation.every((f) => f.kind === 'הכנה לפגישה')).toBe(true);
+    }
+    expect(forms.filter((f) => f.unit === 'OCD-01' && f.age === 'CH').every((f) => f.ageLabel.includes('8 עד 11'))).toBe(true);
+    expect(forms.filter((f) => f.unit === 'FAMILY-01' && ['AD', 'OA'].includes(f.age)).every((f) => f.audience.includes('מלווה'))).toBe(true);
+  });
+
 });

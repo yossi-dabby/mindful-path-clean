@@ -228,7 +228,7 @@ describe('Base44 proxy to the real private PDF server', () => {
   afterAll(async () => { server.closeAllConnections(); await new Promise((resolve) => server.close(resolve)); });
   const dependencies = () => ({ createClientFromRequest: client(), fetchImpl: (url, init) => fetch(`${origin}${new URL(url).pathname}${new URL(url).search}`, init) });
 
-  it('returns all pinned catalogs and all 253 PDFs byte-for-byte through the Base44 transport', async () => {
+  it('returns all pinned catalogs and all 289 PDFs byte-for-byte through the Base44 transport', async () => {
     // Match the deployed Workers incompatibility: Node otherwise accepts error.
     const NativeRequest = Request;
     vi.stubGlobal('Request', class {
@@ -249,7 +249,7 @@ describe('Base44 proxy to the real private PDF server', () => {
         const response = await handleHebrewFormsPilot(request({ path }), dependencies());
         expect((await response.json()).catalog).toEqual(release);
       }
-      for (const form of pilot.p4aCatalog.forms) {
+      for (const form of pilot.p4bCatalog.forms) {
         const response = await handleHebrewFormsPilot(request({ path: `files/${form.id}` }), dependencies());
         expect(response.status).toBe(200);
         const data = await response.json();

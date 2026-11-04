@@ -1,0 +1,326 @@
+[
+  {
+    "id": "MP-SHAME-01-G-ALL-HE",
+    "title": "הנחיות למטפל: להפריד בין רגש, אחריות ויחס לעצמי",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "SHAME-01",
+    "track": "shame"
+  },
+  {
+    "id": "MP-SHAME-01-W-CH-HE",
+    "title": "מה קרה ומה אני צריך",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SHAME-01",
+    "track": "shame"
+  },
+  {
+    "id": "MP-SHAME-01-W-TE-HE",
+    "title": "כשאני קשה עם עצמי",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SHAME-01",
+    "track": "shame"
+  },
+  {
+    "id": "MP-SHAME-01-W-AD-HE",
+    "title": "רגש, אחריות ודרך להגיב",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SHAME-01",
+    "track": "shame"
+  },
+  {
+    "id": "MP-SHAME-01-W-OA-HE",
+    "title": "להביט במצב ביחס מכבד",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "SHAME-01",
+    "track": "shame"
+  },
+  {
+    "id": "MP-SHAME-01-P-CH-HE",
+    "title": "צעד קטן של יחס טוב",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SHAME-01",
+    "track": "shame"
+  },
+  {
+    "id": "MP-SHAME-01-P-TE-HE",
+    "title": "לבחור תגובה בלי להקטין את עצמי",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SHAME-01",
+    "track": "shame"
+  },
+  {
+    "id": "MP-SHAME-01-P-AD-HE",
+    "title": "תגובה מתחשבת ותיקון לפי בחירה",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SHAME-01",
+    "track": "shame"
+  },
+  {
+    "id": "MP-SHAME-01-P-OA-HE",
+    "title": "צעד מתאים בלי לשאת הכול",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "SHAME-01",
+    "track": "shame"
+  },
+  {
+    "id": "MP-MEANING-01-G-ALL-HE",
+    "title": "הנחיות למטפל: מה חשוב לי ומה יכול לתמוך בצעד קטן",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "MEANING-01",
+    "track": "meaning"
+  },
+  {
+    "id": "MP-MEANING-01-W-CH-HE",
+    "title": "דבר שחשוב לי",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MEANING-01",
+    "track": "meaning"
+  },
+  {
+    "id": "MP-MEANING-01-W-TE-HE",
+    "title": "מה חשוב לי בדרך שלי",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MEANING-01",
+    "track": "meaning"
+  },
+  {
+    "id": "MP-MEANING-01-W-AD-HE",
+    "title": "כיוון חשוב ומשאב זמין",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MEANING-01",
+    "track": "meaning"
+  },
+  {
+    "id": "MP-MEANING-01-W-OA-HE",
+    "title": "מה משמעותי לי עכשיו",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "MEANING-01",
+    "track": "meaning"
+  },
+  {
+    "id": "MP-MEANING-01-P-CH-HE",
+    "title": "צעד קטן לדבר שחשוב לי",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MEANING-01",
+    "track": "meaning"
+  },
+  {
+    "id": "MP-MEANING-01-P-TE-HE",
+    "title": "לנסות צעד בדרך שבחרתי",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MEANING-01",
+    "track": "meaning"
+  },
+  {
+    "id": "MP-MEANING-01-P-AD-HE",
+    "title": "פעולה קטנה בכיוון נבחר",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MEANING-01",
+    "track": "meaning"
+  },
+  {
+    "id": "MP-MEANING-01-P-OA-HE",
+    "title": "צעד שמתאים למשמעות ולקצב שלי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "MEANING-01",
+    "track": "meaning"
+  },
+  {
+    "id": "MP-OCD-01-G-ALL-HE",
+    "title": "הנחיות למטפל: להכין שיחה לטיפול ייעודי ב־OCD",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCD-01",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-01-W-CH-HE",
+    "title": "דוגמה אחת לספר למטפל",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-01",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-01-W-TE-HE",
+    "title": "להסביר מה מושך אותי לבדוק או לחזור",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-01",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-01-W-AD-HE",
+    "title": "דוגמה אחת לקראת טיפול ייעודי",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-01",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-01-W-OA-HE",
+    "title": "להביא דוגמה ושאלות לטיפול",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-01",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-01-P-CH-HE",
+    "title": "להכין שאלה לפגישה",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-01",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-01-P-TE-HE",
+    "title": "מה ארצה לשאול את המטפל",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-01",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-01-P-AD-HE",
+    "title": "הכנה לפגישה עם מטפל ב־OCD",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-01",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-01-P-OA-HE",
+    "title": "שאלות ובחירות לקראת הפגישה",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-01",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-TRAUMA-01-G-ALL-HE",
+    "title": "הנחיות למטפל: בחירה ותמיכה לקראת שיחה מקצועית",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "TRAUMA-01",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-01-W-CH-HE",
+    "title": "מה יעזור לי בשיחה",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-01",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-01-W-TE-HE",
+    "title": "איך נוח לי להשתתף בשיחה",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-01",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-01-W-AD-HE",
+    "title": "בחירה, גבולות ותמיכה בשיחה",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-01",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-01-W-OA-HE",
+    "title": "שיחה בקצב ובדרך שמתאימים לי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-01",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-01-P-CH-HE",
+    "title": "לבחור איך לבקש משהו בפגישה",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-01",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-01-P-TE-HE",
+    "title": "להכין בקשה לשיחה הבאה",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-01",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-01-P-AD-HE",
+    "title": "העדפה אחת לקראת פגישה",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-01",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-01-P-OA-HE",
+    "title": "מה ארצה לבקש לקראת השיחה",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-01",
+    "track": "trauma"
+  }
+]

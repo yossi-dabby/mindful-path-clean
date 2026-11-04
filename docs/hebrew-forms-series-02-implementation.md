@@ -21,8 +21,8 @@ Railway validates every catalog and all 460 file hashes at startup. Both request
 - PDF structural checks and visual inspection covered all 120 rendered pages; representative pages were also read at full size.
 - 48 focused release, transport, permission, provenance and integrity tests passed, including all 460 PDFs through the Base44-compatible handler.
 - Full repository suite: 356 files / 11,087 tests passed. Lint and typecheck passed.
-- The 193 browser cases per desktop/mobile project are being completed before PR handoff; results will be recorded here.
+- All 193 browser cases passed in each desktop/mobile project (386 total).
 
-This implementation is not yet merged, published or verified on the live app. After merge, allow Railway to deploy, sync/save the Base44 function and publish the app as in previous batches. In authenticated preview and published sessions, verify version `0.8-series-02`, count 460, both six-unit PERF/REG lists, a new W/P sheet and four-page guide, exact downloaded PDF bytes/hash, back navigation and the existing warning/terms link. Local fixtures cannot establish the live Base44/Railway transport result.
+PR 20 passed its checks, was merged and published. On 2026-11-04 the project owner confirmed public-site verification of version `0.8-series-02` with 460 forms. This user confirmation is distinct from the local fixture tests and does not imply clinical/rights approval.
 
 For rollback, use the prior application release while keeping historical catalogs/assets available. Do not delete private PDFs or change existing pins to make a mismatch pass. Batch 3 (EXEC-02–06 and SOC-02–06, 90 proposed PDFs) follows publication and live verification of this batch.

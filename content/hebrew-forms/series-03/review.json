@@ -1,0 +1,1811 @@
+{
+  "contentVersion": "0.1",
+  "status": "draft_review_only",
+  "sources": [
+    "https://www.nice.org.uk/guidance/ng87/chapter/recommendations",
+    "https://www.nhsinform.scot/illnesses-and-conditions/adhd/managing-adhd-symptoms-in-work-and-education",
+    "https://www.cci.health.wa.gov.au/Resources/Looking-After-Yourself/Assertiveness"
+  ],
+  "forms": [
+    {
+      "id": "MP-EXEC-02-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "5ef6b2360ebad0260a1efd4133420b6bd07ef7518856b93bfc8d90fb58b378be"
+      }
+    },
+    {
+      "id": "MP-EXEC-02-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "e81fb451b00191fc6cbd361f184f080153193005fc76f7d2c16969f9ed79ddaa"
+      }
+    },
+    {
+      "id": "MP-EXEC-02-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "7bdedde254c9c2ed9321dd0475ab27fdc1da97478ae0a62ea374cb55d9144a07"
+      }
+    },
+    {
+      "id": "MP-EXEC-02-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "27136468323e371fb5ac9361c16f08a5f5da0e74a42690c6b0bfd24b32f07b21"
+      }
+    },
+    {
+      "id": "MP-EXEC-02-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "ac04f63bc0fe298cfb6514e0cd8c93da06116dd5a821cf260357a131a244b129"
+      }
+    },
+    {
+      "id": "MP-EXEC-02-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "51b24a78b807f7c9cd89a17e2282ed1718863cec7642ccce3a349b8044a1ff7a"
+      }
+    },
+    {
+      "id": "MP-EXEC-02-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "6070c5e41edc9f1b6b20d3a2c8457a5ce6ae008fce5f4d67e8862766175e796b"
+      }
+    },
+    {
+      "id": "MP-EXEC-02-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "a010a23516bfbc13ee6098b76b63939de4832b3a316e838ded996e85e1924445"
+      }
+    },
+    {
+      "id": "MP-EXEC-02-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "efeada46e630a3b58ec2565ae2a968722e4284f1ae42a9dee9664ae12ad64e84"
+      }
+    },
+    {
+      "id": "MP-EXEC-03-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "f21e9d2adc0b0717f62bd59a2b6bdfbd4f4d470f42dc8d617f54ab427c312a3e"
+      }
+    },
+    {
+      "id": "MP-EXEC-03-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "87af3ce7c3f7066597ce6bc1b33477d8fb1a2698b4ff1018527d586e49147e33"
+      }
+    },
+    {
+      "id": "MP-EXEC-03-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "eb245ae163f19e598262ac9951344b774ecf2009baa3e1bfdee34875d4ec0c64"
+      }
+    },
+    {
+      "id": "MP-EXEC-03-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "e6ccabff6145194bf462f1805c68f0b9ed2ae5f8f1de375882c0d2912ad62857"
+      }
+    },
+    {
+      "id": "MP-EXEC-03-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "e40f873886dc8ee73c095df64c52022cd1021649ad94e0e82b55798ce891e6f2"
+      }
+    },
+    {
+      "id": "MP-EXEC-03-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "3dda8fb39e145b50a0538d43e764acc1c1ddd42c5d47eb9adde5393b5ed3b91b"
+      }
+    },
+    {
+      "id": "MP-EXEC-03-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "6e8577a7366dd4271872aa4c4e65b18b34624e9dd59de9d740e02f813e326b0f"
+      }
+    },
+    {
+      "id": "MP-EXEC-03-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "d34bbca3747e4e1317ed323a79d4250fff78e0e815c864983c625638ef686d08"
+      }
+    },
+    {
+      "id": "MP-EXEC-03-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "8cd02eba51202dc94429fbb01ffb5f92b40184a329cd79c8f830217818324a2d"
+      }
+    },
+    {
+      "id": "MP-EXEC-04-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "7f7acf473569fbb90f518105023b65af2425e0163938a6f87780799205e4a3ed"
+      }
+    },
+    {
+      "id": "MP-EXEC-04-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "3f673b9f29aad7552c2c4a5e060c4ab187d96fe0b193a5e43aa264675d32de05"
+      }
+    },
+    {
+      "id": "MP-EXEC-04-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "0aa777b2018e2f206d814066fb877f465836f1ba4f320321b1971ccf90ae1efa"
+      }
+    },
+    {
+      "id": "MP-EXEC-04-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "328958908662870cbe3a5052bbbb873fb9bb1c59a6dace856adfe417fa2e9d30"
+      }
+    },
+    {
+      "id": "MP-EXEC-04-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "2512b355c38cb14344d8a5cf67cd7d76f2327acfc8d0b57982a39f2cbbe1403f"
+      }
+    },
+    {
+      "id": "MP-EXEC-04-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "d6782edde7c217c5acfa56007bbded680ee49eda23f281ab071a11805f69ac6a"
+      }
+    },
+    {
+      "id": "MP-EXEC-04-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "a131b3e74e05f019a84a1a11032bd8f811f6b2df9a2dce506ac35d5c2e5b887f"
+      }
+    },
+    {
+      "id": "MP-EXEC-04-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "83443a5d7f489aa2615c5edcd2b36b7d1a9bd10bda36c9848b258ec8bc840bb0"
+      }
+    },
+    {
+      "id": "MP-EXEC-04-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "f89dd0d7e6397539990689bba71da4a07bafe987cea7a76468b457f938f62408"
+      }
+    },
+    {
+      "id": "MP-EXEC-05-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "2d4897d7d495d5ad578f6edf2bd2b6800ee6ce963906901de9185fea95291c47"
+      }
+    },
+    {
+      "id": "MP-EXEC-05-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "b109f922b2503107f37cf56cb823bbab3895f7da4125a8aeb623e086c5068ff6"
+      }
+    },
+    {
+      "id": "MP-EXEC-05-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "3eb737b45166fa4f016944eb3236676435ab26aa8f34383f0a46ed5e31b024dc"
+      }
+    },
+    {
+      "id": "MP-EXEC-05-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "baaed11b766fedeafce7947628e56dd9afba36eca3eb60c9e43f60bf1780a016"
+      }
+    },
+    {
+      "id": "MP-EXEC-05-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "ff8d6f164502ffe5c6c772a0a58b5b17e95d14021ce580074921f52d233b8205"
+      }
+    },
+    {
+      "id": "MP-EXEC-05-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "9ea3c4947b6e931c437f471e147c65c595172f66ddb55cac27fd0e13a2d281b2"
+      }
+    },
+    {
+      "id": "MP-EXEC-05-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "c7109375f2c74665fbe3423bc12e38e285162076a902e79f3503f7f609a27e0c"
+      }
+    },
+    {
+      "id": "MP-EXEC-05-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "3eb690137a7cd0961e6eba369bf9ce7e68763996fd33ccfc42fcbf8baa3aa19c"
+      }
+    },
+    {
+      "id": "MP-EXEC-05-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "3464cacb68df5a7cbb5c0e247a11d71e322ab06abd2fe3566b229ac7fee28e61"
+      }
+    },
+    {
+      "id": "MP-EXEC-06-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "7b8f342dd62e300ffd92966142360632ed044e691ac1276e932a2473d1e94529"
+      }
+    },
+    {
+      "id": "MP-EXEC-06-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "9ba65576f500a7d888ee86f8dfb3da5fdd027f4a39304e9e3534e39b48e3d53e"
+      }
+    },
+    {
+      "id": "MP-EXEC-06-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "28f003b43b53ba0a0ba6c521cc37b30e82044f55db70ec2abcce033b76d9b1ee"
+      }
+    },
+    {
+      "id": "MP-EXEC-06-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "b0c3608318d4104c1987095ceb79da2758a80352a92513d8b53a1eb3adfae76a"
+      }
+    },
+    {
+      "id": "MP-EXEC-06-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "21e758c3acffac7df35812f191654c7daec2e053b76bc0cf20e0ac1894e61620"
+      }
+    },
+    {
+      "id": "MP-EXEC-06-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "f21fdf2b4e8d6fd0ac25e47c003867475b5d1f55f28a3d42e4c75ba32a4903fe"
+      }
+    },
+    {
+      "id": "MP-EXEC-06-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "84f1baa0390c219ba9d0e2e328f72b2f91b8804664da4168cb9e0c2545035702"
+      }
+    },
+    {
+      "id": "MP-EXEC-06-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "7eff1ee72e6919264f132db9cb21fe02b8ac46036e5dc104349bd93766518cf6"
+      }
+    },
+    {
+      "id": "MP-EXEC-06-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "2f276b7971a99b3edd88865eab1e9d5c2c314da9ef8e53b4f4878366c8017a7e"
+      }
+    },
+    {
+      "id": "MP-SOC-02-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "a52dfeb3fd1bebd1f08db26a5569ce4dfc775db4089299181190d999079f70a0"
+      }
+    },
+    {
+      "id": "MP-SOC-02-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "7553a41e13d7c6fa67443912a0426c9b8f09467a6c6ec12139edc48349d5ca7f"
+      }
+    },
+    {
+      "id": "MP-SOC-02-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "0e11c5b3514c7ba0e3e8b45d30d44379b92be32304539c71b1ae507fa09478bb"
+      }
+    },
+    {
+      "id": "MP-SOC-02-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "f6ad1bfe2facd4d46ae3117f905491480df21f91e36c8ad47c6ae2c93a8a788e"
+      }
+    },
+    {
+      "id": "MP-SOC-02-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "a5de9cdf7f5f9e50ae9425b10b413d4590df46a5bc7d03e809320f2860149824"
+      }
+    },
+    {
+      "id": "MP-SOC-02-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "d03720d942241e45837887695bb1231ac355b9909c74958a48894712f78d0234"
+      }
+    },
+    {
+      "id": "MP-SOC-02-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "fbab527085bf5363b0246bb921a3a8d3211a18d43a7b53ff164b894b0c577c0f"
+      }
+    },
+    {
+      "id": "MP-SOC-02-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "da0aecdc0a58f37c853e680cbd8df48c17cb75950e12bd4367e74b43230b7d0c"
+      }
+    },
+    {
+      "id": "MP-SOC-02-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "eb4f63b53d67dc35561859342902ea227abeabbab3ee86aa8b2ee7402aae44cf"
+      }
+    },
+    {
+      "id": "MP-SOC-03-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "ff3142a5048de09ac9fb622b64f89c21dee125c827a366c7d01c02d1e2296508"
+      }
+    },
+    {
+      "id": "MP-SOC-03-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "f9b1864996a990951fcbae17926023266cf117bc812a8523aec94186a55fbf30"
+      }
+    },
+    {
+      "id": "MP-SOC-03-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "2b6f45a88fc6617f322181806fa2fa30e98692ab50d6bbffe28c15022be70152"
+      }
+    },
+    {
+      "id": "MP-SOC-03-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "e5a3a277ee312f33450dfd19f18517893a32948434430de6af3f467ec700bcff"
+      }
+    },
+    {
+      "id": "MP-SOC-03-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "fc0b139f7b9cce505a8798c98f739ceb48c52f06353de6ae5e1199e64e8280ee"
+      }
+    },
+    {
+      "id": "MP-SOC-03-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "cfbb9d6f7b245ddb5d5f4c0d6c791652446098fa53f464689b2901ae04c81a73"
+      }
+    },
+    {
+      "id": "MP-SOC-03-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "775780427037e49c332d377deadf0946bbca40a3a90147ff336d6a0a33585e9a"
+      }
+    },
+    {
+      "id": "MP-SOC-03-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "1c198f8a44c25130870d669708265fb23c865430b68ed167a3e879ad36e915c5"
+      }
+    },
+    {
+      "id": "MP-SOC-03-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "1c4877b54a454e5f990030a442fa5d02cc4997356893f5c9847b326bcb76df49"
+      }
+    },
+    {
+      "id": "MP-SOC-04-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "a183aa3420483d47a4e44a6a60a983aec5305201a618731919f106feb9fb5db4"
+      }
+    },
+    {
+      "id": "MP-SOC-04-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "d5edaadf27d7043f087ec5e19aec0fcba19c6b1aa1b78d945f79913a95c1d28f"
+      }
+    },
+    {
+      "id": "MP-SOC-04-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "3b4810b0c0a26aecc96cd8aa96e460b555d9bb0594074aae2914fc4c47ad73a8"
+      }
+    },
+    {
+      "id": "MP-SOC-04-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "1b217456576713d2da0a0e86adab0cd45a56d3c1a2eb402c07419c515437bf90"
+      }
+    },
+    {
+      "id": "MP-SOC-04-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "f19b13f6a5ca3532868c011379105857727e4069e4bc856f547beb0aeae1fda9"
+      }
+    },
+    {
+      "id": "MP-SOC-04-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "b0749d3391ac47d6b07e67c065de10bf4913395656b3b533f727d3f0f490d997"
+      }
+    },
+    {
+      "id": "MP-SOC-04-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "7b7a95122f15e36276c28bdfc9ea5a944354410afb1efe279e173dbd956e55a5"
+      }
+    },
+    {
+      "id": "MP-SOC-04-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "889f470fcc29383db1b3b38aa4e4f181c91678a992dddd09aef9218708535593"
+      }
+    },
+    {
+      "id": "MP-SOC-04-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "4792899cb9e2f0777d533f52697ab9ea41c5eef63552a17221719a21256ea17a"
+      }
+    },
+    {
+      "id": "MP-SOC-05-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "7ece0b83bf05944e4848e758fc77bb33f376ddaea58c63d6235f92a3aa414892"
+      }
+    },
+    {
+      "id": "MP-SOC-05-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "ce2bf8b2336772c3ec8f326a53b37e99e82941d51a71fc7b4c03c3dc59de334b"
+      }
+    },
+    {
+      "id": "MP-SOC-05-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "9029fb1054b09bba585669bf31b98ee8d670e5d7f6e2dac98f95e6a9dcf6def1"
+      }
+    },
+    {
+      "id": "MP-SOC-05-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "0d8ea1bc2907ccac843489c86999cdcdf29fb61b8a14a4b29c51d2395181e87b"
+      }
+    },
+    {
+      "id": "MP-SOC-05-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "76793af74e38695cfd7e3715e470a0a3fa8826d3d616c8589f59d3acd3d8b867"
+      }
+    },
+    {
+      "id": "MP-SOC-05-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "61c12e6ed8dc9f8899f479f51b6b85127cc1be302877d24de35f320198a3cd9c"
+      }
+    },
+    {
+      "id": "MP-SOC-05-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "098eb50655cd156dd98a4770541e806366c26a0dd412328314c60b6b2541063a"
+      }
+    },
+    {
+      "id": "MP-SOC-05-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "0f9f96cc62300fd191e90534601e861d46025d2e5b5caa0a6976c9bdcd3fa0c7"
+      }
+    },
+    {
+      "id": "MP-SOC-05-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "384b2eac83b1e4012f28a84edbd8cea0ea51f058b2fc0bacda9420e4212bda93"
+      }
+    },
+    {
+      "id": "MP-SOC-06-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "e0bd6dcc18388b037255ce551051338c5062a662c14a7e6a0625682c0a300136"
+      }
+    },
+    {
+      "id": "MP-SOC-06-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "0faab126a0004a0cad6e389149e3f347b97c012f8a28d7c2881792925b8766a6"
+      }
+    },
+    {
+      "id": "MP-SOC-06-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "4e15bdac02059b164be9e5250d1629d37ba9b0cec1b47c9ceda31203838a64ea"
+      }
+    },
+    {
+      "id": "MP-SOC-06-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "943c95617bc00e7efda0425dc1e1d964285f750bb603d970849d7387f9ad815f"
+      }
+    },
+    {
+      "id": "MP-SOC-06-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "ce6da4b13fbe51feeef5e3d2a275dfc3c602cc0e92d65fc3a6db0bf210d9cbd9"
+      }
+    },
+    {
+      "id": "MP-SOC-06-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "b1148fc8fb836edc925bb916c3509926a17eff9c3706e041729324ca44330df0"
+      }
+    },
+    {
+      "id": "MP-SOC-06-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "2e84fc615ea9b27b6ddbf7acbc5ea292083b61fc24fa0824cc24ae70441bccc9"
+      }
+    },
+    {
+      "id": "MP-SOC-06-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "5a8709e9fbb50d513206604654ce4dfb37bc28dcb3ae0b5d6ca16df32356b544"
+      }
+    },
+    {
+      "id": "MP-SOC-06-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "729c7e5d44e8457ffbe6979c9c1db416e6ca854be309ac142de3300dfcd60b89"
+      }
+    }
+  ]
+}

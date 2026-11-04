@@ -1,0 +1,688 @@
+{
+  "schemaVersion": 1,
+  "lastUpdated": "2026-11-04",
+  "baselineCommit": "f698e7bc47bef5329d2bfe066f48a311549c40f6",
+  "status": "planning_review_required",
+  "sourcePlan": "https://chatgpt.com/space/page_02494d140b7c81919bc157e6f46862e6",
+  "clinicalApproval": false,
+  "rightsApproval": false,
+  "manifestFrozen": false,
+  "sources": [
+    {
+      "id": "MOOD-SOURCE-1",
+      "title": "MOOD-02 repository reference",
+      "url": "https://www.nice.org.uk/guidance/ng222/chapter/Recommendations",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "MOOD-SOURCE-2",
+      "title": "MOOD-02 repository reference",
+      "url": "https://www.nice.org.uk/guidance/ng134/chapter/Recommendations",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "SELF-SOURCE-1",
+      "title": "SELF-01 repository reference",
+      "url": "https://www.cci.health.wa.gov.au/Resources/Looking-After-Yourself/Self-Esteem",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "PERF-SOURCE-1",
+      "title": "PERF-01 repository reference",
+      "url": "https://www.cci.health.wa.gov.au/Resources/Looking-After-Yourself/Perfectionism",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "REG-SOURCE-1",
+      "title": "REG-01 repository reference",
+      "url": "https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/feelings-and-symptoms/anger/",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "EXEC-SOURCE-1",
+      "title": "EXEC-01 repository reference",
+      "url": "https://www.nice.org.uk/guidance/ng87/chapter/recommendations",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "SOC-SOURCE-1",
+      "title": "SOC-01 repository reference",
+      "url": "https://www.cci.health.wa.gov.au/Resources/Looking-After-Yourself/Assertiveness",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "SLEEP-SOURCE-1",
+      "title": "SLEEP-01 repository reference",
+      "url": "https://www.nhs.uk/conditions/insomnia/",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "CHANGE-SOURCE-1",
+      "title": "CHANGE-01 repository reference",
+      "url": "https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/feelings-and-symptoms/grief-bereavement-loss/",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "FAMILY-SOURCE-1",
+      "title": "FAMILY-01 repository reference",
+      "url": "https://www.unicef.org/eca/11-tips-communicating-your-teen",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "SCREEN-SOURCE-1",
+      "title": "SCREEN-01 repository reference",
+      "url": "https://www.aap.org/5Cs",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "SCREEN-SOURCE-2",
+      "title": "SCREEN-01 repository reference",
+      "url": "https://www.healthychildren.org/English/family-life/Media/Pages/How-to-Make-a-Family-Media-Use-Plan.aspx",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "SHAME-SOURCE-1",
+      "title": "SHAME-01 repository reference",
+      "url": "https://www.cci.health.wa.gov.au/Resources/Looking-After-Yourself/Self-Compassion",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "MEANING-SOURCE-1",
+      "title": "MEANING-01 repository reference",
+      "url": "https://www.who.int/publications/i/item/9789240003927",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "OCD-SOURCE-1",
+      "title": "OCD-01 repository reference",
+      "url": "https://www.nice.org.uk/guidance/cg31/chapter/Recommendations",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "TRAUMA-SOURCE-1",
+      "title": "TRAUMA-01 repository reference",
+      "url": "https://www.nice.org.uk/guidance/ng116/chapter/recommendations",
+      "kind": "inherited_primary_reference",
+      "accessVerified": "url_verified_in_committed_source_not_full_manual_review",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Source citation in the existing unit; not evidence that all proposed units or four age groups are validated."
+    },
+    {
+      "id": "NICE-OCD",
+      "title": "NICE CG31 recommendations",
+      "url": "https://www.nice.org.uk/guidance/cg31/chapter/Recommendations",
+      "kind": "guideline",
+      "accessVerified": "official_indexed_recommendations",
+      "checkedAt": "2026-11-04",
+      "ageScope": "8 and older; 6–7 requires separate evidence",
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "CBT with ERP and family involvement; a guideline is not a complete treatment manual."
+    },
+    {
+      "id": "OCD-CH-MANUAL",
+      "title": "Piacentini, Langley, Roblek: Cognitive-Behavioral Treatment of Childhood OCD: It's Only a False Alarm, Therapist Guide (2007)",
+      "url": "https://academic.oup.com/book/1332",
+      "kind": "candidate_manual",
+      "accessVerified": "publisher_abstract_and_metadata_only",
+      "checkedAt": "2026-11-04",
+      "ageScope": "child/adolescent; exact developmental fit pending",
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Candidate for CH 8–11 and TE. Obtain the complete authorized edition and confirm fit with the clinical lead before fixing component coverage."
+    },
+    {
+      "id": "OCD-AD-MANUAL",
+      "title": "Foa, Yadin, Lichner: Exposure and Response (Ritual) Prevention for Obsessive Compulsive Disorder, Therapist Guide (2nd ed, 2012)",
+      "url": "https://academic.oup.com/book/1134",
+      "kind": "candidate_manual",
+      "accessVerified": "publisher_abstract_and_metadata_only",
+      "checkedAt": "2026-11-04",
+      "ageScope": "adult; OA adaptation requires review",
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Candidate for AD/OA. No manual text or proprietary worksheet has been reproduced."
+    },
+    {
+      "id": "OCD-YC-MANUAL",
+      "title": "Freeman and Garcia: Family Based Treatment for Young Children With OCD, Therapist Guide (publisher metadata September 2008)",
+      "url": "https://academic.oup.com/book/1282",
+      "kind": "candidate_manual",
+      "accessVerified": "publisher_chapter_abstract_and_metadata_only",
+      "checkedAt": "2026-11-04",
+      "ageScope": "young children; proposed app subset 6–7",
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Confirm edition and relationship to POTS Jr protocol with the clinical lead. No complete manual access or adoption is claimed."
+    },
+    {
+      "id": "POTS-JR",
+      "title": "Freeman et al., POTS Jr randomized clinical trial (2014)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4511269/",
+      "kind": "primary_trial",
+      "accessVerified": "full_article_available",
+      "checkedAt": "2026-11-04",
+      "ageScope": "5–8 in trial; proposed subset 6–7",
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Evidence for family-based CBT in ages 5–8, not approval of these Hebrew worksheets or a substitute for the manual."
+    },
+    {
+      "id": "TF-CBT-MANUAL",
+      "title": "Cohen, Mannarino, Deblinger: Treating Trauma and Traumatic Grief in Children and Adolescents (2nd ed, 2017; paperback reissue 2026)",
+      "url": "https://www.guilford.com/books/Treating-Trauma-Traumatic-Grief-Children-Adolescents/Cohen-Mannarino-Deblinger/9781462562770",
+      "kind": "candidate_manual",
+      "accessVerified": "publisher_description_and_metadata_only",
+      "checkedAt": "2026-11-04",
+      "ageScope": "publisher framework ages 3–18; app subset 6–17",
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Candidate for CH and TE. 2026 paperback is not a third edition. Complete manual and trained review required."
+    },
+    {
+      "id": "TF-CBT-NCTSN",
+      "title": "NCTSN TF-CBT intervention overview",
+      "url": "https://www.nctsn.org/interventions/trauma-focused-cognitive-behavioral-therapy",
+      "kind": "official_model_overview",
+      "accessVerified": "official_indexed_overview",
+      "checkedAt": "2026-11-04",
+      "ageScope": "3–18",
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Supports model/age framing and caregiver involvement; does not establish the completeness of this package."
+    },
+    {
+      "id": "TF-CBT-WORKBOOK",
+      "title": "Your Very Own TF-CBT Workbook",
+      "url": "https://tfcbt.org/wp-content/uploads/2014/07/Your-Very-Own-TF-CBT-Workbook-Final.pdf",
+      "kind": "supplemental_workbook",
+      "accessVerified": "official_workbook_age_and_purpose_notice",
+      "checkedAt": "2026-11-04",
+      "ageScope": "6–14",
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Supplement only, not the complete manual; its stated 6–14 range does not by itself cover ages 15–17."
+    },
+    {
+      "id": "CPT-MANUAL",
+      "title": "Resick, Monson, Chard: Cognitive Processing Therapy for PTSD (2nd ed, 2024)",
+      "url": "https://www.guilford.com/books/Cognitive-Processing-Therapy-for-PTSD/Resick-Monson-Chard/9781462554270",
+      "kind": "candidate_manual",
+      "accessVerified": "publisher_description_and_metadata_only",
+      "checkedAt": "2026-11-04",
+      "ageScope": "adult; OA adaptation requires review",
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Candidate for AD and OA. Printed edition ISBN 9781462554270. Full text, rights and age adaptation remain pending."
+    },
+    {
+      "id": "CPT-VA",
+      "title": "VA National Center for PTSD: CPT for PTSD",
+      "url": "https://www.ptsd.va.gov/professional/treat/txessentials/cpt_for_ptsd_pro.asp",
+      "kind": "official_model_overview",
+      "accessVerified": "official_page_read",
+      "checkedAt": "2026-11-04",
+      "ageScope": "adult framing",
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Cognitive-only CPT does not require a written trauma account. Unit folders are not a fixed treatment dose."
+    },
+    {
+      "id": "CCI-RIGHTS",
+      "title": "CCI Copyright and Disclaimer",
+      "url": "https://www.cci.health.wa.gov.au/Home/Utilities/Copyright-and-Disclaimer",
+      "kind": "rights_policy",
+      "accessVerified": "official_policy_indexed",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "CCI limits reproduction/publication beyond its stated permitted uses. Link availability does not grant app distribution or translation rights."
+    },
+    {
+      "id": "GUILFORD-RIGHTS",
+      "title": "Guilford Permissions and Copyrights",
+      "url": "https://www.guilford.com/permissions",
+      "kind": "rights_policy",
+      "accessVerified": "official_policy_indexed",
+      "checkedAt": "2026-11-04",
+      "ageScope": null,
+      "useInThisPackage": "reference_and_original_specification_only",
+      "rightsStatus": "not_cleared_for_translation_or_app_distribution",
+      "note": "Publisher directs electronic sharing and republication permission requests through its permissions process. Project-specific permission not obtained."
+    }
+  ],
+  "models": [
+    {
+      "id": "MOOD-FRAMEWORK",
+      "framework": "CBT skills and behavioral activation framing",
+      "ageGroups": [
+        "CH",
+        "TE",
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "proposed_for_review",
+      "sourceIds": [
+        "MOOD-SOURCE-1",
+        "MOOD-SOURCE-2"
+      ],
+      "clinicalOwnerRole": "general_cbt",
+      "manualSelected": false,
+      "ageEvidenceStatus": "separate_age_adaptation_required_not_inferred_from_adult_or_parent_sources"
+    },
+    {
+      "id": "SELF-FRAMEWORK",
+      "framework": "CBT skills for self-evaluation and self-compassion",
+      "ageGroups": [
+        "CH",
+        "TE",
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "proposed_for_review",
+      "sourceIds": [
+        "SELF-SOURCE-1"
+      ],
+      "clinicalOwnerRole": "general_cbt",
+      "manualSelected": false,
+      "ageEvidenceStatus": "separate_age_adaptation_required_not_inferred_from_adult_or_parent_sources"
+    },
+    {
+      "id": "PERF-FRAMEWORK",
+      "framework": "CBT skills for flexible standards and learning",
+      "ageGroups": [
+        "CH",
+        "TE",
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "proposed_for_review",
+      "sourceIds": [
+        "PERF-SOURCE-1"
+      ],
+      "clinicalOwnerRole": "general_cbt",
+      "manualSelected": false,
+      "ageEvidenceStatus": "separate_age_adaptation_required_not_inferred_from_adult_or_parent_sources"
+    },
+    {
+      "id": "REG-FRAMEWORK",
+      "framework": "Emotion awareness, response choice and communication skills",
+      "ageGroups": [
+        "CH",
+        "TE",
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "proposed_for_review",
+      "sourceIds": [
+        "REG-SOURCE-1"
+      ],
+      "clinicalOwnerRole": "general_cbt",
+      "manualSelected": false,
+      "ageEvidenceStatus": "separate_age_adaptation_required_not_inferred_from_adult_or_parent_sources"
+    },
+    {
+      "id": "EXEC-FRAMEWORK",
+      "framework": "Planning, task initiation and environmental supports",
+      "ageGroups": [
+        "CH",
+        "TE",
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "proposed_for_review",
+      "sourceIds": [
+        "EXEC-SOURCE-1"
+      ],
+      "clinicalOwnerRole": "general_cbt",
+      "manualSelected": false,
+      "ageEvidenceStatus": "separate_age_adaptation_required_not_inferred_from_adult_or_parent_sources"
+    },
+    {
+      "id": "SOC-FRAMEWORK",
+      "framework": "Communication, assertiveness and relationship skills",
+      "ageGroups": [
+        "CH",
+        "TE",
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "proposed_for_review",
+      "sourceIds": [
+        "SOC-SOURCE-1"
+      ],
+      "clinicalOwnerRole": "general_cbt",
+      "manualSelected": false,
+      "ageEvidenceStatus": "separate_age_adaptation_required_not_inferred_from_adult_or_parent_sources"
+    },
+    {
+      "id": "SLEEP-FRAMEWORK",
+      "framework": "Sleep habits, functioning and support; NOT full CBT-I",
+      "ageGroups": [
+        "CH",
+        "TE",
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "proposed_for_review",
+      "sourceIds": [
+        "SLEEP-SOURCE-1"
+      ],
+      "clinicalOwnerRole": "general_cbt",
+      "manualSelected": false,
+      "ageEvidenceStatus": "separate_age_adaptation_required_not_inferred_from_adult_or_parent_sources"
+    },
+    {
+      "id": "CHANGE-FRAMEWORK",
+      "framework": "Adjustment, loss and support; NOT a grief disorder protocol",
+      "ageGroups": [
+        "CH",
+        "TE",
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "proposed_for_review",
+      "sourceIds": [
+        "CHANGE-SOURCE-1"
+      ],
+      "clinicalOwnerRole": "general_cbt",
+      "manualSelected": false,
+      "ageEvidenceStatus": "separate_age_adaptation_required_not_inferred_from_adult_or_parent_sources"
+    },
+    {
+      "id": "FAMILY-FRAMEWORK",
+      "framework": "Family communication skills; NOT a family therapy protocol",
+      "ageGroups": [
+        "CH",
+        "TE",
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "proposed_for_review",
+      "sourceIds": [
+        "FAMILY-SOURCE-1"
+      ],
+      "clinicalOwnerRole": "general_cbt",
+      "manualSelected": false,
+      "ageEvidenceStatus": "separate_age_adaptation_required_not_inferred_from_adult_or_parent_sources"
+    },
+    {
+      "id": "SCREEN-FRAMEWORK",
+      "framework": "Digital habits and functioning; NOT addiction diagnosis/treatment",
+      "ageGroups": [
+        "CH",
+        "TE",
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "proposed_for_review",
+      "sourceIds": [
+        "SCREEN-SOURCE-1",
+        "SCREEN-SOURCE-2"
+      ],
+      "clinicalOwnerRole": "general_cbt",
+      "manualSelected": false,
+      "ageEvidenceStatus": "separate_age_adaptation_required_not_inferred_from_adult_or_parent_sources"
+    },
+    {
+      "id": "SHAME-FRAMEWORK",
+      "framework": "Self-compassion and bounded responsibility; NOT moral certainty checking",
+      "ageGroups": [
+        "CH",
+        "TE",
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "proposed_for_review",
+      "sourceIds": [
+        "SHAME-SOURCE-1"
+      ],
+      "clinicalOwnerRole": "general_cbt",
+      "manualSelected": false,
+      "ageEvidenceStatus": "separate_age_adaptation_required_not_inferred_from_adult_or_parent_sources"
+    },
+    {
+      "id": "MEANING-FRAMEWORK",
+      "framework": "Values and resources skills; NOT a complete ACT protocol",
+      "ageGroups": [
+        "CH",
+        "TE",
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "proposed_for_review",
+      "sourceIds": [
+        "MEANING-SOURCE-1"
+      ],
+      "clinicalOwnerRole": "general_cbt",
+      "manualSelected": false,
+      "ageEvidenceStatus": "separate_age_adaptation_required_not_inferred_from_adult_or_parent_sources"
+    },
+    {
+      "id": "OCD-CH",
+      "framework": "CBT with ERP, child/adolescent family involvement",
+      "ageGroups": [
+        "CH",
+        "TE"
+      ],
+      "scopeStatus": "candidate_not_selected",
+      "sourceIds": [
+        "NICE-OCD",
+        "OCD-CH-MANUAL"
+      ],
+      "clinicalOwnerRole": "ocd_child",
+      "manualSelected": false,
+      "fullManualReviewed": false,
+      "ageEvidenceStatus": "clinical_fit_and_age_adaptation_pending"
+    },
+    {
+      "id": "OCD-AD",
+      "framework": "CBT with ERP, adult pathway",
+      "ageGroups": [
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "candidate_not_selected",
+      "sourceIds": [
+        "NICE-OCD",
+        "OCD-AD-MANUAL"
+      ],
+      "clinicalOwnerRole": "ocd_adult",
+      "manualSelected": false,
+      "fullManualReviewed": false,
+      "ageEvidenceStatus": "clinical_fit_and_age_adaptation_pending"
+    },
+    {
+      "id": "OCD-YC",
+      "framework": "Developmentally adapted family-based CBT with ERP",
+      "ageGroups": [
+        "CH"
+      ],
+      "scopeStatus": "candidate_not_selected",
+      "sourceIds": [
+        "OCD-YC-MANUAL",
+        "POTS-JR"
+      ],
+      "clinicalOwnerRole": "ocd_young_child",
+      "manualSelected": false,
+      "fullManualReviewed": false,
+      "ageEvidenceStatus": "clinical_fit_and_age_adaptation_pending"
+    },
+    {
+      "id": "TF-CBT",
+      "framework": "TF-CBT, child and adolescent pathway",
+      "ageGroups": [
+        "CH",
+        "TE"
+      ],
+      "scopeStatus": "candidate_not_selected",
+      "sourceIds": [
+        "TF-CBT-MANUAL",
+        "TF-CBT-NCTSN",
+        "TF-CBT-WORKBOOK"
+      ],
+      "clinicalOwnerRole": "tfcbt",
+      "manualSelected": false,
+      "fullManualReviewed": false,
+      "ageEvidenceStatus": "clinical_fit_and_age_adaptation_pending"
+    },
+    {
+      "id": "CPT",
+      "framework": "CPT, adult pathway",
+      "ageGroups": [
+        "AD",
+        "OA"
+      ],
+      "scopeStatus": "candidate_not_selected",
+      "sourceIds": [
+        "CPT-MANUAL",
+        "CPT-VA"
+      ],
+      "clinicalOwnerRole": "cpt",
+      "manualSelected": false,
+      "fullManualReviewed": false,
+      "ageEvidenceStatus": "clinical_fit_and_age_adaptation_pending"
+    }
+  ],
+  "roles": [
+    {
+      "id": "product_owner",
+      "requiredCompetence": "Scope, priorities and assignment of reviewers",
+      "assignedPerson": null
+    },
+    {
+      "id": "rights_reviewer",
+      "requiredCompetence": "Review permissions, originality, translation and distribution scope",
+      "assignedPerson": null
+    },
+    {
+      "id": "technical_owner",
+      "requiredCompetence": "Catalog hashes, access control, browser QA and release checks",
+      "assignedPerson": null
+    },
+    {
+      "id": "general_cbt",
+      "requiredCompetence": "CBT content review with competence in the relevant age and domain",
+      "assignedPerson": null
+    },
+    {
+      "id": "ocd_child",
+      "requiredCompetence": "CBT/ERP for children and adolescents",
+      "assignedPerson": null
+    },
+    {
+      "id": "ocd_adult",
+      "requiredCompetence": "CBT/ERP for adults and age-adapted OA review",
+      "assignedPerson": null
+    },
+    {
+      "id": "ocd_young_child",
+      "requiredCompetence": "Family-based CBT/ERP for ages 6–7",
+      "assignedPerson": null
+    },
+    {
+      "id": "tfcbt",
+      "requiredCompetence": "TF-CBT training and child/adolescent caregiver work",
+      "assignedPerson": null
+    },
+    {
+      "id": "cpt",
+      "requiredCompetence": "CPT training and adult/OA adaptation",
+      "assignedPerson": null
+    }
+  ]
+}

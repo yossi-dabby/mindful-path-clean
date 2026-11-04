@@ -59,9 +59,6 @@ jobs:
       - run: node scripts/render-hebrew-p4.mjs --wave=series-03
       - run: python3 scripts/build-hebrew-p4.py --wave series-04 && git diff --exit-code -- content/hebrew-forms/series-04
       - run: node scripts/render-hebrew-p4.mjs --wave=series-04
-      - run: npm run build
-        env:
-          VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'
   pilot:
     needs: validate
     runs-on: ubuntu-24.04
@@ -78,7 +75,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - run: npm run generate:forms-index
+      # The fixture serves /Tools from dist, so each isolated job needs its own build.
+      - run: npm run build
+        env:
+          VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'
       - run: npx playwright test --config hebrew-pilot.playwright.config.ts --project=${{ matrix.project }}
         env:
           VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'

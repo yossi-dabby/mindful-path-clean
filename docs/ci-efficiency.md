@@ -11,7 +11,7 @@ The E2E workflow previously ran the same unit suite, build, lint and policy/inde
 | Hebrew source reproduction and PDF layout validation | 2 | 1 |
 | Hebrew browser projects | 2 | 2 |
 
-The Hebrew workflow similarly validates every existing source generation and PDF layout once in `Validate Hebrew forms sources and PDFs`, then gates both browser projects on that job. Its production build also runs once. Each browser job still installs its own dependencies/browser and generates the forms index, preserving the preparation previously performed by `prebuild`. The general E2E jobs retain the same Vite development server, whose `predev` generates the index and copies the PDF worker. No build artifacts or mutable workspace are shared between jobs.
+The Hebrew workflow similarly validates every existing source generation and PDF layout once in `Validate Hebrew forms sources and PDFs`, then gates both browser projects on that job. Each browser job retains its own production build: the fixture serves `/Tools` from `dist/index.html`, and jobs do not share a filesystem. This build also retains index generation and PDF-worker preparation through `prebuild`. The general E2E jobs retain the same Vite development server, whose `predev` generates the index and copies the PDF worker. No build artifacts or mutable workspace are shared between jobs. An initial CI attempt caught this dependency when removing the per-browser Hebrew build caused both web-server readiness checks to time out; the build remains in each browser job and no timeout or readiness assertion was relaxed.
 
 ## Cancellation boundaries
 

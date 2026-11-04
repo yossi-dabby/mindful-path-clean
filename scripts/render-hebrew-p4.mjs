@@ -1,14 +1,14 @@
-// Offline content QA; only --write-pdfs replaces the 36 P4 review PDFs.
+// Offline content QA; only --write-pdfs writes the selected wave's review PDFs.
 import { chromium } from '@playwright/test';
 import { readFile, mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 const root = new URL('../', import.meta.url);
 const wave = process.argv.find((arg) => arg.startsWith('--wave='))?.split('=')[1] || 'p4-01';
-if (!['p4-01', 'p4-02'].includes(wave)) throw new Error('Unknown P4 wave');
+if (!['p4-01', 'p4-02', 'series-01'].includes(wave)) throw new Error('Unknown review wave');
 const source = new URL(`content/hebrew-forms/${wave}/`, root);
 const forms = JSON.parse(await readFile(new URL('forms.json', source), 'utf8'));
 const output = new URL('server/private/forms/', root);
-const qa = process.env.P4_QA_DIR;
+const qa = process.env.HEBREW_FORMS_QA_DIR || process.env.P4_QA_DIR;
 if (qa) await mkdir(qa, { recursive: true });
 const browser = await chromium.launch({
   ...(process.env.PILOT_CHROMIUM_PATH ? { executablePath: process.env.PILOT_CHROMIUM_PATH } : {}),

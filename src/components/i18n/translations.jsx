@@ -1647,6 +1647,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        "hebrew_library_title": "Hebrew forms",
+        "usage_notice": {
+          "label": "Forms usage warning",
+          "text": "Before use, check the form’s purpose, age group and review status. Forms are not a substitute for an individual professional assessment. Material marked “draft for review” is for review only. Therapeutic use requires a suitability assessment by an appropriate professional and is subject to the terms of use.",
+          "link": "Forms terms of use and limitation of liability"
+        },
         pilot_release: {
           mood: "MOOD - low mood and avoidance",
           summary: "{{count}} forms, version <version>{{version}}</version>.",
@@ -3367,6 +3373,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        "hebrew_library_title": "טפסים בעברית",
+        "usage_notice": {
+          "label": "אזהרת שימוש בטפסים",
+          "text": "לפני השימוש, בדקו את ייעוד הטופס, קבוצת הגיל ומצב הסקירה שלו. הטפסים אינם תחליף להערכה מקצועית אישית. חומר המסומן „טיוטה לסקירה” מיועד לבדיקה בלבד. שימוש טיפולי מחייב בדיקת התאמה בידי איש מקצוע מתאים, ובכפוף לתנאי השימוש.",
+          "link": "תנאי שימוש בטפסים והגבלת אחריות"
+        },
         pilot_release: {
           mood: "MOOD — מצב רוח נמוך והימנעות",
           summary: "{{count}} טפסים, גרסה <version>{{version}}</version>.",
@@ -5043,6 +5055,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        "hebrew_library_title": "Formularios en hebreo",
+        "usage_notice": {
+          "label": "Advertencia de uso de formularios",
+          "text": "Antes del uso, comprueba la finalidad, el grupo de edad y el estado de revisión del formulario. Los formularios no sustituyen una evaluación profesional individual. El material marcado como «borrador para revisión» es solo para revisión. El uso terapéutico requiere que un profesional adecuado evalúe su idoneidad y está sujeto a las condiciones de uso.",
+          "link": "Condiciones de uso de los formularios y limitación de responsabilidad"
+        },
         pilot_release: {
           mood: "MOOD - ánimo bajo y evitación",
           summary: "{{count}} formularios, versión <version>{{version}}</version>.",
@@ -6716,6 +6734,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        "hebrew_library_title": "Fiches en hébreu",
+        "usage_notice": {
+          "label": "Avertissement sur l’utilisation des fiches",
+          "text": "Avant utilisation, vérifiez l’objectif, la tranche d’âge et le statut de révision de la fiche. Les fiches ne remplacent pas une évaluation professionnelle individuelle. Un document marqué «brouillon pour révision» est réservé à la révision. L’usage thérapeutique nécessite une évaluation de son adéquation par un professionnel compétent et reste soumis aux conditions d’utilisation.",
+          "link": "Conditions d’utilisation des fiches et limitation de responsabilité"
+        },
         pilot_release: {
           mood: "MOOD - humeur basse et évitement",
           summary: "{{count}} formulaires, version <version>{{version}}</version>.",
@@ -8389,6 +8413,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        "hebrew_library_title": "Formulare auf Hebräisch",
+        "usage_notice": {
+          "label": "Hinweis zur Nutzung der Formulare",
+          "text": "Prüfen Sie vor der Nutzung Zweck, Altersgruppe und Prüfstatus des Formulars. Formulare ersetzen keine individuelle fachliche Beurteilung. Als „Entwurf zur Prüfung“ gekennzeichnetes Material dient nur der Prüfung. Therapeutische Nutzung setzt eine Eignungsprüfung durch eine geeignete Fachperson voraus und unterliegt den Nutzungsbedingungen.",
+          "link": "Nutzungsbedingungen für Formulare und Haftungsbegrenzung"
+        },
         pilot_release: {
           mood: "MOOD - gedrückte Stimmung und Vermeidung",
           summary: "{{count}} Formulare, Version <version>{{version}}</version>.",
@@ -10062,6 +10092,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        "hebrew_library_title": "Moduli in ebraico",
+        "usage_notice": {
+          "label": "Avvertenza sull’uso dei moduli",
+          "text": "Prima dell’uso, verifica la finalità, la fascia d’età e lo stato di revisione del modulo. I moduli non sostituiscono una valutazione professionale individuale. Il materiale contrassegnato come «bozza da revisionare» è destinato solo alla revisione. L’uso terapeutico richiede una valutazione di idoneità da parte di un professionista adeguato ed è soggetto alle condizioni d’uso.",
+          "link": "Condizioni d’uso dei moduli e limitazione di responsabilità"
+        },
         pilot_release: {
           mood: "MOOD - umore basso ed evitamento",
           summary: "{{count}} moduli, versione <version>{{version}}</version>.",
@@ -11735,6 +11771,12 @@ export const translations = {
         },
       },
       therapeutic_forms: {
+        "hebrew_library_title": "Formulários em hebraico",
+        "usage_notice": {
+          "label": "Aviso de utilização dos formulários",
+          "text": "Antes da utilização, verifique a finalidade, a faixa etária e o estado de revisão do formulário. Os formulários não substituem uma avaliação profissional individual. O material assinalado como «rascunho para revisão» destina-se apenas a revisão. A utilização terapêutica exige uma avaliação de adequação por um profissional apropriado e está sujeita aos termos de utilização.",
+          "link": "Termos de utilização dos formulários e limitação de responsabilidade"
+        },
         pilot_release: {
           mood: "MOOD - humor baixo e evitação",
           summary: "{{count}} formulários, versão <version>{{version}}</version>.",

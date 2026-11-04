@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '@/index.css';
 import '@/globals.css';
+import '@/styles/botanical.css';
 import i18n from '@/components/i18n/i18nConfig';
 import { AuthProvider } from '@/lib/AuthContext';
+import Terms from '@/pages/Terms';
 import TherapeuticForms from '@/pages/TherapeuticForms';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 
@@ -12,6 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter><AuthProvider>
     <main id="app-scroll-container" className="mx-auto h-dvh max-w-5xl overflow-y-auto overflow-x-clip p-4">
       <Routes>
+        <Route path="/terms" element={<Terms />} />
         <Route path="/Tools" element={<Link to="/tests/fixtures/hebrew-pilot-preview.html">פתיחת ספריית הטפסים</Link>} />
         <Route path="/tests/fixtures/hebrew-pilot-preview.html" element={<TherapeuticForms />} />
       </Routes>

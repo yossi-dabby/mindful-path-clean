@@ -1,6 +1,6 @@
 import BotanicalAccent from '@/components/brand/BotanicalAccent';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { LEGAL_CONTACT_EMAIL, LEGAL_EFFECTIVE_DATE, getLegalCopy } from './legalContent';
@@ -9,6 +9,15 @@ export default function LegalDocumentPage({ document }) {
   const { i18n } = useTranslation();
   const copy = getLegalCopy(i18n.resolvedLanguage || i18n.language);
   const content = copy[document];
+  const effectiveDate = content.effectiveDate || LEGAL_EFFECTIVE_DATE;
+  const { hash } = useLocation();
+  useEffect(() => {
+    if (hash === '#forms-terms' && document === 'terms') {
+      const section = window.document.getElementById('forms-terms');
+      section?.scrollIntoView({ block: 'start' });
+      section?.focus({ preventScroll: true });
+    }
+  }, [hash, document, copy.language]);
   const isRtl = copy.direction === 'rtl';
   const BackIcon = isRtl ? ArrowRight : ArrowLeft;
 
@@ -32,7 +41,7 @@ export default function LegalDocumentPage({ document }) {
               <p className="mb-1 text-sm font-semibold tracking-wide text-primary">{copy.common.appName}</p>
               <div className="botanical-title-row"><h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{content.title}</h1><BotanicalAccent variant="leaves" className="botanical-title-art" /></div>
               <p className="mt-3 text-sm text-muted-foreground">
-                {copy.common.effectiveDateLabel}: <time dateTime={LEGAL_EFFECTIVE_DATE}>{LEGAL_EFFECTIVE_DATE}</time>
+                {copy.common.effectiveDateLabel}: <time dateTime={effectiveDate}>{effectiveDate}</time>
               </p>
             </div>
           </div>
@@ -41,7 +50,7 @@ export default function LegalDocumentPage({ document }) {
 
         <div className="space-y-8 px-5 py-8 sm:px-9 sm:py-10">
           {content.sections.map((section) => (
-            <section key={section.title} className="scroll-mt-6">
+            <section key={section.title} id={section.id} tabIndex={section.id ? -1 : undefined} className="scroll-mt-6">
               <h2 className="text-xl font-bold text-foreground">{section.title}</h2>
               {section.paragraphs?.map((paragraph) => (
                 <p key={paragraph} className="mt-3 leading-7 text-muted-foreground">{paragraph}</p>

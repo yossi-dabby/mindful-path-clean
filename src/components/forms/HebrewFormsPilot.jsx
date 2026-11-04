@@ -120,7 +120,7 @@ export default function HebrewFormsPilot() {
 
   return (
     <section dir="rtl" className="my-6 min-w-0 rounded-[var(--radius-card)] border border-border bg-card p-4 md:p-6" data-testid="hebrew-forms-pilot">
-      <h2 className="text-xl font-semibold text-primary">פיילוט טפסים בעברית — למנהל בלבד</h2>
+      <h2 className="text-xl font-semibold text-primary">{t('therapeutic_forms.hebrew_library_title')}</h2>
       <p className="my-3 text-sm">{catalog && <><Trans i18nKey="therapeutic_forms.pilot_release.summary" values={{ count: catalog.forms.length, version: catalog.version }} components={{ version: <bdi dir="ltr" /> }} /> </>}טיוטות לסקירה מקצועית בלבד — לא להפצה וללא אישור קליני או אישור זכויות סופי.</p>
       {expansionPending && <p role="status" data-testid="pilot-expansion-pending" className="my-3 text-sm">{t('therapeutic_forms.pilot_release.pending')}</p>}
       {error && <p role="alert" className="my-3 text-destructive">{error}</p>}

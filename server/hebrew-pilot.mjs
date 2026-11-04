@@ -1,6 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { P3_CATALOG_PATH, PILOT_RELEASES, isPilotCatalogPath, validatePilotCatalog } from '../base44/functions/getHebrewFormsPilot/releases.js';
+import { P4A_CATALOG_PATH, P3_CATALOG_PATH, PILOT_RELEASES, isPilotCatalogPath, validatePilotCatalog } from '../base44/functions/getHebrewFormsPilot/releases.js';
 
 export const PILOT_PREFIX = '/api/hebrew-forms-pilot';
 const privateRoot = new URL('./private/', import.meta.url);
@@ -9,14 +9,15 @@ export async function loadPilot() {
   const catalog = JSON.parse(await readFile(new URL('hebrew-pilot-catalog.json', privateRoot), 'utf8'));
   const expandedCatalog = JSON.parse(await readFile(new URL('hebrew-pilot-mood-catalog.json', privateRoot), 'utf8'));
   const p3Catalog = JSON.parse(await readFile(new URL('hebrew-pilot-p3-catalog.json', privateRoot), 'utf8'));
-  const catalogs = { catalog, 'catalog-mood-01': expandedCatalog, [P3_CATALOG_PATH]: p3Catalog };
+  const p4aCatalog = JSON.parse(await readFile(new URL('hebrew-pilot-p4-01-catalog.json', privateRoot), 'utf8'));
+  const catalogs = { catalog, 'catalog-mood-01': expandedCatalog, [P3_CATALOG_PATH]: p3Catalog, [P4A_CATALOG_PATH]: p4aCatalog };
   for (const [path, release] of Object.entries(catalogs)) {
     if (!await validatePilotCatalog(release, path)) throw new Error('Invalid pilot release');
   }
   const formsRoot = new URL('forms/', privateRoot);
   const filenames = new Set(await readdir(formsRoot));
   const files = new Map();
-  for (const form of p3Catalog.forms) {
+  for (const form of p4aCatalog.forms) {
     if (!/^MP-[A-Z0-9-]+-HE$/.test(form.id) || !filenames.has(`${form.id}.pdf`)) {
       throw new Error('Invalid Hebrew pilot asset');
     }
@@ -27,8 +28,8 @@ export async function loadPilot() {
     }
     files.set(form.id, data);
   }
-  if (files.size !== PILOT_RELEASES[P3_CATALOG_PATH].count || filenames.size !== files.size) throw new Error('Invalid pilot count');
-  return { catalog, expandedCatalog, p3Catalog, catalogs, files };
+  if (files.size !== PILOT_RELEASES[P4A_CATALOG_PATH].count || filenames.size !== files.size) throw new Error('Invalid pilot count');
+  return { catalog, expandedCatalog, p3Catalog, p4aCatalog, catalogs, files };
 }
 
 // Match the installed Base44 SDK auth.me endpoint. The app ID is server-owned;

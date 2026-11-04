@@ -1,0 +1,1812 @@
+{
+  "contentVersion": "0.1",
+  "status": "draft_review_only",
+  "sources": [
+    "https://www.nhs.uk/conditions/insomnia/",
+    "https://www.nhs.uk/conditions/excessive-daytime-sleepiness-hypersomnia/",
+    "https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/feelings-and-symptoms/grief-bereavement-loss/",
+    "https://www.childbereavementuk.org/supporting-bereaved-children-and-young-people"
+  ],
+  "forms": [
+    {
+      "id": "MP-SLEEP-02-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "c20131bea0549cb9a78b2af46074e7a5a7b8da64a74a5ca500aed9f2eaeac104"
+      }
+    },
+    {
+      "id": "MP-SLEEP-02-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "72a5efaca394a2457dece235acdec3135726d90804dd3cecec699f53863f0e93"
+      }
+    },
+    {
+      "id": "MP-SLEEP-02-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "d2b6c60116ab9f0f5bb276de79514612a25ec2402f6356420791cb5131f22d53"
+      }
+    },
+    {
+      "id": "MP-SLEEP-02-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "9bbe8ba7baf91be8c656242ccfae2dec0ac96f732641bb32a5be2c5862eecdef"
+      }
+    },
+    {
+      "id": "MP-SLEEP-02-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "12ee38dddd716233bbf1c6332cd1644bae112a32cabcc9ee5df7a9aad5a8a6ca"
+      }
+    },
+    {
+      "id": "MP-SLEEP-02-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "0ea54cba88dd08c8b957895eda5a0562b971d846cee80b0ae0006e5886c71f73"
+      }
+    },
+    {
+      "id": "MP-SLEEP-02-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "d6c3b6f1cf5a237e0c7bebb6a75b84c7d774d4fa157f50b0fa7b05f0d85434ae"
+      }
+    },
+    {
+      "id": "MP-SLEEP-02-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "cc5df8d7b3a03a3061b8cfb4883d16a653674442d320e212556a71c3f1a00c12"
+      }
+    },
+    {
+      "id": "MP-SLEEP-02-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "3d82efa4ceb242e2bf2e79611d8bb44eb105cb815a3419f2069c638fe25e60ef"
+      }
+    },
+    {
+      "id": "MP-SLEEP-03-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "8ce34b38c4026f181a66d2695ebf74152ca5b5944a25660d29372751d6ff0474"
+      }
+    },
+    {
+      "id": "MP-SLEEP-03-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "0a78bf64c5b6f0d684f91d09a463f1e6bfcd55c8580031f7d8f6346a19055400"
+      }
+    },
+    {
+      "id": "MP-SLEEP-03-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "fb6588dfb3359f37cbb10e4e5c71b12b17b38d9a8df743c06c6f2e7e04464a59"
+      }
+    },
+    {
+      "id": "MP-SLEEP-03-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "fde831a37feff69dba8b01efa32ec1244a00053de05a65e399c123c391f82c3d"
+      }
+    },
+    {
+      "id": "MP-SLEEP-03-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "829d3a28ba134a0dcbe8e2e827f39e498bb7a0288101accf22e3a91c1804bf35"
+      }
+    },
+    {
+      "id": "MP-SLEEP-03-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "1e417502fc9ccd298f0a72c3e2c77130a2512987912ad44ed82a551011706098"
+      }
+    },
+    {
+      "id": "MP-SLEEP-03-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "ad7bd4d94f59ee269492b8c9603b1a7a32c91c2bd2f46507a99c17f112c964ce"
+      }
+    },
+    {
+      "id": "MP-SLEEP-03-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "11405f72b4e43e4ddb3b348d9f1ba29c4086fa10ceec40cd9bfadcbe71c13ef4"
+      }
+    },
+    {
+      "id": "MP-SLEEP-03-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "8fde54ef4ff8d0ea44721d0988e1ccca518d2c974759fea5be1fc6d02a478314"
+      }
+    },
+    {
+      "id": "MP-SLEEP-04-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "0c149264ea6827aa43fd40c83567a2a14e92f7a7031739f7629b777e3fe48d72"
+      }
+    },
+    {
+      "id": "MP-SLEEP-04-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "2586268134739891fe6e479d042364bf8ae2e163e47bd5a4588a55745d659291"
+      }
+    },
+    {
+      "id": "MP-SLEEP-04-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "efa163e89db933287f991670ca6b9e7eb23f409c386a1810f13cad22fa8b3345"
+      }
+    },
+    {
+      "id": "MP-SLEEP-04-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "3d9d57afd95d0a9aed8721156e9a82adab532b57dcd880d3e3e3483a70c74e0d"
+      }
+    },
+    {
+      "id": "MP-SLEEP-04-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "d40993cf833445b7ae1fb37293f64dc9f8494fc066319e3d147a3854ab5302e2"
+      }
+    },
+    {
+      "id": "MP-SLEEP-04-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "3afaf461939c0033a315b17826586e084045e71737ea4ce9dd5f61cec510b4ba"
+      }
+    },
+    {
+      "id": "MP-SLEEP-04-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "f582336b2ceb8af03b608fc6a6d2fc04516d449cdd8919c2eadecee9ce3e8e6c"
+      }
+    },
+    {
+      "id": "MP-SLEEP-04-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "97797492000ea05af4ffdcec00523f42fc0c1cb8ea20d19509c5561c8bda6473"
+      }
+    },
+    {
+      "id": "MP-SLEEP-04-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "c2f80b219f5d0aaa36ead8885cbc7b97852a04dd555421e0a6d4162685ff151b"
+      }
+    },
+    {
+      "id": "MP-SLEEP-05-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "53e60e0b35f87c70a3c05ec2e6ad3381e41874381c47df3a9539c5c359d9aa5a"
+      }
+    },
+    {
+      "id": "MP-SLEEP-05-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "f853d46efbe250f26e089a2756a7517d115bcbfdee13a7b325c767e30faeb335"
+      }
+    },
+    {
+      "id": "MP-SLEEP-05-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "b452264b100c547997ac625054761a0db95c6a0057b289dd10f85f188746869e"
+      }
+    },
+    {
+      "id": "MP-SLEEP-05-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "f779daeb47a5df51ab56c1a16fd66f40ea7965c4cfc40dacfd0f9a1427a30d74"
+      }
+    },
+    {
+      "id": "MP-SLEEP-05-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "3b9ee91e67b197c190fb01bd8fcbe32e090a8921d4c1975b30a784b75fab0903"
+      }
+    },
+    {
+      "id": "MP-SLEEP-05-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "1618994e5b5399828a0d381869400158cf555aee54cbc53603105de315604cd5"
+      }
+    },
+    {
+      "id": "MP-SLEEP-05-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "5a21b9ed975cd2fef47c39bb990ed52a6c5f9d5e5500070ad74072575b4baf95"
+      }
+    },
+    {
+      "id": "MP-SLEEP-05-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "be2369fdb7d5d0c2b5618dd180e01e97fbf2c28397fd868b2a4ff12651a6b8be"
+      }
+    },
+    {
+      "id": "MP-SLEEP-05-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "afe361b53b6bbee7e1bbd52dd51e30ec3a4562b909c0dfdf9dae59f7384f5f1c"
+      }
+    },
+    {
+      "id": "MP-SLEEP-06-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "261fef4a01196dc5d5718a63e4d84cc5b653c729b530e59473f1355df394b654"
+      }
+    },
+    {
+      "id": "MP-SLEEP-06-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "0d1b29ea7bce21f70ac0585ba80a44a1f2abc97119208c160d06db052e2eaf3c"
+      }
+    },
+    {
+      "id": "MP-SLEEP-06-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "3f9070d31e2066cf7d63212391048bedd9981145ab5dfbd69ff96f12c8cfe92c"
+      }
+    },
+    {
+      "id": "MP-SLEEP-06-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "4377f4c2f2a059e5013cbad0d31cd8edae81b8cfe82df86e96673b54c654ab7b"
+      }
+    },
+    {
+      "id": "MP-SLEEP-06-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "37b623f5b147f2b3f461ab9ac4a6c5cd1a4af79af98c372a7a7bbdff52419301"
+      }
+    },
+    {
+      "id": "MP-SLEEP-06-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "56fb0d81a6bbf8c4749cd1f3de4594351822cb7fa5388f5f88585610b1dd2a6c"
+      }
+    },
+    {
+      "id": "MP-SLEEP-06-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "06e631c4601a13cea10bd60a465fd8e3f5925973d60343d79c9a9d46dbe768db"
+      }
+    },
+    {
+      "id": "MP-SLEEP-06-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "abc69ec278ee4457dd8228c281978936a41efec26b8cf30f04a8597432d2f60a"
+      }
+    },
+    {
+      "id": "MP-SLEEP-06-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "b4de757f85d7d0b7a2a074a76b36aa14c32a0af85de8d37296a6a2e6f523c8e4"
+      }
+    },
+    {
+      "id": "MP-CHANGE-02-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "82a24d206a3a5a7372efaab2c03a11f19df0030f01f4138e6e8a9f3befe99512"
+      }
+    },
+    {
+      "id": "MP-CHANGE-02-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "469f8541e420b369f15783099ef51a00d41e3b825ea1e54ac44e9aa2da0f094a"
+      }
+    },
+    {
+      "id": "MP-CHANGE-02-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "c441f4a6c2047beb0170fad71ea15fabc2494afe2b90418a72530538f142fea5"
+      }
+    },
+    {
+      "id": "MP-CHANGE-02-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "8646ed45ca9629933b2e5589dd817dbb3fbb02f2f757177f3ff3853b440c9a50"
+      }
+    },
+    {
+      "id": "MP-CHANGE-02-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "5e5f0d57a43ad907b9080d9da2f75a394ecf9d856513be7dc38df136f4fadb4b"
+      }
+    },
+    {
+      "id": "MP-CHANGE-02-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "240b1b97f4ee72a88b33e72c2f2e6784398747a25a4676149dc5e59c6ed18615"
+      }
+    },
+    {
+      "id": "MP-CHANGE-02-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "fc746578e0bca0510d80a335194df4f87746017f5d81f8b81775bdfa50eff8dc"
+      }
+    },
+    {
+      "id": "MP-CHANGE-02-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "949e7417535c9dbdda99c97ad3cc72a9d31e983b88a452879433005ab404fb00"
+      }
+    },
+    {
+      "id": "MP-CHANGE-02-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "426d34d441fb57e55982573107a0fcbfbf12e84473cf1ae80f9319122df59577"
+      }
+    },
+    {
+      "id": "MP-CHANGE-03-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "a0fe4242595129586a7fb17bfe57331081867a1b949eb3e7c621e690530d48bf"
+      }
+    },
+    {
+      "id": "MP-CHANGE-03-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "81a4789e93ca4c91f3426e5f4101c67a87e7b6a2f422328e04c98cb3804f5ae9"
+      }
+    },
+    {
+      "id": "MP-CHANGE-03-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "4587da160d21700335cea741f6c29305ad03496a7009a59538d923fdbec4b2e9"
+      }
+    },
+    {
+      "id": "MP-CHANGE-03-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "00f46af2fb16231b219c690f660a948be410f9ba390d718ea8cb5d717641a434"
+      }
+    },
+    {
+      "id": "MP-CHANGE-03-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "aa61557593218251475ae7437c006d0b12ace73961c6b17cb91ae164699acd32"
+      }
+    },
+    {
+      "id": "MP-CHANGE-03-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "0f06725334297b3b2cc41c1a1267453c29ee35e67fe637e5ba9ec526b8ff1687"
+      }
+    },
+    {
+      "id": "MP-CHANGE-03-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "a6f160546aeecab1e7190d220ef548a125945d7465ad537fdfe6f20e424d1349"
+      }
+    },
+    {
+      "id": "MP-CHANGE-03-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "ef90800ee80d810c717ff78c84c76e41e329fa62c0535fd6cfbdd06603013284"
+      }
+    },
+    {
+      "id": "MP-CHANGE-03-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "1edaa6686edf16bf68366844425d9d1b6f14c845d44a3303e91939ed56798183"
+      }
+    },
+    {
+      "id": "MP-CHANGE-04-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "a8d830d339f7101a39b963b01bf1e0e2bb9cc86afce4c44308cb6fafa8d95433"
+      }
+    },
+    {
+      "id": "MP-CHANGE-04-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "8766842f80fbaca0eca515cb4de12cc7eef5ffd37f16387681f960e9eadc8e59"
+      }
+    },
+    {
+      "id": "MP-CHANGE-04-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "4835b72adbe205b423921b3cf7495668f33b3688d66986f32bbc1f020c0d8d2f"
+      }
+    },
+    {
+      "id": "MP-CHANGE-04-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "b08ffd3c68c0a30860675983e95d368ea5008d9c5aa3aeb6c982f025477a0505"
+      }
+    },
+    {
+      "id": "MP-CHANGE-04-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "de7c3b531d0909531769e1cf35611f45beb4629ddfd5d067c4b054f90ef5e420"
+      }
+    },
+    {
+      "id": "MP-CHANGE-04-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "944dae73f43a489b217a4501230631c8ae5f428b8176ea22ff4fe6dd7aa1b863"
+      }
+    },
+    {
+      "id": "MP-CHANGE-04-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "6e55f9977aa8f0c0fc6c840f100132997bec85e3b02bf5505ac220af57a38097"
+      }
+    },
+    {
+      "id": "MP-CHANGE-04-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "861d9b2bcf9c4bb0cc6679b59555761d9866ec962f86b1f0528e8606c4499e81"
+      }
+    },
+    {
+      "id": "MP-CHANGE-04-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "b03057104f08b4950be6c693da6348c21a9227cee3d229de312d7dbf96548a2c"
+      }
+    },
+    {
+      "id": "MP-CHANGE-05-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "abe9665469ee05ee621b92ed0249bb77f3ecb1ed427ea8fe88f7eb8a26a77564"
+      }
+    },
+    {
+      "id": "MP-CHANGE-05-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "1cfd0a6c55aac56779c20245eb7f0b1e4bade1a701295725b8922e6f108d2f34"
+      }
+    },
+    {
+      "id": "MP-CHANGE-05-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "f02b4aa41f687e2a83264a631abc2b4d5fce9bfa3a242ba3ea342d44a16e721d"
+      }
+    },
+    {
+      "id": "MP-CHANGE-05-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "bfddc7322b00ad6c9b7fb9d7d7a116f796d058666ba5dbc0dd63ac526d17fe8e"
+      }
+    },
+    {
+      "id": "MP-CHANGE-05-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "40e50480b9ec43a9a2ae7c140dffe5fe294af578de0cf0008a35de094f8002bf"
+      }
+    },
+    {
+      "id": "MP-CHANGE-05-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "8c7e8344c83a2b83876bee177233f4929594b5bda443d1f6edb1233ca654032e"
+      }
+    },
+    {
+      "id": "MP-CHANGE-05-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "cfe07e88943bd97021e5d520c5ada9c9f87e223af11ff8a67a347e04cb563dab"
+      }
+    },
+    {
+      "id": "MP-CHANGE-05-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "db5807628d0e4135c1c46c472f554d6a14025905424c5b4a43f5fb1fcb169bdc"
+      }
+    },
+    {
+      "id": "MP-CHANGE-05-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "eab4afea47049ad344eb4559859b415f9a59317467f6253681f97af1837a3b57"
+      }
+    },
+    {
+      "id": "MP-CHANGE-06-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "ce22b6c2181e674d648e0bc1275282460baa1fee871e4c7f056cec4feed078de"
+      }
+    },
+    {
+      "id": "MP-CHANGE-06-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "deacec6c8eabc8e519e15584d0967fb3d7cdfd80f093501f4d3375f5046eead6"
+      }
+    },
+    {
+      "id": "MP-CHANGE-06-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "cb7a96a582f8b6cc2492f80631fe8c09a1eed3107b330064774a3bed357ccb88"
+      }
+    },
+    {
+      "id": "MP-CHANGE-06-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "45689bfb36b3124fac0f34fe74301c95e42f726cebb522424d6eeab7ad73322b"
+      }
+    },
+    {
+      "id": "MP-CHANGE-06-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "d37b1cdfc58a0efa2b5defacd500d210b9c8a9caee380a9398b63c517961c1af"
+      }
+    },
+    {
+      "id": "MP-CHANGE-06-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "f9603fc8583e1aaca5f8e5ccc5752d2bfe5d3e4baac32ff3afeb41037b4a0afa"
+      }
+    },
+    {
+      "id": "MP-CHANGE-06-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "c14994bbed1b8b2501ec802c12e68d4fbb26972971738e43be229fc644e1eb2e"
+      }
+    },
+    {
+      "id": "MP-CHANGE-06-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "73fe01c268bc1598ae616901894350c62863541ce91e0e56329c603e53e33467"
+      }
+    },
+    {
+      "id": "MP-CHANGE-06-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "findings": [],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "ebc85899dac9e53c4c6673587474ad7de1af7b1f2157ecdb8e67f919cb5c4365"
+      }
+    }
+  ]
+}

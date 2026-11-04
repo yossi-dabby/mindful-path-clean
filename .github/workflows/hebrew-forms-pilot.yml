@@ -28,7 +28,7 @@ permissions:
 jobs:
   pilot:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
@@ -54,6 +54,8 @@ jobs:
       - run: node scripts/render-hebrew-p4.mjs --wave=series-02
       - run: python3 scripts/build-hebrew-p4.py --wave series-03 && git diff --exit-code -- content/hebrew-forms/series-03
       - run: node scripts/render-hebrew-p4.mjs --wave=series-03
+      - run: python3 scripts/build-hebrew-p4.py --wave series-04 && git diff --exit-code -- content/hebrew-forms/series-04
+      - run: node scripts/render-hebrew-p4.mjs --wave=series-04
       - run: npm run build
         env:
           VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'

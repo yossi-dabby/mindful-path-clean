@@ -136,4 +136,16 @@ describe('pinned Hebrew catalog releases', () => {
     expect(new TextEncoder().encode(JSON.stringify(pilot.series03Catalog)).length).toBeLessThan(512 * 1024);
   });
 
+  it('pins series-04: preserves 550 installed records and adds the ten planned units', () => {
+    expect(pilot.series04Catalog.forms).toHaveLength(640);
+    expect(pilot.series04Catalog.forms.slice(0, 550)).toEqual(pilot.series03Catalog.forms);
+    const units = ['SLEEP-02', 'SLEEP-03', 'SLEEP-04', 'SLEEP-05', 'SLEEP-06', 'CHANGE-02', 'CHANGE-03', 'CHANGE-04', 'CHANGE-05', 'CHANGE-06'];
+    const additions = pilot.series04Catalog.forms.slice(550);
+    expect(additions.map((f) => f.id).sort()).toEqual(units.flatMap((unit) => [
+      `MP-${unit}-G-ALL-HE`, ...['W', 'P'].flatMap((kind) => ['CH', 'TE', 'AD', 'OA'].map((age) => `MP-${unit}-${kind}-${age}-HE`)),
+    ]).sort());
+    expect(additions.every((f) => f.contentVersion === '0.1' && f.status === 'טיוטה לסקירה — לא להפצה')).toBe(true);
+    expect(new TextEncoder().encode(JSON.stringify(pilot.series04Catalog)).length).toBeLessThan(512 * 1024);
+  });
+
 });

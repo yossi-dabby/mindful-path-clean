@@ -258,10 +258,10 @@ describe('Base44 proxy to the real private PDF server', () => {
   });
 
   // Keep full byte/hash coverage as the library grows without extending test timeouts.
-  it.each([0, 75, 150, 225, 300, 375, 450, 525, 600])('returns a batch of pinned PDFs starting at %i byte-for-byte', async (start) => {
+  it.each([0, 75, 150, 225, 300, 375, 450, 525, 600, 675, 750])('returns a batch of pinned PDFs starting at %i byte-for-byte', async (start) => {
     await withWorkersRedirectContract(async () => {
-      const forms = pilot.series04Catalog.forms.slice(start, start + 75);
-      expect(forms).toHaveLength(Math.min(75, 640 - start));
+      const forms = pilot.series06Catalog.forms.slice(start, start + 75);
+      expect(forms).toHaveLength(Math.min(75, 820 - start));
       for (const form of forms) {
         const response = await handleHebrewFormsPilot(request({ path: `files/${form.id}` }), dependencies());
         expect(response.status).toBe(200);

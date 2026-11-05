@@ -35,7 +35,7 @@ jobs:
   validate:
     name: Validate Hebrew forms sources and PDFs
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -59,10 +59,14 @@ jobs:
       - run: node scripts/render-hebrew-p4.mjs --wave=series-03
       - run: python3 scripts/build-hebrew-p4.py --wave series-04 && git diff --exit-code -- content/hebrew-forms/series-04
       - run: node scripts/render-hebrew-p4.mjs --wave=series-04
+      - run: python3 scripts/build-hebrew-p4.py --wave series-05 && git diff --exit-code -- content/hebrew-forms/series-05
+      - run: node scripts/render-hebrew-p4.mjs --wave=series-05
+      - run: python3 scripts/build-hebrew-p4.py --wave series-06 && git diff --exit-code -- content/hebrew-forms/series-06
+      - run: node scripts/render-hebrew-p4.mjs --wave=series-06
   pilot:
     needs: validate
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:

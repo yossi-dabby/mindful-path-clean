@@ -10,6 +10,10 @@ export const SERIES03_CATALOG_PATH = 'catalog-series-03';
 export const SERIES04_CATALOG_PATH = 'catalog-series-04';
 export const SERIES05_CATALOG_PATH = 'catalog-series-05';
 export const SERIES06_CATALOG_PATH = 'catalog-series-06';
+export const SERIES07_CATALOG_PATH = 'catalog-series-07';
+export const SERIES08_CATALOG_PATH = 'catalog-series-08';
+export const SERIES09_CATALOG_PATH = 'catalog-series-09';
+export const SERIES10_CATALOG_PATH = 'catalog-series-10';
 export const PILOT_RELEASES = Object.freeze({
   catalog: Object.freeze({ version: '0.2', count: 154, sha256: '2c1df7644d778508b37d2a5076d902906b241166e09f93d388295a8a9983d90b' }),
   [EXPANDED_CATALOG_PATH]: Object.freeze({ version: '0.3-mood-01', count: 163, sha256: 'a9da2978a3d29b8c62a50e3ce9219d4b214d3bfd881ba6eb872e6bacab9885cf' }),
@@ -22,6 +26,10 @@ export const PILOT_RELEASES = Object.freeze({
   [SERIES04_CATALOG_PATH]: Object.freeze({ version: '0.10-series-04', count: 640, sha256: 'f2363efdb1485e965eeb1d73a8d845657d6cfc354b4b0353e4ba8bea392a9dcf' }),
   [SERIES05_CATALOG_PATH]: Object.freeze({ version: '0.11-series-05', count: 730, sha256: '773c342232fb7a58f26da2fd6046f8296cc0b41c1dbd758dc5de4e9ea05866b7' }),
   [SERIES06_CATALOG_PATH]: Object.freeze({ version: '0.12-series-06', count: 820, sha256: 'c465f21602d142ea0b96105f71275a68a3a5260f0da2dc6d6dad3c896dc1740e' }),
+  [SERIES07_CATALOG_PATH]: Object.freeze({ version: '0.13-series-07', count: 847, sha256: '428b2f6dea3b9772b04f1fe378bd8811f2c483ad1b61a9b80ad27d9f8d37af9f' }),
+  [SERIES08_CATALOG_PATH]: Object.freeze({ version: '0.14-series-08', count: 883, sha256: 'a21d7edf7143b66bf1b1cf4d1492a7244b8d726d009831ed56b43001bf848fb7' }),
+  [SERIES09_CATALOG_PATH]: Object.freeze({ version: '0.15-series-09', count: 895, sha256: '70647a87e574ece0979e08d0ed162c14c373f142c5dac47046077751b6d24814' }),
+  [SERIES10_CATALOG_PATH]: Object.freeze({ version: '0.16-series-10', count: 907, sha256: 'e4f495edbe5b639f83f610ee18779f1ec7be388ce5c935bc660a9f508772b2bc' }),
 });
 
 export function isPilotCatalogPath(path) {

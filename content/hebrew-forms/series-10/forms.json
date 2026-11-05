@@ -1,0 +1,110 @@
+[
+  {
+    "id": "MP-OCDYC-05-G-CH-HE",
+    "title": "הנחיות למטפל: גילי 6–7: לספר מה למדנו בליווי המטפל",
+    "age": "CH",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCDYC-05",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-05-W-CH-HE",
+    "title": "דבר קטן שלמדתי עם עזרה",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCDYC-05",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-05-P-CH-HE",
+    "title": "מה נביא לשיחה אחרי העבודה",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCDYC-05",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-06-G-CH-HE",
+    "title": "הנחיות למטפל: גילי 6–7: עזרה של הורים ומלווים",
+    "age": "CH",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCDYC-06",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-06-W-CH-HE",
+    "title": "איך נעים לי לקבל עזרה",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCDYC-06",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-06-P-CH-HE",
+    "title": "מה למדנו על העזרה בבית",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCDYC-06",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-07-G-CH-HE",
+    "title": "הנחיות למטפל: גילי 6–7: תיאום בין הבית למסגרת",
+    "age": "CH",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCDYC-07",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-07-W-CH-HE",
+    "title": "מי עוזר לי במקומות שונים",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCDYC-07",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-07-P-CH-HE",
+    "title": "מה נבדוק על העזרה במסגרת",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCDYC-07",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-08-G-CH-HE",
+    "title": "הנחיות למטפל: גילי 6–7: מה נשמר ומי יעזור בהמשך",
+    "age": "CH",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCDYC-08",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-08-W-CH-HE",
+    "title": "דברים שלמדתי ועזרה להמשך",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCDYC-08",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-08-P-CH-HE",
+    "title": "מה נביא לבדיקת ההמשך",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCDYC-08",
+    "track": "ocd"
+  }
+]

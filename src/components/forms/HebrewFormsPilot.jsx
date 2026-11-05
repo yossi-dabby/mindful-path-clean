@@ -147,6 +147,7 @@ export default function HebrewFormsPilot() {
           {unit && selectedForms.map((form) => <article key={form.id} className="min-w-0 rounded-lg border border-border p-4" data-testid={`pilot-form-${form.id}`}>
             <h3 className="font-semibold text-primary">{form.title}</h3>
             <p className="my-2 text-sm">{form.kind} · {form.audience}</p>
+            {form.track === 'ocd' && <p className="my-2 text-sm">{form.ageLabel}</p>}
             <p className="break-all text-xs" dir="ltr">{form.id}</p>
             <p className="my-2 text-xs">{form.status}</p>
             <div className="flex flex-wrap gap-2">

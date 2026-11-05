@@ -29,7 +29,8 @@ const series03Units = ['EXEC-02', 'EXEC-03', 'EXEC-04', 'EXEC-05', 'EXEC-06', 'S
 const series04Units = ['SLEEP-02', 'SLEEP-03', 'SLEEP-04', 'SLEEP-05', 'SLEEP-06', 'CHANGE-02', 'CHANGE-03', 'CHANGE-04', 'CHANGE-05', 'CHANGE-06'];
 const series05Units = ["FAMILY-02", "FAMILY-03", "FAMILY-04", "FAMILY-05", "FAMILY-06", "SCREEN-02", "SCREEN-03", "SCREEN-04", "SCREEN-05", "SCREEN-06"];
 const series06Units = ["SHAME-02", "SHAME-03", "SHAME-04", "SHAME-05", "SHAME-06", "MEANING-02", "MEANING-03", "MEANING-04", "MEANING-05", "MEANING-06"];
-const reviewUnits = [...series06Units, ...series05Units, ...series04Units, ...series03Units, ...series02Units, ...series01Units, 'MOOD-02', 'SELF-01', 'PERF-01', 'REG-01', 'EXEC-01', 'SOC-01', 'SLEEP-01', 'CHANGE-01', 'FAMILY-01', 'SCREEN-01', 'SHAME-01', 'MEANING-01', 'OCD-01', 'TRAUMA-01'];
+const ocdUnits = ['OCD-02', 'OCD-03', 'OCD-04', 'OCD-05', 'OCD-06', 'OCD-07', 'OCD-08'];
+const reviewUnits = [...ocdUnits, ...series06Units, ...series05Units, ...series04Units, ...series03Units, ...series02Units, ...series01Units, 'MOOD-02', 'SELF-01', 'PERF-01', 'REG-01', 'EXEC-01', 'SOC-01', 'SLEEP-01', 'CHANGE-01', 'FAMILY-01', 'SCREEN-01', 'SHAME-01', 'MEANING-01', 'OCD-01', 'TRAUMA-01'];
 for (const unit of reviewUnits) {
   for (const age of ['CH', 'TE', 'AD', 'OA']) {
     test(`${unit} ${age} opens and downloads both new variants with exact bytes and back focus`, async ({ page }) => {
@@ -38,7 +39,7 @@ for (const unit of reviewUnits) {
       await page.getByTestId(`pilot-age-${age}`).click();
       await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(17);
       await page.getByTestId(`pilot-track-${unit.split('-')[0].toLowerCase()}`).click();
-      await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(/^(MOOD|SELF|PERF|REG|EXEC|SOC|SLEEP|CHANGE|FAMILY|SCREEN|SHAME|MEANING)-/.test(unit) ? 6 : 1);
+      await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(/^(MOOD|SELF|PERF|REG|EXEC|SOC|SLEEP|CHANGE|FAMILY|SCREEN|SHAME|MEANING)-/.test(unit) ? 6 : unit.startsWith('OCD-') ? age === 'CH' ? 16 : 8 : 1);
       await page.getByTestId(`pilot-unit-${unit}`).click();
       await expect(page.locator('[data-testid^="pilot-form-"]')).toHaveCount(3);
       await expect(page.getByTestId(`pilot-form-MP-${unit}-G-ALL-HE`)).toHaveCount(1);
@@ -58,7 +59,7 @@ for (const unit of reviewUnits) {
         const download = await pending;
         expect(download.suggestedFilename()).toBe(`${id}.pdf`);
         const bytes = await readFile((await download.path())!);
-        const form = pilot.series06Catalog.forms.find((f) => f.id === id)!;
+        const form = pilot.series10Catalog.forms.find((f) => f.id === id)!;
         expect(bytes.length).toBe(form.bytes);
         expect(createHash('sha256').update(bytes).digest('hex')).toBe(form.sha256);
       }
@@ -86,7 +87,7 @@ for (const unit of reviewUnits) {
     const download = await pending;
     expect(download.suggestedFilename()).toBe(`${id}.pdf`);
     const bytes = await readFile((await download.path())!);
-    const form = (await loadPilot()).series06Catalog.forms.find((f) => f.id === id)!;
+    const form = (await loadPilot()).series10Catalog.forms.find((f) => f.id === id)!;
     expect(bytes.length).toBe(form.bytes);
     expect(createHash('sha256').update(bytes).digest('hex')).toBe(form.sha256);
   });
@@ -99,7 +100,7 @@ test('active pilot replaces obsolete maintenance and planned-library blocks', as
   for (const id of ['forms-under-revision', 'forms-audience-architecture', 'forms-collection-architecture', 'forms-empty-state']) {
     await expect(page.getByTestId(id)).toHaveCount(0);
   }
-  await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('820 טפסים');
+  await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('907 טפסים');
   await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('טיוטות לסקירה מקצועית בלבד');
 });
 
@@ -110,13 +111,13 @@ for (const status of [400, 404]) {
     await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
       const path = route.request().postDataJSON().path;
       paths.push(path);
-      if (['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02', 'catalog-p4-01', 'catalog-p3-01'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
+      if (['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02', 'catalog-p4-01', 'catalog-p3-01'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
       else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
     });
     await page.goto(preview);
     await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
     await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('163 טפסים, גרסה 0.3-mood-01');
-    expect(paths).toEqual(['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02', 'catalog-p4-01', 'catalog-p3-01', 'catalog-mood-01']);
+    expect(paths).toEqual(['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02', 'catalog-p4-01', 'catalog-p3-01', 'catalog-mood-01']);
     await page.getByTestId('pilot-age-CH').click();
     await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(4);
     await expect(page.getByTestId('pilot-track-self')).toHaveCount(0);
@@ -132,8 +133,8 @@ for (const age of ['CH', 'TE', 'AD', 'OA']) {
   test(`MOOD ${age} opens and downloads both age variants with a single shared guide`, async ({ page }) => {
     await session(page);
     await page.goto(preview);
-    await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('820 טפסים, גרסה 0.12-series-06');
-    await expect(page.getByTestId('hebrew-forms-pilot').locator('bdi[dir="ltr"]')).toHaveText('0.12-series-06');
+    await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('907 טפסים, גרסה 0.16-series-10');
+    await expect(page.getByTestId('hebrew-forms-pilot').locator('bdi[dir="ltr"]')).toHaveText('0.16-series-10');
     await page.getByTestId(`pilot-age-${age}`).click();
     await page.getByTestId('pilot-track-mood').click();
     await page.getByTestId('pilot-unit-MOOD-01').click();
@@ -183,7 +184,7 @@ for (const status of [400, 404]) {
   test(`partial deployment (${status}) keeps the original package usable`, async ({ page }) => {
     await session(page);
     await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
-      if (['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02', 'catalog-p4-01', 'catalog-p3-01', 'catalog-mood-01'].includes(route.request().postDataJSON().path)) {
+      if (['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02', 'catalog-p4-01', 'catalog-p3-01', 'catalog-mood-01'].includes(route.request().postDataJSON().path)) {
         await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
       } else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
     });
@@ -397,13 +398,13 @@ for (const status of [400, 404]) {
     const paths: string[] = [];
     await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
       const path = route.request().postDataJSON().path; paths.push(path);
-      if (['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02', 'catalog-p4-01'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
+      if (['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02', 'catalog-p4-01'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
       else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
     });
     await page.goto(preview);
     await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
     await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('217 טפסים, גרסה 0.4-p3-01');
-    expect(paths).toEqual(['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02', 'catalog-p4-01', 'catalog-p3-01']);
+    expect(paths).toEqual(['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02', 'catalog-p4-01', 'catalog-p3-01']);
     await page.getByTestId('pilot-age-CH').click();
     await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(9);
     await expect(page.getByTestId('pilot-track-sleep')).toHaveCount(0);
@@ -420,13 +421,13 @@ for (const status of [400, 404]) {
     const paths: string[] = [];
     await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
       const path = route.request().postDataJSON().path; paths.push(path);
-      if (['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
+      if (['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
       else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
     });
     await page.goto(preview);
     await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
     await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('253 טפסים, גרסה 0.5-p4-01');
-    expect(paths).toEqual(['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02', 'catalog-p4-01']);
+    expect(paths).toEqual(['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02', 'catalog-p4-01']);
     await page.getByTestId('pilot-age-CH').click();
     await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(13);
     await expect(page.getByTestId('pilot-track-shame')).toHaveCount(0);
@@ -443,13 +444,13 @@ for (const status of [400, 404]) {
     const paths: string[] = [];
     await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
       const path = route.request().postDataJSON().path; paths.push(path);
-      if (['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
+      if (['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
       else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
     });
     await page.goto(preview);
     await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
     await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('289 טפסים, גרסה 0.6-p4-02');
-    expect(paths).toEqual(['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02']);
+    expect(paths).toEqual(['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01', 'catalog-p4-02']);
     await page.getByTestId('pilot-age-CH').click();
     await page.getByTestId('pilot-track-self').click();
     await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(1);
@@ -465,13 +466,13 @@ for (const status of [400, 404]) {
     const paths: string[] = [];
     await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
       const path = route.request().postDataJSON().path; paths.push(path);
-      if (['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
+      if (['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
       else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
     });
     await page.goto(preview);
     await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
     await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('370 טפסים, גרסה 0.7-series-01');
-    expect(paths).toEqual(['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01']);
+    expect(paths).toEqual(['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02', 'catalog-series-01']);
     await page.getByTestId('pilot-age-CH').click();
     await page.getByTestId('pilot-track-reg').click();
     await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(1);
@@ -489,13 +490,13 @@ for (const status of [400, 404]) {
     const paths: string[] = [];
     await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
       const path = route.request().postDataJSON().path; paths.push(path);
-      if (['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
+      if (['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
       else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
     });
     await page.goto(preview);
     await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
     await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('460 טפסים, גרסה 0.8-series-02');
-    expect(paths).toEqual(['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02']);
+    expect(paths).toEqual(['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03', 'catalog-series-02']);
     await page.getByTestId('pilot-age-CH').click();
     await page.getByTestId('pilot-track-exec').click();
     await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(1);
@@ -513,13 +514,13 @@ for (const status of [400, 404]) {
     const paths: string[] = [];
     await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
       const path = route.request().postDataJSON().path; paths.push(path);
-      if (['catalog-series-06', 'catalog-series-05', 'catalog-series-04'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
+      if (['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04'].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
       else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
     });
     await page.goto(preview);
     await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
     await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('550 טפסים, גרסה 0.9-series-03');
-    expect(paths).toEqual(['catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03']);
+    expect(paths).toEqual(['catalog-series-10', 'catalog-series-09', 'catalog-series-08', 'catalog-series-07', 'catalog-series-06', 'catalog-series-05', 'catalog-series-04', 'catalog-series-03']);
     await page.getByTestId('pilot-age-CH').click();
     await page.getByTestId('pilot-track-sleep').click();
     await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(1);
@@ -537,13 +538,13 @@ for (const status of [400, 404]) {
     const paths: string[] = [];
     await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
       const path = route.request().postDataJSON().path; paths.push(path);
-      if (["catalog-series-06"].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
+      if (["catalog-series-10", "catalog-series-09", "catalog-series-08", "catalog-series-07", "catalog-series-06"].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
       else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
     });
     await page.goto(preview);
     await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
     await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('730 טפסים, גרסה 0.11-series-05');
-    expect(paths).toEqual(["catalog-series-06", "catalog-series-05"]);
+    expect(paths).toEqual(["catalog-series-10", "catalog-series-09", "catalog-series-08", "catalog-series-07", "catalog-series-06", "catalog-series-05"]);
     await page.getByTestId('pilot-age-CH').click();
     await page.getByTestId('pilot-track-shame').click();
     await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(1);
@@ -561,13 +562,13 @@ for (const status of [400, 404]) {
     const paths: string[] = [];
     await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
       const path = route.request().postDataJSON().path; paths.push(path);
-      if (["catalog-series-06", "catalog-series-05"].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
+      if (["catalog-series-10", "catalog-series-09", "catalog-series-08", "catalog-series-07", "catalog-series-06", "catalog-series-05"].includes(path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
       else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
     });
     await page.goto(preview);
     await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
     await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('640 טפסים, גרסה 0.10-series-04');
-    expect(paths).toEqual(["catalog-series-06", "catalog-series-05", "catalog-series-04"]);
+    expect(paths).toEqual(["catalog-series-10", "catalog-series-09", "catalog-series-08", "catalog-series-07", "catalog-series-06", "catalog-series-05", "catalog-series-04"]);
     await page.getByTestId('pilot-age-CH').click();
     await page.getByTestId('pilot-track-family').click();
     await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(1);
@@ -608,3 +609,66 @@ test('forms warning is bold above the library and opens the complete terms at it
   await page.goBack();
   await expect(page.getByTestId('pilot-age-CH')).toBeVisible();
 });
+
+for (let index = 1; index <= 8; index++) {
+  const unit = `OCDYC-${String(index).padStart(2, '0')}`;
+  test(`${unit} ages 6–7 opens and downloads all three real PDFs`, async ({ page }) => {
+    await session(page);
+    await page.goto(preview);
+    await page.getByTestId('pilot-age-CH').click();
+    await page.getByTestId('pilot-track-ocd').click();
+    await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(16);
+    await page.getByTestId(`pilot-unit-${unit}`).click();
+    await expect(page.locator('[data-testid^="pilot-form-"]')).toHaveCount(3);
+    for (const kind of ['G', 'W', 'P']) {
+      const id = `MP-${unit}-${kind}-CH-HE`;
+      const card = page.getByTestId(`pilot-form-${id}`);
+      await expect(card).toContainText('6–7');
+      const open = card.getByRole('button', { name: 'פתח', exact: true });
+      await open.click();
+      await expect(page.getByTestId('pilot-pdf-preview').locator('canvas')).toHaveCount(kind === 'G' ? 4 : 1, { timeout: 20000 });
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      await page.getByTestId('pilot-back').click();
+      await expect(open).toBeFocused();
+      const pending = page.waitForEvent('download');
+      await card.getByRole('button', { name: 'הורד', exact: true }).click();
+      const download = await pending;
+      expect(download.suggestedFilename()).toBe(`${id}.pdf`);
+      const bytes = await readFile((await download.path())!);
+      const form = (await loadPilot()).series10Catalog.forms.find((f) => f.id === id)!;
+      expect(bytes.length).toBe(form.bytes);
+      expect(createHash('sha256').update(bytes).digest('hex')).toBe(form.sha256);
+    }
+  });
+}
+
+for (const age of ['TE', 'AD', 'OA']) test(`OCDYC is absent from ${age} while all eight age-appropriate OCD units remain`, async ({ page }) => {
+  await session(page);
+  await page.goto(preview);
+  await page.getByTestId(`pilot-age-${age}`).click();
+  await page.getByTestId('pilot-track-ocd').click();
+  await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(8);
+  await expect(page.locator('[data-testid^="pilot-unit-OCDYC-"]')).toHaveCount(0);
+  await page.getByTestId('pilot-unit-OCD-08').click();
+  await expect(page.getByTestId(`pilot-form-MP-OCD-08-W-${age}-HE`)).toBeVisible();
+});
+
+for (const status of [400, 404]) for (const [wave, count] of [[7, 820], [8, 847], [9, 883], [10, 895]]) {
+  test(`OCD batch ${wave} pending (${status}) retains ${count} installed forms`, async ({ page }) => {
+    await session(page);
+    const unavailable = Array.from({ length: 11 - wave }, (_, i) => `catalog-series-${String(10 - i).padStart(2, '0')}`);
+    await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async (route) => {
+      if (unavailable.includes(route.request().postDataJSON().path)) await route.fulfill({ status, json: { error: 'PILOT_UNAVAILABLE' } });
+      else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
+    });
+    await page.goto(preview);
+    await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
+    await expect(page.getByTestId('hebrew-forms-pilot')).toContainText(`${count} טפסים`);
+    await page.getByTestId('pilot-age-CH').click();
+    await page.getByTestId('pilot-track-ocd').click();
+    await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(wave === 7 ? 1 : wave === 8 ? 4 : wave === 9 ? 8 : 12);
+    await page.getByTestId('pilot-unit-OCD-01').click();
+    await page.getByTestId('pilot-form-MP-OCD-01-W-CH-HE').getByRole('button', { name: 'פתח', exact: true }).click();
+    await expect(page.getByTestId('pilot-pdf-preview').locator('canvas')).toHaveCount(1, { timeout: 20000 });
+  });
+}

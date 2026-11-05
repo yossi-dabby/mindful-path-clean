@@ -1,6 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { SERIES06_CATALOG_PATH, SERIES05_CATALOG_PATH, SERIES04_CATALOG_PATH, SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, P3_CATALOG_PATH, PILOT_RELEASES, isPilotCatalogPath, validatePilotCatalog } from '../base44/functions/getHebrewFormsPilot/releases.js';
+import { SERIES10_CATALOG_PATH, SERIES09_CATALOG_PATH, SERIES08_CATALOG_PATH, SERIES07_CATALOG_PATH, SERIES06_CATALOG_PATH, SERIES05_CATALOG_PATH, SERIES04_CATALOG_PATH, SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, P3_CATALOG_PATH, PILOT_RELEASES, isPilotCatalogPath, validatePilotCatalog } from '../base44/functions/getHebrewFormsPilot/releases.js';
 
 export const PILOT_PREFIX = '/api/hebrew-forms-pilot';
 const privateRoot = new URL('./private/', import.meta.url);
@@ -17,14 +17,18 @@ export async function loadPilot() {
   const series04Catalog = JSON.parse(await readFile(new URL('hebrew-pilot-series-04-catalog.json', privateRoot), 'utf8'));
   const series05Catalog = JSON.parse(await readFile(new URL('hebrew-pilot-series-05-catalog.json', privateRoot), 'utf8'));
   const series06Catalog = JSON.parse(await readFile(new URL('hebrew-pilot-series-06-catalog.json', privateRoot), 'utf8'));
-  const catalogs = { catalog, 'catalog-mood-01': expandedCatalog, [P3_CATALOG_PATH]: p3Catalog, [P4A_CATALOG_PATH]: p4aCatalog, [P4B_CATALOG_PATH]: p4bCatalog, [SERIES01_CATALOG_PATH]: series01Catalog, [SERIES02_CATALOG_PATH]: series02Catalog, [SERIES03_CATALOG_PATH]: series03Catalog, [SERIES04_CATALOG_PATH]: series04Catalog, [SERIES05_CATALOG_PATH]: series05Catalog, [SERIES06_CATALOG_PATH]: series06Catalog };
+  const series07Catalog = JSON.parse(await readFile(new URL('hebrew-pilot-series-07-catalog.json', privateRoot), 'utf8'));
+  const series08Catalog = JSON.parse(await readFile(new URL('hebrew-pilot-series-08-catalog.json', privateRoot), 'utf8'));
+  const series09Catalog = JSON.parse(await readFile(new URL('hebrew-pilot-series-09-catalog.json', privateRoot), 'utf8'));
+  const series10Catalog = JSON.parse(await readFile(new URL('hebrew-pilot-series-10-catalog.json', privateRoot), 'utf8'));
+  const catalogs = { catalog, 'catalog-mood-01': expandedCatalog, [P3_CATALOG_PATH]: p3Catalog, [P4A_CATALOG_PATH]: p4aCatalog, [P4B_CATALOG_PATH]: p4bCatalog, [SERIES01_CATALOG_PATH]: series01Catalog, [SERIES02_CATALOG_PATH]: series02Catalog, [SERIES03_CATALOG_PATH]: series03Catalog, [SERIES04_CATALOG_PATH]: series04Catalog, [SERIES05_CATALOG_PATH]: series05Catalog, [SERIES06_CATALOG_PATH]: series06Catalog, [SERIES07_CATALOG_PATH]: series07Catalog, [SERIES08_CATALOG_PATH]: series08Catalog, [SERIES09_CATALOG_PATH]: series09Catalog, [SERIES10_CATALOG_PATH]: series10Catalog };
   for (const [path, release] of Object.entries(catalogs)) {
     if (!await validatePilotCatalog(release, path)) throw new Error('Invalid pilot release');
   }
   const formsRoot = new URL('forms/', privateRoot);
   const filenames = new Set(await readdir(formsRoot));
   const files = new Map();
-  for (const form of series06Catalog.forms) {
+  for (const form of series10Catalog.forms) {
     if (!/^MP-[A-Z0-9-]+-HE$/.test(form.id) || !filenames.has(`${form.id}.pdf`)) {
       throw new Error('Invalid Hebrew pilot asset');
     }
@@ -35,8 +39,8 @@ export async function loadPilot() {
     }
     files.set(form.id, data);
   }
-  if (files.size !== PILOT_RELEASES[SERIES06_CATALOG_PATH].count || filenames.size !== files.size) throw new Error('Invalid pilot count');
-  return { catalog, expandedCatalog, p3Catalog, p4aCatalog, p4bCatalog, series01Catalog, series02Catalog, series03Catalog, series04Catalog, series05Catalog, series06Catalog, catalogs, files };
+  if (files.size !== PILOT_RELEASES[SERIES10_CATALOG_PATH].count || filenames.size !== files.size) throw new Error('Invalid pilot count');
+  return { catalog, expandedCatalog, p3Catalog, p4aCatalog, p4bCatalog, series01Catalog, series02Catalog, series03Catalog, series04Catalog, series05Catalog, series06Catalog, series07Catalog, series08Catalog, series09Catalog, series10Catalog, catalogs, files };
 }
 
 // Match the installed Base44 SDK auth.me endpoint. The app ID is server-owned;

@@ -1,3 +1,5 @@
+> Update 2026-11-05: the owner requested all OCD batches together. The 87 original support draft files are now implemented; full manual mapping and clinical/rights decisions below remain unresolved. This document retains the specialist readiness requirements. See [implementation scope](hebrew-forms-series-07-10-implementation.md).
+
 # Remaining specialist series: 150 proposed PDFs
 
 After general batches 1–6, the implemented catalog contains 820 forms. The remaining 150 planned IDs are retained in the historical Stage 0 manifest; no substitute generic PDFs or empty catalog entries are added to claim completion. The proposed total of 970 remains conditional on the specialist mapping and companion-material decisions.

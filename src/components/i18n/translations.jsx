@@ -1664,6 +1664,22 @@ export const translations = {
           "text": "Before use, check the form’s purpose, age group and review status. Forms are not a substitute for an individual professional assessment. Material marked “draft for review” is for review only. Therapeutic use requires a suitability assessment by an appropriate professional and is subject to the terms of use.",
           "link": "Forms terms of use and limitation of liability"
         },
+        pilot_ui: {
+          "title": "Forms for review",
+          "notice": "Drafts for professional review only - not for distribution; clinical and final rights approval are pending.",
+          "loading": "Loading the review library…",
+          "loading_file": "Checking access and loading the file…",
+          "auth_error": "Administrator access is no longer valid. Please sign in again.",
+          "unavailable": "The review library is temporarily unavailable. Please try again shortly.",
+          "file_error": "Unable to open the form. No file was downloaded; please try again.",
+          "not_available": "Forms are not yet available in this language.",
+          "navigation": "Location in the review library",
+          "age": "Age group",
+          "shared": "Shared forms",
+          "core": "Core — foundations",
+          "anxiety": "Specialized — anxiety and worry",
+          "coverage": "{{available}} of {{total}} forms are available in this language. {{unavailable}} have not yet been translated."
+        },
         pilot_release: {
           mood: "MOOD - low mood and avoidance",
           summary: "{{count}} forms, version <version>{{version}}</version>.",
@@ -3401,6 +3417,22 @@ export const translations = {
           "text": "לפני השימוש, בדקו את ייעוד הטופס, קבוצת הגיל ומצב הסקירה שלו. הטפסים אינם תחליף להערכה מקצועית אישית. חומר המסומן „טיוטה לסקירה” מיועד לבדיקה בלבד. שימוש טיפולי מחייב בדיקת התאמה בידי איש מקצוע מתאים, ובכפוף לתנאי השימוש.",
           "link": "תנאי שימוש בטפסים והגבלת אחריות"
         },
+        pilot_ui: {
+          "title": "טפסים לסקירה",
+          "notice": "טיוטות לסקירה מקצועית בלבד — לא להפצה וללא אישור קליני או אישור זכויות סופי.",
+          "loading": "טוען את חבילת הפיילוט…",
+          "loading_file": "בודק הרשאה וטוען קובץ…",
+          "auth_error": "אין הרשאת מנהל תקפה. יש להתחבר מחדש.",
+          "unavailable": "חבילת הפיילוט אינה זמינה כרגע. נסו שוב בעוד זמן קצר.",
+          "file_error": "לא ניתן לפתוח את הטופס. הקובץ לא הורד; נסו שוב.",
+          "not_available": "הטפסים עדיין אינם זמינים בשפה הזאת.",
+          "navigation": "מיקום בפיילוט",
+          "age": "גיל",
+          "shared": "טפסים משותפים",
+          "core": "Core — יסודות",
+          "anxiety": "Specialized — חרדה ודאגנות",
+          "coverage": "{{available}} מתוך {{total}} טפסים זמינים בשפה הזאת. {{unavailable}} עדיין לא תורגמו."
+        },
         pilot_release: {
           mood: "MOOD — מצב רוח נמוך והימנעות",
           summary: "{{count}} טפסים, גרסה <version>{{version}}</version>.",
@@ -5094,6 +5126,22 @@ export const translations = {
           "text": "Antes del uso, comprueba la finalidad, el grupo de edad y el estado de revisión del formulario. Los formularios no sustituyen una evaluación profesional individual. El material marcado como «borrador para revisión» es solo para revisión. El uso terapéutico requiere que un profesional adecuado evalúe su idoneidad y está sujeto a las condiciones de uso.",
           "link": "Condiciones de uso de los formularios y limitación de responsabilidad"
         },
+        pilot_ui: {
+          "title": "Formularios para revisión",
+          "notice": "Borradores solo para revisión profesional; no distribuir. La aprobación clínica y de derechos definitiva está pendiente.",
+          "loading": "Cargando la biblioteca de revisión…",
+          "loading_file": "Comprobando el acceso y cargando el archivo…",
+          "auth_error": "El acceso de administrador ya no es válido. Inicia sesión de nuevo.",
+          "unavailable": "La biblioteca de revisión no está disponible temporalmente. Inténtalo de nuevo en breve.",
+          "file_error": "No se pudo abrir el formulario. No se descargó ningún archivo; inténtalo de nuevo.",
+          "not_available": "Los formularios aún no están disponibles en este idioma.",
+          "navigation": "Ubicación en la biblioteca de revisión",
+          "age": "Grupo de edad",
+          "shared": "Formularios compartidos",
+          "core": "Core — fundamentos",
+          "anxiety": "Especializado — ansiedad y preocupación",
+          "coverage": "Hay {{available}} de {{total}} formularios disponibles en este idioma. {{unavailable}} aún no se han traducido."
+        },
         pilot_release: {
           mood: "MOOD - ánimo bajo y evitación",
           summary: "{{count}} formularios, versión <version>{{version}}</version>.",
@@ -6783,6 +6831,22 @@ export const translations = {
           "label": "Avertissement sur l’utilisation des fiches",
           "text": "Avant utilisation, vérifiez l’objectif, la tranche d’âge et le statut de révision de la fiche. Les fiches ne remplacent pas une évaluation professionnelle individuelle. Un document marqué «brouillon pour révision» est réservé à la révision. L’usage thérapeutique nécessite une évaluation de son adéquation par un professionnel compétent et reste soumis aux conditions d’utilisation.",
           "link": "Conditions d’utilisation des fiches et limitation de responsabilité"
+        },
+        pilot_ui: {
+          "title": "Fiches à examiner",
+          "notice": "Brouillons réservés à une révision professionnelle, sans diffusion. Les validations clinique et définitive des droits sont en attente.",
+          "loading": "Chargement de la bibliothèque de révision…",
+          "loading_file": "Vérification de l’accès et chargement du fichier…",
+          "auth_error": "L’accès administrateur n’est plus valide. Veuillez vous reconnecter.",
+          "unavailable": "La bibliothèque de révision est temporairement indisponible. Réessayez dans un instant.",
+          "file_error": "Impossible d’ouvrir la fiche. Aucun fichier n’a été téléchargé ; veuillez réessayer.",
+          "not_available": "Les fiches ne sont pas encore disponibles dans cette langue.",
+          "navigation": "Position dans la bibliothèque de révision",
+          "age": "Groupe d’âge",
+          "shared": "Fiches communes",
+          "core": "Core — fondamentaux",
+          "anxiety": "Spécialisé — anxiété et inquiétude",
+          "coverage": "{{available}} fiches sur {{total}} sont disponibles dans cette langue. {{unavailable}} ne sont pas encore traduites."
         },
         pilot_release: {
           mood: "MOOD - humeur basse et évitement",
@@ -8474,6 +8538,22 @@ export const translations = {
           "text": "Prüfen Sie vor der Nutzung Zweck, Altersgruppe und Prüfstatus des Formulars. Formulare ersetzen keine individuelle fachliche Beurteilung. Als „Entwurf zur Prüfung“ gekennzeichnetes Material dient nur der Prüfung. Therapeutische Nutzung setzt eine Eignungsprüfung durch eine geeignete Fachperson voraus und unterliegt den Nutzungsbedingungen.",
           "link": "Nutzungsbedingungen für Formulare und Haftungsbegrenzung"
         },
+        pilot_ui: {
+          "title": "Formulare zur Prüfung",
+          "notice": "Entwürfe nur zur fachlichen Prüfung, nicht zur Verbreitung. Klinische Prüfung und abschließende Rechtefreigabe stehen noch aus.",
+          "loading": "Prüfbibliothek wird geladen…",
+          "loading_file": "Zugriff wird geprüft und Datei geladen…",
+          "auth_error": "Der Administratorzugriff ist nicht mehr gültig. Bitte erneut anmelden.",
+          "unavailable": "Die Prüfbibliothek ist vorübergehend nicht verfügbar. Bitte in Kürze erneut versuchen.",
+          "file_error": "Das Formular konnte nicht geöffnet werden. Es wurde keine Datei heruntergeladen; bitte erneut versuchen.",
+          "not_available": "Formulare sind in dieser Sprache noch nicht verfügbar.",
+          "navigation": "Position in der Prüfbibliothek",
+          "age": "Altersgruppe",
+          "shared": "Gemeinsame Formulare",
+          "core": "Core — Grundlagen",
+          "anxiety": "Spezialisiert — Angst und Sorgen",
+          "coverage": "{{available}} von {{total}} Formularen sind in dieser Sprache verfügbar. {{unavailable}} wurden noch nicht übersetzt."
+        },
         pilot_release: {
           mood: "MOOD - gedrückte Stimmung und Vermeidung",
           summary: "{{count}} Formulare, Version <version>{{version}}</version>.",
@@ -10164,6 +10244,22 @@ export const translations = {
           "text": "Prima dell’uso, verifica la finalità, la fascia d’età e lo stato di revisione del modulo. I moduli non sostituiscono una valutazione professionale individuale. Il materiale contrassegnato come «bozza da revisionare» è destinato solo alla revisione. L’uso terapeutico richiede una valutazione di idoneità da parte di un professionista adeguato ed è soggetto alle condizioni d’uso.",
           "link": "Condizioni d’uso dei moduli e limitazione di responsabilità"
         },
+        pilot_ui: {
+          "title": "Moduli da revisionare",
+          "notice": "Bozze riservate alla revisione professionale, non distribuibili. L’approvazione clinica e definitiva dei diritti è ancora in attesa.",
+          "loading": "Caricamento della raccolta da revisionare…",
+          "loading_file": "Verifica dell’accesso e caricamento del file…",
+          "auth_error": "L’accesso amministratore non è più valido. Accedi nuovamente.",
+          "unavailable": "La raccolta da revisionare è temporaneamente non disponibile. Riprova tra poco.",
+          "file_error": "Impossibile aprire il modulo. Nessun file è stato scaricato; riprova.",
+          "not_available": "I moduli non sono ancora disponibili in questa lingua.",
+          "navigation": "Posizione nella raccolta da revisionare",
+          "age": "Fascia di età",
+          "shared": "Moduli condivisi",
+          "core": "Core — fondamenti",
+          "anxiety": "Specializzato — ansia e preoccupazioni",
+          "coverage": "Sono disponibili {{available}} moduli su {{total}} in questa lingua. {{unavailable}} non sono ancora stati tradotti."
+        },
         pilot_release: {
           mood: "MOOD - umore basso ed evitamento",
           summary: "{{count}} moduli, versione <version>{{version}}</version>.",
@@ -11853,6 +11949,22 @@ export const translations = {
           "label": "Aviso de utilização dos formulários",
           "text": "Antes da utilização, verifique a finalidade, a faixa etária e o estado de revisão do formulário. Os formulários não substituem uma avaliação profissional individual. O material assinalado como «rascunho para revisão» destina-se apenas a revisão. A utilização terapêutica exige uma avaliação de adequação por um profissional apropriado e está sujeita aos termos de utilização.",
           "link": "Termos de utilização dos formulários e limitação de responsabilidade"
+        },
+        pilot_ui: {
+          "title": "Formulários para revisão",
+          "notice": "Rascunhos apenas para revisão profissional, não para distribuição. A aprovação clínica e final dos direitos está pendente.",
+          "loading": "A carregar a biblioteca de revisão…",
+          "loading_file": "A verificar o acesso e a carregar o ficheiro…",
+          "auth_error": "O acesso de administrador já não é válido. Inicie sessão novamente.",
+          "unavailable": "A biblioteca de revisão está temporariamente indisponível. Tente novamente dentro de instantes.",
+          "file_error": "Não foi possível abrir o formulário. Nenhum ficheiro foi transferido; tente novamente.",
+          "not_available": "Os formulários ainda não estão disponíveis neste idioma.",
+          "navigation": "Localização na biblioteca de revisão",
+          "age": "Grupo etário",
+          "shared": "Formulários comuns",
+          "core": "Core — fundamentos",
+          "anxiety": "Especializado — ansiedade e preocupação",
+          "coverage": "Estão disponíveis {{available}} de {{total}} formulários neste idioma. {{unavailable}} ainda não foram traduzidos."
         },
         pilot_release: {
           mood: "MOOD - humor baixo e evitação",

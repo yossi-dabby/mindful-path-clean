@@ -21,6 +21,9 @@ on:
       - 'tests/fixtures/hebrew-pilot*'
       - 'hebrew-pilot.playwright.config.ts'
       - 'pdf-reader.playwright.config.ts'
+      - 'english-pilot.playwright.config.ts'
+      - 'scripts/build-english-pilot.mjs'
+      - 'test/utils/englishFormsPilot.test.js'
       - '.github/workflows/hebrew-forms-pilot.yml'
       - 'package*.json'
       - 'railway.toml'
@@ -126,5 +129,30 @@ jobs:
         if: failure()
         with:
           name: pdf-reader-failure
+          path: test-results/
+          retention-days: 7
+  english-pilot:
+    name: English forms language isolation and reader
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node scripts/build-english-pilot.mjs
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+        env:
+          VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'
+      - run: npx playwright test --config english-pilot.playwright.config.ts
+        env:
+          VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: english-pilot-failure
           path: test-results/
           retention-days: 7

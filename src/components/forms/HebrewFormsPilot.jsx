@@ -1,19 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/lib/AuthContext';
 import { Button } from '@/components/ui/button';
 import PdfJsViewer from '@/components/forms/PdfJsViewer';
 import { requestPilotCatalog, requestPilotPdf } from '@/lib/hebrewFormsPilotClient';
 
 const AGES = ['CH', 'TE', 'AD', 'OA'];
-const TRACKS = { shared: 'טפסים משותפים', core: 'Core — יסודות', anxiety: 'Specialized — חרדה ודאגנות' };
 
-// This review surface is intentionally Hebrew-only. Its private server catalog
-// is never registered in ALL_FORMS or the AI attachment/search index.
-export default function HebrewFormsPilot() {
-  const { i18n, t } = useTranslation();
-  const isHebrew = (i18n.resolvedLanguage || i18n.language || '').split('-')[0] === 'he';
+
+// Administrator review catalogs remain separate from public/AI form registries.
+function PilotLibrary({ language }) {
+  const { t } = useTranslation();
+  const isHebrew = language === 'he';
   const { user } = useAuth();
   const isAdmin = user?.role === 'admin';
   const [catalog, setCatalog] = useState(null);
@@ -50,18 +49,17 @@ export default function HebrewFormsPilot() {
     const controller = new AbortController();
     setCatalog(null); setExpansionPending(false); setPreview(null); setBusy(false); setError('');
     setAge(null); setTrack(null); setUnit(null);
-    if (isHebrew && isAdmin) {
+    if (isAdmin) {
       (async () => {
         try {
-          const result = await requestPilotCatalog({ signal: controller.signal });
+          const result = await requestPilotCatalog({ language, signal: controller.signal });
           if (!controller.signal.aborted) {
             setCatalog(result.catalog);
             setExpansionPending(result.expansionPending);
           }
         } catch (failure) {
           if (!controller.signal.aborted) setError(failure.message === 'PILOT_AUTH'
-            ? 'אין הרשאת מנהל תקפה. יש להתחבר מחדש.'
-            : 'חבילת הפיילוט אינה זמינה כרגע. נסו שוב בעוד זמן קצר.');
+            ? 'auth_error' : failure.message === 'PILOT_TRANSLATION_UNAVAILABLE' ? 'not_available' : 'unavailable');
         }
       })();
     }
@@ -70,7 +68,7 @@ export default function HebrewFormsPilot() {
       if (activeUrl.current) URL.revokeObjectURL(activeUrl.current);
       activeUrl.current = null;
     };
-  }, [isHebrew, isAdmin, user?.id]);
+  }, [language, isAdmin, user?.id]);
 
   const fileAction = async (form, download) => {
     actionAbort.current?.abort();
@@ -78,7 +76,7 @@ export default function HebrewFormsPilot() {
     actionAbort.current = controller;
     setBusy(true); setError(''); clearPreview();
     try {
-      const blob = await requestPilotPdf(form, { signal: controller.signal, download });
+      const blob = await requestPilotPdf(form, { language, signal: controller.signal, download });
       if (controller.signal.aborted) return;
       const url = URL.createObjectURL(blob);
       if (download) {
@@ -92,15 +90,14 @@ export default function HebrewFormsPilot() {
       }
     } catch (failure) {
       if (!controller.signal.aborted) setError(failure.message === 'PILOT_AUTH'
-        ? 'אין הרשאת מנהל תקפה. יש להתחבר מחדש.'
-        : 'לא ניתן לפתוח את הטופס. הקובץ לא הורד; נסו שוב.');
+        ? 'auth_error' : 'file_error');
     } finally {
       if (!controller.signal.aborted) setBusy(false);
     }
   };
 
-  if (!isHebrew || !isAdmin) return null;
-  const tracks = { ...TRACKS, ...Object.fromEntries(
+  if (!isAdmin) return null;
+  const tracks = { ...Object.fromEntries(['shared', 'core', 'anxiety'].map(id => [id, t(`therapeutic_forms.pilot_ui.${id}`)])), ...Object.fromEntries(
     ['mood', 'self', 'perf', 'reg', 'exec', 'soc', 'sleep', 'change', 'family', 'screen', 'shame', 'meaning', 'ocd', 'trauma'].map((id) => [id, t(`therapeutic_forms.pilot_release.${id}`)]),
   ) };
   const forms = (catalog?.forms || []).filter((form) => form.age === age || form.age === 'ALL');
@@ -119,23 +116,24 @@ export default function HebrewFormsPilot() {
   const backLabel = t(`therapeutic_forms.pilot_navigation.${preview || busy ? 'forms' : unit ? 'units' : track ? 'tracks' : 'ages'}`);
 
   return (
-    <section dir="rtl" className="my-6 min-w-0 rounded-[var(--radius-card)] border border-border bg-card p-4 md:p-6" data-testid="hebrew-forms-pilot">
-      <h2 className="text-xl font-semibold text-primary">{t('therapeutic_forms.hebrew_library_title')}</h2>
-      <p className="my-3 text-sm">{catalog && <><Trans i18nKey="therapeutic_forms.pilot_release.summary" values={{ count: catalog.forms.length, version: catalog.version }} components={{ version: <bdi dir="ltr" /> }} /> </>}טיוטות לסקירה מקצועית בלבד — לא להפצה וללא אישור קליני או אישור זכויות סופי.</p>
+    <section dir={isHebrew ? "rtl" : "ltr"} className="my-6 min-w-0 rounded-[var(--radius-card)] border border-border bg-card p-4 md:p-6" data-testid={isHebrew ? "hebrew-forms-pilot" : "english-forms-pilot"} data-language={language}>
+      <h2 className="text-xl font-semibold text-primary">{t(`therapeutic_forms.${isHebrew ? 'hebrew_library_title' : 'pilot_ui.title'}`)}</h2>
+      <p className="my-3 text-sm">{catalog && <><Trans i18nKey="therapeutic_forms.pilot_release.summary" values={{ count: catalog.forms.length, version: catalog.version }} components={{ version: <bdi dir="ltr" /> }} /> </>}{t('therapeutic_forms.pilot_ui.notice')}</p>
+      {catalog?.coverage && <p role="status" data-testid="pilot-translation-coverage" className="my-3 text-sm">{t('therapeutic_forms.pilot_ui.coverage', catalog.coverage)}</p>}
       {expansionPending && <p role="status" data-testid="pilot-expansion-pending" className="my-3 text-sm">{t('therapeutic_forms.pilot_release.pending')}</p>}
-      {error && <p role="alert" className="my-3 text-destructive">{error}</p>}
-      {!catalog && !error && <p role="status">טוען את חבילת הפיילוט…</p>}
+      {error && <p role="alert" className="my-3 text-destructive">{t(`therapeutic_forms.pilot_ui.${error}`)}</p>}
+      {!catalog && !error && <p role="status">{t('therapeutic_forms.pilot_ui.loading')}</p>}
       {catalog && <>
-        <nav aria-label="מיקום בפיילוט" className="sticky top-[var(--mobile-header-height,60px)] z-20 my-4 rounded-lg border border-border bg-card p-3 text-sm md:top-0" data-testid="pilot-navigation">
+        <nav aria-label={t('therapeutic_forms.pilot_ui.navigation')} className="sticky top-[var(--mobile-header-height,60px)] z-20 my-4 rounded-lg border border-border bg-card p-3 text-sm md:top-0" data-testid="pilot-navigation">
           {age && <Button ref={navigationRef} type="button" variant="outline" className="mb-2 min-h-11 w-full justify-start sm:w-auto scroll-mt-[var(--mobile-header-height,60px)] md:scroll-mt-0" onClick={goBack} data-testid="pilot-back">
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />{backLabel}
+            {isHebrew ? <ArrowRight className="h-4 w-4" aria-hidden="true" /> : <ArrowLeft className="h-4 w-4" aria-hidden="true" />}{backLabel}
           </Button>}
           <div className="flex flex-wrap items-center gap-2">
-          <span>גיל</span>{age && <span>← {catalog.ageGroups[age].label}</span>}
-          {track && <span>← {tracks[track]}</span>}{unit && <span>← {units.find(([id]) => id === unit)?.[1]}</span>}
+          <span>{t('therapeutic_forms.pilot_ui.age')}</span>{age && <span>{isHebrew ? "←" : "→"} {catalog.ageGroups[age].label}</span>}
+          {track && <span>{isHebrew ? "←" : "→"} {tracks[track]}</span>}{unit && <span>{isHebrew ? "←" : "→"} {units.find(([id]) => id === unit)?.[1]}</span>}
           </div>
         </nav>
-        {busy && <p role="status">בודק הרשאה וטוען קובץ…</p>}
+        {busy && <p role="status">{t('therapeutic_forms.pilot_ui.loading_file')}</p>}
         {preview && <div className="my-4 min-w-0" data-testid="pilot-pdf-preview">
           <h3 className="mb-3 font-semibold">{preview.title}</h3>
           <PdfJsViewer fileUrl={preview.url} />
@@ -159,4 +157,14 @@ export default function HebrewFormsPilot() {
       </>}
     </section>
   );
+}
+
+// Remount before painting a different language/identity, and abort/revoke the
+// previous session's requests and object URLs through the child's cleanup.
+export default function HebrewFormsPilot() {
+  const { i18n } = useTranslation();
+  const { user } = useAuth();
+  const language = (i18n.resolvedLanguage || i18n.language || '').split('-')[0];
+  if (user?.role !== 'admin' || !['he', 'en'].includes(language)) return null;
+  return <PilotLibrary key={`${language}:${user.id}`} language={language} />;
 }

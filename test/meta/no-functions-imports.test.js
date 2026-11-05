@@ -50,7 +50,7 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
 
   it('the portable pilot helper imports only the dependency-free Web API release contract', () => {
     const source = fs.readFileSync(PORTABLE_HELPER, 'utf8');
-    const allowedImport = "import { isPilotCatalogPath, validatePilotCatalog } from './releases.js';";
+    const allowedImport = "import { isPilotFileId, isPilotCatalogPath, validatePilotCatalog } from './releases.js';";
     expect(source.split(allowedImport)).toHaveLength(2);
     expect(source.replace(allowedImport, '')).not.toMatch(/\b(?:import|require|Deno)\b/);
     expect(fs.readFileSync(PORTABLE_RELEASE, 'utf8')).not.toMatch(/\b(?:import|require|Deno)\b/);

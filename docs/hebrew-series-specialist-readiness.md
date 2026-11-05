@@ -1,6 +1,8 @@
+> Update 2026-11-05: all 150 specialist draft files are now implemented, including the final 63 TRAUMA files. Full manual mapping, clinical/age review, caregiver-material decisions and rights approval remain open. See [TRAUMA implementation scope](hebrew-forms-series-11-12-implementation.md).
+
 > Update 2026-11-05: the owner requested all OCD batches together. The 87 original support draft files are now implemented; full manual mapping and clinical/rights decisions below remain unresolved. This document retains the specialist readiness requirements. See [implementation scope](hebrew-forms-series-07-10-implementation.md).
 
-# Remaining specialist series: 150 proposed PDFs
+# Specialist review requirements: 150 draft PDFs
 
 After general batches 1–6, the implemented catalog contains 820 forms. The remaining 150 planned IDs are retained in the historical Stage 0 manifest; no substitute generic PDFs or empty catalog entries are added to claim completion. The proposed total of 970 remains conditional on the specialist mapping and companion-material decisions.
 
@@ -30,4 +32,4 @@ No reviewed manual mapping, named reviewer decision or rights clearance resolvin
 
 For each batch, author original age-specific sources against the reviewed mapping, generate blank HTML/PDFs and per-form review metadata, and append a pinned catalog without altering previous files. Verify exact manifest membership, A4/page count, embedded Hebrew rendering, blank fields, short/long answer behavior, hashes, administrator-only transport, older-release fallbacks and desktop/mobile navigation. Merge after passing checks, deploy Railway, sync and redeploy the Base44 function, publish, and perform authenticated live catalog/PDF verification before marking the batch deployed. Record clinical approval independently of technical deployment.
 
-The existing release transport, renderer, CI and compatibility checks now support 11 pinned generations. Later releases must keep checking the 512 KiB catalog limit rather than silently increasing or bypassing it. The latest 820-form compact catalog is 383,667 bytes.
+The release transport now supports 17 pinned generations. Later releases must keep checking the 512 KiB catalog limit rather than silently increasing or bypassing it. The latest 970-form compact catalog is 462,042 bytes.

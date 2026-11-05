@@ -71,6 +71,10 @@ jobs:
       - run: node scripts/render-hebrew-p4.mjs --wave=series-09
       - run: python3 scripts/build-hebrew-p4.py --wave series-10 && git diff --exit-code -- content/hebrew-forms/series-10
       - run: node scripts/render-hebrew-p4.mjs --wave=series-10
+      - run: python3 scripts/build-hebrew-p4.py --wave series-11 && git diff --exit-code -- content/hebrew-forms/series-11
+      - run: node scripts/render-hebrew-p4.mjs --wave=series-11
+      - run: python3 scripts/build-hebrew-p4.py --wave series-12 && git diff --exit-code -- content/hebrew-forms/series-12
+      - run: node scripts/render-hebrew-p4.mjs --wave=series-12
   pilot:
     needs: validate
     runs-on: ubuntu-24.04

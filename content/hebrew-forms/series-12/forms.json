@@ -1,0 +1,326 @@
+[
+  {
+    "id": "MP-TRAUMA-05-G-ALL-HE",
+    "title": "הנחיות למטפל: עבודה ממוקדת טראומה לפי מדריך",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "TRAUMA-05",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-05-W-CH-HE",
+    "title": "מה חשוב לי בשיחה שבחרנו",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-05",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-05-W-TE-HE",
+    "title": "בחירה ולמידה בעבודה עם המטפל",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-05",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-05-W-AD-HE",
+    "title": "תיעוד עבודה ממוקדת במפגש",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-05",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-05-W-OA-HE",
+    "title": "שאלות ולמידה במפגש הממוקד",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-05",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-05-P-CH-HE",
+    "title": "מה ארצה לומר אחרי הפגישה",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-05",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-05-P-TE-HE",
+    "title": "מה אקח לשיחה הבאה",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-05",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-05-P-AD-HE",
+    "title": "למידה ושאלות לאחר המפגש",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-05",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-05-P-OA-HE",
+    "title": "מה נשאר איתי ומה ארצה לברר",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-05",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-06-G-ALL-HE",
+    "title": "הנחיות למטפל: הימנעות והכללה לחיי היום יום",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "TRAUMA-06",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-06-W-CH-HE",
+    "title": "דבר שחשוב לי וצריך עזרה בדרך אליו",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-06",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-06-W-TE-HE",
+    "title": "להבין מה עוצר אותי ביום יום",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-06",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-06-W-AD-HE",
+    "title": "מצב, הימנעות ותוכנית מוסכמת",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-06",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-06-W-OA-HE",
+    "title": "חזרה לעיסוק חשוב בדרך מותאמת",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-06",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-06-P-CH-HE",
+    "title": "מה קרה במה שסיכמנו יחד",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-06",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-06-P-TE-HE",
+    "title": "למידה מניסיון שנבחר בטיפול",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-06",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-06-P-AD-HE",
+    "title": "תיעוד יישום מוסכם בחיים",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-06",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-06-P-OA-HE",
+    "title": "מה התאפשר ומה דורש התאמה",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-06",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-07-G-ALL-HE",
+    "title": "הנחיות למטפל: קשרים, אמונות ושיתוף מתאים",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "TRAUMA-07",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-07-W-CH-HE",
+    "title": "מה ארצה שהמבוגר שלי יבין",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-07",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-07-W-TE-HE",
+    "title": "לבחור מה לשתף ואיך",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-07",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-07-W-AD-HE",
+    "title": "חמישה תחומי אמונה לשיחה",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-07",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-07-W-OA-HE",
+    "title": "קשרים ואמונות שחשוב לי לבחון",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-07",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-07-P-CH-HE",
+    "title": "איך הייתה שיחה שבחרנו יחד",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-07",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-07-P-TE-HE",
+    "title": "מה למדתי משיתוף שבחרתי",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-07",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-07-P-AD-HE",
+    "title": "למידה בתחום אמונה שנבחר",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-07",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-07-P-OA-HE",
+    "title": "מה למדתי על קשר וגבול שבחרתי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-07",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-08-G-ALL-HE",
+    "title": "הנחיות למטפל: שילוב הלמידה ותוכנית להמשך",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "TRAUMA-08",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-08-W-CH-HE",
+    "title": "מה למדתי ומי יעזור לי בהמשך",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-08",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-08-W-TE-HE",
+    "title": "מה אני לוקח איתי ומה עדיין פתוח",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-08",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-08-W-AD-HE",
+    "title": "שילוב הלמידה ותכנון מעקב",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-08",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-08-W-OA-HE",
+    "title": "מה אשמור ומה אצטרך בהמשך",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "TRAUMA-08",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-08-P-CH-HE",
+    "title": "לבדוק יחד איך הולך לי",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-08",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-08-P-TE-HE",
+    "title": "לשים לב להמשך הדרך",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-08",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-08-P-AD-HE",
+    "title": "מעקב מוסכם אחרי התוכנית",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-08",
+    "track": "trauma"
+  },
+  {
+    "id": "MP-TRAUMA-08-P-OA-HE",
+    "title": "בדיקת ההמשך בקצב שמתאים לי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "TRAUMA-08",
+    "track": "trauma"
+  }
+]

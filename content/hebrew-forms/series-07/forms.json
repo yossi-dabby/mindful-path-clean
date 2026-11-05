@@ -1,0 +1,245 @@
+[
+  {
+    "id": "MP-OCD-02-G-ALL-HE",
+    "title": "הנחיות למטפל: הערכה והבנת מעגל ה־OCD יחד",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCD-02",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-02-W-CH-HE",
+    "title": "מה קורה כשספק נתקע",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-02",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-02-W-TE-HE",
+    "title": "למפות מעגל שמפריע לי",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-02",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-02-W-AD-HE",
+    "title": "מפת מצב ותגובה ב־OCD",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-02",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-02-W-OA-HE",
+    "title": "להבין קושי חוזר ביום שלי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-02",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-02-P-CH-HE",
+    "title": "דוגמה אחת להביא לשיחה",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-02",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-02-P-TE-HE",
+    "title": "תיעוד קצר בלי לבדוק שוב ושוב",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-02",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-02-P-AD-HE",
+    "title": "המשך בירור של מעגל נבחר",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-02",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-02-P-OA-HE",
+    "title": "מה הבחנתי בו לקראת הפגישה",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-02",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-03-G-ALL-HE",
+    "title": "הנחיות למטפל: להבין את המודל ולבחור מטרות",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCD-03",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-03-W-CH-HE",
+    "title": "מה אני רוצה שיוכל לחזור ליום שלי",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-03",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-03-W-TE-HE",
+    "title": "להבין ולבחור כיוון בטיפול",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-03",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-03-W-AD-HE",
+    "title": "הבנת המודל ומטרה תפקודית",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-03",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-03-W-OA-HE",
+    "title": "מטרה חשובה לי ושאלות על הדרך",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-03",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-03-P-CH-HE",
+    "title": "מה ארצה לשאול אחרי ההסבר",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-03",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-03-P-TE-HE",
+    "title": "מה הבנתי ומה עדיין פתוח",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-03",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-03-P-AD-HE",
+    "title": "בדיקת הבנה וציפיות בין מפגשים",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-03",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-03-P-OA-HE",
+    "title": "מחשבות על המטרה שבחרתי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-03",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-04-G-ALL-HE",
+    "title": "הנחיות למטפל: לתעד תוכנית עבודה מותאמת עם המטפל",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCD-04",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-04-W-CH-HE",
+    "title": "מה סיכמנו לעשות יחד",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-04",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-04-W-TE-HE",
+    "title": "ההסכמות שלי לקראת עבודה בטיפול",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-04",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-04-W-AD-HE",
+    "title": "תוכנית מוסכמת ומגבלותיה",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-04",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-04-W-OA-HE",
+    "title": "לרכז את ההסכמות בקצב שלי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-04",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-04-P-CH-HE",
+    "title": "איך היו ההסכמות בשבילי",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-04",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-04-P-TE-HE",
+    "title": "בדיקת התאמה של התוכנית שנבחרה",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-04",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-04-P-AD-HE",
+    "title": "מה בתוכנית דורש התאמה",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-04",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-04-P-OA-HE",
+    "title": "מה חשוב לשנות לפני ההמשך",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-04",
+    "track": "ocd"
+  }
+]

@@ -11,7 +11,7 @@ import argparse
 
 ROOT = Path(__file__).resolve().parent.parent
 parser = argparse.ArgumentParser()
-parser.add_argument('--wave', choices=['p4-01', 'p4-02', 'series-01', 'series-02', 'series-03', 'series-04', 'series-05', 'series-06'], default='p4-01')
+parser.add_argument('--wave', choices=['p4-01', 'p4-02', 'series-01', 'series-02', 'series-03', 'series-04', 'series-05', 'series-06', 'series-07', 'series-08', 'series-09', 'series-10'], default='p4-01')
 wave = parser.parse_args().wave
 SOURCE = ROOT / 'content/hebrew-forms' / wave
 BASE = ROOT / 'content/hebrew-forms/mood-01'
@@ -31,9 +31,9 @@ def section(title, *paragraphs):
 
 def sheet(unit, form, title, subtitle, body, page=1):
     age = form['age']
-    cls = {'CH': 'children', 'OA': 'older', 'ALL': 'guide'}.get(age, '')
+    cls = 'guide' if form['kind'] == 'G' else {'CH': 'children', 'OA': 'older', 'ALL': 'guide'}.get(age, '')
     return f'''<article class="sheet {cls}" data-template="{form['id']}"><main class="content">
-<div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>טיוטת תוכן 0.1 | 04.11.2026</div></div>
+<div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>טיוטת תוכן 0.1 | {e(unit.get('contentDate', '04.11.2026'))}</div></div>
 <div class="eyebrow"><bdi>{unit['code']}</bdi> | {e(unit.get('ageLabels', {}).get(age, LABELS[age]))}</div><h1>{e(title)}</h1><p class="subtitle">{e(subtitle)}</p>{body}</main>
 <footer class="footer"><span>טיוטה לסקירה בלבד - לא להפצה | לא כלי אבחוני</span><span><bdi class="code">{form['id']}</bdi> | {page} מתוך {form['pages']}</span></footer></article>'''
 
@@ -48,7 +48,9 @@ def write(form, pages):
 forms = []
 for unit in spec['units']:
     code = unit['code']
-    guide = dict(id=f'MP-{code}-G-ALL-HE', title='הנחיות למטפל: ' + unit['title'], age='ALL', kind='G', pages=4, unit=code, track=unit['track'])
+    ages = unit.get('ages', AGES)
+    guide_age = unit.get('guideAge', 'ALL')
+    guide = dict(id=f'MP-{code}-G-{guide_age}-HE', title='הנחיות למטפל: ' + unit['title'], age=guide_age, kind='G', pages=4, unit=code, track=unit['track'])
     pages = [sheet(unit, guide, unit['title'], '1 | מטרה, התאמה וגבולות',
         section('מטרת היחידה', unit['purpose']) +
         section('בחירה והתאמה', 'בחרו בדף לאחר הערכה מקצועית ובהסכמה. אפשר לדלג, להשיב בעל פה או לבחור כלי אחר. זהו חומר מקורי מוצע לסקירה; אין ציון, אבחון או הבטחה לתוצאה.') +
@@ -56,13 +58,19 @@ for unit in spec['units']:
         section('שימוש חוזר בחומר הקיים', unit['overlap']) +
         (section('דוגמה בדויה לשיחה', unit['fictionalExample']) if 'fictionalExample' in unit else '') +
         '<div class="note">טיוטה לסקירת מנהל. סקירה קלינית ואישור זכויות סופיים טרם הושלמו.</div>')]
-    prompts = unit['worksheet']['AD']
+    prompts = unit['worksheet'][unit.get('guidePromptAge', 'AD')]
     pages.append(sheet(unit, guide, 'לעבוד יחד עם דף העבודה', '2 | שיחה סביב מצב אחד',
-        section('פתיחה', 'בחרו מצב שהאדם מעוניין לבדוק. אין צורך לבחור את המצב הקשה ביותר. ודאו שהשאלה מובנת ושהמילים מתאימות לאדם; תיאורו קודם לפרשנות המטפל.') +
+        section('פתיחה', unit.get('guideOpening', 'בחרו מצב שהאדם מעוניין לבדוק. אין צורך לבחור את המצב הקשה ביותר. ודאו שהשאלה מובנת ושהמילים מתאימות לאדם; תיאורו קודם לפרשנות המטפל.')) +
         ''.join(section(f'{i + 1} | שאלה לשיחה', prompt) for i, prompt in enumerate(prompts)) +
         section('סיום', 'סכמו מה הובן ומה נשאר פתוח. היעזרו ב־SES-S01 וב־SES-S02 הקיימים למעטפת המפגש. אין צורך למלא שוב הערכה או תוכנית שכבר תועדה.') +
         (section('קשיים אפשריים', unit['difficulties']) if 'difficulties' in unit else ''), 2))
-    pages.append(sheet(unit, guide, 'התאמה לארבע קבוצות גיל', '3 | גיל הוא נקודת מוצא, לא הנחה על יכולת',
+    if 'guideAgeSections' in unit:
+        pages.append(sheet(unit, guide, unit['guideAgeTitle'], '3 | גילי 6–7 בלבד; נדרשת התאמה התפתחותית ומשפחתית',
+            ''.join(section(item['title'], item['text']) for item in unit['guideAgeSections']) +
+            section('גבולות החומר', unit['manualReviewNote']) +
+            '<div class="note">אין להחיל את המסלול על קבוצות גיל אחרות ללא סקירה נפרדת.</div>', 3))
+    else:
+        pages.append(sheet(unit, guide, 'התאמה לארבע קבוצות גיל', '3 | גיל הוא נקודת מוצא, לא הנחה על יכולת',
         section(unit.get('childHeading', 'CH | ילדים, בקירוב 6 עד 11'), unit['adaptations']['CH'], 'הציעו שאלה אחת בכל פעם ומעט כתיבה. תיווך מבוגר לא יחליף את קול הילד.') +
         section('TE | מתבגרים, בקירוב 12 עד 17', unit['adaptations']['TE'], 'סכמו מראש מה משתפים ועם מי, ואת גבולות הפרטיות במסגרת. אין להבטיח סודיות מוחלטת.') +
         section('AD | מבוגרים', unit['adaptations']['AD']) +
@@ -74,11 +82,12 @@ for unit in spec['units']:
         section('במפגש הבא', unit['reflection']) +
         section('תיעוד מקצועי וטכני', 'קיימת רשומת סקירה נפרדת לכל גרסה: התאמת גיל, מקוריות, זכויות ומילוי בדוי. סוקר ותאריך שטרם נקבעו נשארים ריקים. בדיקת קבצים או מיזוג קוד אינם אישור קליני. מידע טיפולי נשמר רק במסגרת המורשית, מחוץ למאגר הקוד.') +
         section('מקורות עיון', 'הקישורים הבאים שימשו לרקע בלבד. השאלות וההתאמות נכתבו מחדש לפי תוכנית ההרחבה; לא הועתק שאלון, מדד או פרוטוקול. מקורות למבוגרים אינם מתקפים את גרסאות הילדים. אין בחומר זה קביעה של מספר מפגשים או יעילות טיפולית.') +
+        (section('מעמד מיפוי המדריך', unit['manualReviewNote']) if 'manualReviewNote' in unit else '') +
         source_list, 4))
     write(guide, pages)
     forms.append(guide)
     for kind, key, title_key in [('W', 'worksheet', 'worksheetTitles'), ('P', 'practice', 'practiceTitles')]:
-        for age in AGES:
+        for age in ages:
             form = dict(id=f'MP-{code}-{kind}-{age}-HE', title=unit[title_key][age], age=age, kind=kind, pages=1, unit=code, track=unit['track'])
             meta = ''.join(f'<div class="meta">{label}<span class="write" contenteditable="true" role="textbox" aria-label="{label}"></span></div>' for label in ['קוד מטופל מקומי', 'תאריך', 'מספר סשן'])
             body = '<div class="metadata">' + meta + '</div>'
@@ -88,8 +97,7 @@ for unit in spec['units']:
                     body += f'<div class="line" contenteditable="true" role="textbox" aria-label="{e(prompt)} - שורת מילוי {n + 1}"><br></div>'
                 body += '</section>'
             subtitle = 'נבחר מצב אחד עם המטפל. אפשר לענות בכתב או בשיחה, לדלג או לעצור.' if kind == 'W' else 'תרגול שנבחר יחד עם המטפל. אפשר לכתוב מעט או לספר בפגישה, גם אם לא התאפשר לנסות.'
-            if kind == 'P':
-                subtitle = unit.get('practiceSubtitle', subtitle)
+            subtitle = unit.get('worksheetSubtitle' if kind == 'W' else 'practiceSubtitle', subtitle)
             write(form, [sheet(unit, form, form['title'], subtitle, body)])
             forms.append(form)
 (SOURCE / 'forms.json').write_text(json.dumps(forms, ensure_ascii=False, indent=2) + '\n')

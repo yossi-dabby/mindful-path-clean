@@ -1,0 +1,326 @@
+[
+  {
+    "id": "MP-OCD-05-G-ALL-HE",
+    "title": "הנחיות למטפל: למידה מתוך עבודה שנבחרה עם המטפל",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCD-05",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-05-W-CH-HE",
+    "title": "מה למדתי בזמן העבודה עם המטפל",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-05",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-05-W-TE-HE",
+    "title": "לבדוק למידה בלי לתת לעצמי ציון",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-05",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-05-W-AD-HE",
+    "title": "סקירת ניסיון טיפולי שנבחר יחד",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-05",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-05-W-OA-HE",
+    "title": "מה למדתי בדרך שמתאימה לי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-05",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-05-P-CH-HE",
+    "title": "דבר אחד לספר אחרי העבודה",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-05",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-05-P-TE-HE",
+    "title": "למידה להביא למפגש הבא",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-05",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-05-P-AD-HE",
+    "title": "סיכום קצר של המשך מוסכם",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-05",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-05-P-OA-HE",
+    "title": "מה כדאי שנבדוק בפגישה הבאה",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-05",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-06-G-ALL-HE",
+    "title": "הנחיות למטפל: חסמים, טקסים סמויים והעברת הלמידה",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCD-06",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-06-W-CH-HE",
+    "title": "מה מקשה עליי גם כשלא רואים",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-06",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-06-W-TE-HE",
+    "title": "לברר חסם בלי לחפש כל מחשבה",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-06",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-06-W-AD-HE",
+    "title": "מפת חסם ותגובה סמויה",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-06",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-06-W-OA-HE",
+    "title": "מה משתנה כשהמצב אחר",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-06",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-06-P-CH-HE",
+    "title": "משהו שהיה קשה ואספר למטפל",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-06",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-06-P-TE-HE",
+    "title": "שאלה על תגובה שחזרה",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-06",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-06-P-AD-HE",
+    "title": "בירור חסם לקראת התאמת התוכנית",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-06",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-06-P-OA-HE",
+    "title": "תנאי שחשוב להביא לשיחה",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-06",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-07-G-ALL-HE",
+    "title": "הנחיות למטפל: תמיכה מהסביבה ועצמאות",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCD-07",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-07-W-CH-HE",
+    "title": "איזו עזרה אני רוצה מהמבוגרים",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-07",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-07-W-TE-HE",
+    "title": "לבחור תמיכה ולשמור על עצמאות",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-07",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-07-W-AD-HE",
+    "title": "מפת תמיכה ושיתוף במעגל",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-07",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-07-W-OA-HE",
+    "title": "עזרה מכבדת לפי הבחירה שלי",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-07",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-07-P-CH-HE",
+    "title": "איך הייתה העזרה שסיכמנו עליה",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-07",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-07-P-TE-HE",
+    "title": "משוב על תמיכה ושיתוף",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-07",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-07-P-AD-HE",
+    "title": "סקירת הסכמה עם המלווים",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-07",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-07-P-OA-HE",
+    "title": "מה התאים לי בליווי שקיבלתי",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-07",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-08-G-ALL-HE",
+    "title": "הנחיות למטפל: שימור למידה ותוכנית להמשך",
+    "age": "ALL",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCD-08",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-08-W-CH-HE",
+    "title": "מה למדתי ומי יעזור בהמשך",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-08",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-08-W-TE-HE",
+    "title": "לשמור למידה ולדעת מתי לפנות",
+    "age": "TE",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-08",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-08-W-AD-HE",
+    "title": "סיכום אישי ותוכנית המשך ב־OCD",
+    "age": "AD",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-08",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-08-W-OA-HE",
+    "title": "מה חשוב לי לשמר ולבדוק בהמשך",
+    "age": "OA",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCD-08",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-08-P-CH-HE",
+    "title": "מה ארצה לספר בבדיקת ההמשך",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-08",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-08-P-TE-HE",
+    "title": "עדכון קצר לקראת מעקב",
+    "age": "TE",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-08",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-08-P-AD-HE",
+    "title": "בדיקת התוכנית בתקופה חדשה",
+    "age": "AD",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-08",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCD-08-P-OA-HE",
+    "title": "המשך שמתאים לשינוי בחיים",
+    "age": "OA",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCD-08",
+    "track": "ocd"
+  }
+]

@@ -1,0 +1,289 @@
+{
+  "contentVersion": "0.1",
+  "status": "draft_review_only",
+  "manualMappingApproved": false,
+  "sourceScope": "Public primary guidance read for background only; selected full manuals not accessed or mapped. Original support drafts, not a clinical protocol.",
+  "sources": [
+    "https://www.nice.org.uk/guidance/cg31/chapter/Recommendations",
+    "https://iocdf.org/about-ocd/ocd-treatment-guide/erp/",
+    "https://kids.iocdf.org/professionals/md/treatment/"
+  ],
+  "forms": [
+    {
+      "id": "MP-OCDYC-05-G-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "ad91ca05a4a453fd5ea3e34db0d7db7c3ec5bde4bf4918232164febadf127b68"
+      }
+    },
+    {
+      "id": "MP-OCDYC-05-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "8d1802787747e234be5c9eeace5141ff667fe1afa88274bdd74981f62c82ed86"
+      }
+    },
+    {
+      "id": "MP-OCDYC-05-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "a5f837cbcd87ba292474a83437dc3215210435cafacb140d4707831e55c272c0"
+      }
+    },
+    {
+      "id": "MP-OCDYC-06-G-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "0ef2f3bb2c98158a29c1dbbfca9b068de28afd1b6ee04a08f3cb898eb44cbf08"
+      }
+    },
+    {
+      "id": "MP-OCDYC-06-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "55f8db8d562f5237c5223cc291ad28da215010f048a3c2a60aef7f2112d56b38"
+      }
+    },
+    {
+      "id": "MP-OCDYC-06-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "2152e447ca38160d1511cccb5b347352321504a68f9e417398668b4679708c2f"
+      }
+    },
+    {
+      "id": "MP-OCDYC-07-G-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "1f366e9c28c8a429902b56723911c5f6b0bf86ee90b7d41589c558ae820a8635"
+      }
+    },
+    {
+      "id": "MP-OCDYC-07-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "8d614d4ec3333aa8944cca43b5e57c7be9a51afcc4a2f327172e7dbc23f065fd"
+      }
+    },
+    {
+      "id": "MP-OCDYC-07-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "5907f4bea340772f3ab30eb185de4f1fa1e2ad1caf5d96610c2c5b4a8a2c6bd9"
+      }
+    },
+    {
+      "id": "MP-OCDYC-08-G-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "a1e0191ce4639c420f8e2ecadba49b158fb05a3b99d32b3f61b2c2b5d51c137c"
+      }
+    },
+    {
+      "id": "MP-OCDYC-08-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "6d70264d5bb53a57209a127999026b3aa28f4cd85335e440ef4cdd473f96a9ad"
+      }
+    },
+    {
+      "id": "MP-OCDYC-08-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "ae16177af992458c23dc58b24639f229de56878723449f6b7643d6aa7b4f4eff"
+      }
+    }
+  ]
+}

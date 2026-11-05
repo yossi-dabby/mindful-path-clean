@@ -1,0 +1,110 @@
+[
+  {
+    "id": "MP-OCDYC-01-G-CH-HE",
+    "title": "הנחיות למטפל: גילי 6–7: להכיר, לשמוע את הילד ולבחור יחד",
+    "age": "CH",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCDYC-01",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-01-W-CH-HE",
+    "title": "נעים להכיר אותי",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCDYC-01",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-01-P-CH-HE",
+    "title": "מה היה לי נוח בשיחה",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCDYC-01",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-02-G-CH-HE",
+    "title": "הנחיות למטפל: גילי 6–7: להבין רגע קשה בבית או במסגרת",
+    "age": "CH",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCDYC-02",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-02-W-CH-HE",
+    "title": "רגע אחד שהיה לי קשה",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCDYC-02",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-02-P-CH-HE",
+    "title": "מה שמנו לב אליו יחד",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCDYC-02",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-03-G-CH-HE",
+    "title": "הנחיות למטפל: גילי 6–7: להבין בעזרת מילים ומשחק",
+    "age": "CH",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCDYC-03",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-03-W-CH-HE",
+    "title": "מילים שעוזרות לי להבין",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCDYC-03",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-03-P-CH-HE",
+    "title": "מה הבנתי ומה אשאל",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCDYC-03",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-04-G-CH-HE",
+    "title": "הנחיות למטפל: גילי 6–7: תוכנית משותפת לילד ולמשפחה",
+    "age": "CH",
+    "kind": "G",
+    "pages": 4,
+    "unit": "OCDYC-04",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-04-W-CH-HE",
+    "title": "מי איתי ומה סיכמנו",
+    "age": "CH",
+    "kind": "W",
+    "pages": 1,
+    "unit": "OCDYC-04",
+    "track": "ocd"
+  },
+  {
+    "id": "MP-OCDYC-04-P-CH-HE",
+    "title": "לבדוק שהסיכום מתאים לנו",
+    "age": "CH",
+    "kind": "P",
+    "pages": 1,
+    "unit": "OCDYC-04",
+    "track": "ocd"
+  }
+]

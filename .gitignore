@@ -36,6 +36,9 @@ public/pdfjs/
 /playwright-report/
 /playwright/.cache/
 
+# Offline multilingual review output; never ship generated drafts as app assets.
+/tmp/forms-localization/
+
 # Android build artifacts
 android/.gradle/
 android/app/build/

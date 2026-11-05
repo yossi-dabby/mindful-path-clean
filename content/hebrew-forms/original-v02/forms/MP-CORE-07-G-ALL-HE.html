@@ -1,0 +1,66 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mindful Path CBT - Hebrew draft 0.2</title><style>
+@font-face {font-family: MP; src: url('../fonts/DejaVuSans.ttf'); font-weight:400;}
+@font-face {font-family: MP; src: url('../fonts/DejaVuSans-Bold.ttf'); font-weight:700;}
+@page {size: A4; margin: 0;}
+* {box-sizing:border-box;}
+html {direction:rtl; color:#183c3c; font-family:MP,Arial,sans-serif; font-size:11pt;}
+body {margin:0; background:#eef4f1;}
+.sheet {position:relative; width:210mm; height:297mm; padding:12mm 15mm 13mm; margin:0 auto 8mm; background:white; break-after:page; overflow:hidden;}
+.sheet:last-child {break-after:auto;}
+.sheet::before {content:'Mindful Path'; position:absolute; left:8mm; right:8mm; top:151mm; text-align:center; transform:rotate(-27deg); font-size:52pt; font-weight:700; color:#138e87; opacity:.045; z-index:0; direction:ltr;}
+.sheet::after {content:''; position:absolute; inset:7mm; border:.25mm solid #b8cec5; border-radius:1.5mm; pointer-events:none; z-index:3;}
+.content {position:relative; z-index:1;}
+.brandbar {display:flex; justify-content:space-between; align-items:center; border-bottom:1.1mm solid #15958c; padding-bottom:3mm; margin-bottom:5mm;}
+.brand {font-size:19pt; font-weight:700; color:#078b85; direction:ltr;}
+.edition {font-size:8pt; line-height:1.65; color:#54716c; text-align:left;}
+.eyebrow {font-size:8.5pt; color:#14756d; font-weight:700; margin-bottom:1.5mm;}
+h1 {font-size:22pt; line-height:1.25; margin:0 0 2.8mm; font-weight:700; color:#193f3e;}
+.subtitle {font-size:9pt; line-height:1.6; margin:0 0 4mm; color:#4b6563;}
+.metadata {display:flex; gap:5mm; margin-bottom:4mm;}
+.meta {flex:1; font-size:8pt; color:#506d68;}
+.meta .write {display:block; height:7mm; border-bottom:.25mm solid #97b4ae; color:#193f3e;}
+.note {font-size:8.3pt; line-height:1.55; border-right:.8mm solid #75b8aa; padding:2.5mm 3mm; background:#f1f7f3; margin-bottom:4mm;}
+.section {margin:0 0 3.6mm; break-inside:avoid;}
+.section-title {font-size:10.4pt; font-weight:700; margin:0 0 1mm; line-height:1.4;}
+.num {display:inline-block; color:#14766c; min-width:6mm; font-size:9pt;}
+.prompt {font-size:8.6pt; line-height:1.5; color:#526966; margin:0 0 1.2mm;}
+.line {height:7.2mm; border-bottom:.22mm solid #ccdad6; color:#193f3e; font-size:10pt; outline:none; white-space:pre-wrap;}
+.line:focus {background:#f1f8f4;}
+.line.tall {height:8.3mm;}
+.options {font-size:8.8pt; color:#365c57; line-height:1.8; margin:1mm 0;}
+.box {display:inline-block; width:2.7mm; height:2.7mm; border:.25mm solid #7b9e95; margin-left:1mm; vertical-align:middle;}
+.footer {position:absolute; bottom:8mm; left:15mm; right:15mm; border-top:.23mm solid #c6d9d2; padding-top:2mm; display:flex; justify-content:space-between; font-size:7.1pt; color:#57736d; line-height:1.5; z-index:2;}
+.code {direction:ltr; display:inline-block; font-size:7pt;}
+.children h1 {font-size:23pt;}
+.children .section-title {font-size:12.8pt;}
+.children .prompt {font-size:10.2pt;}
+.children .section {margin-bottom:4.3mm;}
+.children .line {height:8mm;}
+.older h1 {font-size:23pt;}
+.older .section-title {font-size:12pt;}
+.older .prompt {font-size:10.3pt;}
+.older .subtitle {font-size:10pt;}
+.older .section {margin-bottom:4mm;}
+.older .line {height:8mm;}
+.toolbar {max-width:210mm; margin:15px auto; padding:14px 18px; font-family:Arial,sans-serif; font-size:15px; line-height:1.65; background:#fff; border:1px solid #bad3cb; border-radius:9px;}
+.toolbar button {border:0; border-radius:6px; padding:10px 18px; background:#078b85; color:#fff; cursor:pointer; font-size:15px;}
+@media screen {.sheet {box-shadow:0 3px 18px #153d3a15;} }
+@media print {body {background:white;} .sheet {margin:0; box-shadow:none;} .toolbar {display:none;} .line:focus {background:transparent;} }
+
+.guide h1{font-size:22pt}.guide h2{font-size:12pt;color:#0e756b;margin:4mm 0 1.6mm}
+.guide p{font-size:9.7pt;line-height:1.65;margin:1.5mm 0 3mm}
+.guide .list p{margin:1.4mm 0;font-size:9.5pt;line-height:1.6}
+.guide table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:8.8pt;line-height:1.6;margin:3mm 0}
+.guide th{background:#e7f2eb;text-align:right;padding:2mm;border-bottom:.4mm solid #a1c5b8}
+.guide td{padding:2.5mm 2mm;vertical-align:top;border-bottom:.22mm solid #d3e1da}
+.guide .source{font-size:8pt;line-height:1.5;margin:2mm 0}
+.guide .source a{font-size:7pt;direction:ltr;unicode-bidi:embed;overflow-wrap:anywhere;color:#3d6f63;text-decoration:none}
+.review-line{height:8mm;border-bottom:.22mm solid #ccdad6}
+.children .section-title{font-size:12pt}.children .prompt{font-size:9.7pt}
+.older .section-title{font-size:12pt}.older .prompt{font-size:10pt}
+
+[contenteditable="true"]{overflow-wrap:anywhere;white-space:pre-wrap}
+@media screen{.line[contenteditable="true"],.write[contenteditable="true"]{overflow:auto}.field-overflow{outline:2px solid #a43f35!important}}
+.print-warning{display:none}.guard-toolbar{max-width:210mm;margin:12px auto;padding:12px;background:#edf6f1;direction:rtl;font-family:MP,Arial,sans-serif;font-size:14px;line-height:1.7}.guard-toolbar button{font:inherit;padding:8px;margin:4px;border:1px solid #729a8a;background:white;cursor:pointer}
+@media print{.guard-toolbar{display:none}body.has-overflow .sheet{display:none!important}body.has-overflow .print-warning{display:block;margin:25mm;direction:rtl;font-family:MP;font-size:16pt;line-height:1.8}}
+</style></head><body><aside class="guard-toolbar"><b>Mindful Path | מילוי מקומי לסקירה בלבד</b><br>אין שמירה אוטומטית ואין שליחה לרשת. השתמשו בנתונים בדויים בסקירה. אם תשובה חורגת, יש לקצר או לשמור את מלוא התשובות כטקסט ולהעבירן לדף המשך. בדקו תצוגה מקדימה.<br><button type="button" id="print-form">בדיקה והדפסה</button><button type="button" id="save-answers">שמירת תשובות כטקסט</button><span id="fill-status" role="status" aria-live="polite"></span></aside><div class="print-warning">יש תשובה שחורגת משטח המילוי. הטופס לא הודפס כדי למנוע חיתוך שקט. חזרו למסך, קצרו את התשובה או שמרו את מלוא התשובות כטקסט והעבירו לדף המשך. התוכן שהוקלד לא נמחק.</div><article class="sheet guide" data-template="MP-CORE-07-G-ALL-HE"><main class="content"><div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>גרסה 0.2 | 03.11.2026</div></div><div class="eyebrow">CORE-07 | מדריך למטפל בלבד</div><h1>לתכנן ניסיון שבודק ציפייה</h1><p class="subtitle">Core 07: שאלה מוגדרת, ניסיון מוסכם ומידע שניתן לבחון יחד.</p><h2>מטרת היחידה</h2><p>ללמוד על ציפייה באמצעות ניסיון שנבחר עם המטופל לאחר הערכת התאמה. המוקד הוא המידע שיתקבל ביחס לציפייה, ולא עצם הפעילות או הוכחה שהמטופל טעה.</p><h2>לפני התכנון</h2><p>פותחים ב-SES-S01 ומבררים אם יש שאלה שהמטופל מעוניין לבדוק. ההסכמה, היכולת, ההקשר והגבולות צריכים להיות ברורים. הטפסים אינם פרוטוקול חשיפה או תחליף להכשרה מתאימה.</p><h2>שלבי התכנון</h2><p></p><div class="list"><p><b>1. </b>לנסח ציפייה מסוימת והקשר שבו היא עולה, במילות המטופל.</p><p><b>2. </b>לבחור פעולה מתאימה שיכולה לספק מידע על השאלה.</p><p><b>3. </b>להגדיר מראש מה יהיה אפשר לראות או לשמוע, ומה יוכל להישאר לא חד משמעי.</p><p><b>4. </b>לתאם היקף, תנאים, הכנה ותמיכה, כולל הסכמות של אחרים אם רלוונטי.</p><p><b>5. </b>לקבוע גבולות, אפשרות לשינוי או עצירה ומועד לסקירה. לסיים ב-SES-S02.</p></div><h2>גבולות השימוש</h2><p>יש להחריג סיכון ממשי ולבחון מגבלות והשלכות. אין לתכנן פגיעה, הפרת פרטיות או שינוי טיפול רפואי לצורך בדיקת ציפייה. אם אין דרך מתאימה לבדוק, שומרים את השאלה לעבודה אחרת.</p></main><footer class="footer"><span>למטפל בלבד | טיוטה לסקירה מקצועית</span><span><bdi class="code">MP-CORE-07-G-ALL-HE</bdi> | 1 מתוך 4</span></footer></article><article class="sheet guide" data-template="MP-CORE-07-G-ALL-HE"><main class="content"><div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>גרסה 0.2 | 03.11.2026</div></div><div class="eyebrow">CORE-07 | מדריך למטפל בלבד</div><h1>להפוך תחזית למידע נצפה</h1><p class="subtitle">הדוגמאות בדויות, יומיומיות ומצומצמות. הן אינן תוכנית לביצוע ללא התאמה אישית.</p><table><thead><tr><th>קבוצה</th><th>שאלה ודוגמה אפשרית לבירור</th></tr></thead><tbody><tr><td>ילדים</td><td>ציפייה: אצטרך עזרה בכל חלק במשימה מוכרת. אפשר לבחור עם הילד חלק קטן ולשים לב מתי ביקש עזרה, בלי למנוע עזרה ובלי ליצור מבחן הצלחה.</td></tr><tr><td>מתבגרים</td><td>ציפייה: לא אצליח להעלות אף רעיון לטיוטה. אפשר לבדוק ניסיון קצר ומוסכם לרישום רעיונות, ולתעד מה עלה ומה הפריע. אין צורך לפרסם או למסור את התוצר.</td></tr><tr><td>מבוגרים</td><td>ציפייה: אין דרך להתחיל לארגן משימה בלי לסיים את כולה. אפשר לבחור שלב מוגדר ולבדוק מה נעשה ומה השפיע על האפשרות לעצור במועד שסוכם.</td></tr><tr><td>מבוגרים יותר</td><td>ציפייה: אצטרך הסבר חוזר בכל שלב בפעולה שבחרתי. אפשר לבחור חלק מוכר, להשאיר עזרה זמינה ולתעד מה הובן ובאיזו תמיכה. אין להסיק מכך על יכולת כללית.</td></tr></tbody></table><h2>תצפית ופרשנות</h2><p>מגדירים מידע שאפשר לתאר, ולא מה שאנו מניחים שאדם אחר חשב. אם התוצאה תלויה באחרים או בתנאים חיצוניים, מציינים זאת מראש. תוצאה אחת אינה הוכחה לכל המקרים.</p><h2>גם אישוש הוא מידע</h2><p>הניסיון עשוי לתמוך בציפייה, לסייג אותה או להותיר אותה פתוחה. אין לשנות את השאלה בדיעבד כדי לייצר הפרכה. לומדים גם מהתנאים ומהתמיכה שהיו בפועל.</p></main><footer class="footer"><span>למטפל בלבד | טיוטה לסקירה מקצועית</span><span><bdi class="code">MP-CORE-07-G-ALL-HE</bdi> | 2 מתוך 4</span></footer></article><article class="sheet guide" data-template="MP-CORE-07-G-ALL-HE"><main class="content"><div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>גרסה 0.2 | 03.11.2026</div></div><div class="eyebrow">CORE-07 | מדריך למטפל בלבד</div><h1>התאמה, בחירה ואפשרות לעצור</h1><p class="subtitle">המשימה תתוכנן רק בתחום ההכשרה והמסגרת המקצועית המתאימים.</p><table><thead><tr><th>קבוצה</th><th>התאמה מעשית</th></tr></thead><tbody><tr><td>ילדים</td><td>שאלה אחת והתנסות מוחשית; שפה פשוטה ותפקיד ברור למבוגר. שומרים עזרה זמינה ומבררים שהילד מבין ויכול להביע רצון לשנות או לעצור.</td></tr><tr><td>מתבגרים</td><td>בחירה בשאלה ובמידת החשיפה של מידע. אין שימוש בלחץ חברתי, בהפתעה או בפרסום תוכן כחלק שלא הוסכם.</td></tr><tr><td>מבוגרים</td><td>לברר משאבים, מגבלות, אחריות ותפקידים. להבחין בין הסכמה עקרונית לבין יכולת לבצע בתנאים שנקבעו.</td></tr><tr><td>מבוגרים יותר</td><td>לשמור על שפה בוגרת, היקף רצוי ונגישות. תמיכה נבחרת מתועדת כחלק מן התנאים, בלי להניח מראש פגיעה ביכולת.</td></tr></tbody></table><h2>תוכנית ברורה לשינוי</h2><p>מגדירים מה יוביל להקטנה, דחייה או עצירה ומה תהיה דרך החזרה למטפל. שינוי ברצון או בתנאים מחייב בחינה מחודשת. אין הנחיה להמשיך בכוח כדי להשיג תוצאה.</p><h2>אין הרחבה אוטומטית</h2><p>דף הלמידה מתייחס לניסיון שכבר הוסכם. הוא אינו הרשאה להגדיל היקף, להפחית עזרה נחוצה או לבחור התנסות אחרת ללא בחינה משותפת.</p><h2>מתי לבחור כלי אחר</h2><p>אם התחזית אינה ניתנת לבדיקה מתאימה, אם נדרש בירור בטיחותי או אם העומס אינו מאפשר למידה, עוברים להערכה או לעבודה אחרת בהתאם לצורך.</p></main><footer class="footer"><span>למטפל בלבד | טיוטה לסקירה מקצועית</span><span><bdi class="code">MP-CORE-07-G-ALL-HE</bdi> | 3 מתוך 4</span></footer></article><article class="sheet guide" data-template="MP-CORE-07-G-ALL-HE"><main class="content"><div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>גרסה 0.2 | 03.11.2026</div></div><div class="eyebrow">CORE-07 | מדריך למטפל בלבד</div><h1>למידה מן התוצאה לפני מסקנה</h1><p class="subtitle">CORE-07-P מפריד בין מה שתוכנן, מה שנעשה ומה שניתן להסיק.</p><h2>סקירה משותפת</h2><p>מתארים ביצוע ותוצאה, משווים לציפייה ומבררים מה עוד השפיע. שומרים מידע חסר כחסר. אם הניסיון לא בוצע, בוחנים את החסמים וההתאמה במקום להסיק על היכולת או הרצון של המטופל.</p><h2>מסקנה זהירה</h2><p>אפשר לנסח מה נלמד במקרה המסוים ומה נשאר פתוח. לא מכלילים מתוצאה יחידה, ואין חובה להגיע למחשבה חלופית. בחירת המשך נעשית בנפרד, לאחר בדיקת המידע וההעדפות.</p><h2>חיבור להמשך</h2><p>ב-Core 8 מסכמים אילו תובנות וכלים ראוי לשמר ומה עדיין דרוש. התקדמות ברצף אינה קביעה שהציפייה נפתרה או שהטיפול הסתיים.</p><h2>מצב התוכן</h2><p>טיוטות מקוריות ללא תיקוף או אישור מקצועי. יש לבדוק כל התאמת גיל ולתעד סקירת תוכן וזכויות לפני הפצה.</p><h2>מקורות כלליים לעיון</h2><div class="source"><b>Beck Institute: Behavioral Experiments in Cognitive Therapy</b><br>רקע להבחנה בין פעילות לבין בדיקת ציפייה.<br><a href="https://beckinstitute.org/blog/behavioral-experiments-in-cognitive-therapy/">https://beckinstitute.org/blog/behavioral-experiments-in-cognitive-therapy/</a></div><div class="source"><b>Beck Institute: Selecting Techniques in CBT</b><br>רקע לבחירת התערבות בהתאם להמשגה ולהעדפות.<br><a href="https://beckinstitute.org/blog/selecting-techniques-in-cbt/">https://beckinstitute.org/blog/selecting-techniques-in-cbt/</a></div><p class="source">עיון: 03.11.2026. המקורות אינם רישיון לטפסים חיצוניים ואינם תיקוף של הערכה או של התאמות הגיל.</p><p>שם הסוקר, תפקיד, תאריך וגרסאות שנבדקו:</p><div class="review-line"></div></main><footer class="footer"><span>למטפל בלבד | טיוטה לסקירה מקצועית</span><span><bdi class="code">MP-CORE-07-G-ALL-HE</bdi> | 4 מתוך 4</span></footer></article><script src="../print_guard.js"></script></body></html>

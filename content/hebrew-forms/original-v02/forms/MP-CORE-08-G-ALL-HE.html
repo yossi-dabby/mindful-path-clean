@@ -1,0 +1,66 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mindful Path CBT - Hebrew draft 0.2</title><style>
+@font-face {font-family: MP; src: url('../fonts/DejaVuSans.ttf'); font-weight:400;}
+@font-face {font-family: MP; src: url('../fonts/DejaVuSans-Bold.ttf'); font-weight:700;}
+@page {size: A4; margin: 0;}
+* {box-sizing:border-box;}
+html {direction:rtl; color:#183c3c; font-family:MP,Arial,sans-serif; font-size:11pt;}
+body {margin:0; background:#eef4f1;}
+.sheet {position:relative; width:210mm; height:297mm; padding:12mm 15mm 13mm; margin:0 auto 8mm; background:white; break-after:page; overflow:hidden;}
+.sheet:last-child {break-after:auto;}
+.sheet::before {content:'Mindful Path'; position:absolute; left:8mm; right:8mm; top:151mm; text-align:center; transform:rotate(-27deg); font-size:52pt; font-weight:700; color:#138e87; opacity:.045; z-index:0; direction:ltr;}
+.sheet::after {content:''; position:absolute; inset:7mm; border:.25mm solid #b8cec5; border-radius:1.5mm; pointer-events:none; z-index:3;}
+.content {position:relative; z-index:1;}
+.brandbar {display:flex; justify-content:space-between; align-items:center; border-bottom:1.1mm solid #15958c; padding-bottom:3mm; margin-bottom:5mm;}
+.brand {font-size:19pt; font-weight:700; color:#078b85; direction:ltr;}
+.edition {font-size:8pt; line-height:1.65; color:#54716c; text-align:left;}
+.eyebrow {font-size:8.5pt; color:#14756d; font-weight:700; margin-bottom:1.5mm;}
+h1 {font-size:22pt; line-height:1.25; margin:0 0 2.8mm; font-weight:700; color:#193f3e;}
+.subtitle {font-size:9pt; line-height:1.6; margin:0 0 4mm; color:#4b6563;}
+.metadata {display:flex; gap:5mm; margin-bottom:4mm;}
+.meta {flex:1; font-size:8pt; color:#506d68;}
+.meta .write {display:block; height:7mm; border-bottom:.25mm solid #97b4ae; color:#193f3e;}
+.note {font-size:8.3pt; line-height:1.55; border-right:.8mm solid #75b8aa; padding:2.5mm 3mm; background:#f1f7f3; margin-bottom:4mm;}
+.section {margin:0 0 3.6mm; break-inside:avoid;}
+.section-title {font-size:10.4pt; font-weight:700; margin:0 0 1mm; line-height:1.4;}
+.num {display:inline-block; color:#14766c; min-width:6mm; font-size:9pt;}
+.prompt {font-size:8.6pt; line-height:1.5; color:#526966; margin:0 0 1.2mm;}
+.line {height:7.2mm; border-bottom:.22mm solid #ccdad6; color:#193f3e; font-size:10pt; outline:none; white-space:pre-wrap;}
+.line:focus {background:#f1f8f4;}
+.line.tall {height:8.3mm;}
+.options {font-size:8.8pt; color:#365c57; line-height:1.8; margin:1mm 0;}
+.box {display:inline-block; width:2.7mm; height:2.7mm; border:.25mm solid #7b9e95; margin-left:1mm; vertical-align:middle;}
+.footer {position:absolute; bottom:8mm; left:15mm; right:15mm; border-top:.23mm solid #c6d9d2; padding-top:2mm; display:flex; justify-content:space-between; font-size:7.1pt; color:#57736d; line-height:1.5; z-index:2;}
+.code {direction:ltr; display:inline-block; font-size:7pt;}
+.children h1 {font-size:23pt;}
+.children .section-title {font-size:12.8pt;}
+.children .prompt {font-size:10.2pt;}
+.children .section {margin-bottom:4.3mm;}
+.children .line {height:8mm;}
+.older h1 {font-size:23pt;}
+.older .section-title {font-size:12pt;}
+.older .prompt {font-size:10.3pt;}
+.older .subtitle {font-size:10pt;}
+.older .section {margin-bottom:4mm;}
+.older .line {height:8mm;}
+.toolbar {max-width:210mm; margin:15px auto; padding:14px 18px; font-family:Arial,sans-serif; font-size:15px; line-height:1.65; background:#fff; border:1px solid #bad3cb; border-radius:9px;}
+.toolbar button {border:0; border-radius:6px; padding:10px 18px; background:#078b85; color:#fff; cursor:pointer; font-size:15px;}
+@media screen {.sheet {box-shadow:0 3px 18px #153d3a15;} }
+@media print {body {background:white;} .sheet {margin:0; box-shadow:none;} .toolbar {display:none;} .line:focus {background:transparent;} }
+
+.guide h1{font-size:22pt}.guide h2{font-size:12pt;color:#0e756b;margin:4mm 0 1.6mm}
+.guide p{font-size:9.7pt;line-height:1.65;margin:1.5mm 0 3mm}
+.guide .list p{margin:1.4mm 0;font-size:9.5pt;line-height:1.6}
+.guide table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:8.8pt;line-height:1.6;margin:3mm 0}
+.guide th{background:#e7f2eb;text-align:right;padding:2mm;border-bottom:.4mm solid #a1c5b8}
+.guide td{padding:2.5mm 2mm;vertical-align:top;border-bottom:.22mm solid #d3e1da}
+.guide .source{font-size:8pt;line-height:1.5;margin:2mm 0}
+.guide .source a{font-size:7pt;direction:ltr;unicode-bidi:embed;overflow-wrap:anywhere;color:#3d6f63;text-decoration:none}
+.review-line{height:8mm;border-bottom:.22mm solid #ccdad6}
+.children .section-title{font-size:12pt}.children .prompt{font-size:9.7pt}
+.older .section-title{font-size:12pt}.older .prompt{font-size:10pt}
+
+[contenteditable="true"]{overflow-wrap:anywhere;white-space:pre-wrap}
+@media screen{.line[contenteditable="true"],.write[contenteditable="true"]{overflow:auto}.field-overflow{outline:2px solid #a43f35!important}}
+.print-warning{display:none}.guard-toolbar{max-width:210mm;margin:12px auto;padding:12px;background:#edf6f1;direction:rtl;font-family:MP,Arial,sans-serif;font-size:14px;line-height:1.7}.guard-toolbar button{font:inherit;padding:8px;margin:4px;border:1px solid #729a8a;background:white;cursor:pointer}
+@media print{.guard-toolbar{display:none}body.has-overflow .sheet{display:none!important}body.has-overflow .print-warning{display:block;margin:25mm;direction:rtl;font-family:MP;font-size:16pt;line-height:1.8}}
+</style></head><body><aside class="guard-toolbar"><b>Mindful Path | מילוי מקומי לסקירה בלבד</b><br>אין שמירה אוטומטית ואין שליחה לרשת. השתמשו בנתונים בדויים בסקירה. אם תשובה חורגת, יש לקצר או לשמור את מלוא התשובות כטקסט ולהעבירן לדף המשך. בדקו תצוגה מקדימה.<br><button type="button" id="print-form">בדיקה והדפסה</button><button type="button" id="save-answers">שמירת תשובות כטקסט</button><span id="fill-status" role="status" aria-live="polite"></span></aside><div class="print-warning">יש תשובה שחורגת משטח המילוי. הטופס לא הודפס כדי למנוע חיתוך שקט. חזרו למסך, קצרו את התשובה או שמרו את מלוא התשובות כטקסט והעבירו לדף המשך. התוכן שהוקלד לא נמחק.</div><article class="sheet guide" data-template="MP-CORE-08-G-ALL-HE"><main class="content"><div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>גרסה 0.2 | 03.11.2026</div></div><div class="eyebrow">CORE-08 | מדריך למטפל בלבד</div><h1>לסקור שינוי ולבחור המשך</h1><p class="subtitle">Core 08: מטרות, תפקוד, כלים ותוכנית מותאמת להמשך הדרך.</p><h2>מטרת היחידה</h2><p>לעזור למטופל ולמטפל לבדוק מה השתנה, מה הועיל ומה עדיין דורש מענה. משתמשים ב-SES-S03 כדף הסקירה המשותף; אין ליצור עבורו טופס נוסף בשם אחר.</p><h2>מתי להשתמש</h2><p>אפשר לבצע סקירה במהלך הטיפול, לפני שינוי מוקד או לקראת סיום שנבחן מקצועית. השלמת שמונה יחידות אינה תנאי מספיק או הכרחי לסיום טיפול. חוזרים למטרות ולנקודת הפתיחה האישית מ-ASM-A03.</p><h2>רצף סקירה מוצע</h2><p></p><div class="list"><p><b>1. </b>לברר אילו מטרות עדיין רלוונטיות ומה השתנה בהעדפות.</p><p><b>2. </b>להשוות דוגמאות של תפקוד והשתתפות לתקופה ולתנאים שנבחרו בתחילת הדרך.</p><p><b>3. </b>לזהות כלים, תמיכה ותנאים שהועילו וגם את מה שלא התאים.</p><p><b>4. </b>לתת מקום לקושי שנותר ולסימנים אישיים שמצריכים תשומת לב.</p><p><b>5. </b>לבחור המשך, התאמה או חזרה לכלי, ולתאם מועד לבחינה מחדש.</p></div><h2>מידע חסר והקשר</h2><p>אין לשחזר בדיעבד נקודת פתיחה שאינה מתועדת כאילו הייתה נתון. שינוי בנסיבות, בתמיכה ובהזדמנויות לפעול עשוי להשפיע על ההשוואה. אין ציון כולל או סף החלמה בטופס.</p></main><footer class="footer"><span>למטפל בלבד | טיוטה לסקירה מקצועית</span><span><bdi class="code">MP-CORE-08-G-ALL-HE</bdi> | 1 מתוך 4</span></footer></article><article class="sheet guide" data-template="MP-CORE-08-G-ALL-HE"><main class="content"><div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>גרסה 0.2 | 03.11.2026</div></div><div class="eyebrow">CORE-08 | מדריך למטפל בלבד</div><h1>סקירה שנותנת מקום גם לקושי</h1><p class="subtitle">הדוגמאות בדויות. הן ממחישות שאלות לסקירה ולא תוצאות צפויות של הטיפול.</p><table><thead><tr><th>קבוצה</th><th>מה אפשר לברר</th></tr></thead><tbody><tr><td>ילדים</td><td>הילד מצליח לבקש עזרה בחלק מהמצבים, ובאחרים עדיין מסתגר. נשאל מה היה שונה, מה עזר ומה היה רוצה להמשיך לתרגל, בלי להציג יום קשה כביטול של מה שלמד.</td></tr><tr><td>מתבגרים</td><td>יש שינוי בדרך ההתחלה של משימות, אך הקושי בקשרים נשאר. אפשר לבחור אם להמשיך באותו מוקד, להגדיר מטרה חדשה או לבקש תמיכה נוספת.</td></tr><tr><td>מבוגרים</td><td>פעולה משמעותית חזרה לשגרה רק בתנאים מסוימים. בוחנים אם התנאים זמינים ומה נדרש לשימור, ולא מסיקים שצריך להסתדר ללא העזרה.</td></tr><tr><td>מבוגרים יותר</td><td>כלי אחד מועיל ואחר אינו נוח לשימוש. שומרים את מה שנבחר ומתאימים את דרך הזכירה או התמיכה; אין צורך לשמר את כל הדפים והכלים.</td></tr></tbody></table><h2>אם אין שינוי או שיש החמרה</h2><p>בודקים מחדש את המוקד, ההתאמה, הנסיבות והצורך בהערכה או במענה נוספים. אין לסמן הצלחה על סמך השתתפות או מילוי טפסים. התוכנית צריכה לשקף גם נושאים שעדיין פתוחים.</p><h2>משוב על אופן העבודה</h2><p>שואלים על היחס, הקצב, הפרטיות וההתאמה האישית. משוב יכול לשנות את תוכנית ההמשך, ולא רק להופיע בשורת סיכום.</p></main><footer class="footer"><span>למטפל בלבד | טיוטה לסקירה מקצועית</span><span><bdi class="code">MP-CORE-08-G-ALL-HE</bdi> | 2 מתוך 4</span></footer></article><article class="sheet guide" data-template="MP-CORE-08-G-ALL-HE"><main class="content"><div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>גרסה 0.2 | 03.11.2026</div></div><div class="eyebrow">CORE-08 | מדריך למטפל בלבד</div><h1>שימור כלים ותמיכה נבחרת</h1><p class="subtitle">CORE-08-P הוא דף תזכורת ותכנון, ואינו תוכנית חירום או הערכת סיכון מלאה.</p><table><thead><tr><th>קבוצה</th><th>התאמה מעשית</th></tr></thead><tbody><tr><td>ילדים</td><td>תזכורות קצרות למצב, לכלי ולאדם מסייע. לתאם תפקיד של מבוגר ולשמור מקום לרצון הילד. אין מסר שעליו להתמודד לבד.</td></tr><tr><td>מתבגרים</td><td>לבחור מה נוח לשמור ואיך לשמור על פרטיות. תיאום תמיכה צריך להיות ברור ומוסכם, בלי שיתוף אוטומטי עם מסגרת או משפחה.</td></tr><tr><td>מבוגרים</td><td>לזהות מצבים ותנאים שבהם הכלי מועיל, לצד משאבים ותמיכה נדרשים. לא להפוך שימור לדרישה לשליטה מלאה ברגש.</td></tr><tr><td>מבוגרים יותר</td><td>שפה בוגרת ודרך זכירה נוחה. אפשר לשלב מלווה לפי צורך ובחירה ולהשאיר את ההחלטות האישיות בידי המטופל ככל שמתאים.</td></tr></tbody></table><h2>סימנים אישיים והמשך בירור</h2><p>מגדירים שינויים שהמטופל מכיר בתפקוד, בשגרה או בחוויה, ומה יעשה כאשר יבחין בהם. סימן אינו אבחנה. כאשר עולה צורך דחוף או מצוקה משמעותית, נדרש מענה מקצועי מתאים ולא המתנה למועד הסקירה.</p><h2>אם הכלי לא עוזר</h2><p>יש מקום להתאמה ולחזרה לבירור, ולא רק להגברת התרגול. התוכנית כוללת תמיכה ודרך לפנייה נוספת כפי שהוסדרו במסגרת הטיפול.</p></main><footer class="footer"><span>למטפל בלבד | טיוטה לסקירה מקצועית</span><span><bdi class="code">MP-CORE-08-G-ALL-HE</bdi> | 3 מתוך 4</span></footer></article><article class="sheet guide" data-template="MP-CORE-08-G-ALL-HE"><main class="content"><div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>גרסה 0.2 | 03.11.2026</div></div><div class="eyebrow">CORE-08 | מדריך למטפל בלבד</div><h1>להחליט יחד מה ממשיכים</h1><p class="subtitle">אפשר לסכם תקופה בלי לסיים טיפול, ולהשאיר שאלות פתוחות באופן מפורש.</p><h2>תוכנית שימושית</h2><p>בוחרים מספר מצומצם של כלים שנוסו, צעד אפשרי ומקור תמיכה רצוי. מתאמים מועד או תנאי לבדיקה מחדש ואחריות להמשך. אם נשקל סיום, מתאמים את משמעותו ואת דרך הפנייה בעת צורך במסגרת המקצועית המתאימה.</p><h2>בחירת מסלול</h2><p>המשך יכול להיות חזרה ליחידה, שינוי מטרה, עבודה ממוקדת אחרת או סיום שנבחן יחד. אין מעבר אוטומטי למסלול Specialized על סמך הטופס או על סמך מספר היחידות שהושלמו.</p><h2>מצב התוכן</h2><p>כל הטפסים והמדריכים הם טיוטות מקוריות לסקירה מקצועית ולסקירת זכויות. הקטלוג מתעד הפקת תוכן, ולא תוצאות טיפול או אישורי שימוש שכבר ניתנו.</p><h2>מקורות כלליים לעיון</h2><div class="source"><b>Beck Institute Cares: What Are CBT Sessions Like?</b><br>רקע כללי למטרות, משוב ומעקב אחר התפקוד.<br><a href="https://cares.beckinstitute.org/about-cbt/what-are-sessions-like/">https://cares.beckinstitute.org/about-cbt/what-are-sessions-like/</a></div><div class="source"><b>Beck Institute: CBT Relapse Prevention</b><br>רקע כללי לחשיבה על שימור כלים; אינו פרוטוקול של ערכה זו.<br><a href="https://beckinstitute.org/blog/cbt-relapse-prevention/">https://beckinstitute.org/blog/cbt-relapse-prevention/</a></div><p class="source">עיון: 03.11.2026. המקורות אינם רישיון לטפסים חיצוניים ואינם תיקוף של הערכה או של התאמות הגיל.</p><p>שם הסוקר, תפקיד, תאריך וגרסאות שנבדקו:</p><div class="review-line"></div></main><footer class="footer"><span>למטפל בלבד | טיוטה לסקירה מקצועית</span><span><bdi class="code">MP-CORE-08-G-ALL-HE</bdi> | 4 מתוך 4</span></footer></article><script src="../print_guard.js"></script></body></html>

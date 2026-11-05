@@ -28,16 +28,16 @@ describe('Hebrew review pilot HTTP boundary', () => {
 
   it('has exactly 154 original IDs, 18 shared files and no public/AI registrations', () => {
     expect(pilot.catalog.forms).toHaveLength(154);
-    expect(pilot.files.size).toBe(640);
+    expect(pilot.files.size).toBe(820);
     expect(pilot.catalog.forms.filter((f) => f.age === 'ALL')).toHaveLength(18);
     for (const age of ['CH', 'TE', 'AD', 'OA']) expect(pilot.catalog.forms.filter((f) => f.age === age)).toHaveLength(34);
-    for (const form of pilot.series04Catalog.forms) {
+    for (const form of pilot.series06Catalog.forms) {
       expect(ALL_FORMS.find((entry) => entry.id === form.id)).toBeUndefined();
       expect(form.status).toContain('לא להפצה');
     }
   });
   it('rejects missing, query-string, forged-role and invalid credentials for both metadata and files', async () => {
-    for (const path of ['/catalog-series-04', '/catalog-series-03', '/catalog-series-02', '/catalog-series-01', '/catalog', '/catalog-mood-01', '/catalog-p4-01', '/catalog-p4-02', '/catalog-p3-01', `/files/${pilot.catalog.forms[0].id}`, '/files/MP-MOOD-01-W-CH-HE', '/files/MP-SELF-01-W-CH-HE', '/files/MP-SELF-06-W-CH-HE', '/files/MP-REG-06-W-CH-HE', '/files/MP-EXEC-06-W-CH-HE', '/files/MP-SOC-06-W-CH-HE', '/files/MP-SLEEP-06-W-CH-HE', '/files/MP-CHANGE-06-W-CH-HE']) {
+    for (const path of ['/catalog-series-06', '/catalog-series-05', '/catalog-series-04', '/catalog-series-03', '/catalog-series-02', '/catalog-series-01', '/catalog', '/catalog-mood-01', '/catalog-p4-01', '/catalog-p4-02', '/catalog-p3-01', `/files/${pilot.catalog.forms[0].id}`, '/files/MP-MOOD-01-W-CH-HE', '/files/MP-SELF-01-W-CH-HE', '/files/MP-SELF-06-W-CH-HE', '/files/MP-REG-06-W-CH-HE', '/files/MP-EXEC-06-W-CH-HE', '/files/MP-SOC-06-W-CH-HE', '/files/MP-SLEEP-06-W-CH-HE', '/files/MP-CHANGE-06-W-CH-HE', '/files/MP-FAMILY-06-W-CH-HE', '/files/MP-SCREEN-06-W-CH-HE', '/files/MP-SHAME-06-W-CH-HE', '/files/MP-MEANING-06-W-CH-HE']) {
       for (const init of [{}, { headers: { 'X-User-Role': 'admin' } }, { headers: { Authorization: 'Bearer invalid' } }]) {
         expect((await request(`/api/hebrew-forms-pilot${path}?token=test-session&role=admin`, init)).status).toBe(401);
       }
@@ -47,6 +47,9 @@ describe('Hebrew review pilot HTTP boundary', () => {
     expect((await request('/api/hebrew-forms-pilot/catalog', { headers: auth })).status).toBe(200);
     role = 'premium';
     try {
+      expect((await request('/api/hebrew-forms-pilot/catalog-series-06', { headers: auth })).status).toBe(403);
+      expect((await request('/api/hebrew-forms-pilot/catalog-series-05', { headers: auth })).status).toBe(403);
+      expect((await request('/api/hebrew-forms-pilot/files/MP-MEANING-06-W-CH-HE', { headers: auth })).status).toBe(403);
       expect((await request('/api/hebrew-forms-pilot/catalog-series-04', { headers: auth })).status).toBe(403);
       expect((await request('/api/hebrew-forms-pilot/files/MP-CHANGE-06-W-CH-HE', { headers: auth })).status).toBe(403);
       expect((await request('/api/hebrew-forms-pilot/catalog-series-03', { headers: auth })).status).toBe(403);
@@ -67,7 +70,7 @@ describe('Hebrew review pilot HTTP boundary', () => {
     } finally { role = 'admin'; }
   });
   it('serves every source PDF byte-for-byte only after authorization', async () => {
-    for (const form of pilot.series04Catalog.forms) {
+    for (const form of pilot.series06Catalog.forms) {
       const response = await request(`/api/hebrew-forms-pilot/files/${form.id}`, { headers: auth });
       expect(response.status).toBe(200);
       expect(response.headers.get('cache-control')).toBe('private, no-store');
@@ -100,7 +103,7 @@ describe('Hebrew review pilot HTTP boundary', () => {
     expect((await request('/api/hebrew-forms-pilot/files/%2e%2e%2fprivate', { headers: auth })).status).toBe(404);
   });
   it('keeps private/source paths inaccessible and preserves SPA routes and security headers', async () => {
-    for (const path of [`/server/private/forms/${pilot.catalog.forms[0].id}.pdf`, '/server/private/forms/', '/server/private/hebrew-pilot-series-04-catalog.json', '/server/private/forms/MP-CHANGE-06-W-CH-HE.pdf', '/content/hebrew-forms/series-04/forms/MP-SLEEP-02-W-CH-HE.html', '/server/private/hebrew-pilot-series-03-catalog.json', '/server/private/forms/MP-SOC-06-W-CH-HE.pdf', '/content/hebrew-forms/series-03/forms/MP-EXEC-02-W-CH-HE.html', '/server/private/hebrew-pilot-p4-01-catalog.json', '/content/hebrew-forms/p4-01/forms/MP-SLEEP-01-W-CH-HE.html', '/server/private/hebrew-pilot-p4-02-catalog.json', '/content/hebrew-forms/p4-02/forms/MP-SHAME-01-W-CH-HE.html', '/server/private/hebrew-pilot-catalog.json', '/server/private/hebrew-pilot-mood-catalog.json', '/content/hebrew-forms/mood-01/forms/MP-MOOD-01-W-CH-HE.html', '/src/pages/TherapeuticForms.jsx', '/api/unknown']) {
+    for (const path of [`/server/private/forms/${pilot.catalog.forms[0].id}.pdf`, '/server/private/forms/', '/server/private/hebrew-pilot-series-06-catalog.json', '/server/private/hebrew-pilot-series-05-catalog.json', '/server/private/forms/MP-MEANING-06-W-CH-HE.pdf', '/content/hebrew-forms/series-06/forms/MP-SHAME-02-W-CH-HE.html', '/server/private/hebrew-pilot-series-04-catalog.json', '/server/private/forms/MP-CHANGE-06-W-CH-HE.pdf', '/content/hebrew-forms/series-04/forms/MP-SLEEP-02-W-CH-HE.html', '/server/private/hebrew-pilot-series-03-catalog.json', '/server/private/forms/MP-SOC-06-W-CH-HE.pdf', '/content/hebrew-forms/series-03/forms/MP-EXEC-02-W-CH-HE.html', '/server/private/hebrew-pilot-p4-01-catalog.json', '/content/hebrew-forms/p4-01/forms/MP-SLEEP-01-W-CH-HE.html', '/server/private/hebrew-pilot-p4-02-catalog.json', '/content/hebrew-forms/p4-02/forms/MP-SHAME-01-W-CH-HE.html', '/server/private/hebrew-pilot-catalog.json', '/server/private/hebrew-pilot-mood-catalog.json', '/content/hebrew-forms/mood-01/forms/MP-MOOD-01-W-CH-HE.html', '/src/pages/TherapeuticForms.jsx', '/api/unknown']) {
       expect((await request(path)).status).toBe(404);
     }
     const response = await request('/Tools');

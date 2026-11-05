@@ -148,4 +148,28 @@ describe('pinned Hebrew catalog releases', () => {
     expect(new TextEncoder().encode(JSON.stringify(pilot.series04Catalog)).length).toBeLessThan(512 * 1024);
   });
 
+  it('pins series-06: preserves 730 installed records and adds the ten planned units', () => {
+    expect(pilot.series06Catalog.forms).toHaveLength(820);
+    expect(pilot.series06Catalog.forms.slice(0, 730)).toEqual(pilot.series05Catalog.forms);
+    const units = ['SHAME-02', 'SHAME-03', 'SHAME-04', 'SHAME-05', 'SHAME-06', 'MEANING-02', 'MEANING-03', 'MEANING-04', 'MEANING-05', 'MEANING-06'];
+    const additions = pilot.series06Catalog.forms.slice(730);
+    expect(additions.map((f) => f.id).sort()).toEqual(units.flatMap((unit) => [
+      `MP-${unit}-G-ALL-HE`, ...['W', 'P'].flatMap((kind) => ['CH', 'TE', 'AD', 'OA'].map((age) => `MP-${unit}-${kind}-${age}-HE`)),
+    ]).sort());
+    expect(additions.every((f) => f.contentVersion === '0.1' && f.status === 'טיוטה לסקירה — לא להפצה')).toBe(true);
+    expect(new TextEncoder().encode(JSON.stringify(pilot.series06Catalog)).length).toBeLessThan(512 * 1024);
+  });
+
+  it('pins series-05: preserves 640 installed records and adds the ten planned units', () => {
+    expect(pilot.series05Catalog.forms).toHaveLength(730);
+    expect(pilot.series05Catalog.forms.slice(0, 640)).toEqual(pilot.series04Catalog.forms);
+    const units = ['FAMILY-02', 'FAMILY-03', 'FAMILY-04', 'FAMILY-05', 'FAMILY-06', 'SCREEN-02', 'SCREEN-03', 'SCREEN-04', 'SCREEN-05', 'SCREEN-06'];
+    const additions = pilot.series05Catalog.forms.slice(640);
+    expect(additions.map((f) => f.id).sort()).toEqual(units.flatMap((unit) => [
+      `MP-${unit}-G-ALL-HE`, ...['W', 'P'].flatMap((kind) => ['CH', 'TE', 'AD', 'OA'].map((age) => `MP-${unit}-${kind}-${age}-HE`)),
+    ]).sort());
+    expect(additions.every((f) => f.contentVersion === '0.1' && f.status === 'טיוטה לסקירה — לא להפצה')).toBe(true);
+    expect(new TextEncoder().encode(JSON.stringify(pilot.series05Catalog)).length).toBeLessThan(512 * 1024);
+  });
+
 });

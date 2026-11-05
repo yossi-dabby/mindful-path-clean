@@ -1,0 +1,66 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mindful Path CBT - Hebrew draft 0.2</title><style>
+@font-face {font-family: MP; src: url('../fonts/DejaVuSans.ttf'); font-weight:400;}
+@font-face {font-family: MP; src: url('../fonts/DejaVuSans-Bold.ttf'); font-weight:700;}
+@page {size: A4; margin: 0;}
+* {box-sizing:border-box;}
+html {direction:rtl; color:#183c3c; font-family:MP,Arial,sans-serif; font-size:11pt;}
+body {margin:0; background:#eef4f1;}
+.sheet {position:relative; width:210mm; height:297mm; padding:12mm 15mm 13mm; margin:0 auto 8mm; background:white; break-after:page; overflow:hidden;}
+.sheet:last-child {break-after:auto;}
+.sheet::before {content:'Mindful Path'; position:absolute; left:8mm; right:8mm; top:151mm; text-align:center; transform:rotate(-27deg); font-size:52pt; font-weight:700; color:#138e87; opacity:.045; z-index:0; direction:ltr;}
+.sheet::after {content:''; position:absolute; inset:7mm; border:.25mm solid #b8cec5; border-radius:1.5mm; pointer-events:none; z-index:3;}
+.content {position:relative; z-index:1;}
+.brandbar {display:flex; justify-content:space-between; align-items:center; border-bottom:1.1mm solid #15958c; padding-bottom:3mm; margin-bottom:5mm;}
+.brand {font-size:19pt; font-weight:700; color:#078b85; direction:ltr;}
+.edition {font-size:8pt; line-height:1.65; color:#54716c; text-align:left;}
+.eyebrow {font-size:8.5pt; color:#14756d; font-weight:700; margin-bottom:1.5mm;}
+h1 {font-size:22pt; line-height:1.25; margin:0 0 2.8mm; font-weight:700; color:#193f3e;}
+.subtitle {font-size:9pt; line-height:1.6; margin:0 0 4mm; color:#4b6563;}
+.metadata {display:flex; gap:5mm; margin-bottom:4mm;}
+.meta {flex:1; font-size:8pt; color:#506d68;}
+.meta .write {display:block; height:7mm; border-bottom:.25mm solid #97b4ae; color:#193f3e;}
+.note {font-size:8.3pt; line-height:1.55; border-right:.8mm solid #75b8aa; padding:2.5mm 3mm; background:#f1f7f3; margin-bottom:4mm;}
+.section {margin:0 0 3.6mm; break-inside:avoid;}
+.section-title {font-size:10.4pt; font-weight:700; margin:0 0 1mm; line-height:1.4;}
+.num {display:inline-block; color:#14766c; min-width:6mm; font-size:9pt;}
+.prompt {font-size:8.6pt; line-height:1.5; color:#526966; margin:0 0 1.2mm;}
+.line {height:7.2mm; border-bottom:.22mm solid #ccdad6; color:#193f3e; font-size:10pt; outline:none; white-space:pre-wrap;}
+.line:focus {background:#f1f8f4;}
+.line.tall {height:8.3mm;}
+.options {font-size:8.8pt; color:#365c57; line-height:1.8; margin:1mm 0;}
+.box {display:inline-block; width:2.7mm; height:2.7mm; border:.25mm solid #7b9e95; margin-left:1mm; vertical-align:middle;}
+.footer {position:absolute; bottom:8mm; left:15mm; right:15mm; border-top:.23mm solid #c6d9d2; padding-top:2mm; display:flex; justify-content:space-between; font-size:7.1pt; color:#57736d; line-height:1.5; z-index:2;}
+.code {direction:ltr; display:inline-block; font-size:7pt;}
+.children h1 {font-size:23pt;}
+.children .section-title {font-size:12.8pt;}
+.children .prompt {font-size:10.2pt;}
+.children .section {margin-bottom:4.3mm;}
+.children .line {height:8mm;}
+.older h1 {font-size:23pt;}
+.older .section-title {font-size:12pt;}
+.older .prompt {font-size:10.3pt;}
+.older .subtitle {font-size:10pt;}
+.older .section {margin-bottom:4mm;}
+.older .line {height:8mm;}
+.toolbar {max-width:210mm; margin:15px auto; padding:14px 18px; font-family:Arial,sans-serif; font-size:15px; line-height:1.65; background:#fff; border:1px solid #bad3cb; border-radius:9px;}
+.toolbar button {border:0; border-radius:6px; padding:10px 18px; background:#078b85; color:#fff; cursor:pointer; font-size:15px;}
+@media screen {.sheet {box-shadow:0 3px 18px #153d3a15;} }
+@media print {body {background:white;} .sheet {margin:0; box-shadow:none;} .toolbar {display:none;} .line:focus {background:transparent;} }
+
+.guide h1{font-size:22pt}.guide h2{font-size:12pt;color:#0e756b;margin:4mm 0 1.6mm}
+.guide p{font-size:9.7pt;line-height:1.65;margin:1.5mm 0 3mm}
+.guide .list p{margin:1.4mm 0;font-size:9.5pt;line-height:1.6}
+.guide table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:8.8pt;line-height:1.6;margin:3mm 0}
+.guide th{background:#e7f2eb;text-align:right;padding:2mm;border-bottom:.4mm solid #a1c5b8}
+.guide td{padding:2.5mm 2mm;vertical-align:top;border-bottom:.22mm solid #d3e1da}
+.guide .source{font-size:8pt;line-height:1.5;margin:2mm 0}
+.guide .source a{font-size:7pt;direction:ltr;unicode-bidi:embed;overflow-wrap:anywhere;color:#3d6f63;text-decoration:none}
+.review-line{height:8mm;border-bottom:.22mm solid #ccdad6}
+.children .section-title{font-size:12pt}.children .prompt{font-size:9.7pt}
+.older .section-title{font-size:12pt}.older .prompt{font-size:10pt}
+
+[contenteditable="true"]{overflow-wrap:anywhere;white-space:pre-wrap}
+@media screen{.line[contenteditable="true"],.write[contenteditable="true"]{overflow:auto}.field-overflow{outline:2px solid #a43f35!important}}
+.print-warning{display:none}.guard-toolbar{max-width:210mm;margin:12px auto;padding:12px;background:#edf6f1;direction:rtl;font-family:MP,Arial,sans-serif;font-size:14px;line-height:1.7}.guard-toolbar button{font:inherit;padding:8px;margin:4px;border:1px solid #729a8a;background:white;cursor:pointer}
+@media print{.guard-toolbar{display:none}body.has-overflow .sheet{display:none!important}body.has-overflow .print-warning{display:block;margin:25mm;direction:rtl;font-family:MP;font-size:16pt;line-height:1.8}}
+</style></head><body><aside class="guard-toolbar"><b>Mindful Path | מילוי מקומי לסקירה בלבד</b><br>אין שמירה אוטומטית ואין שליחה לרשת. השתמשו בנתונים בדויים בסקירה. אם תשובה חורגת, יש לקצר או לשמור את מלוא התשובות כטקסט ולהעבירן לדף המשך. בדקו תצוגה מקדימה.<br><button type="button" id="print-form">בדיקה והדפסה</button><button type="button" id="save-answers">שמירת תשובות כטקסט</button><span id="fill-status" role="status" aria-live="polite"></span></aside><div class="print-warning">יש תשובה שחורגת משטח המילוי. הטופס לא הודפס כדי למנוע חיתוך שקט. חזרו למסך, קצרו את התשובה או שמרו את מלוא התשובות כטקסט והעבירו לדף המשך. התוכן שהוקלד לא נמחק.</div><article class="sheet guide" data-template="MP-ANX-06-G-ALL-HE"><main class="content"><div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>גרסה 0.2 | 03.11.2026</div></div><div class="eyebrow">ANX-06 | מדריך למטפל בלבד</div><h1>שימור ובחירה בהמשך מותאם</h1><p class="subtitle">ANX-06 | מסגרת עבודה גמישה למטפל, בהתאם להערכה ולהסכמות.</p><h2>מטרה</h2><p>לסקור שינוי ביחס למטרות, לזהות כלים ותנאים שעזרו ולתכנן המשך ותמיכה. אפשר לבצע זאת במהלך העבודה או לקראת סיום שנבחן מקצועית. שש היחידות אינן שישה מפגשים ואינן תנאי לסיום טיפול.</p><h2>לפני השימוש</h2><p>לחזור ל-ANX-01, למטרות ולדוגמאות תפקוד שתועדו. להיעזר ב-SES-S03 או ב-Core 8 אם כבר נעשתה סקירה, במקום לבקש מילוי כפול. נתון שלא תועד בתחילת הדרך נשאר חסר ולא משוחזר כעובדה.</p><h2>רצף עבודה אפשרי</h2><p>פותחים ב-SES-S01 לפי הצורך, ומסיימים ב-SES-S02 עם משוב ותכנון ברור.</p><div class="list"><p><b>1. </b>לברר מה השתנה בחיי המטופל ומה נשאר קשה או אינו מתאים.</p><p><b>2. </b>לזהות תנאים וכלים שנוסו, כולל תמיכה ומשאבים שאפשרו תפקוד.</p><p><b>3. </b>לבחור סימנים אישיים לתשומת לב ומצבים מאתגרים, בלי להפוך כל דאגה לסימן להישנות.</p><p><b>4. </b>לתכנן תגובה אפשרית, דרך לעזרה ומה לעשות אם הכלי אינו מספיק.</p><p><b>5. </b>לתאם מועד או תנאי לסקירה ולבחור המשך, חזרה, שינוי מוקד או סיום מקצועי.</p></div></main><footer class="footer"><span>למטפל בלבד | טיוטה לסקירה מקצועית</span><span><bdi class="code">MP-ANX-06-G-ALL-HE</bdi> | 1 מתוך 4</span></footer></article><article class="sheet guide" data-template="MP-ANX-06-G-ALL-HE"><main class="content"><div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>גרסה 0.2 | 03.11.2026</div></div><div class="eyebrow">ANX-06 | מדריך למטפל בלבד</div><h1>דוגמאות לבירור, לא משימות מוכנות</h1><p class="subtitle">הדוגמאות בדויות. נסיבות, צורך ורצון של מטופל אמיתי קודמים להן.</p><table><thead><tr><th>קבוצה</th><th>דוגמה לשיחה</th></tr></thead><tbody><tr><td>ילדים</td><td>ילד משתתף יותר במשחק אך עדיין מתקשה במעבר לפעילות חדשה. שומרים מה שעזר ובוחרים עם המבוגר המתאים דרך לחזרה לעזרה.</td></tr><tr><td>מתבגרים</td><td>מתבגרת התחילה כמה משימות בעזרת כלי מסוים, אך העומס השתנה. מעדכנים תוכנית ותמיכה ולא מפרשים שינוי ככישלון של מה שנלמד.</td></tr><tr><td>מבוגרים</td><td>מבוגר מזהה שחזרת בדיקות גוזלת זמן ומצמצמת פעילות. חוזרים להמשגה ולכלים שנוסו ומתאמים בירור לפי הצורך, בלי לקבוע אבחנה מן הסימן.</td></tr><tr><td>מבוגרים יותר</td><td>אדם בוחר תזכורת קצרה וכלי אחד מתוך כמה שנוסו. משמרים את הדרך הנוחה לו ותמיכה רצויה, בלי לדרוש שימוש בכל הערכה.</td></tr></tbody></table><h2>הבחנה מרכזית</h2><p>הדפים אינם הערכת סיכון מלאה או תוכנית חירום. החמרה משמעותית או צורך דחוף מחייבים מענה מקצועי מתאים ולא המתנה למועד הסקירה. תכנון מקורות עזרה צריך לשקף הסדרים אמיתיים במסגרת הטיפול, ללא הבטחת זמינות שלא ניתנה.</p><h2>שאלה לסיכום משותף</h2><p>מה באמת הועיל לאדם, מה עדיין נחוץ לו וכיצד יוכל לחזור לעזרה אם הכלים הנבחרים אינם מספיקים?</p></main><footer class="footer"><span>למטפל בלבד | טיוטה לסקירה מקצועית</span><span><bdi class="code">MP-ANX-06-G-ALL-HE</bdi> | 2 מתוך 4</span></footer></article><article class="sheet guide" data-template="MP-ANX-06-G-ALL-HE"><main class="content"><div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>גרסה 0.2 | 03.11.2026</div></div><div class="eyebrow">ANX-06 | מדריך למטפל בלבד</div><h1>התאמה אישית וגבולות העבודה</h1><p class="subtitle">תווית גיל אינה מחליפה בירור של התפתחות, תקשורת, הקשר והעדפות.</p><table><thead><tr><th>קבוצה</th><th>אופן עבודה אפשרי</th></tr></thead><tbody><tr><td>ילדים, בקירוב 6 עד 11</td><td>מצב מוחשי ושאלה אחת בכל פעם. אפשר למלא בשיחה והמטפל יכתוב ויבדוק הבנה. לשמוע גם את קול הילד. תפקיד מבוגר, שיתוף והסכמה נקבעים לפי המסגרת והצורך; אין הבטחת סודיות מוחלטת.</td></tr><tr><td>מתבגרים, בקירוב 12 עד 17</td><td>לבחור מוקד אישי ודרך תיעוד שמכבדת פרטיות. לברר מסגרת, עומס וקשרים. להסביר גבולות שיתוף והסכמה ולתאם עזרה בלי להפוך את התרגול למבחן או לדרישת ציות.</td></tr><tr><td>מבוגרים</td><td>לשלב תפקידים, תרבות, שפה, נסיבות ומשאבים כפי שתוארו. לא להניח שיש זמן, כסף או תמיכה זמינים. בחירה משותפת אינה מחליפה בדיקת התאמה מקצועית.</td></tr><tr><td>מבוגרים יותר</td><td>שפה בוגרת ומכבדת, קצב וריווח נוחים. לשאול איזו דרך מילוי ועזרה רצויות לפי צורך, בלי להניח ירידה ביכולת או תלות במשפחה. ניסיון החיים והעדפות האדם הם מידע לעבודה.</td></tr></tbody></table><h2>בדיקת הבנה ובחירה</h2><p>לבקש מן המטופל לתאר במילותיו מה הבין ומה בחר. אפשר לקצר, להשאיר שדות ריקים או למלא בשיחה. אם השאלות אינן מתאימות או מכבידות, משנים את אופן העבודה ולא דורשים השלמה.</p><h2>גבול ייחודי ליחידה</h2><p>אין ציון החלמה, סף סיום או אבחנה בטפסים. השתתפות ומילוי אינם ראיה לשיפור. החלטה על סיום, המשך ומעקב נפרדת מהשלמת החוברת ומתועדת במסגרת המקצועית המתאימה.</p></main><footer class="footer"><span>למטפל בלבד | טיוטה לסקירה מקצועית</span><span><bdi class="code">MP-ANX-06-G-ALL-HE</bdi> | 3 מתוך 4</span></footer></article><article class="sheet guide" data-template="MP-ANX-06-G-ALL-HE"><main class="content"><div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>גרסה 0.2 | 03.11.2026</div></div><div class="eyebrow">ANX-06 | מדריך למטפל בלבד</div><h1>תרגול, מעקב וסקירה מקצועית</h1><p class="subtitle">בחירת תרגול היא החלטה משותפת; תוכן הדף אינו אישור אוטומטי לביצוע.</p><h2>לפני התרגול</h2><p>לבחור ב-ANX-06-P מעט תזכורות שימושיות מתוך התוכנית, לא ארגז כלים שהמטופל חייב להפעיל כולו. להחליט היכן נוח לשמור את הדף ומה יגן על פרטיותו. הכרטיס אינו מחליף תוכנית טיפול מלאה.</p><h2>בחזרה לפגישה</h2><p>לסקור את השימוש ואת ההתאמה במועד שנקבע. אם אין שינוי או שיש החמרה, לחזור להערכה ולבחירת המענה, ולא רק להוסיף תרגול. אפשר להמשיך טיפול, לחזור ליחידה או להפנות בהתאם לצורך. לסכם משוב גם על קצב, קשר ופרטיות.</p><h2>מצב ההפקה והסקירה</h2><p>מדריך ודפים מקוריים כטיוטה. נדרשת סקירה מקצועית לכל גיל וסקירת זכויות לפני הפצה. השלמת כתיבה אינה אישור קליני, ולא בוצעו תיקוף או בדיקת יעילות של הערכה.</p><h2>מקורות כלליים לעיון</h2><div class="source"><b>NICE CG113 — adults</b><br>מסגרת מקצועית לחרדה מוכללת במבוגרים: הערכה, תפקוד ועבודה בידי מטפלים מיומנים. אינה תיקוף לשש היחידות או לילדים.<br><a href="https://www.nice.org.uk/guidance/cg113/chapter/Recommendations">https://www.nice.org.uk/guidance/cg113/chapter/Recommendations</a></div><div class="source"><b>NIMH — child anxiety, 2024</b><br>רקע מחקרי ל-CBT בילדים; המחקר השתמש בפרוטוקול אחר. אינו אישור לנוסחים או להתאמות הגיל כאן.<br><a href="https://www.nimh.nih.gov/news/science-updates/2024/cognitive-behavioral-therapy-alters-brain-activity-in-children-with-anxiety">https://www.nimh.nih.gov/news/science-updates/2024/cognitive-behavioral-therapy-alters-brain-activity-in-children-with-anxiety</a></div><p class="source">עיון: 03.11.2026. מקורות לרקע בלבד, ללא רישיון להעתקת טפסים וללא תיקוף הערכה.</p><p>שם הסוקר, תפקיד, תאריך וגרסאות שנבדקו:</p><div class="review-line"></div></main><footer class="footer"><span>למטפל בלבד | טיוטה לסקירה מקצועית</span><span><bdi class="code">MP-ANX-06-G-ALL-HE</bdi> | 4 מתוך 4</span></footer></article><script src="../print_guard.js"></script></body></html>

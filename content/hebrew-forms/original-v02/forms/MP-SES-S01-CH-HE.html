@@ -1,0 +1,66 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mindful Path CBT - Hebrew draft 0.2</title><style>
+@font-face {font-family: MP; src: url('../fonts/DejaVuSans.ttf'); font-weight:400;}
+@font-face {font-family: MP; src: url('../fonts/DejaVuSans-Bold.ttf'); font-weight:700;}
+@page {size: A4; margin: 0;}
+* {box-sizing:border-box;}
+html {direction:rtl; color:#183c3c; font-family:MP,Arial,sans-serif; font-size:11pt;}
+body {margin:0; background:#eef4f1;}
+.sheet {position:relative; width:210mm; height:297mm; padding:12mm 15mm 13mm; margin:0 auto 8mm; background:white; break-after:page; overflow:hidden;}
+.sheet:last-child {break-after:auto;}
+.sheet::before {content:'Mindful Path'; position:absolute; left:8mm; right:8mm; top:151mm; text-align:center; transform:rotate(-27deg); font-size:52pt; font-weight:700; color:#138e87; opacity:.045; z-index:0; direction:ltr;}
+.sheet::after {content:''; position:absolute; inset:7mm; border:.25mm solid #b8cec5; border-radius:1.5mm; pointer-events:none; z-index:3;}
+.content {position:relative; z-index:1;}
+.brandbar {display:flex; justify-content:space-between; align-items:center; border-bottom:1.1mm solid #15958c; padding-bottom:3mm; margin-bottom:5mm;}
+.brand {font-size:19pt; font-weight:700; color:#078b85; direction:ltr;}
+.edition {font-size:8pt; line-height:1.65; color:#54716c; text-align:left;}
+.eyebrow {font-size:8.5pt; color:#14756d; font-weight:700; margin-bottom:1.5mm;}
+h1 {font-size:22pt; line-height:1.25; margin:0 0 2.8mm; font-weight:700; color:#193f3e;}
+.subtitle {font-size:9pt; line-height:1.6; margin:0 0 4mm; color:#4b6563;}
+.metadata {display:flex; gap:5mm; margin-bottom:4mm;}
+.meta {flex:1; font-size:8pt; color:#506d68;}
+.meta .write {display:block; height:7mm; border-bottom:.25mm solid #97b4ae; color:#193f3e;}
+.note {font-size:8.3pt; line-height:1.55; border-right:.8mm solid #75b8aa; padding:2.5mm 3mm; background:#f1f7f3; margin-bottom:4mm;}
+.section {margin:0 0 3.6mm; break-inside:avoid;}
+.section-title {font-size:10.4pt; font-weight:700; margin:0 0 1mm; line-height:1.4;}
+.num {display:inline-block; color:#14766c; min-width:6mm; font-size:9pt;}
+.prompt {font-size:8.6pt; line-height:1.5; color:#526966; margin:0 0 1.2mm;}
+.line {height:7.2mm; border-bottom:.22mm solid #ccdad6; color:#193f3e; font-size:10pt; outline:none; white-space:pre-wrap;}
+.line:focus {background:#f1f8f4;}
+.line.tall {height:8.3mm;}
+.options {font-size:8.8pt; color:#365c57; line-height:1.8; margin:1mm 0;}
+.box {display:inline-block; width:2.7mm; height:2.7mm; border:.25mm solid #7b9e95; margin-left:1mm; vertical-align:middle;}
+.footer {position:absolute; bottom:8mm; left:15mm; right:15mm; border-top:.23mm solid #c6d9d2; padding-top:2mm; display:flex; justify-content:space-between; font-size:7.1pt; color:#57736d; line-height:1.5; z-index:2;}
+.code {direction:ltr; display:inline-block; font-size:7pt;}
+.children h1 {font-size:23pt;}
+.children .section-title {font-size:12.8pt;}
+.children .prompt {font-size:10.2pt;}
+.children .section {margin-bottom:4.3mm;}
+.children .line {height:8mm;}
+.older h1 {font-size:23pt;}
+.older .section-title {font-size:12pt;}
+.older .prompt {font-size:10.3pt;}
+.older .subtitle {font-size:10pt;}
+.older .section {margin-bottom:4mm;}
+.older .line {height:8mm;}
+.toolbar {max-width:210mm; margin:15px auto; padding:14px 18px; font-family:Arial,sans-serif; font-size:15px; line-height:1.65; background:#fff; border:1px solid #bad3cb; border-radius:9px;}
+.toolbar button {border:0; border-radius:6px; padding:10px 18px; background:#078b85; color:#fff; cursor:pointer; font-size:15px;}
+@media screen {.sheet {box-shadow:0 3px 18px #153d3a15;} }
+@media print {body {background:white;} .sheet {margin:0; box-shadow:none;} .toolbar {display:none;} .line:focus {background:transparent;} }
+
+.guide h1{font-size:22pt}.guide h2{font-size:12pt;color:#0e756b;margin:4mm 0 1.6mm}
+.guide p{font-size:9.7pt;line-height:1.65;margin:1.5mm 0 3mm}
+.guide .list p{margin:1.4mm 0;font-size:9.5pt;line-height:1.6}
+.guide table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:9pt;line-height:1.6;margin:3mm 0}
+.guide th{background:#e7f2eb;text-align:right;padding:2mm;border-bottom:.4mm solid #a1c5b8}
+.guide td{padding:2.5mm 2mm;vertical-align:top;border-bottom:.22mm solid #d3e1da}
+.guide .source{font-size:8pt;line-height:1.5;margin:2mm 0}
+.guide .source a{font-size:7.3pt;direction:ltr;unicode-bidi:embed;overflow-wrap:anywhere;color:#3d6f63;text-decoration:none}
+.guide .review-line{height:8mm;border-bottom:.22mm solid #ccdad6}
+.guide .review-label{font-size:9pt;line-height:1.5;margin-top:2mm}
+.subsection{font-size:8.3pt;color:#14756d;font-weight:700;margin:2mm 0}
+
+[contenteditable="true"]{overflow-wrap:anywhere;white-space:pre-wrap}
+@media screen{.line[contenteditable="true"],.write[contenteditable="true"]{overflow:auto}.field-overflow{outline:2px solid #a43f35!important}}
+.print-warning{display:none}.guard-toolbar{max-width:210mm;margin:12px auto;padding:12px;background:#edf6f1;direction:rtl;font-family:MP,Arial,sans-serif;font-size:14px;line-height:1.7}.guard-toolbar button{font:inherit;padding:8px;margin:4px;border:1px solid #729a8a;background:white;cursor:pointer}
+@media print{.guard-toolbar{display:none}body.has-overflow .sheet{display:none!important}body.has-overflow .print-warning{display:block;margin:25mm;direction:rtl;font-family:MP;font-size:16pt;line-height:1.8}}
+</style></head><body><aside class="guard-toolbar"><b>Mindful Path | מילוי מקומי לסקירה בלבד</b><br>אין שמירה אוטומטית ואין שליחה לרשת. השתמשו בנתונים בדויים בסקירה. אם תשובה חורגת, יש לקצר או לשמור את מלוא התשובות כטקסט ולהעבירן לדף המשך. בדקו תצוגה מקדימה.<br><button type="button" id="print-form">בדיקה והדפסה</button><button type="button" id="save-answers">שמירת תשובות כטקסט</button><span id="fill-status" role="status" aria-live="polite"></span></aside><div class="print-warning">יש תשובה שחורגת משטח המילוי. הטופס לא הודפס כדי למנוע חיתוך שקט. חזרו למסך, קצרו את התשובה או שמרו את מלוא התשובות כטקסט והעבירו לדף המשך. התוכן שהוקלד לא נמחק.</div><article class="sheet children" data-template="MP-SES-S01-CH-HE"><main class="content"><div class="brandbar"><div class="brand">Mindful Path</div><div class="edition">ערכת טפסים בעברית<br>גרסה 0.2 | 03.11.2026</div></div><div class="eyebrow">Core 01 | ילדים, בקירוב 6 עד 11 | פתיחת סשן</div><h1>מה חשוב לי היום?</h1><p class="subtitle">אפשר לספר והמטפל יכתוב. נבחר יחד במה נרצה לעסוק בפגישה.</p><div class="metadata"><div class="meta">קוד מטופל<span class="write" contenteditable="true" role="textbox" aria-label="קוד מטופל"></span></div><div class="meta">תאריך<span class="write" contenteditable="true" role="textbox" aria-label="תאריך"></span></div><div class="meta">מספר סשן<span class="write" contenteditable="true" role="textbox" aria-label="מספר סשן"></span></div></div><div class="note">אם זה המפגש הראשון, אפשר לדלג על השאלות על הפעם הקודמת.</div><section class="section"><div class="section-title"><span class="num">01</span>איך אני מרגיש היום?</div><p class="prompt">אפשר לומר רגש אחד או כמה, ומה שמתי לב אליו בגוף.</p><div class="line" contenteditable="true" role="textbox" aria-label="איך אני מרגיש היום? - שורת מילוי 1"><br></div><div class="line" contenteditable="true" role="textbox" aria-label="איך אני מרגיש היום? - שורת מילוי 2"><br></div></section><section class="section"><div class="section-title"><span class="num">02</span>מה חשוב לי לספר?</div><p class="prompt">משהו שהיה לי נעים, קשה או חשוב מאז שנפגשנו.</p><div class="line" contenteditable="true" role="textbox" aria-label="מה חשוב לי לספר? - שורת מילוי 1"><br></div><div class="line" contenteditable="true" role="textbox" aria-label="מה חשוב לי לספר? - שורת מילוי 2"><br></div></section><section class="section"><div class="section-title"><span class="num">03</span>מה ניסיתי מאז הפעם הקודמת?</div><p class="prompt">אפשר גם לספר שלא ניסיתי, ומה הקשה עליי.</p><div class="line" contenteditable="true" role="textbox" aria-label="מה ניסיתי מאז הפעם הקודמת? - שורת מילוי 1"><br></div><div class="line" contenteditable="true" role="textbox" aria-label="מה ניסיתי מאז הפעם הקודמת? - שורת מילוי 2"><br></div></section><section class="section"><div class="section-title"><span class="num">04</span>מה עזר לי ומה הייתי רוצה לשנות?</div><p class="prompt">נחשוב יחד על מה שיכול להתאים לי יותר.</p><div class="line" contenteditable="true" role="textbox" aria-label="מה עזר לי ומה הייתי רוצה לשנות? - שורת מילוי 1"><br></div><div class="line" contenteditable="true" role="textbox" aria-label="מה עזר לי ומה הייתי רוצה לשנות? - שורת מילוי 2"><br></div></section><section class="section"><div class="section-title"><span class="num">05</span>על מה נבחר לעבוד היום?</div><p class="prompt">מה הייתי רוצה להבין או לנסות בפגישה הזאת?</p><div class="line" contenteditable="true" role="textbox" aria-label="על מה נבחר לעבוד היום? - שורת מילוי 1"><br></div><div class="line" contenteditable="true" role="textbox" aria-label="על מה נבחר לעבוד היום? - שורת מילוי 2"><br></div></section><section class="section"><div class="section-title"><span class="num">06</span>מה יעזור לי בפגישה?</div><p class="prompt">למשל הסבר בעל פה, הפסקה קצרה או עבודה יחד.</p><div class="line" contenteditable="true" role="textbox" aria-label="מה יעזור לי בפגישה? - שורת מילוי 1"><br></div></section></main><footer class="footer"><span>טיוטה לסקירה מקצועית | כלי עבודה, לא כלי אבחוני</span><span><bdi class="code">MP-SES-S01-CH-HE</bdi> | 1 מתוך 1</span></footer></article><script src="../print_guard.js"></script></body></html>

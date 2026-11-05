@@ -1,0 +1,41 @@
+name: Forms localization readiness
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'content/hebrew-forms/**'
+      - 'content/forms-localization/**'
+      - 'server/private/**'
+      - 'src/lib/formsLocalization.js'
+      - 'scripts/audit-form-sources.mjs'
+      - 'scripts/render-forms-translation.mjs'
+      - 'test/utils/formsLocalization.test.js'
+      - '.github/workflows/forms-localization.yml'
+      - 'package*.json'
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  readiness:
+    name: Source parity and English draft layout
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node scripts/audit-form-sources.mjs
+      - run: npx vitest run test/utils/formsLocalization.test.js
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/render-forms-translation.mjs --screenshots
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: english-mood-03-review-drafts
+          path: tmp/forms-localization/en/mood-03/
+          retention-days: 7

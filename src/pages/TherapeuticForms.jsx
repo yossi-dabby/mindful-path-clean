@@ -822,7 +822,7 @@ function TherapeuticFormsUnavailable() {
   const { user } = useAuth();
   const lang = normalizeLanguageCode(i18n.resolvedLanguage || i18n.language || 'en');
   const uiLabels = FORMS_PAGE_LABELS[lang] || FORMS_PAGE_LABELS.en;
-  const hasReviewPilot = lang === 'he' && user?.role === 'admin';
+  const hasReviewPilot = ['he', 'en'].includes(lang) && user?.role === 'admin';
   const isRtl = i18n.dir ? i18n.dir() === 'rtl' : lang === 'he';
 
   return (
@@ -844,7 +844,7 @@ function TherapeuticFormsUnavailable() {
       <HebrewFormsPilot />
 
       {!hasReviewPilot && <p role="status" data-testid="forms-empty-state" className="my-6 text-muted-foreground">
-        {t('therapeutic_forms.empty_state.title')}
+        {t(user?.role === 'admin' ? 'therapeutic_forms.pilot_ui.not_available' : 'therapeutic_forms.empty_state.title')}
       </p>}
 
       <div className="mt-6 rounded-lg border border-border bg-[hsl(var(--card)/0.97)] p-4 text-sm text-foreground">

@@ -330,7 +330,7 @@ test('back cancels a pending PDF without leaving the unit or reopening it later'
   await expect(page.getByTestId('pilot-pdf-preview').locator('canvas').first()).toBeVisible({ timeout: 20000 });
 });
 
-test('regular user and English mode never receive pilot catalog', async ({ page }) => {
+test('regular user and unsupported language never receive pilot catalog', async ({ page }) => {
   await session(page, 'user', 'pilot-user-fixture');
   const requests: string[] = [];
   // Count API traffic, including both releases, rather than Vite's static import
@@ -342,7 +342,7 @@ test('regular user and English mode never receive pilot catalog', async ({ page 
   await expect(page.getByTestId('forms-empty-state')).toBeVisible();
   await page.unroute('**/api/apps/*/entities/User/me');
   await page.route('**/api/apps/*/entities/User/me', (route) => route.fulfill({ json: { id: 'fixture-admin', role: 'admin' } }));
-  await page.goto(`${preview}?language=en`);
+  await page.goto(`${preview}?language=es`);
   await expect(page.getByTestId('hebrew-forms-pilot')).toHaveCount(0);
   await expect(page.getByTestId('forms-empty-state')).toBeVisible();
   expect(requests).toEqual([]);

@@ -8,6 +8,9 @@ on:
       - 'server/private/**'
       - 'src/lib/formsLocalization.js'
       - 'scripts/audit-form-sources.mjs'
+      - 'scripts/build-english-pilot.mjs'
+      - 'base44/functions/getHebrewFormsPilot/releases.js'
+      - 'test/utils/englishFormsPilot.test.js'
       - 'scripts/render-forms-translation.mjs'
       - 'test/utils/formsLocalization.test.js'
       - '.github/workflows/forms-localization.yml'
@@ -30,7 +33,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: node scripts/audit-form-sources.mjs
-      - run: npx vitest run test/utils/formsLocalization.test.js
+      - run: node scripts/build-english-pilot.mjs
+      - run: npx vitest run test/utils/formsLocalization.test.js test/utils/englishFormsPilot.test.js
       - run: npx playwright install --with-deps chromium
       - run: node scripts/render-forms-translation.mjs --screenshots
       - uses: actions/upload-artifact@v4

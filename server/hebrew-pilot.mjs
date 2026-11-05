@@ -1,6 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { SERIES12_CATALOG_PATH, SERIES11_CATALOG_PATH, SERIES10_CATALOG_PATH, SERIES09_CATALOG_PATH, SERIES08_CATALOG_PATH, SERIES07_CATALOG_PATH, SERIES06_CATALOG_PATH, SERIES05_CATALOG_PATH, SERIES04_CATALOG_PATH, SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, P3_CATALOG_PATH, PILOT_RELEASES, isPilotCatalogPath, validatePilotCatalog } from '../base44/functions/getHebrewFormsPilot/releases.js';
+import { ENGLISH_CATALOG_PATH, ENGLISH_FORM_IDS, isPilotFileId, SERIES12_CATALOG_PATH, SERIES11_CATALOG_PATH, SERIES10_CATALOG_PATH, SERIES09_CATALOG_PATH, SERIES08_CATALOG_PATH, SERIES07_CATALOG_PATH, SERIES06_CATALOG_PATH, SERIES05_CATALOG_PATH, SERIES04_CATALOG_PATH, SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, P3_CATALOG_PATH, PILOT_RELEASES, isPilotCatalogPath, validatePilotCatalog } from '../base44/functions/getHebrewFormsPilot/releases.js';
 
 export const PILOT_PREFIX = '/api/hebrew-forms-pilot';
 const privateRoot = new URL('./private/', import.meta.url);
@@ -42,7 +42,24 @@ export async function loadPilot() {
     files.set(form.id, data);
   }
   if (files.size !== PILOT_RELEASES[SERIES12_CATALOG_PATH].count || filenames.size !== files.size) throw new Error('Invalid pilot count');
-  return { catalog, expandedCatalog, p3Catalog, p4aCatalog, p4bCatalog, series01Catalog, series02Catalog, series03Catalog, series04Catalog, series05Catalog, series06Catalog, series07Catalog, series08Catalog, series09Catalog, series10Catalog, series11Catalog, series12Catalog, catalogs, files };
+  const englishCatalog = JSON.parse(await readFile(new URL('english-pilot-mood-03-catalog.json', privateRoot), 'utf8'));
+  if (!await validatePilotCatalog(englishCatalog, ENGLISH_CATALOG_PATH)) throw new Error('Invalid English pilot release');
+  const englishRoot = new URL('forms-en/', privateRoot);
+  const englishNames = new Set(await readdir(englishRoot));
+  const englishFiles = new Map();
+  for (const form of englishCatalog.forms) {
+    const source = series12Catalog.forms.find(source => source.id === form.sourceId);
+    if (!ENGLISH_FORM_IDS.includes(form.id) || !englishNames.has(`${form.id}.pdf`) ||
+        !source || source.sha256 !== form.sourcePdfSha256 || source.contentVersion !== form.sourceVersion ||
+        source.age !== form.age || source.track !== form.track || source.unit !== form.unit) throw new Error('Invalid English source link');
+    const data = await readFile(new URL(`${form.id}.pdf`, englishRoot));
+    if (englishFiles.has(form.id) || data.subarray(0, 5).toString() !== '%PDF-' ||
+        data.length !== form.bytes || createHash('sha256').update(data).digest('hex') !== form.sha256) throw new Error('Invalid English pilot asset');
+    englishFiles.set(form.id, data);
+  }
+  if (englishFiles.size !== 9 || englishNames.size !== englishFiles.size) throw new Error('Invalid English pilot count');
+  const translations = { catalogs: { [ENGLISH_CATALOG_PATH]: englishCatalog }, files: englishFiles };
+  return { translations, englishCatalog, catalog, expandedCatalog, p3Catalog, p4aCatalog, p4bCatalog, series01Catalog, series02Catalog, series03Catalog, series04Catalog, series05Catalog, series06Catalog, series07Catalog, series08Catalog, series09Catalog, series10Catalog, series11Catalog, series12Catalog, catalogs, files };
 }
 
 // Match the installed Base44 SDK auth.me endpoint. The app ID is server-owned;
@@ -86,7 +103,7 @@ export function createPilotHandler({ pilot, verifyAdmin }) {
     if (access.status !== 200) return fail(access.status);
     const path = url.pathname.slice(`${PILOT_PREFIX}/`.length);
     if (isPilotCatalogPath(path)) {
-      const catalog = pilot.catalogs?.[path];
+      const catalog = pilot.catalogs?.[path] || pilot.translations?.catalogs?.[path];
       if (!catalog) return fail(404);
       res.setHeader('Content-Type', 'application/json; charset=utf-8');
       res.writeHead(200);
@@ -94,8 +111,8 @@ export function createPilotHandler({ pilot, verifyAdmin }) {
       return true;
     }
     const id = url.pathname.slice(`${PILOT_PREFIX}/files/`.length);
-    if (!url.pathname.startsWith(`${PILOT_PREFIX}/files/`) || !/^MP-[A-Z0-9-]+-HE$/.test(id)) return fail(404);
-    const data = pilot.files.get(id);
+    if (!url.pathname.startsWith(`${PILOT_PREFIX}/files/`) || !isPilotFileId(id)) return fail(404);
+    const data = pilot.files.get(id) || pilot.translations?.files.get(id);
     if (!data) return fail(404);
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Length', data.length);

@@ -1,4 +1,4 @@
-import { isPilotCatalogPath, validatePilotCatalog } from './releases.js';
+import { isPilotFileId, isPilotCatalogPath, validatePilotCatalog } from './releases.js';
 
 // Only this app's existing private Railway service may receive the caller's token.
 // No service-role credentials, public asset URLs or caller-selected upstreams.
@@ -99,7 +99,8 @@ export async function handleHebrewFormsPilot(req, { createClientFromRequest, fet
         Object.keys(input).some((key) => !['path', 'download'].includes(key)) ||
         (input.download !== undefined && typeof input.download !== 'boolean')) return fail(400);
     const isCatalog = isPilotCatalogPath(input.path);
-    const fileMatch = typeof input.path === 'string' && /^files\/(MP-[A-Z0-9-]{1,80}-HE)$/.exec(input.path);
+    const fileId = typeof input.path === 'string' && input.path.startsWith('files/') ? input.path.slice(6) : '';
+    const fileMatch = isPilotFileId(fileId) ? [input.path, fileId] : null;
     if (!isCatalog && !fileMatch) return fail(400);
     stage = 'timeout';
     const signal = AbortSignal.timeout(15000);

@@ -1,5 +1,5 @@
 import { base44 } from '@/api/base44Client';
-import { SERIES12_CATALOG_PATH, SERIES11_CATALOG_PATH, SERIES10_CATALOG_PATH, SERIES09_CATALOG_PATH, SERIES08_CATALOG_PATH, SERIES07_CATALOG_PATH, SERIES06_CATALOG_PATH, SERIES05_CATALOG_PATH, SERIES04_CATALOG_PATH, SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, EXPANDED_CATALOG_PATH, P3_CATALOG_PATH, isPilotCatalogPath, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
+import { ENGLISH_CATALOG_PATH, isPilotFileId, SERIES12_CATALOG_PATH, SERIES11_CATALOG_PATH, SERIES10_CATALOG_PATH, SERIES09_CATALOG_PATH, SERIES08_CATALOG_PATH, SERIES07_CATALOG_PATH, SERIES06_CATALOG_PATH, SERIES05_CATALOG_PATH, SERIES04_CATALOG_PATH, SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, EXPANDED_CATALOG_PATH, P3_CATALOG_PATH, isPilotCatalogPath, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
 
 const RAILWAY_ORIGIN = 'https://mindful-path-production-7704.up.railway.app';
 
@@ -12,7 +12,7 @@ const requestError = (status, path) => new Error([401, 403].includes(status) ? '
 
 export async function requestPilot(path, { signal, download = false } = {}) {
   checkAbort(signal);
-  if (!isPilotCatalogPath(path) && !/^files\/(MP-[A-Z0-9-]{1,80}-HE)$/.test(path)) throw new Error('PILOT_INVALID');
+  if (!isPilotCatalogPath(path) && !(typeof path === 'string' && path.startsWith('files/') && isPilotFileId(path.slice(6)))) throw new Error('PILOT_INVALID');
   // This host already serves the private API. Keep it independent of Base44's
   // function runtime; Base44's static hosts still use the SDK transport below.
   if (window.location.origin === RAILWAY_ORIGIN) {
@@ -51,6 +51,21 @@ export async function requestPilot(path, { signal, download = false } = {}) {
 }
 
 export async function requestPilotCatalog(options = {}) {
+  const language = options.language || 'he';
+  checkAbort(options.signal);
+  if (language === 'en') {
+    let response;
+    try { response = await requestPilot(ENGLISH_CATALOG_PATH, options); }
+    catch (error) {
+      if (error.message === 'PILOT_RELEASE_UNAVAILABLE') throw new Error('PILOT_TRANSLATION_UNAVAILABLE');
+      throw error;
+    }
+    const catalog = await response.json();
+    if (!await validatePilotCatalog(catalog, ENGLISH_CATALOG_PATH)) throw new Error('PILOT_INVALID');
+    checkAbort(options.signal);
+    return { catalog, expansionPending: false };
+  }
+  if (language !== 'he') throw new Error('PILOT_TRANSLATION_UNAVAILABLE');
   // Preserve installed generations during staggered publication. Validate
   // before returning; a corrupt 200 response must never select an older release.
   for (const path of [SERIES12_CATALOG_PATH, SERIES11_CATALOG_PATH, SERIES10_CATALOG_PATH, SERIES09_CATALOG_PATH, SERIES08_CATALOG_PATH, SERIES07_CATALOG_PATH, SERIES06_CATALOG_PATH, SERIES05_CATALOG_PATH, SERIES04_CATALOG_PATH, SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, P3_CATALOG_PATH, EXPANDED_CATALOG_PATH, 'catalog']) {
@@ -69,7 +84,7 @@ export async function requestPilotCatalog(options = {}) {
 }
 
 export async function requestPilotPdf(form, options = {}) {
-  if (!/^MP-[A-Z0-9-]+-HE$/.test(form.id)) throw new Error('PILOT_INVALID');
+  if (!isPilotFileId(form?.id) || (options.language && !form.id.endsWith(`-${options.language.toUpperCase()}`))) throw new Error('PILOT_INVALID');
   const response = await requestPilot(`files/${form.id}`, options);
   if (!response.headers.get('Content-Type')?.startsWith('application/pdf')) throw new Error('PILOT_INVALID');
   const bytes = await response.arrayBuffer();

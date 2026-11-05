@@ -14,6 +14,8 @@ export const SERIES07_CATALOG_PATH = 'catalog-series-07';
 export const SERIES08_CATALOG_PATH = 'catalog-series-08';
 export const SERIES09_CATALOG_PATH = 'catalog-series-09';
 export const SERIES10_CATALOG_PATH = 'catalog-series-10';
+export const SERIES11_CATALOG_PATH = 'catalog-series-11';
+export const SERIES12_CATALOG_PATH = 'catalog-series-12';
 export const PILOT_RELEASES = Object.freeze({
   catalog: Object.freeze({ version: '0.2', count: 154, sha256: '2c1df7644d778508b37d2a5076d902906b241166e09f93d388295a8a9983d90b' }),
   [EXPANDED_CATALOG_PATH]: Object.freeze({ version: '0.3-mood-01', count: 163, sha256: 'a9da2978a3d29b8c62a50e3ce9219d4b214d3bfd881ba6eb872e6bacab9885cf' }),
@@ -30,6 +32,8 @@ export const PILOT_RELEASES = Object.freeze({
   [SERIES08_CATALOG_PATH]: Object.freeze({ version: '0.14-series-08', count: 883, sha256: 'a21d7edf7143b66bf1b1cf4d1492a7244b8d726d009831ed56b43001bf848fb7' }),
   [SERIES09_CATALOG_PATH]: Object.freeze({ version: '0.15-series-09', count: 895, sha256: '70647a87e574ece0979e08d0ed162c14c373f142c5dac47046077751b6d24814' }),
   [SERIES10_CATALOG_PATH]: Object.freeze({ version: '0.16-series-10', count: 907, sha256: 'e4f495edbe5b639f83f610ee18779f1ec7be388ce5c935bc660a9f508772b2bc' }),
+  [SERIES11_CATALOG_PATH]: Object.freeze({ version: '0.17-series-11', count: 934, sha256: '9d99d240cd502ed924b0b31bc8a6242a6220191461a10545db12c269acfb9adb' }),
+  [SERIES12_CATALOG_PATH]: Object.freeze({ version: '0.18-series-12', count: 970, sha256: '372f57f6667b01c524f1e6f9dbb7e9ac86a50ab683b340681f4c109b297d3230' }),
 });
 
 export function isPilotCatalogPath(path) {

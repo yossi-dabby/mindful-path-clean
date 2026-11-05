@@ -11,7 +11,7 @@ import argparse
 
 ROOT = Path(__file__).resolve().parent.parent
 parser = argparse.ArgumentParser()
-parser.add_argument('--wave', choices=['p4-01', 'p4-02', 'series-01', 'series-02', 'series-03', 'series-04', 'series-05', 'series-06', 'series-07', 'series-08', 'series-09', 'series-10'], default='p4-01')
+parser.add_argument('--wave', choices=['p4-01', 'p4-02', 'series-01', 'series-02', 'series-03', 'series-04', 'series-05', 'series-06', 'series-07', 'series-08', 'series-09', 'series-10', 'series-11', 'series-12'], default='p4-01')
 wave = parser.parse_args().wave
 SOURCE = ROOT / 'content/hebrew-forms' / wave
 BASE = ROOT / 'content/hebrew-forms/mood-01'
@@ -59,9 +59,11 @@ for unit in spec['units']:
         (section('דוגמה בדויה לשיחה', unit['fictionalExample']) if 'fictionalExample' in unit else '') +
         '<div class="note">טיוטה לסקירת מנהל. סקירה קלינית ואישור זכויות סופיים טרם הושלמו.</div>')]
     prompts = unit['worksheet'][unit.get('guidePromptAge', 'AD')]
-    pages.append(sheet(unit, guide, 'לעבוד יחד עם דף העבודה', '2 | שיחה סביב מצב אחד',
+    work_sections = ''.join(section(item['title'], item['text']) for item in unit['guideWorkSections']) if 'guideWorkSections' in unit else (
         section('פתיחה', unit.get('guideOpening', 'בחרו מצב שהאדם מעוניין לבדוק. אין צורך לבחור את המצב הקשה ביותר. ודאו שהשאלה מובנת ושהמילים מתאימות לאדם; תיאורו קודם לפרשנות המטפל.')) +
-        ''.join(section(f'{i + 1} | שאלה לשיחה', prompt) for i, prompt in enumerate(prompts)) +
+        ''.join(section(f'{i + 1} | שאלה לשיחה', prompt) for i, prompt in enumerate(prompts)))
+    pages.append(sheet(unit, guide, 'לעבוד יחד עם דף העבודה', '2 | מסלולים לפי גיל' if 'guideWorkSections' in unit else '2 | שיחה סביב מצב אחד',
+        work_sections +
         section('סיום', 'סכמו מה הובן ומה נשאר פתוח. היעזרו ב־SES-S01 וב־SES-S02 הקיימים למעטפת המפגש. אין צורך למלא שוב הערכה או תוכנית שכבר תועדה.') +
         (section('קשיים אפשריים', unit['difficulties']) if 'difficulties' in unit else ''), 2))
     if 'guideAgeSections' in unit:

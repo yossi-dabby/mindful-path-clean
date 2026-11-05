@@ -1,0 +1,634 @@
+{
+  "contentVersion": "0.1",
+  "status": "draft_review_only",
+  "manualMappingApproved": false,
+  "sourceScope": "Public primary guidance read for background only; selected full manuals not accessed or mapped. Original support drafts, not a clinical protocol.",
+  "sources": [
+    "https://www.nctsn.org/interventions/trauma-focused-cognitive-behavioral-therapy",
+    "https://tfcbt.org/about/",
+    "https://www.ptsd.va.gov/professional/treat/txessentials/cpt_for_ptsd_pro.asp"
+  ],
+  "forms": [
+    {
+      "id": "MP-TRAUMA-02-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "1a93c0c4aea14b49a0dc6fa6c1695c6fa4ad711711eb49bba4e41a6b65126ca9"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-02-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "e04ae5f9f718eb2407e311eacc4bd399e45f6dc353e62434929de90098dbdfde"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-02-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "59086173b84b123372fd9ccce93185ca89bd7c25b6f876256cd68fb0de9c519f"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-02-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "3370145110194185730d7054f23dd23d173de5dea26321785063b8b5f270b7a9"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-02-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "a1ccda37aba76190e949b2e718cfc3c8cb697480634f863808d57c70e570fb93"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-02-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "cb4eb7540e333de86ddf364497614dc429a16a9e4c14bc487957b34ab6fde104"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-02-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "33e29ef9e02faeeb6206e0619ddca14141991d51722daa34b20948daab4663f0"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-02-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "0e890830c29437ca740be6c111852578b655cdc202f9b837e53dcd38180571f0"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-02-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "266aded4aed9dc5807e034a5d41ef3b13a8970a85aa913ba1b6afeef5b36611b"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-03-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "56bcba606bb7c51bfed05e25ff08972044184cac8338ad5d972ef6b70a072e76"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-03-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "78f81b3ed9751fc441427acbaf7decba6d2cf5bfeecf42ba77a7da20d3aa0aa6"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-03-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "fdf5254ae4df06126d948c4b662f24845a84c63255f0d45b589459fe3168b0e0"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-03-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "b1f44aa2ef5196bb44b0d637ee35c3296308eceebe87ebe3aa8e09b31e46adaa"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-03-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "1999110c165863d015140b1cf151a697291ae55ee8641088f0b60d6003feafa5"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-03-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "775d3f5bb63532235158ff3b0bea90c975389056abdf96ca6ed1e5f6a21b22b3"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-03-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "d15d483debfb932b771dcee1cbede93defe0e011d25996a8a74564c1f2f02cbe"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-03-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "2b2ebc42ac7ff1fed6f136406980d35dda6dd304f00b91d8463723cc50f07620"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-03-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "4fe07aae15a731860603b2512642d2a93b893e0f859d60548bd82af9a979dc18"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-04-G-ALL-HE",
+      "age": "ALL",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 4,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "not_applicable",
+        "longAnswerPrintBlockedAndExportPreserved": "not_applicable",
+        "sha256": "ebb9fd5b52feac6a1500a4870b37a76bcc672de7651871d3187c9561dd0221c7"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-04-W-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "11ca21e76afdc784c2aa06e70211ab9e14eeea003411cc9fcc8815d8b4be22b8"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-04-W-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "26629828fc5b9e668e4f213b34e49fac8d540e9b656bffa0398f2103ef2d9c3e"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-04-W-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "955af05448ba709cb9a89e4ee92e775827afeff42fe76336f0dac8acbb770939"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-04-W-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "4844a9defd24ce55c64cd428f9f10c45fdfaf15705bbc252addbc479576d6f0b"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-04-P-CH-HE",
+      "age": "CH",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "723b2196469d7a1a3bb809bb47ae3ae56a1d336cad8267c551e7ad6cbd79818d"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-04-P-TE-HE",
+      "age": "TE",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "a51d9fc11b48fae3655c92b3c2b588c5e1d9aae548b7bafce220314a0251cd6b"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-04-P-AD-HE",
+      "age": "AD",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "56a6d291d16427ea6bb157b7dc4c77fda5fd958bb8c66b8dc0cb309478972655"
+      }
+    },
+    {
+      "id": "MP-TRAUMA-04-P-OA-HE",
+      "age": "OA",
+      "clinicalReviewer": null,
+      "clinicalReviewDate": null,
+      "rightsReviewer": null,
+      "rightsReviewDate": null,
+      "ageAdaptationApproved": false,
+      "releaseApproved": false,
+      "manualMappingApproved": false,
+      "findings": [
+        "Full selected manual mapping and named professional/rights review remain pending."
+      ],
+      "technicalQa": {
+        "blankPdf": true,
+        "a4": true,
+        "expectedPages": 1,
+        "renderedPageReview": "passed",
+        "shortFictionalAnswer": "passed",
+        "longAnswerPrintBlockedAndExportPreserved": "passed",
+        "sha256": "396ae446f135eda2b7e63812d62e64797c6bab90a9b9fe0249055a2005ec9586"
+      }
+    }
+  ]
+}

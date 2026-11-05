@@ -14,13 +14,15 @@ Updated: 2026-11-05. The Stage 0 proposal covers 681 additional PDFs in 12 batch
 | 8 | OCD-05–08 | 36 | 883 | Draft file inventory implemented as `0.14-series-08`; specialist decisions remain open. |
 | 9 | OCDYC-01–04, ages 6–7 | 12 | 895 | Separate child/caregiver drafts implemented as `0.15-series-09`; manual mapping and review remain open. |
 | 10 | OCDYC-05–08, ages 6–7 | 12 | 907 | Draft file inventory implemented as `0.16-series-10`; young-child decisions remain open. |
-| 11 | TRAUMA-02–04 | 27 | 934 | Full manual, scope and professional review decisions remain open. |
-| 12 | TRAUMA-05–08 | 36 | 970 | Same trauma decisions apply. |
+| 11 | TRAUMA-02–04 | 27 | 934 | Original support drafts implemented as `0.17-series-11`; full manual and professional review decisions remain open. |
+| 12 | TRAUMA-05–08 | 36 | 970 | Original support drafts implemented as `0.18-series-12`; clinical, age, caregiver and rights decisions remain open. |
 
-After batches 7–10 draft implementation, 63 proposed TRAUMA PDFs remain. The deployment target is 907 forms; implementation alone is not evidence of live verification. The OCD file inventory is complete, but an approved OCD protocol is not: full manual mapping, clinical/age review and rights decisions remain open. The 970 total remains a planning estimate, not a clinically approved or frozen scope. The project owner intends to arrange review; this is not evidence that reviewers were appointed or that approvals occurred. The new terms of use do not change clinical, age-adaptation or rights status. No clinical approval is inferred from CI success, merging or publication.
+After batches 11–12, all 681 proposed additional IDs are present in the draft inventory, totaling 970 PDFs. The 907-form predecessor was merged in PR #25 and confirmed published and publicly verified by the owner at `0.16-series-10`; the owner is supervising transfer, merging and publication. The latest implementation target is 970 forms, but no live verification of this release is claimed here. The specialist file inventory is complete; approved OCD/trauma protocols are not. Full manual mapping, clinical/age review, caregiver-material decisions and rights decisions remain open. The 970 total is an implemented draft inventory, not a clinically approved or frozen scope. The project owner intends to arrange review; this is not evidence that reviewers were appointed or that approvals occurred. The new terms of use do not change clinical, age-adaptation or rights status. No clinical approval is inferred from CI success, merging or publication.
 
 Each subsequent implementation should preserve every existing catalog and binary, add a pinned versioned catalog, verify file/page/layout/age/transport behavior, and receive live admin verification after publication. The existing access controls and exclusion from the public/AI forms registry continue. [Batch 1 details](hebrew-forms-series-01-implementation.md); [batch 2 details](hebrew-forms-series-02-implementation.md); [batch 3 details](hebrew-forms-series-03-implementation.md); [batch 4 details](hebrew-forms-series-04-implementation.md).
 
 [Batches 5–6 implementation](hebrew-forms-series-05-06-implementation.md) and [specialist readiness / exact remaining scope](hebrew-series-specialist-readiness.md).
 
 [Batches 7–10 draft implementation and scope limits](hebrew-forms-series-07-10-implementation.md).
+
+[Batches 11–12 TRAUMA draft implementation, verification and publication handoff](hebrew-forms-series-11-12-implementation.md).

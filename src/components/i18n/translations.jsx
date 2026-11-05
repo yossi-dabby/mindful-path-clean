@@ -5,6 +5,17 @@ import { wave3Batch3Translations } from "./wave3Batch3Translations";
 export const translations = {
   en: {
     translation: {
+      pdf_reader: {
+        "open": "Read in full screen",
+        "title": "Document reader",
+        "close": "Back to form",
+        "zoom": "Zoom",
+        "zoom_in": "Zoom in",
+        "zoom_out": "Zoom out",
+        "fit_width": "Fit to width",
+        "hint": "Use + and − or pinch with two fingers to zoom. Swipe to move around the page.",
+        "page": "Page {{page}} of {{count}}"
+      },
       path_ui: {
         "calendar": "Goal Calendar",
         "previous_month": "Previous month",
@@ -1731,6 +1742,17 @@ export const translations = {
   },
   he: {
     translation: {
+      pdf_reader: {
+        "open": "פתיחה לקריאה במסך מלא",
+        "title": "קריאת טופס",
+        "close": "חזרה לטופס",
+        "zoom": "הגדלה",
+        "zoom_in": "הגדלה",
+        "zoom_out": "הקטנה",
+        "fit_width": "התאמה לרוחב",
+        "hint": "הגדילו באמצעות + ו־− או בשתי אצבעות. החליקו כדי לנוע בתוך העמוד.",
+        "page": "עמוד {{page}} מתוך {{count}}"
+      },
       path_ui: {
         "calendar": "לוח מטרות",
         "previous_month": "החודש הקודם",
@@ -3457,6 +3479,17 @@ export const translations = {
   },
   es: {
     translation: {
+      pdf_reader: {
+        "open": "Leer a pantalla completa",
+        "title": "Lector de documentos",
+        "close": "Volver al formulario",
+        "zoom": "Zoom",
+        "zoom_in": "Acercar",
+        "zoom_out": "Alejar",
+        "fit_width": "Ajustar al ancho",
+        "hint": "Usa + y − o dos dedos para ampliar. Desliza para moverte por la página.",
+        "page": "Página {{page}} de {{count}}"
+      },
       path_ui: {
         "calendar": "Calendario de objetivos",
         "previous_month": "Mes anterior",
@@ -5137,6 +5170,17 @@ export const translations = {
   },
   fr: {
     translation: {
+      pdf_reader: {
+        "open": "Lire en plein écran",
+        "title": "Lecture du document",
+        "close": "Retour au formulaire",
+        "zoom": "Zoom",
+        "zoom_in": "Agrandir",
+        "zoom_out": "Réduire",
+        "fit_width": "Adapter à la largeur",
+        "hint": "Utilisez + et − ou deux doigts pour zoomer. Faites glisser pour parcourir la page.",
+        "page": "Page {{page}} sur {{count}}"
+      },
       path_ui: {
         "calendar": "Calendrier des objectifs",
         "previous_month": "Mois précédent",
@@ -6816,6 +6860,17 @@ export const translations = {
   },
   de: {
     translation: {
+      pdf_reader: {
+        "open": "Im Vollbild lesen",
+        "title": "Dokumentansicht",
+        "close": "Zurück zum Formular",
+        "zoom": "Zoom",
+        "zoom_in": "Vergrößern",
+        "zoom_out": "Verkleinern",
+        "fit_width": "An Breite anpassen",
+        "hint": "Mit + und − oder zwei Fingern zoomen. Zum Bewegen auf der Seite wischen.",
+        "page": "Seite {{page}} von {{count}}"
+      },
       path_ui: {
         "calendar": "Zielkalender",
         "previous_month": "Vorheriger Monat",
@@ -8495,6 +8550,17 @@ export const translations = {
   },
   it: {
     translation: {
+      pdf_reader: {
+        "open": "Leggi a schermo intero",
+        "title": "Lettore di documenti",
+        "close": "Torna al modulo",
+        "zoom": "Zoom",
+        "zoom_in": "Ingrandisci",
+        "zoom_out": "Riduci",
+        "fit_width": "Adatta alla larghezza",
+        "hint": "Usa + e − o due dita per ingrandire. Scorri per spostarti nella pagina.",
+        "page": "Pagina {{page}} di {{count}}"
+      },
       path_ui: {
         "calendar": "Calendario degli obiettivi",
         "previous_month": "Mese precedente",
@@ -10174,6 +10240,17 @@ export const translations = {
   },
   pt: {
     translation: {
+      pdf_reader: {
+        "open": "Ler em tela cheia",
+        "title": "Leitor de documentos",
+        "close": "Voltar ao formulário",
+        "zoom": "Zoom",
+        "zoom_in": "Ampliar",
+        "zoom_out": "Reduzir",
+        "fit_width": "Ajustar à largura",
+        "hint": "Use + e − ou dois dedos para ampliar. Deslize para percorrer a página.",
+        "page": "Página {{page}} de {{count}}"
+      },
       path_ui: {
         "calendar": "Calendário de objetivos",
         "previous_month": "Mês anterior",

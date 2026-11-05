@@ -16,6 +16,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import * as pdfjsLib from 'pdfjs-dist';
 import { Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import PdfReadingMode from './PdfReadingMode';
 import { useTranslation } from 'react-i18next';
 import {
   createPdfJsWorkerDeploymentIssueKey,
@@ -59,37 +60,6 @@ const TEMP_ENABLE_PDF_WORKER_DEPLOYMENT_QA_SIGNAL =
 
 // ─── Internal helpers ──────────────────────────────────────────────────────
 
-/** Pick canvas width: prefer container measurement, fall back to window width. */
-function getContainerWidth(containerEl) {
-  if (containerEl) {
-    const w = containerEl.clientWidth;
-    if (w > 0) return w;
-  }
-  return typeof window !== 'undefined' ? window.innerWidth : 800;
-}
-
-/** Render a single PDF page into a new <canvas> and append it to container. */
-async function renderPage(page, containerEl, isFirst) {
-  const containerWidth = getContainerWidth(containerEl);
-  const baseViewport = page.getViewport({ scale: 1 });
-  const scale = containerWidth / baseViewport.width;
-  const scaledViewport = page.getViewport({ scale });
-
-  const canvas = document.createElement('canvas');
-  canvas.width = Math.floor(scaledViewport.width);
-  canvas.height = Math.floor(scaledViewport.height);
-  // Explicit CSS width makes canvas fluid on orientation change.
-  canvas.style.width = '100%';
-  canvas.style.display = 'block';
-  if (!isFirst) {
-    canvas.style.marginTop = '8px';
-  }
-
-  const ctx = canvas.getContext('2d');
-  await page.render({ canvasContext: ctx, viewport: scaledViewport }).promise;
-  containerEl.appendChild(canvas);
-}
-
 // ─── Component ─────────────────────────────────────────────────────────────
 
 /**
@@ -101,7 +71,8 @@ async function renderPage(page, containerEl, isFirst) {
  */
 export default function PdfJsViewer({ fileUrl }) {
   const { t } = useTranslation();
-  const containerRef = useRef(null);
+  const [documentState, setDocumentState] = useState(null);
+  const firstPageLogged = useRef(false);
   const qaSignalDedupeRef = useRef(new Set());
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -128,106 +99,59 @@ export default function PdfJsViewer({ fileUrl }) {
     });
   }, []);
 
-  const renderPdf = useCallback(async (url, signal) => {
-    if (!url) return;
+  const handleRenderError = useCallback((error) => {
+    console.error('[PDFJS_ERROR]', error);
+    setErrorMessage(error?.message || 'Unknown PDF error');
+    setIsLoading(false);
+  }, []);
 
-    const container = containerRef.current;
-    if (!container) return;
+  const handlePageRendered = useCallback((pageNumber) => {
+    if (pageNumber !== 1) return;
+    if (!firstPageLogged.current) console.log('[PDFJS_FIRST_PAGE_RENDERED]');
+    firstPageLogged.current = true;
+    setIsLoading(false);
+  }, []);
 
-    setIsLoading(true);
+  // Fetch once per file/retry. Resizing, HiDPI rendering and reader zoom reuse
+  // this document rather than re-downloading authenticated PDF bytes.
+  useEffect(() => {
+    const controller = new AbortController();
+    let document;
+    setDocumentState(null);
     setErrorMessage(null);
-    container.innerHTML = '';
+    setWorkerDeploymentIssue(null);
+    setIsLoading(Boolean(fileUrl));
+    firstPageLogged.current = false;
+    if (!fileUrl) return () => controller.abort();
     const workerSrc = enforceStablePdfWorkerSrc();
-
-    console.log('[PDFJS_LOAD_START]', {
-      fileUrl: url,
-      build: BUILD_MARKER,
-      workerSrc,
-      containerWidth: getContainerWidth(container),
-    });
-
-    try {
-      console.log('[PDFJS_WORKER_URL]', workerSrc);
-      const pdf = await loadPdfDocumentWithWorkerFallback({
-        url,
-        signal,
-        workerSrc,
-        getDocument: pdfjsLib.getDocument,
-        onWorkerDeploymentIssue: handleWorkerDeploymentIssue,
-        logger: console,
-      });
-      if (signal.aborted) return;
-
-      console.log('[PDFJS_DOCUMENT_LOADED]', { pageCount: pdf.numPages });
-
-      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-        if (signal.aborted) return;
-        const page = await pdf.getPage(pageNum);
-        if (signal.aborted) return;
-        await renderPage(page, container, pageNum === 1);
-        if (pageNum === 1) {
-          console.log('[PDFJS_FIRST_PAGE_RENDERED]');
-          setIsLoading(false);
-        }
+    console.log('[PDFJS_LOAD_START]', { fileUrl, build: BUILD_MARKER });
+    console.log('[PDFJS_WORKER_URL]', workerSrc);
+    (async () => {
+      try {
+        document = await loadPdfDocumentWithWorkerFallback({
+          url: fileUrl, signal: controller.signal, workerSrc,
+          getDocument: pdfjsLib.getDocument,
+          onWorkerDeploymentIssue: handleWorkerDeploymentIssue, logger: console,
+        });
+        if (controller.signal.aborted) { await document.destroy(); return; }
+        console.log('[PDFJS_DOCUMENT_LOADED]', { pageCount: document.numPages });
+        if (!document.numPages) throw new Error('PDF has no pages');
+        const firstPage = await document.getPage(1);
+        if (controller.signal.aborted) return;
+        const viewport = firstPage.getViewport({ scale: 1 });
+        setDocumentState({ pdf: document, aspectRatio: viewport.height / viewport.width });
+      } catch (error) {
+        if (controller.signal.aborted) return;
+        const issue = getPdfJsWorkerDeploymentIssue(error, { workerUrl: workerSrc });
+        if (issue) handleWorkerDeploymentIssue(issue);
+        handleRenderError(error);
       }
-
-      if (pdf.numPages === 0) {
-        setIsLoading(false);
-      }
-    } catch (err) {
-      if (signal.aborted) return;
-      console.error('[PDFJS_ERROR]', err);
-      const issue = getPdfJsWorkerDeploymentIssue(err, {
-        workerUrl: workerSrc,
-      });
-      if (issue) {
-        handleWorkerDeploymentIssue(issue);
-      }
-      setErrorMessage(err?.message || 'Unknown PDF error');
-      setIsLoading(false);
-    }
-  }, [handleWorkerDeploymentIssue]);
-
-  useEffect(() => {
-    if (!fileUrl) {
-      setIsLoading(false);
-      return;
-    }
-
-    const ac = new AbortController();
-    renderPdf(fileUrl, ac.signal);
-    return () => ac.abort();
-  }, [fileUrl, renderPdf, retryCount]);
-
-  // Re-render on resize / orientation change so canvas widths stay correct.
-  useEffect(() => {
-    if (!fileUrl) return;
-
-    let debounceTimer = null;
-    let debounceAc = null;
-
-    const onResize = () => {
-      clearTimeout(debounceTimer);
-      if (debounceAc) debounceAc.abort();
-      debounceAc = new AbortController();
-      // Capture `debounceAc` into a local `ac` so the setTimeout closure holds
-      // a stable reference even if a second resize fires and reassigns `debounceAc`
-      // before the 200ms delay elapses.
-      const ac = debounceAc;
-      debounceTimer = setTimeout(() => {
-        renderPdf(fileUrl, ac.signal);
-      }, 200);
-    };
-
-    window.addEventListener('resize', onResize);
-    window.addEventListener('orientationchange', onResize);
+    })();
     return () => {
-      clearTimeout(debounceTimer);
-      if (debounceAc) debounceAc.abort();
-      window.removeEventListener('resize', onResize);
-      window.removeEventListener('orientationchange', onResize);
+      controller.abort();
+      document?.destroy().catch(() => {});
     };
-  }, [fileUrl, renderPdf]);
+  }, [fileUrl, retryCount, handleWorkerDeploymentIssue, handleRenderError]);
 
   return (
     <div style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}>
@@ -312,8 +236,10 @@ export default function PdfJsViewer({ fileUrl }) {
         </div>
       )}
 
-      {/* Canvas pages are appended here by the render loop */}
-      <div ref={containerRef} />
+      {documentState && !errorMessage && <PdfReadingMode
+        pdf={documentState.pdf} aspectRatio={documentState.aspectRatio}
+        onRendered={handlePageRendered} onError={handleRenderError} />}
+
     </div>
   );
 }

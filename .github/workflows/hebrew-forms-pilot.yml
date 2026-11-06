@@ -23,6 +23,9 @@ on:
       - 'pdf-reader.playwright.config.ts'
       - 'english-pilot.playwright.config.ts'
       - 'english-wave.playwright.config.ts'
+      - 'english-final.playwright.config.ts'
+      - 'scripts/build-english-final.mjs'
+      - 'test/utils/englishFormsFinal.test.js'
       - 'scripts/build-english-wave.mjs'
       - 'test/utils/englishFormsWave*.test.js'
       - 'scripts/build-english-pilot.mjs'
@@ -137,7 +140,7 @@ jobs:
   english-pilot:
     name: English forms language isolation and reader
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -148,6 +151,7 @@ jobs:
       - run: node scripts/build-english-pilot.mjs
       - run: node scripts/build-english-wave.mjs
       - run: node scripts/build-english-wave.mjs --wave=series-02
+      - run: node scripts/build-english-final.mjs
       - run: npx playwright install --with-deps chromium
       - run: npm run build
         env:
@@ -155,6 +159,8 @@ jobs:
       - run: npx playwright test --config english-pilot.playwright.config.ts
         env:
           VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'
+      - run: npx playwright test --config english-final.playwright.config.ts --project=reader-desktop
+      - run: npx playwright test --config english-final.playwright.config.ts --project=reader-tablet --project=reader-mobile --grep representative
       - run: npx playwright test --config english-wave.playwright.config.ts --project=reader-desktop
       - run: npx playwright test --config english-wave.playwright.config.ts --project=reader-tablet --project=reader-mobile --grep representative
       - uses: actions/upload-artifact@v4

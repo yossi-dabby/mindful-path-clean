@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { ENGLISH_CURRENT_FORM_IDS, ENGLISH_SERIES02_CATALOG_PATH, ENGLISH_SERIES02_TRACKS,
+import { ENGLISH_CURRENT_FORM_IDS, ENGLISH_SERIES02_FORM_IDS, ENGLISH_SERIES02_CATALOG_PATH, ENGLISH_SERIES02_TRACKS,
   assembleEnglishCatalog, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
 
 const read = path => readFile(new URL(`../../${path}`, import.meta.url));
@@ -17,7 +17,7 @@ describe('English series 02 complete split release', () => {
     expect(Buffer.byteLength(JSON.stringify(index))).toBeLessThan(512 * 1024);
     const catalog = assembleEnglishCatalog(index, parts);
     expect(catalog.coverage).toEqual({ available: 648, total: 970, unavailable: 322 });
-    expect(catalog.forms.map(f => f.id).sort()).toEqual([...ENGLISH_CURRENT_FORM_IDS].sort());
+    expect(catalog.forms.map(f => f.id).sort()).toEqual([...ENGLISH_SERIES02_FORM_IDS].sort());
     const previous = await json('server/private/english-pilot-series-01-catalog.json');
     for (const form of previous.forms) expect(catalog.forms.find(f => f.id === form.id)).toEqual(form);
     for (let i = 0; i < parts.length; i++) {

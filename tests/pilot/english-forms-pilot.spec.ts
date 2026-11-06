@@ -24,7 +24,7 @@ async function session(page: Page, role = 'admin') {
 }
 async function selectUnit(page: Page, age = 'CH') {
   await page.getByTestId(`pilot-age-${age}`).click();
-  await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(12);
+  await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(17);
   await page.getByTestId('pilot-track-mood').click();
   await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(6);
   await page.getByTestId('pilot-unit-MOOD-03').click();
@@ -46,7 +46,7 @@ test('compiled app opens and downloads all nine English PDFs across all age grou
   await page.getByRole('link', { name: 'CBT worksheets', exact: true }).click();
   const library = page.getByTestId('english-forms-pilot');
   await expect(library).toHaveAttribute('dir', 'ltr');
-  await expect(page.getByTestId('pilot-translation-coverage')).toHaveText('648 of 970 forms are available in this language. 322 have not yet been translated.');
+  await expect(page.getByTestId('pilot-translation-coverage')).toHaveText('970 of 970 forms are available in this language. 0 have not yet been translated.');
   await expect(page.getByTestId('hebrew-forms-pilot')).toHaveCount(0);
   for (const age of ['CH', 'TE', 'AD', 'OA']) {
     await selectUnit(page, age);
@@ -88,9 +88,9 @@ test('compiled app opens and downloads all nine English PDFs across all age grou
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     for (let level = 0; level < 3; level++) await page.getByTestId('pilot-back').click();
   }
-  expect(requests.filter(path => path.startsWith('catalog'))).toEqual(['catalog-en-series-02', ...['mood', 'self', 'perf', 'reg', 'exec', 'soc', 'sleep', 'change', 'family', 'screen', 'shame', 'meaning'].map(track => `catalog-en-series-02-${track}`)]);
+  expect(requests.filter(path => path.startsWith('catalog'))).toEqual(['catalog-en-series-03', ...["shared", "core", "anxiety", "mood", "self", "perf", "reg", "exec", "soc", "sleep", "change", "family", "screen", "shame", "meaning", "ocd", "trauma"].map(track => `catalog-en-series-03-${track}`)]);
   expect(requests.filter(path => path.startsWith('files/'))).toHaveLength(18);
-  expect(requests.every(path => path.startsWith('catalog-en-series-02') || path.endsWith('-EN'))).toBe(true);
+  expect(requests.every(path => path.startsWith('catalog-en-series-03') || path.endsWith('-EN'))).toBe(true);
   expect(errors).toEqual([]);
 });
 
@@ -157,7 +157,7 @@ test('missing English release never requests Hebrew; regular users never request
   });
   await page.goto(preview);
   await expect(page.getByRole('alert')).toHaveText('Forms are not yet available in this language.');
-  expect(requests).toEqual(['catalog-en-series-02', 'catalog-en-series-01', 'catalog-en-mood-03']);
+  expect(requests).toEqual(['catalog-en-series-03', 'catalog-en-series-02', 'catalog-en-series-01', 'catalog-en-mood-03']);
   await page.route('**/api/apps/*/entities/User/me', route => route.fulfill({ json: { id: 'regular', role: 'user', onboarding_completed: true } }));
   for (const language of ['en', 'he']) {
     await page.goto(`/tests/fixtures/hebrew-pilot-preview.html?language=${language}`);
@@ -165,7 +165,7 @@ test('missing English release never requests Hebrew; regular users never request
     await expect(page.getByTestId('english-forms-pilot')).toHaveCount(0);
     await expect(page.getByTestId('hebrew-forms-pilot')).toHaveCount(0);
   }
-  expect(requests).toEqual(['catalog-en-series-02', 'catalog-en-series-01', 'catalog-en-mood-03']);
+  expect(requests).toEqual(['catalog-en-series-03', 'catalog-en-series-02', 'catalog-en-series-01', 'catalog-en-mood-03']);
 });
 
 
@@ -175,7 +175,7 @@ test('staggered publication retains the nine English drafts and shows the pendin
   await page.route(proxy, async route => {
     const path = route.request().postDataJSON().path;
     requests.push(path);
-    if (['catalog-en-series-02', 'catalog-en-series-01'].includes(path)) await route.fulfill({ status: 404, json: { error: 'PILOT_NOT_FOUND' } });
+    if (['catalog-en-series-03', 'catalog-en-series-02', 'catalog-en-series-01'].includes(path)) await route.fulfill({ status: 404, json: { error: 'PILOT_NOT_FOUND' } });
     else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
   });
   await page.goto(preview);
@@ -187,7 +187,7 @@ test('staggered publication retains the nine English drafts and shows the pendin
   await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(1);
   await page.getByTestId('pilot-unit-MOOD-03').click();
   await open(page);
-  expect(requests.filter(path => path.startsWith('catalog'))).toEqual(['catalog-en-series-02', 'catalog-en-series-01', 'catalog-en-mood-03']);
+  expect(requests.filter(path => path.startsWith('catalog'))).toEqual(['catalog-en-series-03', 'catalog-en-series-02', 'catalog-en-series-01', 'catalog-en-mood-03']);
 });
 
 test('staggered publication retains all 270 previous English forms when the split index is absent', async ({ page }) => {
@@ -195,7 +195,7 @@ test('staggered publication retains all 270 previous English forms when the spli
   const requests: string[] = [];
   await page.route(proxy, async route => {
     const path = route.request().postDataJSON().path; requests.push(path);
-    if (path === 'catalog-en-series-02') await route.fulfill({ status: 404, json: { error: 'PILOT_NOT_FOUND' } });
+    if (['catalog-en-series-03', 'catalog-en-series-02'].includes(path)) await route.fulfill({ status: 404, json: { error: 'PILOT_NOT_FOUND' } });
     else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
   });
   await page.goto(preview);
@@ -206,7 +206,28 @@ test('staggered publication retains all 270 previous English forms when the spli
   await page.getByTestId('pilot-track-mood').click();
   await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(6);
   await page.getByTestId('pilot-unit-MOOD-03').click(); await open(page);
-  expect(requests.filter(path => path.startsWith('catalog'))).toEqual(['catalog-en-series-02', 'catalog-en-series-01']);
+  expect(requests.filter(path => path.startsWith('catalog'))).toEqual(['catalog-en-series-03', 'catalog-en-series-02', 'catalog-en-series-01']);
+});
+
+test('staggered publication retains all 648 previous English forms when the final index is absent', async ({ page }) => {
+  await session(page);
+  const requests: string[] = [];
+  await page.route(proxy, async route => {
+    const path = route.request().postDataJSON().path; requests.push(path);
+    if (path === 'catalog-en-series-03') await route.fulfill({ status: 404, json: { error: 'PILOT_NOT_FOUND' } });
+    else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
+  });
+  await page.goto(preview);
+  await expect(page.getByTestId('pilot-translation-coverage')).toContainText('648 of 970');
+  await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
+  await page.getByTestId('pilot-age-CH').click();
+  await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(12);
+  await page.getByTestId('pilot-track-mood').click();
+  await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(6);
+  await page.getByTestId('pilot-unit-MOOD-03').click(); await open(page);
+  expect(requests.slice(0, 2)).toEqual(['catalog-en-series-03', 'catalog-en-series-02']);
+  expect(requests.filter(path => path.startsWith('catalog-en-series-02-'))).toHaveLength(12);
+  expect(requests).not.toContain('catalog-en-series-01');
 });
 
 test('missing part of an existing index never displays a partial library or a legacy fallback', async ({ page }) => {
@@ -214,18 +235,19 @@ test('missing part of an existing index never displays a partial library or a le
   const requests: string[] = [];
   await page.route(proxy, async route => {
     const path = route.request().postDataJSON().path; requests.push(path);
-    if (path === 'catalog-en-series-02-self') await route.fulfill({ status: 404, json: { error: 'PILOT_NOT_FOUND' } });
+    if (path === 'catalog-en-series-03-core') await route.fulfill({ status: 404, json: { error: 'PILOT_NOT_FOUND' } });
     else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
   });
   await page.goto(preview);
   await expect(page.getByRole('alert')).toBeVisible();
   await expect(page.locator('[data-testid^="pilot-age-"]')).toHaveCount(0);
   await expect(page.getByTestId('pilot-translation-coverage')).toHaveCount(0);
-  expect(requests[0]).toBe('catalog-en-series-02');
+  expect(requests[0]).toBe('catalog-en-series-03');
+  expect(requests).not.toContain('catalog-en-series-02');
   expect(requests).not.toContain('catalog-en-series-01');
   expect(requests).not.toContain('catalog-en-mood-03');
-  expect(requests.filter(path => path.startsWith('catalog-en-series-02-')).sort())
-    .toEqual(['catalog-en-series-02-mood', 'catalog-en-series-02-perf', 'catalog-en-series-02-self']);
+  expect(requests.filter(path => path.startsWith('catalog-en-series-03-')).sort())
+    .toEqual(['catalog-en-series-03-anxiety', 'catalog-en-series-03-core', 'catalog-en-series-03-shared']);
 });
 
 test('late catalog parts cannot display English after switching language', async ({ page }) => {
@@ -237,7 +259,7 @@ test('late catalog parts cannot display English after switching language', async
   await page.route(proxy, async route => {
     const path = route.request().postDataJSON().path;
     const response = await route.fetch({ url: 'http://127.0.0.1:3006/' });
-    if (path.startsWith('catalog-en-series-02-')) { parts.push(path); if (parts.length === 3) received(); await gate; }
+    if (path.startsWith('catalog-en-series-03-')) { parts.push(path); if (parts.length === 3) received(); await gate; }
     await route.fulfill({ response });
   });
   try {
@@ -245,7 +267,7 @@ test('late catalog parts cannot display English after switching language', async
     await expect(page.locator('[data-testid^="pilot-age-"]')).toHaveCount(0);
     await page.getByRole('combobox', { name: 'Fixture language' }).selectOption('he');
     await expect(page.getByTestId('hebrew-forms-pilot')).toContainText('970');
-    const delivered = page.waitForResponse(r => r.url().includes('/functions/getHebrewFormsPilot') && r.request().postDataJSON().path.startsWith('catalog-en-series-02-'));
+    const delivered = page.waitForResponse(r => r.url().includes('/functions/getHebrewFormsPilot') && r.request().postDataJSON().path.startsWith('catalog-en-series-03-'));
     release(); await delivered;
     await expect(page.getByTestId('english-forms-pilot')).toHaveCount(0);
     expect(parts).toHaveLength(3);

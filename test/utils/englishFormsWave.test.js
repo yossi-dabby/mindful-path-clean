@@ -40,7 +40,7 @@ describe('English series 01 inventory and source/render provenance', () => {
     }
     const names = await readdir(new URL('../../server/private/forms-en/', import.meta.url));
     expect(names.sort()).toEqual(ENGLISH_CURRENT_FORM_IDS.map(id => `${id}.pdf`).sort());
-    for (const id of ['MP-ANX-01-W-CH-EN', 'MP-EXEC-07-W-CH-EN', 'MP-EXEC-01-W-ALL-EN', '../MP-EXEC-01-W-CH-EN']) expect(isPilotFileId(id)).toBe(false);
+    for (const id of ['MP-UNKNOWN-01-W-CH-EN', 'MP-EXEC-07-W-CH-EN', 'MP-EXEC-01-W-ALL-EN', '../MP-EXEC-01-W-CH-EN']) expect(isPilotFileId(id)).toBe(false);
   });
 
   it('reconstructs the release only from current source fingerprints and verified renders', () => {

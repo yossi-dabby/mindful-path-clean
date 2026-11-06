@@ -9,6 +9,10 @@ on:
       - 'src/lib/formsLocalization.js'
       - 'scripts/audit-form-sources.mjs'
       - 'scripts/build-english-pilot.mjs'
+      - 'scripts/build-english-final.mjs'
+      - 'scripts/render-english-final.mjs'
+      - 'scripts/render-forms-final.mjs'
+      - 'test/utils/englishFormsFinal.test.js'
       - 'scripts/build-english-wave.mjs'
       - 'scripts/render-english-wave.mjs'
       - 'test/utils/englishFormsWave*.test.js'
@@ -39,14 +43,16 @@ jobs:
       - run: node scripts/build-english-pilot.mjs
       - run: node scripts/build-english-wave.mjs
       - run: node scripts/build-english-wave.mjs --wave=series-02
-      - run: npx vitest run test/utils/formsLocalization.test.js test/utils/englishFormsPilot.test.js test/utils/englishFormsWave.test.js test/utils/englishFormsWave02.test.js
+      - run: node scripts/build-english-final.mjs
+      - run: npx vitest run test/utils/formsLocalization.test.js test/utils/englishFormsPilot.test.js test/utils/englishFormsWave.test.js test/utils/englishFormsWave02.test.js test/utils/englishFormsFinal.test.js
       - run: npx playwright install --with-deps chromium
       - run: node scripts/render-forms-translation.mjs --screenshots
       - run: node scripts/render-english-wave.mjs --screenshots
       - run: node scripts/render-english-wave.mjs --wave=series-02 --screenshots
+      - run: node scripts/render-english-final.mjs --screenshots
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: english-series-02-review-drafts
+          name: english-series-03-review-drafts
           path: tmp/forms-localization/en/
           retention-days: 7

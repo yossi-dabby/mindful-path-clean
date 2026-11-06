@@ -1,0 +1,352 @@
+{
+  "schemaVersion": 1,
+  "language": "en",
+  "wave": "series-03",
+  "version": "0.4-en-series-03",
+  "catalogPath": "catalog-en-series-03",
+  "catalogFile": "english-pilot-series-03-index.json",
+  "count": 970,
+  "newCount": 322,
+  "tracks": [
+    "shared",
+    "core",
+    "anxiety",
+    "mood",
+    "self",
+    "perf",
+    "reg",
+    "exec",
+    "soc",
+    "sleep",
+    "change",
+    "family",
+    "screen",
+    "shame",
+    "meaning",
+    "ocd",
+    "trauma"
+  ],
+  "packets": [
+    {
+      "key": "shared-entry",
+      "unit": "כניסה",
+      "track": "shared",
+      "count": 11
+    },
+    {
+      "key": "shared-assessment",
+      "unit": "הערכה",
+      "track": "shared",
+      "count": 13
+    },
+    {
+      "key": "shared-sessions",
+      "unit": "סשן ומעקב",
+      "track": "shared",
+      "count": 12
+    },
+    {
+      "key": "core-01",
+      "unit": "CORE-01",
+      "track": "core",
+      "count": 5
+    },
+    {
+      "key": "core-02",
+      "unit": "CORE-02",
+      "track": "core",
+      "count": 9
+    },
+    {
+      "key": "core-03",
+      "unit": "CORE-03",
+      "track": "core",
+      "count": 9
+    },
+    {
+      "key": "core-04",
+      "unit": "CORE-04",
+      "track": "core",
+      "count": 9
+    },
+    {
+      "key": "core-05",
+      "unit": "CORE-05",
+      "track": "core",
+      "count": 9
+    },
+    {
+      "key": "core-06",
+      "unit": "CORE-06",
+      "track": "core",
+      "count": 9
+    },
+    {
+      "key": "core-07",
+      "unit": "CORE-07",
+      "track": "core",
+      "count": 9
+    },
+    {
+      "key": "core-08",
+      "unit": "CORE-08",
+      "track": "core",
+      "count": 5
+    },
+    {
+      "key": "anx-01",
+      "unit": "ANX-01",
+      "track": "anxiety",
+      "count": 9
+    },
+    {
+      "key": "anx-02",
+      "unit": "ANX-02",
+      "track": "anxiety",
+      "count": 9
+    },
+    {
+      "key": "anx-03",
+      "unit": "ANX-03",
+      "track": "anxiety",
+      "count": 9
+    },
+    {
+      "key": "anx-04",
+      "unit": "ANX-04",
+      "track": "anxiety",
+      "count": 9
+    },
+    {
+      "key": "anx-05",
+      "unit": "ANX-05",
+      "track": "anxiety",
+      "count": 9
+    },
+    {
+      "key": "anx-06",
+      "unit": "ANX-06",
+      "track": "anxiety",
+      "count": 9
+    },
+    {
+      "key": "ocd-01",
+      "unit": "OCD-01",
+      "track": "ocd",
+      "count": 9
+    },
+    {
+      "key": "trauma-01",
+      "unit": "TRAUMA-01",
+      "track": "trauma",
+      "count": 9
+    },
+    {
+      "key": "ocd-02",
+      "unit": "OCD-02",
+      "track": "ocd",
+      "count": 9
+    },
+    {
+      "key": "ocd-03",
+      "unit": "OCD-03",
+      "track": "ocd",
+      "count": 9
+    },
+    {
+      "key": "ocd-04",
+      "unit": "OCD-04",
+      "track": "ocd",
+      "count": 9
+    },
+    {
+      "key": "ocd-05",
+      "unit": "OCD-05",
+      "track": "ocd",
+      "count": 9
+    },
+    {
+      "key": "ocd-06",
+      "unit": "OCD-06",
+      "track": "ocd",
+      "count": 9
+    },
+    {
+      "key": "ocd-07",
+      "unit": "OCD-07",
+      "track": "ocd",
+      "count": 9
+    },
+    {
+      "key": "ocd-08",
+      "unit": "OCD-08",
+      "track": "ocd",
+      "count": 9
+    },
+    {
+      "key": "ocdyc-01",
+      "unit": "OCDYC-01",
+      "track": "ocd",
+      "count": 3
+    },
+    {
+      "key": "ocdyc-02",
+      "unit": "OCDYC-02",
+      "track": "ocd",
+      "count": 3
+    },
+    {
+      "key": "ocdyc-03",
+      "unit": "OCDYC-03",
+      "track": "ocd",
+      "count": 3
+    },
+    {
+      "key": "ocdyc-04",
+      "unit": "OCDYC-04",
+      "track": "ocd",
+      "count": 3
+    },
+    {
+      "key": "ocdyc-05",
+      "unit": "OCDYC-05",
+      "track": "ocd",
+      "count": 3
+    },
+    {
+      "key": "ocdyc-06",
+      "unit": "OCDYC-06",
+      "track": "ocd",
+      "count": 3
+    },
+    {
+      "key": "ocdyc-07",
+      "unit": "OCDYC-07",
+      "track": "ocd",
+      "count": 3
+    },
+    {
+      "key": "ocdyc-08",
+      "unit": "OCDYC-08",
+      "track": "ocd",
+      "count": 3
+    },
+    {
+      "key": "trauma-02",
+      "unit": "TRAUMA-02",
+      "track": "trauma",
+      "count": 9
+    },
+    {
+      "key": "trauma-03",
+      "unit": "TRAUMA-03",
+      "track": "trauma",
+      "count": 9
+    },
+    {
+      "key": "trauma-04",
+      "unit": "TRAUMA-04",
+      "track": "trauma",
+      "count": 9
+    },
+    {
+      "key": "trauma-05",
+      "unit": "TRAUMA-05",
+      "track": "trauma",
+      "count": 9
+    },
+    {
+      "key": "trauma-06",
+      "unit": "TRAUMA-06",
+      "track": "trauma",
+      "count": 9
+    },
+    {
+      "key": "trauma-07",
+      "unit": "TRAUMA-07",
+      "track": "trauma",
+      "count": 9
+    },
+    {
+      "key": "trauma-08",
+      "unit": "TRAUMA-08",
+      "track": "trauma",
+      "count": 9
+    }
+  ],
+  "preserveUnits": [
+    "mood-01",
+    "mood-02",
+    "mood-03",
+    "mood-04",
+    "mood-05",
+    "mood-06",
+    "self-01",
+    "self-02",
+    "self-03",
+    "self-04",
+    "self-05",
+    "self-06",
+    "perf-01",
+    "perf-02",
+    "perf-03",
+    "perf-04",
+    "perf-05",
+    "perf-06",
+    "reg-01",
+    "reg-02",
+    "reg-03",
+    "reg-04",
+    "reg-05",
+    "reg-06",
+    "exec-01",
+    "exec-02",
+    "exec-03",
+    "exec-04",
+    "exec-05",
+    "exec-06",
+    "soc-01",
+    "soc-02",
+    "soc-03",
+    "soc-04",
+    "soc-05",
+    "soc-06",
+    "sleep-01",
+    "sleep-02",
+    "sleep-03",
+    "sleep-04",
+    "sleep-05",
+    "sleep-06",
+    "change-01",
+    "change-02",
+    "change-03",
+    "change-04",
+    "change-05",
+    "change-06",
+    "family-01",
+    "family-02",
+    "family-03",
+    "family-04",
+    "family-05",
+    "family-06",
+    "screen-01",
+    "screen-02",
+    "screen-03",
+    "screen-04",
+    "screen-05",
+    "screen-06",
+    "shame-01",
+    "shame-02",
+    "shame-03",
+    "shame-04",
+    "shame-05",
+    "shame-06",
+    "meaning-01",
+    "meaning-02",
+    "meaning-03",
+    "meaning-04",
+    "meaning-05",
+    "meaning-06"
+  ],
+  "split": true
+}

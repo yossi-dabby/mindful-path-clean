@@ -1,5 +1,5 @@
 import { base44 } from '@/api/base44Client';
-import { ENGLISH_SERIES02_CATALOG_PATH, assembleEnglishCatalog, ENGLISH_SERIES01_CATALOG_PATH, ENGLISH_CATALOG_PATH, isPilotFileId, SERIES12_CATALOG_PATH, SERIES11_CATALOG_PATH, SERIES10_CATALOG_PATH, SERIES09_CATALOG_PATH, SERIES08_CATALOG_PATH, SERIES07_CATALOG_PATH, SERIES06_CATALOG_PATH, SERIES05_CATALOG_PATH, SERIES04_CATALOG_PATH, SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, EXPANDED_CATALOG_PATH, P3_CATALOG_PATH, isPilotCatalogPath, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
+import { ENGLISH_SERIES03_CATALOG_PATH, ENGLISH_SERIES02_CATALOG_PATH, assembleEnglishCatalog, ENGLISH_SERIES01_CATALOG_PATH, ENGLISH_CATALOG_PATH, isPilotFileId, SERIES12_CATALOG_PATH, SERIES11_CATALOG_PATH, SERIES10_CATALOG_PATH, SERIES09_CATALOG_PATH, SERIES08_CATALOG_PATH, SERIES07_CATALOG_PATH, SERIES06_CATALOG_PATH, SERIES05_CATALOG_PATH, SERIES04_CATALOG_PATH, SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, EXPANDED_CATALOG_PATH, P3_CATALOG_PATH, isPilotCatalogPath, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
 
 const RAILWAY_ORIGIN = 'https://mindful-path-production-7704.up.railway.app';
 
@@ -55,7 +55,7 @@ export async function requestPilotCatalog(options = {}) {
   checkAbort(options.signal);
   if (language === 'en') {
     // Staggered publication may retain the previous English release, never Hebrew.
-    for (const path of [ENGLISH_SERIES02_CATALOG_PATH, ENGLISH_SERIES01_CATALOG_PATH, ENGLISH_CATALOG_PATH]) {
+    for (const path of [ENGLISH_SERIES03_CATALOG_PATH, ENGLISH_SERIES02_CATALOG_PATH, ENGLISH_SERIES01_CATALOG_PATH, ENGLISH_CATALOG_PATH]) {
       let response;
       try { response = await requestPilot(path, options); }
       catch (error) {
@@ -65,7 +65,7 @@ export async function requestPilotCatalog(options = {}) {
       const catalog = await response.json();
       if (!await validatePilotCatalog(catalog, path)) throw new Error('PILOT_INVALID');
       checkAbort(options.signal);
-      if (path === ENGLISH_SERIES02_CATALOG_PATH) {
+      if ([ENGLISH_SERIES03_CATALOG_PATH, ENGLISH_SERIES02_CATALOG_PATH].includes(path)) {
         const parts = [];
         // Bound in-flight metadata requests. Each response stays within the proxy's existing limit.
         for (let offset = 0; offset < catalog.parts.length; offset += 3) {
@@ -85,7 +85,7 @@ export async function requestPilotCatalog(options = {}) {
           }));
           parts.push(...batch);
         }
-        return { catalog: assembleEnglishCatalog(catalog, parts), expansionPending: false };
+        return { catalog: assembleEnglishCatalog(catalog, parts), expansionPending: path !== ENGLISH_SERIES03_CATALOG_PATH };
       }
       return { catalog, expansionPending: true };
     }

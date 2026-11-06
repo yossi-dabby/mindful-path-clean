@@ -141,7 +141,7 @@ function PilotLibrary({ language }) {
         <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {!age && AGES.map((id) => <Button key={id} type="button" variant="outline" className="h-auto whitespace-normal p-5" onClick={() => setAge(id)} data-testid={`pilot-age-${id}`}>{catalog.ageGroups[id].label}</Button>)}
           {age && !track && Object.entries(tracks).filter(([id]) => forms.some((form) => form.track === id)).map(([id, title]) => <Button key={id} type="button" variant="outline" className="h-auto whitespace-normal p-5" onClick={() => setTrack(id)} data-testid={`pilot-track-${id}`}>{title}</Button>)}
-          {track && !unit && units.map(([id, title]) => <Button key={id} type="button" variant="outline" className="h-auto whitespace-normal p-5" onClick={() => setUnit(id)} data-testid={`pilot-unit-${id}`}>{id} — {title}</Button>)}
+          {track && !unit && units.map(([id, title]) => <Button key={id} type="button" variant="outline" className="h-auto whitespace-normal p-5" onClick={() => setUnit(id)} data-testid={`pilot-unit-${id}`}>{!isHebrew && track === 'shared' ? title : `${id} — ${title}`}</Button>)}
           {unit && selectedForms.map((form) => <article key={form.id} className="min-w-0 rounded-lg border border-border p-4" data-testid={`pilot-form-${form.id}`}>
             <h3 className="font-semibold text-primary">{form.title}</h3>
             <p className="my-2 text-sm">{form.kind} · {form.audience}</p>

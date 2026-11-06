@@ -21,9 +21,9 @@ for (const track of ['MOOD', 'SELF', 'PERF', 'REG', 'EXEC', 'SOC', 'SLEEP', 'CHA
     });
     await page.goto('http://127.0.0.1:3005/Tools');
     await page.getByRole('link', { name: 'CBT worksheets', exact: true }).click();
-    await expect(page.getByTestId('pilot-translation-coverage')).toContainText('648 of 970');
+    await expect(page.getByTestId('pilot-translation-coverage')).toContainText('970 of 970');
     await page.getByTestId(`pilot-age-${age}`).click();
-    await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(12);
+    await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(17);
     await page.getByTestId(`pilot-track-${track.toLowerCase()}`).click();
     await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(6);
     await page.getByTestId(`pilot-unit-${unit}`).click();

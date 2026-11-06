@@ -1,0 +1,9 @@
+@import '../../hebrew-forms/mood-01/style.css';
+
+/* Preserve A4 geometry, type sizes, section order and all writing areas. */
+html[dir="ltr"] { direction: ltr; }
+html[dir="ltr"] .edition { text-align: right; }
+html[dir="ltr"] .note { border-right: 0; border-left: .8mm solid #75b8aa; }
+html[dir="ltr"] .box { margin-left: 0; margin-right: 1mm; }
+
+html[dir="ltr"] .guard-toolbar, html[dir="ltr"] .print-warning { direction: ltr; }

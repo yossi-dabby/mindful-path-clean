@@ -24,9 +24,9 @@ async function session(page: Page, role = 'admin') {
 }
 async function selectUnit(page: Page, age = 'CH') {
   await page.getByTestId(`pilot-age-${age}`).click();
-  await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(1);
+  await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(5);
   await page.getByTestId('pilot-track-mood').click();
-  await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(1);
+  await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(6);
   await page.getByTestId('pilot-unit-MOOD-03').click();
   await expect(page.locator('[data-testid^="pilot-form-"]')).toHaveCount(3);
 }
@@ -46,7 +46,7 @@ test('compiled app opens and downloads all nine English PDFs across all age grou
   await page.getByRole('link', { name: 'CBT worksheets', exact: true }).click();
   const library = page.getByTestId('english-forms-pilot');
   await expect(library).toHaveAttribute('dir', 'ltr');
-  await expect(page.getByTestId('pilot-translation-coverage')).toHaveText('9 of 970 forms are available in this language. 961 have not yet been translated.');
+  await expect(page.getByTestId('pilot-translation-coverage')).toHaveText('270 of 970 forms are available in this language. 700 have not yet been translated.');
   await expect(page.getByTestId('hebrew-forms-pilot')).toHaveCount(0);
   for (const age of ['CH', 'TE', 'AD', 'OA']) {
     await selectUnit(page, age);
@@ -88,9 +88,9 @@ test('compiled app opens and downloads all nine English PDFs across all age grou
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     for (let level = 0; level < 3; level++) await page.getByTestId('pilot-back').click();
   }
-  expect(requests.filter(path => path.startsWith('catalog'))).toEqual(['catalog-en-mood-03']);
+  expect(requests.filter(path => path.startsWith('catalog'))).toEqual(['catalog-en-series-01']);
   expect(requests.filter(path => path.startsWith('files/'))).toHaveLength(18);
-  expect(requests.every(path => path === 'catalog-en-mood-03' || path.endsWith('-EN'))).toBe(true);
+  expect(requests.every(path => path === 'catalog-en-series-01' || path.endsWith('-EN'))).toBe(true);
   expect(errors).toEqual([]);
 });
 
@@ -157,7 +157,7 @@ test('missing English release never requests Hebrew; regular users never request
   });
   await page.goto(preview);
   await expect(page.getByRole('alert')).toHaveText('Forms are not yet available in this language.');
-  expect(requests).toEqual(['catalog-en-mood-03']);
+  expect(requests).toEqual(['catalog-en-series-01', 'catalog-en-mood-03']);
   await page.route('**/api/apps/*/entities/User/me', route => route.fulfill({ json: { id: 'regular', role: 'user', onboarding_completed: true } }));
   for (const language of ['en', 'he']) {
     await page.goto(`/tests/fixtures/hebrew-pilot-preview.html?language=${language}`);
@@ -165,5 +165,27 @@ test('missing English release never requests Hebrew; regular users never request
     await expect(page.getByTestId('english-forms-pilot')).toHaveCount(0);
     await expect(page.getByTestId('hebrew-forms-pilot')).toHaveCount(0);
   }
-  expect(requests).toEqual(['catalog-en-mood-03']);
+  expect(requests).toEqual(['catalog-en-series-01', 'catalog-en-mood-03']);
+});
+
+
+test('staggered publication retains the nine English drafts and shows the pending release', async ({ page }) => {
+  await session(page);
+  const requests: string[] = [];
+  await page.route(proxy, async route => {
+    const path = route.request().postDataJSON().path;
+    requests.push(path);
+    if (path === 'catalog-en-series-01') await route.fulfill({ status: 404, json: { error: 'PILOT_NOT_FOUND' } });
+    else await route.fulfill({ response: await route.fetch({ url: 'http://127.0.0.1:3006/' }) });
+  });
+  await page.goto(preview);
+  await expect(page.getByTestId('pilot-translation-coverage')).toContainText('9 of 970');
+  await expect(page.getByTestId('pilot-expansion-pending')).toBeVisible();
+  await page.getByTestId('pilot-age-CH').click();
+  await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(1);
+  await page.getByTestId('pilot-track-mood').click();
+  await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(1);
+  await page.getByTestId('pilot-unit-MOOD-03').click();
+  await open(page);
+  expect(requests.filter(path => path.startsWith('catalog'))).toEqual(['catalog-en-series-01', 'catalog-en-mood-03']);
 });

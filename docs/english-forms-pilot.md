@@ -1,35 +1,58 @@
-# English forms review pilot — MOOD-03
+# English forms review library — series 01
 
-PR 28 completed source parity and the offline English draft review packet. This follow-up connects those nine PDFs to the existing administrator library. It does not complete the translation of all 970 forms.
+The English administrator library grows from 9 to **270 forms**. This wave adds 261 PDFs and 29 editable translation packets. MOOD-03's nine previously published PDFs and catalog entries are preserved byte-for-byte. Hebrew remains 970 forms across 17 tracks, version `0.18-series-12`; OCDYC remains child-only.
 
-## Available content
+## Content and size
 
-- English catalog: `catalog-en-mood-03`, version `0.1-en-mood-03`.
-- Four worksheets and four practice sheets: children, adolescents, adults, older adults.
-- One shared, four-page therapist guide; each age route shows its two forms plus this guide.
-- Coverage: 9 of 970 source forms; 961 English forms remain unavailable.
-- The nine PDF files total 232,827 bytes. They are copied byte-for-byte from the PR 28 reviewed render, with selectable text and embedded fonts.
-- Translation remains **draft**; clinical and rights reviews remain **pending**, without a named reviewer or review date. No clinical approval is implied.
-- Hebrew remains 970 forms, 17 tracks, version `0.18-series-12`. OCDYC remains child-only.
+| Track | Units | English forms |
+| --- | --- | ---: |
+| Mood (MOOD) | 01–06 | 54 |
+| Self-worth (SELF) | 01–06 | 54 |
+| Perfectionism (PERF) | 01–06 | 54 |
+| Emotion regulation (REG) | 01–06 | 54 |
+| Executive functioning (EXEC) | 01–06 | 54 |
+
+Each unit has one shared four-page therapist guide and one worksheet and practice sheet for each of children, adolescents, adults and older adults. Age routes show their two forms plus the shared guide. The 261 new PDFs contain 348 A4 pages. All 270 English PDFs total **7,041,550 bytes (7.04 MB)**; the compact runtime catalog is 249,829 bytes. PDFs stay in `server/private/forms-en/`, outside the frontend/mobile bundle, and download on demand.
+
+The release is `catalog-en-series-01`, version `0.2-en-series-01`, with coverage 270/970 and 700 unavailable. The old `catalog-en-mood-03` endpoint remains pinned to its original nine forms. Translation is **draft**, clinical and rights reviews are **pending**, with no named reviewer or review date. The content has not received clinical approval.
 
 ## Behavior and boundaries
 
-Select English in the application and open Tools → CBT worksheets while signed in as an administrator. Navigate age → mood → MOOD-03. The page explicitly reports the available and untranslated counts. Open uses the same HiDPI PDF reader, fullscreen zoom and touch controls as Hebrew; Download saves the original English PDF.
+As an administrator, select English → Tools → CBT worksheets → age → track → unit. Open uses the existing HiDPI reader, fullscreen zoom and touch controls; Download returns the original English PDF. No new PDF viewer or font-size reduction is introduced.
 
-Catalogs are loaded only for the selected language. An unavailable or corrupt English endpoint never falls back to Hebrew. Spanish, French, German, Italian and Portuguese display a localized unavailable message and make no review-library requests. Switching language resets navigation, aborts active work and revokes the previous preview URL; late responses cannot reopen it.
+If the new English endpoint returns 400 or 404 during staggered publication, the client tries the existing nine-form English release and shows the pending-expansion notice. Authorization, network and integrity failures stop immediately. English never falls back to Hebrew. Spanish, French, German, Italian and Portuguese remain unavailable and make no review-library requests. Language switching resets navigation, aborts active work and revokes previews; late responses cannot reopen them.
 
-Both the Node API and Base44 proxy recheck administrator access. English file IDs are limited to the nine pinned IDs. Catalog fingerprints, PDF sizes and PDF SHA-256 checks are enforced. The existing endpoint/function names remain unchanged for deployed Hebrew clients. PDFs stay under `server/private/forms-en/`, outside `public/` and the frontend bundle; they download on demand. There is no new public registry, AI retrieval, agent access, user entity, or schema change. The repository itself is public under the owner's existing approval.
+Node and the Base44 proxy recheck administrator access. Only the 270 explicitly pinned English IDs are accepted. Catalog fingerprints, PDF sizes and SHA-256 checks remain enforced. There are no changes to the public forms registry, AI retrieval, agent boundaries, user entities or schemas. Repository content is public under the owner's existing approval.
 
-## Validation and release
+## Reproducibility and checks
 
-- `node scripts/audit-form-sources.mjs` checks all 970 editable sources and source fingerprints.
-- `node scripts/build-english-pilot.mjs` verifies deterministic English catalog metadata against the source map and committed PDFs; `--write` is only for intentional catalog updates. Update the release pin if the catalog changes.
-- `npx vitest run test/utils/englishFormsPilot.test.js` exercises the real Node and Base44 handler transports, every English PDF, auth revocation, language isolation and corruption handling.
-- `npx playwright test --config english-pilot.playwright.config.ts` covers compiled-app navigation, all nine downloads, full-screen rendering, all age routes, live language changes, pending-response cancellation, missing translations and regular-user gating on desktop, tablet and mobile Chromium profiles.
-- Existing Hebrew transport/release and PDF reader suites continue to cover Hebrew compatibility and touch gestures.
+- `node scripts/audit-form-sources.mjs`: all 970 editable Hebrew sources and fingerprints.
+- `node scripts/build-english-pilot.mjs`: the original nine-form release stays unchanged.
+- `node scripts/render-english-wave.mjs --screenshots`: renders the 29 new packets with two worker processes. Checks A4 page count, source writing-field dimensions and section order, LTR, loaded fonts, text bounds, footer clearance, blank fields, fictional filling, long-answer print guard and downloaded-answer completeness. This does not install runtime files.
+- `node scripts/build-english-wave.mjs --install`: installs only renders whose packet and renderer/style/print-guard fingerprints match current inputs; records 261 per-PDF proofs in `content/forms-localization/review/en-series-01-qa.json`. The existing nine PDFs are never overwritten.
+- `node scripts/build-english-wave.mjs`: read-only audit of all source links, packet/render provenance, PDF hashes, legacy equality, exact file inventory, deterministic catalog and transport size bound. `--write` rewrites catalog metadata only after these checks pass.
+- `npx vitest run test/utils/formsLocalization.test.js test/utils/englishFormsPilot.test.js test/utils/englishFormsWave.test.js`: source freshness, inventory, both real transports, every PDF open/download, authorization revocation, corruption, cancellation and same-language fallback.
+- `npx playwright test --config english-pilot.playwright.config.ts`: original nine downloads, age routes, high-DPI zoom, language changes, cancellation, unavailable releases, staged-release fallback and regular-user gating in desktop, tablet and mobile Chromium profiles.
+- `npx playwright test --config english-wave.playwright.config.ts --project=reader-desktop`: all 30 units, opening and byte-checking worksheet, practice and guide downloads (90 distinct PDFs).
+- `npx playwright test --config english-wave.playwright.config.ts --project=reader-tablet --project=reader-mobile --grep representative`: all five tracks on both smaller profiles, including four-page guides and horizontal overflow checks.
 
-Publish the Node/private-asset release and the updated Base44 function and frontend through the established owner workflow. During a staggered release, an older server reports English unavailable; Hebrew retains its existing release fallback behavior. No merge or production publication is performed by this change.
+Local PDF inspection additionally checks selectable English text, absence of untranslated Hebrew, actual PDF page count and A4 size for all 261 new files. Visual review samples cover every new unit, with full-size checks of dense guide pages. Clinical/rights review remains separate and pending. CI rerenders all new forms and retains screenshots and QA results for seven days.
 
-After owner publication, verify English as admin on the public site: nine-form coverage, each age route, Open, fullscreen/zoom, Download; switch to Hebrew (970), then an untranslated language. Verify a regular user still cannot access review content. Check both the Base44 and Railway hosts if both are in use.
+The prior one-track/one-unit/nine-form expectations are updated to five tracks/six units/270 forms. Dedicated fallback tests retain the original one-track/one-unit/nine-form expectations. Assertions are not skipped or weakened.
 
-The former browser assertion that **English** must be unavailable now checks **Spanish**, which remains unavailable. New English tests prove its allowed behavior and preserve the no-request assertion for regular users and all five unsupported languages.
+## Publication and public verification
+
+The owner merges and publishes the Node/private assets, Base44 function (including shared release pins), and frontend. This PR does not merge or publish production. During staged deployment the old English catalog remains available to old clients; new clients can use the same-language fallback.
+
+After publication, verify as admin: 270/970 coverage; five tracks; six units in each; all age routes; Open, fullscreen/zoom and Download; Hebrew still 970; another language unavailable; regular users denied. Verify both Base44 and Railway hosts if both are used.
+
+## Remaining English waves
+
+| Wave | Scope | New forms | Cumulative English forms |
+| --- | --- | ---: | ---: |
+| Series 01 (this release) | MOOD, SELF, PERF, REG, EXEC | 261 | 270 |
+| Next | SOC, SLEEP, CHANGE, FAMILY, SCREEN | 270 | 540 |
+| Following | SHAME, MEANING, OCD, TRAUMA | 276 | 816 |
+| Final | Original shared/core/anxiety content | 154 | 970 |
+
+These are planned scopes, not completed translations. Before the next cumulative release, implement catalog splitting if needed: the existing 512 KiB transport limit must remain intact. The builder deliberately fails above this bound. The same source-linked packet and QA workflow can then be reused for the remaining five target languages; this wave does not claim to complete all seven languages.

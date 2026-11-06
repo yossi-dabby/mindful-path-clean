@@ -1,5 +1,5 @@
 import { base44 } from '@/api/base44Client';
-import { ENGLISH_CATALOG_PATH, isPilotFileId, SERIES12_CATALOG_PATH, SERIES11_CATALOG_PATH, SERIES10_CATALOG_PATH, SERIES09_CATALOG_PATH, SERIES08_CATALOG_PATH, SERIES07_CATALOG_PATH, SERIES06_CATALOG_PATH, SERIES05_CATALOG_PATH, SERIES04_CATALOG_PATH, SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, EXPANDED_CATALOG_PATH, P3_CATALOG_PATH, isPilotCatalogPath, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
+import { ENGLISH_SERIES01_CATALOG_PATH, ENGLISH_CATALOG_PATH, isPilotFileId, SERIES12_CATALOG_PATH, SERIES11_CATALOG_PATH, SERIES10_CATALOG_PATH, SERIES09_CATALOG_PATH, SERIES08_CATALOG_PATH, SERIES07_CATALOG_PATH, SERIES06_CATALOG_PATH, SERIES05_CATALOG_PATH, SERIES04_CATALOG_PATH, SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, EXPANDED_CATALOG_PATH, P3_CATALOG_PATH, isPilotCatalogPath, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
 
 const RAILWAY_ORIGIN = 'https://mindful-path-production-7704.up.railway.app';
 
@@ -54,16 +54,20 @@ export async function requestPilotCatalog(options = {}) {
   const language = options.language || 'he';
   checkAbort(options.signal);
   if (language === 'en') {
-    let response;
-    try { response = await requestPilot(ENGLISH_CATALOG_PATH, options); }
-    catch (error) {
-      if (error.message === 'PILOT_RELEASE_UNAVAILABLE') throw new Error('PILOT_TRANSLATION_UNAVAILABLE');
-      throw error;
+    // Staggered publication may retain the previous English release, never Hebrew.
+    for (const path of [ENGLISH_SERIES01_CATALOG_PATH, ENGLISH_CATALOG_PATH]) {
+      let response;
+      try { response = await requestPilot(path, options); }
+      catch (error) {
+        if (error.message === 'PILOT_RELEASE_UNAVAILABLE') continue;
+        throw error;
+      }
+      const catalog = await response.json();
+      if (!await validatePilotCatalog(catalog, path)) throw new Error('PILOT_INVALID');
+      checkAbort(options.signal);
+      return { catalog, expansionPending: path !== ENGLISH_SERIES01_CATALOG_PATH };
     }
-    const catalog = await response.json();
-    if (!await validatePilotCatalog(catalog, ENGLISH_CATALOG_PATH)) throw new Error('PILOT_INVALID');
-    checkAbort(options.signal);
-    return { catalog, expansionPending: false };
+    throw new Error('PILOT_TRANSLATION_UNAVAILABLE');
   }
   if (language !== 'he') throw new Error('PILOT_TRANSLATION_UNAVAILABLE');
   // Preserve installed generations during staggered publication. Validate

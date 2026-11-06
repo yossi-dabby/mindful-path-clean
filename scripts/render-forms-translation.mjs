@@ -12,7 +12,11 @@ const language = process.argv.find(arg => arg.startsWith('--language='))?.split(
 const unit = process.argv.find(arg => arg.startsWith('--unit='))?.split('=')[1] || 'mood-03';
 if (!/^(en|es|fr|de|it|pt)$/.test(language) || !/^[a-z]+-\d{2}$/.test(unit)) throw new Error('Invalid translation selection');
 const output = resolve(root, `tmp/forms-localization/${language}/${unit}`);
-const packet = JSON.parse(await readFile(resolve(root, `content/forms-localization/${language}/${unit}.json`), 'utf8'));
+const packetBytes = await readFile(resolve(root, `content/forms-localization/${language}/${unit}.json`));
+const packet = JSON.parse(packetBytes);
+const inputFiles = ['scripts/render-forms-translation.mjs', 'content/forms-localization/review/style.css', 'content/forms-localization/review/print_guard.js'];
+const inputHashes = Object.fromEntries(await Promise.all(inputFiles.map(async path => [path, createHash('sha256').update(await readFile(resolve(root, path))).digest('hex')])));
+const packetSha256 = createHash('sha256').update(packetBytes).digest('hex');
 if (packet.language !== language || packet.unit.toLowerCase() !== unit) throw new Error('Translation packet mismatch');
 for (const key of ['ok', 'overflow', 'printBlocked', 'answersHeader', 'fieldLabel', 'answerLine']) {
   if (typeof packet.messages?.[key] !== 'string' || !packet.messages[key].trim()) throw new Error(`Missing message: ${key}`);
@@ -86,11 +90,21 @@ try {
       blank: [...document.querySelectorAll('[contenteditable]')].every(field => !field.textContent.trim()),
       fits: [...document.querySelectorAll('.sheet')].every(sheet => sheet.querySelector('.content').getBoundingClientRect().bottom + 8 < sheet.querySelector('.footer').getBoundingClientRect().top),
       fieldsFit: window.MindfulPathForm.validate(),
+      textFits: [...document.querySelectorAll('.sheet')].every(sheet => {
+        const bounds = sheet.getBoundingClientRect();
+        const walker = document.createTreeWalker(sheet, NodeFilter.SHOW_TEXT);
+        while (walker.nextNode()) {
+          if (!walker.currentNode.textContent.trim()) continue;
+          const range = document.createRange(); range.selectNodeContents(walker.currentNode);
+          if ([...range.getClientRects()].some(rect => rect.left < bounds.left - 1 || rect.right > bounds.right + 1 || rect.bottom > bounds.bottom + 1)) return false;
+        }
+        return true;
+      }),
       direction: getComputedStyle(document.documentElement).direction,
       fields: [...document.querySelectorAll('[contenteditable]')].map(field => ({ width: field.getBoundingClientRect().width, height: field.getBoundingClientRect().height })),
       sections: [...document.querySelectorAll('.section-title .num')].map(el => el.textContent),
     }));
-    if (!state.fonts || !state.blank || !state.fits || !state.fieldsFit || state.direction !== 'ltr' ||
+    if (!state.fonts || !state.blank || !state.fits || !state.textFits || !state.fieldsFit || state.direction !== 'ltr' ||
         state.pages !== sourceLayout.pages || JSON.stringify(state.fields) !== JSON.stringify(sourceLayout.fields) ||
         JSON.stringify(state.sections) !== JSON.stringify(sourceLayout.sections) || network.length) {
       throw new Error(`${form.id}: layout/parity failure ${JSON.stringify(state)}`);
@@ -118,7 +132,7 @@ try {
       if (download.suggestedFilename() !== `${form.id}-answers.txt` || !(await readFile(await download.path(), 'utf8')).includes(long)) throw new Error('Complete answer download failed');
     }
     results.push({ id: form.id, pages: state.pages, fields: state.fields.length, bytes: pdf.length,
-      sha256: createHash('sha256').update(pdf).digest('hex'), sourceId: source.id, status: 'draft' });
+      sha256: createHash('sha256').update(pdf).digest('hex'), sourceId: source.id, status: 'draft', packetSha256, inputHashes });
     await page.close();
     console.log(`${form.id}: ${state.pages} pages; source/layout/fill/download parity passed`);
   }

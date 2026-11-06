@@ -22,6 +22,9 @@ on:
       - 'hebrew-pilot.playwright.config.ts'
       - 'pdf-reader.playwright.config.ts'
       - 'english-pilot.playwright.config.ts'
+      - 'english-wave.playwright.config.ts'
+      - 'scripts/build-english-wave.mjs'
+      - 'test/utils/englishFormsWave.test.js'
       - 'scripts/build-english-pilot.mjs'
       - 'test/utils/englishFormsPilot.test.js'
       - '.github/workflows/hebrew-forms-pilot.yml'
@@ -143,6 +146,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: node scripts/build-english-pilot.mjs
+      - run: node scripts/build-english-wave.mjs
       - run: npx playwright install --with-deps chromium
       - run: npm run build
         env:
@@ -150,6 +154,8 @@ jobs:
       - run: npx playwright test --config english-pilot.playwright.config.ts
         env:
           VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'
+      - run: npx playwright test --config english-wave.playwright.config.ts --project=reader-desktop
+      - run: npx playwright test --config english-wave.playwright.config.ts --project=reader-tablet --project=reader-mobile --grep representative
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

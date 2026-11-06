@@ -3,14 +3,16 @@ import { readFile, writeFile, readdir, copyFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { auditFormSources } from './audit-form-sources.mjs';
 import { buildTranslationReviewCatalog } from '../src/lib/formsLocalization.js';
-import { canonicalCatalog } from '../base44/functions/getHebrewFormsPilot/releases.js';
+import { canonicalCatalog, ENGLISH_CURRENT_FORM_IDS } from '../base44/functions/getHebrewFormsPilot/releases.js';
 
 const root = new URL('../', import.meta.url);
 const read = path => readFile(new URL(path, root));
 const json = async path => JSON.parse(await read(path));
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
-const manifest = await json('content/forms-localization/waves/en-series-01.json');
-const legacy = await json('server/private/english-pilot-mood-03-catalog.json');
+const wave = process.argv.find(arg => arg.startsWith('--wave='))?.split('=')[1] || 'series-01';
+if (!['series-01', 'series-02'].includes(wave)) throw new Error('Unknown English wave');
+const manifest = await json(`content/forms-localization/waves/en-${wave}.json`);
+const legacy = await json(wave === 'series-01' ? 'server/private/english-pilot-mood-03-catalog.json' : 'server/private/english-pilot-series-01-catalog.json');
 const sources = await auditFormSources();
 const drafts = [], packetHashes = new Map();
 for (const unit of manifest.units) {
@@ -24,7 +26,7 @@ for (const unit of manifest.units) {
 }
 const review = buildTranslationReviewCatalog(sources, drafts, 'en');
 if (review.stale.length || review.forms.length !== manifest.count) throw new Error('English wave needs source review');
-const qaPath = 'content/forms-localization/review/en-series-01-qa.json';
+const qaPath = `content/forms-localization/review/en-${wave}-qa.json`;
 const newIds = new Set(drafts.filter(f => !manifest.preserveUnits.includes(f.unit.toLowerCase())).map(f => f.id));
 if (newIds.size !== manifest.newCount) throw new Error('Unexpected new form count');
 if (process.argv.includes('--install')) {
@@ -66,9 +68,40 @@ for (const draft of review.forms) {
   catalog.forms.push(form);
 }
 const files = await readdir(new URL('server/private/forms-en/', root));
-if (files.length !== manifest.count || files.some(file => !drafts.some(f => `${f.id}.pdf` === file))) throw new Error('Orphan or missing English file');
-if (Buffer.byteLength(JSON.stringify(catalog)) >= 512 * 1024) throw new Error('Catalog exceeds transport bound; split the next release before enlarging it');
-const target = new URL(`server/private/${manifest.catalogFile}`, root), output = JSON.stringify(catalog, null, 2) + '\n';
-if (process.argv.includes('--write') || process.argv.includes('--install')) await writeFile(target, output);
-else if (await readFile(target, 'utf8') !== output) throw new Error('English wave catalog is stale');
-console.log(`${manifest.count} English drafts; ${manifest.newCount} newly verified PDFs; ${Buffer.byteLength(JSON.stringify(catalog))} catalog bytes; SHA-256 ${hash(canonicalCatalog(catalog))}`);
+if (files.length !== ENGLISH_CURRENT_FORM_IDS.length || files.some(file => !ENGLISH_CURRENT_FORM_IDS.some(id => `${id}.pdf` === file))) throw new Error('Orphan or missing English file');
+const writing = process.argv.includes('--write') || process.argv.includes('--install');
+async function emit(path, value) {
+  const output = JSON.stringify(value, null, 2) + '\n';
+  if (Buffer.byteLength(JSON.stringify(value)) >= 512 * 1024) throw new Error('Catalog exceeds unchanged transport bound');
+  if (writing) await writeFile(new URL(path, root), output);
+  else if (await readFile(new URL(path, root), 'utf8') !== output) throw new Error(`Stale release: ${path}`);
+}
+if (manifest.split) {
+  const index = { schemaVersion: 1, kind: 'index', version: catalog.version, language: 'en',
+    sourceCatalogVersion: catalog.sourceCatalogVersion, coverage: catalog.coverage, ageGroups: catalog.ageGroups, parts: [] };
+  const pins = {};
+  for (const track of manifest.tracks) {
+    const part = { version: catalog.version, language: 'en', sourceCatalogVersion: catalog.sourceCatalogVersion, track,
+      forms: catalog.forms.filter(form => form.track === track) };
+    const path = `${manifest.catalogPath}-${track}`, sha256 = hash(canonicalCatalog(part));
+    if (part.forms.length !== 54) throw new Error(`Incomplete track: ${track}`);
+    const bytes = Buffer.byteLength(JSON.stringify(part));
+    index.parts.push({ path, track, count: part.forms.length, sha256, bytes });
+    pins[path] = { language: 'en', version: catalog.version, count: part.forms.length, track, sha256 };
+    await emit(`server/private/english-pilot-${wave}-${track}.json`, part);
+  }
+  pins[manifest.catalogPath] = { language: 'en', version: catalog.version, count: manifest.count, kind: 'index', sha256: hash(canonicalCatalog(index)) };
+  await emit(`server/private/${manifest.catalogFile}`, index);
+  // Keep the shared release contract dependency-free for Node, Workers and browsers.
+  const target = new URL('base44/functions/getHebrewFormsPilot/releases.js', root);
+  const pattern = /\/\/ BEGIN GENERATED ENGLISH SERIES 02 PINS[\s\S]*?\/\/ END GENERATED ENGLISH SERIES 02 PINS/;
+  const code = '// BEGIN GENERATED ENGLISH SERIES 02 PINS\nconst ENGLISH_SERIES02_RELEASES = Object.freeze(' + JSON.stringify(pins, null, 2) + ');\n// END GENERATED ENGLISH SERIES 02 PINS';
+  const source = await readFile(target, 'utf8');
+  if (!pattern.test(source)) throw new Error('Missing split-release fingerprint block');
+  if (writing) await writeFile(target, source.replace(pattern, () => code));
+  else if (source.match(pattern)[0] !== code) throw new Error('Stale split-release fingerprints');
+  console.log(`${manifest.count} English drafts; ${manifest.newCount} newly verified PDFs; ${index.parts.length} independently pinned catalogs; largest ${Math.max(...index.parts.map(p => p.bytes))} bytes`);
+} else {
+  await emit(`server/private/${manifest.catalogFile}`, catalog);
+  console.log(`${manifest.count} English drafts; ${manifest.newCount} newly verified PDFs; ${Buffer.byteLength(JSON.stringify(catalog))} catalog bytes; SHA-256 ${hash(canonicalCatalog(catalog))}`);
+}

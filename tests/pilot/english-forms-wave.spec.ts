@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { mockApi } from '../helpers/ui';
 
-for (const track of ['MOOD', 'SELF', 'PERF', 'REG', 'EXEC']) for (let number = 1; number <= 6; number++) {
+for (const track of ['MOOD', 'SELF', 'PERF', 'REG', 'EXEC', 'SOC', 'SLEEP', 'CHANGE', 'FAMILY', 'SCREEN', 'SHAME', 'MEANING']) for (let number = 1; number <= 6; number++) {
   const unit = `${track}-${String(number).padStart(2, '0')}`;
   const age = ['CH', 'TE', 'AD', 'OA'][(number - 1) % 4];
   test(`${unit} ${age} opens and downloads worksheet, practice and guide${number === 6 ? ' [representative]' : ''}`, async ({ page }, info) => {
@@ -21,9 +21,9 @@ for (const track of ['MOOD', 'SELF', 'PERF', 'REG', 'EXEC']) for (let number = 1
     });
     await page.goto('http://127.0.0.1:3005/Tools');
     await page.getByRole('link', { name: 'CBT worksheets', exact: true }).click();
-    await expect(page.getByTestId('pilot-translation-coverage')).toContainText('270 of 970');
+    await expect(page.getByTestId('pilot-translation-coverage')).toContainText('648 of 970');
     await page.getByTestId(`pilot-age-${age}`).click();
-    await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(5);
+    await expect(page.locator('[data-testid^="pilot-track-"]')).toHaveCount(12);
     await page.getByTestId(`pilot-track-${track.toLowerCase()}`).click();
     await expect(page.locator('[data-testid^="pilot-unit-"]')).toHaveCount(6);
     await page.getByTestId(`pilot-unit-${unit}`).click();

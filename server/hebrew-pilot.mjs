@@ -1,6 +1,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { ENGLISH_SERIES01_CATALOG_PATH, ENGLISH_SERIES01_FORM_IDS, ENGLISH_CATALOG_PATH, isPilotFileId, SERIES12_CATALOG_PATH, SERIES11_CATALOG_PATH, SERIES10_CATALOG_PATH, SERIES09_CATALOG_PATH, SERIES08_CATALOG_PATH, SERIES07_CATALOG_PATH, SERIES06_CATALOG_PATH, SERIES05_CATALOG_PATH, SERIES04_CATALOG_PATH, SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, P3_CATALOG_PATH, PILOT_RELEASES, isPilotCatalogPath, validatePilotCatalog } from '../base44/functions/getHebrewFormsPilot/releases.js';
+import { ENGLISH_SERIES02_CATALOG_PATH, ENGLISH_SERIES02_TRACKS, ENGLISH_CURRENT_FORM_IDS, assembleEnglishCatalog, canonicalCatalog, ENGLISH_SERIES01_CATALOG_PATH, ENGLISH_CATALOG_PATH, isPilotFileId, SERIES12_CATALOG_PATH, SERIES11_CATALOG_PATH, SERIES10_CATALOG_PATH, SERIES09_CATALOG_PATH, SERIES08_CATALOG_PATH, SERIES07_CATALOG_PATH, SERIES06_CATALOG_PATH, SERIES05_CATALOG_PATH, SERIES04_CATALOG_PATH, SERIES03_CATALOG_PATH, SERIES02_CATALOG_PATH, SERIES01_CATALOG_PATH, P4B_CATALOG_PATH, P4A_CATALOG_PATH, P3_CATALOG_PATH, PILOT_RELEASES, isPilotCatalogPath, validatePilotCatalog } from '../base44/functions/getHebrewFormsPilot/releases.js';
 
 export const PILOT_PREFIX = '/api/hebrew-forms-pilot';
 const privateRoot = new URL('./private/', import.meta.url);
@@ -46,16 +46,26 @@ export async function loadPilot() {
   if (!await validatePilotCatalog(englishCatalog, ENGLISH_CATALOG_PATH)) throw new Error('Invalid English pilot release');
   const englishSeries01Catalog = JSON.parse(await readFile(new URL('english-pilot-series-01-catalog.json', privateRoot), 'utf8'));
   if (!await validatePilotCatalog(englishSeries01Catalog, ENGLISH_SERIES01_CATALOG_PATH)) throw new Error('Invalid English wave release');
-  for (const prior of englishCatalog.forms) {
-    const current = englishSeries01Catalog.forms.find(form => form.id === prior.id);
-    if (!current || current.sha256 !== prior.sha256 || current.bytes !== prior.bytes) throw new Error('English pilot PDF changed');
+  const englishSeries02Index = JSON.parse(await readFile(new URL('english-pilot-series-02-index.json', privateRoot), 'utf8'));
+  if (!await validatePilotCatalog(englishSeries02Index, ENGLISH_SERIES02_CATALOG_PATH)) throw new Error('Invalid English index');
+  const englishParts = [], englishPartCatalogs = {};
+  for (const track of ENGLISH_SERIES02_TRACKS) {
+    const path = `${ENGLISH_SERIES02_CATALOG_PATH}-${track}`;
+    const part = JSON.parse(await readFile(new URL(`english-pilot-series-02-${track}.json`, privateRoot), 'utf8'));
+    if (!await validatePilotCatalog(part, path)) throw new Error('Invalid English catalog part');
+    englishParts.push(part); englishPartCatalogs[path] = part;
+  }
+  const englishSeries02Catalog = assembleEnglishCatalog(englishSeries02Index, englishParts);
+  for (const prior of [...englishCatalog.forms, ...englishSeries01Catalog.forms]) {
+    const current = englishSeries02Catalog.forms.find(form => form.id === prior.id);
+    if (!current || canonicalCatalog(current) !== canonicalCatalog(prior)) throw new Error('Previously installed English form changed');
   }
   const englishRoot = new URL('forms-en/', privateRoot);
   const englishNames = new Set(await readdir(englishRoot));
   const englishFiles = new Map();
-  for (const form of englishSeries01Catalog.forms) {
+  for (const form of englishSeries02Catalog.forms) {
     const source = series12Catalog.forms.find(source => source.id === form.sourceId);
-    if (!ENGLISH_SERIES01_FORM_IDS.includes(form.id) || !englishNames.has(`${form.id}.pdf`) ||
+    if (!ENGLISH_CURRENT_FORM_IDS.includes(form.id) || !englishNames.has(`${form.id}.pdf`) ||
         !source || source.sha256 !== form.sourcePdfSha256 || source.contentVersion !== form.sourceVersion ||
         source.age !== form.age || source.track !== form.track || source.unit !== form.unit) throw new Error('Invalid English source link');
     const data = await readFile(new URL(`${form.id}.pdf`, englishRoot));
@@ -63,9 +73,9 @@ export async function loadPilot() {
         data.length !== form.bytes || createHash('sha256').update(data).digest('hex') !== form.sha256) throw new Error('Invalid English pilot asset');
     englishFiles.set(form.id, data);
   }
-  if (englishFiles.size !== PILOT_RELEASES[ENGLISH_SERIES01_CATALOG_PATH].count || englishNames.size !== englishFiles.size) throw new Error('Invalid English pilot count');
-  const translations = { catalogs: { [ENGLISH_CATALOG_PATH]: englishCatalog, [ENGLISH_SERIES01_CATALOG_PATH]: englishSeries01Catalog }, files: englishFiles };
-  return { translations, englishCatalog, englishSeries01Catalog, catalog, expandedCatalog, p3Catalog, p4aCatalog, p4bCatalog, series01Catalog, series02Catalog, series03Catalog, series04Catalog, series05Catalog, series06Catalog, series07Catalog, series08Catalog, series09Catalog, series10Catalog, series11Catalog, series12Catalog, catalogs, files };
+  if (englishFiles.size !== PILOT_RELEASES[ENGLISH_SERIES02_CATALOG_PATH].count || englishNames.size !== englishFiles.size) throw new Error('Invalid English pilot count');
+  const translations = { catalogs: { [ENGLISH_SERIES02_CATALOG_PATH]: englishSeries02Index, ...englishPartCatalogs, [ENGLISH_CATALOG_PATH]: englishCatalog, [ENGLISH_SERIES01_CATALOG_PATH]: englishSeries01Catalog }, files: englishFiles };
+  return { translations, englishSeries02Index, englishSeries02Catalog, englishCatalog, englishSeries01Catalog, catalog, expandedCatalog, p3Catalog, p4aCatalog, p4bCatalog, series01Catalog, series02Catalog, series03Catalog, series04Catalog, series05Catalog, series06Catalog, series07Catalog, series08Catalog, series09Catalog, series10Catalog, series11Catalog, series12Catalog, catalogs, files };
 }
 
 // Match the installed Base44 SDK auth.me endpoint. The app ID is server-owned;

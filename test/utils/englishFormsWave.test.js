@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { ENGLISH_SERIES01_FORM_IDS, ENGLISH_SERIES01_CATALOG_PATH, isPilotFileId, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
+import { ENGLISH_CURRENT_FORM_IDS, ENGLISH_SERIES01_FORM_IDS, ENGLISH_SERIES01_CATALOG_PATH, isPilotFileId, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
 
 const read = path => readFile(new URL(`../../${path}`, import.meta.url));
 const json = async path => JSON.parse(await read(path));
@@ -39,8 +39,8 @@ describe('English series 01 inventory and source/render provenance', () => {
       }
     }
     const names = await readdir(new URL('../../server/private/forms-en/', import.meta.url));
-    expect(names.sort()).toEqual(catalog.forms.map(f => `${f.id}.pdf`).sort());
-    for (const id of ['MP-SOC-01-W-CH-EN', 'MP-EXEC-07-W-CH-EN', 'MP-EXEC-01-W-ALL-EN', '../MP-EXEC-01-W-CH-EN']) expect(isPilotFileId(id)).toBe(false);
+    expect(names.sort()).toEqual(ENGLISH_CURRENT_FORM_IDS.map(id => `${id}.pdf`).sort());
+    for (const id of ['MP-ANX-01-W-CH-EN', 'MP-EXEC-07-W-CH-EN', 'MP-EXEC-01-W-ALL-EN', '../MP-EXEC-01-W-CH-EN']) expect(isPilotFileId(id)).toBe(false);
   });
 
   it('reconstructs the release only from current source fingerprints and verified renders', () => {

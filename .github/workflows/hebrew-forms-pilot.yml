@@ -24,7 +24,7 @@ on:
       - 'english-pilot.playwright.config.ts'
       - 'english-wave.playwright.config.ts'
       - 'scripts/build-english-wave.mjs'
-      - 'test/utils/englishFormsWave.test.js'
+      - 'test/utils/englishFormsWave*.test.js'
       - 'scripts/build-english-pilot.mjs'
       - 'test/utils/englishFormsPilot.test.js'
       - '.github/workflows/hebrew-forms-pilot.yml'
@@ -137,7 +137,7 @@ jobs:
   english-pilot:
     name: English forms language isolation and reader
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -147,6 +147,7 @@ jobs:
       - run: npm ci
       - run: node scripts/build-english-pilot.mjs
       - run: node scripts/build-english-wave.mjs
+      - run: node scripts/build-english-wave.mjs --wave=series-02
       - run: npx playwright install --with-deps chromium
       - run: npm run build
         env:

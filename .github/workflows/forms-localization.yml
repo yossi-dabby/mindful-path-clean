@@ -11,7 +11,7 @@ on:
       - 'scripts/build-english-pilot.mjs'
       - 'scripts/build-english-wave.mjs'
       - 'scripts/render-english-wave.mjs'
-      - 'test/utils/englishFormsWave.test.js'
+      - 'test/utils/englishFormsWave*.test.js'
       - 'base44/functions/getHebrewFormsPilot/releases.js'
       - 'test/utils/englishFormsPilot.test.js'
       - 'scripts/render-forms-translation.mjs'
@@ -27,7 +27,7 @@ jobs:
   readiness:
     name: Source parity and English draft layout
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -38,13 +38,15 @@ jobs:
       - run: node scripts/audit-form-sources.mjs
       - run: node scripts/build-english-pilot.mjs
       - run: node scripts/build-english-wave.mjs
-      - run: npx vitest run test/utils/formsLocalization.test.js test/utils/englishFormsPilot.test.js test/utils/englishFormsWave.test.js
+      - run: node scripts/build-english-wave.mjs --wave=series-02
+      - run: npx vitest run test/utils/formsLocalization.test.js test/utils/englishFormsPilot.test.js test/utils/englishFormsWave.test.js test/utils/englishFormsWave02.test.js
       - run: npx playwright install --with-deps chromium
       - run: node scripts/render-forms-translation.mjs --screenshots
       - run: node scripts/render-english-wave.mjs --screenshots
+      - run: node scripts/render-english-wave.mjs --wave=series-02 --screenshots
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: english-series-01-review-drafts
+          name: english-series-02-review-drafts
           path: tmp/forms-localization/en/
           retention-days: 7

@@ -1,5 +1,105 @@
+// BEGIN GENERATED ENGLISH SERIES 02 PINS
+const ENGLISH_SERIES02_RELEASES = Object.freeze({
+  "catalog-en-series-02-mood": {
+    "language": "en",
+    "version": "0.3-en-series-02",
+    "count": 54,
+    "track": "mood",
+    "sha256": "1a37a35d7fb849b1a1bbb69b3132e64147cfdce0fe457eae6b97c6320a40a62a"
+  },
+  "catalog-en-series-02-self": {
+    "language": "en",
+    "version": "0.3-en-series-02",
+    "count": 54,
+    "track": "self",
+    "sha256": "d70a790c016e24bf7322ddb6f6c01c70d7921a8c97f3bd65105c0f6cc66c51d0"
+  },
+  "catalog-en-series-02-perf": {
+    "language": "en",
+    "version": "0.3-en-series-02",
+    "count": 54,
+    "track": "perf",
+    "sha256": "1fc7615f49c3e855dd29c5b179e899db96a512fdb0d45fd6bc9aee39ce32bcf0"
+  },
+  "catalog-en-series-02-reg": {
+    "language": "en",
+    "version": "0.3-en-series-02",
+    "count": 54,
+    "track": "reg",
+    "sha256": "080383f98975e297829cce97e88df4a443a43df73331a80a7d28737314cc6ed7"
+  },
+  "catalog-en-series-02-exec": {
+    "language": "en",
+    "version": "0.3-en-series-02",
+    "count": 54,
+    "track": "exec",
+    "sha256": "80fd999f4a76e647e729f7dea19d88d19fea9338cc8a9db5b688d9530b0145dc"
+  },
+  "catalog-en-series-02-soc": {
+    "language": "en",
+    "version": "0.3-en-series-02",
+    "count": 54,
+    "track": "soc",
+    "sha256": "e265d4c55b2724760f45acda716f49e40ca93eaa5fc885b525028dba397337c3"
+  },
+  "catalog-en-series-02-sleep": {
+    "language": "en",
+    "version": "0.3-en-series-02",
+    "count": 54,
+    "track": "sleep",
+    "sha256": "164f9c794b9015e5743371880d589f6b5ee494b5e81e3ef5aaa16df1138be8a8"
+  },
+  "catalog-en-series-02-change": {
+    "language": "en",
+    "version": "0.3-en-series-02",
+    "count": 54,
+    "track": "change",
+    "sha256": "05fa94d04799dc2392f53106f3dc089dddae686aa208b77cdf8f88c6dc9c568e"
+  },
+  "catalog-en-series-02-family": {
+    "language": "en",
+    "version": "0.3-en-series-02",
+    "count": 54,
+    "track": "family",
+    "sha256": "7a3202d400c6dd357ef6034165182517301f0cef48089580a21b0764010ac1a5"
+  },
+  "catalog-en-series-02-screen": {
+    "language": "en",
+    "version": "0.3-en-series-02",
+    "count": 54,
+    "track": "screen",
+    "sha256": "be1361bf54c542afc1a28992ba565a501251b065aa3a752bc99150836ee3655d"
+  },
+  "catalog-en-series-02-shame": {
+    "language": "en",
+    "version": "0.3-en-series-02",
+    "count": 54,
+    "track": "shame",
+    "sha256": "8eca09d820a95013fc8e85f7cd9d6a902f0f0e4390edd352d9d92f7a5321d45f"
+  },
+  "catalog-en-series-02-meaning": {
+    "language": "en",
+    "version": "0.3-en-series-02",
+    "count": 54,
+    "track": "meaning",
+    "sha256": "1fb75e0d73725a7d4037ed5b48ee26f65e92888ea38eb53f440a4c0b256a8300"
+  },
+  "catalog-en-series-02": {
+    "language": "en",
+    "version": "0.3-en-series-02",
+    "count": 648,
+    "kind": "index",
+    "sha256": "e1b513bb57810717fef54bd3ebeae745be55618d2eda47802cb6986013988722"
+  }
+});
+// END GENERATED ENGLISH SERIES 02 PINS
 // Shared by Workers, Railway and the browser. Only reviewed, pinned catalogs
 // are accepted; the original endpoint stays on 0.2 for older deployed clients.
+export const ENGLISH_SERIES02_CATALOG_PATH = 'catalog-en-series-02';
+export const ENGLISH_SERIES02_TRACKS = Object.freeze(['mood', 'self', 'perf', 'reg', 'exec', 'soc', 'sleep', 'change', 'family', 'screen', 'shame', 'meaning']);
+export const ENGLISH_CURRENT_FORM_IDS = Object.freeze(ENGLISH_SERIES02_TRACKS.flatMap(track =>
+  Array.from({ length: 6 }, (_, index) => [`MP-${track.toUpperCase()}-${String(index + 1).padStart(2, '0')}-G-ALL-EN`,
+    ...['W', 'P'].flatMap(kind => ['CH', 'TE', 'AD', 'OA'].map(age => `MP-${track.toUpperCase()}-${String(index + 1).padStart(2, '0')}-${kind}-${age}-EN`))]).flat()));
 export const ENGLISH_SERIES01_CATALOG_PATH = 'catalog-en-series-01';
 export const ENGLISH_SERIES01_FORM_IDS = Object.freeze(
   ['MOOD', 'SELF', 'PERF', 'REG', 'EXEC'].flatMap(track => Array.from({ length: 6 }, (_, index) =>
@@ -13,7 +113,7 @@ export const ENGLISH_FORM_IDS = Object.freeze([
 ]);
 
 export function isPilotFileId(id) {
-  return typeof id === 'string' && (/^MP-[A-Z0-9-]{1,80}-HE$/.test(id) || ENGLISH_SERIES01_FORM_IDS.includes(id));
+  return typeof id === 'string' && (/^MP-[A-Z0-9-]{1,80}-HE$/.test(id) || ENGLISH_CURRENT_FORM_IDS.includes(id));
 }
 
 export const EXPANDED_CATALOG_PATH = 'catalog-mood-01';
@@ -33,6 +133,7 @@ export const SERIES10_CATALOG_PATH = 'catalog-series-10';
 export const SERIES11_CATALOG_PATH = 'catalog-series-11';
 export const SERIES12_CATALOG_PATH = 'catalog-series-12';
 export const PILOT_RELEASES = Object.freeze({
+  ...ENGLISH_SERIES02_RELEASES,
   [ENGLISH_SERIES01_CATALOG_PATH]: Object.freeze({ language: 'en', version: '0.2-en-series-01', count: 270, sha256: '5adacbbaa325c24f7c4b2da1d63c5bd3c6b1e1c90507815a526ac298baf84737' }),
   [ENGLISH_CATALOG_PATH]: Object.freeze({ language: 'en', version: '0.1-en-mood-03', count: 9, sha256: '7212b2a928b8c04e5e8da94b06f97cd99e4fb667150cbae535ccf2e311a8b795' }),
   catalog: Object.freeze({ version: '0.2', count: 154, sha256: '2c1df7644d778508b37d2a5076d902906b241166e09f93d388295a8a9983d90b' }),
@@ -71,8 +172,36 @@ export async function validatePilotCatalog(catalog, path) {
   if (!isPilotCatalogPath(path)) return false;
   const release = PILOT_RELEASES[path];
   if (catalog?.language !== (release.language || 'he') || catalog.version !== release.version ||
-      !Array.isArray(catalog.forms) || catalog.forms.length !== release.count) return false;
+      (release.kind === 'index' ? catalog.kind !== 'index' || catalog.coverage?.available !== release.count || !Array.isArray(catalog.parts)
+        : !Array.isArray(catalog.forms) || catalog.forms.length !== release.count) ||
+      (release.track && catalog.track !== release.track)) return false;
   const digest = await globalThis.crypto.subtle.digest('SHA-256', new TextEncoder().encode(canonicalCatalog(catalog)));
   const hex = Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
   return hex === release.sha256;
+}
+
+// Assemble only a complete, independently verified release. No partially loaded library.
+export function assembleEnglishCatalog(index, parts) {
+  const release = PILOT_RELEASES[ENGLISH_SERIES02_CATALOG_PATH];
+  if (!release || index?.kind !== 'index' || index.language !== 'en' || index.version !== release.version ||
+      !Array.isArray(index.parts) || !Array.isArray(parts) || index.parts.length !== ENGLISH_SERIES02_TRACKS.length || parts.length !== index.parts.length) throw new Error('PILOT_INVALID');
+  const ids = new Set(), sourceIds = new Set();
+  const forms = [];
+  for (let i = 0; i < index.parts.length; i++) {
+    const spec = index.parts[i], part = parts[i], pin = PILOT_RELEASES[spec?.path];
+    if (!pin || !part || !Array.isArray(part.forms) || spec.track !== ENGLISH_SERIES02_TRACKS[i] || spec.path !== `${ENGLISH_SERIES02_CATALOG_PATH}-${spec.track}` ||
+        spec.sha256 !== pin.sha256 || spec.count !== pin.count || spec.bytes < 1 || spec.bytes >= 512 * 1024 ||
+        part.language !== 'en' || part.version !== index.version || part.track !== spec.track ||
+        part.sourceCatalogVersion !== index.sourceCatalogVersion || part.forms?.length !== spec.count ||
+        new TextEncoder().encode(JSON.stringify(part)).length !== spec.bytes) throw new Error('PILOT_INVALID');
+    for (const form of part.forms) {
+      if (!form || form.language !== 'en' || form.track !== spec.track || !ENGLISH_CURRENT_FORM_IDS.includes(form.id) ||
+          form.sourceId !== `${form.id.slice(0, -2)}HE` || ids.has(form.id) || sourceIds.has(form.sourceId)) throw new Error('PILOT_INVALID');
+      ids.add(form.id); sourceIds.add(form.sourceId); forms.push(form);
+    }
+  }
+  if (forms.length !== release.count || forms.length !== ENGLISH_CURRENT_FORM_IDS.length ||
+      index.coverage?.available !== forms.length || index.coverage?.total !== 970 || index.coverage.unavailable !== 970 - forms.length) throw new Error('PILOT_INVALID');
+  return { version: index.version, language: 'en', sourceCatalogVersion: index.sourceCatalogVersion,
+    coverage: index.coverage, ageGroups: index.ageGroups, forms };
 }

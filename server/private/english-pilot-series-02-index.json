@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "kind": "index",
+  "version": "0.3-en-series-02",
+  "language": "en",
+  "sourceCatalogVersion": "0.18-series-12",
+  "coverage": {
+    "available": 648,
+    "total": 970,
+    "unavailable": 322
+  },
+  "ageGroups": {
+    "CH": {
+      "label": "Children, approximately ages 6 to 11",
+      "adaptation": "Short, concrete questions; little writing; therapist support and the child’s own voice; coordinate parent involvement as needed."
+    },
+    "TE": {
+      "label": "Adolescents, approximately ages 12 to 17",
+      "adaptation": "Direct, respectful language; autonomy, belonging and privacy; examples from learning, relationships and family."
+    },
+    "AD": {
+      "label": "Adults",
+      "adaptation": "Examples from work, relationships, family and daily functioning; personal goals and practical exercises."
+    },
+    "OA": {
+      "label": "Older adults",
+      "adaptation": "Readable, spacious text; answering in conversation is an option; adapt to needs and preferences without assuming reduced ability."
+    },
+    "ALL": {
+      "label": "Shared across age groups",
+      "adaptation": "Shared wording with adaptations as needed. Therapist guides include separate notes for all four age groups."
+    }
+  },
+  "parts": [
+    {
+      "path": "catalog-en-series-02-mood",
+      "track": "mood",
+      "count": 54,
+      "sha256": "1a37a35d7fb849b1a1bbb69b3132e64147cfdce0fe457eae6b97c6320a40a62a",
+      "bytes": 50233
+    },
+    {
+      "path": "catalog-en-series-02-self",
+      "track": "self",
+      "count": 54,
+      "sha256": "d70a790c016e24bf7322ddb6f6c01c70d7921a8c97f3bd65105c0f6cc66c51d0",
+      "bytes": 49967
+    },
+    {
+      "path": "catalog-en-series-02-perf",
+      "track": "perf",
+      "count": 54,
+      "sha256": "1fc7615f49c3e855dd29c5b179e899db96a512fdb0d45fd6bc9aee39ce32bcf0",
+      "bytes": 49911
+    },
+    {
+      "path": "catalog-en-series-02-reg",
+      "track": "reg",
+      "count": 54,
+      "sha256": "080383f98975e297829cce97e88df4a443a43df73331a80a7d28737314cc6ed7",
+      "bytes": 49495
+    },
+    {
+      "path": "catalog-en-series-02-exec",
+      "track": "exec",
+      "count": 54,
+      "sha256": "80fd999f4a76e647e729f7dea19d88d19fea9338cc8a9db5b688d9530b0145dc",
+      "bytes": 49738
+    },
+    {
+      "path": "catalog-en-series-02-soc",
+      "track": "soc",
+      "count": 54,
+      "sha256": "e265d4c55b2724760f45acda716f49e40ca93eaa5fc885b525028dba397337c3",
+      "bytes": 49670
+    },
+    {
+      "path": "catalog-en-series-02-sleep",
+      "track": "sleep",
+      "count": 54,
+      "sha256": "164f9c794b9015e5743371880d589f6b5ee494b5e81e3ef5aaa16df1138be8a8",
+      "bytes": 49920
+    },
+    {
+      "path": "catalog-en-series-02-change",
+      "track": "change",
+      "count": 54,
+      "sha256": "05fa94d04799dc2392f53106f3dc089dddae686aa208b77cdf8f88c6dc9c568e",
+      "bytes": 50324
+    },
+    {
+      "path": "catalog-en-series-02-family",
+      "track": "family",
+      "count": 54,
+      "sha256": "7a3202d400c6dd357ef6034165182517301f0cef48089580a21b0764010ac1a5",
+      "bytes": 50738
+    },
+    {
+      "path": "catalog-en-series-02-screen",
+      "track": "screen",
+      "count": 54,
+      "sha256": "be1361bf54c542afc1a28992ba565a501251b065aa3a752bc99150836ee3655d",
+      "bytes": 50590
+    },
+    {
+      "path": "catalog-en-series-02-shame",
+      "track": "shame",
+      "count": 54,
+      "sha256": "8eca09d820a95013fc8e85f7cd9d6a902f0f0e4390edd352d9d92f7a5321d45f",
+      "bytes": 50314
+    },
+    {
+      "path": "catalog-en-series-02-meaning",
+      "track": "meaning",
+      "count": 54,
+      "sha256": "1fb75e0d73725a7d4037ed5b48ee26f65e92888ea38eb53f440a4c0b256a8300",
+      "bytes": 50463
+    }
+  ]
+}

@@ -39,6 +39,7 @@ public/pdfjs/
 # Offline multilingual review output; never ship generated drafts as app assets.
 /tmp/forms-localization/
 /tmp/english-wave-01/
+/tmp/english-wave-02/
 
 # Android build artifacts
 android/.gradle/

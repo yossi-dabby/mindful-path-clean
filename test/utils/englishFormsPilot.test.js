@@ -3,7 +3,7 @@ import { webcrypto } from 'node:crypto';
 import { createAppServer } from '../../server/index.mjs';
 import { loadPilot } from '../../server/hebrew-pilot.mjs';
 import { handleHebrewFormsPilot } from '../../base44/functions/getHebrewFormsPilot/handler.js';
-import { ENGLISH_CATALOG_PATH, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
+import { ENGLISH_CATALOG_PATH, ENGLISH_SERIES01_CATALOG_PATH, validatePilotCatalog } from '../../base44/functions/getHebrewFormsPilot/releases.js';
 
 const { invoke } = vi.hoisted(() => ({ invoke: vi.fn() }));
 vi.mock('@/api/base44Client', () => ({ base44: { functions: { invoke } } }));
@@ -42,7 +42,7 @@ describe('English pilot through real private server and Base44 proxy', () => {
 
   it('pins nine source-linked drafts independently from all 970 Hebrew forms', async () => {
     expect(pilot.files.size).toBe(970);
-    expect(pilot.translations.files.size).toBe(9);
+    expect(pilot.translations.files.size).toBe(270);
     const catalog = pilot.englishCatalog;
     expect(await validatePilotCatalog(catalog, ENGLISH_CATALOG_PATH)).toBe(true);
     expect(await validatePilotCatalog(pilot.series12Catalog, ENGLISH_CATALOG_PATH)).toBe(false);
@@ -63,16 +63,29 @@ describe('English pilot through real private server and Base44 proxy', () => {
     it(`serves every English PDF byte-for-byte and rechecks authorization on ${host}`, async () => {
       window.location.origin = host;
       const result = await requestPilotCatalog({ language: 'en' });
-      expect(result).toEqual({ catalog: pilot.englishCatalog, expansionPending: false });
-      for (const form of result.catalog.forms) for (const download of [false, true]) {
-        const pdf = await requestPilotPdf(form, { language: 'en', download });
-        expect(Buffer.from(await pdf.arrayBuffer())).toEqual(pilot.translations.files.get(form.id));
+      expect(result).toEqual({ catalog: pilot.englishSeries01Catalog, expansionPending: false });
+      // Bound concurrency while checking every open/download. Sequential HTTP keep-alive
+      // delays would otherwise make this 30-times-larger inventory exceed the test budget.
+      for (let offset = 0; offset < result.catalog.forms.length; offset += 8) {
+        await Promise.all(result.catalog.forms.slice(offset, offset + 8).flatMap(form => [false, true].map(async download => {
+          const pdf = await requestPilotPdf(form, { language: 'en', download });
+          expect(Buffer.from(await pdf.arrayBuffer()).equals(pilot.translations.files.get(form.id))).toBe(true);
+        })));
       }
       role = 'user';
       await expect(requestPilotCatalog({ language: 'en' })).rejects.toThrow('PILOT_AUTH');
       await expect(requestPilotPdf(result.catalog.forms[0], { language: 'en' })).rejects.toThrow('PILOT_AUTH');
       role = 'admin'; token = 'expired';
       await expect(requestPilotCatalog({ language: 'en' })).rejects.toThrow('PILOT_AUTH');
+    }, 30000);
+
+    it(`uses only the nine-form English fallback during staggered publication on ${host}`, async () => {
+      window.location.origin = host;
+      for (const status of [400, 404]) {
+        if (host === railway) fetch.mockResolvedValueOnce(new Response(null, { status }));
+        else invoke.mockRejectedValueOnce({ response: { status } });
+        expect(await requestPilotCatalog({ language: 'en' })).toEqual({ catalog: pilot.englishCatalog, expansionPending: true });
+      }
     });
 
     it(`never falls back across languages after missing/corrupt/error responses on ${host}`, async () => {
@@ -81,19 +94,21 @@ describe('English pilot through real private server and Base44 proxy', () => {
       for (const failure of [400, 404, 401, 403, 503, 'corrupt', 'hebrew', 'network']) {
         fetch.mockClear(); invoke.mockClear();
         if (typeof failure === 'number') {
-          if (direct) fetch.mockResolvedValueOnce(new Response(null, { status: failure }));
-          else invoke.mockRejectedValueOnce({ response: { status: failure } });
+          for (let attempt = 0; attempt < ([400, 404].includes(failure) ? 2 : 1); attempt++) {
+            if (direct) fetch.mockResolvedValueOnce(new Response(null, { status: failure }));
+            else invoke.mockRejectedValueOnce({ response: { status: failure } });
+          }
         } else if (failure === 'network') (direct ? fetch : invoke).mockRejectedValueOnce(new TypeError('offline'));
         else {
-          const catalog = structuredClone(failure === 'hebrew' ? pilot.series12Catalog : pilot.englishCatalog);
+          const catalog = structuredClone(failure === 'hebrew' ? pilot.series12Catalog : pilot.englishSeries01Catalog);
           if (failure === 'corrupt') catalog.forms[0].sha256 = '0'.repeat(64);
           if (direct) fetch.mockResolvedValueOnce(Response.json(catalog));
           else invoke.mockResolvedValueOnce({ data: { kind: 'catalog', catalog } });
         }
         await expect(requestPilotCatalog({ language: 'en' })).rejects.toThrow(
           [400, 404].includes(failure) ? 'PILOT_TRANSLATION_UNAVAILABLE' : [401, 403].includes(failure) ? 'PILOT_AUTH' : ['corrupt', 'hebrew'].includes(failure) ? 'PILOT_INVALID' : 'PILOT_UNAVAILABLE');
-        expect(direct ? fetch : invoke).toHaveBeenCalledTimes(1);
-        expect(direct ? fetch.mock.calls[0][0] : invoke.mock.calls[0][1].path).toBe(direct ? `/api/hebrew-forms-pilot/${ENGLISH_CATALOG_PATH}` : ENGLISH_CATALOG_PATH);
+        const requested = direct ? fetch.mock.calls.map(call => call[0].split('/').pop()) : invoke.mock.calls.map(call => call[1].path);
+        expect(requested).toEqual([400, 404].includes(failure) ? [ENGLISH_SERIES01_CATALOG_PATH, ENGLISH_CATALOG_PATH] : [ENGLISH_SERIES01_CATALOG_PATH]);
       }
     });
   }
@@ -102,7 +117,7 @@ describe('English pilot through real private server and Base44 proxy', () => {
     for (const language of ['es', 'fr', 'de', 'it', 'pt']) await expect(requestPilotCatalog({ language })).rejects.toThrow('PILOT_TRANSLATION_UNAVAILABLE');
     await expect(requestPilotPdf(pilot.englishCatalog.forms[0], { language: 'he' })).rejects.toThrow('PILOT_INVALID');
     await expect(requestPilotPdf(pilot.series12Catalog.forms[0], { language: 'en' })).rejects.toThrow('PILOT_INVALID');
-    await expect(requestPilotPdf({ id: 'MP-MOOD-04-W-CH-EN' }, { language: 'en' })).rejects.toThrow('PILOT_INVALID');
+    await expect(requestPilotPdf({ id: 'MP-SOC-01-W-CH-EN' }, { language: 'en' })).rejects.toThrow('PILOT_INVALID');
     expect(fetch).not.toHaveBeenCalled(); expect(invoke).not.toHaveBeenCalled();
   });
 
@@ -111,7 +126,7 @@ describe('English pilot through real private server and Base44 proxy', () => {
     await expect(requestPilotPdf(pilot.englishCatalog.forms[0], { language: 'en' })).rejects.toThrow('PILOT_INVALID');
     window.location.origin = 'https://mindful-path-75aeaf7d.base44.app';
     const controller = new AbortController();
-    invoke.mockImplementationOnce(async () => { controller.abort(); return { data: { kind: 'catalog', catalog: pilot.englishCatalog } }; });
+    invoke.mockImplementationOnce(async () => { controller.abort(); return { data: { kind: 'catalog', catalog: pilot.englishSeries01Catalog } }; });
     await expect(requestPilotCatalog({ language: 'en', signal: controller.signal })).rejects.toMatchObject({ name: 'AbortError' });
   });
 
@@ -122,6 +137,6 @@ describe('English pilot through real private server and Base44 proxy', () => {
     for (const path of [ENGLISH_CATALOG_PATH, ...pilot.englishCatalog.forms.map(f => `files/${f.id}`)]) {
       expect((await realFetch(`${origin}/api/hebrew-forms-pilot/${path}?token=fixture-session&role=admin`, { headers: { 'X-User-Role': 'admin' } })).status).toBe(401);
     }
-    expect((await realFetch(`${origin}/api/hebrew-forms-pilot/files/MP-MOOD-04-W-CH-EN`, { headers: { Authorization: 'Bearer fixture-session' } })).status).toBe(404);
+    expect((await realFetch(`${origin}/api/hebrew-forms-pilot/files/MP-SOC-01-W-CH-EN`, { headers: { Authorization: 'Bearer fixture-session' } })).status).toBe(404);
   });
 });

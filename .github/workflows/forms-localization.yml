@@ -9,6 +9,9 @@ on:
       - 'src/lib/formsLocalization.js'
       - 'scripts/audit-form-sources.mjs'
       - 'scripts/build-english-pilot.mjs'
+      - 'scripts/build-english-wave.mjs'
+      - 'scripts/render-english-wave.mjs'
+      - 'test/utils/englishFormsWave.test.js'
       - 'base44/functions/getHebrewFormsPilot/releases.js'
       - 'test/utils/englishFormsPilot.test.js'
       - 'scripts/render-forms-translation.mjs'
@@ -34,12 +37,14 @@ jobs:
       - run: npm ci
       - run: node scripts/audit-form-sources.mjs
       - run: node scripts/build-english-pilot.mjs
-      - run: npx vitest run test/utils/formsLocalization.test.js test/utils/englishFormsPilot.test.js
+      - run: node scripts/build-english-wave.mjs
+      - run: npx vitest run test/utils/formsLocalization.test.js test/utils/englishFormsPilot.test.js test/utils/englishFormsWave.test.js
       - run: npx playwright install --with-deps chromium
       - run: node scripts/render-forms-translation.mjs --screenshots
+      - run: node scripts/render-english-wave.mjs --screenshots
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: english-mood-03-review-drafts
-          path: tmp/forms-localization/en/mood-03/
+          name: english-series-01-review-drafts
+          path: tmp/forms-localization/en/
           retention-days: 7

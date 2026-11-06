@@ -1,5 +1,11 @@
 // Shared by Workers, Railway and the browser. Only reviewed, pinned catalogs
 // are accepted; the original endpoint stays on 0.2 for older deployed clients.
+export const ENGLISH_SERIES01_CATALOG_PATH = 'catalog-en-series-01';
+export const ENGLISH_SERIES01_FORM_IDS = Object.freeze(
+  ['MOOD', 'SELF', 'PERF', 'REG', 'EXEC'].flatMap(track => Array.from({ length: 6 }, (_, index) =>
+    [`MP-${track}-${String(index + 1).padStart(2, '0')}-G-ALL-EN`,
+      ...['W', 'P'].flatMap(kind => ['CH', 'TE', 'AD', 'OA'].map(age => `MP-${track}-${String(index + 1).padStart(2, '0')}-${kind}-${age}-EN`))]).flat()),
+);
 export const ENGLISH_CATALOG_PATH = 'catalog-en-mood-03';
 export const ENGLISH_FORM_IDS = Object.freeze([
   'MP-MOOD-03-G-ALL-EN',
@@ -7,7 +13,7 @@ export const ENGLISH_FORM_IDS = Object.freeze([
 ]);
 
 export function isPilotFileId(id) {
-  return typeof id === 'string' && (/^MP-[A-Z0-9-]{1,80}-HE$/.test(id) || ENGLISH_FORM_IDS.includes(id));
+  return typeof id === 'string' && (/^MP-[A-Z0-9-]{1,80}-HE$/.test(id) || ENGLISH_SERIES01_FORM_IDS.includes(id));
 }
 
 export const EXPANDED_CATALOG_PATH = 'catalog-mood-01';
@@ -27,6 +33,7 @@ export const SERIES10_CATALOG_PATH = 'catalog-series-10';
 export const SERIES11_CATALOG_PATH = 'catalog-series-11';
 export const SERIES12_CATALOG_PATH = 'catalog-series-12';
 export const PILOT_RELEASES = Object.freeze({
+  [ENGLISH_SERIES01_CATALOG_PATH]: Object.freeze({ language: 'en', version: '0.2-en-series-01', count: 270, sha256: '5adacbbaa325c24f7c4b2da1d63c5bd3c6b1e1c90507815a526ac298baf84737' }),
   [ENGLISH_CATALOG_PATH]: Object.freeze({ language: 'en', version: '0.1-en-mood-03', count: 9, sha256: '7212b2a928b8c04e5e8da94b06f97cd99e4fb667150cbae535ccf2e311a8b795' }),
   catalog: Object.freeze({ version: '0.2', count: 154, sha256: '2c1df7644d778508b37d2a5076d902906b241166e09f93d388295a8a9983d90b' }),
   [EXPANDED_CATALOG_PATH]: Object.freeze({ version: '0.3-mood-01', count: 163, sha256: 'a9da2978a3d29b8c62a50e3ce9219d4b214d3bfd881ba6eb872e6bacab9885cf' }),

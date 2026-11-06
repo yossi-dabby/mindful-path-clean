@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "language": "en",
+  "wave": "series-01",
+  "version": "0.2-en-series-01",
+  "catalogPath": "catalog-en-series-01",
+  "catalogFile": "english-pilot-series-01-catalog.json",
+  "count": 270,
+  "newCount": 261,
+  "tracks": [
+    "mood",
+    "self",
+    "perf",
+    "reg",
+    "exec"
+  ],
+  "units": [
+    "mood-01",
+    "mood-02",
+    "mood-03",
+    "mood-04",
+    "mood-05",
+    "mood-06",
+    "self-01",
+    "self-02",
+    "self-03",
+    "self-04",
+    "self-05",
+    "self-06",
+    "perf-01",
+    "perf-02",
+    "perf-03",
+    "perf-04",
+    "perf-05",
+    "perf-06",
+    "reg-01",
+    "reg-02",
+    "reg-03",
+    "reg-04",
+    "reg-05",
+    "reg-06",
+    "exec-01",
+    "exec-02",
+    "exec-03",
+    "exec-04",
+    "exec-05",
+    "exec-06"
+  ],
+  "preserveUnits": [
+    "mood-03"
+  ]
+}

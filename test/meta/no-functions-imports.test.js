@@ -7,7 +7,7 @@
  *
  * This test recursively scans all *.test.js files under test/ and fails if any
  * of them contain an import or require path that includes "functions/".
- * Two explicitly named Web API modules are portable to Node; the handler may
+ * Explicitly named Web API modules are portable to Node; the pilot handler may
  * import only the dependency-free release contract, checked below.
  * its separate entry.ts still contains the platform SDK and remains forbidden.
  */
@@ -41,6 +41,8 @@ const FUNCTIONS_IMPORT_RE = /(?:from\s+|require\(\s*|import\(\s*)['"]([^'"]*func
 const PORTABLE_HELPER = path.resolve(TEST_DIR, '../base44/functions/getHebrewFormsPilot/handler.js');
 const PORTABLE_RELEASE = path.resolve(TEST_DIR, '../base44/functions/getHebrewFormsPilot/releases.js');
 
+const PORTABLE_ATTACHMENTS = ['uploadAttachment', 'extractPdfText'].map((name) => path.resolve(TEST_DIR, `../base44/functions/${name}/handler.js`));
+
 describe('meta: no test file imports from functions/ (Deno runtime code)', () => {
   const testFiles = collectTestFiles(TEST_DIR);
 
@@ -56,6 +58,12 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
     expect(fs.readFileSync(PORTABLE_RELEASE, 'utf8')).not.toMatch(/\b(?:import|require|Deno)\b/);
   });
 
+  it('private attachment handlers are dependency-free Web API code', () => {
+    for (const file of PORTABLE_ATTACHMENTS) {
+      expect(fs.readFileSync(file, 'utf8')).not.toMatch(/\b(?:import|require|Deno)\b/);
+    }
+  });
+
   for (const filePath of testFiles) {
     // Skip this guard file itself — its source contains the regex as a literal
     // string, which would otherwise match its own pattern.
@@ -68,7 +76,7 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
       const source = fs.readFileSync(filePath, 'utf8');
       for (const match of source.matchAll(FUNCTIONS_IMPORT_RE)) {
         expect(
-          [PORTABLE_HELPER, PORTABLE_RELEASE],
+          [PORTABLE_HELPER, PORTABLE_RELEASE, ...PORTABLE_ATTACHMENTS],
           `Found forbidden platform functions/ import in ${relativePath}: "${match[0]}"`
         ).toContain(path.resolve(path.dirname(filePath), match[1]));
       }

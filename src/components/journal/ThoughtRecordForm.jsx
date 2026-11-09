@@ -1,3 +1,5 @@
+import { uploadPrivateAttachment } from '@/lib/privateAttachments';
+import PrivateAttachmentMedia from '@/components/PrivateAttachmentMedia';
 import PremiumDialog from '@/components/ui/PremiumDialog';
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -290,20 +292,20 @@ Provide:
     setUploadingFile(true);
     setUploadError(null);
     try {
-      const { file_url } = await base44.integrations.Core.UploadFile({ file });
+      const { file_ref } = await uploadPrivateAttachment(base44, file);
       if (type === 'image') {
         setFormData(prev => ({
           ...prev,
-          images: [...(prev.images || []), file_url]
+          images: [...(prev.images || []), file_ref]
         }));
       } else if (type === 'audio') {
         setFormData(prev => ({
           ...prev,
-          audio_notes: [...(prev.audio_notes || []), file_url]
+          audio_notes: [...(prev.audio_notes || []), file_ref]
         }));
       }
     } catch (error) {
-      console.error('Upload failed:', error);
+      console.error('Private upload failed');
       setUploadError(t('journal_ui.form.upload_error'));
     } finally {
       setUploadingFile(false);
@@ -953,7 +955,7 @@ Provide:
                     <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                       {formData.images.map((url, i) => (
                         <div key={i} className="min-w-0 space-y-2">
-                          <img src={url} alt={`${t('journal_ui.form.images')} ${i + 1}`} className="w-full h-20 object-cover rounded-lg" />
+                          <PrivateAttachmentMedia reference={url} alt={`${t('journal_ui.form.images')} ${i + 1}`} className="w-full h-20 object-cover rounded-lg" />
                           <Button type="button" variant="outline" size="sm"
                             onClick={() => removeFile(i, 'image')}
                             className="min-h-11 w-full rounded-xl"
@@ -971,7 +973,7 @@ Provide:
                     <h4 className="text-sm font-medium text-foreground">{t('journal_ui.cards.audio_notes')}</h4>
                     {formData.audio_notes.map((url, index) => (
                       <div key={`${url}-${index}`} className="min-w-0 rounded-xl border border-border bg-secondary/40 p-3 space-y-2">
-                        <audio src={url} controls preload="metadata" className="h-11 w-full min-w-0" />
+                        <PrivateAttachmentMedia as="audio" reference={url} controls preload="metadata" className="h-11 w-full min-w-0" />
                         <Button type="button" variant="outline" size="sm" className="min-h-11 w-full rounded-xl"
                           onClick={() => removeFile(index, 'audio')}
                           aria-label={t('journal_ui.common.delete_aria', { item: `${t('journal_ui.cards.audio_notes')} ${index + 1}` })}>

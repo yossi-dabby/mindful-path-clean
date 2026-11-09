@@ -66,11 +66,12 @@ describe('Stage A privacy, consent, and lifecycle contracts', () => {
     expect(source).toContain("defaultSection==='data'");
     expect(stage6UiCopy.en.selected_data_title).toBe('Delete selected data without deleting your account');
     expect(stage6UiCopy.en.selected_data_intro).toContain('keeping your Mindful Path account active');
-    expect(stage6UiCopy.en.selected_data_result).toContain('Residual encrypted backups may take up to 90 days');
+    expect(stage6UiCopy.en.selected_data_result).toContain('not automatically erased');
     for(const copy of Object.values(stage6UiCopy)) {
-      expect(copy.selected_data_result).toContain('90');
+      expect(copy.selected_data_result).not.toContain('90');
       expect(copy.partial_email).toContain('Mindful Path partial data deletion request');
-      expect(copy.retention_body).toContain('90');
+      expect(copy.retention_body).not.toContain('90');
+      expect(copy.retention_body).toContain('Base44');
     }
   });
 

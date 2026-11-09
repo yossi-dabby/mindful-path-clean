@@ -1,3 +1,4 @@
+import { publicLegalUrl } from '@/lib/publicLegalUrls';
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -11,7 +12,7 @@ import SocialAuthButtons from "@/components/SocialAuthButtons";
 import { safeReturnTo } from "@/lib/authReturnTo";
 
 export default function Login() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -85,9 +86,9 @@ export default function Login() {
       </form>
 
       <p className="mt-5 text-center text-xs leading-5 text-muted-foreground">
-        <Link to="/privacy" className="font-semibold text-primary underline underline-offset-4">{t("settings.data_privacy.privacy_policy")}</Link>
+        <a href={publicLegalUrl('/privacy', i18n.language)} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">{t("settings.data_privacy.privacy_policy")}</a>
         <span aria-hidden="true"> · </span>
-        <Link to="/terms" className="font-semibold text-primary underline underline-offset-4">{t("settings.data_privacy.terms_of_service")}</Link>
+        <a href={publicLegalUrl('/terms', i18n.language)} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">{t("settings.data_privacy.terms_of_service")}</a>
       </p>
     </AuthLayout>
   );

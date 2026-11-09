@@ -30,8 +30,7 @@ export default function PdfViewer() {
   // Intentionally run once on mount — values are captured as a snapshot.
   useEffect(() => {
     console.log('[PDF_VIEWER_MOUNTED]', {
-      requestedFile,
-      normalized: normalizedRequestedFile
+      hasFileReference: Boolean(requestedFile)
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -60,17 +59,16 @@ export default function PdfViewer() {
 
       try {
         const { url: fileUrl } = await resolveWorksheetFileUrl(fileRef, {
-          coreIntegration: base44?.integrations?.Core,
+          functions: base44?.functions,
           entities: base44?.entities
         });
-        console.log('[PDF_VIEWER_RESOLVED_URL]', { fileRef, resolvedUrl: fileUrl });
+        console.log('[PDF_VIEWER_RESOLVED_URL]'); // Never log signed URLs.
         if (isCancelled) return;
         setResolvedFileUrl(fileUrl);
         setHasError(false);
       } catch (error) {
         console.error('[PDF_VIEWER_RESOLVE_ERROR]', {
-          fileRef,
-          reason: error?.message || error
+          reason: error?.name || 'Error'
         });
         toast({
           title: t('pdf_ui.unavailable'),
@@ -97,13 +95,16 @@ export default function PdfViewer() {
   const handleDownload = async () => {
     if (!resolvedFileUrl) return;
     try {
-      const downloadUrl = getFormDownloadUrl(resolvedFileUrl);
+      // Refresh the capability when downloading after a long reading session.
+      const { url } = await resolveWorksheetFileUrl(normalizedRequestedFile || requestedFile, {
+        functions: base44?.functions, entities: base44?.entities,
+      });
+      const downloadUrl = getFormDownloadUrl(url);
       if (!downloadUrl) throw new Error('Could not build download URL');
       await downloadPdfFile(downloadUrl);
     } catch (error) {
       console.error('[PdfViewer] Download failed:', {
-        fileValue: resolvedFileUrl,
-        reason: error?.message || error
+        reason: error?.name || 'Error'
       });
       toast({
         title: t('chat.generated_file.download_error_title'),

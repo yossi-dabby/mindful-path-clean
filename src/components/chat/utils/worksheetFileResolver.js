@@ -1,3 +1,4 @@
+import { isPrivateAttachmentRef, resolvePrivateAttachment } from '../../../lib/privateAttachments.js';
 const FILE_ERROR_MESSAGE = 'This worksheet file could not be opened. Please try again or contact support.';
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const DIRECT_FILE_EXTENSION_REGEX = /\.(pdf|txt|csv|doc|docx|xls|xlsx|ppt|pptx|zip)(?:$|[?#])/i;
@@ -36,6 +37,7 @@ export function classifyWorksheetFileReference(fileValue) {
   const trimmed = fileValue.trim();
   if (!trimmed) return 'invalid';
   if (trimmed.startsWith('/forms/')) return 'static_public_form_path';
+  if (isPrivateAttachmentRef(trimmed)) return 'private_attachment_ref';
   if (looksLikePrivateFileUri(trimmed)) return 'base44_private_file_uri';
   if (isUuid(trimmed)) return 'raw_uuid';
   if (isHttpUrl(trimmed)) return 'full_public_url';
@@ -45,7 +47,7 @@ export function classifyWorksheetFileReference(fileValue) {
 export async function resolveWorksheetFileUrl(fileValue, options = {}) {
   const {
     sourceRecord = null,
-    coreIntegration = null,
+    functions = null,
     entities = null,
     logger = console,
     _visitedValues = new Set(),
@@ -74,19 +76,13 @@ export async function resolveWorksheetFileUrl(fileValue, options = {}) {
     return { url: trimmed, classification };
   }
 
+  if (classification === 'private_attachment_ref') {
+    const data = await resolvePrivateAttachment({ functions }, trimmed);
+    return { url: data.file_url, classification, resolvedFrom: 'owned_private_attachment' };
+  }
+
   if (classification === 'base44_private_file_uri') {
-    if (!coreIntegration?.CreateFileSignedUrl) {
-      throw new WorksheetFileResolutionError('CreateFileSignedUrl integration is unavailable', { fileValue: trimmed, classification });
-    }
-    const signed = await coreIntegration.CreateFileSignedUrl({
-      file_uri: normalizePrivateFileUri(trimmed),
-      expires_in: 3600,
-    });
-    const signedUrl = signed?.signed_url || signed?.url || signed?.file_url;
-    if (typeof signedUrl !== 'string' || !signedUrl.trim()) {
-      throw new WorksheetFileResolutionError('CreateFileSignedUrl returned no signed URL', { fileValue: trimmed, classification });
-    }
-    return { url: signedUrl.trim(), classification, resolvedFrom: 'file_uri_signed_url' };
+    throw new WorksheetFileResolutionError('An owned file reference is required', { classification });
   }
 
   if (classification === 'raw_uuid') {
@@ -96,7 +92,7 @@ export async function resolveWorksheetFileUrl(fileValue, options = {}) {
     }
     const nested = await resolveWorksheetFileUrl(lookedUpRef, {
       sourceRecord,
-      coreIntegration,
+      functions,
       entities,
       logger,
       _visitedValues,
@@ -117,10 +113,6 @@ function isHttpUrl(value) {
 
 function looksLikePrivateFileUri(value) {
   return /^\/?private\//i.test(value);
-}
-
-function normalizePrivateFileUri(value) {
-  return value.startsWith('/') ? value.slice(1) : value;
 }
 
 function normalizePublicFormPath(value) {

@@ -43,7 +43,7 @@ export function resolvePdfViewerFileParam(fileParam) {
 export function getFormOpenUrl(url) {
   const normalized = normalizePdfPath(url);
   if (!normalized) return null;
-  if (!normalized.startsWith('/')) return normalized;
+  if (!normalized.startsWith('/') && !normalized.startsWith('mp-private:')) return normalized;
   return `${PDF_VIEWER_ROUTE_PATH}?file=${encodeURIComponent(normalized)}`;
 }
 

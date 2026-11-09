@@ -411,9 +411,9 @@ test.describe('Chat voice transcription runtime flow', () => {
     let uploadCount = 0;
     let invokeCount = 0;
 
-    await page.route('**/api/**/integration-endpoints/**', async (route) => {
+    await page.route(/\/api\/.*\/(?:integration-endpoints\/|functions\/uploadAttachment\b)/, async (route) => {
       const url = route.request().url();
-      if (/\/integration-endpoints\/Core\/UploadFile\b/i.test(url)) uploadCount += 1;
+      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(url)) uploadCount += 1;
       if (/\/integration-endpoints\/Core\/InvokeLLM\b/i.test(url)) invokeCount += 1;
       await route.continue();
     });
@@ -447,18 +447,18 @@ test.describe('Chat voice transcription runtime flow', () => {
       messagePostCount: 0,
     };
 
-    await page.route('**/api/**/integration-endpoints/**', async (route) => {
+    await page.route(/\/api\/.*\/(?:integration-endpoints\/|functions\/uploadAttachment\b)/, async (route) => {
       const req = route.request();
       const url = req.url();
 
-      if (/\/integration-endpoints\/Core\/UploadFile\b/i.test(url)) {
+      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(url)) {
         const rawBody = req.postData() || '';
         captured.uploadFileName = rawBody.match(/filename="([^"]+)"/i)?.[1] || '';
         captured.uploadMimeType = rawBody.match(/Content-Type:\s*([^\r\n;]+)/i)?.[1] || '';
         await route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify({ file_url: 'https://files.example.com/voice-draft.webm' }),
+          body: JSON.stringify({ file_ref: 'mp-private:a12345678901234567890123', expires_in: 300, file_url: 'https://files.example.com/voice-draft.webm' }),
         });
         return;
       }
@@ -543,18 +543,18 @@ test.describe('Chat voice transcription runtime flow', () => {
       invokeCount: 0,
     };
 
-    await page.route('**/api/**/integration-endpoints/**', async (route) => {
+    await page.route(/\/api\/.*\/(?:integration-endpoints\/|functions\/uploadAttachment\b)/, async (route) => {
       const req = route.request();
       const url = req.url();
 
-      if (/\/integration-endpoints\/Core\/UploadFile\b/i.test(url)) {
+      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(url)) {
         captured.uploadCount += 1;
         const rawBody = req.postData() || '';
         captured.uploadContentTypes.push(rawBody.match(/Content-Type:\s*([^\r\n]+)/i)?.[1]?.trim() || '');
         await route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify({ file_url: `https://files.example.com/voice-draft-${captured.uploadCount}.webm` }),
+          body: JSON.stringify({ file_ref: 'mp-private:a12345678901234567890123', expires_in: 300, file_url: `https://files.example.com/voice-draft-${captured.uploadCount}.webm` }),
         });
         return;
       }
@@ -616,15 +616,15 @@ test.describe('Chat voice transcription runtime flow', () => {
       invokeCount: 0,
     };
 
-    await page.route('**/api/**/integration-endpoints/**', async (route) => {
+    await page.route(/\/api\/.*\/(?:integration-endpoints\/|functions\/uploadAttachment\b)/, async (route) => {
       const req = route.request();
       const url = req.url();
 
-      if (/\/integration-endpoints\/Core\/UploadFile\b/i.test(url)) {
+      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(url)) {
         await route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify({ file_url: 'https://files.example.com/voice-draft.webm' }),
+          body: JSON.stringify({ file_ref: 'mp-private:a12345678901234567890123', expires_in: 300, file_url: 'https://files.example.com/voice-draft.webm' }),
         });
         return;
       }
@@ -686,18 +686,18 @@ test.describe('Chat voice transcription runtime flow', () => {
       uploadMimeType: '',
     };
 
-    await page.route('**/api/**/integration-endpoints/**', async (route) => {
+    await page.route(/\/api\/.*\/(?:integration-endpoints\/|functions\/uploadAttachment\b)/, async (route) => {
       const req = route.request();
       const url = req.url();
 
-      if (/\/integration-endpoints\/Core\/UploadFile\b/i.test(url)) {
+      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(url)) {
         const rawBody = req.postData() || '';
         captured.uploadFileName = rawBody.match(/filename="([^"]+)"/i)?.[1] || '';
         captured.uploadMimeType = rawBody.match(/Content-Type:\s*([^\r\n;]+)/i)?.[1] || '';
         await route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify({ file_url: 'https://files.example.com/voice-draft.m4a' }),
+          body: JSON.stringify({ file_ref: 'mp-private:a12345678901234567890123', expires_in: 300, file_url: 'https://files.example.com/voice-draft.m4a' }),
         });
         return;
       }
@@ -749,18 +749,18 @@ test.describe('Chat voice transcription runtime flow', () => {
       uploadMimeType: '',
     };
 
-    await page.route('**/api/**/integration-endpoints/**', async (route) => {
+    await page.route(/\/api\/.*\/(?:integration-endpoints\/|functions\/uploadAttachment\b)/, async (route) => {
       const req = route.request();
       const url = req.url();
 
-      if (/\/integration-endpoints\/Core\/UploadFile\b/i.test(url)) {
+      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(url)) {
         const rawBody = req.postData() || '';
         captured.uploadFileName = rawBody.match(/filename="([^"]+)"/i)?.[1] || '';
         captured.uploadMimeType = rawBody.match(/Content-Type:\s*([^\r\n;]+)/i)?.[1] || '';
         await route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify({ file_url: 'https://files.example.com/voice-draft.m4a' }),
+          body: JSON.stringify({ file_ref: 'mp-private:a12345678901234567890123', expires_in: 300, file_url: 'https://files.example.com/voice-draft.m4a' }),
         });
         return;
       }
@@ -814,18 +814,18 @@ test.describe('Chat voice transcription runtime flow', () => {
       uploadMimeType: '',
     };
 
-    await page.route('**/api/**/integration-endpoints/**', async (route) => {
+    await page.route(/\/api\/.*\/(?:integration-endpoints\/|functions\/uploadAttachment\b)/, async (route) => {
       const req = route.request();
       const url = req.url();
 
-      if (/\/integration-endpoints\/Core\/UploadFile\b/i.test(url)) {
+      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(url)) {
         const rawBody = req.postData() || '';
         captured.uploadFileName = rawBody.match(/filename="([^"]+)"/i)?.[1] || '';
         captured.uploadMimeType = rawBody.match(/Content-Type:\s*([^\r\n;]+)/i)?.[1] || '';
         await route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify({ file_url: 'https://files.example.com/voice-draft.wav' }),
+          body: JSON.stringify({ file_ref: 'mp-private:a12345678901234567890123', expires_in: 300, file_url: 'https://files.example.com/voice-draft.wav' }),
         });
         return;
       }
@@ -879,18 +879,18 @@ test.describe('Chat voice transcription runtime flow', () => {
       uploadMimeType: '',
     };
 
-    await page.route('**/api/**/integration-endpoints/**', async (route) => {
+    await page.route(/\/api\/.*\/(?:integration-endpoints\/|functions\/uploadAttachment\b)/, async (route) => {
       const req = route.request();
       const url = req.url();
 
-      if (/\/integration-endpoints\/Core\/UploadFile\b/i.test(url)) {
+      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(url)) {
         const rawBody = req.postData() || '';
         captured.uploadFileName = rawBody.match(/filename="([^"]+)"/i)?.[1] || '';
         captured.uploadMimeType = rawBody.match(/Content-Type:\s*([^\r\n;]+)/i)?.[1] || '';
         await route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify({ file_url: 'https://files.example.com/voice-draft.wav' }),
+          body: JSON.stringify({ file_ref: 'mp-private:a12345678901234567890123', expires_in: 300, file_url: 'https://files.example.com/voice-draft.wav' }),
         });
         return;
       }
@@ -948,11 +948,11 @@ test.describe('Chat voice transcription runtime flow', () => {
       publicUploadCount: 0,
     };
 
-    await page.route('**/api/**/integration-endpoints/**', async (route) => {
+    await page.route(/\/api\/.*\/(?:integration-endpoints\/|functions\/uploadAttachment\b)/, async (route) => {
       const req = route.request();
       const url = req.url();
 
-      if (/\/integration-endpoints\/Core\/UploadFile\b/i.test(url)) {
+      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(url)) {
         captured.publicUploadCount += 1;
         const rawBody = req.postData() || '';
         captured.uploadFileName = rawBody.match(/filename="([^"]+)"/i)?.[1] || '';
@@ -960,7 +960,7 @@ test.describe('Chat voice transcription runtime flow', () => {
         await route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify({ file_url: 'https://files.example.com/voice-draft.ogg' }),
+          body: JSON.stringify({ file_ref: 'mp-private:a12345678901234567890123', expires_in: 300, file_url: 'https://files.example.com/voice-draft.ogg' }),
         });
         return;
       }
@@ -1014,16 +1014,16 @@ test.describe('Chat voice transcription runtime flow', () => {
       uploadCount: 0,
     };
 
-    await page.route('**/api/**/integration-endpoints/**', async (route) => {
+    await page.route(/\/api\/.*\/(?:integration-endpoints\/|functions\/uploadAttachment\b)/, async (route) => {
       const req = route.request();
       const url = req.url();
 
-      if (/\/integration-endpoints\/Core\/UploadFile\b/i.test(url)) {
+      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(url)) {
         captured.uploadCount += 1;
         await route.fulfill({
           status: 200,
           contentType: 'application/json',
-          body: JSON.stringify({ file_url: 'https://files.example.com/voice-draft.m4a' }),
+          body: JSON.stringify({ file_ref: 'mp-private:a12345678901234567890123', expires_in: 300, file_url: 'https://files.example.com/voice-draft.m4a' }),
         });
         return;
       }

@@ -1,3 +1,4 @@
+import PrivateAttachmentMedia from '@/components/PrivateAttachmentMedia';
 import MoreActions from '@/components/ui/MoreActions';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -161,16 +162,16 @@ function ThoughtRecordCard({ entry, onEdit }) {
               <section>
                 <h3 className="mb-2 text-sm font-bold text-foreground">{t('journal_ui.cards.attached_images')}</h3>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">{entry.images.map((url, index) => (
-                  <a key={url} href={url} target="_blank" rel="noopener noreferrer" className="rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                    <img src={url} alt={t('journal_ui.cards.images', { count: index + 1 })} className="h-28 w-full rounded-xl object-cover" />
-                  </a>
+                  <PrivateAttachmentMedia as="a" key={url} reference={url} target="_blank" rel="noopener noreferrer" className="rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                    <PrivateAttachmentMedia reference={url} alt={t('journal_ui.cards.images', { count: index + 1 })} className="h-28 w-full rounded-xl object-cover" />
+                  </PrivateAttachmentMedia>
                 ))}</div>
               </section>
             )}
             {(entry.audio_notes || []).length > 0 && (
               <section>
                 <h3 className="mb-2 text-sm font-bold text-foreground">{t('journal_ui.cards.audio_notes')}</h3>
-                <div className="space-y-2">{entry.audio_notes.map((url) => <audio key={url} src={url} controls className="h-11 w-full" />)}</div>
+                <div className="space-y-2">{entry.audio_notes.map((url) => <PrivateAttachmentMedia as="audio" key={url} reference={url} controls className="h-11 w-full" />)}</div>
               </section>
             )}
           </div>

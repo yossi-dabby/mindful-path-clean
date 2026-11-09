@@ -19,7 +19,7 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
  * - Input is plain structured text only — no raw HTML, no Markdown rendering.
  * - All string fields are length-limited before use.
  * - Title and body content are sanitized to prevent injection into the PDF.
- * - Output file is private to the authenticated user (uploaded via Base44 UploadFile).
+ * - Output file is private to the authenticated user (uploaded through the owner-checked private attachment function).
  * - No user PII is written to the file beyond what the caller provides.
  * - The function does not read, access, or index any user entity data.
  *
@@ -27,7 +27,7 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
  * ------
  * {
  *   success:              true,
- *   file_url:             string,  // Base44 hosted PDF URL
+ *   file_url:             string,  // Owner-checked mp-private reference, resolved by the app
  *   name:                 string,  // File name (e.g. "thought-record-2025-04-27.pdf")
  *   title:                string,
  *   therapeutic_purpose?: string,
@@ -381,15 +381,16 @@ Deno.serve(async (req) => {
 
     // ── Upload to Base44 storage ───────────────────────────────────────────────
     const file = new File([pdfBytes], fileName, { type: 'application/pdf' });
-    const uploadResult = await base44.integrations.Core.UploadFile({ file });
+    const uploadResponse = await base44.functions.invoke('uploadAttachment', { file });
+    const uploadResult = uploadResponse?.data || uploadResponse;
 
-    if (!uploadResult?.file_url) {
+    if (!/^mp-private:[a-f0-9]{24}$/i.test(uploadResult?.file_ref || '')) {
       return Response.json({ success: false, error: 'File upload failed.' }, { status: 500 });
     }
 
     return Response.json({
       success: true,
-      file_url: uploadResult.file_url,
+      file_url: uploadResult.file_ref,
       name: fileName,
       title,
       therapeutic_purpose: therapeuticPurpose,
@@ -397,8 +398,6 @@ Deno.serve(async (req) => {
     });
 
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    console.error('[generateTherapeuticPdf] Failed:', message);
-    return Response.json({ success: false, error: message }, { status: 500 });
+    return Response.json({ success: false, error: 'PDF generation is unavailable.' }, { status: 503 });
   }
 });

@@ -3,6 +3,8 @@ import { mockApi, spaNavigate } from '../helpers/ui';
 
 const IMAGE_FILE_URL = 'https://files.example.com/stage4-image.png';
 const PDF_FILE_URL = 'https://files.example.com/stage4-doc.pdf';
+const IMAGE_FILE_REF = 'mp-private:a12345678901234567890123';
+const PDF_FILE_REF = 'mp-private:b12345678901234567890123';
 const PDF_EXTRACTED_TEXT = 'Stage 4 PDF text: Mindful breathing reduces stress and improves emotional regulation.';
 const METADATA_422_RESPONSE = {
   detail: [
@@ -93,7 +95,7 @@ async function startChatWithRuntimeMocks(page: Parameters<typeof mockApi>[0]) {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify({ file_url: isPdf ? PDF_FILE_URL : IMAGE_FILE_URL }),
+      body: JSON.stringify({ file_ref: isPdf ? PDF_FILE_REF : IMAGE_FILE_REF, file_url: isPdf ? PDF_FILE_URL : IMAGE_FILE_URL, expires_in: 300 }),
     });
   });
 
@@ -110,16 +112,18 @@ async function startChatWithRuntimeMocks(page: Parameters<typeof mockApi>[0]) {
     const routeFingerprint = `${url}::${JSON.stringify(body || {})}`;
 
     if (routeFingerprint.includes('uploadAttachment')) {
-      const isPdf = captureUploadPayload(url, body, rawBody);
+      const isPdf = body?.action === 'resolve' ? body.file_ref === PDF_FILE_REF : captureUploadPayload(url, body, rawBody);
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify({ file_url: isPdf ? PDF_FILE_URL : IMAGE_FILE_URL }),
+        body: JSON.stringify({ file_ref: isPdf ? PDF_FILE_REF : IMAGE_FILE_REF, file_url: isPdf ? PDF_FILE_URL : IMAGE_FILE_URL, expires_in: 300 }),
       });
       return;
     }
 
     if (routeFingerprint.includes('extractPdfText')) {
+      expect(body?.file_ref).toBe(PDF_FILE_REF);
+      expect(body?.file_url).toBeUndefined();
       captured.extractPdfTextCalls += 1;
       await route.fulfill({
         status: 200,
@@ -265,6 +269,7 @@ test.describe('Stage 4 runtime file-understanding verification', () => {
 
     expect(postedContent).toContain('Please describe this image.');
     expect(posted.file_urls).toEqual([IMAGE_FILE_URL]);
+    expect(postedContent).toContain(IMAGE_FILE_REF);
     expect(posted.metadata).toBeUndefined();
     expect(postedContent).toContain('[ATTACHMENT_CONTEXT]');
     expect(postedContent).toContain('type: image');
@@ -305,6 +310,7 @@ test.describe('Stage 4 runtime file-understanding verification', () => {
     expect(captured.extractPdfTextCalls).toBe(1);
     expect(postedContent).toContain('Please summarize this PDF.');
     expect(posted.file_urls).toEqual([PDF_FILE_URL]);
+    expect(postedContent).toContain(PDF_FILE_REF);
     expect(posted.metadata).toBeUndefined();
     expect(postedContent).toContain('[ATTACHMENT_CONTEXT]');
     expect(postedContent).toContain('type: pdf');

@@ -72,11 +72,19 @@ export async function prepareJournalStage4(page: Page, { language = 'en', theme 
     if(result?.prompts)result.prompts=result.prompts.map((item:any,index:number)=>({...item,title:`QA prompt ${index+1}`,prompt:`QA prompt body ${index+1}`}));
     return route.fulfill({ json: result });
   });
-  await page.route('**/integration-endpoints/Core/UploadFile**',async route=>{
-    if(state.holdNextUpload){state.holdNextUpload=false;await new Promise<void>(resolve=>{state.releaseUpload=resolve;});}
-    const audio=route.request().postDataBuffer()?.includes(Buffer.from('audio/wav'));
-    const file_url=audio?'data:audio/wav;base64,'+audioBytes.toString('base64'):'/art/botanical/garden-path-v2.webp';
-    state.uploads.push(audio?'audio':'image');return route.fulfill({json:{file_url}});
+  const imageRef = 'mp-private:a12345678901234567890123';
+  const audioRef = 'mp-private:b12345678901234567890123';
+  // Synthetic uploaded bytes, not mocked application static assets.
+  await page.route('https://private-files.example.test/qa-image.png', route => route.fulfill({ contentType: 'image/png', body: journalImageFile.buffer }));
+  await page.route('https://private-files.example.test/qa-audio.wav', route => route.fulfill({ contentType: 'audio/wav', body: audioBytes }));
+  await page.route('**/functions/uploadAttachment', async route => {
+    const request = route.request();
+    const resolving = request.headers()['content-type']?.includes('application/json');
+    const body = resolving ? request.postDataJSON() : null;
+    if (!resolving && state.holdNextUpload) { state.holdNextUpload=false; await new Promise<void>(resolve => { state.releaseUpload=resolve; }); }
+    const audio = resolving ? body.file_ref === audioRef : request.postDataBuffer()?.includes(Buffer.from('audio/wav'));
+    if (!resolving) state.uploads.push(audio ? 'audio' : 'image');
+    return route.fulfill({ json: { file_ref: audio ? audioRef : imageRef, file_url: `https://private-files.example.test/qa-${audio ? 'audio.wav' : 'image.png'}`, expires_in: 300 } });
   });
   return state;
 }

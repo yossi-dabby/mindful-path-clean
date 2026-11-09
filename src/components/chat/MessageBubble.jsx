@@ -1,3 +1,4 @@
+import PrivateAttachmentMedia from '@/components/PrivateAttachmentMedia';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -361,27 +362,27 @@ export default function MessageBubble({ message, conversationId, messageIndex, a
                 {(isImageAttachment || isPdfAttachment || isAudioAttachment || isGenericFileAttachment) &&
             <div className="mb-3">
                     {isImageAttachment &&
-              <a href={attachmentUrl} target="_blank" rel="noopener noreferrer" className="inline-block">
-                        <img
-                  src={attachmentUrl}
+              <PrivateAttachmentMedia as="a" reference={attachmentUrl} target="_blank" rel="noopener noreferrer" className="inline-block">
+                        <PrivateAttachmentMedia
+                  reference={attachmentUrl}
                   alt={t('chat.attachments.image_preview_alt')}
                   className="max-w-full max-h-[180px] rounded-lg object-cover border border-primary-foreground/20" />
-                      </a>
+                      </PrivateAttachmentMedia>
               }
                     {(isPdfAttachment || isGenericFileAttachment) &&
-              <a
-                href={attachmentUrl}
+              <PrivateAttachmentMedia as="a"
+                reference={attachmentUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex max-w-full items-center gap-2 rounded-lg border border-primary-foreground/20 px-3 py-2 text-sm hover:bg-primary-foreground/10 transition-colors">
                         <FileText className="w-4 h-4 shrink-0" />
                         <span className="min-w-0 truncate">{attachmentName || t(isPdfAttachment ? 'chat.attachments.pdf_chip_label' : 'chat_stage2.file_attachment')}</span>
                         <ExternalLink className="w-3.5 h-3.5 shrink-0 opacity-80" />
-                      </a>
+                      </PrivateAttachmentMedia>
               }
                     {isAudioAttachment &&
               <div className="rounded-lg border border-primary-foreground/20 px-3 py-2">
-                        <audio controls preload="none" src={attachmentUrl} className="w-full max-w-[220px]" />
+                        <PrivateAttachmentMedia as="audio" controls preload="none" reference={attachmentUrl} className="w-full max-w-[220px]" />
                       </div>
               }
                   </div>

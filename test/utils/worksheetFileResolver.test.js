@@ -40,44 +40,25 @@ describe('resolveWorksheetFileUrl', () => {
     expect(result.classification).toBe('full_public_url');
   });
 
-  it('signs private file_uri using CreateFileSignedUrl(file_uri)', async () => {
-    const createFileSignedUrl = vi.fn().mockResolvedValue({
-      signed_url: 'https://files.example.com/signed/worksheet.pdf',
-    });
-
-    const result = await resolveWorksheetFileUrl('private/uploads/u1/worksheet.pdf', {
-      coreIntegration: { CreateFileSignedUrl: createFileSignedUrl },
-      entities: {},
-    });
-
-    expect(createFileSignedUrl).toHaveBeenCalledTimes(1);
-    expect(createFileSignedUrl).toHaveBeenCalledWith({
-      file_uri: 'private/uploads/u1/worksheet.pdf',
-      expires_in: 3600,
-    });
-    expect(result.url).toBe('https://files.example.com/signed/worksheet.pdf');
+  it('rejects raw private URIs instead of signing them without ownership checks', async () => {
+    const sign = vi.fn();
+    await expect(resolveWorksheetFileUrl('private/uploads/u1/worksheet.pdf', {
+      coreIntegration: { CreateFileSignedUrl: sign },
+    })).rejects.toMatchObject({ name: 'WorksheetFileResolutionError' });
+    expect(sign).not.toHaveBeenCalled();
   });
 
-  it('resolves UUID via related record lookup and never signs the raw UUID directly', async () => {
-    const createFileSignedUrl = vi.fn().mockResolvedValue({
-      signed_url: 'https://files.example.com/signed/from-uuid.pdf',
-    });
+  it('resolves UUID through an owned reference and never signs a raw URI on the client', async () => {
+    const file_ref = 'mp-private:a12345678901234567890123';
+    const invoke = vi.fn().mockResolvedValue({ data: { file_ref, file_url: 'https://files.example.com/signed/from-uuid.pdf' } });
     const getGeneratedFile = vi.fn().mockResolvedValue({
-      id: '2edc7577-3efa-4fa3-b098-571854be76cb',
-      file_uri: 'private/generated/worksheet.pdf',
+      id: '2edc7577-3efa-4fa3-b098-571854be76cb', file_url: file_ref,
     });
-
     const result = await resolveWorksheetFileUrl('2edc7577-3efa-4fa3-b098-571854be76cb', {
-      coreIntegration: { CreateFileSignedUrl: createFileSignedUrl },
-      entities: { GeneratedFile: { get: getGeneratedFile } },
-      sourceRecord: { id: 'message-1' },
+      functions: { invoke }, entities: { GeneratedFile: { get: getGeneratedFile } },
     });
-
     expect(getGeneratedFile).toHaveBeenCalledWith('2edc7577-3efa-4fa3-b098-571854be76cb');
-    expect(createFileSignedUrl).toHaveBeenCalledWith({
-      file_uri: 'private/generated/worksheet.pdf',
-      expires_in: 3600,
-    });
+    expect(invoke).toHaveBeenCalledWith('uploadAttachment', { action: 'resolve', file_ref });
     expect(result.url).toBe('https://files.example.com/signed/from-uuid.pdf');
   });
 
@@ -105,9 +86,9 @@ describe('worksheet open/download source contracts', () => {
   const resolverSrc = fs.readFileSync(`${ROOT}/src/components/chat/utils/worksheetFileResolver.js`, 'utf8');
   const cardSrc = fs.readFileSync(`${ROOT}/src/components/chat/GeneratedFileCard.jsx`, 'utf8');
 
-  it('uses file_uri (not file_url) for CreateFileSignedUrl', () => {
-    expect(resolverSrc).toContain('file_uri: normalizePrivateFileUri(trimmed)');
-    expect(resolverSrc).not.toContain('CreateFileSignedUrl({ file_url');
+  it('delegates private references to the owner-checked server resolver', () => {
+    expect(resolverSrc).toContain('resolvePrivateAttachment({ functions }, trimmed)');
+    expect(resolverSrc).not.toContain('CreateFileSignedUrl');
   });
 
   it('does not pass raw generated file values directly to open/download helpers', () => {

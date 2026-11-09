@@ -242,11 +242,12 @@ export default async function(req) {
  const base44 = createClientFromRequest(req);
  if (req.method === 'POST') {
   let user; try { user = await base44.auth.me(); } catch { return Response.json({error:'Unauthorized'},{status:401}); }
-  if (!['pr34-security-a-20261109@example.com','pr34-security-b-20261109@example.com'].includes(user?.email)) return Response.json({error:'Verification accounts only'},{status:403});
+  if (!['pr34-security-a-20261109@example.com','pr34-security-b-20261109@example.com','yoye156156@gmail.com'].includes(user?.email)) return Response.json({error:'Verification accounts only'},{status:403});
  }
  if(req.method==='POST') {
  const payload = await req.clone().json().catch(()=>({}));
  if(payload.action==='verification_storage_uri') {
+  const checker=await base44.auth.me(); if(checker.email==='yoye156156@gmail.com') return Response.json({error:'Synthetic accounts only'},{status:403});
   const user=await base44.auth.me();
   const id=String(payload.file_ref||'').replace(/^mp-private:/,'');
   if(!/^[a-f0-9]{24}$/i.test(id)) return Response.json({error:'Invalid reference'},{status:400});

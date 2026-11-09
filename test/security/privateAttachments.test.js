@@ -59,6 +59,21 @@ describe('private attachment ownership boundary', () => {
     expect(f.records.filter).toHaveBeenCalledWith({ id: ID, owner_user_id: USER.id, status: 'active' }, '-created_date', 1);
     expect(f.core.CreateFileSignedUrl).toHaveBeenCalledWith({ file_uri: URI, expires_in: 300 });
   });
+  it.each(['private/app/user/test.png', 'mp/private/app/user/test.png'])('uploads and reopens the provider private namespace %s', async (uri) => {
+    const f = fixture();
+    f.core.UploadPrivateFile.mockResolvedValue({ file_uri: uri });
+    expect((await handlePrivateAttachment(uploadRequest(), f.deps)).status).toBe(200);
+    expect(f.records.update).toHaveBeenCalledWith(ID, { file_uri: uri, status: 'active' });
+    f.records.filter.mockResolvedValue([{ ...f.record, file_uri: uri }]);
+    expect((await handlePrivateAttachment(resolveRequest(), f.deps)).status).toBe(200);
+    expect(f.core.CreateFileSignedUrl).toHaveBeenLastCalledWith({ file_uri: uri, expires_in: 300 });
+  });
+  it.each(['public/app/test.png', 'mp/public/app/test.png', 'https://files.example.test/public.png'])('rejects the non-private provider result %s', async (uri) => {
+    const f = fixture();
+    f.core.UploadPrivateFile.mockResolvedValue({ file_uri: uri });
+    expect((await handlePrivateAttachment(uploadRequest(), f.deps)).status).toBe(503);
+    expect(f.core.CreateFileSignedUrl).not.toHaveBeenCalled();
+  });
   it.each(['user', 'admin'])('denies another owner even when the caller is %s and the provider ignores its filter', async (role) => {
     const f = fixture({ id: 'user-b', email: 'b@example.test', role });
     expect((await handlePrivateAttachment(resolveRequest(), f.deps)).status).toBe(404);
@@ -119,7 +134,10 @@ describe('private attachment ownership boundary', () => {
   });
   it('does not expose provider storage paths through public, ordinary or admin entity access', () => {
     const schema = JSON.parse(readFileSync(new URL('../../base44/entities/PrivateAttachment.jsonc', import.meta.url), 'utf8'));
-    expect(schema.rls).toEqual({ create: false, read: false, update: false, delete: false });
+    // Base44 does not enforce boolean false for create/update. Mutually
+    // exclusive role predicates deny every client; service-role code bypasses RLS.
+    const denyClientWrite = { $and: [{ user_condition: { role: 'admin' } }, { user_condition: { role: 'user' } }] };
+    expect(schema.rls).toEqual({ create: denyClientWrite, read: false, update: denyClientWrite, delete: false });
   });
 });
 

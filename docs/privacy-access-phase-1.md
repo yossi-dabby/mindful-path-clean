@@ -4,10 +4,13 @@ Last updated: 2026-11-09
 
 This change starts the approved privacy/access remediation. It is a code change for review, not evidence that the live Base44 runtime or Railway deployment has been updated.
 
+**Release blocked by live verification on 2026-11-09.** Two ordinary synthetic users confirmed that the application handler rejects cross-owner references, but a direct provider signing request by B produced a working link to A's synthetic private image when B knew its storage identifier. Do not merge or publish this as a completed private-file boundary. See [live verification results](privacy-access-live-verification-2026-11-09.md). Passing CI does not resolve this provider bypass.
+
 ## Behavior
 
 - Chat, desktop voice transcription, journal uploads and generated personal PDFs use `uploadAttachment`, which calls `UploadPrivateFile`. There is no fallback to public `UploadFile`.
 - `PrivateAttachment` holds an owner ID, owner email, storage URI and file metadata. Ordinary entity operations, including admin operations, are denied by RLS. Only server service-role code manages this mapping. No retrieval or agent entity scope is expanded.
+- Boolean `false` is not an enforced create/update denial in the current Base44 RLS documentation. Those two operations use mutually exclusive role predicates instead; read/delete remain `false`. Live ordinary-user create/update attempts were denied. Private storage accepts both the documented `private/` namespace and the observed `mp/private/` namespace; public namespaces remain rejected.
 - The function assigns ownership from `auth.me()`, returns an opaque `mp-private:<id>` reference, and signs access only after checking the stored owner. Signed URLs expire after five minutes. A signed URL is a bearer capability during that period; it should not be shared.
 - The app stores references in journal records and chat attachment metadata. Temporary URLs are delivered to the configured AI processing service for the requested turn. Private media renews URLs while mounted; PDF downloads request a fresh URL. Client diagnostics no longer print signed PDF URLs.
 - PDF extraction accepts an owned reference, not an arbitrary remote URL or a claimed owner segment in a URL. Legacy raw private URIs fail closed until mapped to a verified owner.
@@ -18,7 +21,7 @@ This change starts the approved privacy/access remediation. It is a code change 
 
 ## Deployment order and live verification
 
-1. Review and merge through the normal `main` PR workflow. Ensure CI lint, unit, build and browser checks pass.
+1. Resolve the provider signing bypass and re-run the two-user test before approving merge or publication. Keep the PR in draft while it is unresolved. Ensure CI lint, unit, build and browser checks pass on the final commit.
 2. Deploy the `PrivateAttachment` entity and all three changed Base44 functions (`uploadAttachment`, `extractPdfText`, `generateTherapeuticPdf`) with their helper files before enabling the updated client. A frontend-only publication is insufficient.
 3. With two synthetic test accounts, check that A can upload/open/reopen an image, audio and PDF, that B cannot resolve A's reference, that an anonymous request is rejected, and that direct entity reads/writes cannot reveal or forge mappings. Confirm the provider honors RLS and URL expiry. Do not use real wellness records for this check.
 4. Verify that the actual Base44 provider can consume the signed URL for PDF extraction and desktop audio transcription. Unit tests use provider mocks; they cannot establish this runtime behavior.
@@ -66,3 +69,4 @@ Public references checked on 2026-11-09:
 - Automated ownership, failure, bounded upload, private reference round-trip, PDF extraction and public HTTP tests cover the changed boundaries.
 - The full unit suite, lint, typecheck and production build are run for the PR. Exact run results are recorded in its description.
 - Local browser tests could not start because the Chromium executable was unavailable and its download failed. GitHub Actions browser results and the live provider checks above remain required before release.
+- GitHub Actions Test Suite, Playwright E2E Tests and Hebrew Forms Pilot all passed on `6abac9799e91ebf642f5202235a607ad2951ed55`. Subsequent provider-compatibility fixes need fresh CI. The live provider test found the blocking bypass above; the temporary verification function was removed and the original main upload function restored without publishing a new frontend.

@@ -2,6 +2,9 @@
 // an opaque reference to a short-lived URL after checking its recorded owner.
 export const MAX_FILE_BYTES = 10 * 1024 * 1024;
 export const SIGNED_URL_SECONDS = 300;
+// Base44's current storage returns mp/private/...; older objects use private/....
+// Accept only these private namespaces, never a public URL or a caller-supplied URI.
+const PRIVATE_URI = /^(?:mp\/)?private\//;
 const MAX_REQUEST_BYTES = Math.ceil(MAX_FILE_BYTES * 4 / 3) + 65536;
 const REFERENCE = /^mp-private:([a-f0-9]{24})$/i;
 const TYPES = new Set([
@@ -58,7 +61,7 @@ async function readBody(req) {
 }
 
 async function signedResult(client, record) {
-  if (!record?.id || !/^private\//.test(record.file_uri || '')) throw fail(503, 'Private file is unavailable');
+  if (!record?.id || !PRIVATE_URI.test(record.file_uri || '')) throw fail(503, 'Private file is unavailable');
   const signed = await client.integrations.Core.CreateFileSignedUrl({
     file_uri: record.file_uri, expires_in: SIGNED_URL_SECONDS,
   });
@@ -109,7 +112,7 @@ export async function handlePrivateAttachment(req, { createClientFromRequest }) 
     if (!REFERENCE.test(`mp-private:${record?.id}`)) throw fail(503, 'Private file is unavailable');
     const uploaded = await client.integrations.Core.UploadPrivateFile({ file });
     const uri = uploaded?.file_uri;
-    if (typeof uri !== 'string' || !uri.startsWith('private/')) throw fail(503, 'Private upload failed');
+    if (typeof uri !== 'string' || !PRIVATE_URI.test(uri)) throw fail(503, 'Private upload failed');
     const update = { file_uri: uri, status: 'active' };
     try { await records.update(record.id, update); }
     catch { await records.update(record.id, update); }

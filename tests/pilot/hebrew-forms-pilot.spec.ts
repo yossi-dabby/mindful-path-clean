@@ -604,7 +604,8 @@ test('forms warning is bold above the library and opens the complete terms at it
   await expect(terms.getByRole('heading', { name: 'תנאי שימוש בטפסים והגבלת אחריות', exact: true })).toBeInViewport();
   await expect(terms.locator('p')).toHaveCount(6);
   await expect(terms).toContainText('אין באמור כדי לפטור את מפעילי האפליקציה מאחריות שלא ניתן לפטור ממנה על פי דין');
-  await expect(page.locator('time')).toHaveAttribute('datetime', '2026-11-04');
+  // The full terms page includes the newer privacy/access update, not only the forms annex.
+  await expect(page.locator('time')).toHaveAttribute('datetime', '2026-11-09');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: testInfo.outputPath('forms-terms.png'), fullPage: true });
   await page.goBack();

@@ -27,7 +27,7 @@ export default function GeneratedFileCard({ generatedFile }) {
   const resolveUrl = async () => {
     const { url } = await resolveWorksheetFileUrl(normalized.url, {
       sourceRecord: generatedFile,
-      coreIntegration: base44?.integrations?.Core,
+      functions: base44?.functions,
       entities: base44?.entities,
     });
     return url;
@@ -52,8 +52,7 @@ export default function GeneratedFileCard({ generatedFile }) {
       await downloadPdfFile(downloadUrl, normalized.name);
     } catch (error) {
       console.error('[GeneratedFileCard] Download failed:', {
-        fileValue: normalized.url,
-        reason: error?.message || error,
+        reason: error?.name || 'Error',
       });
       toast({
         title: t('chat.generated_file.download_error_title'),

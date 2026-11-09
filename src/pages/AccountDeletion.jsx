@@ -2,7 +2,7 @@ import BotanicalAccent from '@/components/brand/BotanicalAccent';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ShieldCheck, Trash2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-const SUPPORT_EMAIL='support@mindful-path.app';
+const SUPPORT_EMAIL='yosephdabby4@gmail.com';
 const subject={partial:'Mindful Path partial data deletion request',account:'Mindful Path account deletion request'};
 function Section({title,children,id}) {return <section id={id} className="scroll-mt-6"><h2 className="text-xl font-bold">{title}</h2><div className="mt-3 space-y-3 leading-7 text-muted-foreground">{children}</div></section>;}
 function PartialDataDeletion(){const {t}=useTranslation();return <Section id="delete-data" title={t('stage6.selected_data_title')}>

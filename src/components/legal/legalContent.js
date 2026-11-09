@@ -1,9 +1,9 @@
-import { additionalLegalCopies } from './legalContentAdditional';
-import { formsTermsCopies, FORMS_TERMS_EFFECTIVE_DATE } from './formsTermsContent';
+import { additionalLegalCopies } from './legalContentAdditional.js';
+import { formsTermsCopies, FORMS_TERMS_EFFECTIVE_DATE } from './formsTermsContent.js';
 
-export const LEGAL_EFFECTIVE_DATE = '2026-09-03';
-export const LEGAL_CONSENT_VERSION = '2026-09-03';
-export const LEGAL_CONTACT_EMAIL = 'support@mindful-path.app';
+export const LEGAL_EFFECTIVE_DATE = '2026-11-09';
+export const LEGAL_CONSENT_VERSION = '2026-11-09';
+export const LEGAL_CONTACT_EMAIL = 'yosephdabby4@gmail.com';
 
 const en = {
   language: 'en',
@@ -22,7 +22,7 @@ const en = {
     intro: 'This notice explains what information Mindful Path processes, why it is used, and the choices available to you. Mindful Path is a wellness and self-help service; it is not an emergency or medical treatment service.',
     sections: [
       { title: 'Who is responsible and how to contact us', paragraphs: [
-        'The operator of Mindful Path is responsible for the processing described in this notice. Privacy, access, export, correction, and deletion requests can be sent to support@mindful-path.app.',
+        'Mindful Path is operated by דבי יוסף ודבי נצחיה, an Israeli registered partnership (שותפות מורשה), business number 558524088. For support, privacy, access, export, correction or deletion requests: yosephdabby4@gmail.com.',
       ]},
       { title: 'Information we process', bullets: [
         'Account details, such as name, email address, language, preferences, and authentication identifiers.',
@@ -39,17 +39,17 @@ const en = {
         'To meet legal obligations and respond to valid legal requests.',
       ]},
       { title: 'AI processing and important limitations', paragraphs: [
-        'Content sent to AI features may be processed by Mindful Path infrastructure, Base44 services, and configured AI service providers solely to provide and protect the requested feature. AI output can be incomplete or incorrect and must not be treated as a diagnosis, treatment plan, or emergency instruction.',
+        'Content sent to AI features may be processed by Mindful Path infrastructure, Base44 services, and configured AI service providers to provide and protect the requested feature. AI output can be incomplete or incorrect and must not be treated as a diagnosis, treatment plan, or emergency instruction.',
         'Use the chat only for information you are comfortable providing. Do not include another person’s confidential information unless you are authorized to do so.',
       ]},
       { title: 'Sharing and international processing', paragraphs: [
-        'Information may be processed by service providers that supply hosting, authentication, AI, analytics, support, communications, payments, and security. They are permitted to process information only for the services they provide, subject to applicable contractual and legal safeguards.',
+        'Hosting, authentication, AI, analytics, support, communications, payment and security providers may process information under their service terms. Base44 and configured AI providers process content supplied to AI features. We have requested clarification about training use and available exclusions; we cannot currently promise that all provider processing is excluded from model training.',
         'Some providers may process information outside your country. Where required, appropriate transfer safeguards should be used.',
         'Mindful Path does not sell personal information.',
       ]},
       { title: 'Retention, export, and deletion', paragraphs: [
-        'Retention controls available in Settings are intended to limit how long supported wellness records are kept. Operational backups, security records, transaction records, or information required by law may follow different limited retention periods.',
-        'You can request an export or deletion from Settings. Account deletion is intended to remove the account and associated user-owned records. Some deletion operations may take time to propagate through backups and managed service systems.',
+        'Settings apply retention controls to supported records. Removing a conversation from the app may only hide it from your history. Deleting an account or a database record does not automatically erase uploaded files or provider-managed conversations. Contact support to request their deletion and confirmation of completion.',
+        'Backup, log and analytics retention periods and provider deletion procedures are being confirmed with Base44. We cannot promise a fixed deletion deadline until it is confirmed. Records subject to legal retention obligations may be retained as required.',
       ]},
       { title: 'Your choices and rights', bullets: [
         'Access and export information associated with your account.',
@@ -64,7 +64,7 @@ const en = {
         'Mindful Path uses access controls, authentication, encrypted network connections, data minimization, and monitoring intended to reduce unauthorized access. No online service can guarantee absolute security.',
       ]},
       { title: 'Age limits', paragraphs: [
-        'The AI chat is intended only for adults aged 18 or older. Users under 18 must not use the AI chat. Other wellness tools are not intended for children under 13; users aged 13–17 should use them only with a parent or legal guardian as applicable.',
+        'Mindful Path, including all its tools and AI features, is intended only for people aged 18 or older. People under 18 must not use the service.',
       ]},
       { title: 'Changes to this notice', paragraphs: [
         'Material changes will be identified by an updated effective date and, when appropriate, an in-app notice. Continued use does not replace consent where new consent is legally required.',
@@ -82,7 +82,7 @@ const en = {
         'Do not rely on Mindful Path in an emergency. If you may harm yourself or another person, are in immediate danger, or need urgent care, contact local emergency services or a qualified professional now. Safety prompts and resource links may be incomplete or unavailable.',
       ]},
       { title: 'Eligibility and age', paragraphs: [
-        'The AI chat is for users aged 18 or older. People under 18 must not use the AI chat. Other wellness tools are not for children under 13; users aged 13–17 should use them only with a parent or legal guardian as applicable.',
+        'Mindful Path, including all its tools and AI features, is intended only for people aged 18 or older. People under 18 must not use the service.',
       ]},
       { title: 'AI limitations', paragraphs: [
         'AI-generated responses may be inaccurate, repetitive, unsuitable, or incomplete. You remain responsible for decisions you make. Do not delay or replace professional assessment or treatment because of information provided by the service.',
@@ -106,10 +106,10 @@ const en = {
         'Mindful Path and its original software and content remain protected by applicable intellectual-property laws. You retain rights in content you submit and permit its processing only as needed to operate, secure, and improve the service as described in the Privacy Notice.',
       ]},
       { title: 'Responsibility and applicable law', paragraphs: [
-        'Nothing in these Terms excludes rights or responsibilities that cannot legally be excluded. Any additional limitations, governing-law terms, and business identity details must be confirmed for the country in which the service is offered.',
+        'Nothing in these Terms excludes rights or responsibilities that cannot legally be excluded. The operator is דבי יוסף ודבי נצחיה (שותפות מורשה), business number 558524088. Contact: yosephdabby4@gmail.com.',
       ]},
       { title: 'Contact and updates', paragraphs: [
-        'Questions about these Terms can be sent to support@mindful-path.app. Material updates will be identified by a revised effective date and, when appropriate, an in-app notice.',
+        'Questions about these Terms can be sent to yosephdabby4@gmail.com. Material updates will be identified by a revised effective date and, when appropriate, an in-app notice.',
       ]},
     ],
   },
@@ -147,7 +147,7 @@ const he = {
     intro: 'הודעה זו מסבירה איזה מידע Mindful Path מעבדת, לאילו מטרות ובאילו אפשרויות תוכלו לבחור. Mindful Path היא שירות לרווחה נפשית ולעזרה עצמית; היא אינה שירות חירום ואינה שירות רפואי.',
     sections: [
       { title: 'מי אחראי למידע וכיצד פונים אלינו', paragraphs: [
-        'מפעיל Mindful Path אחראי לעיבוד המתואר בהודעה זו. בקשות בנושא פרטיות, עיון, ייצוא, תיקון או מחיקה ניתן לשלוח לכתובת support@mindful-path.app.',
+        'Mindful Path מופעלת בידי דבי יוסף ודבי נצחיה, שותפות מורשה, מספר עוסק 558524088. לתמיכה ולבקשות פרטיות, עיון, ייצוא, תיקון או מחיקה: yosephdabby4@gmail.com.',
       ]},
       { title: 'המידע שאנו מעבדים', bullets: [
         'פרטי חשבון כגון שם, כתובת דוא״ל, שפה, העדפות ומזהי התחברות.',
@@ -168,13 +168,13 @@ const he = {
         'השתמשו בצ׳אט רק לגבי מידע שנוח לכם למסור. אין לכלול מידע חסוי של אדם אחר ללא הרשאה מתאימה.',
       ]},
       { title: 'שיתוף ועיבוד מחוץ לישראל', paragraphs: [
-        'מידע עשוי להיות מעובד בידי ספקים המספקים אחסון, התחברות, AI, ניתוח שימוש, תמיכה, תקשורת, תשלומים ואבטחה. הם רשאים לעבד מידע רק לצורך השירות שהם מספקים ובכפוף להגנות חוזיות וחוקיות מתאימות.',
+        'ספקי אחסון, התחברות, AI, ניתוח שימוש, תמיכה, תקשורת, תשלומים ואבטחה עשויים לעבד מידע לפי תנאי השירות שלהם. Base44 וספקי AI שהוגדרו מעבדים תוכן שנמסר לתכונות AI. ביקשנו הבהרה לגבי שימוש לאימון והחרגות אפשריות; בשלב זה איננו יכולים להבטיח שכל עיבוד אצל הספקים מוחרג מאימון מודלים.',
         'חלק מהספקים עשויים לעבד מידע מחוץ למדינתכם. כאשר נדרש, יש להשתמש באמצעי הגנה מתאימים להעברת מידע.',
         'Mindful Path אינה מוכרת מידע אישי.',
       ]},
       { title: 'שמירה, ייצוא ומחיקה', paragraphs: [
-        'אפשרויות השמירה שבהגדרות נועדו להגביל את משך שמירתן של רשומות רווחה נתמכות. גיבויים תפעוליים, רישומי אבטחה, רישומי עסקאות או מידע שחובה לשמור על פי דין עשויים להישמר לפרקי זמן מוגבלים אחרים.',
-        'ניתן לבקש ייצוא או מחיקה דרך ההגדרות. מחיקת חשבון נועדה להסיר את החשבון ואת הרשומות שבבעלות המשתמש. השלמת המחיקה בגיבויים ובמערכות שירות מנוהלות עשויה להימשך זמן.',
+        'הגדרות השמירה חלות על רשומות נתמכות. הסרת שיחה מהאפליקציה עשויה רק להסתיר אותה מההיסטוריה. מחיקת חשבון או רשומה ממסד הנתונים אינה מוחקת אוטומטית קבצים שהועלו או שיחות המנוהלות אצל הספק. יש לפנות לתמיכה לבקשת מחיקתם ולאישור השלמתה.',
+        'תקופות השמירה של גיבויים, יומני מערכת ונתוני שימוש והליכי המחיקה אצל הספק נמצאים בבירור מול Base44. איננו מתחייבים למועד מחיקה קבוע עד לקבלת אישור. מידע הכפוף לחובת שמירה חוקית עשוי להישמר כנדרש.',
       ]},
       { title: 'הבחירות והזכויות שלכם', bullets: [
         'לעיין במידע המשויך לחשבון ולקבל עותק ממנו.',
@@ -189,7 +189,7 @@ const he = {
         'Mindful Path משתמשת באמצעי בקרת גישה, אימות, חיבורי רשת מוצפנים, צמצום מידע וניטור שנועדו להפחית גישה בלתי מורשית. אף שירות מקוון אינו יכול להבטיח אבטחה מוחלטת.',
       ]},
       { title: 'מגבלות גיל', paragraphs: [
-        'צ׳אט ה־AI מיועד לבני 18 ומעלה בלבד. משתמשים מתחת לגיל 18 אינם רשאים להשתמש בצ׳אט ה־AI. כלי הרווחה האחרים אינם מיועדים לילדים מתחת לגיל 13; בני 13–17 צריכים להשתמש בהם בליווי הורה או אפוטרופוס חוקי, ככל שנדרש.',
+        'Mindful Path, לרבות כל הכלים ותכונות ה־AI, מיועדת לבני 18 ומעלה בלבד. מי שטרם מלאו להם 18 אינם רשאים להשתמש בשירות.',
       ]},
       { title: 'שינויים בהודעה', paragraphs: [
         'שינוי מהותי יסומן באמצעות עדכון תאריך התחילה, ובמידת הצורך גם בהודעה בתוך האפליקציה. המשך שימוש אינו מחליף הסכמה חדשה כאשר הדין מחייב לקבלה.',
@@ -207,7 +207,7 @@ const he = {
         'אין להסתמך על Mindful Path במקרה חירום. אם אתם עלולים לפגוע בעצמכם או באדם אחר, נמצאים בסכנה מיידית או זקוקים לטיפול דחוף, פנו כעת לשירותי החירום המקומיים או לאיש מקצוע מוסמך. התראות בטיחות וקישורים למשאבים עלולים להיות חלקיים או בלתי זמינים.',
       ]},
       { title: 'זכאות וגיל', paragraphs: [
-        'צ׳אט ה־AI מיועד לבני 18 ומעלה. בני פחות מ־18 אינם רשאים להשתמש בצ׳אט ה־AI. כלי הרווחה האחרים אינם מיועדים לילדים מתחת לגיל 13; בני 13–17 צריכים להשתמש בהם בליווי הורה או אפוטרופוס חוקי, ככל שנדרש.',
+        'Mindful Path, לרבות כל הכלים ותכונות ה־AI, מיועדת לבני 18 ומעלה בלבד. מי שטרם מלאו להם 18 אינם רשאים להשתמש בשירות.',
       ]},
       { title: 'מגבלות ה־AI', paragraphs: [
         'תשובות שנוצרו בידי AI עשויות להיות שגויות, חזרתיות, לא מתאימות או חלקיות. האחריות להחלטות נשארת בידיכם. אין לדחות או להחליף הערכה או טיפול מקצועיים בגלל מידע שהתקבל בשירות.',
@@ -231,10 +231,10 @@ const he = {
         'Mindful Path והתוכנה והתוכן המקוריים שלה מוגנים בדיני הקניין הרוחני. הזכויות בתוכן שאתם מוסרים נשארות בידיכם, ואתם מתירים את עיבודו רק ככל שנדרש להפעלה, לאבטחה ולשיפור השירות כמתואר בהודעת הפרטיות.',
       ]},
       { title: 'אחריות ודין חל', paragraphs: [
-        'אין בתנאים אלה כדי לשלול זכויות או אחריות שלא ניתן לשלול על פי דין. מגבלות אחריות נוספות, הדין החל וזהותו המשפטית של מפעיל השירות צריכים להיות מאושרים בהתאם למדינות שבהן יוצע השירות.',
+        'אין בתנאים אלה כדי לשלול זכויות או אחריות שלא ניתן לשלול על פי דין. מפעילת השירות היא דבי יוסף ודבי נצחיה, שותפות מורשה, מספר עוסק 558524088. לפניות: yosephdabby4@gmail.com.',
       ]},
       { title: 'יצירת קשר ועדכונים', paragraphs: [
-        'שאלות בנושא התנאים ניתן לשלוח ל־support@mindful-path.app. עדכון מהותי יסומן בתאריך תחילה חדש, ובמידת הצורך גם בהודעה בתוך האפליקציה.',
+        'שאלות בנושא התנאים ניתן לשלוח ל־yosephdabby4@gmail.com. עדכון מהותי יסומן בתאריך תחילה חדש, ובמידת הצורך גם בהודעה בתוך האפליקציה.',
       ]},
     ],
   },
@@ -259,12 +259,12 @@ const legalCopies = { en, he, ...additionalLegalCopies };
 
 export function getLegalCopy(language) {
   const normalized = String(language || 'en').toLowerCase().split('-')[0];
-  const copy = legalCopies[normalized] || en;
+  const copy = Object.hasOwn(legalCopies, normalized) ? legalCopies[normalized] : en;
   return {
     ...copy,
     terms: {
       ...copy.terms,
-      effectiveDate: FORMS_TERMS_EFFECTIVE_DATE,
+      effectiveDate: [LEGAL_EFFECTIVE_DATE, FORMS_TERMS_EFFECTIVE_DATE].sort().at(-1),
       sections: [...copy.terms.sections, { id: 'forms-terms', ...formsTermsCopies[copy.language] }],
     },
   };

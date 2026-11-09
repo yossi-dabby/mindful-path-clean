@@ -265,7 +265,7 @@ describe('pdfJsViewerUtils', () => {
 
     expect(logger.warn).toHaveBeenCalledWith(
       '[PDFJS_PDF_FETCH_TEST_FAILED]',
-      expect.objectContaining({ reason: 'Failed to fetch' })
+      expect.objectContaining({ reason: 'TypeError', pdfUrl: '/forms/en/example.pdf' })
     );
   });
 

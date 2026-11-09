@@ -1,3 +1,6 @@
+// Only bundled form paths are safe to include in diagnostics.
+const safePdfLogReference = (value) => typeof value === 'string' && /^\/forms\/[^?#]+$/.test(value) ? value : '[private file]';
+
 export function isValidPdfJsWorkerContentType(contentType = '') {
   return (
     contentType.includes('javascript') ||
@@ -100,7 +103,7 @@ export async function validateWorkerUrl(
   } catch (error) {
     logger.error('[PDFJS_WORKER_FETCH_TEST_FAILED]', {
       workerUrl,
-      reason: error?.message || String(error),
+      reason: error?.name || 'Error',
     });
     throw error;
   }
@@ -123,7 +126,7 @@ export async function validatePdfUrl(
   signal,
   { fetchImpl = fetch, logger = console } = {}
 ) {
-  logger.log('[PDFJS_PDF_FETCH_TEST_START]', { pdfUrl });
+  logger.log('[PDFJS_PDF_FETCH_TEST_START]', { pdfUrl: safePdfLogReference(pdfUrl) });
   try {
     const response = await fetchImpl(pdfUrl, {
       method: 'GET',
@@ -135,7 +138,7 @@ export async function validatePdfUrl(
     // Accept 200 (server ignores Range) or 206 (partial content).
     if (!response.ok) {
       logger.warn('[PDFJS_PDF_FETCH_TEST_FAILED]', {
-        pdfUrl,
+        pdfUrl: safePdfLogReference(pdfUrl),
         status: response.status,
         reason: `HTTP ${response.status}`,
       });
@@ -146,7 +149,7 @@ export async function validatePdfUrl(
 
     if (contentType.includes('text/html')) {
       logger.error('[PDF_BYTES_NOT_PDF]', {
-        pdfUrl,
+        pdfUrl: safePdfLogReference(pdfUrl),
         contentType,
         reason: 'Response has HTML content-type — likely SPA catch-all',
       });
@@ -161,7 +164,7 @@ export async function validatePdfUrl(
 
     if (!firstFive.startsWith('%PDF')) {
       logger.error('[PDF_BYTES_NOT_PDF]', {
-        pdfUrl,
+        pdfUrl: safePdfLogReference(pdfUrl),
         contentType,
         firstFive,
         reason: 'First bytes are not %PDF — response may be an HTML page',
@@ -172,7 +175,7 @@ export async function validatePdfUrl(
     }
 
     logger.log('[PDFJS_PDF_FETCH_TEST_OK]', {
-      pdfUrl,
+      pdfUrl: safePdfLogReference(pdfUrl),
       status: response.status,
       contentType,
       firstFive,
@@ -188,8 +191,8 @@ export async function validatePdfUrl(
     }
     // Network / CORS / timeout errors: log but do not block the actual load.
     logger.warn('[PDFJS_PDF_FETCH_TEST_FAILED]', {
-      pdfUrl,
-      reason: error?.message || String(error),
+      pdfUrl: safePdfLogReference(pdfUrl),
+      reason: error?.name || 'Error',
     });
   }
 }
@@ -243,8 +246,8 @@ export async function loadPdfDocumentWithWorkerFallback({
     }
 
     logger.warn('[PDFJS_WORKER_RETRY_DISABLE_WORKER]', {
-      fileUrl: url,
-      reason: error?.message || String(error),
+      fileUrl: safePdfLogReference(url),
+      reason: error?.name || 'Error',
     });
 
     return await loadDocument({ url, disableWorker: true });

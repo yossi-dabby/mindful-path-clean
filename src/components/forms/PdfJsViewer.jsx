@@ -100,7 +100,7 @@ export default function PdfJsViewer({ fileUrl }) {
   }, []);
 
   const handleRenderError = useCallback((error) => {
-    console.error('[PDFJS_ERROR]', error);
+    console.error('[PDFJS_ERROR]', { name: error?.name });
     setErrorMessage(error?.message || 'Unknown PDF error');
     setIsLoading(false);
   }, []);
@@ -124,7 +124,7 @@ export default function PdfJsViewer({ fileUrl }) {
     firstPageLogged.current = false;
     if (!fileUrl) return () => controller.abort();
     const workerSrc = enforceStablePdfWorkerSrc();
-    console.log('[PDFJS_LOAD_START]', { fileUrl, build: BUILD_MARKER });
+    console.log('[PDFJS_LOAD_START]', { build: BUILD_MARKER });
     console.log('[PDFJS_WORKER_URL]', workerSrc);
     (async () => {
       try {

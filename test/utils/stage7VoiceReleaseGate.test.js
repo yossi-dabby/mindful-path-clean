@@ -43,8 +43,8 @@ describe('Stage 7 — voice release gate contracts', () => {
 
   it('renders user audio attachments via native audio control surface', () => {
     expect(messageBubbleSource).toMatch(/isAudioAttachment/);
-    expect(messageBubbleSource).toContain('<audio controls');
+    expect(messageBubbleSource).toContain('<PrivateAttachmentMedia as="audio" controls');
     expect(messageBubbleSource).toContain('preload="none"');
-    expect(messageBubbleSource).toContain('src={attachmentUrl}');
+    expect(messageBubbleSource).toContain('reference={attachmentUrl}');
   });
 });

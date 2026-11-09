@@ -1,3 +1,4 @@
+import { uploadPrivateAttachment } from '@/lib/privateAttachments';
 import BotanicalAccent from '@/components/brand/BotanicalAccent';
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -3626,7 +3627,7 @@ export default function Chat() {
       let file_url = '';
       try {
         if (!onMobile) {
-          const uploadResult = await base44.integrations.Core.UploadFile({ file: transcriptionSourceFile });
+          const uploadResult = await uploadPrivateAttachment(base44, transcriptionSourceFile);
           file_url = uploadResult?.file_url;
           if (!file_url) throw new Error('Upload returned no file_url');
         }
@@ -3678,7 +3679,7 @@ export default function Chat() {
           try {
             let retryFileUrl = '';
             if (!onMobile) {
-              const retryUploadResult = await base44.integrations.Core.UploadFile({ file: normalizedRetryFile });
+              const retryUploadResult = await uploadPrivateAttachment(base44, normalizedRetryFile);
               retryFileUrl = retryUploadResult?.file_url;
               if (!retryFileUrl) throw new Error('Retry upload returned no file_url');
             }
@@ -4251,20 +4252,22 @@ export default function Chat() {
 
       // Upload file attachment if present
       let attachmentMeta = undefined;
+      let attachmentDeliveryUrl;
       let pdfAttachmentMetadata = {};
       let usedAudioDraftAttachment = false;
       if (attachmentToUpload) {
         setIsUploadingFile(true);
         try {
-          const { file_url } = await base44.integrations.Core.UploadFile({ file: attachmentToUpload });
+          const { file_url, file_ref } = await uploadPrivateAttachment(base44, attachmentToUpload);
+          attachmentDeliveryUrl = file_url;
           const type = attachmentToUpload === audioDraftFile ? 'audio' : resolveAttachmentType(attachmentToUpload.name);
-          attachmentMeta = { type, url: file_url, name: attachmentToUpload.name };
+          attachmentMeta = { type, url: file_ref, name: attachmentToUpload.name };
           usedAudioDraftAttachment = attachmentToUpload === audioDraftFile;
 
           if (type === 'pdf') {
             try {
               const extractionResult = await base44.functions.invoke('extractPdfText', {
-                file_url,
+                file_ref,
                 file_name: attachmentToUpload.name
               });
               const extractionData = extractionResult?.data || extractionResult || {};
@@ -4279,7 +4282,7 @@ export default function Chat() {
             }
           }
         } catch (err) {
-          console.error('[Upload] File upload failed:', err);
+          console.error('[Upload] File upload failed');
           toast({
             title: t('chat.errors.file_upload_title'),
             description: t('chat.errors.file_upload_desc'),
@@ -4298,18 +4301,19 @@ export default function Chat() {
       if (!isVoiceDerivedSend && !attachmentMeta && audioDraftStatus === 'recorded' && audioDraftFile) {
         setIsUploadingFile(true);
         try {
-          const { file_url } = await base44.integrations.Core.UploadFile({ file: audioDraftFile });
+          const { file_url, file_ref } = await uploadPrivateAttachment(base44, audioDraftFile);
+          attachmentDeliveryUrl = file_url;
           if (file_url) {
             attachmentMeta = {
               type: 'audio',
-              url: file_url,
+              url: file_ref,
               name: audioDraftFile.name,
               size: typeof audioDraftFile.size === 'number' ? audioDraftFile.size : undefined
             };
             shouldClearAudioDraftAfterSend = true;
           }
         } catch (err) {
-          console.error('[Upload] Audio draft upload failed:', err);
+          console.error('[Upload] Audio draft upload failed');
           toast({
             title: t('chat.errors.audio_upload_title'),
             description: t('chat.errors.audio_upload_desc'),
@@ -4322,13 +4326,14 @@ export default function Chat() {
 
       // Runtime-safe attachment contract for addMessage:
       // - AI delivery fields go in [ATTACHMENT_CONTEXT] within content.
-      // - Round-trip recovery stays in [ATTACHMENT_METADATA] marker.
+      // - Round-trip recovery stores an owned reference in [ATTACHMENT_METADATA].
+      // - Signed URLs are temporary delivery capabilities; never persist them as UI references.
       // - Do not send custom metadata fields (runtime 422s on attachment metadata).
       const attachmentContextBlock = attachmentMeta ? (() => {
         const lines = [
         '[ATTACHMENT_CONTEXT]',
         `type: ${attachmentMeta.type}`,
-        `url: ${attachmentMeta.url}`];
+        `url: ${attachmentDeliveryUrl}`];
         if (attachmentMeta.name) lines.push(`name: ${attachmentMeta.name}`);
         if (typeof pdfAttachmentMetadata.pdf_page_count === 'number') {
           lines.push(`pdf_page_count: ${pdfAttachmentMetadata.pdf_page_count}`);
@@ -4345,7 +4350,7 @@ export default function Chat() {
         role: 'user',
         content: finalContent,
         ...(attachmentMeta ? {
-          file_urls: [attachmentMeta.url]
+          file_urls: [attachmentDeliveryUrl]
         } : {})
       });
       legacyMessagePersistencePendingRef.current = false;

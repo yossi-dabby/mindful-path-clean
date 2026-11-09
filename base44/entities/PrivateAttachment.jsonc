@@ -1,0 +1,15 @@
+{
+  "name": "PrivateAttachment",
+  "type": "object",
+  "properties": {
+    "owner_user_id": { "type": "string" },
+    "owner_email": { "type": "string" },
+    "file_uri": { "type": "string" },
+    "name": { "type": "string" },
+    "mime_type": { "type": "string" },
+    "size_bytes": { "type": "integer" },
+    "status": { "type": "string", "enum": ["uploading", "active", "deletion_pending"] }
+  },
+  "required": ["owner_user_id", "owner_email", "name", "mime_type", "size_bytes", "status"],
+  "rls": { "create": false, "read": false, "update": false, "delete": false }
+}

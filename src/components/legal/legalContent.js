@@ -43,13 +43,13 @@ const en = {
         'Use the chat only for information you are comfortable providing. Do not include another person’s confidential information unless you are authorized to do so.',
       ]},
       { title: 'Sharing and international processing', paragraphs: [
-        'Hosting, authentication, AI, analytics, support, communications, payment and security providers may process information under their service terms. Base44 and configured AI providers process content supplied to AI features. We have requested clarification about training use and available exclusions; we cannot currently promise that all provider processing is excluded from model training.',
+        'Service providers process information under their terms. Base44 confirmed that customer data may be used to train and improve its internal AI/ML models under our current plan; it says it does not use this data to train third-party models. Mindful Path does not currently have an Enterprise training exclusion. The exact coverage of end-user content and anonymization is still being clarified. Other AI services configured by Mindful Path have their own terms.',
         'Some providers may process information outside your country. Where required, appropriate transfer safeguards should be used.',
         'Mindful Path does not sell personal information.',
       ]},
       { title: 'Retention, export, and deletion', paragraphs: [
-        'Settings apply retention controls to supported records. Removing a conversation from the app may only hide it from your history. Deleting an account or a database record does not automatically erase uploaded files or provider-managed conversations. Contact support to request their deletion and confirmation of completion.',
-        'Backup, log and analytics retention periods and provider deletion procedures are being confirmed with Base44. We cannot promise a fixed deletion deadline until it is confirmed. Records subject to legal retention obligations may be retained as required.',
+        'Retention settings apply to supported records. Removing a conversation may only hide it from history. Deleting an account or database record does not erase stored uploads or provider-managed conversations. Base44 support can delete uploaded files when given their file links; contact Mindful Path support to arrange this. Base44 has not provided a documented conversation-deletion API or confirmed a support-assisted conversation-erasure process. We cannot promise complete conversation erasure.',
+        'Base44 reports automatic deletion of analytics after 60 days and retention of Table Backup & Restore copies for 7 days on our current Elite plan. These periods do not establish deletion deadlines for conversations, files, logs or all platform backups. Log and platform-wide backup retention remain unconfirmed. Legally required records may be retained.',
       ]},
       { title: 'Your choices and rights', bullets: [
         'Access and export information associated with your account.',
@@ -121,7 +121,7 @@ const en = {
     aiTitle: 'AI can make mistakes',
     aiBody: 'Responses may be incomplete or unsuitable. Use your judgment and seek a qualified professional for clinical decisions.',
     privacyTitle: 'Your messages are processed to provide the chat',
-    privacyBody: 'Messages may be processed by Mindful Path, Base44, and configured AI providers. Avoid sharing information you do not want processed.',
+    privacyBody: 'Mindful Path, Base44 and configured AI providers process messages. Under the current plan, Base44 may use customer data for internal AI training. Complete erasure of provider-managed conversations is not yet confirmed. Avoid sensitive personal information until these arrangements are clarified; read the Privacy Notice.',
     crisisTitle: 'Not for emergencies',
     crisisBody: 'If you may harm yourself or someone else, or are in immediate danger, contact local emergency services or a qualified crisis service now.',
     acknowledgement: 'By continuing, you confirm that you are 18 or older, understand these limits, and agree to the Terms of Use and Privacy Notice.',
@@ -168,13 +168,13 @@ const he = {
         'השתמשו בצ׳אט רק לגבי מידע שנוח לכם למסור. אין לכלול מידע חסוי של אדם אחר ללא הרשאה מתאימה.',
       ]},
       { title: 'שיתוף ועיבוד מחוץ לישראל', paragraphs: [
-        'ספקי אחסון, התחברות, AI, ניתוח שימוש, תמיכה, תקשורת, תשלומים ואבטחה עשויים לעבד מידע לפי תנאי השירות שלהם. Base44 וספקי AI שהוגדרו מעבדים תוכן שנמסר לתכונות AI. ביקשנו הבהרה לגבי שימוש לאימון והחרגות אפשריות; בשלב זה איננו יכולים להבטיח שכל עיבוד אצל הספקים מוחרג מאימון מודלים.',
+        'ספקי השירות מעבדים מידע לפי תנאיהם. Base44 אישרה שבמסלול הנוכחי נתוני לקוחות עשויים לשמש לאימון ולשיפור מודלי AI/ML פנימיים שלה; לדבריה, היא אינה משתמשת במידע זה לאימון מודלים של צדדים שלישיים. ל־Mindful Path אין כיום החרגת אימון של Enterprise. היקף הכללת תוכן משתמשי הקצה ואופן הסרת פרטים מזהים עדיין בבירור. שירותי AI אחרים שהוגדרו ב־Mindful Path כפופים לתנאים משלהם.',
         'חלק מהספקים עשויים לעבד מידע מחוץ למדינתכם. כאשר נדרש, יש להשתמש באמצעי הגנה מתאימים להעברת מידע.',
         'Mindful Path אינה מוכרת מידע אישי.',
       ]},
       { title: 'שמירה, ייצוא ומחיקה', paragraphs: [
-        'הגדרות השמירה חלות על רשומות נתמכות. הסרת שיחה מהאפליקציה עשויה רק להסתיר אותה מההיסטוריה. מחיקת חשבון או רשומה ממסד הנתונים אינה מוחקת אוטומטית קבצים שהועלו או שיחות המנוהלות אצל הספק. יש לפנות לתמיכה לבקשת מחיקתם ולאישור השלמתה.',
-        'תקופות השמירה של גיבויים, יומני מערכת ונתוני שימוש והליכי המחיקה אצל הספק נמצאים בבירור מול Base44. איננו מתחייבים למועד מחיקה קבוע עד לקבלת אישור. מידע הכפוף לחובת שמירה חוקית עשוי להישמר כנדרש.',
+        'הגדרות השמירה חלות על רשומות נתמכות. הסרת שיחה עשויה רק להסתיר אותה מההיסטוריה. מחיקת חשבון או רשומה אינה מוחקת קבצים מאוחסנים או שיחות המנוהלות אצל הספק. תמיכת Base44 יכולה למחוק קבצים שהועלו לאחר קבלת הקישורים אליהם; לתיאום יש לפנות לתמיכת Mindful Path. Base44 לא סיפקה ממשק מתועד למחיקת שיחות ולא אישרה הליך למחיקתן באמצעות התמיכה. איננו יכולים להבטיח מחיקה מלאה של השיחות.',
+        'לפי Base44, נתוני ניתוח שימוש נמחקים אוטומטית לאחר 60 ימים, ועותקי הטבלאות בשירות Backup & Restore נשמרים 7 ימים במסלול Elite הנוכחי שלנו. תקופות אלה אינן קובעות מועדי מחיקה לשיחות, לקבצים, ליומני מערכת או לכל גיבויי הפלטפורמה. תקופות השמירה של יומני המערכת וגיבויי הפלטפורמה עדיין לא אושרו. מידע המחויב בשמירה על פי דין עשוי להישמר.',
       ]},
       { title: 'הבחירות והזכויות שלכם', bullets: [
         'לעיין במידע המשויך לחשבון ולקבל עותק ממנו.',
@@ -246,7 +246,7 @@ const he = {
     aiTitle: 'AI עלול לטעות',
     aiBody: 'התשובות עשויות להיות חלקיות או לא מתאימות. יש להפעיל שיקול דעת ולפנות לאיש מקצוע מוסמך לקבלת החלטות קליניות.',
     privacyTitle: 'ההודעות מעובדות לצורך הפעלת הצ׳אט',
-    privacyBody: 'הודעות עשויות להיות מעובדות בידי Mindful Path, שירותי Base44 וספקי AI שהוגדרו במערכת. הימנעו ממסירת מידע שאינכם רוצים שיעובד.',
+    privacyBody: 'Mindful Path, שירותי Base44 וספקי AI שהוגדרו מעבדים את ההודעות. במסלול הנוכחי Base44 עשויה להשתמש בנתוני לקוחות לאימון AI פנימי. מחיקה מלאה של שיחות המנוהלות אצל הספק טרם אושרה. הימנעו ממסירת מידע אישי רגיש עד להבהרת ההסדרים, וקראו את הודעת הפרטיות.',
     crisisTitle: 'לא מיועד למצבי חירום',
     crisisBody: 'אם אתם עלולים לפגוע בעצמכם או באדם אחר, או נמצאים בסכנה מיידית, פנו כעת לשירותי החירום המקומיים או לשירות משבר מוסמך.',
     acknowledgement: 'בהמשך אתם מאשרים שגילכם 18 ומעלה, שהבנתם את המגבלות ושאתם מסכימים לתנאי השימוש ולהודעת הפרטיות.',

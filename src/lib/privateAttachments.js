@@ -9,12 +9,12 @@ function resultData(result) {
 }
 
 export async function uploadPrivateAttachment(base44, file) {
-  return resultData(await base44.functions.invoke('uploadAttachment', { file }));
+  return resultData(await base44.functions.invoke('pr34EncryptedFileCheck', { file }));
 }
 
 export async function resolvePrivateAttachment(base44, reference) {
   if (!isPrivateAttachmentRef(reference)) throw new Error('An owned file reference is required');
-  const data = resultData(await base44.functions.invoke('uploadAttachment', { action: 'resolve', file_ref: reference }));
+  const data = resultData(await base44.functions.invoke('pr34EncryptedFileCheck', { action: 'resolve', file_ref: reference }));
   if (data.file_ref !== reference) throw new Error('Private file reference mismatch');
   return data;
 }

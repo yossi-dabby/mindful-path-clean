@@ -36,6 +36,7 @@ export function renderPublicInformation(pathname, language = 'en') {
       + `<a dir="ltr" href="mailto:${LEGAL_CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}">${LEGAL_CONTACT_EMAIL}</a>`);
     if (!partial) body += section(ui.what_deleted, list([ui.deleted_profile, ui.deleted_records, ui.deleted_preferences]));
     body += section(ui.limited_retention, paragraph(ui.retention_body)) + paragraph(partial ? ui.data_keeps_account : ui.uninstall_note);
+    body += section(copy.providerLimits.title, copy.providerLimits.paragraphs.map(paragraph).join(''));
   }
   const labels = [copy.common.privacy, copy.common.terms, copy.common.contact, ui.account_delete_title, ui.data_delete_title];
   const navigation = PUBLIC_INFORMATION_PATHS.map((path, i) => `<a href="${path}?lang=${lang}"${path === pathname ? ' aria-current="page"' : ''}>${escapeHtml(labels[i])}</a>`).join('');

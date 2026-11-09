@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import serveHandler from 'serve-handler';
 import { createAdminVerifier, createPilotHandler, loadPilot } from './hebrew-pilot.mjs';
 import { handlePublicInformation } from './public-information.mjs';
+import { createPrivateAttachmentHandler } from './private-attachments.mjs';
 
 export async function createAppServer({ verifyAdmin, pilot, distRoot } = {}) {
   const handlePilot = createPilotHandler({
@@ -11,9 +12,11 @@ export async function createAppServer({ verifyAdmin, pilot, distRoot } = {}) {
     verifyAdmin: verifyAdmin || createAdminVerifier(process.env.BASE44_APP_ID || process.env.VITE_BASE44_APP_ID),
   });
   const securityHeaders = JSON.parse(await readFile(new URL('../serve.json', import.meta.url), 'utf8')).headers;
+  const handleAttachment = createPrivateAttachmentHandler();
   return createServer(async (req, res) => {
     try {
       if (handlePublicInformation(req, res)) return;
+      if (await handleAttachment(req, res)) return;
       if (await handlePilot(req, res)) return;
       // Only dist is public. Source files, private bundles and unknown API URLs
       // must never fall through to SPA fallback or directory listings.

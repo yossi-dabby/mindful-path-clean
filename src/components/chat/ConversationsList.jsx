@@ -30,6 +30,9 @@ export default function ConversationsList({
   onRenameConversation,
   onTogglePinConversation,
   isPreferenceSaving = false,
+  isLoading = false,
+  loadError = false,
+  onRetry,
   onClose
 }) {
   // Stage 1 runtime-path lock:
@@ -210,9 +213,17 @@ export default function ConversationsList({
 
         {preferenceError && <p role="alert" className="mx-3 mb-2 rounded-xl border border-destructive/30 bg-destructive/10 p-3 text-sm text-red-700 dark:text-red-300">{t('chat.conversations_list.update_error_title')}. {t('chat.conversations_list.update_error_desc')}</p>}
 
+        {loadError && (
+          <div role="alert" data-testid="chat-list-error" className="mx-3 my-2 rounded-xl border border-destructive/30 bg-destructive/10 p-3 text-sm">
+            <p>{t('chat.refresh.list_error')}</p>
+            <Button variant="outline" size="sm" className="mt-2" disabled={isLoading} onClick={onRetry}>{t('chat.refresh.retry')}</Button>
+          </div>
+        )}
+        {isLoading && <p role="status" className="px-4 py-2 text-sm text-muted-foreground">{t('chat.refresh.loading')}</p>}
+
         {/* Conversations List */}
         <div className="bg-transparent p-2.5 flex-1 overflow-y-auto min-h-0" style={{ overscrollBehavior: 'none' }}>
-          {safeConversations.length === 0 ? (
+          {safeConversations.length === 0 && (isLoading || loadError) ? null : safeConversations.length === 0 ? (
             <div className="border border-dashed border-border bg-[hsl(var(--card)/0.97)] px-4 py-8 text-center rounded-3xl shadow-sm">
               <MessageCircle className="text-primary mb-3 mx-auto lucide lucide-message-circle w-12 h-12" />
               <p className="text-primary text-sm font-medium">{t('chat.conversations_list.empty_title')}</p>

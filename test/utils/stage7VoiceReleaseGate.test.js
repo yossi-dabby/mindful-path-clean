@@ -13,7 +13,13 @@ const messageBubbleSource = readFileSync(resolve(process.cwd(), 'src/components/
 describe('Stage 7 — voice release gate contracts', () => {
   it('clears local audio draft state on session switch/start/delete paths', () => {
     expect(chatSource).toMatch(/setMessages\(\[\]\);\s*clearLocalAudioDraft\(\);/);
-    expect(chatSource).toMatch(/maybeTriggerEndWrite\(leavingId, leavingMeta, messages\);\s*clearLocalAudioDraft\(\);/);
+    const load = chatSource.slice(chatSource.indexOf('const loadConversation ='), chatSource.indexOf('const handleFileSelect ='));
+    // Failed/stale reads retain the draft. Only a successfully selected different
+    // session clears audio; refresh never calls the destructive selection path.
+    expect(load).toContain('if (!isSameConversation) clearLocalAudioDraft();');
+    expect(load.indexOf('clearLocalAudioDraft()')).toBeGreaterThan(load.indexOf('await base44.agents.getConversation(conversationId)'));
+    expect(load.indexOf('clearLocalAudioDraft()')).toBeLessThan(load.indexOf('setCurrentConversationId(conversationId)'));
+    expect(load.slice(load.indexOf('} catch (error)'))).not.toContain('clearLocalAudioDraft');
     expect(chatSource).toMatch(/setAttachedFile\(null\);\s*clearLocalAudioDraft\(\);\s*setCurrentConversationId\(null\);/);
   });
 

@@ -11,9 +11,11 @@ import AuthErrorBanner from '../components/utils/AuthErrorBanner';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
-import { Send, Loader2, Menu, Sparkles, ArrowLeft, Trash2, Paperclip, Mic, Square, Play, PanelLeftClose, PanelLeftOpen, LifeBuoy } from 'lucide-react';
+import { Send, Loader2, Menu, Sparkles, ArrowLeft, Trash2, Paperclip, Mic, Square, Play, PanelLeftClose, PanelLeftOpen, LifeBuoy, MoreHorizontal, RefreshCw } from 'lucide-react';
 import PremiumIcon from '@/components/ui/PremiumIcon';
 import { useToast } from '@/components/ui/use-toast';
+import { useChatRefresh } from '@/hooks/useChatRefresh';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -414,6 +416,9 @@ export default function Chat() {
   const [isLoading, setIsLoading] = useState(false);
   const [isConversationInitializing, setIsConversationInitializing] = useState(false);
   const [deliveryStatus, setDeliveryStatus] = useState('idle');
+  const [conversationLoadError, setConversationLoadError] = useState(null);
+  const [isConversationLoading, setIsConversationLoading] = useState(false);
+  const conversationSelectionRef = useRef(0);
   const [responseWaitSeconds, setResponseWaitSeconds] = useState(0);
   const [showSidebar, setShowSidebar] = useState(false);
   const deleteReturnFocusRef = useRef(null);
@@ -2767,31 +2772,26 @@ export default function Chat() {
     };
   }, [currentConversationId]);
 
-  const { data: conversations, refetch: refetchConversations } = useQuery({
+  const { data: conversations, refetch: refetchConversations, isError: conversationsError, isFetching: conversationsFetching } = useQuery({
     queryKey: ['conversations'],
     queryFn: async () => {
-      try {
-        // In test environment, return empty array immediately
-        if (window.__TEST_APP_ID__ || document.body.getAttribute('data-test-env') === 'true') {
-          return [];
-        }
-
-        // Fetch conversations sequentially to avoid rate-limit bursts
-        const allConversations = [];
-        for (const agentName of ['cbt_therapist_lenient', 'cbt_therapist_standard', 'cbt_therapist_strict', 'cbt_therapist']) {
-          const result = await base44.agents.listConversations({ agent_name: agentName }).catch(() => []);
-          allConversations.push(result);
-        }
-
-        const flatConversations = allConversations.flat();
-        const deletedConversations = await base44.entities.UserDeletedConversations.list();
-        const deletedIds = Array.isArray(deletedConversations) ? deletedConversations.map((d) => d.agent_conversation_id) : [];
-        const conversationsArray = Array.isArray(flatConversations) ? flatConversations : [];
-        return conversationsArray.filter((c) => !deletedIds.includes(c.id));
-      } catch (error) {
-        console.error('Error fetching conversations:', error);
+      // In test environment, return empty array immediately
+      if (window.__TEST_APP_ID__ || document.body.getAttribute('data-test-env') === 'true') {
         return [];
       }
+
+      // Fetch conversations sequentially to avoid rate-limit bursts
+      const allConversations = [];
+      for (const agentName of ['cbt_therapist_lenient', 'cbt_therapist_standard', 'cbt_therapist_strict', 'cbt_therapist']) {
+        const result = await base44.agents.listConversations({ agent_name: agentName });
+        allConversations.push(result);
+      }
+
+      const flatConversations = allConversations.flat();
+      const deletedConversations = await base44.entities.UserDeletedConversations.list();
+      const deletedIds = Array.isArray(deletedConversations) ? deletedConversations.map((d) => d.agent_conversation_id) : [];
+      const conversationsArray = Array.isArray(flatConversations) ? flatConversations : [];
+      return conversationsArray.filter((c) => !deletedIds.includes(c.id));
     },
     initialData: [],
     refetchOnWindowFocus: false,
@@ -2863,11 +2863,48 @@ export default function Chat() {
   const handleTogglePinConversation = (conversationId, isPinned) =>
     conversationPreferenceMutation.mutateAsync({ conversationId, changes: { is_pinned: isPinned } });
 
-  const { data: currentConversationData } = useQuery({
+  const refreshBlocked = isLoading || isConversationInitializing || isConversationLoading ||
+    audioDraftStatus === 'recording' || isTranscribingAudio || isUploadingFile ||
+    legacyMessagePersistencePendingRef.current || legacyAwaitingReplyRef.current;
+  const refreshBusyRef = useRef(refreshBlocked);
+  refreshBusyRef.current = refreshBlocked;
+  const getRefreshScope = () => `${currentConversationIdRef.current || ''}:${currentTurnIdRef.current}:${conversationSelectionRef.current}`;
+  const { refreshing: isRefreshingConversation, error: conversationRefreshError, requestRefresh } = useChatRefresh({
+    scope: currentConversationId,
+    blocked: refreshBlocked,
+    getScope: getRefreshScope,
+    isBlocked: () => refreshBusyRef.current || isLoadingRef.current || conversationInitializingRef.current ||
+      legacyMessagePersistencePendingRef.current || legacyAwaitingReplyRef.current ||
+      mediaRecorderRef.current?.state === 'recording',
+    refresh: async (isCurrent) => {
+      const conversationId = currentConversationIdRef.current;
+      // List errors retain their own retry state; both reads settle before the
+      // refresh indicator finishes, even when one request fails.
+      const results = await Promise.allSettled([
+        refetchConversations({ throwOnError: true, cancelRefetch: false }),
+        (async () => {
+          if (!conversationId) return;
+          const conversation = await base44.agents.getConversation(conversationId);
+          if (!isCurrent()) return;
+          const guarded = buildVisibleConversationMessages(conversation.messages || [], sessionLanguageRef.current);
+          const finality = evaluateAssistantSnapshotFinality(guarded, 'ConversationRefresh');
+          const updated = safeUpdateMessages(guarded, 'ConversationRefresh');
+          if (updated && finality.isFinal) markAssistantMessagesFinalized(conversationId, guarded);
+          queryClient.setQueryData(['currentConversation', conversationId], conversation);
+        })(),
+      ]);
+      // List errors are rendered from query state and clear when its own retry succeeds.
+      if (results[1].status === 'rejected') throw new Error('Chat refresh failed');
+    },
+  });
+
+  const { data: currentConversationData, isError: currentConversationError } = useQuery({
     queryKey: ['currentConversation', currentConversationId],
     queryFn: () => currentConversationId ? base44.agents.getConversation(currentConversationId) : null,
     enabled: !!currentConversationId,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: false
   });
 
   useEffect(() => {
@@ -3021,6 +3058,9 @@ export default function Chat() {
       locale: i18n.language || 'en',
       baselineAssistantCount: 0,
     });
+    ++conversationSelectionRef.current;
+    setConversationLoadError(null);
+    setIsConversationLoading(false);
     conversationInitializingRef.current = true;
     setIsConversationInitializing(true);
     setIsLoading(true);
@@ -3156,8 +3196,9 @@ export default function Chat() {
   };
 
   const loadConversation = async (conversationId) => {
-    crisisDetectionLifecycleRef.current.invalidate();
-    setShowRiskPanel(false);
+    const selection = ++conversationSelectionRef.current;
+    setConversationLoadError(null);
+    setIsConversationLoading(true);
     try {
       // Stage 6 — wait only for the bounded memory-write window for the session
       // being left before loading the new one. Capture the current
@@ -3169,19 +3210,43 @@ export default function Chat() {
       const leavingId = currentConversationId;
       const leavingMeta = conversations?.find((c) => c.id === leavingId)?.metadata || {};
       const endWritePromise = maybeTriggerEndWrite(leavingId, leavingMeta, messages);
-      clearLocalAudioDraft();
       await waitForConversationMemoryWrite(endWritePromise);
+      if (!mountedRef.current || selection !== conversationSelectionRef.current) return;
       sessionStartOpenerFallbackRef.current?.stop('conversation_switch', {
         clearLoading: true,
         clearLoadingTimeout: true,
       });
 
       let conversation = await base44.agents.getConversation(conversationId);
+      if (!mountedRef.current || selection !== conversationSelectionRef.current) return;
+      // Lock session language for this conversation.
+      // Prefer the SESSION_LANGUAGE directive embedded in the first user message.
+      // Directive format (injected by addLangDirective in Chat.jsx):
+      //   "[SESSION_LANGUAGE: <iso2>. Open and respond entirely in <name> ...]"
+      // Fall back to the current UI locale so the governor never defaults to English
+      // for a non-English session loaded from history.
+      const firstUserMsg = (conversation.messages || []).find((m) => m.role === 'user' && m.content);
+      const embeddedLang = firstUserMsg?.content?.match(/\[SESSION_LANGUAGE:\s*([a-zA-Z]{2})\b/)?.[1]?.toLowerCase();
+      const nextSessionLanguage = embeddedLang || i18n.language || 'en';
+
+      const policyRefresh = await ensureTherapeuticFormsPolicyInjected({
+        conversation,
+        sessionLanguage: nextSessionLanguage,
+        isNewConversation: false,
+        injectedVersionCache: formsPolicyVersionCacheRef.current,
+        pendingRefreshByConversation: pendingTherapeuticFormsPolicyRefreshRef.current,
+      });
+      void policyRefresh;
+      if (!mountedRef.current || selection !== conversationSelectionRef.current) return;
+
       rememberConversationSessionIdentity(
         conversationId,
         resolveConversationSessionInstanceId(conversation),
       );
       const isSameConversation = conversationId === currentConversationId;
+      crisisDetectionLifecycleRef.current.invalidate();
+      setShowRiskPanel(false);
+      if (!isSameConversation) clearLocalAudioDraft();
       setCurrentConversationId(conversationId);
 
       // CRITICAL: Reset confirmed-messages baseline when switching conversations.
@@ -3192,24 +3257,7 @@ export default function Chat() {
         lastConfirmedMessagesRef.current = [];
       }
 
-      // Lock session language for this conversation.
-      // Prefer the SESSION_LANGUAGE directive embedded in the first user message.
-      // Directive format (injected by addLangDirective in Chat.jsx):
-      //   "[SESSION_LANGUAGE: <iso2>. Open and respond entirely in <name> ...]"
-      // Fall back to the current UI locale so the governor never defaults to English
-      // for a non-English session loaded from history.
-      const firstUserMsg = (conversation.messages || []).find((m) => m.role === 'user' && m.content);
-      const embeddedLang = firstUserMsg?.content?.match(/\[SESSION_LANGUAGE:\s*([a-zA-Z]{2})\b/)?.[1]?.toLowerCase();
-      sessionLanguageRef.current = embeddedLang || i18n.language || 'en';
-
-      const policyRefresh = await ensureTherapeuticFormsPolicyInjected({
-        conversation,
-        sessionLanguage: sessionLanguageRef.current,
-        isNewConversation: false,
-        injectedVersionCache: formsPolicyVersionCacheRef.current,
-        pendingRefreshByConversation: pendingTherapeuticFormsPolicyRefreshRef.current,
-      });
-      void policyRefresh;
+      sessionLanguageRef.current = nextSessionLanguage;
 
       // Process and sanitize messages before setting
       const guardedLoad = buildVisibleConversationMessages(conversation.messages || [], sessionLanguageRef.current);
@@ -3234,9 +3282,11 @@ export default function Chat() {
       }
       setShowSidebar(false);
     } catch (error) {
-      console.error('[Load Conversation Error]', error);
-      lastConfirmedMessagesRef.current = [];
-      setMessages([]);
+      if (!mountedRef.current || selection !== conversationSelectionRef.current) return;
+      setConversationLoadError(conversationId);
+      setShowSidebar(false);
+    } finally {
+      if (mountedRef.current && selection === conversationSelectionRef.current) setIsConversationLoading(false);
     }
   };
 
@@ -5314,6 +5364,9 @@ export default function Chat() {
           <ConversationsList
               conversations={Array.isArray(displayConversations) ? displayConversations : []}
               currentConversationId={currentConversationId}
+              isLoading={conversationsFetching}
+              loadError={conversationsError}
+              onRetry={() => refetchConversations()}
               onSelectConversation={loadConversation}
               onNewConversation={startNewConversation}
               onDeleteConversation={handleDeleteConversation}
@@ -5375,7 +5428,29 @@ export default function Chat() {
               </span>
             )}
             </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" data-testid="chat-refresh-menu" aria-label={t('chat.refresh.menu')} className="ms-auto shrink-0 min-h-[44px] min-w-[44px] text-primary">
+                  <MoreHorizontal className="h-5 w-5" aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onSelect={() => requestRefresh()} disabled={refreshBlocked || isRefreshingConversation}>
+                  <RefreshCw className="h-4 w-4" aria-hidden="true" />
+                  {t(currentConversationId ? 'chat.refresh.action' : 'chat.refresh.list_action')}
+                </DropdownMenuItem>
+                {refreshBlocked && <p className="max-w-64 px-2 py-1 text-xs text-muted-foreground">{t('chat.refresh.busy')}</p>}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
+
+          {(conversationLoadError || conversationRefreshError || currentConversationError || conversationsError) && (
+            <div role="alert" data-testid="chat-load-error" className="mx-3 my-2 flex flex-wrap items-center gap-2 rounded-xl border border-destructive/30 bg-destructive/10 p-3 text-sm shrink-0">
+              <span className="flex-1">{t(conversationLoadError ? 'chat.refresh.load_error' : conversationsError && !conversationRefreshError && !currentConversationError ? 'chat.refresh.list_error' : 'chat.refresh.error')}</span>
+              <Button variant="outline" size="sm" disabled={refreshBlocked || isRefreshingConversation} onClick={() => conversationLoadError ? loadConversation(conversationLoadError) : requestRefresh()}>{t('chat.refresh.retry')}</Button>
+            </div>
+          )}
+          {(isRefreshingConversation || isConversationLoading) && <p role="status" className="px-4 py-1 text-sm text-muted-foreground shrink-0">{t('chat.refresh.loading')}</p>}
 
         {/* Risk Panel — rendered outside conversation gate so it shows even before a conversation is created */}
         {showRiskPanel && !currentConversationId &&

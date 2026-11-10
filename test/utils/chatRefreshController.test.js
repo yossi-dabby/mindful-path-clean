@@ -1,4 +1,5 @@
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
+import { translations } from '../../src/components/i18n/translations.jsx';
 import { createChatRefreshController, listenForChatRefresh } from '../../src/lib/chatRefreshController';
 
 const deferred = () => {
@@ -109,7 +110,22 @@ describe('conversation refresh lifecycle', () => {
     doc.hidden = false;
     doc.dispatchEvent(new Event('visibilitychange')); win.dispatchEvent(new Event('focus')); win.dispatchEvent(new Event('online'));
     expect(request).toHaveBeenCalledTimes(3);
-    stop(); win.dispatchEvent(new Event('online')); doc.dispatchEvent(new Event('visibilitychange'));
+    const nativeEvent = new Event('mindfulpath:native-app-state');
+    nativeEvent.detail = { isActive: false }; win.dispatchEvent(nativeEvent);
     expect(request).toHaveBeenCalledTimes(3);
+    nativeEvent.detail = { isActive: true }; win.dispatchEvent(nativeEvent);
+    expect(request).toHaveBeenCalledTimes(4);
+    stop(); win.dispatchEvent(new Event('online')); win.dispatchEvent(nativeEvent); doc.dispatchEvent(new Event('visibilitychange'));
+    expect(request).toHaveBeenCalledTimes(4);
+  });
+
+  it('provides refresh and retry copy in all seven UI languages', () => {
+    for (const language of ['en', 'he', 'es', 'fr', 'de', 'it', 'pt']) {
+      const copy = translations[language].translation.chat.refresh;
+      for (const key of ['menu', 'action', 'list_action', 'loading', 'error', 'load_error', 'list_error', 'retry', 'busy']) {
+        expect(copy[key]?.trim().length, `${language}.${key}`).toBeGreaterThan(0);
+      }
+      if (language !== 'en') expect(copy.action).not.toBe(translations.en.translation.chat.refresh.action);
+    }
   });
 });

@@ -43,7 +43,7 @@ test('manual refresh retrieves new messages without a page reload or loss of dra
   expect(state.requests.filter(request => request.startsWith('POST'))).toHaveLength(0);
 });
 
-for (const event of ['online', 'focus', 'visibilitychange']) {
+for (const event of ['online', 'focus', 'visibilitychange', 'mindfulpath:native-app-state']) {
   test(`return/reconnect refreshes an idle conversation on ${event}`, async ({ page }, info) => {
     const { state } = await setup(page, info.project.name);
     await page.getByTestId('therapist-chat-input').fill(draft);
@@ -54,6 +54,8 @@ for (const event of ['online', 'focus', 'visibilitychange']) {
         document.dispatchEvent(new Event(eventName));
         Object.defineProperty(document, 'hidden', { configurable: true, value: false });
         document.dispatchEvent(new Event(eventName));
+      } else if (eventName === 'mindfulpath:native-app-state') {
+        window.dispatchEvent(new CustomEvent(eventName, { detail: { isActive: true } }));
       } else window.dispatchEvent(new Event(eventName));
     }, event);
     await expect(page.getByRole('log')).toContainText(`Synthetic saved response ${event}.`);

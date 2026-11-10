@@ -28,7 +28,7 @@ export function createChatRefreshController({ getScope, isBlocked, refresh, onSt
     active = job;
     onStateChange({ refreshing: true, error: false });
     job.promise = Promise.resolve()
-      .then(() => refresh(isCurrent))
+      .then(() => isCurrent() ? refresh(isCurrent) : undefined)
       .then(() => {
         if (isCurrent()) onStateChange({ refreshing: false, error: false });
       })
@@ -75,10 +75,13 @@ export function createChatRefreshController({ getScope, isBlocked, refresh, onSt
 
 export function listenForChatRefresh(windowTarget, documentTarget, request) {
   const resume = () => { if (!documentTarget.hidden) request(); };
+  const resumeNative = (event) => { if (event.detail?.isActive === true) resume(); };
+  windowTarget.addEventListener('mindfulpath:native-app-state', resumeNative);
   documentTarget.addEventListener('visibilitychange', resume);
   windowTarget.addEventListener('focus', resume);
   windowTarget.addEventListener('online', resume);
   return () => {
+    windowTarget.removeEventListener('mindfulpath:native-app-state', resumeNative);
     documentTarget.removeEventListener('visibilitychange', resume);
     windowTarget.removeEventListener('focus', resume);
     windowTarget.removeEventListener('online', resume);

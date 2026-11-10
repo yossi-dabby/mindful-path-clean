@@ -92,6 +92,14 @@ describe('refresh delivery through the real V2 coordinator', () => {
     if (!isFinal) expect(commit).not.toHaveBeenCalled();
   });
 
+  it('does not deliver an old queued send after changing conversations during persistence', async () => {
+    const { coordinator, executeSend } = setup();
+    const result = commitRefreshedSnapshot({ messages: [user, reply()], finality: { isFinal: true }, coordinator, commit: () => true });
+    coordinator.resetForConversationChange();
+    await result.nextQueuedSend();
+    expect(executeSend).not.toHaveBeenCalled();
+  });
+
   it('keeps the legacy refresh path independent of coordinator state', () => {
     const commit = vi.fn(() => true);
     expect(commitRefreshedSnapshot({ messages: [user, reply()], finality: { isFinal: true }, coordinator: null, commit })).toEqual({ updated: true, nextQueuedSend: null });

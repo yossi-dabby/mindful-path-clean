@@ -2903,12 +2903,12 @@ export default function Chat() {
             startingTurnId: currentTurnIdRef.current,
             commit: (messages, options) => safeUpdateMessages(messages, 'ConversationRefresh', options),
           });
+          queryClient.setQueryData(['currentConversation', conversationId], snapshot.conversation);
           if (updated && snapshot.finality.isFinal) {
             const committedRefresh = lastConfirmedMessagesRef.current;
             markAssistantMessagesFinalized(conversationId, committedRefresh);
             await persistFinalizedCaseFormulationUpdates(conversationId, committedRefresh);
           }
-          queryClient.setQueryData(['currentConversation', conversationId], snapshot.conversation);
           if (nextQueuedSend) {
             nextQueuedSend().catch(() => console.error('[ConversationRefresh] queued send failed'));
           }

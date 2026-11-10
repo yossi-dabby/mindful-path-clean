@@ -53,5 +53,12 @@ export function commitRefreshedSnapshot({ messages, finality, coordinator, start
     visibleAccepted: true,
     terminalReason: 'visible_terminal_result_committed',
   });
-  return { updated, nextQueuedSend: result.accepted ? result._nextQueuedSend : null };
+  const queuedTurnId = result._nextQueuedTurnRecord?.client_request_id;
+  const nextQueuedSend = result.accepted && result._nextQueuedSend ? async () => {
+    // Persistence is awaited before delivery. A conversation switch during that
+    // wait resets the coordinator and must cancel this old conversation's send.
+    if (coordinator.getActiveTurn()?.client_request_id !== queuedTurnId) return;
+    await result._nextQueuedSend();
+  } : null;
+  return { updated, nextQueuedSend };
 }

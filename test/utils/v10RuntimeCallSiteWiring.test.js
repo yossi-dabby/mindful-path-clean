@@ -19,6 +19,12 @@ describe('V10 Gate 1 — live Chat runtime wiring', () => {
     expect(chatSource).not.toContain('persistFinalizedCaseFormulationUpdates(convId, guardedPoll);');
   });
 
+  it('persists only the accepted final refresh before releasing a queued send', () => {
+    const refreshPath = chatSource.slice(chatSource.indexOf('const { updated, nextQueuedSend } = commitRefreshedSnapshot'), chatSource.indexOf('// List errors are rendered from query state'));
+    expect(refreshPath).toMatch(/if \(updated && snapshot\.finality\.isFinal\) \{\s*const committedRefresh = lastConfirmedMessagesRef\.current;\s*markAssistantMessagesFinalized\(conversationId, committedRefresh\);\s*await persistFinalizedCaseFormulationUpdates\(conversationId, committedRefresh\);/);
+    expect(refreshPath.indexOf('await persistFinalizedCaseFormulationUpdates')).toBeLessThan(refreshPath.indexOf('nextQueuedSend().catch'));
+  });
+
   it('creates and stores a canonical session_instance_id on every conversation path', () => {
     const createCalls = chatSource.match(/agents\.createConversation\(\{/g) ?? [];
     const metadataBindings = chatSource.match(/session_instance_id:\s*newSessionInstanceId/g) ?? [];

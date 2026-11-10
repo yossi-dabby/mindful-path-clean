@@ -2904,7 +2904,9 @@ export default function Chat() {
             commit: (messages, options) => safeUpdateMessages(messages, 'ConversationRefresh', options),
           });
           if (updated && snapshot.finality.isFinal) {
-            markAssistantMessagesFinalized(conversationId, lastConfirmedMessagesRef.current);
+            const committedRefresh = lastConfirmedMessagesRef.current;
+            markAssistantMessagesFinalized(conversationId, committedRefresh);
+            await persistFinalizedCaseFormulationUpdates(conversationId, committedRefresh);
           }
           queryClient.setQueryData(['currentConversation', conversationId], snapshot.conversation);
           if (nextQueuedSend) {

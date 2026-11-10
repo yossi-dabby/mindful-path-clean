@@ -25,6 +25,14 @@ function fail(status, message) {
 }
 function json(body, status = 200) { return Response.json(body, { status, headers: HEADERS }); }
 
+function safeAttachmentName(value) {
+  const name = typeof value === 'string' && value ? value : 'attachment';
+  // Replace lone surrogates from older records before URI encoding, and truncate
+  // by Unicode code point so a supplementary character is never split in half.
+  const wellFormed = new TextDecoder().decode(new TextEncoder().encode(name));
+  return Array.from(wellFormed.replace(/[\x00-\x1f\x7f/\\]/g, '_')).slice(0, 160).join('');
+}
+
 async function readBody(req) {
   if (Number(req.headers.get('content-length')) > MAX_REQUEST_BYTES) throw fail(413, 'File is too large');
   const reader = req.body?.getReader();
@@ -123,7 +131,7 @@ async function download(req, client, fetchFile, now) {
   const bytes = new Uint8Array(await decryptAttachment(ciphertext, record));
   if (bytes.length !== record.size_bytes) throw fail(503, 'Private file is unavailable');
   let start = 0; let end = bytes.length - 1; let status = 200;
-  const headers = { ...HEADERS, 'Content-Type': record.mime_type, 'Accept-Ranges': 'bytes', 'Content-Security-Policy': "default-src 'none'; sandbox", 'Content-Disposition': `inline; filename="attachment"; filename*=UTF-8''${encodeURIComponent(record.name || 'attachment').replaceAll("'", '%27')}` };
+  const headers = { ...HEADERS, 'Content-Type': record.mime_type, 'Accept-Ranges': 'bytes', 'Content-Security-Policy': "default-src 'none'; sandbox", 'Content-Disposition': `inline; filename="attachment"; filename*=UTF-8''${encodeURIComponent(safeAttachmentName(record.name)).replaceAll("'", '%27')}` };
   const range = req.headers.get('range');
   if (range) {
     const match = /^bytes=(\d*)-(\d*)$/.exec(range);
@@ -173,7 +181,7 @@ export async function handlePrivateAttachment(req, { createClientFromRequest, fe
     if (file.size > MAX_FILE_BYTES) throw fail(413, 'File is too large');
     const mimeType = file.type.split(';')[0].trim().toLowerCase();
     if (!TYPES.has(mimeType)) throw fail(415, 'Unsupported file type');
-    const name = (file.name || 'attachment').replace(/[\x00-\x1f\x7f/\\]/g, '_').slice(0, 160);
+    const name = safeAttachmentName(file.name);
     const record = await records.create({
       owner_user_id: user.id, owner_email: user.email, name, mime_type: mimeType,
       size_bytes: file.size, status: 'uploading',

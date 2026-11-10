@@ -435,246 +435,108 @@ test.describe('Chat voice transcription runtime flow', () => {
     expect(invokeCount).toBe(0);
   });
 
-  test('transcribes uploaded recording and inserts transcript into composer without auto-send', async ({ page }) => {
+  test('transcribes a desktop draft through the authenticated backend without storing or auto-sending it', async ({ page }) => {
     await installFakeMediaRecording(page, 'audio/webm');
-
     await mockApi(page);
-
-    const captured = {
-      uploadFileName: '',
-      uploadMimeType: '',
-      invokePayload: null as null | Record<string, any>,
-      messagePostCount: 0,
-    };
-
-    await page.route(/\/api\/.*\/(?:integration-endpoints\/|functions\/uploadAttachment\b)/, async (route) => {
-      const req = route.request();
-      const url = req.url();
-
-      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(url)) {
-        const rawBody = req.postData() || '';
-        captured.uploadFileName = rawBody.match(/filename="([^"]+)"/i)?.[1] || '';
-        captured.uploadMimeType = rawBody.match(/Content-Type:\s*([^\r\n;]+)/i)?.[1] || '';
-        await route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify({ file_ref: 'mp-private:a12345678901234567890123', expires_in: 300, file_url: 'https://files.example.com/voice-draft.webm' }),
-        });
-        return;
-      }
-
-      if (/\/integration-endpoints\/Core\/InvokeLLM\b/i.test(url)) {
-        const body = req.postDataJSON?.() as Record<string, any>;
-        captured.invokePayload = body || null;
-
-        if (body?.response_json_schema) {
-          await route.fulfill({
-            status: 400,
-            contentType: 'application/json',
-            body: JSON.stringify({ message: 'response_json_schema is not supported for this audio transcription path' }),
-          });
-          return;
-        }
-        if (body?.model) {
-          await route.fulfill({
-            status: 400,
-            contentType: 'application/json',
-            body: JSON.stringify({ message: 'model override is not supported for this audio transcription path' }),
-          });
-          return;
-        }
-
-        await route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify('Transcribed runtime text from voice draft.'),
-        });
-        return;
-      }
-
-      await route.continue();
+    let requestBody = '';
+    let contentType = '';
+    let uploadCount = 0;
+    let llmCount = 0;
+    let messagePostCount = 0;
+    page.on('request', req => {
+      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(req.url())) uploadCount += 1;
+      if (/\/integration-endpoints\/Core\/InvokeLLM\b/i.test(req.url())) llmCount += 1;
+      if (/\/agents\/conversations\/.*\/messages/.test(req.url()) && req.method() === 'POST') messagePostCount += 1;
     });
-
-    await page.route('**/api/**/agents/conversations/**/messages**', async (route) => {
-      captured.messagePostCount += 1;
-      const body = route.request().postDataJSON?.() as any;
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({
-          role: 'user',
-          content: String(body?.content || ''),
-          created_date: new Date().toISOString(),
-        }),
-      });
+    await page.route('**/api/**/functions/transcribeMobileAudio', async route => {
+      requestBody = route.request().postData() || '';
+      contentType = route.request().headers()['content-type'] || '';
+      await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ transcription: 'Transcribed runtime text from voice draft.' }) });
     });
-
     await spaNavigate(page, '/Chat');
-    await expect(page.locator('[data-testid="therapist-chat-input"]')).toBeVisible({ timeout: 15000 });
-
+    const composer = page.locator('[data-testid="therapist-chat-input"]');
+    await expect(composer).toBeVisible({ timeout: 15000 });
+    await composer.fill('Existing text');
     await page.getByRole('button', { name: 'Record' }).click();
     await expect(page.getByRole('button', { name: 'Stop' })).toBeVisible({ timeout: 5000 });
     await page.getByRole('button', { name: 'Stop' }).click();
-
     await expect(page.getByText('Voice draft ready')).toBeVisible({ timeout: 10000 });
     await page.getByRole('button', { name: 'Transcribe' }).click();
-
-    const composer = page.locator('[data-testid="therapist-chat-input"]');
-    await expect(composer).toHaveValue('Transcribed runtime text from voice draft.', { timeout: 10000 });
-    await expect(page.getByText('Transcript added to the message.')).toBeVisible({ timeout: 10000 });
-
-    expect(captured.uploadFileName).toMatch(/^voice-draft-\d+\.webm$/);
-    expect(captured.uploadMimeType).toBe('audio/webm');
-    expect(captured.invokePayload).not.toBeNull();
-    expect(captured.invokePayload?.file_urls).toEqual(['https://files.example.com/voice-draft.webm']);
-    expect(captured.invokePayload?.model).toBeUndefined();
-    expect(captured.invokePayload?.response_json_schema).toBeUndefined();
-    expect(captured.messagePostCount).toBe(0);
+    await expect(composer).toHaveValue('Existing text\nTranscribed runtime text from voice draft.', { timeout: 10000 });
+    await expect(page.getByText('Transcript added to the message.')).toBeVisible();
+    expect(contentType).toContain('multipart/form-data');
+    expect(requestBody).toMatch(/filename="voice-draft-\d+\.webm"/);
+    expect(requestBody).toContain('Content-Type: audio/webm');
+    expect(requestBody).not.toContain('name="file_url"');
+    expect(uploadCount).toBe(0);
+    expect(llmCount).toBe(0);
+    expect(messagePostCount).toBe(0);
   });
 
-  test('retries transcription with normalized mime type when first transcription request fails', async ({ page }) => {
+  test('retries desktop transcription with normalized audio bytes when the first request fails', async ({ page }) => {
     await installFakeMediaRecording(page, 'audio/webm;codecs=opus');
     await mockApi(page);
-
-    const captured = {
-      uploadContentTypes: [] as string[],
-      uploadCount: 0,
-      invokePayloads: [] as Array<Record<string, any>>,
-      invokeCount: 0,
-    };
-
-    await page.route(/\/api\/.*\/(?:integration-endpoints\/|functions\/uploadAttachment\b)/, async (route) => {
-      const req = route.request();
-      const url = req.url();
-
-      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(url)) {
-        captured.uploadCount += 1;
-        const rawBody = req.postData() || '';
-        captured.uploadContentTypes.push(rawBody.match(/Content-Type:\s*([^\r\n]+)/i)?.[1]?.trim() || '');
-        await route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify({ file_ref: 'mp-private:a12345678901234567890123', expires_in: 300, file_url: `https://files.example.com/voice-draft-${captured.uploadCount}.webm` }),
-        });
-        return;
-      }
-
-      if (/\/integration-endpoints\/Core\/InvokeLLM\b/i.test(url)) {
-        captured.invokeCount += 1;
-        captured.invokePayloads.push((req.postDataJSON?.() as Record<string, any>) || {});
-
-        if (captured.invokeCount === 1) {
-          await route.fulfill({
-            status: 400,
-            contentType: 'application/json',
-            body: JSON.stringify({ message: 'unsupported file content type metadata' }),
-          });
-          return;
-        }
-
-        await route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify('Recovered transcript after mime normalization.'),
-        });
-        return;
-      }
-
-      await route.continue();
+    const bodies: string[] = [];
+    let uploadCount = 0;
+    let llmCount = 0;
+    page.on('request', req => {
+      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(req.url())) uploadCount += 1;
+      if (/\/integration-endpoints\/Core\/InvokeLLM\b/i.test(req.url())) llmCount += 1;
     });
-
+    await page.route('**/api/**/functions/transcribeMobileAudio', async route => {
+      bodies.push(route.request().postData() || '');
+      await route.fulfill({
+        status: bodies.length === 1 ? 415 : 200, contentType: 'application/json',
+        body: JSON.stringify(bodies.length === 1 ? { error: 'Unsupported audio content type' } : { transcription: 'Recovered transcript after mime normalization.' }),
+      });
+    });
     await spaNavigate(page, '/Chat');
-    await expect(page.locator('[data-testid="therapist-chat-input"]')).toBeVisible({ timeout: 15000 });
-
+    const composer = page.locator('[data-testid="therapist-chat-input"]');
+    await expect(composer).toBeVisible({ timeout: 15000 });
     await page.getByRole('button', { name: 'Record' }).click();
     await expect(page.getByRole('button', { name: 'Stop' })).toBeVisible({ timeout: 5000 });
     await page.getByRole('button', { name: 'Stop' }).click();
-
     await expect(page.getByText('Voice draft ready')).toBeVisible({ timeout: 10000 });
     await page.getByRole('button', { name: 'Transcribe' }).click();
-
-    const composer = page.locator('[data-testid="therapist-chat-input"]');
     await expect(composer).toHaveValue('Recovered transcript after mime normalization.', { timeout: 10000 });
-    await expect(page.getByText('Transcript added to the message.')).toBeVisible({ timeout: 10000 });
-
-    expect(captured.uploadCount).toBe(2);
-    expect(captured.invokeCount).toBe(2);
-    expect(captured.uploadContentTypes[0]).toContain('audio/webm;codecs=opus');
-    expect(captured.uploadContentTypes[1]).toBe('audio/webm');
-    expect(captured.invokePayloads[0]?.file_urls).toEqual(['https://files.example.com/voice-draft-1.webm']);
-    expect(captured.invokePayloads[1]?.file_urls).toEqual(['https://files.example.com/voice-draft-2.webm']);
-    expect(captured.invokePayloads.every((payload) => payload?.model === undefined)).toBe(true);
-    expect(captured.invokePayloads.every((payload) => payload?.response_json_schema === undefined)).toBe(true);
+    expect(bodies).toHaveLength(2);
+    expect(bodies[0]).toContain('Content-Type: audio/webm;codecs=opus');
+    expect(bodies[1]).toContain('Content-Type: audio/webm\r\n');
+    expect(uploadCount).toBe(0);
+    expect(llmCount).toBe(0);
   });
 
-  test('falls back to file-only transcription payload when prompt-based payload is rejected', async ({ page }) => {
+  test('keeps the desktop draft after an empty backend transcript and lets the user retry', async ({ page }) => {
     await installFakeMediaRecording(page, 'audio/webm');
     await mockApi(page);
-
-    const captured = {
-      invokePayloads: [] as Array<Record<string, any>>,
-      invokeCount: 0,
-    };
-
-    await page.route(/\/api\/.*\/(?:integration-endpoints\/|functions\/uploadAttachment\b)/, async (route) => {
-      const req = route.request();
-      const url = req.url();
-
-      if (/\/(?:functions\/uploadAttachment|integration-endpoints\/Core\/UploadFile)\b/i.test(url)) {
-        await route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify({ file_ref: 'mp-private:a12345678901234567890123', expires_in: 300, file_url: 'https://files.example.com/voice-draft.webm' }),
-        });
-        return;
-      }
-
-      if (/\/integration-endpoints\/Core\/InvokeLLM\b/i.test(url)) {
-        captured.invokeCount += 1;
-        const body = (req.postDataJSON?.() as Record<string, any>) || {};
-        captured.invokePayloads.push(body);
-
-        if (captured.invokeCount === 1 && typeof body?.prompt === 'string') {
-          await route.fulfill({
-            status: 400,
-            contentType: 'application/json',
-            body: JSON.stringify({ message: 'prompt is not supported for this transcription path' }),
-          });
-          return;
-        }
-
-        await route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify('Transcribed using file-only fallback payload.'),
-        });
-        return;
-      }
-
-      await route.continue();
+    let recover = false;
+    let messagePostCount = 0;
+    let llmCount = 0;
+    page.on('request', req => {
+      if (/\/integration-endpoints\/Core\/InvokeLLM\b/i.test(req.url())) llmCount += 1;
+      if (/\/agents\/conversations\/.*\/messages/.test(req.url()) && req.method() === 'POST') messagePostCount += 1;
     });
-
+    await page.route('**/api/**/functions/transcribeMobileAudio', route => route.fulfill({
+      status: 200, contentType: 'application/json',
+      body: JSON.stringify({ transcription: recover ? 'Recovered desktop recording.' : '   ' }),
+    }));
     await spaNavigate(page, '/Chat');
-    await expect(page.locator('[data-testid="therapist-chat-input"]')).toBeVisible({ timeout: 15000 });
-
+    const composer = page.locator('[data-testid="therapist-chat-input"]');
+    await expect(composer).toBeVisible({ timeout: 15000 });
+    await composer.fill('Existing draft');
     await page.getByRole('button', { name: 'Record' }).click();
     await expect(page.getByRole('button', { name: 'Stop' })).toBeVisible({ timeout: 5000 });
     await page.getByRole('button', { name: 'Stop' }).click();
-
-    await expect(page.getByText('Voice draft ready')).toBeVisible({ timeout: 10000 });
+    await expect(page.getByText('Voice draft ready')).toBeVisible();
     await page.getByRole('button', { name: 'Transcribe' }).click();
-
-    const composer = page.locator('[data-testid="therapist-chat-input"]');
-    await expect(composer).toHaveValue('Transcribed using file-only fallback payload.', { timeout: 10000 });
-    await expect(page.getByText('Transcript added to the message.')).toBeVisible({ timeout: 10000 });
-
-    expect(captured.invokeCount).toBe(2);
-    expect(typeof captured.invokePayloads[0]?.prompt).toBe('string');
-    expect(captured.invokePayloads[0]?.file_urls).toEqual(['https://files.example.com/voice-draft.webm']);
-    expect(captured.invokePayloads[1]?.prompt).toBeUndefined();
-    expect(captured.invokePayloads[1]?.file_urls).toEqual(['https://files.example.com/voice-draft.webm']);
-    expect(captured.invokePayloads.every((payload) => payload?.model === undefined)).toBe(true);
-    expect(captured.invokePayloads.every((payload) => payload?.response_json_schema === undefined)).toBe(true);
+    await expect(page.getByText('Audio transcription failed', { exact: true })).toBeVisible();
+    await expect(composer).toHaveValue('Existing draft');
+    await expect(page.getByText('Voice draft ready')).toBeVisible();
+    recover = true;
+    await page.getByRole('button', { name: 'Transcribe' }).click();
+    await expect(composer).toHaveValue('Existing draft\nRecovered desktop recording.');
+    expect(messagePostCount).toBe(0);
+    expect(llmCount).toBe(0);
   });
 
   test('records and transcribes in Android runtime when recorder requires explicit supported mime type', async ({ page }) => {

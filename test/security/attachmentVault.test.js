@@ -67,6 +67,28 @@ describe('encrypted attachment storage', () => {
 });
 
 describe('real cryptography through upload and download handlers', () => {
+  it('uploads and opens a filename with an emoji at the truncation boundary', async () => {
+    const e = await environment();
+    const name = 'a'.repeat(159) + '😀.txt';
+    const uploaded = await e.post({ file_base64: btoa(TEXT), file_name: name, file_type: 'text/plain' });
+    expect(uploaded.status).toBe(200);
+    const file = await uploaded.json();
+    expect(file.name).toBe('a'.repeat(159) + '😀');
+    const opened = await e.get(file.file_url);
+    expect(opened.status).toBe(200);
+    expect(await opened.text()).toBe(TEXT);
+    expect(opened.headers.get('content-disposition')).toContain(encodeURIComponent(file.name));
+  });
+  it.each(['\ud83d', '\ude00'])('reopens older records containing a lone surrogate', async (surrogate) => {
+    const e = await environment();
+    e.setRow({ ...e.row(), name: 'old-' + surrogate });
+    for (const method of ['GET', 'HEAD']) {
+      const opened = await e.get(undefined, { method });
+      expect(opened.status).toBe(200);
+      expect(opened.headers.get('content-disposition')).toContain('old-%EF%BF%BD');
+      expect(await opened.text()).toBe(method === 'HEAD' ? '' : TEXT);
+    }
+  });
   it('returns plaintext only via its proxy; a freshly signed provider object contains only ciphertext', async () => {
     const e = await environment(); const record = e.row();
     const downloaded = await e.get(); expect(downloaded.status).toBe(200); expect(await downloaded.text()).toBe(TEXT);

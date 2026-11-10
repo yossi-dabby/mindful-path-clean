@@ -419,6 +419,7 @@ export default function Chat() {
   const [conversationLoadError, setConversationLoadError] = useState(null);
   const [isConversationLoading, setIsConversationLoading] = useState(false);
   const conversationSelectionRef = useRef(0);
+  const refreshSendRevisionRef = useRef(0);
   const [responseWaitSeconds, setResponseWaitSeconds] = useState(0);
   const [showSidebar, setShowSidebar] = useState(false);
   const deleteReturnFocusRef = useRef(null);
@@ -2868,7 +2869,7 @@ export default function Chat() {
     legacyMessagePersistencePendingRef.current || legacyAwaitingReplyRef.current;
   const refreshBusyRef = useRef(refreshBlocked);
   refreshBusyRef.current = refreshBlocked;
-  const getRefreshScope = () => `${currentConversationIdRef.current || ''}:${currentTurnIdRef.current}:${conversationSelectionRef.current}`;
+  const getRefreshScope = () => `${currentConversationIdRef.current || ''}:${refreshSendRevisionRef.current}:${conversationSelectionRef.current}`;
   const { refreshing: isRefreshingConversation, error: conversationRefreshError, requestRefresh } = useChatRefresh({
     scope: currentConversationId,
     blocked: refreshBlocked,
@@ -2877,6 +2878,7 @@ export default function Chat() {
       legacyMessagePersistencePendingRef.current || legacyAwaitingReplyRef.current ||
       mediaRecorderRef.current?.state === 'recording',
     refresh: async (isCurrent) => {
+      if (navigator.onLine === false) throw new Error('Offline');
       const conversationId = currentConversationIdRef.current;
       // List errors retain their own retry state; both reads settle before the
       // refresh indicator finishes, even when one request fails.
@@ -3895,6 +3897,7 @@ export default function Chat() {
       return;
     }
 
+    ++refreshSendRevisionRef.current;
     isLoadingRef.current = true;
     setIsLoading(true);
 

@@ -151,3 +151,37 @@ test('recording defers automatic refresh and preserves the finished audio draft'
   await expect(page.getByTestId('therapist-chat-input')).toHaveValue(draft);
   expect(await page.evaluate(() => (window as any).__qaRecordingStops())).toBe(1);
 });
+
+test('legacy messages without stable IDs do not cause repeated background refreshes', async ({ page }, info) => {
+  const width = info.project.name === 'web-desktop' ? 1440 : 390;
+  const state = await prepareChatStage2(page, { width });
+  state.conversation.messages.forEach(message => { delete (message as any).id; });
+  await openStage2Conversation(page, width);
+  await page.waitForLoadState('networkidle');
+  let reads = 0;
+  await page.route(detail, route => { reads++; return route.fulfill({ json: state.conversation }); });
+  await refresh(page);
+  await expect.poll(() => reads).toBe(1);
+  await expect(page.getByRole('status').filter({ hasText: 'Refreshing…' })).toHaveCount(0);
+  // A self-invalidating scope previously repeated every 200ms for date-only messages.
+  await page.waitForTimeout(800);
+  expect(reads).toBe(1);
+  await expect(page.getByRole('log')).toContainText('One small step is enough.');
+});
+
+test('offline manual refresh shows retry and reconnect recovers without losing the draft', async ({ page }, info) => {
+  const { state } = await setup(page, info.project.name);
+  await page.getByTestId('therapist-chat-input').fill(draft);
+  await page.evaluate(() => Object.defineProperty(navigator, 'onLine', { configurable: true, value: false }));
+  await refresh(page);
+  await expect(page.getByTestId('chat-load-error')).toBeVisible();
+  await expect(page.getByTestId('chat-load-error').getByRole('button', { name: 'Try again' })).toBeEnabled();
+  appendReply(state, 'back-online');
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, 'onLine', { configurable: true, value: true });
+    window.dispatchEvent(new Event('online'));
+  });
+  await expect(page.getByRole('log')).toContainText('Synthetic saved response back-online.');
+  await expect(page.getByTestId('chat-load-error')).toHaveCount(0);
+  await expect(page.getByTestId('therapist-chat-input')).toHaveValue(draft);
+});

@@ -99,12 +99,13 @@ test('failed conversation selection offers retry instead of clearing the screen'
 });
 
 test('list failure retains cached conversations and offers a working retry', async ({ page }, info) => {
-  const { state } = await setup(page, info.project.name);
+  const { state, width } = await setup(page, info.project.name);
   let fail = true;
   await page.route(list, route => fail ? route.fulfill({ status: 503, json: { message: 'Synthetic list failure' } }) : route.fallback());
   await refresh(page);
   await expect(page.getByTestId('chat-load-error')).toBeVisible();
-  await page.getByRole('button', { name: 'Open conversations sidebar', exact: true }).click();
+  // Desktop keeps the sidebar open after selecting a session; mobile closes it.
+  if (width < 1280) await page.getByRole('button', { name: 'Open conversations sidebar', exact: true }).click();
   const error = page.getByTestId('chat-list-error');
   await expect(error).toBeVisible();
   await expect(page.getByRole('button', { name: /^QA stage 2 conversation/ })).toBeVisible();

@@ -3624,66 +3624,30 @@ export default function Chat() {
         });
       }
 
-      let file_url = '';
-      try {
-        if (!onMobile) {
-          const uploadResult = await uploadPrivateAttachment(base44, transcriptionSourceFile);
-          file_url = uploadResult?.file_url;
-          if (!file_url) throw new Error('Upload returned no file_url');
-        }
-      } catch (uploadError) {
-        console.error('[Audio] Upload failed before transcription:', uploadError);
-        toast({
-          title: t('chat.errors.audio_upload_title'),
-          description: t('chat.errors.audio_upload_desc'),
-          variant: 'destructive'
-        });
-        return;
-      }
-
+      // Use the authenticated transcription endpoint on every device. A general
+      // LLM can return a refusal as a successful string instead of a transcript.
+      // Send the draft bytes directly; persist an encrypted attachment only when
+      // the user sends it, not as a side effect of transcription.
       let result;
-      // Mobile: dedicated Whisper backend (avoids Base44 InvokeLLM format restrictions on Android)
-      // Web: InvokeLLM unchanged
-      const runTranscription = async (targetFileUrl, targetFile = transcriptionSourceFile) => {
-        if (onMobile) {
-          // The SDK sends File parameters as authenticated multipart/form-data.
-          // Storage URLs do not encode reliable ownership; send the local bytes.
-          const r = await base44.functions.invoke('transcribeMobileAudio', {
-            file: targetFile,
-            ...(audioDraftLanguageRef.current ? { language: audioDraftLanguageRef.current } : {}),
-          });
-          const t = r?.data?.transcription;
-          if (!t) throw new Error('No transcription returned from backend');
-          return t;
+      const runTranscription = async (targetFile = transcriptionSourceFile) => {
+        const response = await base44.functions.invoke('transcribeMobileAudio', {
+          file: targetFile,
+          ...(audioDraftLanguageRef.current ? { language: audioDraftLanguageRef.current } : {}),
+        });
+        const transcript = response?.data?.transcription;
+        if (typeof transcript !== 'string' || !transcript.trim()) {
+          throw new Error('No transcription returned from backend');
         }
-        const basePrompt = 'Transcribe this audio to plain text. Return only the spoken words with natural punctuation.';
-        const reqs = [{ prompt: basePrompt, file_urls: [targetFileUrl] }, { file_urls: [targetFileUrl] }];
-        let lastError = null;
-        for (let i = 0; i < reqs.length; i++) {
-          try { return await base44.integrations.Core.InvokeLLM(reqs[i]); }
-          catch (e) {
-            lastError = e;
-            if (i >= reqs.length - 1) break;
-            const h = [e?.message, e?.data ? JSON.stringify(e.data) : ''].join(' ').toLowerCase();
-            if (!(h.includes('prompt') && (h.includes('not supported') || h.includes('unsupported')))) break;
-          }
-        }
-        throw lastError || new Error('Audio transcription request failed');
+        return transcript;
       };
 
       try {
-        result = await runTranscription(file_url);
+        result = await runTranscription();
       } catch (transcriptionError) {
         const normalizedRetryFile = buildNormalizedAudioDraftForTranscriptionRetry(transcriptionSourceFile);
         if (normalizedRetryFile) {
           try {
-            let retryFileUrl = '';
-            if (!onMobile) {
-              const retryUploadResult = await uploadPrivateAttachment(base44, normalizedRetryFile);
-              retryFileUrl = retryUploadResult?.file_url;
-              if (!retryFileUrl) throw new Error('Retry upload returned no file_url');
-            }
-            result = await runTranscription(retryFileUrl, normalizedRetryFile);
+            result = await runTranscription(normalizedRetryFile);
           } catch (retryError) {
             const diagInfo = onMobile ? await diagInfoPromise : null;
             const backendReason = extractBackendTranscriptionErrorReason(retryError) ||
@@ -3705,7 +3669,7 @@ export default function Chat() {
             });
             const description = onMobile
               ? buildTranscriptionFailureDescription({ diagInfo, backendReason, conversionError })
-              : 'The upload succeeded, but transcription failed. Retry or delete this draft.';
+              : t('chat.errors.transcription_desc');
             toast({
               title: t('chat.errors.transcription_title'),
               description,
@@ -3725,7 +3689,7 @@ export default function Chat() {
           });
           const description = onMobile
             ? buildTranscriptionFailureDescription({ diagInfo, backendReason, conversionError })
-            : 'The upload succeeded, but transcription failed. Retry or delete this draft.';
+            : t('chat.errors.transcription_desc');
           toast({
             title: t('chat.errors.transcription_title'),
             description,
@@ -3752,7 +3716,7 @@ export default function Chat() {
       console.error('[Audio] Transcription failed:', error, onMobile ? { diagnostic: diagInfo, backendReason } : {});
       const description = onMobile
         ? buildTranscriptionFailureDescription({ diagInfo, backendReason, conversionError })
-        : 'No transcript text was returned. Retry or delete this draft.';
+        : t('chat.errors.transcription_desc');
       toast({
         title: t('chat.errors.transcription_title'),
         description,

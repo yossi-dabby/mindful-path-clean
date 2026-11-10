@@ -1,6 +1,59 @@
 # Encrypted private attachments: verification and rollout
 
-Status: candidate implementation, 9 November 2026. **Not a production security sign-off.**
+Status: server activated and production integration checked, 10 November 2026.
+Desktop transcription follow-up and signed-in live UI verification remain open.
+**Not a complete production security sign-off.**
+
+## Production activation on 10 November 2026
+
+PR35 was merged at `fe5b79b88690031c391feb67968f0103c678d164`.
+Railway deployment `54be2bed-5f04-4f81-a77b-8725f41df673` succeeded with
+the attachment relay. The additive encryption fields and client-denying RLS were
+present in Base44. However, publishing the repository initially left the older
+upload function active: it returned only `file_url`, without an opaque reference.
+No real-user data was used while diagnosing this mismatch.
+
+The reviewed `uploadAttachment` and `extractPdfText` sources were explicitly
+redeployed using Base44's Save & Redeploy API, then the app was published again
+at `2026-11-10T01:48:06Z`. Commit `52ddce2859199ad6261578a7b31c6996b07d7550`
+differs from the reviewed merge only by final newlines in the uploader files.
+The production responses now identify the expected private-reference handlers.
+Do not infer function activation from the presence of a file in GitHub alone.
+
+Observed against the published functions and Railway relay, with two ordinary
+test accounts and synthetic PDF/WAV files:
+
+| Production check | Result |
+| --- | --- |
+| PDF and WAV upload | HTTP 200; opaque references returned |
+| Download through Railway | HTTP 200; exact original bytes; `no-store` |
+| Another account renews either reference | HTTP 404 |
+| Anonymous renewal | HTTP 401 |
+| Owner renewal | HTTP 200; download remains byte-identical |
+| Either account directly reads the key-bearing record | HTTP 404 |
+| Another account signs the provider storage URI | HTTP 200, but only ciphertext is downloaded (original bytes + 16-byte tag) |
+| Original PDF capability after 306 seconds | HTTP 403 |
+| Renewal after expiry | Other account HTTP 404; owner HTTP 200 with byte-identical fresh download |
+| PDF extraction through the relay | HTTP 200; correct synthetic sentence |
+| Relay-downloaded WAV sent to authenticated transcription | HTTP 200; `1, 2, 3.` |
+| Existing desktop `InvokeLLM` audio path | HTTP 200 but a refusal, not a transcript |
+
+The desktop follow-up uses the existing authenticated multipart transcription
+endpoint, as mobile already does. It no longer creates an otherwise unused stored
+attachment merely to transcribe a local draft. Sending an audio attachment still
+uses encrypted storage. An empty/malformed transcription result preserves the
+draft and produces the existing translated error. Browser speech recognition
+behavior and clinical prompts are unchanged.
+
+The follow-up also fixes filenames truncated through a UTF-16 surrogate pair,
+and makes already-stored malformed filenames safe in download response headers.
+All 11,269 unit tests, lint and the production build passed locally. Desktop
+browser tests cover multipart delivery, MIME-normalization retry, no automatic
+send or storage upload, and recovery after an empty transcript; CI status must
+be checked on the follow-up commit.
+
+The live browser currently requires sign-in. No signed-in UI upload/reopen or
+mobile UI result is claimed from these API checks.
 
 ## Why PR34 needs this follow-up
 
@@ -41,34 +94,21 @@ The HTTP suites include tampered capabilities, wrong owners, key/ciphertext
 tampering, bounded downloads, ranges, legacy migration and public-page content
 without login. These do not replace live provider integration or UI checks.
 
-## Outstanding release gates
+## Remaining release gates
 
-1. Complete CI and human review on the candidate commit. PR34's earlier green CI
-   does not validate this new implementation.
-2. Install the additive Railway relay before activating the encrypted uploader.
-   Check that an unauthenticated request to its file route returns 403, not the
-   SPA HTML. The relay only contacts the fixed Base44 function, strips caller
-   credentials, bounds responses to 10 MiB and never redirects to storage.
-3. Verify the additive entity fields and deny-all client RLS, then deploy the
-   candidate `uploadAttachment` function. Verify both POST owner resolution and
-   GET capability handling against the actual published runtime before claiming
-   success. A file's presence in the repository is not proof of deployment.
-4. Verify PDF extraction and desktop audio consumption using the complete public
-   relay URL. Base44's extraction API rejected an otherwise valid PDF served
-   directly by an extensionless function URL with `Unsupported file type`.
-   The relay supplies a `.pdf` / `.wav` / other supported extension; local HTTP
-   tests pass, but real provider consumption through that relay is still pending.
-5. Complete desktop and mobile UI upload, open, reopen and voice workflows with
-   synthetic files. The isolated Base44 branch reached Home but failed loading
-   `src/pages/Chat.jsx` dynamically; one preview refresh did not repair it.
-   This is an uncompleted UI check, not a passing result. Local Playwright browser
-   installation was also blocked by unsuccessful browser-binary downloads.
-6. Repeat the A/B storage-signing, owner-renewal and five-minute expiry checks on
-   the final published code, including reloading old conversation attachments.
+1. Complete CI and human review on the desktop-transcription/Unicode follow-up,
+   then activate its uploader handler and frontend. PR35's green CI does not
+   validate this additional change. Use Save & Redeploy plus Publish for the
+   backend and confirm the deployed behavior, not just the source files.
+2. Sign in to the live browser and complete desktop and mobile UI upload, open,
+   reopen and voice workflows with synthetic files, including reloading older
+   synthetic conversation attachments. The isolated preview's previous dynamic
+   import failure is not evidence about the newly published UI.
+3. Keep the provider privacy/deletion commitments below tracked separately.
 
-The production frontend already consumes opaque references and does not need an
-early switch. Keep the current public uploader until the server component exists.
-Do not publish the isolated verification branch or merge its test-only alias.
+The relay, encrypted uploader, PDF extraction, cross-account checks and actual
+five-minute expiry are verified in production as recorded above. Do not publish
+the old isolated verification branch or merge its test-only function alias.
 
 ## Legacy files, deletion and rollback
 

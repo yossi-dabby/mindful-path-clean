@@ -159,12 +159,12 @@ async function readMultipartAudio(req: Request): Promise<{ audio: Blob; language
 }
 
 /**
- * Backend transcription endpoint for mobile audio recordings.
+ * Backend transcription endpoint for desktop and mobile audio recordings.
  * Uses OpenAI Whisper which natively handles mp4, m4a, webm, wav, ogg, mp3 —
  * bypassing the Base44 InvokeLLM file-format restrictions that cause Android failures.
  *
- * Called exclusively from the mobile transcription path in pages/Chat.
- * The web transcription path (InvokeLLM) is unchanged.
+ * Called from pages/Chat with authenticated multipart draft bytes on all devices.
+ * The historical endpoint name is kept for compatibility with installed clients.
  */
 Deno.serve(async (req) => {
   try {

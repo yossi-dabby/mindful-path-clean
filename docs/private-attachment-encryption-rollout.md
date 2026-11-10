@@ -1,7 +1,8 @@
 # Encrypted private attachments: verification and rollout
 
-Status: server activated and production integration checked, 10 November 2026.
-Desktop transcription follow-up and signed-in live UI verification remain open.
+Status: PR36 published; server integration and signed-in desktop PDF upload,
+extraction, opening and reopening verified, 10 November 2026. Attachment-link
+contrast follow-up and physical-device voice/mobile checks remain open.
 **Not a complete production security sign-off.**
 
 ## Production activation on 10 November 2026
@@ -52,8 +53,33 @@ browser tests cover multipart delivery, MIME-normalization retry, no automatic
 send or storage upload, and recovery after an empty transcript; CI status must
 be checked on the follow-up commit.
 
-The live browser currently requires sign-in. No signed-in UI upload/reopen or
-mobile UI result is claimed from these API checks.
+## PR36 activation and signed-in UI verification
+
+PR36 merged at `2b67435dbf9cd239c830dd63547d1fbf689987c0` after its required
+CI passed, including all desktop/mobile shards and critical smoke checks.
+The uploader was explicitly redeployed and the app published at
+`2026-11-10T07:14:34Z` as `e154daa94ec32905c3c572ebbd30a87b1d207a61`.
+The latter differs only by a final newline in the uploader entry file.
+Post-publish PDF/WAV GET and HEAD, byte identity, owner renewal, cross-account
+denial, PDF extraction and dedicated audio transcription all passed again.
+
+The owner completed sign-in, the age gate and the terms/privacy consent screen
+in the live browser at `app.mindful-path.me`. Only synthetic content was sent.
+The PDF was selected, sent in a new conversation, correctly quoted by the AI,
+and visibly rendered in the browser PDF viewer. After reloading Chat and opening
+the saved conversation, a fresh capability was obtained and the PDF rendered
+again. The conversation is explicitly named as a technical synthetic PDF test.
+
+Visual inspection found the user attachment link inherited the global teal link
+color on the same teal user-bubble background. The focused follow-up explicitly
+uses the bubble's contrasting foreground for PDF/general file chips, including
+hover, without changing opening or authorization behavior.
+
+The generic attachment picker intentionally rejects WAV files. Voice uses the
+recording control instead. In this cloud browser, that control fails with
+`NotFoundError: Requested device not found`; there is no microphone device.
+No successful physical microphone or mobile-device UI result is claimed.
+The successful real-WAV backend test and passing mobile CI are separate evidence.
 
 ## Why PR34 needs this follow-up
 
@@ -96,14 +122,12 @@ without login. These do not replace live provider integration or UI checks.
 
 ## Remaining release gates
 
-1. Complete CI and human review on the desktop-transcription/Unicode follow-up,
-   then activate its uploader handler and frontend. PR35's green CI does not
-   validate this additional change. Use Save & Redeploy plus Publish for the
-   backend and confirm the deployed behavior, not just the source files.
-2. Sign in to the live browser and complete desktop and mobile UI upload, open,
-   reopen and voice workflows with synthetic files, including reloading older
-   synthetic conversation attachments. The isolated preview's previous dynamic
-   import failure is not evidence about the newly published UI.
+1. Complete required CI and human review on the attachment-link contrast fix,
+   publish it and verify the filename/icons remain legible on the user bubble.
+2. Complete microphone recording, playback, transcription and send/reopen on a
+   physical desktop/mobile device with microphone access. Verify the live mobile
+   attachment workflow there; the cloud browser lacks a microphone and its
+   desktop PDF result does not establish a physical mobile result.
 3. Keep the provider privacy/deletion commitments below tracked separately.
 
 The relay, encrypted uploader, PDF extraction, cross-account checks and actual

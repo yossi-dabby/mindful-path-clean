@@ -27,6 +27,24 @@
         "active",
         "deletion_pending"
       ]
+    },
+    "encryption_key": {
+      "type": "string"
+    },
+    "encryption_iv": {
+      "type": "string"
+    },
+    "signing_key": {
+      "type": "string"
+    },
+    "superseded_file_uri": {
+      "type": "string"
+    },
+    "encryption_version": {
+      "type": "integer",
+      "enum": [
+        1
+      ]
     }
   },
   "required": [

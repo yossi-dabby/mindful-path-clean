@@ -29,6 +29,17 @@ describe('public information HTTP access without a session or JavaScript', () =>
       expect(html).not.toContain('<script');
       expect(html).not.toContain('support@mindful-path.app');
       expect(html).not.toMatch(/90 (days|יום|días|jours|Tage|giorni|dias)/);
+      if (['/privacy', '/account-deletion', '/data-deletion'].includes(path)) {
+        const limits = getLegalCopy(lang).providerLimits;
+        expect(limits.paragraphs).toHaveLength(3);
+        expect(html).toContain(limits.title);
+        for (const paragraph of limits.paragraphs) {
+          // The public HTTP page must expose the same provider limitations as
+          // the signed-in app, even when JavaScript and cookies are absent.
+          const escaped = paragraph.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+          expect(html).toContain(escaped);
+        }
+      }
       if (['/privacy', '/terms', '/contact'].includes(path)) {
         expect(html).toContain('דבי יוסף ודבי נצחיה');
         expect(html).toContain('558524088');

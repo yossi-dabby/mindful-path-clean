@@ -1,5 +1,6 @@
 import { additionalLegalCopies } from './legalContentAdditional.js';
 import { formsTermsCopies, FORMS_TERMS_EFFECTIVE_DATE } from './formsTermsContent.js';
+import { providerPrivacyLimits } from './providerPrivacyLimits.js';
 
 export const LEGAL_EFFECTIVE_DATE = '2026-11-09';
 export const LEGAL_CONSENT_VERSION = '2026-11-09';
@@ -262,6 +263,11 @@ export function getLegalCopy(language) {
   const copy = Object.hasOwn(legalCopies, normalized) ? legalCopies[normalized] : en;
   return {
     ...copy,
+    providerLimits: providerPrivacyLimits[copy.language],
+    privacy: {
+      ...copy.privacy,
+      sections: [...copy.privacy.sections, { id: 'provider-limits', ...providerPrivacyLimits[copy.language] }],
+    },
     terms: {
       ...copy.terms,
       effectiveDate: [LEGAL_EFFECTIVE_DATE, FORMS_TERMS_EFFECTIVE_DATE].sort().at(-1),

@@ -11,11 +11,11 @@ const URI = 'private/app/user/worksheet.pdf';
 const SIGNED_URL = 'https://files.example.test/worksheet.pdf?signature=temporary';
 const USER = { id: 'user-a', email: 'a@example.test' };
 const fixture = (user = USER) => {
-  const record = { id: ID, owner_user_id: USER.id, owner_email: USER.email, name: 'worksheet.pdf', mime_type: 'application/pdf', size_bytes: 4, file_uri: URI, status: 'active' };
+  const record = { id: ID, owner_user_id: USER.id, owner_email: USER.email, name: 'worksheet.pdf', mime_type: 'application/pdf', size_bytes: 4, file_uri: URI, status: 'active', encryption_version: 1, encryption_key: btoa('e'.repeat(32)).replace(/=+$/, ''), encryption_iv: btoa('i'.repeat(12)), signing_key: btoa('s'.repeat(32)).replace(/=+$/, '') };
   const records = { create: vi.fn(async (data) => ({ id: ID, ...data })), update: vi.fn(async () => ({})), filter: vi.fn(async () => [record]) };
   const core = { UploadPrivateFile: vi.fn(async () => ({ file_uri: URI })), CreateFileSignedUrl: vi.fn(async () => ({ signed_url: SIGNED_URL })), UploadFile: vi.fn(), ExtractDataFromUploadedFile: vi.fn(async () => ({ output: { full_text: 'Example text', page_count: 1 } })) };
-  const client = { auth: { me: vi.fn(async () => user) }, asServiceRole: { entities: { PrivateAttachment: records } }, integrations: { Core: core }, functions: { invoke: vi.fn(async () => ({ data: { file_ref: REF, file_url: SIGNED_URL, mime_type: 'application/pdf' } })) } };
-  const deps = { createClientFromRequest: () => client };
+  const client = { auth: { me: vi.fn(async () => user) }, asServiceRole: { entities: { PrivateAttachment: records }, integrations: { Core: core } }, integrations: { Core: core }, functions: { invoke: vi.fn(async () => ({ data: { file_ref: REF, file_url: SIGNED_URL, mime_type: 'application/pdf' } })) } };
+  const deps = { createClientFromRequest: () => client, fetchFile: vi.fn(async () => new Response(new Uint8Array(4))) };
   return { client, record, records, core, deps };
 };
 const jsonRequest = (body) => new Request('https://app.example.test/uploadAttachment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
@@ -43,13 +43,20 @@ describe('private attachment ownership boundary', () => {
     const response = await handlePrivateAttachment(uploadRequest(), f.deps);
     expect(response.status).toBe(200);
     expect(f.records.create).toHaveBeenCalledWith(expect.objectContaining({ owner_user_id: USER.id, owner_email: USER.email, status: 'uploading', size_bytes: 4 }));
-    expect(f.records.update).toHaveBeenCalledWith(ID, { file_uri: URI, status: 'active' });
+    expect(f.records.update).toHaveBeenCalledWith(ID, expect.objectContaining({ file_uri: URI, status: 'active', encryption_version: 1 }));
     expect(f.core.UploadPrivateFile).toHaveBeenCalledTimes(1);
     expect(f.core.UploadFile).not.toHaveBeenCalled();
-    expect(f.core.CreateFileSignedUrl).toHaveBeenCalledWith({ file_uri: URI, expires_in: 300 });
+    expect(f.core.CreateFileSignedUrl).not.toHaveBeenCalled();
     const data = await response.json();
-    expect(data).toMatchObject({ file_ref: REF, file_url: SIGNED_URL, expires_in: 300 });
+    expect(data).toMatchObject({ file_ref: REF, expires_in: 300 });
     expect(data).not.toHaveProperty('file_uri');
+    expect(data.file_url).toContain('/api/private-attachments/');
+    expect(new URL(data.file_url).pathname).toMatch(/\/attachment\.pdf$/);
+    expect(JSON.stringify(data)).not.toMatch(/encryption_key|signing_key|storage/);
+    const stored = f.core.UploadPrivateFile.mock.calls[0][0].file;
+    expect(stored.type).toBe('application/octet-stream');
+    expect(stored.name).toMatch(/\.bin$/);
+    expect(stored.size).toBe(20);
     expect(response.headers.get('cache-control')).toBe('private, no-store');
   });
   it('signs an owned reference and ignores caller-supplied storage URI and owner fields', async () => {
@@ -57,16 +64,16 @@ describe('private attachment ownership boundary', () => {
     const response = await handlePrivateAttachment(resolveRequest({ file_uri: 'private/other-user/secret.pdf', owner_user_id: 'other-user' }), f.deps);
     expect(response.status).toBe(200);
     expect(f.records.filter).toHaveBeenCalledWith({ id: ID, owner_user_id: USER.id, status: 'active' }, '-created_date', 1);
-    expect(f.core.CreateFileSignedUrl).toHaveBeenCalledWith({ file_uri: URI, expires_in: 300 });
+    expect(f.core.CreateFileSignedUrl).not.toHaveBeenCalled();
   });
   it.each(['private/app/user/test.png', 'mp/private/app/user/test.png'])('uploads and reopens the provider private namespace %s', async (uri) => {
     const f = fixture();
     f.core.UploadPrivateFile.mockResolvedValue({ file_uri: uri });
     expect((await handlePrivateAttachment(uploadRequest(), f.deps)).status).toBe(200);
-    expect(f.records.update).toHaveBeenCalledWith(ID, { file_uri: uri, status: 'active' });
+    expect(f.records.update).toHaveBeenCalledWith(ID, expect.objectContaining({ file_uri: uri, status: 'active', encryption_version: 1 }));
     f.records.filter.mockResolvedValue([{ ...f.record, file_uri: uri }]);
     expect((await handlePrivateAttachment(resolveRequest(), f.deps)).status).toBe(200);
-    expect(f.core.CreateFileSignedUrl).toHaveBeenLastCalledWith({ file_uri: uri, expires_in: 300 });
+    expect(f.core.CreateFileSignedUrl).not.toHaveBeenCalled();
   });
   it.each(['public/app/test.png', 'mp/public/app/test.png', 'https://files.example.test/public.png'])('rejects the non-private provider result %s', async (uri) => {
     const f = fixture();

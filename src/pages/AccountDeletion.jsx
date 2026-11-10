@@ -2,6 +2,7 @@ import BotanicalAccent from '@/components/brand/BotanicalAccent';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ShieldCheck, Trash2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { getLegalCopy } from '@/components/legal/legalContent';
 const SUPPORT_EMAIL='yosephdabby4@gmail.com';
 const subject={partial:'Mindful Path partial data deletion request',account:'Mindful Path account deletion request'};
 function Section({title,children,id}) {return <section id={id} className="scroll-mt-6"><h2 className="text-xl font-bold">{title}</h2><div className="mt-3 space-y-3 leading-7 text-muted-foreground">{children}</div></section>;}
@@ -11,6 +12,7 @@ function PartialDataDeletion(){const {t}=useTranslation();return <Section id="de
 </Section>;}
 export default function AccountDeletion({defaultSection='account'}){
  const {t,i18n}=useTranslation();const isData=defaultSection==='data';
+ const providerLimits=getLegalCopy(i18n.language).providerLimits;
  return <main dir={i18n.dir()} className="garden-public-background min-h-dvh px-4 py-8 text-foreground sm:px-6 sm:py-12"><article className="mx-auto max-w-3xl overflow-hidden rounded-[28px] border border-border bg-card/95 shadow-lg">
   <header className="border-b border-border bg-secondary/35 px-5 py-7 sm:px-9">
    <Link to="/" className="mb-6 inline-flex min-h-11 items-center gap-2 rounded-xl px-2 text-sm font-medium text-primary focus-visible:ring-2 focus-visible:ring-ring"><ArrowLeft className="h-4 w-4 rtl:rotate-180" aria-hidden="true"/>{t('stage6.back_app')}</Link>
@@ -23,6 +25,7 @@ export default function AccountDeletion({defaultSection='account'}){
    {!isData&&<><Section title={t('stage6.request_delete')}><p>{t('stage6.account_email',{email:SUPPORT_EMAIL})} <a className="text-primary underline [overflow-wrap:anywhere]" href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(subject.account)}`}>{SUPPORT_EMAIL}</a></p></Section>
     <Section title={t('stage6.what_deleted')}><ul className="list-disc space-y-2 ps-6">{['deleted_profile','deleted_records','deleted_preferences'].map(key=><li key={key}>{t(`stage6.${key}`)}</li>)}</ul></Section>
     <Section title={t('stage6.limited_retention')}><p>{t('stage6.retention_body')}</p></Section></>}
+   <Section title={providerLimits.title}>{providerLimits.paragraphs.map((text,index)=><p key={index}>{text}</p>)}</Section>
    <aside className="flex gap-3 rounded-2xl border border-border bg-secondary p-4 text-sm leading-6"><ShieldCheck className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true"/><p>{t(`stage6.${isData?'data_keeps_account':'uninstall_note'}`)}</p></aside>
   </div>
   <footer className="flex flex-wrap gap-3 border-t border-border bg-card px-5 py-6 text-sm sm:px-9">

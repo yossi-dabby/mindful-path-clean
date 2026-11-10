@@ -60,7 +60,7 @@ describe('crisis hard-stop visibility and composer state', () => {
   });
 
   it('renders both panel locations as assertive accessible alerts', () => {
-    expect(chatSource.match(/role="alert"/g)).toHaveLength(2);
+    expect(chatSource.match(/ref=\{riskPanelRef\}\s+role="alert"\s+aria-live="assertive"/g)).toHaveLength(2);
     expect(chatSource.match(/aria-live="assertive"/g)).toHaveLength(2);
     expect(chatSource.match(/ref=\{riskPanelRef\}/g)).toHaveLength(2);
   });

@@ -15,6 +15,7 @@ import { Send, Loader2, Menu, Sparkles, ArrowLeft, Trash2, Paperclip, Mic, Squar
 import PremiumIcon from '@/components/ui/PremiumIcon';
 import { useToast } from '@/components/ui/use-toast';
 import { useChatRefresh } from '@/hooks/useChatRefresh';
+import { readRefreshSnapshot, commitRefreshedSnapshot } from '@/lib/chatRefreshRecovery';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import {
   AlertDialog,
@@ -2886,13 +2887,29 @@ export default function Chat() {
         refetchConversations({ throwOnError: true, cancelRefetch: false }),
         (async () => {
           if (!conversationId) return;
-          const conversation = await base44.agents.getConversation(conversationId);
-          if (!isCurrent()) return;
-          const guarded = buildVisibleConversationMessages(conversation.messages || [], sessionLanguageRef.current);
-          const finality = evaluateAssistantSnapshotFinality(guarded, 'ConversationRefresh');
-          const updated = safeUpdateMessages(guarded, 'ConversationRefresh');
-          if (updated && finality.isFinal) markAssistantMessagesFinalized(conversationId, guarded);
-          queryClient.setQueryData(['currentConversation', conversationId], conversation);
+          const snapshot = await readRefreshSnapshot({
+            read: () => base44.agents.getConversation(conversationId),
+            prepare: (messages) => buildVisibleConversationMessages(messages, sessionLanguageRef.current),
+            isCurrent,
+            hasAssistantChanges: (messages) => hasAssistantSnapshotContentChange(lastConfirmedMessagesRef.current, messages),
+            getAssistantKey: getAssistantIdentityKey,
+            isExplicitlyFinal: isExplicitlyFinalAssistantMessage,
+          });
+          if (!snapshot || !isCurrent()) return;
+          const { updated, nextQueuedSend } = commitRefreshedSnapshot({
+            messages: snapshot.messages,
+            finality: snapshot.finality,
+            coordinator: chatOrchestratorV2EnabledRef.current ? chatCoordinatorV2Ref.current : null,
+            startingTurnId: currentTurnIdRef.current,
+            commit: (messages, options) => safeUpdateMessages(messages, 'ConversationRefresh', options),
+          });
+          if (updated && snapshot.finality.isFinal) {
+            markAssistantMessagesFinalized(conversationId, lastConfirmedMessagesRef.current);
+          }
+          queryClient.setQueryData(['currentConversation', conversationId], snapshot.conversation);
+          if (nextQueuedSend) {
+            nextQueuedSend().catch(() => console.error('[ConversationRefresh] queued send failed'));
+          }
         })(),
       ]);
       // List errors are rendered from query state and clear when its own retry succeeds.

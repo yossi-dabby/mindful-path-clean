@@ -185,3 +185,37 @@ test('offline manual refresh shows retry and reconnect recovers without losing t
   await expect(page.getByTestId('chat-load-error')).toHaveCount(0);
   await expect(page.getByTestId('therapist-chat-input')).toHaveValue(draft);
 });
+
+test('refresh recovers a missed status-less reply after bounded stability verification', async ({ page }, info) => {
+  const { state } = await setup(page, info.project.name);
+  await page.getByTestId('therapist-chat-input').fill(draft);
+  appendReply(state, 'no-status');
+  const reply = state.conversation.messages.at(-1) as any;
+  delete reply.status; delete reply.metadata;
+  let reads = 0;
+  await page.route(detail, route => { reads++; return route.fulfill({ json: state.conversation }); });
+  await refresh(page);
+  await expect(page.getByRole('log')).toContainText('Synthetic saved response no-status.');
+  expect(reads).toBe(2);
+  await expect(page.getByTestId('therapist-chat-input')).toHaveValue(draft);
+  await expect(page.getByTestId('chat-load-error')).toHaveCount(0);
+});
+
+test('unstable replies stay hidden and bounded refresh offers retry', async ({ page }, info) => {
+  const { state } = await setup(page, info.project.name);
+  await page.getByTestId('therapist-chat-input').fill(draft);
+  appendReply(state, 'unstable');
+  const reply = state.conversation.messages.at(-1) as any;
+  delete reply.status; delete reply.metadata;
+  let reads = 0;
+  await page.route(detail, route => {
+    reply.content = `Synthetic changing reply ${++reads}.`;
+    return route.fulfill({ json: state.conversation });
+  });
+  await refresh(page);
+  await expect(page.getByTestId('chat-load-error')).toBeVisible();
+  expect(reads).toBe(3);
+  await expect(page.getByRole('log')).not.toContainText('Synthetic changing reply');
+  await expect(page.getByRole('log')).toContainText('One small step is enough.');
+  await expect(page.getByTestId('therapist-chat-input')).toHaveValue(draft);
+});

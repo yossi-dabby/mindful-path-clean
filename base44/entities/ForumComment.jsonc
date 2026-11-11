@@ -34,29 +34,59 @@
     "content"
   ],
   "rls": {
-    "create": {},
-    "read": {},
+    "create": {
+      "user_condition": {
+        "data.mp_adult_policy": "2026-11-11",
+        "data.mp_account_deletion_pending": false
+      }
+    },
+    "read": {
+      "user_condition": {
+        "data.mp_adult_policy": "2026-11-11",
+        "data.mp_account_deletion_pending": false
+      }
+    },
     "update": {
-      "$or": [
-        {
-          "created_by": "{{user.email}}"
-        },
+      "$and": [
         {
           "user_condition": {
-            "role": "admin"
+            "data.mp_adult_policy": "2026-11-11",
+            "data.mp_account_deletion_pending": false
           }
+        },
+        {
+          "$or": [
+            {
+              "created_by": "{{user.email}}"
+            },
+            {
+              "user_condition": {
+                "role": "admin"
+              }
+            }
+          ]
         }
       ]
     },
     "delete": {
-      "$or": [
-        {
-          "created_by": "{{user.email}}"
-        },
+      "$and": [
         {
           "user_condition": {
-            "role": "admin"
+            "data.mp_adult_policy": "2026-11-11",
+            "data.mp_account_deletion_pending": false
           }
+        },
+        {
+          "$or": [
+            {
+              "created_by": "{{user.email}}"
+            },
+            {
+              "user_condition": {
+                "role": "admin"
+              }
+            }
+          ]
         }
       ]
     }

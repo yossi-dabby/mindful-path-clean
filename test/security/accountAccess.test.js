@@ -17,7 +17,10 @@ function fixture(user = A, initial = []) {
     create: vi.fn(async values => { const row = { id: `row-${rows.length}`, ...values }; rows.push(row); return row; }),
     update: vi.fn(async (id, values) => Object.assign(rows.find(row => row.id === id), values)),
   };
-  const users = { filter: vi.fn(async ({ email }) => [A, B, ADMIN].filter(candidate => candidate.email === email)) };
+  const accounts = structuredClone([A, B, ADMIN]);
+  const users = { filter: vi.fn(async ({ email }) => accounts.filter(candidate => candidate.email === email)),
+    get: vi.fn(async id => accounts.find(candidate => candidate.id === id)),
+    update: vi.fn(async (id, values) => Object.assign(accounts.find(candidate => candidate.id === id), values)) };
   const client = { auth: { me: vi.fn(async () => user) }, asServiceRole: { entities: { AccountAccess: entity, User: users } } };
   const request = (input = { action: 'status' }, method = 'POST') => new Request('https://app.test/accountAccess', {
     method, ...(method === 'POST' ? { body: typeof input === 'string' ? input : JSON.stringify(input) } : {}),
@@ -179,5 +182,33 @@ describe('independent server access guards', () => {
       expect(source).not.toContain('age_verified');
       expect(source).not.toContain('navigator.webdriver');
     }
+  });
+});
+
+describe('locked record-access projection', () => {
+  it('initializes an existing confirmed account without another age declaration', async () => {
+    const f = fixture(A, [record(A)]);
+    expect((await f.call()).status).toBe(200);
+    expect(f.users.update).toHaveBeenCalledWith(A.id, { mp_adult_policy: AGE_POLICY_VERSION, mp_account_deletion_pending: false });
+  });
+  it('revokes stale grants when the declaration is missing or declined', async () => {
+    for (const records of [[], [record(A, { adult_status: 'declined' })]]) {
+      const f = fixture(A, records); const user = await f.users.get(A.id);
+      Object.assign(user, { mp_adult_policy: AGE_POLICY_VERSION, mp_account_deletion_pending: false });
+      expect((await (await f.call()).json()).eligible).toBe(false);
+      expect(user.mp_adult_policy).toBe('');
+    }
+  });
+  it('never restores record access while account deletion is pending', async () => {
+    const f = fixture(A, [record(A)]); const user = await f.users.get(A.id);
+    Object.assign(user, { mp_adult_policy: '', mp_account_deletion_pending: true });
+    expect((await (await f.call()).json()).eligible).toBe(false);
+    expect(f.users.update).not.toHaveBeenCalled();
+  });
+  it('fails entry closed when the server cannot persist the projection', async () => {
+    const f = fixture(A, [record(A)]);
+    f.users.update.mockRejectedValue(new Error('private details'));
+    const result = await f.call(); expect(result.status).toBe(503);
+    expect(await result.json()).toEqual({ error: 'ACCESS_UNAVAILABLE' });
   });
 });

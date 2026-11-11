@@ -133,11 +133,47 @@
     "status"
   ],
   "rls": {
-    "create": false,
-    "read": {
-      "created_by": "{{user.email}}"
+    "create": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
     },
-    "update": false,
+    "read": {
+      "$and": [
+        {
+          "user_condition": {
+            "data.mp_adult_policy": "2026-11-11",
+            "data.mp_account_deletion_pending": false
+          }
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    },
+    "update": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
     "delete": false
   }
 }

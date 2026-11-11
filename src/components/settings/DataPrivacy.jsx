@@ -1,3 +1,4 @@
+import FileDeletionPanel from './FileDeletionPanel';
 import { saveUserPreferences } from '@/lib/userPreferences';
 import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
@@ -185,6 +186,8 @@ export default function DataPrivacy({ user }) {
               <a href="#settings-account">{t('settings.data_privacy.delete_button')}</a>
             </Button>
           </div>
+
+          <FileDeletionPanel key={user?.id} />
 
           {/* Info Box */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">

@@ -1,4 +1,6 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.23';
+import { requestFileDeletion } from './fileDeletionQueue.js';
+import { checkLegacyReferences } from './legacyFiles.js';
 
 const USER_OWNED_ENTITIES = [
   'Goal',
@@ -70,6 +72,7 @@ async function deleteAllOwnedRecords(base44, entityName, email, subjectUserId = 
 }
 
 Deno.serve(async (req) => {
+  if (req.method !== 'POST') return Response.json({ error: 'Method not allowed' }, { status: 405 });
   try {
     const base44 = createClientFromRequest(req);
     const user = await base44.auth.me();
@@ -85,6 +88,13 @@ Deno.serve(async (req) => {
       );
     }
 
+    await checkLegacyReferences(base44, USER_OWNED_ENTITIES, user.email);
+    // Capture and retain private storage references before deleting any source
+    // rows. Customer Care confirmation is a separate tracked operation.
+    const fileRequest = await requestFileDeletion(base44, user);
+    await base44.asServiceRole.entities.User.update(user.id, {
+      mp_account_deletion_pending: true, mp_adult_policy: '',
+    });
     const deletedByEntity = {};
     for (const entityName of USER_OWNED_ENTITIES) {
       deletedByEntity[entityName] = await deleteAllOwnedRecords(base44, entityName, user.email);
@@ -94,15 +104,19 @@ Deno.serve(async (req) => {
     deletedByEntity.AccountAccess = await deleteAllOwnedRecords(base44, 'AccountAccess', user.email, user.id);
 
     // Delete the account only after every owned entity batch completed. If an
-    // earlier deletion fails, the account remains accessible so the user can retry.
+    // earlier deletion fails, sign-in/privacy support remains available, while
+    // the deletion latch keeps ordinary tools closed until support resolves it.
     await base44.asServiceRole.entities.User.delete(user.id);
 
     return Response.json({
       success: true,
       accountDeleted: true,
+      fileDeletionPending: !!fileRequest,
+      fileDeletionRequestId: fileRequest?.id || null,
+      providerConversationErasure: 'unconfirmed',
       deletedByEntity
     });
   } catch (error) {
-    return Response.json({ error: error.message }, { status: 500 });
+    return Response.json({ error: 'Account deletion could not be completed. Contact support or retry.' }, { status: 500 });
   }
 });

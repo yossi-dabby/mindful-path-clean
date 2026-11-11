@@ -1,3 +1,4 @@
+import { fileDeletionTranslations } from './fileDeletionTranslations';
 // Updated Hebrew translations - rebuild [current date]
 import { sixStepGoalTranslations } from "./sixStepGoalTranslations";
 import { wave3Batch3Translations } from "./wave3Batch3Translations";
@@ -5,6 +6,7 @@ import { wave3Batch3Translations } from "./wave3Batch3Translations";
 export const translations = {
   en: {
     translation: {
+      file_deletion: fileDeletionTranslations.en,
       account_access: {
         "title": "Confirm your age",
         "notice": "Mindful Path is for adults aged 18 and over. Your declaration is saved to this account across devices. We do not ask for your date of birth or an identity document.",
@@ -289,7 +291,7 @@ export const translations = {
           logout: "Log Out",
           delete_account: "Delete Account",
           delete_confirm_title: "Delete Account Permanently?",
-          delete_confirm_description: "This action cannot be undone. All your data including goals, journals, mood entries, and conversations will be permanently deleted.",
+          delete_confirm_description: fileDeletionTranslations.en.account_notice,
           delete_confirm_button: "Delete My Account",
           delete_error: "Failed to delete account. Please try again or contact support.",
           delete_section_description: "Permanently removes your account and all personal data. This cannot be undone.",
@@ -1783,6 +1785,7 @@ export const translations = {
   },
   he: {
     translation: {
+      file_deletion: fileDeletionTranslations.he,
       account_access: {
         "title": "אישור גיל",
         "notice": "Mindful Path מיועדת לבני 18 ומעלה. ההצהרה נשמרת בחשבון ותקפה גם במכשירים אחרים. אין צורך למסור תאריך לידה או מסמך מזהה.",
@@ -2067,7 +2070,7 @@ export const translations = {
           logout: "התנתקות",
           delete_account: "מחיקת חשבון",
           delete_confirm_title: "למחוק את החשבון לצמיתות?",
-          delete_confirm_description: "פעולה זו אינה הפיכה. כל הנתונים שלכם כולל מטרות, רשומות יומן, רשומות מצב רוח ושיחות יימחקו לצמיתות.",
+          delete_confirm_description: fileDeletionTranslations.he.account_notice,
           delete_confirm_button: "מחקו את החשבון שלי",
           delete_error: "מחיקת החשבון נכשלה. נסו שוב או צרו קשר עם התמיכה.",
           delete_section_description: "מוחק לצמיתות את החשבון שלכם ואת כל הנתונים האישיים. לא ניתן לבטל פעולה זו.",
@@ -3561,6 +3564,7 @@ export const translations = {
   },
   es: {
     translation: {
+      file_deletion: fileDeletionTranslations.es,
       account_access: {
         "title": "Confirma tu edad",
         "notice": "Mindful Path es para mayores de 18 años. Tu declaración se guarda en esta cuenta y se aplica en todos tus dispositivos. No pedimos tu fecha de nacimiento ni un documento de identidad.",
@@ -3845,7 +3849,7 @@ export const translations = {
           logout: "Cerrar Sesión",
           delete_account: "Eliminar Cuenta",
           delete_confirm_title: "¿Eliminar cuenta permanentemente?",
-          delete_confirm_description: "Esta acción no se puede deshacer. Todos tus datos, incluidos objetivos, diarios, entradas de humor y conversaciones, se eliminarán permanentemente.",
+          delete_confirm_description: fileDeletionTranslations.es.account_notice,
           delete_confirm_button: "Eliminar Mi Cuenta",
           delete_error: "Error al eliminar la cuenta. Por favor, inténtalo de nuevo o contacta con soporte.",
           delete_section_description: "Elimina permanentemente tu cuenta y todos los datos personales. Esta acción no se puede deshacer.",
@@ -5293,6 +5297,7 @@ export const translations = {
   },
   fr: {
     translation: {
+      file_deletion: fileDeletionTranslations.fr,
       account_access: {
         "title": "Confirmez votre âge",
         "notice": "Mindful Path est réservé aux personnes de 18 ans et plus. Votre déclaration est enregistrée dans ce compte et reste valable sur vos autres appareils. Nous ne demandons ni date de naissance ni pièce d’identité.",
@@ -5577,7 +5582,7 @@ export const translations = {
           logout: "Se Déconnecter",
           delete_account: "Supprimer le Compte",
           delete_confirm_title: "Supprimer le compte définitivement ?",
-          delete_confirm_description: "Cette action ne peut pas être annulée. Toutes vos données, y compris les objectifs, journaux, entrées d'humeur et conversations, seront définitivement supprimées.",
+          delete_confirm_description: fileDeletionTranslations.fr.account_notice,
           delete_confirm_button: "Supprimer Mon Compte",
           delete_error: "Échec de la suppression du compte. Veuillez réessayer ou contacter le support.",
           delete_section_description: "Supprime définitivement votre compte et toutes les données personnelles. Cette action est irréversible.",
@@ -7024,6 +7029,7 @@ export const translations = {
   },
   de: {
     translation: {
+      file_deletion: fileDeletionTranslations.de,
       account_access: {
         "title": "Alter bestätigen",
         "notice": "Mindful Path ist für Erwachsene ab 18 Jahren. Deine Erklärung wird in diesem Konto gespeichert und gilt auch auf anderen Geräten. Wir fragen weder nach deinem Geburtsdatum noch nach einem Ausweisdokument.",
@@ -7308,7 +7314,7 @@ export const translations = {
           logout: "Abmelden",
           delete_account: "Konto Löschen",
           delete_confirm_title: "Konto dauerhaft löschen?",
-          delete_confirm_description: "Diese Aktion kann nicht rückgängig gemacht werden. Alle Ihre Daten, einschließlich Ziele, Tagebücher, Stimmungseinträge und Gespräche, werden dauerhaft gelöscht.",
+          delete_confirm_description: fileDeletionTranslations.de.account_notice,
           delete_confirm_button: "Mein Konto Löschen",
           delete_error: "Konto konnte nicht gelöscht werden. Bitte versuchen Sie es erneut oder wenden Sie sich an den Support.",
           delete_section_description: "Löscht Ihr Konto und alle persönlichen Daten dauerhaft. Diese Aktion kann nicht rückgängig gemacht werden.",
@@ -8755,6 +8761,7 @@ export const translations = {
   },
   it: {
     translation: {
+      file_deletion: fileDeletionTranslations.it,
       account_access: {
         "title": "Conferma la tua età",
         "notice": "Mindful Path è riservata a persone di almeno 18 anni. La dichiarazione viene salvata in questo account e vale anche sugli altri dispositivi. Non chiediamo la data di nascita né un documento d’identità.",
@@ -9039,7 +9046,7 @@ export const translations = {
           logout: "Disconnetti",
           delete_account: "Elimina Account",
           delete_confirm_title: "Eliminare l'account definitivamente?",
-          delete_confirm_description: "Questa azione non può essere annullata. Tutti i tuoi dati, inclusi obiettivi, diari, voci di umore e conversazioni, saranno eliminati definitivamente.",
+          delete_confirm_description: fileDeletionTranslations.it.account_notice,
           delete_confirm_button: "Elimina il Mio Account",
           delete_error: "Impossibile eliminare l'account. Riprova o contatta il supporto.",
           delete_section_description: "Elimina definitivamente il tuo account e tutti i dati personali. Questa azione non può essere annullata.",
@@ -10486,6 +10493,7 @@ export const translations = {
   },
   pt: {
     translation: {
+      file_deletion: fileDeletionTranslations.pt,
       account_access: {
         "title": "Confirme a sua idade",
         "notice": "O Mindful Path destina-se a adultos com 18 anos ou mais. A declaração fica guardada nesta conta e aplica-se aos outros dispositivos. Não pedimos a data de nascimento nem um documento de identificação.",
@@ -10770,7 +10778,7 @@ export const translations = {
           logout: "Sair",
           delete_account: "Excluir Conta",
           delete_confirm_title: "Excluir conta permanentemente?",
-          delete_confirm_description: "Esta ação não pode ser desfeita. Todos os seus dados, incluindo objetivos, diários, entradas de humor e conversas, serão permanentemente excluídos.",
+          delete_confirm_description: fileDeletionTranslations.pt.account_notice,
           delete_confirm_button: "Excluir Minha Conta",
           delete_error: "Falha ao excluir a conta. Por favor, tente novamente ou entre em contato com o suporte.",
           delete_section_description: "Remove permanentemente sua conta e todos os dados pessoais. Esta ação não pode ser desfeita.",

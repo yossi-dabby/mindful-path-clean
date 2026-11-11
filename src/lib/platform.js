@@ -42,17 +42,17 @@ export function performLogout() {
 }
 
 /**
- * Permanently deletes the current user's account and all associated data,
+ * Deletes the current user's app account/records and queues managed file erasure,
  * then performs a clean logout/session reset.
  *
  * Flow:
- *   1. Calls the `deleteMyAccount` Base44 backend function to purge server-side data.
+ *   1. Calls `deleteMyAccount`; provider files/conversations have separate limits.
  *   2. Clears the React Query cache to remove any in-memory user data.
  *   3. Clears sessionStorage to remove any transient session data.
  *   4. Calls performLogout() to clear auth tokens and redirect to login.
  *
  * On error: re-throws so the caller can surface an appropriate error message.
- * The user is NOT logged out on error — a failed deletion leaves the account intact.
+ * The user is not logged out on error. A partial deletion may require support.
  *
  * @returns {Promise<void>}
  * @throws if the backend deletion call fails

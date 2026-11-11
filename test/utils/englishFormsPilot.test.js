@@ -1,3 +1,4 @@
+import { accountAccessResult } from '../helpers/accountAccessFixture.js';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { webcrypto } from 'node:crypto';
 import { createAppServer } from '../../server/index.mjs';
@@ -30,7 +31,7 @@ describe('English pilot through real private server and Base44 proxy', () => {
       const response = await handleHebrewFormsPilot(new Request('https://app.example/function', {
         method: 'POST', headers: { 'Content-Type': 'application/json', 'Base44-App-Id': appId, Authorization: `Bearer ${token}` }, body: JSON.stringify(body),
       }), {
-        createClientFromRequest: () => ({ auth: { me: async () => token === 'fixture-session' ? { id: 'fixture-user', role } : null } }),
+        createClientFromRequest: () => ({ auth: { me: async () => token === 'fixture-session' ? { id: 'fixture-user', role } : null }, functions: { invoke: async () => accountAccessResult({ id: 'fixture-user', role }) } }),
         fetchImpl: (url, init) => realFetch(`${origin}${new URL(url).pathname}${new URL(url).search}`, init),
         logFailure: () => {},
       });

@@ -2,7 +2,7 @@
 import { createAppServer } from '../../server/index.mjs';
 import { createServer } from 'node:http';
 import { handleHebrewFormsPilot } from '../../base44/functions/getHebrewFormsPilot/handler.js';
-const server = await createAppServer({ verifyAdmin: async (token) => ({ status: token === 'pilot-admin-fixture' ? 200 : token === 'pilot-user-fixture' ? 403 : 401 }) });
+const server = await createAppServer({ verifyAdmin: async (token) => ({ status: ['pilot-admin-fixture', 'pilot-reviewer-fixture'].includes(token) ? 200 : token === 'pilot-user-fixture' ? 403 : 401 }) });
 server.listen(3005, '127.0.0.1');
 
 // The browser uses the real SDK request and the real Base44 handler. Only the
@@ -17,8 +17,12 @@ createServer(async (req, res) => {
     createClientFromRequest: () => ({ auth: { me: async () => {
       const token = headers.get('Authorization');
       if (token === 'Bearer pilot-admin-fixture') return { id: 'fixture-admin', role: 'admin' };
+      if (token === 'Bearer pilot-reviewer-fixture') return { id: 'fixture-reviewer', role: 'user' };
       if (token === 'Bearer pilot-user-fixture') return { id: 'fixture-user', role: 'user' };
       throw { status: 401 };
+    } }, functions: { invoke: async () => {
+      const token = headers.get('Authorization');
+      return { data: { schema_version: 1, user_id: token === 'Bearer pilot-admin-fixture' ? 'fixture-admin' : token === 'Bearer pilot-reviewer-fixture' ? 'fixture-reviewer' : 'fixture-user', policy_version: '2026-11-11', adult_status: 'confirmed', eligible: true, forms_review_allowed: ['Bearer pilot-admin-fixture', 'Bearer pilot-reviewer-fixture'].includes(token) } };
     } } }),
     fetchImpl: (url, init) => {
       if (!url.startsWith('https://mindful-path-production-7704.up.railway.app/api/hebrew-forms-pilot/')) throw new Error('Unexpected service');

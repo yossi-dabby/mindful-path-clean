@@ -1,3 +1,4 @@
+import { requireAccountAccess } from './accountAccessGuard.js';
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 
 /**
@@ -332,6 +333,7 @@ Deno.serve(async (req) => {
     if (!user) {
       return Response.json({ success: false, error: 'Unauthorized' }, { status: 401 });
     }
+    await requireAccountAccess(base44, user);
 
     let rawInput: Record<string, unknown>;
     try {
@@ -398,6 +400,7 @@ Deno.serve(async (req) => {
     });
 
   } catch (error) {
+    if (error?.safe) return Response.json({ success: false, error: error.message }, { status: error.status });
     return Response.json({ success: false, error: 'PDF generation is unavailable.' }, { status: 503 });
   }
 });

@@ -1,3 +1,4 @@
+import { mockAccountAccess } from '../helpers/accountAccess';
 import { test, expect } from '@playwright/test';
 import { mockApi } from '../helpers/ui';
 
@@ -110,6 +111,7 @@ test('PDF without a file explains the state and offers a close action', async ({
 
 test('new-user onboarding covers navigation and keeps keyboard focus inside', async ({ page }) => {
   await prepare(page, '/Home');
+  await mockAccountAccess(page, 'new-sample-user');
   await page.route('**/entities/User/me', route => route.fulfill({ json: {
     id: 'new-sample-user', email: 'sample@example.invalid', full_name: 'Sample user',
     onboarding_completed: false

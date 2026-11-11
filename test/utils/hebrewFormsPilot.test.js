@@ -1,3 +1,4 @@
+import { accountAccessResult } from '../helpers/accountAccessFixture.js';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { createHash } from 'node:crypto';
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
@@ -120,17 +121,18 @@ describe('Base44 administrator verification', () => {
     let calledUrl, calledOptions;
     const verify = createAdminVerifier(appId, async (url, options) => {
       calledUrl = url; calledOptions = options;
-      return Response.json({ id: 'fixture-admin', role: 'admin' });
+      return url.endsWith('/User/me') ? Response.json({ id: 'fixture-admin', role: 'admin' }) : Response.json(accountAccessResult({ id: 'fixture-admin', role: 'admin' }).data);
     });
     expect(await verify('fixture-token')).toEqual({ status: 200 });
-    expect(calledUrl).toBe(`https://base44.app/api/apps/${appId}/entities/User/me`);
+    expect(calledUrl).toBe(`https://base44.app/api/apps/${appId}/functions/accountAccess`);
+    expect(JSON.parse(calledOptions.body)).toEqual({ action: 'status' });
     expect(calledOptions.headers.Authorization).toBe('Bearer fixture-token');
     expect(calledOptions.redirect).toBe('error');
   });
   it('fails closed on invalid config, missing ID, premium, expired auth, upstream errors and timeout', async () => {
     expect(await createAdminVerifier('bad', () => { throw new Error('not called'); })('token')).toEqual({ status: 503 });
     for (const [response, status] of [[Response.json({ role: 'admin' }), 403], [Response.json({ id: 'user', role: 'premium' }), 403], [new Response(null, { status: 401 }), 401], [new Response(null, { status: 403 }), 401], [new Response(null, { status: 500 }), 503]]) {
-      expect(await createAdminVerifier(appId, async () => response)('token')).toEqual({ status });
+      expect(await createAdminVerifier(appId, async url => url.endsWith('/User/me') ? response : Response.json(accountAccessResult({ id: 'user', role: 'premium' }).data))('token')).toEqual({ status });
     }
     expect(await createAdminVerifier(appId, async () => { throw new Error('timeout'); })('token')).toEqual({ status: 503 });
   });

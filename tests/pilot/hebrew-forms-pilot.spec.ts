@@ -1,3 +1,4 @@
+import { mockAccountAccess } from '../helpers/accountAccess';
 import { test, expect } from '@playwright/test';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
@@ -13,6 +14,7 @@ async function session(page, role = 'admin', token = 'pilot-admin-fixture') {
   await page.addInitScript((value) => { localStorage.setItem('base44_access_token', value); }, token);
   // Keep navigation independent of the external UI font service. Embedded PDF
   // fonts still render from the real files, including in the canvas assertions.
+  await mockAccountAccess(page, 'fixture-user', token === 'pilot-admin-fixture' || token === 'pilot-reviewer-fixture');
   await page.route('https://fonts.googleapis.com/**', (route) => route.fulfill({ contentType: 'text/css', body: '' }));
   // External identity is stubbed. Catalog, authorization,
   // real PDF bytes, integrity checks and PDF.js rendering run through real code.
@@ -362,9 +364,9 @@ test('expired session clears preview and blocks opening/downloading a file', asy
     base44.auth.setToken('expired-fixture');
   });
   await card.getByRole('button', { name: 'הורד', exact: true }).click();
-  await expect(page.getByRole('alert')).toContainText('אין הרשאת מנהל תקפה');
+  await expect(page.getByRole('alert')).toContainText('הגישה לטפסים אינה זמינה או בוטלה');
   await page.getByTestId('pilot-form-MP-CORE-02-W-AD-HE').getByRole('button', { name: 'פתח', exact: true }).click();
-  await expect(page.getByRole('alert')).toContainText('אין הרשאת מנהל תקפה');
+  await expect(page.getByRole('alert')).toContainText('הגישה לטפסים אינה זמינה או בוטלה');
   await expect(page.getByTestId('pilot-pdf-preview')).toHaveCount(0);
 });
 
@@ -694,3 +696,24 @@ for (const status of [400, 404]) for (const [wave, count, units] of [[11, 907, 1
     await expect(page.getByTestId('pilot-pdf-preview').locator('canvas')).toHaveCount(1, { timeout: 20000 });
   });
 }
+
+test('approved ordinary reviewer opens a real PDF without administrator rights; revoked access blocks reopening', async ({ page }) => {
+  await session(page, 'user', 'pilot-reviewer-fixture');
+  await page.goto(preview);
+  await page.getByTestId('pilot-age-AD').click();
+  await page.getByTestId('pilot-track-anxiety').click();
+  await page.getByTestId('pilot-unit-ANX-01').click();
+  const card = page.getByTestId('pilot-form-MP-ANX-01-W-AD-HE');
+  await card.getByRole('button', { name: 'פתח', exact: true }).click();
+  await expect(page.getByTestId('pilot-pdf-preview').locator('canvas')).toHaveCount(1);
+  await page.getByTestId('pilot-back').click();
+  // The server now returns a denied grant; keeping a previously allowed client
+  // view cannot authorize another file request.
+  await page.evaluate(async () => {
+    const { base44 } = await import('/src/api/base44Client.js');
+    base44.auth.setToken('pilot-user-fixture');
+  });
+  await card.getByRole('button', { name: 'פתח', exact: true }).click();
+  await expect(page.getByRole('alert')).toContainText('הגישה לטפסים אינה זמינה או בוטלה');
+  await expect(page.getByTestId('pilot-pdf-preview')).toHaveCount(0);
+});

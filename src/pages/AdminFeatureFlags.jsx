@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { RefreshCw, CheckCircle2, XCircle, AlertTriangle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import AiRuntimeCapabilitiesPanel from '@/components/admin/AiRuntimeCapabilitiesPanel';
+import AccountAccessPanel from '@/components/admin/AccountAccessPanel';
 
 const FLAG_KEYS = [
   'THERAPIST_UPGRADE_ENABLED',
@@ -62,6 +63,7 @@ export default function AdminFeatureFlags() {
 
   return (
     <div className="max-w-2xl min-w-0 mx-auto p-4 md:p-6 space-y-6">
+      <AccountAccessPanel />
       <div>
         <h1 className="text-2xl font-bold text-foreground">{t('stage6.flags_title')}</h1>
         <p className="text-muted-foreground text-sm mt-1">

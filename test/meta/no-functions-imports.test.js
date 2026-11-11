@@ -39,6 +39,12 @@ function collectTestFiles(dir) {
 
 const FUNCTIONS_IMPORT_RE = /(?:from\s+|require\(\s*|import\(\s*)['"]([^'"]*functions\/[^'"]*)['"]/g;
 const PORTABLE_HELPER = path.resolve(TEST_DIR, '../base44/functions/getHebrewFormsPilot/handler.js');
+const ACCESS_GUARD_IMPORT = "import { requireAccountAccess } from './accountAccessGuard.js';";
+const PORTABLE_ACCESS = [
+  '../base44/functions/accountAccess/handler.js',
+  '../base44/functions/accountAccess/guard.js',
+  '../base44/functions/transcribeMobileAudio/accountAccessGuard.js',
+].map(file => path.resolve(TEST_DIR, file));
 const PORTABLE_RELEASE = path.resolve(TEST_DIR, '../base44/functions/getHebrewFormsPilot/releases.js');
 
 const PORTABLE_ATTACHMENTS = ['uploadAttachment', 'extractPdfText'].map((name) => path.resolve(TEST_DIR, `../base44/functions/${name}/handler.js`));
@@ -54,12 +60,18 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
     const source = fs.readFileSync(PORTABLE_HELPER, 'utf8');
     const allowedImport = "import { isPilotFileId, isPilotCatalogPath, validatePilotCatalog } from './releases.js';";
     expect(source.split(allowedImport)).toHaveLength(2);
-    expect(source.replace(allowedImport, '')).not.toMatch(/\b(?:import|require|Deno)\b/);
+    expect(source.replace(allowedImport, '').replace(ACCESS_GUARD_IMPORT, '')).not.toMatch(/\b(?:import|require|Deno)\b/);
     expect(fs.readFileSync(PORTABLE_RELEASE, 'utf8')).not.toMatch(/\b(?:import|require|Deno)\b/);
   });
 
   it('private attachment handlers are dependency-free Web API code', () => {
     for (const file of PORTABLE_ATTACHMENTS) {
+      expect(fs.readFileSync(file, 'utf8').replace(ACCESS_GUARD_IMPORT, '')).not.toMatch(/\b(?:import|require|Deno)\b/);
+    }
+  });
+
+  it('the explicitly allowed account access modules have no runtime imports or platform APIs', () => {
+    for (const file of PORTABLE_ACCESS) {
       expect(fs.readFileSync(file, 'utf8')).not.toMatch(/\b(?:import|require|Deno)\b/);
     }
   });
@@ -76,7 +88,7 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
       const source = fs.readFileSync(filePath, 'utf8');
       for (const match of source.matchAll(FUNCTIONS_IMPORT_RE)) {
         expect(
-          [PORTABLE_HELPER, PORTABLE_RELEASE, ...PORTABLE_ATTACHMENTS],
+          [PORTABLE_HELPER, PORTABLE_RELEASE, ...PORTABLE_ATTACHMENTS, ...PORTABLE_ACCESS],
           `Found forbidden platform functions/ import in ${relativePath}: "${match[0]}"`
         ).toContain(path.resolve(path.dirname(filePath), match[1]));
       }

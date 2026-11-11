@@ -1,3 +1,4 @@
+import { mockAccountAccess } from '../helpers/accountAccess';
 import { test, expect, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -10,6 +11,7 @@ const guide = 'MP-MOOD-03-G-ALL-EN';
 
 async function session(page: Page, role = 'admin') {
   await mockApi(page);
+  await mockAccountAccess(page, 'fixture-user', role === 'admin');
   await page.route('https://fonts.googleapis.com/**', route => route.fulfill({ contentType: 'text/css', body: '' }));
   await page.route('**/api/apps/*/entities/User/me', route => route.fulfill({ json: {
     id: 'fixture-user', role, onboarding_completed: true,

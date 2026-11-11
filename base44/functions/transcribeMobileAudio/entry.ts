@@ -1,3 +1,4 @@
+import { requireAccountAccess } from './accountAccessGuard.js';
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 import OpenAI from 'npm:openai';
 
@@ -187,6 +188,7 @@ Deno.serve(async (req) => {
     if (!user) {
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
+    await requireAccountAccess(base44, user);
 
     let audioBlob: Blob;
     let language: string | undefined;
@@ -243,6 +245,7 @@ Deno.serve(async (req) => {
 
     return Response.json({ transcription });
   } catch (error) {
+    if (error?.safe) return Response.json({ error: error.message }, { status: error.status });
     if (error instanceof AudioRequestError) {
       return Response.json({ error: error.message }, { status: error.status });
     }

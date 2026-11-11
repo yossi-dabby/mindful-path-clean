@@ -1,3 +1,4 @@
+import { accountAccessResult } from '../helpers/accountAccessFixture.js';
 import { describe, it, expect, vi } from 'vitest';
 import { handlePrivateAttachment } from '../../base44/functions/uploadAttachment/handler.js';
 import { encryptAttachment, decryptAttachment, createAccessToken, verifyAccessToken } from '../../base44/functions/uploadAttachment/handler.js';
@@ -24,7 +25,7 @@ async function environment() {
     // Deliberately ignores filters: the handler must re-check every boundary.
     filter: vi.fn(async () => row ? [row] : []),
   };
-  const client = { auth: { me: async () => user }, integrations: { Core: core }, asServiceRole: { entities: { PrivateAttachment: records }, integrations: { Core: core } } };
+  const client = { functions: { invoke: async () => accountAccessResult(user) }, auth: { me: async () => user }, integrations: { Core: core }, asServiceRole: { entities: { PrivateAttachment: records }, integrations: { Core: core } } };
   const deps = { createClientFromRequest: () => client, now: () => now, fetchFile: vi.fn(async url => new Response(storage.get(decodeURIComponent(new URL(url).pathname.slice(1))))), downloadBase: 'https://app.example.test/functions/uploadAttachment' };
   const post = (body) => handlePrivateAttachment(new Request('https://app.example.test/functions/uploadAttachment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }), deps);
   const uploaded = await post({ file_base64: btoa(TEXT), file_name: 'example.txt', file_type: 'text/plain' });

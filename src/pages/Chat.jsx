@@ -45,8 +45,6 @@ import {
   clearSubmittedDraftIfUnchanged,
   createCrisisDetectionLifecycle,
 } from '../lib/crisisDetectionLifecycle';
-import AgeGateModal from '../components/utils/AgeGateModal';
-import AgeRestrictedMessage from '../components/utils/AgeRestrictedMessage';
 import ErrorBoundary from '../components/utils/ErrorBoundary';
 import { validateAgentOutput, sanitizeConversationMessagesAligned, parseCounters, serializeAttachmentMetadataMarker } from '../components/utils/validateAgentOutput.jsx';
 import {
@@ -434,8 +432,6 @@ export default function Chat() {
   const [showConsentBanner, setShowConsentBanner] = useState(false);
   const [isConsentResolved, setIsConsentResolved] = useState(false);
   const [showRiskPanel, setShowRiskPanel] = useState(false);
-  const [showAgeGate, setShowAgeGate] = useState(false);
-  const [isAgeRestricted, setIsAgeRestricted] = useState(false);
   const [showSavePrompt, setShowSavePrompt] = useState(false);
   const [savePromptData, setSavePromptData] = useState(null);
   const [attachedFile, setAttachedFile] = useState(null);
@@ -5224,35 +5220,7 @@ export default function Chat() {
     // Expose report function globally for testing
     window.printChatStabilityReport = printFinalStabilityReport;
 
-    // Detect test environment (Playwright, Cypress, etc.)
-    const isTestEnv =
-    window.location.search.includes('e2e-test') ||
-    document.body.getAttribute('data-test-env') === 'true' ||
-    window.navigator.webdriver === true ||
-    window.Cypress !== undefined ||
-    window.playwright !== undefined ||
-    /HeadlessChrome/.test(window.navigator.userAgent);
-
-    if (isTestEnv) {
-      setShowConsentBanner(false);
-      setIsConsentResolved(true);
-      localStorage.setItem('age_verified', 'true');
-      // Disable analytics in test environment
-      window.__DISABLE_ANALYTICS__ = true;
-      return;
-    }
-
-    // Check age verification first
-    const ageVerified = localStorage.getItem('age_verified');
-    if (ageVerified === 'false') {
-      setIsAgeRestricted(true);
-      return;
-    }
-    if (!ageVerified) {
-      setShowAgeGate(true);
-      return;
-    }
-
+    // ProtectedRoute has already checked the account-bound age declaration.
     // Consent is resolved against an owner-scoped Base44 record. Local storage
     // is only a user-bound cache and can never transfer consent between accounts.
     resolveCurrentChatConsent(base44)
@@ -5289,37 +5257,12 @@ export default function Chat() {
     setIsConsentResolved(true);
   };
 
-  const handleAgeConfirm = () => {
-    localStorage.setItem('age_verified', 'true');
-    setShowAgeGate(false);
-    resolveCurrentChatConsent(base44)
-      .then((hasConsent) => {
-        setShowConsentBanner(!hasConsent);
-        setIsConsentResolved(true);
-      })
-      .catch(() => {
-        setShowConsentBanner(true);
-        setIsConsentResolved(true);
-      });
-  };
-
-  const handleAgeDecline = () => {
-    localStorage.setItem('age_verified', 'false');
-    setShowAgeGate(false);
-    setIsAgeRestricted(true);
-  };
-
   const s2DebugBadgeBuildSha = isS2DebugEnabled()
     ? s2V8TraceCollectorRef.current.getSnapshot().build.sha
     : null;
   const s2DebugLatestTraceSource = isS2DebugEnabled()
     ? s2V8TraceCollectorRef.current.getSnapshot().activeStage
     : null;
-
-  // Show age restriction message if user is under 18
-  if (isAgeRestricted) {
-    return <AgeRestrictedMessage />;
-  }
 
   return (
     <>
@@ -5897,10 +5840,6 @@ export default function Chat() {
         </div>
           }
 
-      {/* Age Gate Modal - appears before consent */}
-      {showAgeGate &&
-          <AgeGateModal onConfirm={handleAgeConfirm} onDecline={handleAgeDecline} />
-          }
       </div>
       </div>
     </>);

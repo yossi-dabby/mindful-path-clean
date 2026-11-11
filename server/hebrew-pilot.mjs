@@ -107,7 +107,20 @@ export function createAdminVerifier(appId, fetchImpl = fetch) {
       if (response.status === 401 || response.status === 403) return { status: 401 };
       if (!response.ok) return { status: 503 };
       const user = await response.json();
-      return { status: user?.id && user.role === 'admin' ? 200 : 403 };
+      if (!user?.id) return { status: 403 };
+      // Verify every request against the service-owned grant, including direct
+      // Railway requests. The name is retained for existing server integrations.
+      const accessResponse = await fetchImpl(`https://base44.app/api/apps/${appId}/functions/accountAccess`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', 'Base44-App-Id': appId, 'X-App-Id': appId },
+        body: JSON.stringify({ action: 'status' }),
+        signal: AbortSignal.timeout(8000), redirect: 'error', cache: 'no-store',
+      });
+      if ([401, 403].includes(accessResponse.status)) return { status: accessResponse.status };
+      if (!accessResponse.ok) return { status: 503 };
+      const access = await accessResponse.json();
+      if (access?.schema_version !== 1 || access.user_id !== user.id || access.policy_version !== '2026-11-11') return { status: 503 };
+      return { status: access.eligible === true && access.adult_status === 'confirmed' && access.forms_review_allowed === true ? 200 : 403 };
     } catch {
       return { status: 503 };
     }

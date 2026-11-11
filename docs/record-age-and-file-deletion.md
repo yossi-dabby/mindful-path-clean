@@ -63,7 +63,8 @@ concurrency test is a deployment gate; do not describe this as transactional RLS
 - An adult administrator uses `/AdminFeatureFlags` to list requests and download a
   manifest for the existing **private support ticket**. No email/ticket is sent
   automatically. The manifest includes app name/id and storage paths only; it
-  omits patient filenames, encryption keys and conversation content.
+  omits separate filename fields, encryption keys and conversation content. Storage
+  paths can themselves carry historical names, so keep the manifest private.
 - The operator records submission with a ticket reference, then explicit written
   confirmation that **every URI in that exact manifest** was deleted. A fingerprint
   binds submission/confirmation to its contents. New/changed files invalidate the

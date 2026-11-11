@@ -22,6 +22,7 @@ API results are not a desktop/Android UI certification.
 | Expiry | Original capabilities returned 403 after more than five minutes. This was tested separately from deletion or age revocation. |
 | File deletion request | A synthetic file request was durable and idempotent. Its earlier capability was denied within its validity period, and renewal/new upload were blocked. |
 | Deletion isolation/operations | The other account could still open its own file and could not see the request in its own status. Ordinary operator actions returned 403. A temporarily elevated QA administrator exported the one-file manifest; premature confirmation and reference cleanup returned 409. The request remained `requested`, with no fabricated provider confirmation. |
+| Forms review permission | Both eligible adult accounts without forms-review approval were denied the pilot route. An ordinary user could not grant forms permission to the other account. This does not replace a positive authorized-library UI test. |
 
 ## Found: an issued link outlived age revocation
 
@@ -70,3 +71,22 @@ erasure; test records and storage references must not be discarded prematurely.
 - ESLint, TypeScript and the production build passed. The build retained the local
   unset-app-ID and outdated Browserslist warnings; no deployment was performed.
 - Required browser CI and the post-deployment live retest remain separate gates.
+
+## Browser CI environment failure
+
+Run `43033652838` passed shared checks, then all nine browser jobs failed in
+`Install Playwright browsers`, before the server or tests started. The smoke,
+desktop and mobile logs report `Temporary failure resolving 'azure.archive.ubuntu.com'`
+while apt fetched browser fonts/dependencies; there were no Playwright artifacts.
+The separate Test Suite passed on Node 20 and 22. A retry of failed jobs was started
+on the same revision; the environment follow-up supersedes that retry.
+
+The browser jobs now use the official Playwright `v1.58.2-noble` image, pinned by
+registry digest and matched to the lockfile. Its browsers and OS dependencies are
+preinstalled. A startup check rejects version mismatch or a missing Chromium
+executable. All nine browser jobs, assertions, shards, timeouts and mandatory shared
+checks are retained. The container follows the vendor's GitHub Actions guidance:
+https://playwright.dev/docs/ci#via-containers
+and version-matching guidance: https://playwright.dev/docs/docker#image-tags.
+The new environment still requires a full successful CI run; installation success
+alone is not an E2E pass.

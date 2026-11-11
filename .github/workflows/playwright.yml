@@ -66,6 +66,11 @@ jobs:
     timeout-minutes: 40
     # Playwright 1.58 supports Ubuntu 24.04; ubuntu-latest can move ahead of it.
     runs-on: ubuntu-24.04
+    # Match package-lock.json. Preinstalled browsers/dependencies avoid the
+    # Ubuntu mirror DNS failure that prevented all nine jobs from starting tests.
+    container:
+      image: mcr.microsoft.com/playwright:v1.58.2-noble@sha256:6446946a1d9fd62d9ae501312a2d76a43ee688542b21622056a372959b65d63d
+      options: --user 1001 --ipc=host
     permissions:
       contents: read
 
@@ -93,8 +98,13 @@ jobs:
       - name: Install dependencies
         run: npm ci --fetch-retries=5 --fetch-retry-factor=2
 
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+      - name: Verify preinstalled Playwright browsers
+        run: |
+          node <<'NODE'
+          const { version } = require('@playwright/test/package.json');
+          if (version !== '1.58.2') throw new Error('Update the pinned Playwright container to match package-lock.json');
+          require('node:fs').accessSync(require('@playwright/test').chromium.executablePath());
+          NODE
 
       - name: Start dev server
         run: |

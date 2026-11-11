@@ -1,4 +1,5 @@
 import { test, expect, devices } from '@playwright/test';
+import { mockAccountAccess } from '../helpers/accountAccess';
 
 /**
  * Mobile Readiness Final Hardening Tests
@@ -79,6 +80,7 @@ async function mockApis(page: import('@playwright/test').Page) {
   await page.route('**/api/entities/**', async (route) => {
     await route.fulfill({ status: 200, contentType: 'application/json', body: '[]' });
   });
+  await mockAccountAccess(page, 'test-user-id');
   await page.route('**/analytics/**', async (route) => {
     await route.fulfill({ status: 200, contentType: 'application/json', body: '{}' });
   });

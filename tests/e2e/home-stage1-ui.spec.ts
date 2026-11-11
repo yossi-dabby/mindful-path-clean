@@ -1,5 +1,6 @@
 import { test, expect, type Page } from '@playwright/test';
 import { mockApi } from '../helpers/ui';
+import { mockAccountAccess } from '../helpers/accountAccess';
 
 const sizes = [{ width: 390, height: 844 }, { width: 768, height: 1024 }, { width: 1440, height: 900 }];
 
@@ -12,6 +13,7 @@ async function prepare(page: Page, { language = 'en', theme = 'light', viewport 
   const exercise = { id: 'home-practice-sample', title: language === 'he' ? 'תרגיל דוגמה לבדיקת ממשק בלבד' : 'A sample exercise for interface review', category: breathing ? 'breathing' : 'grounding', difficulty: 'beginner', duration_minutes: 5, duration_options: breathing ? [1, 3, 5] : [], completed_count: 2, total_time_practiced: 0, instructions: 'Sample practice instructions.', favorite: false };
   await page.setViewportSize(viewport);
   await mockApi(page);
+  await mockAccountAccess(page, 'sample-user');
   await page.addInitScript(({ language, theme }) => {
     localStorage.setItem('language', language);
     localStorage.setItem('i18nextLng', language);

@@ -146,11 +146,7 @@ async function startChatWithRuntimeMocks(page: Parameters<typeof mockApi>[0]) {
       return;
     }
 
-    await route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify({ success: true }),
-    });
+    await route.fallback();
   });
 
   await page.route('**/api/**/agents/conversations/**/messages**', async (route) => {

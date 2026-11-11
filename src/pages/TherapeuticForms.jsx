@@ -1,4 +1,5 @@
 import { useAccountAccess } from '@/lib/accountAccess';
+import { useAuth } from '@/lib/AuthContext';
 import HebrewFormsPilot from '@/components/forms/HebrewFormsPilot';
 import FormsUsageNotice from '@/components/forms/FormsUsageNotice';
 import BotanicalAccent from '@/components/brand/BotanicalAccent';
@@ -819,6 +820,7 @@ function TherapeuticFormsLibrary() {
 
 function TherapeuticFormsUnavailable() {
   const { t, i18n } = useTranslation();
+  const { user } = useAuth();
   const lang = normalizeLanguageCode(i18n.resolvedLanguage || i18n.language || 'en');
   const uiLabels = FORMS_PAGE_LABELS[lang] || FORMS_PAGE_LABELS.en;
   const { canReviewForms } = useAccountAccess();

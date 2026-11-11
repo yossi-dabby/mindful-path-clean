@@ -567,7 +567,7 @@ test.describe('Chat voice transcription runtime flow', () => {
       await route.continue();
     });
 
-    await page.route('**/api/**/functions/**', async (route) => {
+    await page.route('**/api/**/functions/transcribeMobileAudio', async (route) => {
       if (/\/functions\/transcribeMobileAudio\b/i.test(route.request().url())) {
         const req = route.request();
         const rawBody = req.postData() || '';
@@ -630,7 +630,7 @@ test.describe('Chat voice transcription runtime flow', () => {
       await route.continue();
     });
 
-    await page.route('**/api/**/functions/**', async (route) => {
+    await page.route('**/api/**/functions/transcribeMobileAudio', async (route) => {
       if (/\/functions\/transcribeMobileAudio\b/i.test(route.request().url())) {
         const req = route.request();
         const rawBody = req.postData() || '';
@@ -695,7 +695,7 @@ test.describe('Chat voice transcription runtime flow', () => {
       await route.continue();
     });
 
-    await page.route('**/api/**/functions/**', async (route) => {
+    await page.route('**/api/**/functions/transcribeMobileAudio', async (route) => {
       if (/\/functions\/transcribeMobileAudio\b/i.test(route.request().url())) {
         const req = route.request();
         const rawBody = req.postData() || '';
@@ -760,7 +760,7 @@ test.describe('Chat voice transcription runtime flow', () => {
       await route.continue();
     });
 
-    await page.route('**/api/**/functions/**', async (route) => {
+    await page.route('**/api/**/functions/transcribeMobileAudio', async (route) => {
       if (/\/functions\/transcribeMobileAudio\b/i.test(route.request().url())) {
         const req = route.request();
         const rawBody = req.postData() || '';
@@ -830,7 +830,7 @@ test.describe('Chat voice transcription runtime flow', () => {
       await route.continue();
     });
 
-    await page.route('**/api/**/functions/**', async (route) => {
+    await page.route('**/api/**/functions/transcribeMobileAudio', async (route) => {
       if (/\/functions\/transcribeMobileAudio\b/i.test(route.request().url())) {
         const req = route.request();
         const rawBody = req.postData() || '';
@@ -893,7 +893,7 @@ test.describe('Chat voice transcription runtime flow', () => {
       await route.continue();
     });
 
-    await page.route('**/api/**/functions/**', async (route) => {
+    await page.route('**/api/**/functions/transcribeMobileAudio', async (route) => {
       if (/\/functions\/transcribeMobileAudio\b/i.test(route.request().url())) {
         const req = route.request();
         const rawBody = req.postData() || '';

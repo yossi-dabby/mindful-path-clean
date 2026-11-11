@@ -60,3 +60,29 @@ describe('age/permission records in existing account lifecycle handlers', () => 
     expect(f.user.delete).not.toHaveBeenCalled();
   });
 });
+
+describe('account deletion retains support-assisted storage evidence', () => {
+  it('records current and superseded file paths before removing the account, without deleting attachment rows', async () => {
+    const f = setup();
+    const files = [{ id: 'file-a', owner_user_id: 'adult-a', status: 'active', file_uri: 'private/synthetic/current.bin', superseded_file_uri: 'private/synthetic/old.pdf' }];
+    const queue = [];
+    const attachments = { filter: vi.fn(async () => files), update: vi.fn(async (id, data) => Object.assign(files.find(row => row.id === id), data)), delete: vi.fn() };
+    const requests = { filter: vi.fn(async () => queue), create: vi.fn(async data => { const row = { id: 'request-a', ...data }; queue.push(row); return row; }), delete: vi.fn() };
+    f.client.asServiceRole.entities = new Proxy(f.client.asServiceRole.entities, { get: (target, name) => name === 'PrivateAttachment' ? attachments : name === 'FileDeletionRequest' ? requests : target[name] });
+    const response = await handlerFor('deleteMyAccount', f.client)(request());
+    expect(response.status).toBe(200);
+    expect(await response.json()).toMatchObject({ accountDeleted: true, fileDeletionPending: true, fileDeletionRequestId: 'request-a', providerConversationErasure: 'unconfirmed' });
+    expect(queue[0].file_uris).toEqual(['private/synthetic/current.bin', 'private/synthetic/old.pdf']);
+    expect(requests.create.mock.invocationCallOrder[0]).toBeLessThan(f.user.delete.mock.invocationCallOrder[0]);
+    expect(f.user.update).toHaveBeenCalledWith('adult-a', { mp_account_deletion_pending: true, mp_adult_policy: '' });
+    expect(attachments.delete).not.toHaveBeenCalled(); expect(requests.delete).not.toHaveBeenCalled();
+    expect(files[0].file_uri).toBe('private/synthetic/current.bin');
+  });
+  it('does not discard older unmanaged upload references or start account removal', async () => {
+    const f = setup();
+    const legacy = { filter: vi.fn(async () => [{ id: 'goal-a', created_by: 'a@example.test', attachments: [{ file_url: 'https://old.example.test/synthetic.pdf' }] }]), delete: vi.fn() };
+    f.client.asServiceRole.entities = new Proxy(f.client.asServiceRole.entities, { get: (target, name) => name === 'Goal' ? legacy : target[name] });
+    expect((await handlerFor('deleteMyAccount', f.client)(request())).status).toBe(500);
+    expect(legacy.delete).not.toHaveBeenCalled(); expect(f.user.update).not.toHaveBeenCalled(); expect(f.user.delete).not.toHaveBeenCalled();
+  });
+});

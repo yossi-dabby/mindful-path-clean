@@ -6,6 +6,7 @@ import { encryptAttachment, decryptAttachment, createAccessToken, verifyAccessTo
 const ID = 'a12345678901234567890123';
 const NOW = Date.parse('2026-11-09T20:00:00Z');
 const USER = { id: 'owner-a', email: 'a@example.test' };
+const POLICY = '2026-11-11';
 const TEXT = 'Synthetic private-file verification. No personal information.';
 const bytes = new TextEncoder().encode(TEXT);
 const metadata = () => ({ id: ID, owner_user_id: USER.id, name: 'example.txt', mime_type: 'text/plain', size_bytes: bytes.length, status: 'active' });
@@ -25,7 +26,12 @@ async function environment() {
     // Deliberately ignores filters: the handler must re-check every boundary.
     filter: vi.fn(async () => row ? [row] : []),
   };
-  const client = { functions: { invoke: async () => accountAccessResult(user) }, auth: { me: async () => user }, integrations: { Core: core }, asServiceRole: { entities: { PrivateAttachment: records, FileDeletionRequest: { filter: vi.fn(async () => []) } }, integrations: { Core: core } } };
+  const owner = { ...USER, mp_adult_policy: POLICY, mp_account_deletion_pending: false };
+  const access = { id: 'access-a', subject_user_id: USER.id, adult_status: 'confirmed', policy_version: POLICY, attested_at: new Date(NOW).toISOString() };
+  const client = { functions: { invoke: async () => accountAccessResult(user) }, auth: { me: async () => user }, integrations: { Core: core }, asServiceRole: { entities: {
+    PrivateAttachment: records, FileDeletionRequest: { filter: vi.fn(async () => []) },
+    User: { get: vi.fn(async () => owner) }, AccountAccess: { filter: vi.fn(async () => [access]) },
+  }, integrations: { Core: core } } };
   const deps = { createClientFromRequest: () => client, now: () => now, fetchFile: vi.fn(async url => new Response(storage.get(decodeURIComponent(new URL(url).pathname.slice(1))))), downloadBase: 'https://app.example.test/functions/uploadAttachment' };
   const post = (body) => handlePrivateAttachment(new Request('https://app.example.test/functions/uploadAttachment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }), deps);
   const uploaded = await post({ file_base64: btoa(TEXT), file_name: 'example.txt', file_type: 'text/plain' });
@@ -68,6 +74,65 @@ describe('encrypted attachment storage', () => {
 });
 
 describe('real cryptography through upload and download handlers', () => {
+  it.each(['GET', 'HEAD'])('revokes an existing %s capability on declined source despite a stale positive projection', async method => {
+    const e = await environment();
+    expect((await e.get()).status).toBe(200);
+    e.deps.fetchFile.mockClear(); e.core.CreateFileSignedUrl.mockClear();
+    const source = (await e.client.asServiceRole.entities.AccountAccess.filter())[0];
+    e.client.asServiceRole.entities.AccountAccess.filter.mockResolvedValue([{ ...source, adult_status: 'declined' }]);
+    const denied = await e.get(undefined, { method });
+    expect(denied.status).toBe(403);
+    expect(await denied.text()).not.toContain(TEXT);
+    expect(e.deps.fetchFile).not.toHaveBeenCalled();
+    expect(e.core.CreateFileSignedUrl).not.toHaveBeenCalled();
+  });
+  it.each([
+    ['disabled owner', { disabled: true }], ['foreign owner', { id: 'other' }],
+    ['missing policy', { mp_adult_policy: undefined }], ['expired policy', { mp_adult_policy: 'old' }],
+    ['deleting owner', { mp_account_deletion_pending: true }], ['missing deletion latch', { mp_account_deletion_pending: undefined }],
+  ])('denies an issued link for %s', async (_name, change) => {
+    const e = await environment(); const users = e.client.asServiceRole.entities.User;
+    users.get.mockResolvedValue({ ...await users.get(USER.id), ...change });
+    expect((await e.get()).status).toBe(403);
+    expect(e.deps.fetchFile).not.toHaveBeenCalled();
+  });
+  it.each(['missing', 'duplicate', 'foreign', 'pending', 'expired', 'unattested', 'invalid'])('denies %s access source', async state => {
+    const e = await environment(); const source = e.client.asServiceRole.entities.AccountAccess;
+    const row = (await source.filter())[0];
+    const cases = { missing: [], duplicate: [row, { ...row, id: 'duplicate' }], foreign: [{ ...row, subject_user_id: 'other' }],
+      pending: [{ ...row, adult_status: 'pending' }], expired: [{ ...row, policy_version: 'old' }], unattested: [{ ...row, attested_at: '' }], invalid: null };
+    source.filter.mockResolvedValue(cases[state]);
+    expect((await e.get()).status).toBe(403);
+    expect(e.deps.fetchFile).not.toHaveBeenCalled();
+  });
+  it('denies a missing owner and fails closed without disclosing provider errors', async () => {
+    const e = await environment();
+    e.client.asServiceRole.entities.User.get.mockRejectedValue({ status: 404 });
+    expect((await e.get()).status).toBe(403);
+    e.client.asServiceRole.entities.User.get.mockRejectedValue(new Error('private/provider-secret'));
+    const unavailable = await e.get();
+    expect(unavailable.status).toBe(503);
+    expect(await unavailable.text()).not.toContain('provider-secret');
+    expect(e.deps.fetchFile).not.toHaveBeenCalled();
+  });
+  it.each(['age', 'deletion'])('rechecks %s revocation during the storage fetch before releasing bytes', async reason => {
+    const e = await environment(); const fetchStored = e.deps.fetchFile.getMockImplementation();
+    e.deps.fetchFile.mockImplementation(async (...args) => {
+      if (reason === 'age') e.client.asServiceRole.entities.AccountAccess.filter.mockResolvedValue([]);
+      else e.client.asServiceRole.entities.FileDeletionRequest.filter.mockResolvedValue([{ id: 'request-a', subject_user_id: USER.id, status: 'requested' }]);
+      return fetchStored(...args);
+    });
+    const response = await e.get();
+    expect(response.status).toBe(403);
+    expect(await response.text()).not.toContain(TEXT);
+    expect(e.deps.fetchFile).toHaveBeenCalledTimes(1);
+  });
+  it('checks the capability owner without requiring a browser session or refreshing their grant', async () => {
+    const e = await environment(); e.setUser(null);
+    expect(await (await e.get()).text()).toBe(TEXT);
+    expect(e.client.asServiceRole.entities.User.get).toHaveBeenCalledWith(USER.id);
+    expect(e.client.asServiceRole.entities.AccountAccess.filter).toHaveBeenCalledWith({ subject_user_id: USER.id }, '-created_date', 2);
+  });
   it('rejects an already issued capability once a deletion request is recorded', async () => {
     const e = await environment();
     expect((await e.get()).status).toBe(200);

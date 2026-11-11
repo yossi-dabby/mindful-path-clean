@@ -1,6 +1,9 @@
 # Record-level adult access and support-assisted file erasure
 
-Status: implementation for PR review, **not deployed or a provider-wide security sign-off**.
+Status: PR #40 merged and the live server/record rules were exercised on 2026-11-11.
+See [live verification](pr40-live-verification.md) for observed results and the
+issued-link revocation gap. The follow-up download guard requires review,
+deployment and a live retest; **this is not a provider-wide security sign-off**.
 Authorization: the owner requested both follow-up improvements on 2026-11-11 after
 Base44 support explained User field write locks and support-assisted storage deletion.
 
@@ -51,6 +54,12 @@ concurrency test is a deployment gate; do not describe this as transactional RLS
   fails while an open request exists, including already-issued download capabilities.
   In-flight uploads persist their returned URI before checking revocation and are
   held as deletion-pending. Incomplete uploads block support completion.
+- The follow-up download guard checks the capability owner's current AccountAccess
+  source, locked User projection and deletion latch/queue, both before storage I/O
+  and after decryption. An issued GET/HEAD capability must no longer deliver a file
+  after the owner becomes ineligible. Capability possession still authorizes a
+  download while the owner is eligible; this does not bind a link to a browser
+  session or revoke bytes that have already been delivered.
 - An adult administrator uses `/AdminFeatureFlags` to list requests and download a
   manifest for the existing **private support ticket**. No email/ticket is sent
   automatically. The manifest includes app name/id and storage paths only; it

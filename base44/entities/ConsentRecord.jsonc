@@ -47,13 +47,51 @@
     "accepted_at"
   ],
   "rls": {
-    "create": true,
-    "read": {
-      "created_by": "{{user.email}}"
+    "create": {
+      "user_condition": {
+        "data.mp_adult_policy": "2026-11-11",
+        "data.mp_account_deletion_pending": false
+      }
     },
-    "update": false,
+    "read": {
+      "$and": [
+        {
+          "user_condition": {
+            "data.mp_adult_policy": "2026-11-11",
+            "data.mp_account_deletion_pending": false
+          }
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    },
+    "update": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
     "delete": {
-      "created_by": "{{user.email}}"
+      "$and": [
+        {
+          "user_condition": {
+            "data.mp_adult_policy": "2026-11-11",
+            "data.mp_account_deletion_pending": false
+          }
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
     }
   }
 }

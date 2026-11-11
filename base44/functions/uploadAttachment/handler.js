@@ -1,4 +1,5 @@
 import { requireAccountAccess } from './accountAccessGuard.js';
+import { assertNoFileDeletion } from './fileDeletionQueue.js';
 // Storage holds ciphertext. Only this function can decrypt an owned attachment
 // using an expiring capability; the provider's signing API cannot grant plaintext.
 export const MAX_FILE_BYTES = 10 * 1024 * 1024;
@@ -103,10 +104,19 @@ async function storeEncrypted(client, records, record, bytes, legacy = false) {
   const uploaded = await client.integrations.Core.UploadPrivateFile({ file });
   const uri = uploaded?.file_uri;
   if (typeof uri !== 'string' || !PRIVATE_URI.test(uri)) throw fail(503, 'Private upload failed');
-  const update = { ...fields, file_uri: uri, status: 'active', ...(legacy ? { superseded_file_uri: record.file_uri } : {}) };
+  const update = { ...fields, file_uri: uri, status: 'uploading', ...(legacy ? { superseded_file_uri: record.file_uri } : {}) };
   try { await records.update(record.id, update); }
   catch { await records.update(record.id, update); }
-  return { ...record, ...update };
+  try {
+    // Preserve the URI even if deletion/age revocation happened during upload.
+    await assertNoFileDeletion(client, record.owner_user_id);
+    await requireAccountAccess(client, { id: record.owner_user_id });
+    await records.update(record.id, { status: 'active' });
+  } catch (error) {
+    await records.update(record.id, { status: 'deletion_pending' });
+    throw error;
+  }
+  return { ...record, ...update, status: 'active' };
 }
 
 async function signedResult(record, downloadBase, now) {
@@ -128,6 +138,7 @@ async function download(req, client, fetchFile, now) {
   const matches = await client.asServiceRole.entities.PrivateAttachment.filter({ id, status: 'active' }, '-created_date', 1);
   const record = matches?.[0];
   if (!record || record.id !== id || record.status !== 'active' || record.encryption_version !== 1 || !TYPES.has(record.mime_type) || !await verifyAccessToken(record, url.searchParams.get('token'), now())) throw fail(403, 'Access link is invalid or expired');
+  await assertNoFileDeletion(client, record.owner_user_id);
   const ciphertext = await readStoredBytes(client, record, fetchFile, true);
   const bytes = new Uint8Array(await decryptAttachment(ciphertext, record));
   if (bytes.length !== record.size_bytes) throw fail(503, 'Private file is unavailable');
@@ -160,6 +171,7 @@ export async function handlePrivateAttachment(req, { createClientFromRequest, fe
     }
     if (!user?.id || !user?.email) throw fail(401, 'Unauthorized');
     await requireAccountAccess(client, user);
+    await assertNoFileDeletion(client, user.id);
     const data = await readBody(req);
     const records = client.asServiceRole.entities.PrivateAttachment;
 

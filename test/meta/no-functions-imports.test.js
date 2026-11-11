@@ -43,8 +43,17 @@ const ACCESS_GUARD_IMPORT = "import { requireAccountAccess } from './accountAcce
 const PORTABLE_ACCESS = [
   '../base44/functions/accountAccess/handler.js',
   '../base44/functions/accountAccess/guard.js',
+  '../base44/functions/accountAccess/recordEntities.js',
+  '../base44/functions/fileDeletion/queue.js',
+  '../base44/functions/fileDeletion/accountAccessGuard.js',
+  '../base44/functions/deleteMyAccount/fileDeletionQueue.js',
+  '../base44/functions/deleteMyAccount/legacyFiles.js',
+  '../base44/functions/uploadAttachment/fileDeletionQueue.js',
   '../base44/functions/transcribeMobileAudio/accountAccessGuard.js',
 ].map(file => path.resolve(TEST_DIR, file));
+const DELETION_HANDLER = path.resolve(TEST_DIR, '../base44/functions/fileDeletion/handler.js');
+const DELETION_IMPORT = "import { deletionError, ownedAttachments, openDeletionRequests, collectManifest, manifestHash, requestFileDeletion, publicDeletionStatus } from './queue.js';";
+const FILE_QUEUE_IMPORT = "import { assertNoFileDeletion } from './fileDeletionQueue.js';";
 const PORTABLE_RELEASE = path.resolve(TEST_DIR, '../base44/functions/getHebrewFormsPilot/releases.js');
 
 const PORTABLE_ATTACHMENTS = ['uploadAttachment', 'extractPdfText'].map((name) => path.resolve(TEST_DIR, `../base44/functions/${name}/handler.js`));
@@ -60,13 +69,13 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
     const source = fs.readFileSync(PORTABLE_HELPER, 'utf8');
     const allowedImport = "import { isPilotFileId, isPilotCatalogPath, validatePilotCatalog } from './releases.js';";
     expect(source.split(allowedImport)).toHaveLength(2);
-    expect(source.replace(allowedImport, '').replace(ACCESS_GUARD_IMPORT, '')).not.toMatch(/\b(?:import|require|Deno)\b/);
+    expect(source.replace(allowedImport, '').replace(ACCESS_GUARD_IMPORT, '').replace(FILE_QUEUE_IMPORT, '')).not.toMatch(/\b(?:import|require|Deno)\b/);
     expect(fs.readFileSync(PORTABLE_RELEASE, 'utf8')).not.toMatch(/\b(?:import|require|Deno)\b/);
   });
 
   it('private attachment handlers are dependency-free Web API code', () => {
     for (const file of PORTABLE_ATTACHMENTS) {
-      expect(fs.readFileSync(file, 'utf8').replace(ACCESS_GUARD_IMPORT, '')).not.toMatch(/\b(?:import|require|Deno)\b/);
+      expect(fs.readFileSync(file, 'utf8').replace(ACCESS_GUARD_IMPORT, '').replace(FILE_QUEUE_IMPORT, '')).not.toMatch(/\b(?:import|require|Deno)\b/);
     }
   });
 
@@ -74,6 +83,12 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
     for (const file of PORTABLE_ACCESS) {
       expect(fs.readFileSync(file, 'utf8')).not.toMatch(/\b(?:import|require|Deno)\b/);
     }
+  });
+
+  it('the deletion handler imports only validated portable helpers', () => {
+    const source = fs.readFileSync(DELETION_HANDLER, 'utf8');
+    expect(source.split(DELETION_IMPORT)).toHaveLength(2);
+    expect(source.replace(DELETION_IMPORT, '').replace(ACCESS_GUARD_IMPORT, '')).not.toMatch(/\b(?:import|require|Deno)\b/);
   });
 
   for (const filePath of testFiles) {
@@ -88,7 +103,7 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
       const source = fs.readFileSync(filePath, 'utf8');
       for (const match of source.matchAll(FUNCTIONS_IMPORT_RE)) {
         expect(
-          [PORTABLE_HELPER, PORTABLE_RELEASE, ...PORTABLE_ATTACHMENTS, ...PORTABLE_ACCESS],
+          [PORTABLE_HELPER, PORTABLE_RELEASE, DELETION_HANDLER, ...PORTABLE_ATTACHMENTS, ...PORTABLE_ACCESS],
           `Found forbidden platform functions/ import in ${relativePath}: "${match[0]}"`
         ).toContain(path.resolve(path.dirname(filePath), match[1]));
       }

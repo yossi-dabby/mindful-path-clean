@@ -46,6 +46,30 @@
           "default": true
         }
       }
+    },
+    "mp_adult_policy": {
+      "type": "string",
+      "default": "",
+      "description": "Server-maintained record access projection; never an editable age declaration.",
+      "rls": {
+        "update": {
+          "user_condition": {
+            "collaborator_role": "editor"
+          }
+        }
+      }
+    },
+    "mp_account_deletion_pending": {
+      "type": "boolean",
+      "default": false,
+      "description": "Server-only account deletion latch; prevents access being restored during deletion.",
+      "rls": {
+        "update": {
+          "user_condition": {
+            "collaborator_role": "editor"
+          }
+        }
+      }
     }
   },
   "required": []

@@ -123,10 +123,11 @@ describe('Stage A privacy, consent, and lifecycle contracts', () => {
 
   it('keeps consent records owner-readable, immutable, and owner-deletable', () => {
     const schema = parseJsonc('base44/entities/ConsentRecord.jsonc');
-    expect(schema.rls.create).toBe(true);
-    expect(schema.rls.read.created_by).toBe('{{user.email}}');
-    expect(schema.rls.update).toBe(false);
-    expect(schema.rls.delete.created_by).toBe('{{user.email}}');
+    const gate = { user_condition: { 'data.mp_adult_policy': '2026-11-11', 'data.mp_account_deletion_pending': false } };
+    expect(schema.rls.create).toEqual(gate);
+    expect(schema.rls.read).toEqual({ $and: [gate, { created_by: '{{user.email}}' }] });
+    expect(schema.rls.update).toEqual({ $and: [{ user_condition: { role: 'admin' } }, { user_condition: { role: 'user' } }] });
+    expect(schema.rls.delete).toEqual({ $and: [gate, { created_by: '{{user.email}}' }] });
     expect(schema.required).toContain('version');
     expect(schema.required).toContain('accepted_at');
   });

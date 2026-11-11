@@ -15,7 +15,7 @@ const fixture = (user = USER) => {
   const record = { id: ID, owner_user_id: USER.id, owner_email: USER.email, name: 'worksheet.pdf', mime_type: 'application/pdf', size_bytes: 4, file_uri: URI, status: 'active', encryption_version: 1, encryption_key: btoa('e'.repeat(32)).replace(/=+$/, ''), encryption_iv: btoa('i'.repeat(12)), signing_key: btoa('s'.repeat(32)).replace(/=+$/, '') };
   const records = { create: vi.fn(async (data) => ({ id: ID, ...data })), update: vi.fn(async () => ({})), filter: vi.fn(async () => [record]) };
   const core = { UploadPrivateFile: vi.fn(async () => ({ file_uri: URI })), CreateFileSignedUrl: vi.fn(async () => ({ signed_url: SIGNED_URL })), UploadFile: vi.fn(), ExtractDataFromUploadedFile: vi.fn(async () => ({ output: { full_text: 'Example text', page_count: 1 } })) };
-  const client = { auth: { me: vi.fn(async () => user) }, asServiceRole: { entities: { PrivateAttachment: records }, integrations: { Core: core } }, integrations: { Core: core }, functions: { invoke: vi.fn(async name => name === 'accountAccess' ? accountAccessResult(user) : ({ data: { file_ref: REF, file_url: SIGNED_URL, mime_type: 'application/pdf' } })) } };
+  const client = { auth: { me: vi.fn(async () => user) }, asServiceRole: { entities: { PrivateAttachment: records, FileDeletionRequest: { filter: vi.fn(async () => []) } }, integrations: { Core: core } }, integrations: { Core: core }, functions: { invoke: vi.fn(async name => name === 'accountAccess' ? accountAccessResult(user) : ({ data: { file_ref: REF, file_url: SIGNED_URL, mime_type: 'application/pdf' } })) } };
   const deps = { createClientFromRequest: () => client, fetchFile: vi.fn(async () => new Response(new Uint8Array(4))) };
   return { client, record, records, core, deps };
 };
@@ -43,6 +43,18 @@ describe('private attachment ownership boundary', () => {
     expect(f.core.ExtractDataFromUploadedFile).not.toHaveBeenCalled();
   });
 
+  it('retains an uploaded URI but denies activation when deletion begins during storage', async () => {
+    const f = fixture();
+    f.core.UploadPrivateFile.mockImplementation(async () => {
+      f.client.asServiceRole.entities.FileDeletionRequest.filter.mockResolvedValue([{ id: 'request-a', subject_user_id: USER.id, status: 'requested' }]);
+      return { file_uri: URI };
+    });
+    expect((await handlePrivateAttachment(uploadRequest(), f.deps)).status).toBe(403);
+    expect(f.records.update).toHaveBeenCalledWith(ID, expect.objectContaining({ file_uri: URI, status: 'uploading' }));
+    expect(f.records.update).toHaveBeenCalledWith(ID, { status: 'deletion_pending' });
+    expect(f.records.update).not.toHaveBeenCalledWith(ID, { status: 'active' });
+  });
+
   it('denies anonymous requests before reading files or accessing storage', async () => {
     const f = fixture(null);
     for (const request of [uploadRequest(), resolveRequest()]) {
@@ -58,7 +70,8 @@ describe('private attachment ownership boundary', () => {
     const response = await handlePrivateAttachment(uploadRequest(), f.deps);
     expect(response.status).toBe(200);
     expect(f.records.create).toHaveBeenCalledWith(expect.objectContaining({ owner_user_id: USER.id, owner_email: USER.email, status: 'uploading', size_bytes: 4 }));
-    expect(f.records.update).toHaveBeenCalledWith(ID, expect.objectContaining({ file_uri: URI, status: 'active', encryption_version: 1 }));
+    expect(f.records.update).toHaveBeenCalledWith(ID, expect.objectContaining({ file_uri: URI, status: 'uploading', encryption_version: 1 }));
+    expect(f.records.update).toHaveBeenCalledWith(ID, { status: 'active' });
     expect(f.core.UploadPrivateFile).toHaveBeenCalledTimes(1);
     expect(f.core.UploadFile).not.toHaveBeenCalled();
     expect(f.core.CreateFileSignedUrl).not.toHaveBeenCalled();
@@ -85,7 +98,8 @@ describe('private attachment ownership boundary', () => {
     const f = fixture();
     f.core.UploadPrivateFile.mockResolvedValue({ file_uri: uri });
     expect((await handlePrivateAttachment(uploadRequest(), f.deps)).status).toBe(200);
-    expect(f.records.update).toHaveBeenCalledWith(ID, expect.objectContaining({ file_uri: uri, status: 'active', encryption_version: 1 }));
+    expect(f.records.update).toHaveBeenCalledWith(ID, expect.objectContaining({ file_uri: uri, status: 'uploading', encryption_version: 1 }));
+    expect(f.records.update).toHaveBeenCalledWith(ID, { status: 'active' });
     f.records.filter.mockResolvedValue([{ ...f.record, file_uri: uri }]);
     expect((await handlePrivateAttachment(resolveRequest(), f.deps)).status).toBe(200);
     expect(f.core.CreateFileSignedUrl).not.toHaveBeenCalled();
@@ -152,7 +166,8 @@ describe('private attachment ownership boundary', () => {
   it('retries a transient metadata failure before issuing access', async () => {
     const f = fixture(); f.records.update.mockRejectedValueOnce(new Error('transient'));
     expect((await handlePrivateAttachment(uploadRequest(), f.deps)).status).toBe(200);
-    expect(f.records.update).toHaveBeenCalledTimes(2);
+    expect(f.records.update).toHaveBeenCalledTimes(3);
+    expect(f.records.update).toHaveBeenNthCalledWith(3, ID, { status: 'active' });
   });
   it('does not expose provider storage paths through public, ordinary or admin entity access', () => {
     const schema = JSON.parse(readFileSync(new URL('../../base44/entities/PrivateAttachment.jsonc', import.meta.url), 'utf8'));

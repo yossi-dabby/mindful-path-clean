@@ -101,6 +101,19 @@ Deno.serve(async (req) => {
       warnings.push('AccountAccess: export unavailable');
     }
 
+    try {
+      const result = await readAllOwnedRecords(base44, 'FileDeletionRequest', user.email, user.id);
+      entities.FileDeletionRequest = result.records.map(record => ({
+        status: record.status, requested_at: record.requested_at, submitted_at: record.submitted_at,
+        confirmed_at: record.confirmed_at, cleared_at: record.cleared_at,
+        coverage: record.coverage, file_count: record.file_uris?.length || 0,
+      }));
+      if (result.truncated) truncatedEntities.push('FileDeletionRequest');
+    } catch {
+      entities.FileDeletionRequest = [];
+      warnings.push('FileDeletionRequest: export unavailable');
+    }
+
     let agentConversations = [];
     try {
       const conversations = await base44.agents.getConversations();

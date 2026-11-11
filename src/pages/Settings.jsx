@@ -518,7 +518,7 @@ export default function Settings() {
                 </div>
                 <div className="rounded-2xl border border-red-200 bg-red-50/75 p-4">
                   <h3 className="text-sm font-bold text-red-900">{t('settings.account.delete_account')}</h3>
-                  <p className="mb-3 mt-1 text-xs leading-5 text-red-700">{t('settings.account.delete_section_description')}</p>
+                  <p className="mb-3 mt-1 text-xs leading-5 text-red-700">{t('file_deletion.account_notice')}</p>
                   <DeleteAccountFlow userRole={user.role} />
                 </div>
               </CardContent>

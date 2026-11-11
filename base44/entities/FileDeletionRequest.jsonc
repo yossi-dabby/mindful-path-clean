@@ -1,0 +1,128 @@
+{
+  "name": "FileDeletionRequest",
+  "type": "object",
+  "properties": {
+    "subject_user_id": {
+      "type": "string"
+    },
+    "subject_email": {
+      "type": "string"
+    },
+    "requested_at": {
+      "type": "string"
+    },
+    "manifest_hash": {
+      "type": "string"
+    },
+    "ticket_reference": {
+      "type": "string"
+    },
+    "submitted_at": {
+      "type": "string"
+    },
+    "confirmed_at": {
+      "type": "string"
+    },
+    "confirmed_by": {
+      "type": "string"
+    },
+    "cleared_at": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "requested",
+        "submitted",
+        "confirmed",
+        "references_cleared"
+      ]
+    },
+    "coverage": {
+      "type": "string",
+      "enum": [
+        "managed_private_attachments_only"
+      ]
+    },
+    "file_uris": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "attachment_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "incomplete": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "subject_user_id",
+    "status",
+    "requested_at",
+    "coverage"
+  ],
+  "rls": {
+    "create": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    }
+  }
+}

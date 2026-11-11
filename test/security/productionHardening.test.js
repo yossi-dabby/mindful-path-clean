@@ -3,14 +3,16 @@ import { describe, expect, it } from 'vitest';
 
 const read = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const parseJsonc = (path) => JSON.parse(read(path));
+const ageGate = { user_condition: { 'data.mp_adult_policy': '2026-11-11', 'data.mp_account_deletion_pending': false } };
+const gated = rule => ({ $and: [ageGate, rule] });
 
 describe('production security hardening', () => {
   it('keeps crisis alerts private while allowing owner-attributed creation', () => {
     const schema = parseJsonc('base44/entities/CrisisAlert.jsonc');
-    expect(schema.rls.create).toEqual({ 'data.user_email': '{{user.email}}' });
-    expect(schema.rls.read.user_condition.role).toBe('admin');
-    expect(schema.rls.update.user_condition.role).toBe('admin');
-    expect(schema.rls.delete.user_condition.role).toBe('admin');
+    expect(schema.rls.create).toEqual(gated({ 'data.user_email': '{{user.email}}' }));
+    expect(schema.rls.read).toEqual(gated({ user_condition: { role: 'admin' } }));
+    expect(schema.rls.update).toEqual(gated({ user_condition: { role: 'admin' } }));
+    expect(schema.rls.delete).toEqual(gated({ user_condition: { role: 'admin' } }));
   });
 
   it('limits regression logs to administrators', () => {
@@ -81,7 +83,7 @@ describe('production security hardening', () => {
   it('stores exercise favorites and progress in an owner-only entity', () => {
     const schema = parseJsonc('base44/entities/UserExerciseProgress.jsonc');
     for (const operation of ['create', 'read', 'update', 'delete']) {
-      expect(schema.rls[operation].created_by).toBe('{{user.email}}');
+      expect(schema.rls[operation]).toEqual(gated({ created_by: '{{user.email}}' }));
     }
     expect(read('src/api/base44Client.js')).toContain('installExerciseProgressAdapter(base44)');
   });

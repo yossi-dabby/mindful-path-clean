@@ -33,6 +33,7 @@ export default function AccountAccessGate({ children }) {
   // draft/recording. Initial entry is fail-closed; protected backend operations
   // independently check the current server record on every request.
   if (query.data?.eligible && query.data.user_id === user?.id) return children;
+  const deletionPending = query.data?.deletion_pending === true;
   const declined = query.data?.adult_status === 'declined';
   const accountLinks = (<div className="flex flex-wrap gap-4 text-sm">
           <a href={publicLegalUrl('/privacy', language)}>{t('account_access.privacy')}</a>
@@ -42,13 +43,13 @@ export default function AccountAccessGate({ children }) {
   return (
     <main className="flex min-h-dvh items-center justify-center bg-background p-4 text-foreground" dir={language === 'he' ? 'rtl' : 'ltr'} data-testid="account-access-gate">
       <section className="w-full max-w-md space-y-4 rounded-2xl border border-border bg-card p-6">
-        <h1 className="text-xl font-semibold">{t(declined ? 'chat_stage2.restricted_title' : 'account_access.title')}</h1>
-        {declined ? <p>{t('account_access.declined')}</p> : query.isError
+        <h1 className="text-xl font-semibold">{t(deletionPending ? 'file_deletion.account_pending_title' : declined ? 'chat_stage2.restricted_title' : 'account_access.title')}</h1>
+        {deletionPending ? <p>{t('file_deletion.account_pending')}</p> : declined ? <p>{t('account_access.declined')}</p> : query.isError
           ? <><p role="alert">{t('account_access.load_error')}</p><Button onClick={() => query.refetch()}>{t('account_access.retry')}</Button></>
           : <p role="status">{t('account_access.loading')}</p>}
         {accountLinks}
       </section>
-      {query.data?.adult_status === 'pending' && !query.isError && <AgeGateModal
+      {query.data?.adult_status === 'pending' && !deletionPending && !query.isError && <AgeGateModal
         onConfirm={() => attest(true)} onDecline={() => attest(false)} busy={saving}
         error={saveError ? t('account_access.save_error') : ''} accountNotice={t('account_access.notice')} footer={accountLinks}
       />}

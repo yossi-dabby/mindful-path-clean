@@ -25,12 +25,12 @@ async function environment() {
     // Deliberately ignores filters: the handler must re-check every boundary.
     filter: vi.fn(async () => row ? [row] : []),
   };
-  const client = { functions: { invoke: async () => accountAccessResult(user) }, auth: { me: async () => user }, integrations: { Core: core }, asServiceRole: { entities: { PrivateAttachment: records }, integrations: { Core: core } } };
+  const client = { functions: { invoke: async () => accountAccessResult(user) }, auth: { me: async () => user }, integrations: { Core: core }, asServiceRole: { entities: { PrivateAttachment: records, FileDeletionRequest: { filter: vi.fn(async () => []) } }, integrations: { Core: core } } };
   const deps = { createClientFromRequest: () => client, now: () => now, fetchFile: vi.fn(async url => new Response(storage.get(decodeURIComponent(new URL(url).pathname.slice(1))))), downloadBase: 'https://app.example.test/functions/uploadAttachment' };
   const post = (body) => handlePrivateAttachment(new Request('https://app.example.test/functions/uploadAttachment', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }), deps);
   const uploaded = await post({ file_base64: btoa(TEXT), file_name: 'example.txt', file_type: 'text/plain' });
   expect(uploaded.status).toBe(200); const result = await uploaded.json();
-  return { result, core, records, deps, post, storage, row: () => row, setRow: value => { row = value; }, setUser: value => { user = value; }, setTime: value => { now = value; }, get: (url = result.file_url, init) => handlePrivateAttachment(new Request(url, init), deps) };
+  return { client, result, core, records, deps, post, storage, row: () => row, setRow: value => { row = value; }, setUser: value => { user = value; }, setTime: value => { now = value; }, get: (url = result.file_url, init) => handlePrivateAttachment(new Request(url, init), deps) };
 }
 
 describe('encrypted attachment storage', () => {
@@ -68,6 +68,15 @@ describe('encrypted attachment storage', () => {
 });
 
 describe('real cryptography through upload and download handlers', () => {
+  it('rejects an already issued capability once a deletion request is recorded', async () => {
+    const e = await environment();
+    expect((await e.get()).status).toBe(200);
+    e.client.asServiceRole.entities.FileDeletionRequest.filter.mockResolvedValue([{ id: 'request-a', subject_user_id: USER.id, status: 'requested' }]);
+    // The row deliberately remains active to exercise an in-flight activation race.
+    expect(e.row().status).toBe('active');
+    expect((await e.get()).status).toBe(403);
+    expect((await e.post({ action: 'resolve', file_ref: e.result.file_ref })).status).toBe(403);
+  });
   it('uploads and opens a filename with an emoji at the truncation boundary', async () => {
     const e = await environment();
     const name = 'a'.repeat(159) + '😀.txt';

@@ -25,7 +25,8 @@
       "enum": [
         "uploading",
         "active",
-        "deletion_pending"
+        "deletion_pending",
+        "references_cleared"
       ]
     },
     "encryption_key": {

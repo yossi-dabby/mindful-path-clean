@@ -45,8 +45,9 @@ async function readRecord(entity, userId) {
 function statusFor(user, record) {
   const current = record?.policy_version === AGE_POLICY_VERSION;
   const declined = record?.adult_status === 'declined';
-  const eligible = current && record?.adult_status === 'confirmed' && !!record?.attested_at;
+  const eligible = current && record?.adult_status === 'confirmed' && !!record?.attested_at && user.mp_account_deletion_pending !== true;
   return {
+    ...(user.mp_account_deletion_pending === true ? { deletion_pending: true } : {}),
     schema_version: 1,
     user_id: user.id,
     policy_version: AGE_POLICY_VERSION,
@@ -56,12 +57,39 @@ function statusFor(user, record) {
   };
 }
 
+// AccountAccess remains the source of truth. Entity RLS cannot join that table,
+// so publish only a locked, server-maintained projection on the built-in User.
+// A missing projection denies direct entity calls until status succeeds.
+async function syncRecordAccess(client, user, record) {
+  const users = client.asServiceRole.entities.User;
+  const currentUser = await users.get(user.id);
+  if (currentUser?.id !== user.id || currentUser.disabled === true) throw fail(503, 'ACCESS_UNAVAILABLE');
+  const status = statusFor(currentUser, record);
+  const policy = status.eligible ? AGE_POLICY_VERSION : '';
+  if (currentUser.mp_adult_policy !== policy || typeof currentUser.mp_account_deletion_pending !== 'boolean') {
+    await users.update(user.id, { mp_adult_policy: policy,
+      ...(typeof currentUser.mp_account_deletion_pending !== 'boolean' ? { mp_account_deletion_pending: false } : {}) });
+  }
+  // Detect a declaration/deletion changing while the projection was written.
+  // Base44 has no documented multi-record transaction; never report a stale
+  // grant as successful. Live concurrency verification remains a rollout gate.
+  const latest = await readRecord(client.asServiceRole.entities.AccountAccess, user.id);
+  const verifiedUser = await users.get(user.id);
+  const verified = statusFor(verifiedUser || {}, latest);
+  if (verifiedUser?.id !== user.id || verifiedUser.mp_adult_policy !== (verified.eligible ? AGE_POLICY_VERSION : '') ||
+      status.eligible !== verified.eligible || latest?.id !== record?.id || latest?.adult_status !== record?.adult_status) {
+    await users.update(user.id, { mp_adult_policy: '' });
+    throw fail(503, 'ACCESS_UNAVAILABLE');
+  }
+  return verified;
+}
+
 export async function handleAccountAccess(req, { createClientFromRequest, now = () => new Date().toISOString() }) {
   const reply = (body, status = 200) => Response.json(body, { status, headers: HEADERS });
   if (req.method !== 'POST') return reply({ error: 'METHOD_NOT_ALLOWED' }, 405);
+  let client, user, checkedInput = false;
   try {
-    const client = createClientFromRequest(req);
-    let user;
+    client = createClientFromRequest(req);
     try { user = await client.auth.me(); }
     catch (error) {
       if ([401, 403].includes(error?.status ?? error?.response?.status)) throw fail(401, 'UNAUTHORIZED');
@@ -69,9 +97,10 @@ export async function handleAccountAccess(req, { createClientFromRequest, now = 
     }
     if (!user?.id || !user?.email || user.disabled === true) throw fail(401, 'UNAUTHORIZED');
     const input = await readInput(req);
+    checkedInput = true;
     const entity = client.asServiceRole.entities.AccountAccess;
     const record = await readRecord(entity, user.id);
-    const self = statusFor(user, record);
+    const self = await syncRecordAccess(client, user, record);
     if (input.action === 'status') return reply(self);
     if (input.action === 'attest') {
       if (typeof input.adult !== 'boolean' || input.policy_version !== AGE_POLICY_VERSION || !LANGUAGES.has(input.language)) {
@@ -81,6 +110,9 @@ export async function handleAccountAccess(req, { createClientFromRequest, now = 
       // second click. A correction needs a support review, not a client flag.
       if (self.adult_status === 'declined') throw fail(403, 'AGE_RESTRICTED');
       if (self.eligible && input.adult) return reply(self);
+      if (user.mp_account_deletion_pending === true) throw fail(403, 'AGE_RESTRICTED');
+      // Revoke before changing the source, including an adult -> under-18 declaration.
+      await client.asServiceRole.entities.User.update(user.id, { mp_adult_policy: '' });
       const values = {
         subject_user_id: user.id,
         adult_status: input.adult ? 'confirmed' : 'declined',
@@ -91,7 +123,7 @@ export async function handleAccountAccess(req, { createClientFromRequest, now = 
       if (record) await entity.update(record.id, values);
       else await entity.create({ ...values, forms_review_allowed: false });
       // Re-read so concurrent first submissions fail closed on duplicates.
-      return reply(statusFor(user, await readRecord(entity, user.id)));
+      return reply(await syncRecordAccess(client, user, await readRecord(entity, user.id)));
     }
     if (user.role !== 'admin' || !self.eligible) throw fail(403, 'FORBIDDEN');
     if (typeof input.email !== 'string' || input.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email)) {
@@ -120,6 +152,11 @@ export async function handleAccountAccess(req, { createClientFromRequest, now = 
     }
     return reply({ ...statusFor(target, await readRecord(entity, target.id)), email: target.email, administrator: target.role === 'admin' });
   } catch (error) {
+    if (checkedInput && user?.id && (!error?.code || error.code === 'ACCESS_UNAVAILABLE')) {
+      // Best-effort revocation if the source could not be verified. A provider
+      // outage can also prevent this write; no claim of transactional revocation.
+      try { await client.asServiceRole.entities.User.update(user.id, { mp_adult_policy: '' }); } catch { /* return closed */ }
+    }
     const known = ['INVALID_REQUEST', 'REQUEST_TOO_LARGE', 'ACCESS_UNAVAILABLE', 'UNAUTHORIZED', 'INVALID_ATTESTATION', 'AGE_RESTRICTED', 'FORBIDDEN', 'ACCOUNT_NOT_FOUND', 'ACCOUNT_DISABLED', 'ACCOUNT_CHANGED', 'ADMIN_ROLE_ACCESS', 'ADULT_CONFIRMATION_REQUIRED'];
     return reply({ error: known.includes(error?.code) ? error.code : 'ACCESS_UNAVAILABLE' }, known.includes(error?.code) ? error.status : 503);
   }

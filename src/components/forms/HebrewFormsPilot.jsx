@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/lib/AuthContext';
+import { useAccountAccess } from '@/lib/accountAccess';
 import { Button } from '@/components/ui/button';
 import PdfJsViewer from '@/components/forms/PdfJsViewer';
 import { requestPilotCatalog, requestPilotPdf } from '@/lib/hebrewFormsPilotClient';
@@ -9,12 +10,12 @@ import { requestPilotCatalog, requestPilotPdf } from '@/lib/hebrewFormsPilotClie
 const AGES = ['CH', 'TE', 'AD', 'OA'];
 
 
-// Administrator review catalogs remain separate from public/AI form registries.
+// Approved review catalogs remain separate from public/AI form registries.
 function PilotLibrary({ language }) {
   const { t } = useTranslation();
   const isHebrew = language === 'he';
   const { user } = useAuth();
-  const isAdmin = user?.role === 'admin';
+  const { canReviewForms } = useAccountAccess();
   const [catalog, setCatalog] = useState(null);
   const [expansionPending, setExpansionPending] = useState(false);
   const [age, setAge] = useState(null);
@@ -49,7 +50,7 @@ function PilotLibrary({ language }) {
     const controller = new AbortController();
     setCatalog(null); setExpansionPending(false); setPreview(null); setBusy(false); setError('');
     setAge(null); setTrack(null); setUnit(null);
-    if (isAdmin) {
+    if (canReviewForms) {
       (async () => {
         try {
           const result = await requestPilotCatalog({ language, signal: controller.signal });
@@ -68,7 +69,7 @@ function PilotLibrary({ language }) {
       if (activeUrl.current) URL.revokeObjectURL(activeUrl.current);
       activeUrl.current = null;
     };
-  }, [language, isAdmin, user?.id]);
+  }, [language, canReviewForms, user?.id]);
 
   const fileAction = async (form, download) => {
     actionAbort.current?.abort();
@@ -96,7 +97,7 @@ function PilotLibrary({ language }) {
     }
   };
 
-  if (!isAdmin) return null;
+  if (!canReviewForms) return null;
   const tracks = { ...Object.fromEntries(['shared', 'core', 'anxiety'].map(id => [id, t(`therapeutic_forms.pilot_ui.${id}`)])), ...Object.fromEntries(
     ['mood', 'self', 'perf', 'reg', 'exec', 'soc', 'sleep', 'change', 'family', 'screen', 'shame', 'meaning', 'ocd', 'trauma'].map((id) => [id, t(`therapeutic_forms.pilot_release.${id}`)]),
   ) };
@@ -165,6 +166,7 @@ export default function HebrewFormsPilot() {
   const { i18n } = useTranslation();
   const { user } = useAuth();
   const language = (i18n.resolvedLanguage || i18n.language || '').split('-')[0];
-  if (user?.role !== 'admin' || !['he', 'en'].includes(language)) return null;
+  const { canReviewForms } = useAccountAccess();
+  if (!canReviewForms || !['he', 'en'].includes(language)) return null;
   return <PilotLibrary key={`${language}:${user.id}`} language={language} />;
 }

@@ -1,3 +1,4 @@
+import { mockAccountAccess } from '../helpers/accountAccess';
 import { test, expect, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -10,6 +11,7 @@ const guide = 'MP-MOOD-03-G-ALL-EN';
 
 async function session(page: Page, role = 'admin') {
   await mockApi(page);
+  await mockAccountAccess(page, 'fixture-user', role === 'admin');
   await page.route('https://fonts.googleapis.com/**', route => route.fulfill({ contentType: 'text/css', body: '' }));
   await page.route('**/api/apps/*/entities/User/me', route => route.fulfill({ json: {
     id: 'fixture-user', role, onboarding_completed: true,
@@ -159,6 +161,7 @@ test('missing English release never requests Hebrew; regular users never request
   await expect(page.getByRole('alert')).toHaveText('Forms are not yet available in this language.');
   expect(requests).toEqual(['catalog-en-series-03', 'catalog-en-series-02', 'catalog-en-series-01', 'catalog-en-mood-03']);
   await page.route('**/api/apps/*/entities/User/me', route => route.fulfill({ json: { id: 'regular', role: 'user', onboarding_completed: true } }));
+  await mockAccountAccess(page, 'regular');
   for (const language of ['en', 'he']) {
     await page.goto(`/tests/fixtures/hebrew-pilot-preview.html?language=${language}`);
     await expect(page.getByTestId('forms-empty-state')).toBeVisible();

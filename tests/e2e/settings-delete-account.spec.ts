@@ -135,7 +135,7 @@ test.describe('Settings — Delete Account flow', () => {
     await mockApi(page);
 
     // Intercept the deleteMyAccount backend call specifically and return 500
-    await page.route('**/functions/**', async (route) => {
+    await page.route('**/functions/deleteMyAccount', async (route) => {
       const req = route.request();
       const url = req.url();
       if (url.includes('deleteMyAccount')) {
@@ -175,7 +175,7 @@ test.describe('Settings — Delete Account flow', () => {
     await mockApi(page);
 
     const deleteCalls: string[] = [];
-    await page.route('**/functions/**', async (route) => {
+    await page.route('**/functions/deleteMyAccount', async (route) => {
       const req = route.request();
       const url = req.url();
       if (url.includes('deleteMyAccount')) {

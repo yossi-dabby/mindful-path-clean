@@ -231,6 +231,18 @@ export async function mockApi(page: Page) {
       return;
     }
 
+    if (url.includes('/functions/accountAccess') && method === 'POST') {
+      await route.fulfill({ json: {
+        schema_version: 1, user_id: mockUserId, policy_version: '2026-11-11',
+        adult_status: 'confirmed', eligible: true, forms_review_allowed: false,
+      } });
+      return;
+    }
+    if (url.includes('/entities/ConsentRecord') && method === 'GET') {
+      await route.fulfill({ json: [{ id: 'fixture-consent', document: 'ai_chat_terms_and_privacy', version: '2026-11-09', created_by: mockUserEmail }] });
+      return;
+    }
+
     // Mock Base44 function invocations so they don't reach the real server in CI.
     // The enhancedCrisisDetector is called in handleSendMessage before the POST;
     // without this mock it would either block on the network or fail slowly.

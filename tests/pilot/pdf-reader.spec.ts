@@ -1,3 +1,4 @@
+import { mockAccountAccess } from '../helpers/accountAccess';
 import { test, expect, type Page, type Locator } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -8,6 +9,7 @@ const guide = 'MP-ANX-01-G-ALL-HE';
 
 async function session(page: Page) {
   await mockApi(page);
+  await mockAccountAccess(page, 'fixture-admin', true);
   await page.route('**/api/apps/*/entities/User/me', route => route.fulfill({ json: {
     id: 'fixture-admin', email: 'fixture@example.com', role: 'admin', onboarding_completed: true,
   } }));

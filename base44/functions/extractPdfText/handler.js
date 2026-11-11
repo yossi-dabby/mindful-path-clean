@@ -1,3 +1,4 @@
+import { requireAccountAccess } from './accountAccessGuard.js';
 const HEADERS = { 'Cache-Control': 'private, no-store', Vary: 'Authorization' };
 const reply = (body, status = 200) => Response.json(body, { status, headers: HEADERS });
 
@@ -7,6 +8,7 @@ export async function handleExtractPdfText(req, { createClientFromRequest }) {
     const base44 = createClientFromRequest(req);
     const user = await base44.auth.me();
     if (!user?.id) return reply({ success: false, error: 'Unauthorized' }, 401);
+    await requireAccountAccess(base44, user);
     const { file_ref } = await req.json();
     if (typeof file_ref !== 'string' || !/^mp-private:[a-f0-9]{24}$/i.test(file_ref)) {
       return reply({ success: false, error: 'An owned PDF reference is required' }, 400);

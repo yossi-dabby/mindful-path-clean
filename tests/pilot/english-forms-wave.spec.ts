@@ -1,3 +1,4 @@
+import { mockAccountAccess } from '../helpers/accountAccess';
 import { test, expect } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -10,6 +11,7 @@ for (const track of ['MOOD', 'SELF', 'PERF', 'REG', 'EXEC', 'SOC', 'SLEEP', 'CHA
     const errors: string[] = [];
     page.on('pageerror', e => errors.push(e.message));
     await mockApi(page);
+  await mockAccountAccess(page, 'fixture-user', true);
     await page.route('https://fonts.googleapis.com/**', route => route.fulfill({ contentType: 'text/css', body: '' }));
     await page.route('**/api/apps/*/entities/User/me', route => route.fulfill({ json: { id: 'fixture-user', role: 'admin', onboarding_completed: true } }));
     await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async route => {

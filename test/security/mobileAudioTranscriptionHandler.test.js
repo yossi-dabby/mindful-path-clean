@@ -1,3 +1,5 @@
+import { requireAccountAccess } from '../../base44/functions/transcribeMobileAudio/accountAccessGuard.js';
+import { accountAccessResult } from '../helpers/accountAccessFixture.js';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
@@ -9,7 +11,7 @@ const js = ts.transpileModule(source.replace(/^import .*;\n/gm, ''), {
   compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.None },
 }).outputText;
 const MAX_AUDIO = 25 * 1024 * 1024;
-let handler, me, transcribe, remoteFetch;
+let handler, me, transcribe, remoteFetch, access;
 
 function multipart(file = new File([new Uint8Array([1, 2, 3, 4])], 'draft.m4a', { type: 'audio/mp4;codecs=opus' }), language) {
   const form = new FormData();
@@ -26,18 +28,27 @@ function legacy(url) {
 
 beforeEach(() => {
   me = vi.fn().mockResolvedValue({ id: 'user-1' });
+  access = vi.fn(async () => accountAccessResult({ id: 'user-1' }));
   transcribe = vi.fn().mockResolvedValue('שלום, זו בדיקת תמלול.');
   remoteFetch = vi.fn();
   vi.stubGlobal('fetch', remoteFetch);
-  new Function('Deno', 'createClientFromRequest', 'OpenAI', js)(
+  new Function('Deno', 'createClientFromRequest', 'OpenAI', 'requireAccountAccess', js)(
     { serve: fn => { handler = fn; }, env: { get: () => 'test-only-key' } },
-    () => ({ auth: { me } }),
+    () => ({ auth: { me }, functions: { invoke: access } }),
     class { audio = { transcriptions: { create: transcribe } }; },
+    requireAccountAccess,
   );
 });
 afterEach(() => vi.unstubAllGlobals());
 
 describe('mobile audio transcription — real request handler', () => {
+  it('denies audio processing before reading bytes or calling the provider without an adult declaration', async () => {
+    access.mockResolvedValue({ data: { ...accountAccessResult({ id: 'user-1' }).data, eligible: false, adult_status: 'pending' } });
+    expect((await handler(multipart())).status).toBe(403);
+    expect(transcribe).not.toHaveBeenCalled();
+    expect(remoteFetch).not.toHaveBeenCalled();
+  });
+
   it.each(['audio/mp4;codecs=opus', 'audio/wav', 'audio/webm', 'audio/ogg', 'video/mp4'])(
     'accepts authenticated multipart %s without storage URL assumptions or remote fetches', async (type) => {
       const response = await handler(multipart(new File([new Uint8Array([1, 2, 3, 4])], 'local-draft', { type })));

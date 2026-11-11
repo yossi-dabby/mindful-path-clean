@@ -53,7 +53,6 @@ export default function DraggableAiCompanion() {
   const [showConsentBanner, setShowConsentBanner] = useState(false);
   const [isConsentResolved, setIsConsentResolved] = useState(false);
   const [showRiskPanel, setShowRiskPanel] = useState(false);
-  const [isAgeVerified, setIsAgeVerified] = useState(true);
   const mountedRef = useRef(true);
   const messagesEndRef = useRef(null);
   const dragRef = useRef({ startX: 0, startY: 0, initialX: 0, initialY: 0, initialRight: 0, initialBottom: 0 });
@@ -124,36 +123,18 @@ export default function DraggableAiCompanion() {
     };
   }, []);
 
-  // Check age verification and consent
+  // This widget only mounts inside the account age gate. Consent remains
+  // separate and account-bound; automation flags never bypass either check.
   useEffect(() => {
-    const isTestEnv =
-    window.navigator.webdriver === true ||
-    window.Cypress !== undefined ||
-    window.playwright !== undefined ||
-    /HeadlessChrome/.test(window.navigator.userAgent);
-
-    if (isTestEnv) {
-      localStorage.setItem('age_verified', 'true');
-      setShowConsentBanner(false);
-      setIsConsentResolved(true);
-      setIsAgeVerified(true);
-      return;
-    }
-
-    const ageVerified = localStorage.getItem('age_verified');
-    setIsAgeVerified(ageVerified === 'true');
-
-    if (ageVerified === 'true') {
-      resolveCurrentChatConsent(base44)
-        .then((hasConsent) => {
-          setShowConsentBanner(!hasConsent);
-          setIsConsentResolved(true);
-        })
-        .catch(() => {
-          setShowConsentBanner(true);
-          setIsConsentResolved(true);
-        });
-    }
+    let cancelled = false;
+    resolveCurrentChatConsent(base44)
+      .then((hasConsent) => {
+        if (!cancelled) { setShowConsentBanner(!hasConsent); setIsConsentResolved(true); }
+      })
+      .catch(() => {
+        if (!cancelled) { setShowConsentBanner(true); setIsConsentResolved(true); }
+      });
+    return () => { cancelled = true; };
   }, []);
 
   // Delay showing the button on Videos page
@@ -551,11 +532,6 @@ export default function DraggableAiCompanion() {
 
   if (!position) {
     return null; // Wait for position to initialize
-  }
-
-  // Hide if age not verified
-  if (!isAgeVerified) {
-    return null;
   }
 
   const isMobile = window.innerWidth < MOBILE_BREAKPOINT;

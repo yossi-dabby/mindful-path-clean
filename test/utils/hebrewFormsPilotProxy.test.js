@@ -1,3 +1,4 @@
+import { accountAccessResult } from '../helpers/accountAccessFixture.js';
 import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { createHash } from 'node:crypto';
 import { createServer } from 'node:http';
@@ -11,7 +12,7 @@ const request = (body = { path: 'catalog' }, headers = {}, method = 'POST') => n
   method, headers: { 'Content-Type': 'application/json', 'Base44-App-Id': appId, Authorization: 'Bearer fixture-session', ...headers },
   ...(method === 'POST' ? { body: typeof body === 'string' ? body : JSON.stringify(body) } : {}),
 });
-const client = (me = user) => () => ({ auth: { me: async () => me } });
+const client = (me = user) => () => ({ auth: { me: async () => me }, functions: { invoke: async () => accountAccessResult(me) } });
 const diagnosticDefaults = { diagnosticVersion: 3, causeCode: 'unknown', reason: 'unknown', timeoutAvailable: true };
 
 describe('Base44 pilot proxy authorization and transport', () => {
@@ -156,7 +157,7 @@ describe('Base44 pilot proxy authorization and transport', () => {
       [request(), { role: 'admin' }, 403],
     ]) expect((await handleHebrewFormsPilot(req, { createClientFromRequest: client(me), fetchImpl, logFailure })).status).toBe(status);
     let currentRole = 'admin';
-    const dependencies = { createClientFromRequest: () => ({ auth: { me: async () => ({ id: 'same-user', role: currentRole }) } }), fetchImpl, logFailure };
+    const dependencies = { createClientFromRequest: () => ({ auth: { me: async () => ({ id: 'same-user', role: currentRole }) }, functions: { invoke: async () => accountAccessResult({ id: 'same-user', role: currentRole }) } }), fetchImpl, logFailure };
     currentRole = 'user';
     expect((await handleHebrewFormsPilot(request(), dependencies)).status).toBe(403);
     expect(fetchImpl).not.toHaveBeenCalled();

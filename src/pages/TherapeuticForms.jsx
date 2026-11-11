@@ -1,3 +1,5 @@
+import { useAccountAccess } from '@/lib/accountAccess';
+import { useAuth } from '@/lib/AuthContext';
 import HebrewFormsPilot from '@/components/forms/HebrewFormsPilot';
 import FormsUsageNotice from '@/components/forms/FormsUsageNotice';
 import BotanicalAccent from '@/components/brand/BotanicalAccent';
@@ -5,7 +7,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, ArrowRight, ClipboardList } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
-import { useAuth } from '@/lib/AuthContext';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { SUPPORTED_LANGUAGES, ALL_FORMS, resolveFormWithLanguage } from '@/data/therapeuticForms/index.js';
@@ -822,7 +823,8 @@ function TherapeuticFormsUnavailable() {
   const { user } = useAuth();
   const lang = normalizeLanguageCode(i18n.resolvedLanguage || i18n.language || 'en');
   const uiLabels = FORMS_PAGE_LABELS[lang] || FORMS_PAGE_LABELS.en;
-  const hasReviewPilot = ['he', 'en'].includes(lang) && user?.role === 'admin';
+  const { canReviewForms } = useAccountAccess();
+  const hasReviewPilot = ['he', 'en'].includes(lang) && canReviewForms;
   const isRtl = i18n.dir ? i18n.dir() === 'rtl' : lang === 'he';
 
   return (

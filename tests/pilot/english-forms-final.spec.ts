@@ -1,3 +1,4 @@
+import { mockAccountAccess } from '../helpers/accountAccess';
 import { test, expect, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
@@ -9,6 +10,7 @@ const proof = JSON.parse(readFileSync('content/forms-localization/review/en-seri
 const representative = new Set(['shared-entry', 'shared-assessment', 'shared-sessions', 'core-01', 'core-02', 'core-08', 'anx-06', 'ocd-08', 'ocdyc-01', 'trauma-08']);
 async function session(page: Page) {
   await mockApi(page);
+  await mockAccountAccess(page, 'fixture-user', true);
   await page.route('https://fonts.googleapis.com/**', route => route.fulfill({ contentType: 'text/css', body: '' }));
   await page.route('**/api/apps/*/entities/User/me', route => route.fulfill({ json: { id: 'fixture-user', role: 'admin', onboarding_completed: true } }));
   await page.route('**/api/apps/*/functions/getHebrewFormsPilot', async route => {

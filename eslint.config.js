@@ -67,4 +67,9 @@ export default [
       "react-hooks/rules-of-hooks": "error",
     },
   },
+  {
+    // Catch render-time reference errors on both authorized and unavailable forms views.
+    files: ["src/pages/TherapeuticForms.jsx"],
+    rules: { "no-undef": "error" },
+  },
 ];

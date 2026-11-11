@@ -1,3 +1,4 @@
+import { requireAccountAccess } from './accountAccessGuard.js';
 // Storage holds ciphertext. Only this function can decrypt an owned attachment
 // using an expiring capability; the provider's signing API cannot grant plaintext.
 export const MAX_FILE_BYTES = 10 * 1024 * 1024;
@@ -158,6 +159,7 @@ export async function handlePrivateAttachment(req, { createClientFromRequest, fe
       throw error;
     }
     if (!user?.id || !user?.email) throw fail(401, 'Unauthorized');
+    await requireAccountAccess(client, user);
     const data = await readBody(req);
     const records = client.asServiceRole.entities.PrivateAttachment;
 

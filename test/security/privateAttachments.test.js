@@ -1,3 +1,4 @@
+import { accountAccessResult } from '../helpers/accountAccessFixture.js';
 import { describe, it, expect, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { handlePrivateAttachment, MAX_FILE_BYTES } from '../../base44/functions/uploadAttachment/handler.js';
@@ -14,7 +15,7 @@ const fixture = (user = USER) => {
   const record = { id: ID, owner_user_id: USER.id, owner_email: USER.email, name: 'worksheet.pdf', mime_type: 'application/pdf', size_bytes: 4, file_uri: URI, status: 'active', encryption_version: 1, encryption_key: btoa('e'.repeat(32)).replace(/=+$/, ''), encryption_iv: btoa('i'.repeat(12)), signing_key: btoa('s'.repeat(32)).replace(/=+$/, '') };
   const records = { create: vi.fn(async (data) => ({ id: ID, ...data })), update: vi.fn(async () => ({})), filter: vi.fn(async () => [record]) };
   const core = { UploadPrivateFile: vi.fn(async () => ({ file_uri: URI })), CreateFileSignedUrl: vi.fn(async () => ({ signed_url: SIGNED_URL })), UploadFile: vi.fn(), ExtractDataFromUploadedFile: vi.fn(async () => ({ output: { full_text: 'Example text', page_count: 1 } })) };
-  const client = { auth: { me: vi.fn(async () => user) }, asServiceRole: { entities: { PrivateAttachment: records }, integrations: { Core: core } }, integrations: { Core: core }, functions: { invoke: vi.fn(async () => ({ data: { file_ref: REF, file_url: SIGNED_URL, mime_type: 'application/pdf' } })) } };
+  const client = { auth: { me: vi.fn(async () => user) }, asServiceRole: { entities: { PrivateAttachment: records }, integrations: { Core: core } }, integrations: { Core: core }, functions: { invoke: vi.fn(async name => name === 'accountAccess' ? accountAccessResult(user) : ({ data: { file_ref: REF, file_url: SIGNED_URL, mime_type: 'application/pdf' } })) } };
   const deps = { createClientFromRequest: () => client, fetchFile: vi.fn(async () => new Response(new Uint8Array(4))) };
   return { client, record, records, core, deps };
 };
@@ -28,6 +29,20 @@ function uploadRequest({ size = 4, type = 'application/pdf', name = 'worksheet.p
 }
 
 describe('private attachment ownership boundary', () => {
+  it('blocks uploads, fresh links and extraction before data access when age is missing', async () => {
+    const f = fixture();
+    f.client.functions.invoke.mockResolvedValue({ data: {
+      ...accountAccessResult(USER).data, eligible: false, adult_status: 'pending',
+    } });
+    expect((await handlePrivateAttachment(uploadRequest(), f.deps)).status).toBe(403);
+    expect((await handlePrivateAttachment(resolveRequest(), f.deps)).status).toBe(403);
+    expect((await handleExtractPdfText(jsonRequest({ file_ref: REF }), f.deps)).status).toBe(403);
+    expect(f.records.create).not.toHaveBeenCalled();
+    expect(f.records.filter).not.toHaveBeenCalled();
+    expect(f.core.UploadPrivateFile).not.toHaveBeenCalled();
+    expect(f.core.ExtractDataFromUploadedFile).not.toHaveBeenCalled();
+  });
+
   it('denies anonymous requests before reading files or accessing storage', async () => {
     const f = fixture(null);
     for (const request of [uploadRequest(), resolveRequest()]) {
@@ -175,7 +190,7 @@ describe('private attachment consumers', () => {
     expect(await response.json()).toMatchObject({ success: true, text: 'Example text' });
   });
   it('never extracts a foreign file or a supplied public URL', async () => {
-    const f = fixture(); f.client.functions.invoke.mockRejectedValue({ response: { status: 404 } });
+    const f = fixture(); f.client.functions.invoke.mockImplementation(async name => { if (name === 'accountAccess') return accountAccessResult(USER); throw { response: { status: 404 } }; });
     expect((await handleExtractPdfText(jsonRequest({ file_ref: REF }), f.deps)).status).toBe(404);
     expect((await handleExtractPdfText(jsonRequest({ file_url: 'https://attacker.example/public/user-a/doc.pdf' }), f.deps)).status).toBe(400);
     expect(f.core.ExtractDataFromUploadedFile).not.toHaveBeenCalled();

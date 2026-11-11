@@ -1,0 +1,21 @@
+{
+  "name": "AccountAccess",
+  "type": "object",
+  "properties": {
+    "subject_user_id": { "type": "string" },
+    "adult_status": { "type": "string", "enum": ["confirmed", "declined"] },
+    "policy_version": { "type": "string" },
+    "attested_at": { "type": "string" },
+    "attestation_language": { "type": "string", "enum": ["en", "he", "es", "fr", "de", "it", "pt"] },
+    "forms_review_allowed": { "type": "boolean", "default": false },
+    "forms_updated_at": { "type": "string" },
+    "forms_updated_by": { "type": "string" }
+  },
+  "required": ["subject_user_id", "adult_status", "policy_version", "attested_at", "attestation_language", "forms_review_allowed"],
+  "rls": {
+    "create": { "$and": [{ "user_condition": { "role": "admin" } }, { "user_condition": { "role": "user" } }] },
+    "read": { "$and": [{ "user_condition": { "role": "admin" } }, { "user_condition": { "role": "user" } }] },
+    "update": { "$and": [{ "user_condition": { "role": "admin" } }, { "user_condition": { "role": "user" } }] },
+    "delete": { "$and": [{ "user_condition": { "role": "admin" } }, { "user_condition": { "role": "user" } }] }
+  }
+}

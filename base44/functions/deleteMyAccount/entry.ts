@@ -43,13 +43,13 @@ const USER_OWNED_ENTITIES = [
 const BATCH_SIZE = 100;
 const MAX_BATCHES_PER_ENTITY = 1000;
 
-async function deleteAllOwnedRecords(base44, entityName, email) {
+async function deleteAllOwnedRecords(base44, entityName, email, subjectUserId = null) {
   const entityApi = base44.asServiceRole.entities[entityName];
   let deleted = 0;
 
   for (let batchNumber = 0; batchNumber < MAX_BATCHES_PER_ENTITY; batchNumber += 1) {
     const records = await entityApi.filter(
-      { created_by: email },
+      subjectUserId ? { subject_user_id: subjectUserId } : { created_by: email },
       'created_date',
       BATCH_SIZE,
       0
@@ -58,6 +58,7 @@ async function deleteAllOwnedRecords(base44, entityName, email) {
     if (records.length === 0) return deleted;
 
     for (const record of records) {
+      if (subjectUserId && record.subject_user_id !== subjectUserId) throw new Error('Account access ownership mismatch');
       await entityApi.delete(record.id);
       deleted += 1;
     }
@@ -88,6 +89,9 @@ Deno.serve(async (req) => {
     for (const entityName of USER_OWNED_ENTITIES) {
       deletedByEntity[entityName] = await deleteAllOwnedRecords(base44, entityName, user.email);
     }
+
+    // Service-created age/grant rows are owned by subject ID, not created_by.
+    deletedByEntity.AccountAccess = await deleteAllOwnedRecords(base44, 'AccountAccess', user.email, user.id);
 
     // Delete the account only after every owned entity batch completed. If an
     // earlier deletion fails, the account remains accessible so the user can retry.

@@ -1,3 +1,4 @@
+import { requireAccountAccess } from './accountAccessGuard.js';
 import { isPilotFileId, isPilotCatalogPath, validatePilotCatalog } from './releases.js';
 
 // Only this app's existing private Railway service may receive the caller's token.
@@ -93,7 +94,10 @@ export async function handleHebrewFormsPilot(req, { createClientFromRequest, fet
       report(error, status);
       return fail(503);
     }
-    if (!user?.id || user.role !== 'admin') return fail(403);
+    if (!user?.id) return fail(403);
+    stage = 'account_access';
+    try { await requireAccountAccess(client, user, { forms: true }); }
+    catch (error) { return fail(error.status || 503); }
     const input = await req.json().catch(() => null);
     if (!input || typeof input !== 'object' || Array.isArray(input) ||
         Object.keys(input).some((key) => !['path', 'download'].includes(key)) ||

@@ -31,7 +31,7 @@ export default function FileDeletionPanel() {
     <p className="text-sm">{t('file_deletion.notice')}</p>
     <p className="text-sm text-muted-foreground">{t('file_deletion.scope')}</p>
     <label htmlFor="file-deletion-consent" className="flex min-h-11 cursor-pointer items-start gap-2 text-sm">
-      <Checkbox id="file-deletion-consent" className="m-2.5" checked={confirmed} disabled={busy} onCheckedChange={value => setConfirmed(value === true)} />
+      <Checkbox id="file-deletion-consent" aria-label={t('file_deletion.request_confirm')} className="m-2.5" checked={confirmed} disabled={busy} onCheckedChange={value => setConfirmed(value === true)} />
       {t('file_deletion.request_confirm')}
     </label>
     <div className="flex flex-wrap gap-2">

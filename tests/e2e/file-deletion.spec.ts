@@ -1,5 +1,16 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Locator } from '@playwright/test';
 import { mockApi, spaNavigate } from '../helpers/ui';
+
+async function expectTouchSafeCheckbox(checkbox: Locator) {
+  const target = await checkbox.evaluate(element => {
+    const box = element.getBoundingClientRect();
+    const after = getComputedStyle(element, '::after');
+    const inset = (value: string) => Math.max(0, -(parseFloat(value) || 0));
+    return { width: box.width + inset(after.left) + inset(after.right), height: box.height + inset(after.top) + inset(after.bottom) };
+  });
+  expect(target.width).toBeGreaterThanOrEqual(44);
+  expect(target.height).toBeGreaterThanOrEqual(44);
+}
 
 test('requesting attachment erasure requires consent and retains pending status on refresh', async ({ page }) => {
   await mockApi(page);
@@ -16,6 +27,7 @@ test('requesting attachment erasure requires consent and retains pending status 
   await panel.scrollIntoViewIfNeeded();
   const request = panel.getByRole('button', { name: 'Request file deletion', exact: true });
   await expect(request).toBeDisabled();
+  await expectTouchSafeCheckbox(panel.getByRole('checkbox'));
   await panel.getByRole('checkbox').check();
   await request.click();
   await expect(panel.getByRole('status')).toContainText('Storage deletion is still pending');
@@ -66,6 +78,7 @@ test('operator must download the exact manifest and record written support confi
   await panel.getByRole('button', { name: 'Record as submitted', exact: true }).click();
   const confirm = panel.getByRole('button', { name: 'Record support confirmation', exact: true });
   await expect(confirm).toBeDisabled();
+  await expectTouchSafeCheckbox(panel.getByRole('checkbox'));
   await panel.getByRole('checkbox').check();
   await confirm.click();
   await panel.getByRole('button', { name: 'Clear references after confirmation', exact: true }).click();

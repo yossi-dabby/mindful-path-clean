@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function FileDeletionAdminPanel() {
@@ -63,7 +64,7 @@ export default function FileDeletionAdminPanel() {
         <Input id="deletion-ticket" dir="ltr" value={ticket} disabled={busy} maxLength={160} onChange={event => setTicket(event.target.value)} />
         {snapshot.status === 'requested' && <Button disabled={busy || snapshot.incomplete || ticket.trim().length < 3} onClick={() => run('submitted', snapshot.request_id)}>{t('file_deletion.submitted')}</Button>}
         {snapshot.status === 'submitted' && <>
-          <label className="flex items-start gap-2 text-sm"><input type="checkbox" checked={confirmed} disabled={busy} onChange={event => setConfirmed(event.target.checked)} />{t('file_deletion.support_confirm')}</label>
+          <label htmlFor="file-deletion-support-confirmation" className="flex min-h-11 cursor-pointer items-start gap-2 text-sm"><Checkbox id="file-deletion-support-confirmation" className="m-2.5" checked={confirmed} disabled={busy} onCheckedChange={value => setConfirmed(value === true)} />{t('file_deletion.support_confirm')}</label>
           <Button disabled={busy || snapshot.incomplete || !confirmed || ticket.trim().length < 3} onClick={() => run('confirm', snapshot.request_id)}>{t('file_deletion.confirm')}</Button>
         </>}
         {snapshot.status === 'confirmed' && <Button disabled={busy || snapshot.incomplete} onClick={() => run('clear_references', snapshot.request_id)}>{t('file_deletion.clear')}</Button>}

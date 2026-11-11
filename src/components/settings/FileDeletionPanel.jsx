@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { base44 } from '@/api/base44Client';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 
 export default function FileDeletionPanel() {
   const { t } = useTranslation();
@@ -29,8 +30,8 @@ export default function FileDeletionPanel() {
     <h3 className="font-semibold">{t('file_deletion.title')}</h3>
     <p className="text-sm">{t('file_deletion.notice')}</p>
     <p className="text-sm text-muted-foreground">{t('file_deletion.scope')}</p>
-    <label className="flex items-start gap-2 text-sm">
-      <input type="checkbox" checked={confirmed} disabled={busy} onChange={event => setConfirmed(event.target.checked)} />
+    <label htmlFor="file-deletion-consent" className="flex min-h-11 cursor-pointer items-start gap-2 text-sm">
+      <Checkbox id="file-deletion-consent" className="m-2.5" checked={confirmed} disabled={busy} onCheckedChange={value => setConfirmed(value === true)} />
       {t('file_deletion.request_confirm')}
     </label>
     <div className="flex flex-wrap gap-2">

@@ -4,6 +4,7 @@ import { assertNoFileDeletion } from './fileDeletionQueue.js';
 // using an expiring capability; the provider's signing API cannot grant plaintext.
 export const MAX_FILE_BYTES = 10 * 1024 * 1024;
 export const SIGNED_URL_SECONDS = 300;
+const AGE_POLICY_VERSION = '2026-11-11';
 // Base44's current storage returns mp/private/...; older objects use private/....
 // Accept only these private namespaces, never a public URL or a caller-supplied URI.
 const PRIVATE_URI = /^(?:mp\/)?private\//;
@@ -132,16 +133,41 @@ async function signedResult(record, downloadBase, now) {
   };
 }
 
+async function assertDownloadAccess(client, ownerId) {
+  if (typeof ownerId !== 'string' || !ownerId) throw fail(403, 'Access link is unavailable');
+  const entities = client.asServiceRole.entities;
+  // A capability has no caller session. Read its owner's current source and
+  // locked projection directly; never refresh an older grant while downloading.
+  const [owner, access] = await Promise.all([
+    entities.User.get(ownerId).catch(error => {
+      if ((error?.status ?? error?.response?.status) === 404) return null;
+      throw error;
+    }),
+    entities.AccountAccess.filter({ subject_user_id: ownerId }, '-created_date', 2),
+    assertNoFileDeletion(client, ownerId),
+  ]);
+  if (owner?.id !== ownerId || owner.disabled === true ||
+      owner.mp_adult_policy !== AGE_POLICY_VERSION || owner.mp_account_deletion_pending !== false ||
+      !Array.isArray(access) || access.length !== 1 || !access[0]?.id ||
+      access[0].subject_user_id !== ownerId || access[0].policy_version !== AGE_POLICY_VERSION ||
+      access[0].adult_status !== 'confirmed' || !access[0].attested_at) {
+    throw fail(403, 'Access link is unavailable');
+  }
+}
+
 async function download(req, client, fetchFile, now) {
   const url = new URL(req.url); const id = url.searchParams.get('attachment');
   if (!/^[a-f0-9]{24}$/i.test(id || '') || !url.searchParams.get('token')) throw fail(401, 'Unauthorized');
   const matches = await client.asServiceRole.entities.PrivateAttachment.filter({ id, status: 'active' }, '-created_date', 1);
   const record = matches?.[0];
   if (!record || record.id !== id || record.status !== 'active' || record.encryption_version !== 1 || !TYPES.has(record.mime_type) || !await verifyAccessToken(record, url.searchParams.get('token'), now())) throw fail(403, 'Access link is invalid or expired');
-  await assertNoFileDeletion(client, record.owner_user_id);
+  await assertDownloadAccess(client, record.owner_user_id);
   const ciphertext = await readStoredBytes(client, record, fetchFile, true);
   const bytes = new Uint8Array(await decryptAttachment(ciphertext, record));
   if (bytes.length !== record.size_bytes) throw fail(503, 'Private file is unavailable');
+  // Storage may be slow. Recheck after fetching/decrypting, before releasing
+  // bytes or HEAD metadata if access was revoked while the request was in flight.
+  await assertDownloadAccess(client, record.owner_user_id);
   let start = 0; let end = bytes.length - 1; let status = 200;
   const headers = { ...HEADERS, 'Content-Type': record.mime_type, 'Accept-Ranges': 'bytes', 'Content-Security-Policy': "default-src 'none'; sandbox", 'Content-Disposition': `inline; filename="attachment"; filename*=UTF-8''${encodeURIComponent(safeAttachmentName(record.name)).replaceAll("'", '%27')}` };
   const range = req.headers.get('range');

@@ -42,7 +42,7 @@
     "start": "node server/index.mjs"
   },
   "dependencies": {
-    "@base44/sdk": "^0.8.59",
+    "@base44/sdk": "^0.8.60",
     "@base44/vite-plugin": "^1.0.52",
     "@capacitor/android": "^8.4.1",
     "@capacitor/app": "^8.1.1",

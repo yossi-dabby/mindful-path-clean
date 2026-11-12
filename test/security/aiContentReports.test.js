@@ -12,6 +12,7 @@ function fixture() {
     create: vi.fn(async data => { const row = { ...data, id: `report-${records.length}` }; records.push(row); return row; }),
     get: vi.fn(async id => records.find(row => row.id === id)),
     update: vi.fn(async (id, changes) => Object.assign(records.find(row => row.id === id), changes)),
+    delete: vi.fn(async id => { const index = records.findIndex(row => row.id === id); if (index >= 0) records.splice(index, 1); }),
   };
   const client = { auth: { me: vi.fn(async () => user) }, agents: { getConversation: vi.fn(async () => conversation) },
     functions: { invoke: vi.fn(async () => ({ data: { schema_version: 1, policy_version: '2026-11-11', user_id: user.id, eligible: true, adult_status: 'confirmed' } })) }, asServiceRole: { entities: { AIContentReport: entity } } };
@@ -32,6 +33,27 @@ describe('AI response reporting authorization and privacy', () => {
     expect((await f.call({ ...f.input, message_index: 0 })).status).toBe(200);
     expect(f.records[0].message_index).toBe(1);
     expect((await f.call(f.input)).status).toBe(200); expect(f.entity.create).toHaveBeenCalledTimes(1);
+  });
+  it('removes a late report if account deletion starts during the write', async () => {
+    const f = fixture();
+    f.entity.create.mockImplementationOnce(async data => {
+      const row = { ...data, id: 'late-report' }; f.records.push(row);
+      f.client.functions.invoke.mockResolvedValue({ data: { schema_version: 1, policy_version: '2026-11-11', user_id: A.id, eligible: false, adult_status: 'confirmed' } });
+      return row;
+    });
+    expect((await f.call(f.input)).status).toBe(403);
+    expect(f.entity.delete).toHaveBeenCalledWith('late-report'); expect(f.records).toHaveLength(0);
+  });
+  it('does not confirm success if access disappears and late-report removal fails', async () => {
+    const f = fixture();
+    f.entity.create.mockImplementationOnce(async data => {
+      const row = { ...data, id: 'late-report' }; f.records.push(row);
+      f.client.functions.invoke.mockRejectedValue(new Error('Private provider error'));
+      return row;
+    });
+    f.entity.delete.mockRejectedValue(new Error('Private deletion error'));
+    const response = await f.call(f.input);
+    expect(response.status).toBe(503); expect(await response.text()).not.toContain('Private');
   });
   it('rejects anonymous, underage and inaccessible conversations before writing', async () => {
     const f = fixture(); f.setUser(null);

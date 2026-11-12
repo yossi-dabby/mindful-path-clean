@@ -85,6 +85,17 @@ export async function handleAIContentReports(req, { createClientFromRequest, now
         status: 'open', reported_at: now(), resolution: '', reviewed_by: '', reviewed_at: '',
       });
       if (!validId(record?.id)) throw fail('REPORT_UNAVAILABLE', 503);
+      // Account deletion sets its durable access latch before scanning reports.
+      // Recheck after the write: if deletion won the race, remove this late row
+      // rather than acknowledging a report that escaped the deletion scan.
+      try { await requireAccountAccess(client, user); }
+      catch (error) {
+        try { await entity.delete(record.id); }
+        catch (cleanupError) {
+          if ((cleanupError?.status ?? cleanupError?.response?.status) !== 404) throw fail('REPORT_UNAVAILABLE', 503);
+        }
+        throw error;
+      }
       return reply({ success: true, report_id: record.id });
     }
     if (input.action === 'list') {

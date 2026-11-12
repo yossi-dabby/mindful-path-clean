@@ -123,7 +123,7 @@ export default function DataPrivacy({ user }) {
               {t('settings.data_privacy.retention_label')}
             </label>
             <p className="text-sm text-muted-foreground mb-4">
-              {t('settings.data_privacy.retention_description')}
+              {t('retention_cleanup.schedule')}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <BottomSheetSelect

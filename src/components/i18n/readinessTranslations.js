@@ -43,7 +43,9 @@ export const readinessTranslations = {
       "skipped": "Retention is set to keep data indefinitely. Nothing was removed.",
       "success": "Cleanup completed for the supported records.",
       "partial": "Cleanup was not fully confirmed. Some records may already have been removed. Try again to continue.",
-      "counts": "Removed: {{moods}} mood entries and {{journals}} journal entries. Hidden conversations: {{conversations}}."
+      "counts": "Removed: {{moods}} mood entries and {{journals}} journal entries. Hidden conversations: {{conversations}}.",
+      "schedule": "Choose when old mood and journal records should be removed and old AI conversations hidden. Cleanup is attempted when you open Chat or use the button below; it does not run while the app is closed.",
+      "manual_review": "Some records contain older upload references and have been kept to avoid losing them. Contact support before retrying these records."
     }
   },
   "he": {
@@ -90,7 +92,9 @@ export const readinessTranslations = {
       "skipped": "נבחרה שמירה ללא הגבלת זמן. לא הוסר מידע.",
       "success": "הניקוי הושלם עבור סוגי הרשומות הנתמכים.",
       "partial": "הניקוי לא אושר במלואו. ייתכן שחלק מהרשומות כבר הוסרו. נסו שוב להשלמת הפעולה.",
-      "counts": "הוסרו {{moods}} רישומי מצב רוח ו־{{journals}} רישומי יומן. הוסתרו {{conversations}} שיחות."
+      "counts": "הוסרו {{moods}} רישומי מצב רוח ו־{{journals}} רישומי יומן. הוסתרו {{conversations}} שיחות.",
+      "schedule": "בחרו מתי להסיר רישומי מצב רוח ויומן ישנים ולהסתיר שיחות AI ישנות. הניקוי מופעל בעת כניסה לצ׳אט או באמצעות הכפתור למטה, ואינו פועל כשהאפליקציה סגורה.",
+      "manual_review": "בחלק מהרשומות יש הפניות להעלאות ישנות. הרשומות נשמרו כדי לא לאבד את ההפניות. פנו לתמיכה לפני ניסיון נוסף לטפל ברשומות אלה."
     }
   },
   "es": {
@@ -137,7 +141,9 @@ export const readinessTranslations = {
       "skipped": "Se ha elegido conservar los datos indefinidamente. No se eliminó nada.",
       "success": "Limpieza completada para los registros compatibles.",
       "partial": "La limpieza no se confirmó por completo. Puede que algunos registros ya se hayan eliminado. Reintenta para continuar.",
-      "counts": "Eliminados: {{moods}} registros de ánimo y {{journals}} de diario. Conversaciones ocultas: {{conversations}}."
+      "counts": "Eliminados: {{moods}} registros de ánimo y {{journals}} de diario. Conversaciones ocultas: {{conversations}}.",
+      "schedule": "Elige cuándo eliminar registros antiguos de ánimo y diario y ocultar conversaciones antiguas de IA. La limpieza se intenta al abrir Chat o usar el botón de abajo; no se ejecuta con la aplicación cerrada.",
+      "manual_review": "Algunos registros contienen referencias a archivos antiguos y se han conservado para no perderlas. Contacta con soporte antes de volver a procesarlos."
     }
   },
   "fr": {
@@ -184,7 +190,9 @@ export const readinessTranslations = {
       "skipped": "La conservation est illimitée. Aucune suppression effectuée.",
       "success": "Nettoyage terminé pour les types de données pris en charge.",
       "partial": "Le nettoyage n’est pas entièrement confirmé. Certaines données ont peut-être déjà été supprimées. Réessayez pour continuer.",
-      "counts": "Supprimés : {{moods}} relevés d’humeur et {{journals}} entrées de journal. Conversations masquées : {{conversations}}."
+      "counts": "Supprimés : {{moods}} relevés d’humeur et {{journals}} entrées de journal. Conversations masquées : {{conversations}}.",
+      "schedule": "Choisissez quand supprimer les anciennes entrées d’humeur et de journal et masquer les anciennes conversations IA. Le nettoyage est tenté à l’ouverture du chat ou avec le bouton ci-dessous ; il ne fonctionne pas quand l’application est fermée.",
+      "manual_review": "Certains enregistrements contiennent des références à d’anciens fichiers et ont été conservés pour ne pas les perdre. Contactez le support avant de réessayer pour ces enregistrements."
     }
   },
   "de": {
@@ -231,7 +239,9 @@ export const readinessTranslations = {
       "skipped": "Die Aufbewahrung ist unbegrenzt. Es wurde nichts entfernt.",
       "success": "Bereinigung für unterstützte Datensätze abgeschlossen.",
       "partial": "Die Bereinigung wurde nicht vollständig bestätigt. Einige Einträge wurden möglicherweise bereits entfernt. Zum Fortsetzen erneut versuchen.",
-      "counts": "Entfernt: {{moods}} Stimmungseinträge und {{journals}} Tagebucheinträge. Ausgeblendete Chats: {{conversations}}."
+      "counts": "Entfernt: {{moods}} Stimmungseinträge und {{journals}} Tagebucheinträge. Ausgeblendete Chats: {{conversations}}.",
+      "schedule": "Wählen Sie, wann alte Stimmungs- und Tagebucheinträge entfernt und alte KI-Gespräche ausgeblendet werden. Die Bereinigung wird beim Öffnen des Chats oder über die Schaltfläche unten versucht; bei geschlossener App läuft sie nicht.",
+      "manual_review": "Einige Datensätze enthalten Verweise auf ältere Uploads und wurden zum Schutz dieser Verweise behalten. Wenden Sie sich vor einem erneuten Versuch für diese Datensätze an den Support."
     }
   },
   "it": {
@@ -278,7 +288,9 @@ export const readinessTranslations = {
       "skipped": "È stata scelta la conservazione illimitata. Nulla è stato rimosso.",
       "success": "Pulizia completata per i tipi di dati supportati.",
       "partial": "La pulizia non è stata confermata interamente. Alcuni dati potrebbero essere già stati rimossi. Riprova per continuare.",
-      "counts": "Rimossi: {{moods}} dati di umore e {{journals}} voci di diario. Conversazioni nascoste: {{conversations}}."
+      "counts": "Rimossi: {{moods}} dati di umore e {{journals}} voci di diario. Conversazioni nascoste: {{conversations}}.",
+      "schedule": "Scegli quando rimuovere le vecchie voci di umore e diario e nascondere le vecchie conversazioni IA. La pulizia viene tentata quando apri la chat o usi il pulsante qui sotto; non viene eseguita con l’app chiusa.",
+      "manual_review": "Alcuni record contengono riferimenti a vecchi file e sono stati conservati per non perderli. Contatta l’assistenza prima di riprovare per questi record."
     }
   },
   "pt": {
@@ -325,7 +337,9 @@ export const readinessTranslations = {
       "skipped": "Foi escolhida a conservação ilimitada. Nada foi removido.",
       "success": "Limpeza concluída para os tipos de registos suportados.",
       "partial": "A limpeza não foi totalmente confirmada. Alguns registos podem já ter sido removidos. Tente novamente para continuar.",
-      "counts": "Removidos: {{moods}} registos de humor e {{journals}} de diário. Conversas ocultas: {{conversations}}."
+      "counts": "Removidos: {{moods}} registos de humor e {{journals}} de diário. Conversas ocultas: {{conversations}}.",
+      "schedule": "Escolha quando remover registos antigos de humor e diário e ocultar conversas antigas de IA. A limpeza é tentada ao abrir o Chat ou usar o botão abaixo; não é executada com a aplicação fechada.",
+      "manual_review": "Alguns registos contêm referências a ficheiros antigos e foram mantidos para não as perder. Contacte o apoio antes de tentar novamente estes registos."
     }
   }
 };

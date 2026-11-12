@@ -1,4 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { handleRetentionCleanup } from '../../base44/functions/retentionCleanup/handler.js';
 const NOW = Date.parse('2026-11-12T12:00:00Z');
 const OLD = '2025-01-01T00:00:00Z';
@@ -17,6 +18,23 @@ function fixture() {
   return { moods, journals, archived, conversations, moodApi, journalApi, archiveApi, client, call, row, setUser: value => { user = value; } };
 }
 describe('retention cleanup behavior', () => {
+  it('packages the same legacy-reference guard used by account deletion', () => {
+    expect(readFileSync(new URL('../../base44/functions/retentionCleanup/legacyFiles.js', import.meta.url), 'utf8')).toBe(readFileSync(new URL('../../base44/functions/deleteMyAccount/legacyFiles.js', import.meta.url), 'utf8'));
+  });
+  it('preserves legacy image and audio references before deleting any row in the batch', async () => {
+    const f = fixture();
+    f.journals.push(f.row('plain'), f.row('legacy', { images: ['https://legacy.example.test/private.pdf'], audio_notes: ['private/old/audio'] }));
+    f.moods.push(f.row('mood'));
+    const result = await (await f.call()).json();
+    expect(result).toMatchObject({ success: false, manualReviewRequired: true, deletedMoodEntries: 1, deletedJournalEntries: 0 });
+    expect(f.journalApi.delete).not.toHaveBeenCalled(); expect(f.journals).toHaveLength(2);
+    expect(JSON.stringify(result)).not.toContain('private.pdf'); expect(JSON.stringify(result)).not.toContain('private/old/audio');
+  });
+  it('can remove journal rows with managed references without removing the separate attachment registry', async () => {
+    const f = fixture(); f.journals.push(f.row('managed', { images: ['mp-private:a12345678901234567890123'] }));
+    expect(await (await f.call()).json()).toMatchObject({ success: true, deletedJournalEntries: 1 });
+    expect(f.journals).toHaveLength(0);
+  });
   it('deletes expired owned rows across pages and leaves recent/foreign data intact', async () => {
     const f = fixture(); f.moods.push(...Array.from({ length: 205 }, (_, i) => f.row(`m-${i}`)), f.row('recent', { created_date: '2026-11-11T00:00:00Z' }), f.row('foreign', { created_by: 'b@example.test' }));
     const body = await (await f.call()).json();

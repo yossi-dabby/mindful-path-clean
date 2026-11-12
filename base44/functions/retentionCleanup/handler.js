@@ -1,3 +1,5 @@
+import { hasUnmanagedAttachments } from './legacyFiles.js';
+
 const ALLOWED_RETENTION_DAYS = new Set([30, 90, 365, 999999]);
 const BATCH_SIZE = 100;
 const MAX_BATCHES = 10;
@@ -20,6 +22,9 @@ async function deleteExpiredOwnedRecords(client, entityName, user, cutoffISO, pr
     // Validate the entire batch before deleting any row, even if the provider
     // unexpectedly returns an unfiltered, foreign, or malformed result.
     if (records.some(row => !row.id || row.created_by !== email || !Number.isFinite(Date.parse(row.created_date)) || Date.parse(row.created_date) >= cutoff)) throw new Error('OWNERSHIP_OR_DATE');
+    // Keep legacy upload references available for an operator's inventory.
+    // Managed mp-private references have a separate PrivateAttachment record.
+    if (records.some(hasUnmanagedAttachments)) throw Object.assign(new Error('FILE_REVIEW_REQUIRED'), { manualReviewRequired: true });
     if (!records.length) return true;
     for (const record of records) {
       if (expired()) return false;
@@ -75,10 +80,10 @@ export async function handleRetentionCleanup(req, { createClientFromRequest, now
     const cutoffISO = new Date(start - retentionDays * 86400000).toISOString();
     const expired = () => now() - start >= 20000;
     const progress = { deletedMoodEntries: 0, deletedJournalEntries: 0, archivedConversations: 0 };
-    const errors = []; const pending = [];
+    const errors = []; const pending = []; let manualReviewRequired = false;
     for (const [entity, key] of [['MoodEntry', 'deletedMoodEntries'], ['ThoughtJournal', 'deletedJournalEntries']]) {
       try { if (!await deleteExpiredOwnedRecords(client, entity, user, cutoffISO, progress, key, expired)) pending.push(entity); }
-      catch { errors.push(`${entity}: CLEANUP_FAILED`); }
+      catch (error) { manualReviewRequired ||= error?.manualReviewRequired === true; errors.push(`${entity}: CLEANUP_FAILED`); }
     }
     let nextConversationOffset = conversationOffset;
     try {
@@ -88,7 +93,7 @@ export async function handleRetentionCleanup(req, { createClientFromRequest, now
     } catch { errors.push('Agent conversations: CLEANUP_FAILED'); }
 
     const success = errors.length === 0 && pending.length === 0;
-    return reply({ success, partial: !success, retentionDays, cutoffDate: cutoffISO, ...progress, errors, pending, nextConversationOffset,
+    return reply({ success, partial: !success, manualReviewRequired, retentionDays, cutoffDate: cutoffISO, ...progress, errors, pending, nextConversationOffset,
       providerConversationErasure: 'unconfirmed',
       message: success ? 'Retention cleanup completed. Managed AI conversations are archived, not physically deleted.' : 'Retention cleanup is incomplete. Retry to continue. Managed AI conversations are archived, not physically deleted.',
     });

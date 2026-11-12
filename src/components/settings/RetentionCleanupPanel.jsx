@@ -19,6 +19,7 @@ export default function RetentionCleanupPanel({ disabled = false }) {
     <Button variant="outline" onClick={run} disabled={busy || disabled} data-testid="retention-cleanup-run">{t(busy ? 'retention_cleanup.running' : result?.success === false ? 'retention_cleanup.retry' : 'retention_cleanup.run')}</Button>
     {result && <div role={result.success ? 'status' : 'alert'} data-testid="retention-cleanup-result" className="text-sm">
       <p>{t(result.skipped ? 'retention_cleanup.skipped' : result.success ? 'retention_cleanup.success' : 'retention_cleanup.partial')}</p>
+      {result.manualReviewRequired && <p>{t('retention_cleanup.manual_review')}</p>}
       {Number.isInteger(result.deletedMoodEntries) && <p>{t('retention_cleanup.counts', { moods: result.deletedMoodEntries, journals: result.deletedJournalEntries, conversations: result.archivedConversations })}</p>}
     </div>}
   </section>;

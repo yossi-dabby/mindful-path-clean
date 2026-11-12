@@ -2,11 +2,22 @@ import { test, expect } from '@playwright/test';
 import { prepareChatStage2, openStage2Conversation } from '../helpers/chatStage2';
 import { readinessTranslations } from '../../src/components/i18n/readinessTranslations';
 
+async function prepareRetentionPanel(page) {
+  // Let Chat's startup cleanup finish against the baseline mock before replacing
+  // it with the explicit manual-cleanup scenario. Otherwise it consumes attempt 1.
+  const startupCleanup = page.waitForResponse(response => /\/functions\/retentionCleanup(?:[/?]|$)/.test(response.url()));
+  await prepareChatStage2(page);
+  await (await startupCleanup).finished();
+}
+
 for (const language of ['en', 'he', 'es', 'fr', 'de', 'it', 'pt']) test(`AI report stays in app and retries safely: ${language}`, async ({ page }, info) => {
   const width = info.project.name.includes('mobile') ? 390 : 1280;
   const state = await prepareChatStage2(page, { language, width });
   // Two replies: feedback sampling does not request thumbs, but both replies
   // must still offer reporting. Hidden user text must never be submitted.
+  // Consecutive assistant blocks intentionally render as one response. Use two
+  // distinct user turns so this really exercises two separately displayed replies.
+  state.conversation.messages.push({ id: 'second-user', role: 'user', content: 'Second synthetic user turn.', created_date: new Date().toISOString() } as any);
   state.conversation.messages.push({ id: 'second-assistant', role: 'assistant', content: 'Another synthetic response.', status: 'completed', created_date: new Date().toISOString(), metadata: { status: 'completed', completed: true, feedback_finality_verified: true } } as any);
   let fail = true; const submissions: any[] = [];
   await page.route(/\/functions\/aiContentReports(?:[/?]|$)/, route => {
@@ -15,6 +26,8 @@ for (const language of ['en', 'he', 'es', 'fr', 'de', 'it', 'pt']) test(`AI repo
   });
   await openStage2Conversation(page, width);
   await expect(page.getByTestId('ai-report-open')).toHaveCount(2);
+  await expect(page.getByRole('log')).toContainText('Another synthetic response.');
+  await expect(page.getByTestId('feedback-helpful')).toHaveCount(0);
   const trigger = page.getByTestId('ai-report-open').first();
   await expect(trigger).toHaveText(readinessTranslations[language].ai_report.open);
   await trigger.click();
@@ -29,11 +42,12 @@ for (const language of ['en', 'he', 'es', 'fr', 'de', 'it', 'pt']) test(`AI repo
   expect(submissions[1]).toMatchObject({ conversation_id: 'qa-chat-stage2', message_id: 'qa-assistant', reason: 'harmful_advice', details: 'Synthetic report details' });
   expect(submissions[1].response_text).toContain('One small step is enough.');
   expect(JSON.stringify(submissions)).not.toContain('Synthetic UI check only.');
+  expect(JSON.stringify(submissions)).not.toContain('Second synthetic user turn.');
   await expect(page).toHaveURL(/\/Chat$/);
 });
 
 test('retention partial result remains retryable and shows confirmed counts', async ({ page }) => {
-  await prepareChatStage2(page);
+  await prepareRetentionPanel(page);
   let calls = 0;
   await page.route(/\/functions\/retentionCleanup(?:[/?]|$)/, route => {
     calls++;
@@ -46,6 +60,17 @@ test('retention partial result remains retryable and shows confirmed counts', as
   await page.getByTestId('retention-cleanup-run').click();
   await expect(page.getByTestId('retention-cleanup-result')).toHaveAttribute('role', 'status');
   expect(calls).toBe(2);
+});
+
+test('legacy upload references show a support-review message without storage paths', async ({ page }) => {
+  await prepareRetentionPanel(page);
+  await page.route(/\/functions\/retentionCleanup(?:[/?]|$)/, route => route.fulfill({ json: { success: false, partial: true, manualReviewRequired: true, deletedMoodEntries: 0, deletedJournalEntries: 0, archivedConversations: 0 } }));
+  await page.evaluate(async () => { const { renderReadinessFixture } = await import('/tests/fixtures/readiness-preview.jsx'); renderReadinessFixture('retention'); });
+  await page.getByTestId('retention-cleanup-run').click();
+  const result = page.getByTestId('retention-cleanup-result');
+  await expect(result).toHaveAttribute('role', 'alert');
+  await expect(result).toContainText(readinessTranslations.en.retention_cleanup.manual_review);
+  await expect(result).toContainText('0 journal entries');
 });
 
 test('operator records a resolution, and failed writes keep the draft', async ({ page }) => {

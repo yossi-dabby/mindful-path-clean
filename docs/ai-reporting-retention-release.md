@@ -25,6 +25,9 @@ account audit results, store-console settings, support correspondence or credent
 - Account export and account-record deletion include only the caller's reports.
 - Retention counts remain accurate after partial failure. A failed or incomplete
   attempt does not prevent a retry for 24 hours. Progress can resume across batches.
+- A batch containing legacy upload references is preserved for support-assisted
+  inventory; the result explains that manual review is required, without exposing
+  storage paths. Managed attachment records remain separate from journal cleanup.
 - Retention state is isolated by account and saved policy. Manual retry is available
   in Data Privacy. Apply the notice describing which records are removed and which
   conversations are hidden; do not describe this as comprehensive storage erasure.

@@ -1,6 +1,7 @@
 import { additionalLegalCopies } from './legalContentAdditional.js';
 import { formsTermsCopies, FORMS_TERMS_EFFECTIVE_DATE } from './formsTermsContent.js';
 import { providerPrivacyLimits } from './providerPrivacyLimits.js';
+import { getBusinessDetails } from './businessDetails.js';
 
 export const LEGAL_EFFECTIVE_DATE = '2026-11-09';
 export const LEGAL_CONSENT_VERSION = '2026-11-09';
@@ -261,17 +262,19 @@ const legalCopies = { en, he, ...additionalLegalCopies };
 export function getLegalCopy(language) {
   const normalized = String(language || 'en').toLowerCase().split('-')[0];
   const copy = Object.hasOwn(legalCopies, normalized) ? legalCopies[normalized] : en;
+  const businessDetails = getBusinessDetails(copy.language);
   return {
     ...copy,
+    businessDetails,
     providerLimits: providerPrivacyLimits[copy.language],
     privacy: {
       ...copy.privacy,
-      sections: [...copy.privacy.sections, { id: 'provider-limits', ...providerPrivacyLimits[copy.language] }],
+      sections: [...copy.privacy.sections, businessDetails, { id: 'provider-limits', ...providerPrivacyLimits[copy.language] }],
     },
     terms: {
       ...copy.terms,
       effectiveDate: [LEGAL_EFFECTIVE_DATE, FORMS_TERMS_EFFECTIVE_DATE].sort().at(-1),
-      sections: [...copy.terms.sections, { id: 'forms-terms', ...formsTermsCopies[copy.language] }],
+      sections: [...copy.terms.sections, businessDetails, { id: 'forms-terms', ...formsTermsCopies[copy.language] }],
     },
   };
 }

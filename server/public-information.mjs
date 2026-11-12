@@ -22,7 +22,9 @@ export function renderPublicInformation(pathname, language = 'en') {
       + document.sections.map((item) => section(item.title, (item.paragraphs || []).map(paragraph).join('') + (item.bullets ? list(item.bullets) : ''))).join('');
   } else if (pathname === '/contact') {
     title = copy.common.contact;
-    body = paragraph(copy.privacy.sections[0].paragraphs[0]) + paragraph(copy.privacy.intro) + emailLink;
+    body = paragraph(copy.privacy.sections[0].paragraphs[0])
+      + section(copy.businessDetails.title, copy.businessDetails.paragraphs.map(paragraph).join(''))
+      + paragraph(copy.privacy.intro) + emailLink;
   } else {
     const partial = pathname === '/data-deletion';
     title = partial ? ui.data_delete_title : ui.account_delete_title;

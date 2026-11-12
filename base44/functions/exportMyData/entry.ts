@@ -114,6 +114,19 @@ Deno.serve(async (req) => {
       warnings.push('FileDeletionRequest: export unavailable');
     }
 
+    try {
+      const result = await readAllOwnedRecords(base44, 'AIContentReport', user.email, user.id);
+      entities.AIContentReport = result.records.map(record => ({
+        id: record.id, conversation_id: record.conversation_id, message_id: record.message_id,
+        reason: record.reason, details: record.details, response_text: record.response_text,
+        status: record.status, reported_at: record.reported_at,
+      }));
+      if (result.truncated) truncatedEntities.push('AIContentReport');
+    } catch {
+      entities.AIContentReport = [];
+      warnings.push('AIContentReport: export unavailable');
+    }
+
     let agentConversations = [];
     try {
       const conversations = await base44.agents.getConversations();

@@ -1,3 +1,4 @@
+import RetentionCleanupPanel from './RetentionCleanupPanel';
 import FileDeletionPanel from './FileDeletionPanel';
 import { saveUserPreferences } from '@/lib/userPreferences';
 import React, { useState } from 'react';
@@ -148,6 +149,8 @@ export default function DataPrivacy({ user }) {
               })}
             </p>
           </div>
+
+          <RetentionCleanupPanel key={user?.id} disabled={updateRetentionMutation.isPending} />
 
           {/* Export Data */}
           <div className="border-t pt-6">

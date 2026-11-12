@@ -1,3 +1,4 @@
+import AIContentReportButton from '../chat/AIContentReportButton';
 // @ts-check
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
@@ -763,6 +764,10 @@ export default function DraggableAiCompanion() {
                       {msg.content}
                       </ReactMarkdown>
                   }
+                      {msg.role === 'assistant' && <AIContentReportButton
+                        key={`${conversation?.id}:${msg.id || i}`}
+                        conversationId={conversation?.id} messageId={msg.id}
+                        messageIndex={i} responseText={msg.content} />}
                       {msg.role === 'assistant' && conversation?.id &&
                   <MessageFeedback
                     conversationId={conversation.id}

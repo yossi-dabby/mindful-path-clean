@@ -1,3 +1,4 @@
+import { aiReportPrivacy } from './aiReportPrivacy.js';
 import { additionalLegalCopies } from './legalContentAdditional.js';
 import { formsTermsCopies, FORMS_TERMS_EFFECTIVE_DATE } from './formsTermsContent.js';
 import { providerPrivacyLimits } from './providerPrivacyLimits.js';
@@ -269,7 +270,8 @@ export function getLegalCopy(language) {
     providerLimits: providerPrivacyLimits[copy.language],
     privacy: {
       ...copy.privacy,
-      sections: [...copy.privacy.sections, businessDetails, { id: 'provider-limits', ...providerPrivacyLimits[copy.language] }],
+      effectiveDate: '2026-11-12',
+      sections: [...copy.privacy.sections, { id: 'ai-reporting', ...aiReportPrivacy[copy.language] }, businessDetails, { id: 'provider-limits', ...providerPrivacyLimits[copy.language] }],
     },
     terms: {
       ...copy.terms,

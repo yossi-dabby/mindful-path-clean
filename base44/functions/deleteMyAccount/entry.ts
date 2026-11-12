@@ -102,6 +102,7 @@ Deno.serve(async (req) => {
 
     // Service-created age/grant rows are owned by subject ID, not created_by.
     deletedByEntity.AccountAccess = await deleteAllOwnedRecords(base44, 'AccountAccess', user.email, user.id);
+    deletedByEntity.AIContentReport = await deleteAllOwnedRecords(base44, 'AIContentReport', user.email, user.id);
 
     // Delete the account only after every owned entity batch completed. If an
     // earlier deletion fails, sign-in/privacy support remains available, while

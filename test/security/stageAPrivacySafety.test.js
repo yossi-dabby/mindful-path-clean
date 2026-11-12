@@ -158,11 +158,11 @@ describe('Stage A privacy, consent, and lifecycle contracts', () => {
   });
 
   it('bounds and ownership-scopes retention cleanup', () => {
-    const source = read('base44/functions/retentionCleanup/entry.ts');
+    const source = read('base44/functions/retentionCleanup/handler.js');
     expect(source).toContain('ALLOWED_RETENTION_DAYS');
     expect(source).toContain('created_by: email');
     expect(source).toContain('MAX_BATCHES');
-    expect(source).toContain('getConversations()');
+    expect(source).toContain('listConversations(');
     expect(source).toContain('archived, not physically deleted');
   });
 });

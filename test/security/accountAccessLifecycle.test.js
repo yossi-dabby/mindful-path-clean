@@ -35,6 +35,26 @@ describe('age/permission records in existing account lifecycle handlers', () => 
     expect(body.integrity.complete).toBe(true);
     expect(JSON.stringify(body)).not.toContain('private-admin-id');
   });
+  it('exports only the callers safety reports and removes them before account deletion', async () => {
+    const f = setup();
+    const reports = { filter: vi.fn(async () => [{ id: 'report-a', subject_user_id: 'adult-a', reason: 'privacy', response_text: 'Synthetic excerpt', status: 'open', reviewed_by: 'internal-reviewer' }]), delete: vi.fn() };
+    f.client.asServiceRole.entities = new Proxy(f.client.asServiceRole.entities, { get: (target, name) => name === 'AIContentReport' ? reports : target[name] });
+    const body = await (await handlerFor('exportMyData', f.client)(request())).json();
+    expect(body.data.entities.AIContentReport).toEqual([{ id: 'report-a', reason: 'privacy', response_text: 'Synthetic excerpt', status: 'open' }]);
+    expect(reports.filter).toHaveBeenCalledWith({ subject_user_id: 'adult-a' }, 'created_date', 500, 0);
+    expect(JSON.stringify(body)).not.toContain('internal-reviewer');
+    const result = await handlerFor('deleteMyAccount', f.client)(request());
+    expect(result.status).toBe(200); expect(reports.delete).toHaveBeenCalledWith('report-a');
+    expect(reports.delete.mock.invocationCallOrder[0]).toBeLessThan(f.user.delete.mock.invocationCallOrder[0]);
+  });
+  it('rejects a foreign safety-report row during export and before account deletion', async () => {
+    const f = setup();
+    const reports = { filter: vi.fn(async () => [{ id: 'foreign-report', subject_user_id: 'adult-b', response_text: 'Never expose' }]), delete: vi.fn() };
+    f.client.asServiceRole.entities = new Proxy(f.client.asServiceRole.entities, { get: (target, name) => name === 'AIContentReport' ? reports : target[name] });
+    const body = await (await handlerFor('exportMyData', f.client)(request())).json();
+    expect(body.data.entities.AIContentReport).toEqual([]); expect(body.integrity.complete).toBe(false); expect(JSON.stringify(body)).not.toContain('Never expose');
+    expect((await handlerFor('deleteMyAccount', f.client)(request())).status).toBe(500); expect(reports.delete).not.toHaveBeenCalled(); expect(f.user.delete).not.toHaveBeenCalled();
+  });
   it('does not export another user if a provider ignores the filter', async () => {
     const f = setup([{ id: 'foreign', subject_user_id: 'adult-b' }]);
     const body = await (await handlerFor('exportMyData', f.client)(request())).json();

@@ -1,3 +1,4 @@
+import AIContentReportButton from './AIContentReportButton';
 import PrivateAttachmentMedia from '@/components/PrivateAttachmentMedia';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -552,6 +553,11 @@ export default function MessageBubble({ message, conversationId, messageIndex, a
                       ))}
                     </div>
           }
+
+                  {!isUser && message.role === 'assistant' && <AIContentReportButton
+                    key={`${conversationId}:${message.id || messageIndex}`}
+                    conversationId={conversationId} messageId={message.id}
+                    messageIndex={messageIndex} responseText={content} />}
 
                   {/* Feedback for assistant messages */}
                   {!isUser &&

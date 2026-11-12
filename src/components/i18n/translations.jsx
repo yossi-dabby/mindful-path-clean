@@ -1,3 +1,4 @@
+import { readinessTranslations } from './readinessTranslations';
 import { fileDeletionTranslations } from './fileDeletionTranslations';
 // Updated Hebrew translations - rebuild [current date]
 import { sixStepGoalTranslations } from "./sixStepGoalTranslations";
@@ -7,6 +8,8 @@ export const translations = {
   en: {
     translation: {
       file_deletion: fileDeletionTranslations.en,
+      ai_report: readinessTranslations.en.ai_report,
+      retention_cleanup: readinessTranslations.en.retention_cleanup,
       account_access: {
         "title": "Confirm your age",
         "notice": "Mindful Path is for adults aged 18 and over. Your declaration is saved to this account across devices. We do not ask for your date of birth or an identity document.",
@@ -1786,6 +1789,8 @@ export const translations = {
   he: {
     translation: {
       file_deletion: fileDeletionTranslations.he,
+      ai_report: readinessTranslations.he.ai_report,
+      retention_cleanup: readinessTranslations.he.retention_cleanup,
       account_access: {
         "title": "אישור גיל",
         "notice": "Mindful Path מיועדת לבני 18 ומעלה. ההצהרה נשמרת בחשבון ותקפה גם במכשירים אחרים. אין צורך למסור תאריך לידה או מסמך מזהה.",
@@ -3565,6 +3570,8 @@ export const translations = {
   es: {
     translation: {
       file_deletion: fileDeletionTranslations.es,
+      ai_report: readinessTranslations.es.ai_report,
+      retention_cleanup: readinessTranslations.es.retention_cleanup,
       account_access: {
         "title": "Confirma tu edad",
         "notice": "Mindful Path es para mayores de 18 años. Tu declaración se guarda en esta cuenta y se aplica en todos tus dispositivos. No pedimos tu fecha de nacimiento ni un documento de identidad.",
@@ -5298,6 +5305,8 @@ export const translations = {
   fr: {
     translation: {
       file_deletion: fileDeletionTranslations.fr,
+      ai_report: readinessTranslations.fr.ai_report,
+      retention_cleanup: readinessTranslations.fr.retention_cleanup,
       account_access: {
         "title": "Confirmez votre âge",
         "notice": "Mindful Path est réservé aux personnes de 18 ans et plus. Votre déclaration est enregistrée dans ce compte et reste valable sur vos autres appareils. Nous ne demandons ni date de naissance ni pièce d’identité.",
@@ -7030,6 +7039,8 @@ export const translations = {
   de: {
     translation: {
       file_deletion: fileDeletionTranslations.de,
+      ai_report: readinessTranslations.de.ai_report,
+      retention_cleanup: readinessTranslations.de.retention_cleanup,
       account_access: {
         "title": "Alter bestätigen",
         "notice": "Mindful Path ist für Erwachsene ab 18 Jahren. Deine Erklärung wird in diesem Konto gespeichert und gilt auch auf anderen Geräten. Wir fragen weder nach deinem Geburtsdatum noch nach einem Ausweisdokument.",
@@ -8762,6 +8773,8 @@ export const translations = {
   it: {
     translation: {
       file_deletion: fileDeletionTranslations.it,
+      ai_report: readinessTranslations.it.ai_report,
+      retention_cleanup: readinessTranslations.it.retention_cleanup,
       account_access: {
         "title": "Conferma la tua età",
         "notice": "Mindful Path è riservata a persone di almeno 18 anni. La dichiarazione viene salvata in questo account e vale anche sugli altri dispositivi. Non chiediamo la data di nascita né un documento d’identità.",
@@ -10494,6 +10507,8 @@ export const translations = {
   pt: {
     translation: {
       file_deletion: fileDeletionTranslations.pt,
+      ai_report: readinessTranslations.pt.ai_report,
+      retention_cleanup: readinessTranslations.pt.retention_cleanup,
       account_access: {
         "title": "Confirme a sua idade",
         "notice": "O Mindful Path destina-se a adultos com 18 anos ou mais. A declaração fica guardada nesta conta e aplica-se aos outros dispositivos. Não pedimos a data de nascimento nem um documento de identificação.",

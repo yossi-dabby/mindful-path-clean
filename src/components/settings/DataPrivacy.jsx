@@ -1,3 +1,4 @@
+import RetentionCleanupPanel from './RetentionCleanupPanel';
 import FileDeletionPanel from './FileDeletionPanel';
 import { saveUserPreferences } from '@/lib/userPreferences';
 import React, { useState } from 'react';
@@ -122,7 +123,7 @@ export default function DataPrivacy({ user }) {
               {t('settings.data_privacy.retention_label')}
             </label>
             <p className="text-sm text-muted-foreground mb-4">
-              {t('settings.data_privacy.retention_description')}
+              {t('retention_cleanup.schedule')}
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <BottomSheetSelect
@@ -148,6 +149,8 @@ export default function DataPrivacy({ user }) {
               })}
             </p>
           </div>
+
+          <RetentionCleanupPanel key={user?.id} disabled={updateRetentionMutation.isPending} />
 
           {/* Export Data */}
           <div className="border-t pt-6">

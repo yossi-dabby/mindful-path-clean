@@ -41,6 +41,8 @@ const FUNCTIONS_IMPORT_RE = /(?:from\s+|require\(\s*|import\(\s*)['"]([^'"]*func
 const PORTABLE_HELPER = path.resolve(TEST_DIR, '../base44/functions/getHebrewFormsPilot/handler.js');
 const ACCESS_GUARD_IMPORT = "import { requireAccountAccess } from './accountAccessGuard.js';";
 const PORTABLE_ACCESS = [
+  '../base44/functions/retentionCleanup/legacyFiles.js',
+  '../base44/functions/aiContentReports/accountAccessGuard.js',
   '../base44/functions/accountAccess/handler.js',
   '../base44/functions/accountAccess/guard.js',
   '../base44/functions/accountAccess/recordEntities.js',
@@ -51,6 +53,9 @@ const PORTABLE_ACCESS = [
   '../base44/functions/uploadAttachment/fileDeletionQueue.js',
   '../base44/functions/transcribeMobileAudio/accountAccessGuard.js',
 ].map(file => path.resolve(TEST_DIR, file));
+const REPORT_HANDLER = path.resolve(TEST_DIR, '../base44/functions/aiContentReports/handler.js');
+const RETENTION_HANDLER = path.resolve(TEST_DIR, '../base44/functions/retentionCleanup/handler.js');
+const LEGACY_FILES_IMPORT = "import { hasUnmanagedAttachments } from './legacyFiles.js';";
 const DELETION_HANDLER = path.resolve(TEST_DIR, '../base44/functions/fileDeletion/handler.js');
 const DELETION_IMPORT = "import { deletionError, ownedAttachments, openDeletionRequests, collectManifest, manifestHash, requestFileDeletion, publicDeletionStatus } from './queue.js';";
 const FILE_QUEUE_IMPORT = "import { assertNoFileDeletion } from './fileDeletionQueue.js';";
@@ -85,6 +90,16 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
     }
   });
 
+  it('the report handler uses only the packaged access guard', () => {
+    expect(fs.readFileSync(REPORT_HANDLER, 'utf8').replace(ACCESS_GUARD_IMPORT, '')).not.toMatch(/\b(?:import|require|Deno)\b/);
+  });
+
+  it('the retention handler uses only the packaged legacy-file guard', () => {
+    const source = fs.readFileSync(RETENTION_HANDLER, 'utf8');
+    expect(source.split(LEGACY_FILES_IMPORT)).toHaveLength(2);
+    expect(source.replace(LEGACY_FILES_IMPORT, '')).not.toMatch(/\b(?:import|require|Deno)\b/);
+  });
+
   it('the deletion handler imports only validated portable helpers', () => {
     const source = fs.readFileSync(DELETION_HANDLER, 'utf8');
     expect(source.split(DELETION_IMPORT)).toHaveLength(2);
@@ -103,7 +118,7 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
       const source = fs.readFileSync(filePath, 'utf8');
       for (const match of source.matchAll(FUNCTIONS_IMPORT_RE)) {
         expect(
-          [PORTABLE_HELPER, PORTABLE_RELEASE, DELETION_HANDLER, ...PORTABLE_ATTACHMENTS, ...PORTABLE_ACCESS],
+          [PORTABLE_HELPER, PORTABLE_RELEASE, DELETION_HANDLER, REPORT_HANDLER, RETENTION_HANDLER, ...PORTABLE_ATTACHMENTS, ...PORTABLE_ACCESS],
           `Found forbidden platform functions/ import in ${relativePath}: "${match[0]}"`
         ).toContain(path.resolve(path.dirname(filePath), match[1]));
       }

@@ -1,0 +1,137 @@
+{
+  "name": "AIContentReport",
+  "type": "object",
+  "properties": {
+    "subject_user_id": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "conversation_id": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "message_id": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "agent_name": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "response_text": {
+      "type": "string",
+      "maxLength": 6000
+    },
+    "details": {
+      "type": "string",
+      "maxLength": 1000
+    },
+    "resolution": {
+      "type": "string",
+      "maxLength": 1000
+    },
+    "reviewed_by": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "reported_at": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "reviewed_at": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "message_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "harmful_advice",
+        "hate_or_harassment",
+        "sexual_content",
+        "privacy",
+        "other"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "reviewing",
+        "resolved",
+        "dismissed"
+      ]
+    }
+  },
+  "required": [
+    "subject_user_id",
+    "conversation_id",
+    "message_id",
+    "message_index",
+    "reason",
+    "response_text",
+    "status",
+    "reported_at"
+  ],
+  "rls": {
+    "create": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    }
+  }
+}

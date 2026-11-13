@@ -14,23 +14,26 @@ test('journal editor excludes embeds and preserves safe formatting through save 
       const field = form.locator('[data-journal-field="situation"]');
       // Exercise actual keyboard input too: export-space normalization must not
       // feed converted HTML back into the controlled editor on every keystroke.
+      // Cursor navigation must leave the whole-document selection used for
+      // Bold in both the browser and editor state before appending text.
       await field.locator('.ql-editor').press('End');
+      await expect.poll(() => field.locator('.ql-editor').evaluate(element => {
+        const selection = element.ownerDocument.getSelection();
+        return Boolean(selection?.isCollapsed && element.contains(selection.anchorNode));
+      })).toBe(true);
       await field.locator('.ql-editor').pressSequentially(' editable words');
+      await expect(field.locator('.ql-editor')).toContainText('Security QA situation with a practical next step editable words');
       await expect(field.locator('.ql-editor')).toContainText('editable words');
-      // Exercise Quill's paste conversion with stored/clipboard HTML, not merely
-      // the sanitizer in isolation. Unsupported embeds must never enter its Delta.
-      const formats = await field.locator('.ql-container').evaluate(async element => {
-        const { Quill } = await import('/tests/fixtures/journal-editor-security.js');
-        const editor = Quill.find(element);
-        editor.clipboard.dangerouslyPasteHTML(editor.getLength() - 1,
+      // Send a clipboard event through the real editor's paste pipeline.
+      await field.locator('.ql-editor').evaluate(element => {
+        const clipboardData = new DataTransfer();
+        clipboardData.setData('text/html',
           '<p><strong>Safe pasted text</strong></p><iframe src="https://example.invalid/qa"></iframe>' +
           '<span class="ql-formula" data-value="&lt;img src=x onerror=alert(1)&gt;">formula</span>' +
           '<img src="x" onerror="window.__qaUnsafe=true"><script>window.__qaUnsafe=true</script>');
-        return { allowed: editor.options.formats, embeds: editor.getContents().ops.filter(op => typeof op.insert !== 'string').length };
+        clipboardData.setData('text/plain', 'Safe pasted text formula');
+        element.dispatchEvent(new ClipboardEvent('paste', { bubbles: true, cancelable: true, clipboardData }));
       });
-      expect(formats.allowed).not.toContain('video');
-      expect(formats.allowed).not.toContain('formula');
-      expect(formats.embeds).toBe(0);
       await expect(field.locator('iframe, img, script, .ql-formula')).toHaveCount(0);
       await expect(field.locator('strong').filter({ hasText: 'Security QA' }).first()).toBeVisible();
       await expect(field.locator('strong').filter({ hasText: 'Safe pasted text' }).first()).toBeVisible();
@@ -49,3 +52,31 @@ test('journal editor excludes embeds and preserves safe formatting through save 
   await expect(page.getByTestId('journal-entry-card')).toHaveCount(1);
   expect(await page.evaluate(() => (window as any).__qaUnsafe)).toBeUndefined();
 });
+
+for (const language of ['en', 'he']) {
+  test(`legacy journal lists survive reopening and saving ${language}`, async ({ page }) => {
+    const state = await prepareJournalStage4(page, { language });
+    const copy = journalCopy(language);
+    const row = state.db.ThoughtJournal.find(item => item.id === 'journal-qa');
+    row.situation = '<p><strong>Old entry</strong> two  spaces <u>underlined</u></p><ol><li data-list="bullet"><span class="ql-ui" contenteditable="false"></span>Legacy bullet</li><li data-list="ordered" class="ql-indent-1">Legacy number</li></ol>';
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/Journal?entry=journal-qa');
+    await page.getByRole('button', { name: copy.common.edit_aria.replace('{{item}}', copy.cards.entry_item), exact: true }).click();
+    const field = page.getByRole('dialog').locator('[data-journal-field="situation"]');
+    await expect(field.locator('ul li')).toContainText('Legacy bullet');
+    await expect(field.locator('ol li')).toContainText('Legacy number');
+    await expect(field.locator('u')).toHaveText('underlined');
+    await field.locator('.ql-editor').press('ControlOrMeta+End');
+    await field.locator('.ql-editor').pressSequentially(' retained');
+    for (let step = 1; step < 5; step++) await page.getByRole('dialog').getByRole('button', { name: copy.common.continue, exact: true }).click();
+    await page.getByRole('dialog').getByRole('button', { name: copy.form.save_entry, exact: true }).click();
+    await expect(page.getByRole('heading', { name: copy.form.saved_title, exact: true })).toBeVisible();
+    expect(row.situation).toContain('two  spaces');
+    expect(row.situation).toContain('<ul>');
+    expect(row.situation).toContain('ql-indent-1');
+    await closeJournalDialog(page);
+    await page.reload();
+    await page.getByRole('button', { name: copy.common.edit_aria.replace('{{item}}', copy.cards.entry_item), exact: true }).click();
+    await expect(page.getByRole('dialog').locator('[data-journal-field="situation"] .ql-editor')).toContainText('retained');
+  });
+}

@@ -1,6 +1,6 @@
 # Dependency security and retention verification
 
-## Dependency changes (2026-11-13)
+## PR45 dependency changes (2026-11-13; historical baseline)
 
 The lockfile audit decreased from 31 findings (4 critical, 13 high, 13 moderate,
 1 low) to 2 low findings, with no moderate, high or critical findings. This is
@@ -14,7 +14,7 @@ an npm advisory result, not a claim that the application has no vulnerabilities.
 - Upgrade Vitest and its UI together to 4.1.12, compatible with the Node 20/22 CI.
 - Remove the unused direct Zod dependency; preserve Playwright 1.58.2 to match CI.
 
-### Remaining advisory
+### Advisory remaining after PR45 (resolved by the editor replacement below)
 
 [GHSA-v3m3-f69x-jf25](https://github.com/advisories/GHSA-v3m3-f69x-jf25)
 affects Quill 2.0.3; no patched version was listed during this review. npm reports
@@ -74,7 +74,7 @@ ownership assertions before each DELETE. Independent editor queries confirmed
 zero mood, journal and archive rows across both test accounts. All eight fixtures
 were removed; no stored files, real users, or existing conversations were deleted.
 
-## Browser regression follow-up
+## PR45 browser regression follow-up (historical)
 
 The first GitHub browser run exposed two issues that are addressed in this PR:
 Quill 2 exports ordinary spaces as nonbreaking HTML spaces, so sanitized journal
@@ -89,3 +89,44 @@ now have distinct prefixes while retaining per-user state reset.
 Lint/typecheck and the new GitHub browser run must be checked on the final commit.
 Signed-in live Settings verification still requires browser authentication.
 Base44 storage-erasure confirmation remains separate from record cleanup.
+
+## PR46 editor replacement and acceptance (2026-11-13)
+
+The owner confirmed that PR45's live journal typing, save/reload/edit, and the
+single Settings cleanup panel/button passed. Base44's deployed checkpoint was
+matched to the PR45 merge commit `c92b53ad3cbeebf125e4824259eb4197498b76ce`.
+
+The follow-up removes `react-quill-new` and `quill`, replacing them with Tiptap
+3.33.1 using only text, paragraphs, lists, bold, italic and underline. Formula,
+video, image and link schema types are absent. DOMPurify still sanitizes loaded,
+pasted and saved HTML. There is no advisory suppression or vulnerable-version
+override. The dependency audit currently reports zero findings, including dev
+dependencies; this is an audit result, not a guarantee of zero vulnerabilities.
+
+Existing Quill list HTML is normalized on opening an entry; bullet and numbered
+groups, list indentation, Unicode and repeated spaces are preserved. This does
+not rewrite existing records in bulk. The existing CSS/QA class hooks are kept,
+but no Quill runtime or stylesheet is loaded. Undo/redo and translated keyboard
+accessible toolbar controls remain available.
+
+Eight editor migration/security tests pass, including cursor navigation after
+Select All and formatting. A deterministic DOM test also reproduced a delayed
+route announcement moving focus behind an open modal when its Save control was
+removed; the route focus manager now defers to open modal focus management, and
+that regression test passes. Lint, typecheck and the production bundle have
+passed during this change. Browser tests cover keyboard
+input, clipboard HTML, legacy entries and save/reload in English and Hebrew;
+GitHub CI must pass on the final commit before this editor change is merged.
+
+### Real-clock retention proof
+
+The minimum production policy is 30 days. Base44 assigns `created_date` and
+record ownership and ignores client-supplied values. No production test-clock,
+shortened retention bypass, backdated timestamp, or ownership override was added.
+The previously completed controlled-clock test therefore remains separate from
+the still-pending real-clock expiration proof. Run the latter only with the two
+authorized synthetic accounts after a fixture actually exceeds the policy age.
+Before invoking cleanup, inventory every mood/journal record and conversation in
+both accounts; stop if any content outside the authorized fixture set could be
+affected. Verify that expired own records disappear, fresh own records remain,
+and the other account's records remain. Restore test preferences afterwards.

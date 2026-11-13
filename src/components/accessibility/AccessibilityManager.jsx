@@ -67,7 +67,14 @@ export default function AccessibilityManager() {
         activeElement instanceof HTMLElement &&
         activeElement !== document.body && activeElement !== routeStartFocus;
 
-      if (!isEditing && !isAlreadyInsideMain && !hasNewFocus) {
+      // A modal can briefly leave focus on body when a focused control is
+      // removed (for example Save -> saved confirmation). Let its focus scope
+      // restore focus rather than moving it to the page behind the modal.
+      const hasOpenModal = Boolean(document.querySelector(
+        '[role="dialog"][aria-modal="true"]:not([hidden]):not([aria-hidden="true"]):not([data-state="closed"]), dialog[open]'
+      ));
+
+      if (!hasOpenModal && !isEditing && !isAlreadyInsideMain && !hasNewFocus) {
         main.focus({ preventScroll: true });
       }
 

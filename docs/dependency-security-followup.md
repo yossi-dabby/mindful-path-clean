@@ -1,6 +1,6 @@
 # Dependency security and retention verification
 
-## Dependency changes (2026-11-13)
+## PR45 dependency changes (2026-11-13; historical baseline)
 
 The lockfile audit decreased from 31 findings (4 critical, 13 high, 13 moderate,
 1 low) to 2 low findings, with no moderate, high or critical findings. This is
@@ -14,7 +14,7 @@ an npm advisory result, not a claim that the application has no vulnerabilities.
 - Upgrade Vitest and its UI together to 4.1.12, compatible with the Node 20/22 CI.
 - Remove the unused direct Zod dependency; preserve Playwright 1.58.2 to match CI.
 
-### Remaining advisory
+### Advisory remaining after PR45 (resolved by the editor replacement below)
 
 [GHSA-v3m3-f69x-jf25](https://github.com/advisories/GHSA-v3m3-f69x-jf25)
 affects Quill 2.0.3; no patched version was listed during this review. npm reports
@@ -74,7 +74,7 @@ ownership assertions before each DELETE. Independent editor queries confirmed
 zero mood, journal and archive rows across both test accounts. All eight fixtures
 were removed; no stored files, real users, or existing conversations were deleted.
 
-## Browser regression follow-up
+## PR45 browser regression follow-up (historical)
 
 The first GitHub browser run exposed two issues that are addressed in this PR:
 Quill 2 exports ordinary spaces as nonbreaking HTML spaces, so sanitized journal
@@ -90,7 +90,7 @@ Lint/typecheck and the new GitHub browser run must be checked on the final commi
 Signed-in live Settings verification still requires browser authentication.
 Base44 storage-erasure confirmation remains separate from record cleanup.
 
-## Editor replacement and acceptance (2026-11-13)
+## PR46 editor replacement and acceptance (2026-11-13)
 
 The owner confirmed that PR45's live journal typing, save/reload/edit, and the
 single Settings cleanup panel/button passed. Base44's deployed checkpoint was
@@ -109,10 +109,12 @@ not rewrite existing records in bulk. The existing CSS/QA class hooks are kept,
 but no Quill runtime or stylesheet is loaded. Undo/redo and translated keyboard
 accessible toolbar controls remain available.
 
-Seven editor migration/security tests pass. The full local unit run passed
-11,480 tests and exposed one source-location assertion after moving the sanitizer;
-that assertion was updated to check the shared sanitizer and passed on rerun.
-Lint, typecheck and the production bundle pass. Browser tests cover keyboard
+Eight editor migration/security tests pass, including cursor navigation after
+Select All and formatting. A deterministic DOM test also reproduced a delayed
+route announcement moving focus behind an open modal when its Save control was
+removed; the route focus manager now defers to open modal focus management, and
+that regression test passes. Lint, typecheck and the production bundle have
+passed during this change. Browser tests cover keyboard
 input, clipboard HTML, legacy entries and save/reload in English and Hebrew;
 GitHub CI must pass on the final commit before this editor change is merged.
 

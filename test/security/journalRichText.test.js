@@ -68,6 +68,22 @@ describe('journal editor migration', () => {
     expect(editor.getText()).toBe('First two words');
   });
 
+  it('appends after selecting and formatting the whole document then pressing End', () => {
+    for (const key of ['End', 'Mod-End']) {
+      if (editor) editor.destroy();
+      open('<p>Keep these words</p>');
+      editor.commands.selectAll();
+      editor.commands.toggleBold();
+      editor.view.dom.dispatchEvent(new KeyboardEvent('keydown', {
+        key: 'End', ctrlKey: key === 'Mod-End', bubbles: true, cancelable: true,
+      }));
+      expect(editor.state.selection.empty).toBe(true);
+      editor.commands.insertContent(' plus new words');
+      expect(editor.getText()).toBe('Keep these words plus new words');
+      expect(editor.getHTML()).toContain('<strong>Keep these words');
+    }
+  });
+
   it('treats empty editor HTML as empty', () => {
     open('<p><br></p>');
     editor.commands.clearContent();

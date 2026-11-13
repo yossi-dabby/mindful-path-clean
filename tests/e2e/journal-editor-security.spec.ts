@@ -14,8 +14,15 @@ test('journal editor excludes embeds and preserves safe formatting through save 
       const field = form.locator('[data-journal-field="situation"]');
       // Exercise actual keyboard input too: export-space normalization must not
       // feed converted HTML back into the controlled editor on every keystroke.
-      await field.locator('.ql-editor').press('End');
+      // Collapse the whole-document selection used for Bold before typing.
+      // A bare End key does not reliably leave an editor AllSelection.
+      await field.locator('.ql-editor').press('ControlOrMeta+End');
+      await expect.poll(() => field.locator('.ql-editor').evaluate(element => {
+        const selection = element.ownerDocument.getSelection();
+        return Boolean(selection?.isCollapsed && element.contains(selection.anchorNode));
+      })).toBe(true);
       await field.locator('.ql-editor').pressSequentially(' editable words');
+      await expect(field.locator('.ql-editor')).toContainText('Security QA situation with a practical next step editable words');
       await expect(field.locator('.ql-editor')).toContainText('editable words');
       // Send a clipboard event through the real editor's paste pipeline.
       await field.locator('.ql-editor').evaluate(element => {

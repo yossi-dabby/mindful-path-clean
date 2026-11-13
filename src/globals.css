@@ -464,6 +464,7 @@ label {
 .journal-rich-text[data-editor-engine="tiptap"] .ql-editor strong { font-weight: 700; }
 .journal-rich-text[data-editor-engine="tiptap"] .ql-editor em { font-style: italic; }
 .journal-rich-text[data-editor-engine="tiptap"] .ql-container { position: relative; }
+.journal-dialog[dir="rtl"] .journal-rich-text[data-editor-engine="tiptap"] .ql-container[data-empty="true"] .ql-editor { direction: rtl; }
 .journal-rich-text[data-editor-engine="tiptap"] .ql-container[data-empty="true"]::before {
   content: attr(data-placeholder); position: absolute; inset-inline: 15px; top: 12px;
   color: hsl(var(--muted-foreground)); pointer-events: none; line-height: 1.65;

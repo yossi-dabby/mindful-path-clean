@@ -89,3 +89,42 @@ now have distinct prefixes while retaining per-user state reset.
 Lint/typecheck and the new GitHub browser run must be checked on the final commit.
 Signed-in live Settings verification still requires browser authentication.
 Base44 storage-erasure confirmation remains separate from record cleanup.
+
+## Editor replacement and acceptance (2026-11-13)
+
+The owner confirmed that PR45's live journal typing, save/reload/edit, and the
+single Settings cleanup panel/button passed. Base44's deployed checkpoint was
+matched to the PR45 merge commit `c92b53ad3cbeebf125e4824259eb4197498b76ce`.
+
+The follow-up removes `react-quill-new` and `quill`, replacing them with Tiptap
+3.33.1 using only text, paragraphs, lists, bold, italic and underline. Formula,
+video, image and link schema types are absent. DOMPurify still sanitizes loaded,
+pasted and saved HTML. There is no advisory suppression or vulnerable-version
+override. The dependency audit currently reports zero findings, including dev
+dependencies; this is an audit result, not a guarantee of zero vulnerabilities.
+
+Existing Quill list HTML is normalized on opening an entry; bullet and numbered
+groups, list indentation, Unicode and repeated spaces are preserved. This does
+not rewrite existing records in bulk. The existing CSS/QA class hooks are kept,
+but no Quill runtime or stylesheet is loaded. Undo/redo and translated keyboard
+accessible toolbar controls remain available.
+
+Seven editor migration/security tests pass. The full local unit run passed
+11,480 tests and exposed one source-location assertion after moving the sanitizer;
+that assertion was updated to check the shared sanitizer and passed on rerun.
+Lint, typecheck and the production bundle pass. Browser tests cover keyboard
+input, clipboard HTML, legacy entries and save/reload in English and Hebrew;
+GitHub CI must pass on the final commit before this editor change is merged.
+
+### Real-clock retention proof
+
+The minimum production policy is 30 days. Base44 assigns `created_date` and
+record ownership and ignores client-supplied values. No production test-clock,
+shortened retention bypass, backdated timestamp, or ownership override was added.
+The previously completed controlled-clock test therefore remains separate from
+the still-pending real-clock expiration proof. Run the latter only with the two
+authorized synthetic accounts after a fixture actually exceeds the policy age.
+Before invoking cleanup, inventory every mood/journal record and conversation in
+both accounts; stop if any content outside the authorized fixture set could be
+affected. Verify that expired own records disappear, fresh own records remain,
+and the other account's records remain. Restore test preferences afterwards.

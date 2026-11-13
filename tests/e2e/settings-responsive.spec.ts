@@ -24,6 +24,21 @@ async function prepareSettings(page, language = 'en', viewport = { width: 390, h
 }
 
 test.describe('Premium settings and mobile menu', () => {
+  test('privacy settings expose one cleanup action and one server result', async ({ page }) => {
+    await prepareSettings(page);
+    let calls = 0;
+    await page.route(/\/functions\/retentionCleanup(?:[/?]|$)/, route => {
+      calls++;
+      return route.fulfill({ json: { success: true, deletedMoodEntries: 1, deletedJournalEntries: 0, archivedConversations: 0 } });
+    });
+    await expect(page.getByTestId('retention-cleanup-panel')).toHaveCount(1);
+    await expect(page.getByTestId('retention-cleanup-run')).toHaveCount(1);
+    await page.getByTestId('retention-cleanup-run').click();
+    await expect(page.getByTestId('retention-cleanup-result')).toHaveAttribute('role', 'status');
+    await expect(page.getByTestId('retention-cleanup-result')).toContainText('1 mood entries');
+    expect(calls).toBe(1);
+  });
+
   test('Settings has no horizontal overflow on mobile, tablet and desktop', async ({ page }) => {
     await prepareSettings(page);
 

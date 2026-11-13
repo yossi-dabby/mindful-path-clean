@@ -34,17 +34,20 @@ const RICH_TEXT_FIELDS = ['situation', 'automatic_thoughts', 'evidence_for', 'ev
 const JOURNAL_FORMATS = ['bold', 'italic', 'underline', 'list', 'indent'];
 
 function sanitizeJournalRichText(value) {
-  // Quill 2 semantic HTML encodes ordinary word spaces as nonbreaking spaces.
-  // Preserve the journal's existing wrapping, search and plain-text AI input.
   return DOMPurify.sanitize(String(value || ''), {
     USE_PROFILES: { html: true },
     FORBID_TAGS: ['img', 'video', 'audio', 'iframe', 'object', 'embed', 'svg', 'math'],
-  }).replace(/&nbsp;/g, ' ');
+  });
 }
 
 function sanitizeJournalRichTextFields(data) {
   const sanitized = { ...data };
-  for (const field of RICH_TEXT_FIELDS) sanitized[field] = sanitizeJournalRichText(data?.[field]);
+  // Normalize Quill 2 export spaces only for persistence/cache snapshots.
+  // Changing them in onChange makes the controlled editor repeatedly replace
+  // its own HTML, blocking typing. Sanitization still runs on every edit.
+  for (const field of RICH_TEXT_FIELDS) {
+    sanitized[field] = sanitizeJournalRichText(data?.[field]).replace(/&nbsp;/g, ' ');
+  }
   return sanitized;
 }
 

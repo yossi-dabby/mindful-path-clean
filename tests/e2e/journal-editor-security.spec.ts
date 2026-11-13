@@ -12,6 +12,11 @@ test('journal editor excludes embeds and preserves safe formatting through save 
     onStep: async (step, form) => {
       if (step !== 1) return;
       const field = form.locator('[data-journal-field="situation"]');
+      // Exercise actual keyboard input too: export-space normalization must not
+      // feed converted HTML back into the controlled editor on every keystroke.
+      await field.locator('.ql-editor').press('End');
+      await field.locator('.ql-editor').pressSequentially(' editable words');
+      await expect(field.locator('.ql-editor')).toContainText('editable words');
       // Exercise Quill's paste conversion with stored/clipboard HTML, not merely
       // the sanitizer in isolation. Unsupported embeds must never enter its Delta.
       const formats = await field.locator('.ql-container').evaluate(async element => {

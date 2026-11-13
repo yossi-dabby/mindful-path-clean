@@ -78,8 +78,11 @@ were removed; no stored files, real users, or existing conversations were delete
 
 The first GitHub browser run exposed two issues that are addressed in this PR:
 Quill 2 exports ordinary spaces as nonbreaking HTML spaces, so sanitized journal
-HTML now normalizes those spaces to preserve existing wrapping and plain-text
-consumers. The retention and file-deletion panels used the same sibling React
+HTML now normalizes those spaces only in persisted/cache snapshots to preserve
+existing wrapping and plain-text consumers. Normalizing inside onChange caused
+a controlled-editor feedback loop; live edit state now preserves Quill output
+spacing while still sanitizing it. The regression test also types through the
+keyboard before pasting, saving and reloading. The retention and file-deletion panels used the same sibling React
 key, which produced a duplicate cleanup panel after user data loaded. Their keys
 now have distinct prefixes while retaining per-user state reset.
 

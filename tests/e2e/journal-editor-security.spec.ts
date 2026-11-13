@@ -37,6 +37,7 @@ test('journal editor excludes embeds and preserves safe formatting through save 
   const saved = state.db.ThoughtJournal[0].situation;
   expect(saved).toContain('<strong>');
   expect(saved).toContain('Safe pasted text');
+  expect(saved).not.toContain('&nbsp;');
   expect(saved).not.toMatch(/<(?:iframe|img|script)|\sonerror=|\sonload=/i);
   await closeJournalDialog(page);
   await page.reload();

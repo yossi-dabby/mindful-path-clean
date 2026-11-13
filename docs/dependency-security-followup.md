@@ -44,14 +44,45 @@ Server code scopes old mood/journal records to the authenticated owner, preserve
 legacy file references for support review, and hides old agent conversations.
 Hiding a conversation is not permanent deletion from Base44 storage or backups.
 
-Read-only checks found no mood, journal or hidden-conversation records in the two
-designated synthetic security accounts. This does not prove that deletion works.
-The live destructive cleanup invocation was not completed: automatic approval
-review blocked it because the empty request can delete records. Obtain explicit
-permission for deletion of synthetic records in the two test accounts before
-running a controlled expired/new-record and cross-account isolation scenario.
-Do not use real user accounts or delete attachment mappings needed by support.
+## Authorized two-account verification (2026-11-13)
 
-The signed-in live Settings check also remains pending browser authentication.
-These live checks and Base44's storage-erasure confirmation are not replaced by
-mocked browser or controlled-clock unit tests.
+Following explicit permission to create/delete synthetic records, eight marked
+mood/journal records were created through two ordinary test users (four each).
+Fourteen live-service checks passed:
+
+- Both identities and the complete mood/journal inventory were checked first.
+- Neither account could GET, PUT or DELETE the other's mood or journal record.
+  The owner reread each record and confirmed it was unchanged.
+- The deployed cleanup endpoint rejected a caller-supplied owner with HTTP 400.
+- The deployed cleanup endpoint succeeded for each user with zero deletions;
+  all fresh records in both accounts remained intact after each invocation.
+- Existing recent conversations remained unchanged; no archive rows were added.
+
+Base44 ignored attempts to backdate synthetic created_date values, including an
+editor API update that reported success. Readback confirmed the server timestamps
+remained current. Therefore expired-record deletion by the deployed endpoint's
+real clock is **not yet verified**.
+
+Separately, the unchanged cleanup handler ran locally with a controlled clock
+against actual app-user entity APIs and an allowlist of these fixture IDs. For
+both entity types in both accounts, the older fixture was deleted, the newer one
+was preserved, and the other account's records were preserved. This is hybrid
+integration evidence, not an end-to-end test of production service-role deletion.
+
+The four surviving fixtures were then deleted by their owners, with marker and
+ownership assertions before each DELETE. Independent editor queries confirmed
+zero mood, journal and archive rows across both test accounts. All eight fixtures
+were removed; no stored files, real users, or existing conversations were deleted.
+
+## Browser regression follow-up
+
+The first GitHub browser run exposed two issues that are addressed in this PR:
+Quill 2 exports ordinary spaces as nonbreaking HTML spaces, so sanitized journal
+HTML now normalizes those spaces to preserve existing wrapping and plain-text
+consumers. The retention and file-deletion panels used the same sibling React
+key, which produced a duplicate cleanup panel after user data loaded. Their keys
+now have distinct prefixes while retaining per-user state reset.
+
+Lint/typecheck and the new GitHub browser run must be checked on the final commit.
+Signed-in live Settings verification still requires browser authentication.
+Base44 storage-erasure confirmation remains separate from record cleanup.

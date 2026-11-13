@@ -150,7 +150,7 @@ export default function DataPrivacy({ user }) {
             </p>
           </div>
 
-          <RetentionCleanupPanel key={user?.id} disabled={updateRetentionMutation.isPending} />
+          <RetentionCleanupPanel key={`retention-${user?.id}`} disabled={updateRetentionMutation.isPending} />
 
           {/* Export Data */}
           <div className="border-t pt-6">
@@ -190,7 +190,7 @@ export default function DataPrivacy({ user }) {
             </Button>
           </div>
 
-          <FileDeletionPanel key={user?.id} />
+          <FileDeletionPanel key={`files-${user?.id}`} />
 
           {/* Info Box */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">

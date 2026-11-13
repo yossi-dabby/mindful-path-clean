@@ -174,7 +174,7 @@ function App() {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="theme">
       <QueryClientProvider client={queryClientInstance}>
-        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <Router>
           <RouteMetadata />
           <AccessibilityManager />
           <AndroidNativeBridge />

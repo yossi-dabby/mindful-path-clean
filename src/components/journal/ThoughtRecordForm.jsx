@@ -14,9 +14,9 @@ import { Badge } from '@/components/ui/badge';
 import BottomSheetSelect from '@/components/ui/bottom-sheet-select';
 import { X, Image as ImageIcon, Mic, Trash2, Plus, Sparkles, Brain, Lightbulb, Target, Loader2, Link2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import ReactQuill from 'react-quill';
+import ReactQuill from 'react-quill-new';
 import DOMPurify from 'dompurify';
-import 'react-quill/dist/quill.snow.css';
+import 'react-quill-new/dist/quill.snow.css';
 import AiJournalSuggestions from './AiJournalSuggestions';
 import AiDistortionAnalysis from './AiDistortionAnalysis';
 import { safeInvokeLLM } from '../utils/safeInvokeLLM';
@@ -29,6 +29,9 @@ const commonEmotions = [
 ];
 
 const RICH_TEXT_FIELDS = ['situation', 'automatic_thoughts', 'evidence_for', 'evidence_against', 'balanced_thought'];
+// Keep embeds out of the editor as well as the sanitizer. Quill's formula/video
+// HTML-export paths are not part of the journal's supported text formats.
+const JOURNAL_FORMATS = ['bold', 'italic', 'underline', 'list', 'indent'];
 
 function sanitizeJournalRichText(value) {
   return DOMPurify.sanitize(String(value || ''), {
@@ -39,7 +42,12 @@ function sanitizeJournalRichText(value) {
 
 function sanitizeJournalRichTextFields(data) {
   const sanitized = { ...data };
-  for (const field of RICH_TEXT_FIELDS) sanitized[field] = sanitizeJournalRichText(data?.[field]);
+  // Normalize Quill 2 export spaces only for persistence/cache snapshots.
+  // Changing them in onChange makes the controlled editor repeatedly replace
+  // its own HTML, blocking typing. Sanitization still runs on every edit.
+  for (const field of RICH_TEXT_FIELDS) {
+    sanitized[field] = sanitizeJournalRichText(data?.[field]).replace(/&nbsp;/g, ' ');
+  }
   return sanitized;
 }
 
@@ -460,6 +468,7 @@ Provide:
                 </label>
                 <div data-journal-field="situation" className="border border-border/70 rounded-xl overflow-hidden bg-card">
                   <ReactQuill
+                    formats={JOURNAL_FORMATS}
                     value={formData.situation || ''}
                     onChange={(value) => setFormData(prev => ({ ...prev, situation: sanitizeJournalRichText(value) }))}
                     placeholder={t('journal_ui.form.situation_placeholder')}
@@ -482,6 +491,7 @@ Provide:
                 </label>
                 <div data-journal-field="automatic_thoughts" className="border border-border/70 rounded-xl overflow-hidden bg-card">
                   <ReactQuill
+                    formats={JOURNAL_FORMATS}
                     value={formData.automatic_thoughts || ''}
                     onChange={(value) => setFormData(prev => ({ ...prev, automatic_thoughts: sanitizeJournalRichText(value) }))}
                     placeholder={t('journal_ui.form.thoughts_placeholder')}
@@ -638,6 +648,7 @@ Provide:
                 </label>
                 <div data-journal-field="evidence_for" className="border border-border/70 rounded-xl overflow-hidden bg-card">
                   <ReactQuill
+                    formats={JOURNAL_FORMATS}
                     value={formData.evidence_for || ''}
                     onChange={(value) => setFormData({ ...formData, evidence_for: sanitizeJournalRichText(value) })}
                     placeholder={t('journal_ui.form.evidence_for_placeholder')}
@@ -659,6 +670,7 @@ Provide:
                 </label>
                 <div data-journal-field="evidence_against" className="border border-border/70 rounded-xl overflow-hidden bg-card">
                   <ReactQuill
+                    formats={JOURNAL_FORMATS}
                     value={formData.evidence_against || ''}
                     onChange={(value) => setFormData({ ...formData, evidence_against: sanitizeJournalRichText(value) })}
                     placeholder={t('journal_ui.form.evidence_against_placeholder')}
@@ -693,6 +705,7 @@ Provide:
                 </label>
                 <div data-journal-field="balanced_thought" className="border border-border/70 rounded-xl overflow-hidden bg-card">
                   <ReactQuill
+                    formats={JOURNAL_FORMATS}
                     value={formData.balanced_thought || ''}
                     onChange={(value) => setFormData({ ...formData, balanced_thought: sanitizeJournalRichText(value) })}
                     placeholder={t('journal_ui.form.balanced_placeholder')}

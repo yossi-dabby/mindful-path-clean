@@ -881,7 +881,9 @@ html:lang(pt) .journal-rich-text { --format-bold: "Negrito"; --format-italic: "I
 @media (max-width: 767px) {
   [data-mobile-bottom-nav] { overflow-x: auto; scroll-behavior: auto; }
   [data-mobile-bottom-nav] > div { display: flex; width: max-content; min-width: 100%; }
-  [data-mobile-bottom-nav] a { flex: 1; min-width: max-content; }
+  /* Keep the 48px touch floor without letting the global control rule shrink
+     enlarged labels. Extra tabs remain reachable by scrolling or keyboard. */
+  [data-mobile-bottom-nav] a { flex: 1 0 48px; min-width: max-content !important; }
   [data-mobile-bottom-nav] a > span { white-space: nowrap; overflow-wrap: normal; }
 }
 @media (max-width: 640px) {

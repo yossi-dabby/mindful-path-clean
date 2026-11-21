@@ -185,6 +185,9 @@ for (const language of ['en', 'he']) for (const width of [360, 390]) {
       await tab.focus();
       await expect(tab).toBeInViewport({ ratio: 0.99 });
       expect(await tab.evaluate(el => el.scrollWidth <= el.clientWidth + 2)).toBe(true);
+      const target = await tab.boundingBox();
+      expect(target!.width).toBeGreaterThanOrEqual(48);
+      expect(target!.height).toBeGreaterThanOrEqual(48);
     }
     const support = page.getByTestId('persistent-human-support');
     await expect(support).toHaveCSS('position', 'static');

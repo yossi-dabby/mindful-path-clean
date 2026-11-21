@@ -61,3 +61,17 @@ account was deleted. The changes still need a physical Android acceptance pass
 Provider conversation erasure, direct-API age enforcement, training/retention
 commitments, business verification and the scheduled real-clock retention check
 are separate open items; these frontend changes do not resolve them.
+
+## Follow-up: enlarged bottom-navigation labels
+
+GitHub Actions run `44952356391` found four 200% text cases failing in each
+browser project (English/Hebrew, 360/390 px). The global 48px minimum-width rule
+overrode the bottom tabs' content-based minimum, allowing flex layout to shrink
+the enlarged labels. The tabs now retain their intrinsic content width and use
+a non-shrinking 48px flex basis to preserve the touch target floor.
+
+All eight original failures were reproduced against the unchanged source using
+the repository Playwright projects and Vite development server. After the CSS
+fix, those eight cases and four related keyboard-focus cases passed. The
+existing tests still assert full label visibility and keyboard reachability,
+and now also check that every tab remains at least 48 by 48 pixels.

@@ -1,4 +1,4 @@
-import { chatDraftSession } from '@/lib/chatDraftSession';
+import { chatDraftSession } from './chatDraftSession.js';
 import { Capacitor } from '@capacitor/core';
 import { base44 } from '@/api/base44Client';
 import { queryClientInstance } from '@/lib/query-client';

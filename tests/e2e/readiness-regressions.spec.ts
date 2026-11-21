@@ -1,4 +1,7 @@
-import {test, expect} from '@playwright/test';
+import { test, expect, devices } from '@playwright/test';
+
+// These regressions exercise the mobile bottom navigation, including in CI.
+test.use({ ...devices['Pixel 5'], viewport: { width: 390, height: 844 } });
 import {mockApi} from '../helpers/ui';
 
 test.beforeEach(async ({page}) => {

@@ -1,4 +1,7 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, devices } from '@playwright/test';
+
+// These regressions exercise the mobile bottom navigation, including in CI.
+test.use({ ...devices['Pixel 5'], viewport: { width: 390, height: 844 } });
 import { prepareChatStage2, openStage2Conversation } from '../helpers/chatStage2';
 
 const tab = (page: any, name: string) => page.locator(`[data-mobile-bottom-nav] a[href="/${name}"]`);

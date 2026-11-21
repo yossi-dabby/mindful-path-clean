@@ -1,3 +1,4 @@
+import { chatDraftSession } from '@/lib/chatDraftSession';
 import { Capacitor } from '@capacitor/core';
 import { base44 } from '@/api/base44Client';
 import { queryClientInstance } from '@/lib/query-client';
@@ -26,6 +27,7 @@ export function isNativePlatform() {
  * token, causing the auth check to redirect the user to the login screen.
  */
 export function performLogout() {
+  chatDraftSession.clear();
   if (isNativePlatform()) {
     try {
       AUTH_TOKEN_KEYS.forEach(key => localStorage.removeItem(key));

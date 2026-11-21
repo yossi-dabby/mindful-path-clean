@@ -120,11 +120,10 @@ test.describe('Stage 13 accessibility and bidirectional layout', () => {
     for (let index = 0; index < count; index += 1) {
       const metrics = await switches.nth(index).evaluate((element) => {
         const box = element.getBoundingClientRect();
-        const after = getComputedStyle(element, '::after');
-        return { width: box.width, height: box.height, top: parseFloat(after.top), bottom: parseFloat(after.bottom) };
+        return { width: box.width, height: box.height };
       });
-      expect(metrics.width).toBeGreaterThanOrEqual(43.5);
-      expect(metrics.height + Math.abs(metrics.top) + Math.abs(metrics.bottom)).toBeGreaterThanOrEqual(43.5);
+      expect(metrics.width).toBeGreaterThanOrEqual(47.5);
+      expect(metrics.height).toBeGreaterThanOrEqual(47.5);
     }
   });
 

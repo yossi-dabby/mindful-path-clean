@@ -1,3 +1,4 @@
+import { chatDraftSession } from '@/lib/chatDraftSession';
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import { base44 } from '@/api/base44Client';
 import { AUTH_CHECK_TIMEOUT_MS, withTimeout } from '@/lib/promiseTimeout';
@@ -22,6 +23,7 @@ export const AuthProvider = ({ children }) => {
         AUTH_CHECK_TIMEOUT_MS,
         'Authentication check timed out',
       );
+      chatDraftSession.setOwner(currentUser?.id);
       setUser(currentUser);
       setIsAuthenticated(true);
     } catch (error) {
@@ -30,6 +32,8 @@ export const AuthProvider = ({ children }) => {
       // Check user_not_registered BEFORE the generic 401/403 guard.
       if (error?.data?.extra_data?.reason === 'user_not_registered') {
         setIsAuthenticated(false);
+        chatDraftSession.clear();
+        setUser(null);
         setAuthError({ type: 'user_not_registered', message: 'User not registered for this app' });
         setIsLoadingAuth(false);
         return;
@@ -46,6 +50,8 @@ export const AuthProvider = ({ children }) => {
       setIsAuthenticated(false);
 
       if (status === 401 || status === 403) {
+        chatDraftSession.clear();
+        setUser(null);
         // Custom-auth app: do not invoke Base44's legacy hosted login here.
         // Once loading settles, ProtectedRoute renders the single in-app
         // /login route. Calling redirectToLogin would stack a second auth
@@ -83,6 +89,7 @@ export const AuthProvider = ({ children }) => {
   }, [authError, checkAuth]);
 
   const logout = (shouldRedirect = true) => {
+    chatDraftSession.clear();
     setUser(null);
     setIsAuthenticated(false);
     if (shouldRedirect) {

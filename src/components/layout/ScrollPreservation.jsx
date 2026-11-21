@@ -1,37 +1,71 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
 import { getScrollContainer } from '@/lib/scrollContainer';
 
-// Store scroll positions for each page
-const scrollPositions = new Map();
+/** Mount with the animated page, not with the shared layout. This keeps the
+ * outgoing page's save ahead of the incoming page's restore, even with lazy
+ * routes, exit animations and content that grows after an API response.
+ */
+export default function ScrollPreservation({ pageKey, positions, resetScroll = false }) {
+  useLayoutEffect(() => {
+    const container = getScrollContainer();
+    const target = resetScroll ? 0 : positions.get(pageKey) || 0;
+    let restoring = true;
+    let frame = null;
+    let observer = null;
+    let timeout = null;
 
-export default function ScrollPreservation() {
-  const location = useLocation();
-
-  useEffect(() => {
-    // Save current scroll position before navigating away
-    return () => {
-      const currentPath = location.pathname + location.search;
-      const scrollY = getScrollContainer().scrollTop;
-      scrollPositions.set(currentPath, scrollY);
+    const finish = () => {
+      restoring = false;
+      observer?.disconnect();
+      if (frame !== null) cancelAnimationFrame(frame);
+      if (timeout !== null) clearTimeout(timeout);
+      positions.set(pageKey, container.scrollTop);
     };
-  }, [location.pathname, location.search]);
+    const restore = () => {
+      frame = null;
+      if (!restoring) return;
+      container.scrollTop = target;
+      if (Math.abs(container.scrollTop - target) < 2) finish();
+    };
+    const scheduleRestore = () => {
+      if (restoring && frame === null) frame = requestAnimationFrame(restore);
+    };
+    const remember = () => {
+      if (!restoring) positions.set(pageKey, container.scrollTop);
+    };
+    // A user's scroll/focus choice always wins over delayed restoration.
+    const interrupt = () => { if (restoring) finish(); };
+    const onKeyDown = (event) => {
+      if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) interrupt();
+    };
 
-  useEffect(() => {
-    // Restore scroll position for this page
-    const currentPath = location.pathname + location.search;
-    const savedScrollY = scrollPositions.get(currentPath);
-
-    if (savedScrollY !== undefined) {
-      // Use requestAnimationFrame to ensure DOM is ready
-      requestAnimationFrame(() => {
-        getScrollContainer().scrollTop = savedScrollY;
-      });
-    } else {
-      // New page, scroll to top
-      getScrollContainer().scrollTop = 0;
+    container.addEventListener('scroll', remember, { passive: true });
+    for (const event of ['wheel', 'touchstart', 'pointerdown']) {
+      container.addEventListener(event, interrupt, { passive: true });
     }
-  }, [location.pathname, location.search]);
+    container.addEventListener('keydown', onKeyDown);
+    if (typeof ResizeObserver !== 'undefined') {
+      observer = new ResizeObserver(scheduleRestore);
+      observer.observe(container);
+      const page = Array.from(container.querySelectorAll('[data-app-page-key]'))
+        .find(element => element.getAttribute('data-app-page-key') === pageKey);
+      if (page) observer.observe(page);
+    }
+    timeout = setTimeout(finish, 5000);
+    restore();
+
+    return () => {
+      // Layout cleanup runs before the outgoing DOM is removed and clamps scroll.
+      positions.set(pageKey, restoring ? target : container.scrollTop);
+      restoring = false;
+      observer?.disconnect();
+      if (frame !== null) cancelAnimationFrame(frame);
+      if (timeout !== null) clearTimeout(timeout);
+      container.removeEventListener('scroll', remember);
+      for (const event of ['wheel', 'touchstart', 'pointerdown']) container.removeEventListener(event, interrupt);
+      container.removeEventListener('keydown', onKeyDown);
+    };
+  }, [pageKey, positions, resetScroll]);
 
   return null;
 }

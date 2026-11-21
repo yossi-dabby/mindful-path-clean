@@ -162,9 +162,10 @@ export function TabNavigationProvider({ children, currentPageName }) {
 
       if (currentPath !== rootPath) {
         navFlagRef.current += 1;
-        navigate(rootPath, { replace: true });
+        navigate(rootPath, { replace: true, state: { resetPageScroll: true } });
+      } else {
+        getScrollContainer().scrollTo({ top: 0, behavior: 'smooth' });
       }
-      getScrollContainer().scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       // Switching to a different tab: restore its last known position.
       const targetStack = tabStacks[tabName];
@@ -179,9 +180,8 @@ export function TabNavigationProvider({ children, currentPageName }) {
         navFlagRef.current += 1;
         navigate(targetPath, { replace: true });
       }
-      // Jump scroll to top instantly when switching tabs (no animation —
-      // content is for a completely different tab).
-      getScrollContainer().scrollTo({ top: 0, behavior: 'instant' });
+      // The outgoing page saves its scroll before unmount; the incoming page
+      // restores after its content mounts. Never reset their shared container here.
     }
   }, [activeTab, tabStacks, location.pathname, location.search, navigate]);
 

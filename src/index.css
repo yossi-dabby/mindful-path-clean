@@ -274,11 +274,15 @@ select,
   -webkit-touch-callout: default;
 }
 
-/* Minimum 44 × 44 px touch targets on mobile (WCAG 2.5.5) */
-@media (max-width: 768px) {
-  button, a[role="button"], [role="button"] {
-    min-height: 44px;
-    min-width: 44px;
+/* Android-sized touch targets on phones and other coarse-pointer screens.
+   Inline prose links and hidden/native checkbox inputs keep their own layout. */
+@media (max-width: 768px), (pointer: coarse) {
+  button, [role="button"], [role="tab"], [role="menuitem"], [role="option"],
+  [role="combobox"], [role="switch"], [data-ui="button"], nav a,
+  input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select, textarea, a[data-testid="persistent-human-support"] {
+    min-height: 48px !important;
+    min-width: 48px !important;
   }
 }
 

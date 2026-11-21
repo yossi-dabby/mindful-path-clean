@@ -34,7 +34,7 @@ describe('Stage 13 accessibility and RTL/LTR architecture', () => {
     expect(sidebar).toContain('border-e');
     expect(content).toContain('padding-inline-start');
     expect(content).toContain('focus:start-2');
-    expect(layout).toContain("isRtl ? '-100%' : '100%'");
+    expect(layout).toContain("pageTransitionDirection(isRtl, navigationType)");
   });
 
   it('keeps shared controls touch-safe at every breakpoint', () => {
@@ -47,7 +47,7 @@ describe('Stage 13 accessibility and RTL/LTR architecture', () => {
     expect(button).not.toContain('min-h-[44px] md:min-h-0');
     expect(input).not.toContain('min-h-[44px] md:min-h-0');
     expect(select).not.toContain('min-h-[44px] md:min-h-0');
-    expect(switchSource).toContain('after:-inset-y-2.5');
+    expect(switchSource).toContain('h-12 w-12');
     expect(checkbox).toContain('after:-inset-2.5');
   });
 

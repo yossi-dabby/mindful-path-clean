@@ -1,3 +1,5 @@
+import { useAuth } from '@/lib/AuthContext';
+import { useChatDraft } from '@/hooks/useChatDraft';
 import { runRetentionCleanup } from '@/lib/retentionCleanup';
 import { uploadPrivateAttachment } from '@/lib/privateAttachments';
 import BotanicalAccent from '@/components/brand/BotanicalAccent';
@@ -397,22 +399,12 @@ export default function Chat() {
     ? location.state.pdfViewerReturn.chatConversationId || null
     : null;
   const [pendingDeleteId, setPendingDeleteId] = useState(null);
-  const [currentConversationId, setCurrentConversationId] = useState(restoredPdfViewerConversationId);
+  const { user: authenticatedUser } = useAuth();
+  const {
+    currentConversationId, setCurrentConversationId,
+    inputMessage, inputMessageRef, setInputMessage, forgetConversationDraft,
+  } = useChatDraft(authenticatedUser?.id, restoredPdfViewerConversationId);
   const [messages, setMessages] = useState([]);
-  const [inputMessage, setInputMessageState] = useState('');
-  const inputMessageRef = useRef('');
-  const setInputMessage = (nextValue) => {
-    if (typeof nextValue === 'function') {
-      setInputMessageState((previousValue) => {
-        const resolvedValue = nextValue(previousValue);
-        inputMessageRef.current = resolvedValue;
-        return resolvedValue;
-      });
-      return;
-    }
-    inputMessageRef.current = nextValue;
-    setInputMessageState(nextValue);
-  };
   const [isLoading, setIsLoading] = useState(false);
   const [isConversationInitializing, setIsConversationInitializing] = useState(false);
   const [deliveryStatus, setDeliveryStatus] = useState('idle');
@@ -4132,7 +4124,7 @@ export default function Chat() {
         });
         convId = conversation.id;
         rememberConversationSessionIdentity(convId, newSessionInstanceId);
-        setCurrentConversationId(convId);
+        setCurrentConversationId(convId, { carryDraft: true });
         refetchConversations();
         setShowSidebar(false);
       }
@@ -5142,7 +5134,8 @@ export default function Chat() {
       }
       return { previousConversations, previousConversationId, previousMessages };
     },
-    onSuccess: () => {
+    onSuccess: (conversationId) => {
+      forgetConversationDraft(conversationId);
       refetchConversations();
     },
     onError: (error, _conversationId, context) => {
@@ -5187,7 +5180,7 @@ export default function Chat() {
         base44.entities.UserDeletedConversations.create({
           agent_conversation_id: id,
           conversation_title: conversations.find((c) => c.id === id)?.metadata?.name || 'Deleted Session'
-        }).catch(() => {})
+        }).then(() => forgetConversationDraft(id)).catch(() => {})
       )
     );
     refetchConversations();

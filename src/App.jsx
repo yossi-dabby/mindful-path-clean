@@ -9,10 +9,6 @@ import IOSNativeBridge from '@/components/native/IOSNativeBridge'
 import { pagesConfig } from './pages.config'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
-import KnowledgeStudio from './pages/KnowledgeStudio';
-import AdminFeatureFlags from './pages/AdminFeatureFlags';
-import TherapistTraining from './pages/TherapistTraining';
-import PdfViewer from './pages/PdfViewer';
 import About from './pages/About';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
@@ -28,7 +24,13 @@ import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import { ThemeProvider } from 'next-themes';
 import { useTranslation } from 'react-i18next';
-import React, { Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
+
+// Administration and PDF tooling are fetched only when their routes open.
+const KnowledgeStudio = lazy(() => import('./pages/KnowledgeStudio'));
+const AdminFeatureFlags = lazy(() => import('./pages/AdminFeatureFlags'));
+const TherapistTraining = lazy(() => import('./pages/TherapistTraining'));
+const PdfViewer = lazy(() => import('./pages/PdfViewer'));
 
 /** Fallback shown while a lazy-loaded page chunk is being fetched.
  *  Matches the auth-loading spinner style to avoid a jarring flash. */
@@ -88,7 +90,7 @@ const LayoutWrapper = ({ children, currentPageName }) => Layout ?
 
 const AuthenticatedApp = () => {
   const {t}=useTranslation();
-  const { isLoadingAuth, isLoadingPublicSettings, authError, checkAppState } = useAuth();
+  const { user, isLoadingAuth, isLoadingPublicSettings, authError, checkAppState } = useAuth();
 
   // Only render the explicit "not registered" error screen here. All other
   // unauthenticated states are handled by the ProtectedRoute layout route
@@ -131,7 +133,7 @@ const AuthenticatedApp = () => {
           <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
             <Route path="/" element={
               <LayoutWrapper currentPageName={mainPageKey}>
-                <MainPage />
+                <MainPage key={user?.id} />
               </LayoutWrapper>
             } />
             {Object.entries(Pages).map(([path, Page]) => (
@@ -140,7 +142,7 @@ const AuthenticatedApp = () => {
                 path={`/${path}`}
                 element={
                   <LayoutWrapper currentPageName={path}>
-                    <Page />
+                    <Page key={user?.id} />
                   </LayoutWrapper>
                 }
               />

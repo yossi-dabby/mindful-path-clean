@@ -1,8 +1,9 @@
+import { createPageTransitionVariants, pageTransitionDirection } from '@/lib/pageTransitions';
 import { applyAppearancePalette } from '@/lib/appearancePalettes';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { base44 } from '@/api/base44Client';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigationType } from 'react-router-dom';
 import { LifeBuoy } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import BottomNav from './components/layout/BottomNav';
@@ -22,41 +23,14 @@ export default function Layout({ children, currentPageName }) {
   const { i18n } = useTranslation();
   const prefersReducedMotion = useReducedMotion();
   const isRtl = i18n.dir() === 'rtl';
+  const navigationType = useNavigationType();
+  const transitionDirection = pageTransitionDirection(isRtl, navigationType);
+  const scrollPositionsRef = React.useRef(new Map());
   const [theme, setTheme] = React.useState('default');
   const [isOffline, setIsOffline] = React.useState(!navigator.onLine);
 
-  // Page transitions follow the reading direction and respect the user's
-  // reduced-motion preference.
-  const pageVariants = prefersReducedMotion
-    ? {
-        initial: { x: 0, opacity: 1 },
-        animate: { x: 0, opacity: 1, transition: { duration: 0 } },
-        exit: { x: 0, opacity: 1, transition: { duration: 0 } }
-      }
-    : {
-        initial: {
-          x: isRtl ? '-100%' : '100%',
-          opacity: 0
-        },
-        animate: {
-          x: 0,
-          opacity: 1,
-          transition: {
-            type: 'tween',
-            ease: [0.4, 0.0, 0.2, 1],
-            duration: 0.3
-          }
-        },
-        exit: {
-          x: isRtl ? '30%' : '-30%',
-          opacity: 0,
-          transition: {
-            type: 'tween',
-            ease: [0.4, 0.0, 0.2, 1],
-            duration: 0.3
-          }
-        }
-      };
+  // AnimatePresence also passes the new direction to the exiting page.
+  const pageVariants = createPageTransitionVariants(prefersReducedMotion);
 
   // Detect system dark mode preference and update theme-color meta tag only.
   // The dark class on <html> is managed by ThemeProvider (next-themes).
@@ -236,8 +210,6 @@ export default function Layout({ children, currentPageName }) {
            animations does not create an ancestor overflow:hidden that would prevent
            iOS WKWebView touch-scroll events from reaching #app-scroll-container. */}
       <div className="app-global-background botanical-theme text-foreground min-h-dvh overflow-x-clip">
-        {/* Preserve scroll position between tab switches */}
-        <ScrollPreservation />
 
         {/* Offline Banner - Global */}
         {isOffline &&
@@ -252,7 +224,7 @@ export default function Layout({ children, currentPageName }) {
 
       {/* Main Content - Single scroll container with page transitions */}
       <AppContent currentPageName={currentPageName}>
-        <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence mode="wait" initial={false} custom={transitionDirection}>
           {/* min-h-full (not h-full): lets page content taller than the viewport
                  drive #app-scroll-container's scrollHeight. With h-full the wrapper
                  was capped at exactly 100dvh-padding and Safari/WebKit excluded
@@ -260,12 +232,20 @@ export default function Layout({ children, currentPageName }) {
           <motion.div
               key={location.pathname}
               variants={pageVariants}
+              custom={transitionDirection}
               initial="initial"
               animate="animate"
               exit="exit"
               className="app-page-transition w-full min-h-full"
               data-app-page-transition
-              data-app-page-name={currentPageName}>
+              data-app-page-name={currentPageName}
+              data-app-page-key={location.pathname + location.search}
+              data-navigation-type={navigationType}>
+            <ScrollPreservation
+              pageKey={location.pathname + location.search}
+              positions={scrollPositionsRef.current}
+              resetScroll={location.state?.resetPageScroll === true}
+            />
 
             {children}
           </motion.div>

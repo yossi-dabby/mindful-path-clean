@@ -72,12 +72,15 @@ vi.mock('@/lib/query-client', () => ({
 import { deleteAccount } from '../../src/lib/platform.js';
 import { base44 } from '@/api/base44Client';
 import { queryClientInstance } from '@/lib/query-client';
+import { chatDraftSession } from '../../src/lib/chatDraftSession.js';
 
 // ── Tests ──────────────────────────────────────────────────────────────────
 
 describe('platform.deleteAccount', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    chatDraftSession.clear();
+    chatDraftSession.setOwner('test-user');
     locationHref = 'http://localhost/';
     sessionStorageClearSpy.mockClear();
     Object.keys(sessionStorageData).forEach(k => delete sessionStorageData[k]);
@@ -134,6 +137,23 @@ describe('platform.deleteAccount', () => {
     base44.functions.invoke.mockRejectedValueOnce(new Error('Network error'));
     await expect(deleteAccount()).rejects.toThrow();
     expect(sessionStorageClearSpy).not.toHaveBeenCalled();
+  });
+
+  it('clears private drafts after a successful deletion', async () => {
+    const session = chatDraftSession.forUser('test-user');
+    session.write('conversation', 'synthetic private draft');
+    base44.functions.invoke.mockResolvedValueOnce({ data: { success: true } });
+    await deleteAccount();
+    chatDraftSession.setOwner('test-user');
+    session.write('conversation', 'late callback');
+    expect(chatDraftSession.forUser('test-user').read('conversation')).toBe('');
+  });
+
+  it('preserves a draft when deletion fails and the account remains signed in', async () => {
+    chatDraftSession.forUser('test-user').write('conversation', 'synthetic retained draft');
+    base44.functions.invoke.mockRejectedValueOnce(new Error('Network error'));
+    await expect(deleteAccount()).rejects.toThrow();
+    expect(chatDraftSession.forUser('test-user').read('conversation')).toBe('synthetic retained draft');
   });
 });
 

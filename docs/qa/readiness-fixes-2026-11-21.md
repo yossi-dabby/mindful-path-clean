@@ -34,9 +34,12 @@ Final results across the selected Chromium runs: **105 checks passed**:
 - 4 PDF retry/render/download/return checks in English/Hebrew at 333/768 px.
 
 An additional visual smoke check inspected Home, Settings and Chat in Hebrew.
-**54 unit/source tests passed**, including draft session isolation, stale-session
-writes, transition direction, auth deletion paths and chat refresh recovery.
-Targeted ESLint and `git diff --check` passed.
+**All 11,497 project unit/source tests passed**, with no failed or skipped tests
+and no failed suites. Coverage includes draft session isolation, stale-session
+writes, transition direction, actual draft cleanup on account deletion, and chat
+refresh recovery. The full project ESLint and `git diff --check` passed.
+The deletion tests use the real in-memory draft store; its relative import also
+works in the unit runner, which does not configure the application path alias.
 
 The older switch test assumed a `::after` hitbox and returned NaN after the real
 target replaced it. It now measures the actual 48 × 48 box. Native Chromium

@@ -111,6 +111,14 @@ export function TabNavigationProvider({ children, currentPageName }) {
   // decrement in the tracking effect. Avoids the race where a second
   // navigation clears a boolean flag before the first effect has consumed it.
   const navFlagRef = useRef(0);
+  const historyEntriesRef = useRef(new Map());
+
+  useEffect(() => {
+    const index = window.history.state?.idx;
+    if (Number.isInteger(index)) {
+      historyEntriesRef.current.set(index, location.pathname + location.search);
+    }
+  }, [location.key, location.pathname, location.search]);
 
   // ── Sync activeTab when location changes externally (deep-link, etc.) ──
   useEffect(() => {
@@ -186,20 +194,37 @@ export function TabNavigationProvider({ children, currentPageName }) {
   }, [activeTab, tabStacks, location.pathname, location.search, navigate]);
 
   // ── Back navigation ───────────────────────────────────────────────────────
-  // Delegate to browser history so the iOS swipe-back gesture and Android
-  // hardware-back button both work correctly. The tracking effect above
-  // automatically pops our in-memory stack when the location changes.
+  // Tab switches replace the current browser entry. After another tab pushes a
+  // page, browser history can point into that other tab instead of this parent.
+  // Use history only when its prior entry is the actual parent of this tab.
   const goBackInTab = useCallback(() => {
-    if ((tabStacks[activeTab]?.length || 0) > 1) {
+    const currentTab = getTabForPage(currentPageName);
+    const stack = currentTab && tabStacks[currentTab];
+    const currentPath = window.location.pathname + window.location.search;
+    if (!stack || stack.length < 2 || stack[stack.length - 1].path !== currentPath) return false;
+
+    const parentPath = stack[stack.length - 2].path;
+    const index = window.history.state?.idx;
+    if (Number.isInteger(index) && historyEntriesRef.current.get(index - 1) === parentPath) {
       navigate(-1);
-      return true;
+    } else {
+      navigate(parentPath, { replace: true, state: { tabBack: true } });
     }
-    return false;
-  }, [activeTab, tabStacks, navigate]);
+    return true;
+  }, [currentPageName, tabStacks, navigate]);
+
+  useEffect(() => {
+    const handleNativeBack = (event) => {
+      if (goBackInTab()) event.preventDefault();
+    };
+    window.addEventListener('mindfulpath:back-request', handleNativeBack);
+    return () => window.removeEventListener('mindfulpath:back-request', handleNativeBack);
+  }, [goBackInTab]);
 
   const canGoBack = useCallback(
-    () => (tabStacks[activeTab]?.length || 0) > 1,
-    [activeTab, tabStacks]
+    () => getTabForPage(currentPageName) === activeTab &&
+      !TAB_ROOTS[currentPageName] && (tabStacks[activeTab]?.length || 0) > 1,
+    [activeTab, currentPageName, tabStacks]
   );
 
   // ── Stable context value ──────────────────────────────────────────────────

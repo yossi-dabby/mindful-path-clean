@@ -16,6 +16,20 @@ export default defineConfig({
   testMatch: ['e2e/**/*.spec.ts'], // Ensures it finds tests/e2e/smoke.web.spec.ts
   projects: [
     {
+      name: 'ios-webkit-readiness',
+      testMatch: [
+        'e2e/store-readiness-shell.spec.ts',
+        'e2e/readiness-controls.spec.ts',
+        'e2e/pull-to-refresh.spec.ts',
+        'e2e/settings-delete-account.spec.ts',
+        'ios/stage15-native.ios.spec.ts',
+      ],
+      use: {
+        ...devices['iPhone 15 Pro'],
+        browserName: 'webkit',
+      },
+    },
+    {
       name: 'smoke-production-critical',
       testMatch: ['**/smoke-production-critical.spec.ts'],
       use: {

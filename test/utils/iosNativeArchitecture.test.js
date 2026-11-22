@@ -68,4 +68,10 @@ describe('Stage 15 iOS Native architecture', () => {
     expect(plist).toContain('<string>UIInterfaceOrientationPortrait</string>');
     expect(plist).toContain('<string>UIInterfaceOrientationLandscapeLeft</string>');
   });
+
+  it('declares the microphone purpose required by the voice recording flow', () => {
+    const plist = read('ios/App/App/Info.plist');
+    expect(plist).toMatch(/<key>NSMicrophoneUsageDescription<\/key>\s*<string>[^<]*record a voice message[^<]*<\/string>/);
+    expect(read('src/pages/Chat.jsx')).toContain('getUserMedia({ audio: true })');
+  });
 });

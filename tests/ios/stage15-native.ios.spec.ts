@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { mockApi } from '../helpers/ui';
 
-const BASE_URL = process.env.E2E_BASE_URL || 'http://localhost:5173';
+const BASE_URL = process.env.PLAYWRIGHT_TEST_BASE_URL || process.env.E2E_BASE_URL || process.env.BASE_URL || 'http://127.0.0.1:5173';
 
 async function prepare(page: import('@playwright/test').Page) {
   await mockApi(page);

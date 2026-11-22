@@ -33,7 +33,10 @@ export default function Sidebar({ currentPageName }) {
 
       style={{
         zIndex: 35,
-        width: `${SIDEBAR_WIDTH}px`
+        width: `${SIDEBAR_WIDTH}px`,
+        insetInlineStart: 'var(--safe-area-inline-start, 0px)',
+        paddingTop: `calc(${isCompactChat ? 12 : 24}px + var(--sat, 0px))`,
+        paddingBottom: `calc(${isCompactChat ? 12 : 24}px + var(--sab, 0px))`
       }}>
 
       {/* Logo */}

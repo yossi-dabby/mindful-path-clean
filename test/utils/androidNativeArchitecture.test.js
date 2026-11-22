@@ -28,10 +28,12 @@ describe('Stage 14 Android Native architecture', () => {
   it('handles Back in overlay, page, and root order', () => {
     const source = read('src/components/native/AndroidNativeBridge.jsx');
     const overlay = source.indexOf('if (closeTopOverlay()) return');
+    const tabBack = source.indexOf("new CustomEvent('mindfulpath:back-request'");
     const root = source.indexOf('ROOT_PATHS.has(window.location.pathname)');
     const history = source.indexOf('if (canGoBack || window.history.length > 1)');
     expect(overlay).toBeGreaterThan(0);
-    expect(root).toBeGreaterThan(overlay);
+    expect(tabBack).toBeGreaterThan(overlay);
+    expect(root).toBeGreaterThan(tabBack);
     expect(history).toBeGreaterThan(root);
     expect(source).toContain('CapacitorApp.minimizeApp()');
   });

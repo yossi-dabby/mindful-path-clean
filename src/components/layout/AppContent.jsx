@@ -51,15 +51,15 @@ export default function AppContent({ children, currentPageName }) {
           // Mobile: padding for header + bottom nav + safe areas
           paddingTop: `var(--mobile-header-height, calc(${MOBILE_HEADER_HEIGHT}px + env(safe-area-inset-top, 0px)))`,
           paddingBottom: `var(--mobile-bottom-nav-height, calc(${BOTTOM_NAV_HEIGHT}px + env(safe-area-inset-bottom, 0px)))`,
-          paddingLeft: '0',
-          paddingRight: '0'
+          paddingLeft: 'var(--sal, 0px)',
+          paddingRight: 'var(--sar, 0px)'
         }}>
 
       <style>{`
         @media (min-width: ${desktopBreakpoint}px) {
           #app-scroll-container {
-            padding-inline-start: ${sidebarWidth}px !important;
-            padding-inline-end: 0 !important;
+            padding-inline-start: calc(${sidebarWidth}px + var(--safe-area-inline-start, 0px)) !important;
+            padding-inline-end: var(--safe-area-inline-end, 0px) !important;
             /* Reset mobile header/nav paddings; sidebar is fixed so content starts at top */
             padding-bottom: env(safe-area-inset-bottom, 0px) !important;
             padding-top: env(safe-area-inset-top, 0px) !important;

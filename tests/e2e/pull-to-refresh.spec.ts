@@ -1,4 +1,4 @@
-import { test, expect, devices } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { mockAccountAccess } from '../helpers/accountAccess';
 
 /**
@@ -12,7 +12,7 @@ import { mockAccountAccess } from '../helpers/accountAccess';
  */
 
 // Use a mobile device so that touch events fire and the PullToRefresh component activates
-test.use({ ...devices['Pixel 5'] });
+test.use({ viewport: { width: 393, height: 727 }, isMobile: true, hasTouch: true });
 
 const BASE_URL =
   process.env.PLAYWRIGHT_TEST_BASE_URL ||
@@ -98,21 +98,18 @@ async function simulatePull(
       const x = 200;
       const target = document.elementFromPoint(x, sx) ?? document.body;
 
-      target.dispatchEvent(
-        new TouchEvent('touchstart', {
-          touches: [new Touch({ identifier: 1, target, clientX: x, clientY: sx })],
-          bubbles: true,
-          cancelable: true,
-        }),
-      );
-
-      target.dispatchEvent(
-        new TouchEvent('touchmove', {
-          touches: [new Touch({ identifier: 1, target, clientX: x, clientY: ex })],
-          bubbles: true,
-          cancelable: true,
-        }),
-      );
+      // WebKit exposes Touch but does not allow new Touch(). These synthetic
+      // events exercise the handler contract in both engines; device gestures
+      // remain a separate native acceptance check.
+      for (const [type, y] of [['touchstart', sx], ['touchmove', ex]] as const) {
+        const point = { identifier: 1, target, clientX: x, clientY: y };
+        const event = new Event(type, { bubbles: true, cancelable: true });
+        Object.defineProperties(event, {
+          touches: { value: [point] },
+          changedTouches: { value: [point] },
+        });
+        target.dispatchEvent(event);
+      }
     },
     [startY, endY, resetScrollTop] as [number, number, boolean],
   );
@@ -128,19 +125,13 @@ async function finishTouch(
       const root = document.querySelector<HTMLElement>('[data-pull-to-refresh]');
       const target = root ?? document.body;
       const x = 200;
-      const touches =
-        eventType === 'touchend'
-          ? []
-          : [new Touch({ identifier: 1, target, clientX: x, clientY: y })];
-
-      target.dispatchEvent(
-        new TouchEvent(eventType, {
-          touches,
-          changedTouches: [new Touch({ identifier: 1, target, clientX: x, clientY: y })],
-          bubbles: true,
-          cancelable: true,
-        }),
-      );
+      const point = { identifier: 1, target, clientX: x, clientY: y };
+      const event = new Event(eventType, { bubbles: true, cancelable: true });
+      Object.defineProperties(event, {
+        touches: { value: eventType === 'touchend' ? [] : [point] },
+        changedTouches: { value: [point] },
+      });
+      target.dispatchEvent(event);
     },
     [type, clientY] as ['touchend' | 'touchcancel', number],
   );

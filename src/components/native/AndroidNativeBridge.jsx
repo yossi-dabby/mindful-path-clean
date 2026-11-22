@@ -93,6 +93,10 @@ export default function AndroidNativeBridge() {
     addHandle(CapacitorApp.addListener('backButton', async ({ canGoBack }) => {
       if (closeTopOverlay()) return;
 
+      // The active tab knows its own parent even after cross-tab navigation.
+      const backRequest = new CustomEvent('mindfulpath:back-request', { cancelable: true });
+      if (!window.dispatchEvent(backRequest)) return;
+
       if (ROOT_PATHS.has(window.location.pathname)) {
         await CapacitorApp.minimizeApp();
         return;

@@ -1,7 +1,7 @@
-import { test, expect, devices } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
-// These regressions exercise the mobile bottom navigation, including in CI.
-test.use({ ...devices['Pixel 5'], viewport: { width: 390, height: 844 } });
+// Exercise mobile controls without overriding the project's browser engine.
+test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 import { mockApi } from '../helpers/ui';
 test.beforeEach(async ({page})=>{
  await mockApi(page); await page.addInitScript(()=>{
@@ -61,7 +61,10 @@ test('readiness controls: notification optimistic deletion rolls back on server 
 test('readiness controls: editable content selection remains available',async({page})=>{
  await page.goto('/Chat');const input=page.getByTestId('therapist-chat-input');await expect(input).toBeVisible();
  await input.fill('SYNTHETIC selection audit');
- expect(await input.evaluate(el=>getComputedStyle(el).userSelect)).toBe('text');
+ expect(await input.evaluate(el=>{
+  const style=getComputedStyle(el);
+  return style.getPropertyValue('user-select')||style.getPropertyValue('-webkit-user-select');
+ })).toBe('text');
  await input.selectText();expect(await input.evaluate((el:any)=>el.selectionEnd-el.selectionStart)).toBe(25);
 });
 test('readiness controls: Tools restores rendered subpage not just URL',async({page})=>{

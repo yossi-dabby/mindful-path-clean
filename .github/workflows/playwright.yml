@@ -58,7 +58,7 @@ jobs:
         run: npm run lint
 
   e2e:
-    # All nine browser jobs require the same commit to pass the shared checks.
+    # All ten browser jobs require the same commit to pass the shared checks.
     needs: checks
     name: E2E ${{ matrix.project }} (${{ matrix.shard }}/${{ matrix.shards }})
     # Private-repository runners have fewer CPUs than public-repository runners.
@@ -82,6 +82,9 @@ jobs:
         shards: [4]
         include:
           - project: smoke-production-critical
+            shard: 1
+            shards: 1
+          - project: ios-webkit-readiness
             shard: 1
             shards: 1
 

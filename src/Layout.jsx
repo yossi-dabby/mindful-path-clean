@@ -23,7 +23,8 @@ export default function Layout({ children, currentPageName }) {
   const { i18n } = useTranslation();
   const prefersReducedMotion = useReducedMotion();
   const isRtl = i18n.dir() === 'rtl';
-  const navigationType = useNavigationType();
+  const routerNavigationType = useNavigationType();
+  const navigationType = location.state?.tabBack ? 'POP' : routerNavigationType;
   const transitionDirection = pageTransitionDirection(isRtl, navigationType);
   const scrollPositionsRef = React.useRef(new Map());
   const [theme, setTheme] = React.useState('default');

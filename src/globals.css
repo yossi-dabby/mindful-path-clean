@@ -125,6 +125,8 @@ label {
     --sar: env(safe-area-inset-right, 0px);
     --sab: env(safe-area-inset-bottom, 0px);
     --sal: env(safe-area-inset-left, 0px);
+    --safe-area-inline-start: var(--sal);
+    --safe-area-inline-end: var(--sar);
     --native-keyboard-height: 0px;
     --app-viewport-height: 100dvh;
     --app-viewport-width: 100vw;
@@ -773,6 +775,20 @@ input[type="url"] {
   select {
     font-size: 16px !important;
   }
+}
+
+/* Physical cutouts stay on the same side when the interface switches to RTL. */
+:root[dir="rtl"] {
+  --safe-area-inline-start: var(--sar);
+  --safe-area-inline-end: var(--sal);
+}
+[data-mobile-header] > div {
+  padding-left: max(0.5rem, var(--sal, 0px));
+  padding-right: max(0.5rem, var(--sar, 0px));
+}
+[data-mobile-bottom-nav] {
+  padding-left: var(--sal, 0px);
+  padding-right: var(--sar, 0px);
 }
 
 /* Native iOS viewport and keyboard geometry.

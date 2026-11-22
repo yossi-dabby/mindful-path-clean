@@ -2,7 +2,7 @@
  * E2E: Settings → Delete Account flow
  *
  * Tests the in-app account deletion flow required for iOS App Store compliance
- * (App Store Review Guideline 14 — sign-in / account deletion requirement).
+ * (App Store Review Guideline 5.1.1(v) — account deletion).
  *
  * Covered scenarios:
  *   1. Delete Account button and destructive section are visible in Settings.
@@ -14,7 +14,8 @@
  * Note: The success path cannot verify the post-delete redirect in a
  * standard E2E environment because performLogout() triggers a full page
  * reload / server-side logout. The test verifies the POST to the backend
- * was made, which is the critical compliance assertion.
+ * was made. This verifies UI/request wiring with synthetic responses, not
+ * actual erasure by the backend/provider or full store-policy compliance.
  */
 
 import { test, expect, devices } from '@playwright/test';

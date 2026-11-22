@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   ANDROID_AUTH_CALLBACK_PATH,
   ANDROID_AUTH_CALLBACK_URL,
@@ -79,6 +79,7 @@ describe('iOS native OAuth return', () => {
     setToken = vi.fn();
     navigate = vi.fn();
   });
+  afterEach(() => vi.unstubAllGlobals());
   const start = (returnTo = '/Journal?tab=today') => new URL(buildOAuthReturnTo(returnTo, {
     isNativePlatform: true, platform: 'ios', storage, now: () => startedAt,
   }));
@@ -89,7 +90,7 @@ describe('iOS native OAuth return', () => {
   it('returns through the verified HTTPS domain and consumes the pending sign-in once', () => {
     const url = start();
     expect(url.origin + url.pathname).toBe(ANDROID_AUTH_CALLBACK_URL);
-    expect(url.searchParams.get('native_state')).toMatch(/^[0-9a-f-]{36}$/);
+    expect(url.searchParams.get('native_state')).toMatch(/^[0-9a-f]{64}$/);
     expect(JSON.stringify([...values])).not.toContain('test-token');
     url.searchParams.set('access_token', 'test-token');
     expect(finish(url)).toBe(true);
@@ -98,6 +99,13 @@ describe('iOS native OAuth return', () => {
     expect(values.size).toBe(0);
     expect(finish(url)).toBe(false);
     expect(setToken).toHaveBeenCalledTimes(1);
+  });
+
+  it('starts sign-in when WebView exposes getRandomValues but not randomUUID', () => {
+    const getRandomValues = globalThis.crypto.getRandomValues.bind(globalThis.crypto);
+    vi.stubGlobal('crypto', { getRandomValues });
+    const url = start();
+    expect(url.searchParams.get('native_state')).toMatch(/^[0-9a-f]{64}$/);
   });
 
   it('accepts a fragment token after a cold start and ignores a modified destination', () => {

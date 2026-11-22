@@ -56,7 +56,10 @@ export function buildOAuthReturnTo(
   if (platform === 'ios') {
     // Persist only a short-lived nonce and destination, never an access token.
     // localStorage survives a cold app launch after the system browser returns.
-    const state = globalThis.crypto.randomUUID();
+    // getRandomValues also works in WKWebView's custom-scheme context, where
+    // secure-context-only APIs such as randomUUID may be unavailable.
+    const bytes = globalThis.crypto.getRandomValues(new Uint8Array(32));
+    const state = Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
     const attemptStorage = storage || globalThis.localStorage;
     attemptStorage.setItem(IOS_OAUTH_ATTEMPT_KEY, JSON.stringify({ state, returnTo: destination, startedAt: now() }));
     callback.searchParams.set('native_state', state);

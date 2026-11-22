@@ -64,7 +64,7 @@ provisioning, Apple's domain association, external provider login, or an iPhone.
 
 ## Validation
 
-Local validation: 74 targeted tests passed; ESLint, TypeScript, and a minified
+Local validation: 75 targeted tests passed; ESLint, TypeScript, and a minified
 CI-mode production build passed. Native build and full CI results are recorded
 in the pull request. Targeted tests cover callback
 origin/path restrictions, state/expiry/replay protection, safe destinations,

@@ -52,4 +52,9 @@
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Capacitor requests these when the user starts a voice recording. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <!-- Recording is optional: devices without a microphone can still use the app. -->
+    <uses-feature android:name="android.hardware.microphone" android:required="false" />
 </manifest>

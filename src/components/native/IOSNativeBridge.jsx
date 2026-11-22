@@ -2,8 +2,10 @@ import { useEffect } from 'react';
 import { App as CapacitorApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { Keyboard } from '@capacitor/keyboard';
+import { base44 } from '../../api/base44Client';
+import { completeIOSOAuthCallback } from '../../lib/nativeOAuth';
 import { focusManager } from '@tanstack/react-query';
-import { queryClientInstance } from '@/lib/query-client';
+import { queryClientInstance } from '../../lib/query-client';
 
 function updateViewportMetrics() {
   const viewport = window.visualViewport;
@@ -61,9 +63,25 @@ export default function IOSNativeBridge() {
       }
     }));
 
-    addHandle(CapacitorApp.addListener('appUrlOpen', ({ url }) => {
-      dispatchNativeEvent('mindfulpath:native-url-open', { url, platform: 'ios' });
-    }));
+    const handleNativeUrl = ({ url } = {}) => {
+      if (disposed || !url) return;
+      try {
+        if (completeIOSOAuthCallback(url, {
+          setToken: (token) => base44.auth.setToken(token),
+          navigate: (path) => window.location.replace(path),
+        })) return;
+      } catch {
+        // Never log a callback URL or token. Leave the sign-in screen retryable.
+        console.warn('iOS sign-in could not be completed.');
+      }
+    };
+
+    addHandle(CapacitorApp.addListener('appUrlOpen', handleNativeUrl));
+    CapacitorApp.getLaunchUrl()
+      .then((launchUrl) => {
+        if (!disposed) handleNativeUrl(launchUrl);
+      })
+      .catch(() => {});
 
     addHandle(CapacitorApp.addListener('appRestoredResult', (result) => {
       dispatchNativeEvent('mindfulpath:native-restored-result', result);

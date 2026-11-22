@@ -44,3 +44,29 @@ jobs:
         working-directory: android
         run: bash ./gradlew --no-daemon :app:assembleDebug :app:bundleRelease --stacktrace
 
+
+      - name: Verify packaged audio permissions
+        run: |
+          python3 - <<'PY'
+          import pathlib, xml.etree.ElementTree as ET
+          manifests = list(pathlib.Path('android/app/build/intermediates/merged_manifests').glob('**/AndroidManifest.xml'))
+          assert manifests, 'No merged Android manifests found'
+          android = '{http://schemas.android.com/apk/res/android}'
+          required = {'android.permission.RECORD_AUDIO', 'android.permission.MODIFY_AUDIO_SETTINGS'}
+          for manifest in manifests:
+              root = ET.parse(manifest).getroot()
+              permissions = {node.get(android + 'name'): node for node in root.findall('uses-permission')}
+              assert required <= permissions.keys(), f'Missing audio permissions: {manifest}'
+              assert all(permissions[name].get(android + 'maxSdkVersion') is None for name in required)
+              mic = next((node for node in root.findall('uses-feature') if node.get(android + 'name') == 'android.hardware.microphone'), None)
+              assert mic is not None and mic.get(android + 'required') == 'false'
+              print(f'Audio permissions verified: {manifest}')
+          PY
+
+      - name: Upload diagnostic APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-diagnostic-apk
+          path: android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 7

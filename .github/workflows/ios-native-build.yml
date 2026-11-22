@@ -1,0 +1,56 @@
+name: iOS Native Build
+
+on:
+  pull_request:
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'capacitor.config.ts'
+      - 'ios/**'
+      - 'src/lib/nativeOAuth.js'
+      - 'src/components/native/IOSNativeBridge.jsx'
+      - '.github/workflows/ios-native-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-native-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compile:
+    runs-on: macos-15
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Select Xcode 26.2
+        run: sudo xcode-select -s /Applications/Xcode_26.2.app/Contents/Developer
+      - name: Install dependencies
+        run: npm ci
+      - name: Build web assets and sync iOS
+        env:
+          VITE_BASE44_APP_ID: '69504b725a07f5aa75aeaf7d'
+          VITE_BASE44_APP_BASE_URL: 'https://mindful-path-production-7704.up.railway.app'
+          VITE_BASE44_AUTH_BASE_URL: 'https://mindful-path-75aeaf7d.base44.app'
+        run: npm run ios:build
+      - name: Validate the app association entitlement
+        run: |
+          plutil -lint ios/App/App/Info.plist ios/App/App/App.entitlements
+          python3 - <<'PY'
+          import pathlib, plistlib
+          data = plistlib.loads(pathlib.Path('ios/App/App/App.entitlements').read_bytes())
+          assert data['com.apple.developer.associated-domains'] == ['applinks:mindful-path-production-7704.up.railway.app']
+          PY
+      - name: Compile unsigned iOS simulator app
+        run: |
+          xcodebuild -project ios/App/App.xcodeproj -scheme App \
+            -configuration Debug -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath /tmp/mindful-path-ios-build \
+            CODE_SIGNING_ALLOWED=NO build

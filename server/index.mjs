@@ -3,6 +3,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { readFile } from 'node:fs/promises';
 import serveHandler from 'serve-handler';
 import { createAdminVerifier, createPilotHandler, loadPilot } from './hebrew-pilot.mjs';
+import { handleAppleAppSiteAssociation } from './apple-app-site-association.mjs';
 import { handlePublicInformation } from './public-information.mjs';
 import { createPrivateAttachmentHandler } from './private-attachments.mjs';
 
@@ -15,6 +16,7 @@ export async function createAppServer({ verifyAdmin, pilot, distRoot } = {}) {
   const handleAttachment = createPrivateAttachmentHandler();
   return createServer(async (req, res) => {
     try {
+      if (handleAppleAppSiteAssociation(req, res)) return;
       if (handlePublicInformation(req, res)) return;
       if (await handleAttachment(req, res)) return;
       if (await handlePilot(req, res)) return;

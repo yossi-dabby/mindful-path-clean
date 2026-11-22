@@ -1,5 +1,11 @@
 # Mobile-Readiness Production Candidate — RC Verification Report
 
+> **Historical report (5 July 2026), not a current store-approval certificate.**
+> The green scanner results below describe that revision. Browser emulation
+> and a reachable deletion UI do not verify installed native builds or complete
+> deletion at the provider. See [the independent November verification](qa/store-scan-verification-2026-11-22.md)
+> for current evidence and outstanding device/provider checks.
+
 **Branch:** `copilot/mobile-readiness-production-candidate`  
 **Commit:** `88c49e9`  
 **Date:** 2026-07-05  

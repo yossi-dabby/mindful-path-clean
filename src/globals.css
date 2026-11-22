@@ -628,6 +628,15 @@ select,
   -webkit-touch-callout: default;
 }
 
+/* Chrome labels must override the generic selectable span/heading rules.
+   Editable controls and their descendants retain selection and copy/paste. */
+[data-app-chrome],
+[data-app-chrome] :not(:is(input, textarea, select, [contenteditable], [contenteditable] *)) {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
 /* Ensure minimum 44px touch targets on mobile */
 @media (max-width: 768px) {
   button, a[role="button"], [role="button"] {

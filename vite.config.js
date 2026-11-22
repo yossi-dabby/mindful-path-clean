@@ -27,10 +27,11 @@ export default defineConfig({
     exclude: ["pdfjs-dist"],
   },
 
-  // CI-only diagnostics (does not affect production users)
+  // Keep CI source maps for diagnostics, but minify every production build.
+  // CI is also set by release builders; it must not turn off optimization.
   build: {
     sourcemap: process.env.CI ? true : false,
-    minify: process.env.CI ? false : "esbuild",
+    minify: "esbuild",
   },
 
   // Inject build metadata for runtime diagnostics (e.g. confirming which

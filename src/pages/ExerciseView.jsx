@@ -44,13 +44,28 @@ export default function ExerciseViewPage() {
   });
 
   const toggleFavoriteMutation = useMutation({
-    mutationFn: async () => {
-      await base44.entities.Exercise.update(exerciseId, {
-        favorite: !exercise.favorite
-      });
+    mutationFn: (favorite) => base44.entities.Exercise.update(exerciseId, { favorite }),
+    onMutate: async (favorite) => {
+      await queryClient.cancelQueries({ queryKey: ['exercise', exerciseId] });
+      const previousExercise = queryClient.getQueryData(['exercise', exerciseId]);
+      queryClient.setQueryData(['exercise', exerciseId], current =>
+        current ? { ...current, favorite } : current
+      );
+      return { previousExercise };
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['exercise', exerciseId] });
+    onError: (_error, _favorite, context) => {
+      if (context?.previousExercise) {
+        queryClient.setQueryData(['exercise', exerciseId], context.previousExercise);
+      }
+    },
+    onSettled: () => {
+      // Reconcile the detail and any cached lists after success or rollback.
+      return Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['exercise', exerciseId] }),
+        queryClient.invalidateQueries({ queryKey: ['exercises'] }),
+        queryClient.invalidateQueries({ queryKey: ['allExercises'] }),
+        queryClient.invalidateQueries({ queryKey: ['todayExercise'] }),
+      ]);
     }
   });
 
@@ -128,7 +143,7 @@ export default function ExerciseViewPage() {
               <div className="botanical-title-row"><h1 className="min-w-0 break-words text-lg sm:text-xl font-semibold text-foreground">{exercise.title || t('exercise_view.untitled')}</h1><BotanicalAccent variant="leaves" className="botanical-title-art hidden sm:block" /></div>
             </div>
             <button
-              onClick={() => toggleFavoriteMutation.mutate()}
+              onClick={() => toggleFavoriteMutation.mutate(!exercise.favorite)}
               disabled={toggleFavoriteMutation.isPending}
               aria-pressed={!!exercise.favorite}
               className="ms-auto lg:ms-0 shrink-0 min-h-11 min-w-11 p-2 rounded-full hover:bg-secondary transition-colors"

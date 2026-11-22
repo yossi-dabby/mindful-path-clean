@@ -76,3 +76,82 @@ test('readiness controls: Tools restores rendered subpage not just URL',async({p
  await expect(page).toHaveURL(/\/Exercises/);
  await expect(page.locator('[data-app-page-name="Exercises"]')).toBeVisible();
 });
+
+test('readiness controls: chrome labels suppress selection without disabling editable content', async ({ page }) => {
+  await page.goto('/Home');
+  await expect(page.getByTestId('daily-path')).toBeVisible();
+  const labels = page.locator('[data-mobile-bottom-nav] a > span');
+  await expect(labels).toHaveCount(5);
+  for (const label of await labels.all()) {
+    expect(await label.evaluate(el => {
+      const style = getComputedStyle(el);
+      return style.getPropertyValue('user-select') || style.getPropertyValue('-webkit-user-select');
+    })).toBe('none');
+  }
+  // Protect editable descendants even if a search field is added to chrome.
+  const probe = page.locator('[data-mobile-header]');
+  await probe.evaluate(el => {
+    const input = document.createElement('textarea');
+    input.dataset.testid = 'chrome-editable-probe';
+    input.value = 'Selectable text';
+    el.append(input);
+  });
+  const editable = page.getByTestId('chrome-editable-probe');
+  expect(await editable.evaluate(el => {
+    const style = getComputedStyle(el);
+    return style.getPropertyValue('user-select') || style.getPropertyValue('-webkit-user-select');
+  })).toBe('text');
+  await editable.selectText();
+  expect(await editable.evaluate((el: HTMLTextAreaElement) => el.selectionEnd - el.selectionStart)).toBe(15);
+});
+
+test('readiness controls: overscroll stays scoped to the document and app scroller', async ({ page }) => {
+  await page.goto('/Home');
+  await expect(page.getByTestId('daily-path')).toBeVisible();
+  for (const selector of ['html', 'body', '#app-scroll-container']) {
+    expect(await page.locator(selector).evaluate(el => getComputedStyle(el).overscrollBehaviorY)).toBe('none');
+  }
+  // Preserve browser zoom/panning defaults rather than blocking all touch input.
+  expect(await page.locator('html').evaluate(el => getComputedStyle(el).touchAction)).toBe('auto');
+});
+
+for (const outcome of ['success', 'error']) {
+  test(`readiness controls: exercise favorite updates before the response and handles ${outcome}`, async ({ page }) => {
+    let release: () => void = () => {};
+    const responseGate = new Promise<void>(resolve => { release = resolve; });
+    let payload: any;
+    const exercise = { id: 'readiness-exercise', title: 'Readiness exercise fixture', category: 'grounding', difficulty: 'beginner', description: 'Synthetic exercise description', favorite: false };
+    const progress = { id: 'readiness-progress', exercise_id: exercise.id, favorite: false };
+    let catalogWrites = 0;
+    await page.route('**/entities/Exercise**', async route => {
+      if (route.request().method() === 'GET') return route.fulfill({ json: [exercise] });
+      catalogWrites++;
+      return route.fulfill({ status: 500, json: { error: 'Catalog must remain read only' } });
+    });
+    await page.route('**/entities/UserExerciseProgress**', async route => {
+      if (route.request().method() === 'GET') return route.fulfill({ json: [progress] });
+      payload = route.request().postDataJSON();
+      await responseGate;
+      if (outcome === 'error') return route.fulfill({ status: 500, json: { error: 'Synthetic favorite failure' } });
+      progress.favorite = payload.favorite;
+      return route.fulfill({ json: progress });
+    });
+    await page.goto('/ExerciseView?id=readiness-exercise');
+    const favorite = page.locator('#app-scroll-container button[aria-pressed]');
+    await expect(favorite).toHaveAttribute('aria-pressed', 'false');
+    await favorite.click();
+    try {
+      await expect.poll(() => payload).toEqual({ favorite: true });
+      await expect(favorite).toHaveAttribute('aria-pressed', 'true');
+      await expect(favorite).toBeDisabled();
+    } finally {
+      release();
+    }
+    await expect(favorite).toBeEnabled();
+    await expect(favorite).toHaveAttribute('aria-pressed', outcome === 'success' ? 'true' : 'false');
+    if (outcome === 'error') await expect(page.locator('#app-scroll-container [role="alert"]')).toBeVisible();
+    await page.reload();
+    await expect(favorite).toHaveAttribute('aria-pressed', outcome === 'success' ? 'true' : 'false');
+    expect(catalogWrites).toBe(0);
+  });
+}

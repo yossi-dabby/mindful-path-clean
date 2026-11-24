@@ -13,7 +13,7 @@
 
 The repository now includes a manually gated live-response runner for the 140 non-crisis
 agent/language cases. It authenticates only as the dedicated verified test user
-`yosephdabby4@gmail.com`, creates a fresh conversation per synthetic case, and performs a
+configured in the protected test environment, creates a fresh conversation per synthetic case, and performs a
 batched AI-assisted bilingual and clinical-safety screen. Retained evidence contains response
 hashes, model/usage/latency metadata, scores, and short rationales, but no raw response text or
 credentials.

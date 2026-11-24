@@ -6,12 +6,13 @@ import { Badge } from '@/components/ui/badge';
 import { BookOpen, Calendar, TrendingDown } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { sanitizeJournalRichText } from '../journal/journalRichText';
 
 // Helper to strip HTML tags
 const stripHtml = (html) => {
   if (!html) return '';
   const tmp = document.createElement('div');
-  tmp.innerHTML = html;
+  tmp.innerHTML = sanitizeJournalRichText(html);
   return tmp.textContent || tmp.innerText || '';
 };
 

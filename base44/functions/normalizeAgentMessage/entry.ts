@@ -10,7 +10,8 @@ Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
     const user = await base44.auth.me().catch((error) => {
-      if (error.status === 401 || error.response?.status === 401) return null;
+      const status = error.status ?? error.response?.status;
+      if (status === 401 || status === 403) return null;
       throw error;
     });
     

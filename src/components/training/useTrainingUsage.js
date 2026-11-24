@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export function validTrainingQuota(value) {
   return value && Number.isInteger(value.limit) && value.limit > 0 &&
@@ -19,34 +19,39 @@ export function trainingErrorKey(error) {
 export function useTrainingUsage(invoke) {
   const [quota, setQuota] = useState(null);
   const [now, setNow] = useState(Date.now);
+  const mounted = useRef(false);
+  const sequence = useRef(0);
   const applyQuota = useCallback(value => {
     const valid = validTrainingQuota(value);
-    if (valid) { setQuota(valid); setNow(Date.now()); }
+    if (valid) { sequence.current++; setQuota(valid); setNow(Date.now()); }
   }, []);
 
-  useEffect(() => {
-    let active = true;
-    invoke('evaluateTherapistResponse', { action: 'status' })
-      .then(response => { if (active) applyQuota(response.data?.quota); })
-      .catch(() => {}); // The evaluation endpoint still fails closed if its own quota check fails.
-    return () => { active = false; };
+  const refreshUsage = useCallback(async () => {
+    const requestSequence = ++sequence.current;
+    try {
+      const response = await invoke('evaluateTherapistResponse', { action: 'status' });
+      if (mounted.current && sequence.current === requestSequence) applyQuota(response.data?.quota);
+    } catch { /* The evaluation endpoint still enforces the server quota. */ }
   }, [invoke, applyQuota]);
+
+  useEffect(() => {
+    mounted.current = true;
+    refreshUsage();
+    return () => { mounted.current = false; sequence.current++; };
+  }, [refreshUsage]);
 
   const until = quota ? Date.parse(quota.remaining === 0 ? quota.reset_at : quota.next_allowed_at) : 0;
   useEffect(() => {
     if (until <= Date.now()) return;
-    let active = true;
     const delay = Math.min(until - Date.now(), quota.remaining === 0 ? 60000 : 1000);
     const timer = setTimeout(() => {
       setNow(Date.now());
       if (Date.now() >= until) {
-        invoke('evaluateTherapistResponse', { action: 'status' })
-          .then(response => { if (active) applyQuota(response.data?.quota); })
-          .catch(() => {});
+        refreshUsage();
       }
     }, Math.max(1, delay));
-    return () => { active = false; clearTimeout(timer); };
-  }, [until, quota, now, invoke, applyQuota]);
+    return () => clearTimeout(timer);
+  }, [until, quota, now, refreshUsage]);
 
   return { quota, applyQuota, blocked: until > now, seconds: Math.max(0, Math.ceil((until - now) / 1000)) };
 }

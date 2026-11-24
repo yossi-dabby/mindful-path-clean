@@ -1,11 +1,29 @@
-import { createClientFromRequest } from 'npm:@base44/sdk@0.8.23';
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.63';
+import { readTrainingInput, reserveTrainingUsage, trainingUsage, TrainingLimitError } from './limits.js';
 
+const HEADERS = { 'Cache-Control': 'private, no-store', Vary: 'Authorization' };
 Deno.serve(async (req) => {
-  const base44 = createClientFromRequest(req);
-  const user = await base44.auth.me();
-  if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 });
-
-  const { scenario, conversationHistory, therapistResponse } = await req.json();
+  let quota;
+  try {
+    if (req.method !== 'POST') {
+      return Response.json({ error: 'Method not allowed' }, { status: 405, headers: { ...HEADERS, Allow: 'POST' } });
+    }
+    const base44 = createClientFromRequest(req);
+    const user = await base44.auth.me().catch(error => {
+      const status = error.status ?? error.response?.status;
+      if (status === 401 || status === 403) return null;
+      throw error;
+    });
+    if (!user?.id) return Response.json({ error: 'Unauthorized' }, { status: 401, headers: HEADERS });
+    const input = await readTrainingInput(req);
+    const users = base44.asServiceRole.entities.User;
+    if (input.action === 'status') {
+      return Response.json({ quota: await trainingUsage(users, user.id) }, { headers: HEADERS });
+    }
+    // Reserve atomically BEFORE either paid AI call. A started evaluation keeps its
+    // reservation even if the provider fails, since it may already have consumed credits.
+    quota = await reserveTrainingUsage(users, user.id);
+    const { scenario, conversationHistory, therapistResponse } = input;
 
   const systemPrompt = `You are an expert CBT supervisor evaluating a trainee therapist's response during a simulated patient interaction.
 
@@ -96,5 +114,17 @@ Based on how you (as this patient) would realistically react, write your next me
     model: 'claude_sonnet_4_6'
   });
 
-  return Response.json({ feedback: result, patientReply });
+    return Response.json({ feedback: result, patientReply, quota }, { headers: HEADERS });
+  } catch (error) {
+    if (error instanceof TrainingLimitError) {
+      return Response.json({ error: error.code, code: error.code, ...(error.quota ? { quota: error.quota } : {}) }, {
+        status: error.status,
+        headers: { ...HEADERS, ...(error.retryAfter ? { 'Retry-After': String(error.retryAfter) } : {}) },
+      });
+    }
+    // Do not expose provider errors or log patient/therapist text.
+    console.error('[Training] Evaluation unavailable');
+    const code = quota ? 'TRAINING_EVALUATION_FAILED' : 'TRAINING_USAGE_UNAVAILABLE';
+    return Response.json({ error: code, code, ...(quota ? { quota } : {}) }, { status: 503, headers: HEADERS });
+  }
 });

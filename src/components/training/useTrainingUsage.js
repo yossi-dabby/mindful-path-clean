@@ -42,16 +42,18 @@ export function useTrainingUsage(invoke) {
 
   const until = quota ? Date.parse(quota.remaining === 0 ? quota.reset_at : quota.next_allowed_at) : 0;
   useEffect(() => {
-    if (until <= Date.now()) return;
-    const delay = Math.min(until - Date.now(), quota.remaining === 0 ? 60000 : 1000);
-    const timer = setTimeout(() => {
-      setNow(Date.now());
-      if (Date.now() >= until) {
-        refreshUsage();
-      }
-    }, Math.max(1, delay));
+    if (!until) return;
+    if (until <= Date.now()) { setNow(Date.now()); return; }
+    let timer;
+    const tick = () => {
+      const timestamp = Date.now();
+      setNow(timestamp);
+      if (timestamp >= until) { refreshUsage(); return; }
+      timer = setTimeout(tick, Math.max(1, Math.min(until - timestamp, quota.remaining === 0 ? 60000 : 1000)));
+    };
+    timer = setTimeout(tick, Math.max(1, Math.min(until - Date.now(), quota.remaining === 0 ? 60000 : 1000)));
     return () => clearTimeout(timer);
-  }, [until, quota, now, refreshUsage]);
+  }, [until, quota?.remaining, refreshUsage]);
 
   return { quota, applyQuota, blocked: until > now, seconds: Math.max(0, Math.ceil((until - now) / 1000)) };
 }

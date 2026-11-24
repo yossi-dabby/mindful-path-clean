@@ -292,7 +292,8 @@ Deno.serve(async (req) => {
     // Workflows call as their creator (an app admin). Authenticate every request
     // before trusting an event payload or touching the index/provider credentials.
     const user = await base44.auth.me().catch((error) => {
-      if (error.status === 401 || error.response?.status === 401) return null;
+      const status = error.status ?? error.response?.status;
+      if (status === 401 || status === 403) return null;
       throw error;
     });
     if (!user) {

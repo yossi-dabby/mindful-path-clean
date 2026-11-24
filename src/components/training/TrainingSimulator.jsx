@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Send, RotateCcw, Loader2, ChevronRight } from 'lucide-react';
 import FeedbackPanel from './FeedbackPanel';
+import { useTrainingUsage, trainingErrorKey } from './useTrainingUsage';
 
 const DIFFICULTY_COLORS = {
   Easy: 'bg-green-100 text-green-800 border-green-300',
@@ -14,8 +15,10 @@ const DIFFICULTY_COLORS = {
 };
 
 export default function TrainingSimulator({ scenario, onReset }) {
-  const {t}=useTranslation();
-  const [error,setError]=useState(false);
+  const { t, i18n } = useTranslation();
+  const [error, setError] = useState(null);
+  const { quota, applyQuota, blocked, seconds } = useTrainingUsage(base44.functions.invoke);
+  const sendingRef = useRef(false);
   const [messages, setMessages] = useState([
     { role: 'patient', content: scenario.openingMessage }
   ]);
@@ -31,9 +34,9 @@ export default function TrainingSimulator({ scenario, onReset }) {
   }, [messages, lastFeedback]);
 
   const handleSend = async () => {
-    if (!input.trim() || loading || sessionEnded) return;
-
-    setError(false);
+    if (!input.trim() || loading || sendingRef.current || sessionEnded || blocked) return;
+    sendingRef.current = true;
+    setError(null);
     const therapistMsg = input.trim();
     setInput('');
     setLoading(true);
@@ -50,6 +53,7 @@ export default function TrainingSimulator({ scenario, onReset }) {
       });
 
       const { feedback, patientReply } = res.data;
+      applyQuota(res.data.quota);
       if (!feedback || typeof feedback.overall !== 'number' || !feedback.scores || typeof feedback.scores !== 'object') throw new Error('Missing feedback');
       setLastFeedback(feedback);
       setTotalScores(prev => [...prev, feedback.overall]);
@@ -60,9 +64,22 @@ export default function TrainingSimulator({ scenario, onReset }) {
       } else {
         setMessages(prev => [...prev, { role: 'patient', content: patientReply }]);
       }
-    } catch { setMessages(messages); setInput(therapistMsg); setError(true); }
-    finally { setLoading(false); }
+    } catch (failure) {
+      setMessages(messages);
+      setInput(therapistMsg);
+      applyQuota((failure?.response?.data ?? failure?.data)?.quota);
+      setError(trainingErrorKey(failure));
+    } finally {
+      sendingRef.current = false;
+      setLoading(false);
+    }
   };
+
+  const resetLabel = quota ? new Intl.DateTimeFormat(i18n.resolvedLanguage || i18n.language || 'en', {
+    dateStyle: 'short', timeStyle: 'short',
+  }).format(new Date(quota.reset_at)) : '';
+  const quotaMessage = blocked ? (quota?.remaining === 0 ? 'stage6.training_daily_limit' : 'stage6.training_cooldown') : null;
+  const visibleError = error && !['stage6.training_daily_limit', 'stage6.training_cooldown'].includes(error) ? error : null;
 
   const avgScore = totalScores.length
     ? (totalScores.reduce((a, b) => a + b, 0) / totalScores.length).toFixed(1)
@@ -125,7 +142,12 @@ export default function TrainingSimulator({ scenario, onReset }) {
           <div ref={bottomRef} />
         </div>
 
-        {error && <p role="alert" className="text-sm text-destructive">{t('stage6.training_error')}</p>}
+        <div className="space-y-1 text-sm text-muted-foreground" aria-live="polite">
+          <p>{t('stage6.training_quota_policy')}</p>
+          {quota && <p>{t('stage6.training_quota_remaining', { remaining: quota.remaining, limit: quota.limit })}</p>}
+          {quotaMessage && <p role="status">{t(quotaMessage, { seconds, reset: resetLabel })}</p>}
+        </div>
+        {visibleError && <p role="alert" className="text-sm text-destructive">{t(visibleError)}</p>}
         {/* Input */}
         {!sessionEnded ? (
           <div className="flex gap-2 items-end">
@@ -133,6 +155,7 @@ export default function TrainingSimulator({ scenario, onReset }) {
               aria-label={t('stage6.training_response')}
               disabled={loading}
               value={input}
+              maxLength={4000}
               onChange={e => setInput(e.target.value)}
               placeholder={t('stage6.training_response')}
               className="resize-none flex-1"
@@ -141,7 +164,7 @@ export default function TrainingSimulator({ scenario, onReset }) {
                 if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) handleSend();
               }}
             />
-            <Button aria-label={t('stage6.send')} onClick={handleSend} disabled={loading || !input.trim()} className="gap-1 self-end" mobileLabelKey="send">
+            <Button aria-label={t('stage6.send')} onClick={handleSend} disabled={loading || blocked || !input.trim()} className="gap-1 self-end" mobileLabelKey="send">
               <Send className="w-4 h-4" />
             </Button>
           </div>

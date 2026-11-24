@@ -1,5 +1,11 @@
 export const stage6UiCopy = {
   "en": {
+    "training_quota_policy": "Up to 20 evaluations per day, with at least 15 seconds between requests. Resets at midnight, Israel time.",
+    "training_quota_remaining": "{{remaining}} of {{limit}} evaluations remaining today.",
+    "training_daily_limit": "Today's evaluations have been used. You can continue at {{reset}}.",
+    "training_cooldown": "You can send another response in {{seconds}} seconds.",
+    "training_input_limit": "Please use a response of up to 4,000 characters. Your draft is preserved.",
+    "training_usage_unavailable": "Usage limits could not be checked. Your draft is preserved; please try again shortly.",
     "retry": "Try again",
     "loading": "Loading…",
     "load_error": "We couldn't load this content. Please try again.",
@@ -178,6 +184,12 @@ export const stage6UiCopy = {
     "copy_error": "Could not copy. Select the code and copy it manually."
   },
   "he": {
+    "training_quota_policy": "עד 20 הערכות ביום, עם מרווח של לפחות 15 שניות בין בקשות. המכסה מתחדשת בחצות לפי שעון ישראל.",
+    "training_quota_remaining": "נותרו היום {{remaining}} מתוך {{limit}} הערכות.",
+    "training_daily_limit": "מכסת ההערכות להיום נוצלה. אפשר להמשיך ב־{{reset}}.",
+    "training_cooldown": "אפשר לשלוח תשובה נוספת בעוד {{seconds}} שניות.",
+    "training_input_limit": "יש לכתוב תשובה באורך של עד 4,000 תווים. הטיוטה שלך נשמרה.",
+    "training_usage_unavailable": "לא ניתן לבדוק כרגע את מכסת השימוש. הטיוטה נשמרה; אפשר לנסות שוב בעוד זמן קצר.",
     "retry": "נסה שוב",
     "loading": "טוען…",
     "load_error": "לא הצלחנו לטעון את התוכן. אנא נסה שוב.",
@@ -356,6 +368,12 @@ export const stage6UiCopy = {
     "copy_error": "לא ניתן להעתיק. בחר את הקוד והעתק אותו ידנית."
   },
   "es": {
+    "training_quota_policy": "Hasta 20 evaluaciones al día, con al menos 15 segundos entre solicitudes. Se renueva a medianoche, hora de Israel.",
+    "training_quota_remaining": "Quedan {{remaining}} de {{limit}} evaluaciones hoy.",
+    "training_daily_limit": "Has utilizado las evaluaciones de hoy. Puedes continuar el {{reset}}.",
+    "training_cooldown": "Puedes enviar otra respuesta en {{seconds}} segundos.",
+    "training_input_limit": "Escribe una respuesta de hasta 4.000 caracteres. Tu borrador se conserva.",
+    "training_usage_unavailable": "No se pudo comprobar el límite de uso. Tu borrador se conserva; vuelve a intentarlo en breve.",
     "retry": "Reintentar",
     "loading": "Cargando…",
     "load_error": "No pudimos cargar el contenido. Inténtalo de nuevo.",
@@ -534,6 +552,12 @@ export const stage6UiCopy = {
     "copy_error": "No se pudo copiar. Selecciona el código y cópialo manualmente."
   },
   "fr": {
+    "training_quota_policy": "Jusqu’à 20 évaluations par jour, avec au moins 15 secondes entre les demandes. Renouvellement à minuit, heure d’Israël.",
+    "training_quota_remaining": "Il reste {{remaining}} évaluations sur {{limit}} aujourd’hui.",
+    "training_daily_limit": "Les évaluations du jour ont été utilisées. Vous pourrez continuer le {{reset}}.",
+    "training_cooldown": "Vous pourrez envoyer une autre réponse dans {{seconds}} secondes.",
+    "training_input_limit": "Utilisez une réponse de 4 000 caractères maximum. Votre brouillon est conservé.",
+    "training_usage_unavailable": "Impossible de vérifier la limite d’utilisation. Votre brouillon est conservé ; réessayez dans un instant.",
     "retry": "Réessayer",
     "loading": "Chargement…",
     "load_error": "Impossible de charger le contenu. Réessayez.",
@@ -712,6 +736,12 @@ export const stage6UiCopy = {
     "copy_error": "Copie impossible. Sélectionnez le code et copiez-le manuellement."
   },
   "de": {
+    "training_quota_policy": "Bis zu 20 Bewertungen pro Tag, mit mindestens 15 Sekunden zwischen Anfragen. Zurücksetzung um Mitternacht israelischer Zeit.",
+    "training_quota_remaining": "Heute sind noch {{remaining}} von {{limit}} Bewertungen verfügbar.",
+    "training_daily_limit": "Die heutigen Bewertungen sind aufgebraucht. Du kannst am {{reset}} fortfahren.",
+    "training_cooldown": "Du kannst in {{seconds}} Sekunden eine weitere Antwort senden.",
+    "training_input_limit": "Bitte verwende höchstens 4.000 Zeichen. Dein Entwurf bleibt erhalten.",
+    "training_usage_unavailable": "Das Nutzungslimit konnte nicht geprüft werden. Dein Entwurf bleibt erhalten; versuche es gleich noch einmal.",
     "retry": "Erneut versuchen",
     "loading": "Wird geladen…",
     "load_error": "Der Inhalt konnte nicht geladen werden. Bitte erneut versuchen.",
@@ -890,6 +920,12 @@ export const stage6UiCopy = {
     "copy_error": "Kopieren fehlgeschlagen. Code auswählen und manuell kopieren."
   },
   "it": {
+    "training_quota_policy": "Fino a 20 valutazioni al giorno, con almeno 15 secondi tra le richieste. Il limite si rinnova a mezzanotte, ora di Israele.",
+    "training_quota_remaining": "Oggi restano {{remaining}} valutazioni su {{limit}}.",
+    "training_daily_limit": "Hai utilizzato le valutazioni di oggi. Puoi continuare il {{reset}}.",
+    "training_cooldown": "Puoi inviare un’altra risposta tra {{seconds}} secondi.",
+    "training_input_limit": "Scrivi una risposta di massimo 4.000 caratteri. La bozza è conservata.",
+    "training_usage_unavailable": "Non è stato possibile verificare il limite di utilizzo. La bozza è conservata; riprova tra poco.",
     "retry": "Riprova",
     "loading": "Caricamento…",
     "load_error": "Impossibile caricare il contenuto. Riprova.",
@@ -1068,6 +1104,12 @@ export const stage6UiCopy = {
     "copy_error": "Impossibile copiare. Seleziona il codice e copialo manualmente."
   },
   "pt": {
+    "training_quota_policy": "Até 20 avaliações por dia, com pelo menos 15 segundos entre pedidos. O limite renova-se à meia-noite, hora de Israel.",
+    "training_quota_remaining": "Restam {{remaining}} de {{limit}} avaliações hoje.",
+    "training_daily_limit": "As avaliações de hoje foram utilizadas. Podes continuar em {{reset}}.",
+    "training_cooldown": "Podes enviar outra resposta dentro de {{seconds}} segundos.",
+    "training_input_limit": "Escreve uma resposta com até 4.000 caracteres. O rascunho foi preservado.",
+    "training_usage_unavailable": "Não foi possível verificar o limite de utilização. O rascunho foi preservado; tenta novamente em breve.",
     "retry": "Tentar novamente",
     "loading": "Carregando…",
     "load_error": "Não foi possível carregar o conteúdo. Tente novamente.",

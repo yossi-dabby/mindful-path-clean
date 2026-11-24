@@ -5,6 +5,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { useTranslation } from 'react-i18next';
 import { execFileSync } from 'node:child_process';
 import i18n from '../../src/components/i18n/i18nConfig.jsx';
+import { APP_LANGUAGE_STORAGE_KEY } from '../../src/components/i18n/appLocale.js';
 
 const languages = ['en', 'he', 'es', 'fr', 'de', 'it', 'pt'];
 
@@ -24,7 +25,7 @@ describe('i18next security upgrade — actual app initialization and React integ
       expect(i18n.resolvedLanguage).toBe(language);
       expect(document.documentElement.lang).toBe(language);
       expect(document.documentElement.dir).toBe(language === 'he' ? 'rtl' : 'ltr');
-      expect(localStorage.getItem('appLanguage')).toBe(language);
+      expect(localStorage.getItem(APP_LANGUAGE_STORAGE_KEY)).toBe(language);
 
       for (const key of ['sidebar.home.name', 'sidebar.chat.name', 'daily_check_in.title']) {
         const expected = i18n.getResource(language, 'translation', key);

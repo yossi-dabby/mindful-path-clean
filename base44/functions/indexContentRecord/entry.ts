@@ -9,13 +9,13 @@
  *   delete  → remove from index
  *
  * This function is designed to be called from BOTH:
- *   1. Entity automations (no user auth — automation payload format)
+ *   1. Entity workflows (authenticated workflow-creator admin — legacy payload format)
  *   2. Direct admin calls (admin auth — direct call payload format)
  *
  * AUTH HANDLING:
- *   - Direct admin calls: validated via base44.auth.me() → role === 'admin'
- *   - Automation calls:   detected by presence of body.event.entity_name;
- *                         trusted by the Base44 automation system.
+ *   - Every call, including workflows: base44.auth.me() → role === 'admin'.
+ *   - body.event.entity_name selects only the legacy payload format;
+ *     it is never evidence of caller identity or authorization.
  *
  * SCOPE: Only processes Exercise, Resource, JournalTemplate, Psychoeducation.
  *        Never processes private user records.
@@ -289,16 +289,24 @@ Deno.serve(async (req) => {
   try {
     const t0 = Date.now();
     const base44 = createClientFromRequest(req);
-    const body = await req.json();
-
-    // ── AUTH: direct admin call vs automation call ─────────────────────────────
-    const isAutomationCall = body?.event?.entity_name !== undefined;
-    if (!isAutomationCall) {
-      const user = await base44.auth.me();
-      if (user?.role !== 'admin') {
-        return Response.json({ error: 'Forbidden: Admin access required' }, { status: 403 });
-      }
+    // Workflows call as their creator (an app admin). Authenticate every request
+    // before trusting an event payload or touching the index/provider credentials.
+    const user = await base44.auth.me().catch((error) => {
+      if (error.status === 401 || error.response?.status === 401) return null;
+      throw error;
+    });
+    if (!user) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
+    if (user.role !== 'admin') {
+      return Response.json({ error: 'Forbidden: Admin access required' }, { status: 403 });
+    }
+    const body = await req.json().catch(() => null);
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return Response.json({ error: 'A JSON object is required' }, { status: 400 });
+    }
+    // Payload compatibility only; this flag cannot bypass the admin check above.
+    const isAutomationCall = body?.event?.entity_name !== undefined;
 
     // ── PARSE PAYLOAD (normalize automation vs direct call) ────────────────────
     let entity_type, record_id, event_type, dry_run;

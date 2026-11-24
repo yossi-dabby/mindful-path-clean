@@ -107,8 +107,12 @@ describe('normalizeAgentMessage ownership and privacy', () => {
   it('rejects signed-out callers before fetching a conversation', async () => {
     const f = fixture('normalizeAgentMessage', null);
     expect((await f.call({ conversation_id: 'conversation-a' })).status).toBe(401);
-    f.client.auth.me.mockRejectedValueOnce(Object.assign(new Error('signed out'), { status: 401 }));
-    expect((await f.call({ conversation_id: 'conversation-a' })).status).toBe(401);
+    for (const status of [401, 403]) {
+      f.client.auth.me.mockRejectedValueOnce(Object.assign(new Error('signed out'), { status }));
+      expect((await f.call({ conversation_id: 'conversation-a' })).status).toBe(401);
+      f.client.auth.me.mockRejectedValueOnce(Object.assign(new Error('signed out'), { response: { status } }));
+      expect((await f.call({ conversation_id: 'conversation-a' })).status).toBe(401);
+    }
     expect(f.getConversation).not.toHaveBeenCalled();
   });
 
@@ -162,8 +166,12 @@ describe('indexContentRecord authorization and workflow compatibility', () => {
   it('blocks direct non-admin calls and signed-out SDK failures', async () => {
     const f = fixture('indexContentRecord', OWNER);
     expect((await f.call({ entity_type: 'Resource', record_id: 'record-a' })).status).toBe(403);
-    f.client.auth.me.mockRejectedValueOnce(Object.assign(new Error('signed out'), { status: 401 }));
-    expect((await f.call(eventBody())).status).toBe(401);
+    for (const status of [401, 403]) {
+      f.client.auth.me.mockRejectedValueOnce(Object.assign(new Error('signed out'), { status }));
+      expect((await f.call(eventBody())).status).toBe(401);
+      f.client.auth.me.mockRejectedValueOnce(Object.assign(new Error('signed out'), { response: { status } }));
+      expect((await f.call(eventBody())).status).toBe(401);
+    }
     expect(f.fetchMock).not.toHaveBeenCalled();
   });
 

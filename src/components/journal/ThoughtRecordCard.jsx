@@ -14,11 +14,12 @@ import AiJournalSuggestions from './AiJournalSuggestions';
 import AiEntrySummary from './AiEntrySummary';
 import { journalNumberOrNull } from './journalPresentation';
 import DOMPurify from 'dompurify';
+import { sanitizeJournalRichText } from './journalRichText';
 
 const stripHtml = (html) => {
   if (!html) return '';
   const temporary = document.createElement('div');
-  temporary.innerHTML = html;
+  temporary.innerHTML = sanitizeJournalRichText(html);
   return temporary.textContent || temporary.innerText || '';
 };
 const normalizeKey = (value = '') => value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');

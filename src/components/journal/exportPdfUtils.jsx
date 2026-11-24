@@ -1,5 +1,6 @@
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
+import { sanitizeJournalRichText } from './journalRichText';
 
 import i18n from '../i18n/i18nConfig';
 import { buildThoughtRecordHtml, buildSessionSummaryHtml } from './journalExportHtml';
@@ -23,7 +24,7 @@ const captureAndSavePdf = async (htmlContent, filename) => {
     'line-height:1.5',
     'color:#222',
   ].join(';');
-  container.innerHTML = htmlContent;
+  container.innerHTML = sanitizeJournalRichText(htmlContent);
   document.body.appendChild(container);
 
   try {

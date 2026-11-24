@@ -22,7 +22,8 @@ import {
   applyAppLocaleSideEffects,
   applyAppLocaleToDocument,
   getCurrentAppLocale,
-  resolveInitialAppLocale
+  resolveInitialAppLocale,
+  SUPPORTED_APP_LOCALES
 } from './appLocale';
 
 // Apply mind games UI + content translations to all languages
@@ -60,6 +61,9 @@ i18n
   .init({
     resources: translations,
     fallbackLng: 'en',
+    supportedLngs: SUPPORTED_APP_LOCALES,
+    // Preserve intentional empty translations when upgrading to i18next 27.
+    returnEmptyString: true,
     lng: resolveInitialAppLocale(),
     
     detection: {

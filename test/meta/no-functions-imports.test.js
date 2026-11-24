@@ -60,6 +60,7 @@ const DELETION_HANDLER = path.resolve(TEST_DIR, '../base44/functions/fileDeletio
 const DELETION_IMPORT = "import { deletionError, ownedAttachments, openDeletionRequests, collectManifest, manifestHash, requestFileDeletion, publicDeletionStatus } from './queue.js';";
 const FILE_QUEUE_IMPORT = "import { assertNoFileDeletion } from './fileDeletionQueue.js';";
 const PORTABLE_RELEASE = path.resolve(TEST_DIR, '../base44/functions/getHebrewFormsPilot/releases.js');
+const PORTABLE_TRAINING_LIMITS = path.resolve(TEST_DIR, '../base44/functions/evaluateTherapistResponse/limits.js');
 
 const PORTABLE_ATTACHMENTS = ['uploadAttachment', 'extractPdfText'].map((name) => path.resolve(TEST_DIR, `../base44/functions/${name}/handler.js`));
 
@@ -86,6 +87,12 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
 
   it('the explicitly allowed account access modules have no runtime imports or platform APIs', () => {
     for (const file of PORTABLE_ACCESS) {
+      expect(fs.readFileSync(file, 'utf8')).not.toMatch(/\b(?:import|require|Deno)\b/);
+    }
+  });
+
+  it('training quota helpers use only portable JavaScript and Web APIs', () => {
+    for (const file of [PORTABLE_TRAINING_LIMITS, path.resolve(TEST_DIR, '../base44/actors/TrainingUsage/limits.js')]) {
       expect(fs.readFileSync(file, 'utf8')).not.toMatch(/\b(?:import|require|Deno)\b/);
     }
   });
@@ -118,7 +125,7 @@ describe('meta: no test file imports from functions/ (Deno runtime code)', () =>
       const source = fs.readFileSync(filePath, 'utf8');
       for (const match of source.matchAll(FUNCTIONS_IMPORT_RE)) {
         expect(
-          [PORTABLE_HELPER, PORTABLE_RELEASE, DELETION_HANDLER, REPORT_HANDLER, RETENTION_HANDLER, ...PORTABLE_ATTACHMENTS, ...PORTABLE_ACCESS],
+          [PORTABLE_HELPER, PORTABLE_RELEASE, PORTABLE_TRAINING_LIMITS, DELETION_HANDLER, REPORT_HANDLER, RETENTION_HANDLER, ...PORTABLE_ATTACHMENTS, ...PORTABLE_ACCESS],
           `Found forbidden platform functions/ import in ${relativePath}: "${match[0]}"`
         ).toContain(path.resolve(path.dirname(filePath), match[1]));
       }

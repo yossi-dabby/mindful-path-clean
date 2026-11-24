@@ -70,6 +70,45 @@
           }
         }
       }
+    },
+    "mp_training_day": {
+      "type": "string",
+      "description": "Server-only training quota day in Asia/Jerusalem; no conversation content.",
+      "rls": {
+        "create": false,
+        "read": false,
+        "update": false
+      }
+    },
+    "mp_training_count": {
+      "type": "integer",
+      "description": "Server-only number of accepted training evaluations for this quota day.",
+      "minimum": 0,
+      "rls": {
+        "create": false,
+        "read": false,
+        "update": false
+      }
+    },
+    "mp_training_next_at": {
+      "type": "integer",
+      "description": "Server-only earliest next training request time, Unix milliseconds.",
+      "minimum": 0,
+      "rls": {
+        "create": false,
+        "read": false,
+        "update": false
+      }
+    },
+    "mp_training_revision": {
+      "type": "integer",
+      "description": "Server-only atomic compare-and-swap revision for the training quota.",
+      "minimum": 0,
+      "rls": {
+        "create": false,
+        "read": false,
+        "update": false
+      }
     }
   },
   "required": []

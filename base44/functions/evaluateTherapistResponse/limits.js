@@ -67,44 +67,34 @@ export async function trainingUsage(users, userId, clock = Date.now) {
   return metadata(stateFrom(row, userId, now), now);
 }
 
+// Only call from TrainingUsage's per-user serialized actor. User.update does
+// not support compare-and-swap; the actor is the cross-instance concurrency gate.
 export async function reserveTrainingUsage(users, userId, clock = Date.now) {
-  for (let attempt = 0; attempt < 4; attempt++) {
-    const row = await users.get(userId);
-    const now = clock();
-    const state = stateFrom(row, userId, now);
-    const quota = metadata(state, now);
-    if (quota.remaining === 0) {
-      throw new TrainingLimitError(429, 'TRAINING_DAILY_LIMIT', quota,
-        Math.max(1, Math.ceil((Date.parse(quota.reset_at) - now) / 1000)));
-    }
-    if (state.nextAt > now) {
-      throw new TrainingLimitError(429, 'TRAINING_RATE_LIMIT', quota,
-        Math.max(1, Math.ceil((state.nextAt - now) / 1000)));
-    }
-
-    const next = {
-      day: quotaDay(now), count: DAILY_LIMIT - quota.remaining + 1,
-      nextAt: now + MIN_INTERVAL_MS, revision: state.revision + 1,
-    };
-    // Base44 rechecks conditions atomically only with ONE plain id.
-    // Use the pre-existing User record: no upsert/create race on first use.
-    const query = row.mp_training_revision == null
-      ? { id: userId, $or: [
-          { mp_training_revision: { $exists: false } },
-          { mp_training_revision: null },
-        ] }
-      : { id: userId, mp_training_revision: state.revision };
-    const result = await users.updateMany(query, { $set: {
-      mp_training_day: next.day,
-      mp_training_count: next.count,
-      mp_training_next_at: next.nextAt,
-      mp_training_revision: next.revision,
-    } });
-    if (result?.updated === 1) return metadata(next, now);
-    if (result?.updated !== 0) throw fail(503, 'TRAINING_USAGE_UNAVAILABLE');
-    // A concurrent caller won. Read fresh state and apply its new limit/cooldown.
+  const row = await users.get(userId);
+  const now = clock();
+  const state = stateFrom(row, userId, now);
+  const quota = metadata(state, now);
+  if (quota.remaining === 0) {
+    throw new TrainingLimitError(429, 'TRAINING_DAILY_LIMIT', quota,
+      Math.max(1, Math.ceil((Date.parse(quota.reset_at) - now) / 1000)));
   }
-  throw fail(503, 'TRAINING_USAGE_UNAVAILABLE');
+  if (state.nextAt > now) {
+    throw new TrainingLimitError(429, 'TRAINING_RATE_LIMIT', quota,
+      Math.max(1, Math.ceil((state.nextAt - now) / 1000)));
+  }
+  const next = {
+    day: quotaDay(now), count: DAILY_LIMIT - quota.remaining + 1,
+    nextAt: now + MIN_INTERVAL_MS, revision: state.revision + 1,
+  };
+  const fields = {
+    mp_training_day: next.day, mp_training_count: next.count,
+    mp_training_next_at: next.nextAt, mp_training_revision: next.revision,
+  };
+  const saved = await users.update(userId, fields);
+  if (!saved || saved.id !== userId || Object.entries(fields).some(([key,value]) => saved[key] !== value)) {
+    throw fail(503, 'TRAINING_USAGE_UNAVAILABLE');
+  }
+  return metadata(next, now);
 }
 
 export async function readTrainingInput(req) {

@@ -1,5 +1,5 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.63';
-import { readTrainingInput, reserveTrainingUsage, trainingUsage, TrainingLimitError } from './limits.js';
+import { readTrainingInput, TrainingLimitError } from './limits.js';
 
 const HEADERS = { 'Cache-Control': 'private, no-store', Vary: 'Authorization' };
 Deno.serve(async (req) => {
@@ -16,13 +16,21 @@ Deno.serve(async (req) => {
     });
     if (!user?.id) return Response.json({ error: 'Unauthorized' }, { status: 401, headers: HEADERS });
     const input = await readTrainingInput(req);
-    const users = base44.asServiceRole.entities.User;
-    if (input.action === 'status') {
-      return Response.json({ quota: await trainingUsage(users, user.id) }, { headers: HEADERS });
+    // Only this authenticated server chooses the actor's user id. The actor
+    // serializes the durable quota update across every tab and function instance.
+    const usage = await base44.asServiceRole.actors.TrainingUsage(user.id).usage({
+      action: input.action === 'status' ? 'status' : 'reserve',
+    });
+    if (!usage?.ok) {
+      if ([403,429,503].includes(usage?.status) && typeof usage?.code === 'string') {
+        throw new TrainingLimitError(usage.status, usage.code, usage.quota, usage.retryAfter);
+      }
+      throw new TrainingLimitError(503, 'TRAINING_USAGE_UNAVAILABLE');
     }
-    // Reserve atomically BEFORE either paid AI call. A started evaluation keeps its
-    // reservation even if the provider fails, since it may already have consumed credits.
-    quota = await reserveTrainingUsage(users, user.id);
+    quota = usage.quota;
+    if (input.action === 'status') return Response.json({ quota }, { headers: HEADERS });
+    // Reservation precedes BOTH paid calls and remains if a provider fails,
+    // because that request may already have consumed AI credits.
     const { scenario, conversationHistory, therapistResponse } = input;
 
   const systemPrompt = `You are an expert CBT supervisor evaluating a trainee therapist's response during a simulated patient interaction.

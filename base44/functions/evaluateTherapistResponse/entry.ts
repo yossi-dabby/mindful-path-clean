@@ -123,7 +123,11 @@ Based on how you (as this patient) would realistically react, write your next me
       });
     }
     // Do not expose provider errors or log patient/therapist text.
-    console.error('[Training] Evaluation unavailable');
+    console.error('[Training] Evaluation unavailable', {
+      stage: quota ? 'provider' : 'usage',
+      kind: error instanceof TypeError ? 'type_error' : 'request_error',
+      status: Number(error?.status ?? error?.response?.status) || 0,
+    });
     const code = quota ? 'TRAINING_EVALUATION_FAILED' : 'TRAINING_USAGE_UNAVAILABLE';
     return Response.json({ error: code, code, ...(quota ? { quota } : {}) }, { status: 503, headers: HEADERS });
   }

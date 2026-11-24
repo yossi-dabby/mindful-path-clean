@@ -9,22 +9,38 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
-    const user = await base44.auth.me();
+    const user = await base44.auth.me().catch((error) => {
+      if (error.status === 401 || error.response?.status === 401) return null;
+      throw error;
+    });
     
     if (!user) {
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { conversation_id } = await req.json();
+    const body = await req.json().catch(() => null);
+    const conversation_id = body?.conversation_id;
 
-    if (!conversation_id) {
+    if (typeof conversation_id !== 'string' || !conversation_id.trim() || conversation_id.length > 256) {
       return Response.json({ error: 'conversation_id required' }, { status: 400 });
     }
 
-    // Fetch the conversation
-    const conversation = await base44.asServiceRole.agents.getConversation(conversation_id);
-    
-    if (!conversation || !conversation.messages) {
+    // Keep the caller's access scope, then independently verify ownership.
+    const conversation = await base44.agents.getConversation(conversation_id).catch((error) => {
+      const status = error.status ?? error.response?.status;
+      if (status === 403 || status === 404) return null;
+      throw error;
+    });
+    const ownsConversation = conversation && (
+      conversation.created_by_id
+        ? Boolean(user.id && conversation.created_by_id === user.id)
+        : Boolean(user.email && conversation.created_by === user.email)
+    );
+    // Return the same result for absent and foreign conversations, before reading messages.
+    if (!ownsConversation) {
+      return Response.json({ error: 'Conversation not found' }, { status: 404 });
+    }
+    if (!Array.isArray(conversation.messages)) {
       return Response.json({ error: 'Conversation not found' }, { status: 404 });
     }
 
@@ -61,9 +77,9 @@ Deno.serve(async (req) => {
           // So we track this for monitoring but can't modify past messages
           normalizedCount++;
           
-          console.log(`[Normalize] Would normalize: "${assistantMessage.substring(0, 50)}..."`);
+          // Never write conversation content to server logs.
         } catch (err) {
-          console.error('[Normalize] Extraction error:', err);
+          console.error('[Normalize] Extraction failed');
           errorCount++;
         }
       } else if (typeof message.content === 'string') {
@@ -83,13 +99,10 @@ Deno.serve(async (req) => {
       objects_found: normalizedCount,
       errors: errorCount,
       note: 'Message normalization requires platform-level support. Currently monitoring only.'
-    });
+    }, { headers: { 'Cache-Control': 'no-store' } });
 
   } catch (error) {
-    console.error('Message normalization error:', error);
-    return Response.json({ 
-      error: 'Normalization failed',
-      message: error.message 
-    }, { status: 500 });
+    console.error('Message normalization failed');
+    return Response.json({ error: 'Normalization failed' }, { status: 500 });
   }
 });

@@ -268,7 +268,7 @@ export const translations = {
           export_failed: "Failed to export data",
           delete_success: "All data cleared successfully",
           delete_failed: "Failed to delete data",
-          privacy_notice: "Privacy notice: Mindful Path is a wellness and self-help service, not a medical or emergency service. Export and deletion behavior is described in the Privacy Notice. For data questions or requests, contact yosephdabby4@gmail.com."
+          privacy_notice: "Privacy notice: Mindful Path is a wellness and self-help service, not a medical or emergency service. Export and deletion behavior is described in the Privacy Notice. For data questions or requests, contact contact@mindful-path.me."
         },
         notifications: {
           title: "Notifications",
@@ -2049,7 +2049,7 @@ export const translations = {
           export_failed: "ייצוא הנתונים נכשל",
           delete_success: "כל הנתונים נמחקו בהצלחה",
           delete_failed: "מחיקת הנתונים נכשלה",
-          privacy_notice: "הודעת פרטיות: Mindful Path הוא שירות לרווחה ולעזרה עצמית, ואינו שירות רפואי או שירות חירום. אופן הייצוא והמחיקה מפורט בהודעת הפרטיות. לשאלות או בקשות בנושא נתונים: yosephdabby4@gmail.com."
+          privacy_notice: "הודעת פרטיות: Mindful Path הוא שירות לרווחה ולעזרה עצמית, ואינו שירות רפואי או שירות חירום. אופן הייצוא והמחיקה מפורט בהודעת הפרטיות. לשאלות או בקשות בנושא נתונים: contact@mindful-path.me."
         },
         notifications: {
           title: "התראות",

@@ -24,7 +24,7 @@ describe('public information HTTP access without a session or JavaScript', () =>
       expect(response.headers.get('content-type')).toContain('text/html');
       const html = await response.text();
       expect(html).toContain(`<html lang="${lang}" dir="${lang === 'he' ? 'rtl' : 'ltr'}">`);
-      expect(html).toContain('mailto:yosephdabby4@gmail.com');
+      expect(html).toContain('mailto:contact@mindful-path.me');
       expect(html).toContain('<h1>');
       expect(html).not.toContain('<script');
       expect(html).not.toContain('support@mindful-path.app');

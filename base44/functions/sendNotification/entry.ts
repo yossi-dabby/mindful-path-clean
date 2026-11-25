@@ -1,4 +1,5 @@
-import { createClientFromRequest } from 'npm:@base44/sdk@0.8.20';
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.63';
+import { normalizeEmailRecipient, sendBusinessEmail } from '../../shared/businessEmail.ts';
 
 /**
  * Send an in-app notification (and optionally an email) to a user.
@@ -32,7 +33,7 @@ const TRUSTED_ACTION_ORIGINS = new Set([
   'https://mindful-path-production-7704.up.railway.app',
 ]);
 
-function escapeHtml(value: unknown): string {
+function escapeHtml(value) {
   return String(value ?? '')
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
@@ -41,7 +42,7 @@ function escapeHtml(value: unknown): string {
     .replaceAll("'", '&#039;');
 }
 
-function normalizeActionUrl(value: unknown): string | null {
+function normalizeActionUrl(value) {
   if (typeof value !== 'string' || value.length > 500) return null;
   const trimmed = value.trim();
   if (!trimmed) return null;
@@ -68,7 +69,7 @@ const TYPE_TO_PREF = {
   system: 'emailCritical'
 };
 
-Deno.serve(async (req) => {
+export default async function(req) {
   try {
     const base44 = createClientFromRequest(req);
     const caller = await base44.auth.me().catch(() => null);
@@ -76,7 +77,7 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const body = await req.json();
+    const body = await req.json().catch(() => ({}));
 
     const {
       user_email,
@@ -93,7 +94,10 @@ Deno.serve(async (req) => {
       return Response.json({ error: 'user_email, title and message are required' }, { status: 400 });
     }
 
-    const recipient = String(user_email).trim().toLowerCase();
+    const recipient = normalizeEmailRecipient(user_email);
+    if (!recipient) {
+      return Response.json({ error: 'A single valid recipient email is required' }, { status: 400 });
+    }
     const callerEmail = String(caller.email).trim().toLowerCase();
     if (caller.role !== 'admin' && recipient !== callerEmail) {
       return Response.json({ error: 'Forbidden: notifications may only be sent to your own account' }, { status: 403 });
@@ -151,15 +155,17 @@ Deno.serve(async (req) => {
       }
     }
 
+    let emailSent = false;
     if (shouldSendEmail) {
       try {
-        await base44.asServiceRole.integrations.Core.SendEmail({
+        await sendBusinessEmail(base44, {
           to: recipient,
-          subject: `[MindCompanion] ${title.trim()}`,
+          subject: `[Mindful Path] ${title.trim()}`,
+          html: true,
           body: `
 <div style="font-family: sans-serif; max-width: 560px; margin: 0 auto; padding: 24px; background: #f8fffe; border-radius: 16px;">
   <div style="text-align: center; margin-bottom: 24px;">
-    <h2 style="color: #26A69A; margin: 0; font-weight: 600;">MindCompanion</h2>
+    <h2 style="color: #26A69A; margin: 0; font-weight: 600;">Mindful Path</h2>
   </div>
   <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
     <h3 style="color: #1A3A34; margin-top: 0;">${safeTitle}</h3>
@@ -167,12 +173,13 @@ Deno.serve(async (req) => {
     ${safeActionUrl ? `<a href="${safeActionUrl}" style="display: inline-block; margin-top: 16px; padding: 12px 24px; background: #26A69A; color: white; text-decoration: none; border-radius: 24px; font-weight: 500;">Open App</a>` : ''}
   </div>
   <p style="text-align: center; color: #9AA8A4; font-size: 12px; margin-top: 24px;">
-    You're receiving this because you enabled email notifications in your MindCompanion settings.<br/>
-    <a href="#" style="color: #26A69A;">Manage preferences</a>
+    You're receiving this because you enabled email notifications in your Mindful Path settings.<br/>
+    <a href="https://app.mindful-path.me/Settings" style="color: #26A69A;">Manage preferences</a>
   </p>
 </div>`
         });
 
+        emailSent = true;
         // Mark email as sent
         await base44.asServiceRole.entities.AppNotification.update(notification.id, { email_sent: true });
       } catch (emailErr) {
@@ -180,8 +187,9 @@ Deno.serve(async (req) => {
       }
     }
 
-    return Response.json({ success: true, notification_id: notification.id, email_sent: shouldSendEmail });
+    return Response.json({ success: true, notification_id: notification.id, email_sent: emailSent });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }
-});
+}
+

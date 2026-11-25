@@ -1,6 +1,7 @@
-import { createClientFromRequest } from 'npm:@base44/sdk@0.8.6';
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.63';
+import { sendBusinessEmail } from '../../shared/businessEmail.ts';
 
-Deno.serve(async (req) => {
+export default async function(req) {
   try {
     const base44 = createClientFromRequest(req);
     const caller = await base44.auth.me().catch(() => null);
@@ -78,7 +79,7 @@ Deno.serve(async (req) => {
         if (shouldSend) {
           // Send email if requested
           if (reminder.notification_method === 'email' || reminder.notification_method === 'both') {
-            await base44.asServiceRole.integrations.Core.SendEmail({
+            await sendBusinessEmail(base44, {
               to: goalOwner,
               subject: subject,
               body: message
@@ -152,4 +153,5 @@ Deno.serve(async (req) => {
       error: error.message 
     }, { status: 500 });
   }
-});
+}
+

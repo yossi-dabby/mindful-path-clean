@@ -2,7 +2,7 @@ export const fileDeletionTranslations = {
   "en": {
     "title": "Delete private attachments",
     "notice": "A request blocks access to your private attachments. Support must confirm deletion from storage before we remove the stored references.",
-    "scope": "This covers attachments managed by the private-file feature. Older uploads and agent conversations need separate support review. Contact yosephdabby4@gmail.com.",
+    "scope": "This covers attachments managed by the private-file feature. Older uploads and agent conversations need separate support review. Contact contact@mindful-path.me.",
     "request_confirm": "I want to stop access to these attachments and request their deletion.",
     "request": "Request file deletion",
     "refresh": "Check requests",
@@ -31,7 +31,7 @@ export const fileDeletionTranslations = {
   "he": {
     "title": "מחיקת קבצים פרטיים",
     "notice": "פתיחת בקשה תחסום גישה לקבצים הפרטיים שלך. ההפניות לקבצים יישמרו עד שהתמיכה תאשר את מחיקתם מהאחסון.",
-    "scope": "הבקשה מכסה קבצים המנוהלים באמצעות מנגנון הקבצים הפרטיים. העלאות ישנות ושיחות עם הסוכן דורשות בירור נפרד בתמיכה: yosephdabby4@gmail.com.",
+    "scope": "הבקשה מכסה קבצים המנוהלים באמצעות מנגנון הקבצים הפרטיים. העלאות ישנות ושיחות עם הסוכן דורשות בירור נפרד בתמיכה: contact@mindful-path.me.",
     "request_confirm": "אני מבקש לחסום את הגישה לקבצים האלה ולבקש את מחיקתם.",
     "request": "בקשת מחיקת קבצים",
     "refresh": "בדיקת הבקשות",
@@ -60,7 +60,7 @@ export const fileDeletionTranslations = {
   "es": {
     "title": "Eliminar archivos adjuntos privados",
     "notice": "La solicitud bloquea el acceso a tus archivos privados. Conservamos las referencias hasta que soporte confirme su eliminación del almacenamiento.",
-    "scope": "Incluye los adjuntos gestionados por la función de archivos privados. Las cargas antiguas y las conversaciones del agente requieren revisión aparte: yosephdabby4@gmail.com.",
+    "scope": "Incluye los adjuntos gestionados por la función de archivos privados. Las cargas antiguas y las conversaciones del agente requieren revisión aparte: contact@mindful-path.me.",
     "request_confirm": "Quiero bloquear el acceso a estos adjuntos y solicitar su eliminación.",
     "request": "Solicitar eliminación",
     "refresh": "Consultar solicitudes",
@@ -89,7 +89,7 @@ export const fileDeletionTranslations = {
   "fr": {
     "title": "Supprimer les pièces jointes privées",
     "notice": "Une demande bloque l’accès à vos fichiers privés. Les références sont conservées jusqu’à confirmation de leur suppression du stockage par l’assistance.",
-    "scope": "Cela couvre les pièces jointes gérées par la fonction de fichiers privés. Les anciens téléversements et les conversations de l’agent nécessitent un examen séparé : yosephdabby4@gmail.com.",
+    "scope": "Cela couvre les pièces jointes gérées par la fonction de fichiers privés. Les anciens téléversements et les conversations de l’agent nécessitent un examen séparé : contact@mindful-path.me.",
     "request_confirm": "Je souhaite bloquer l’accès à ces pièces jointes et demander leur suppression.",
     "request": "Demander la suppression",
     "refresh": "Vérifier les demandes",
@@ -118,7 +118,7 @@ export const fileDeletionTranslations = {
   "de": {
     "title": "Private Anhänge löschen",
     "notice": "Eine Anfrage sperrt den Zugriff auf Ihre privaten Dateien. Die Verweise bleiben erhalten, bis der Support die Löschung aus dem Speicher bestätigt.",
-    "scope": "Dies umfasst Anhänge der Funktion für private Dateien. Ältere Uploads und Agentengespräche benötigen eine separate Prüfung: yosephdabby4@gmail.com.",
+    "scope": "Dies umfasst Anhänge der Funktion für private Dateien. Ältere Uploads und Agentengespräche benötigen eine separate Prüfung: contact@mindful-path.me.",
     "request_confirm": "Ich möchte den Zugriff auf diese Anhänge sperren und ihre Löschung beantragen.",
     "request": "Dateilöschung beantragen",
     "refresh": "Anfragen prüfen",
@@ -147,7 +147,7 @@ export const fileDeletionTranslations = {
   "it": {
     "title": "Elimina allegati privati",
     "notice": "La richiesta blocca l’accesso ai tuoi file privati. I riferimenti restano conservati finché l’assistenza non conferma la cancellazione dall’archivio.",
-    "scope": "Include gli allegati gestiti dalla funzione dei file privati. I vecchi caricamenti e le conversazioni dell’agente richiedono una verifica separata: yosephdabby4@gmail.com.",
+    "scope": "Include gli allegati gestiti dalla funzione dei file privati. I vecchi caricamenti e le conversazioni dell’agente richiedono una verifica separata: contact@mindful-path.me.",
     "request_confirm": "Voglio bloccare l’accesso a questi allegati e richiederne l’eliminazione.",
     "request": "Richiedi eliminazione",
     "refresh": "Controlla richieste",
@@ -176,7 +176,7 @@ export const fileDeletionTranslations = {
   "pt": {
     "title": "Excluir anexos privados",
     "notice": "Uma solicitação bloqueia o acesso aos seus arquivos privados. As referências são mantidas até o suporte confirmar a exclusão do armazenamento.",
-    "scope": "Abrange anexos gerenciados pelo recurso de arquivos privados. Uploads antigos e conversas do agente exigem análise separada: yosephdabby4@gmail.com.",
+    "scope": "Abrange anexos gerenciados pelo recurso de arquivos privados. Uploads antigos e conversas do agente exigem análise separada: contact@mindful-path.me.",
     "request_confirm": "Quero bloquear o acesso a estes anexos e solicitar a exclusão.",
     "request": "Solicitar exclusão",
     "refresh": "Verificar solicitações",

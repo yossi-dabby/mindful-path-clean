@@ -6,7 +6,7 @@ import { getBusinessDetails } from './businessDetails.js';
 
 export const LEGAL_EFFECTIVE_DATE = '2026-11-09';
 export const LEGAL_CONSENT_VERSION = '2026-11-09';
-export const LEGAL_CONTACT_EMAIL = 'yosephdabby4@gmail.com';
+export const LEGAL_CONTACT_EMAIL = 'contact@mindful-path.me';
 
 const en = {
   language: 'en',
@@ -25,7 +25,7 @@ const en = {
     intro: 'This notice explains what information Mindful Path processes, why it is used, and the choices available to you. Mindful Path is a wellness and self-help service; it is not an emergency or medical treatment service.',
     sections: [
       { title: 'Who is responsible and how to contact us', paragraphs: [
-        'Mindful Path is operated by דבי יוסף ודבי נצחיה, an Israeli registered partnership (שותפות מורשה), business number 558524088. For support, privacy, access, export, correction or deletion requests: yosephdabby4@gmail.com.',
+        'Mindful Path is operated by דבי יוסף ודבי נצחיה, an Israeli registered partnership (שותפות מורשה), business number 558524088. For support, privacy, access, export, correction or deletion requests: contact@mindful-path.me.',
       ]},
       { title: 'Information we process', bullets: [
         'Account details, such as name, email address, language, preferences, and authentication identifiers.',
@@ -109,10 +109,10 @@ const en = {
         'Mindful Path and its original software and content remain protected by applicable intellectual-property laws. You retain rights in content you submit and permit its processing only as needed to operate, secure, and improve the service as described in the Privacy Notice.',
       ]},
       { title: 'Responsibility and applicable law', paragraphs: [
-        'Nothing in these Terms excludes rights or responsibilities that cannot legally be excluded. The operator is דבי יוסף ודבי נצחיה (שותפות מורשה), business number 558524088. Contact: yosephdabby4@gmail.com.',
+        'Nothing in these Terms excludes rights or responsibilities that cannot legally be excluded. The operator is דבי יוסף ודבי נצחיה (שותפות מורשה), business number 558524088. Contact: contact@mindful-path.me.',
       ]},
       { title: 'Contact and updates', paragraphs: [
-        'Questions about these Terms can be sent to yosephdabby4@gmail.com. Material updates will be identified by a revised effective date and, when appropriate, an in-app notice.',
+        'Questions about these Terms can be sent to contact@mindful-path.me. Material updates will be identified by a revised effective date and, when appropriate, an in-app notice.',
       ]},
     ],
   },
@@ -150,7 +150,7 @@ const he = {
     intro: 'הודעה זו מסבירה איזה מידע Mindful Path מעבדת, לאילו מטרות ובאילו אפשרויות תוכלו לבחור. Mindful Path היא שירות לרווחה נפשית ולעזרה עצמית; היא אינה שירות חירום ואינה שירות רפואי.',
     sections: [
       { title: 'מי אחראי למידע וכיצד פונים אלינו', paragraphs: [
-        'Mindful Path מופעלת בידי דבי יוסף ודבי נצחיה, שותפות מורשה, מספר עוסק 558524088. לתמיכה ולבקשות פרטיות, עיון, ייצוא, תיקון או מחיקה: yosephdabby4@gmail.com.',
+        'Mindful Path מופעלת בידי דבי יוסף ודבי נצחיה, שותפות מורשה, מספר עוסק 558524088. לתמיכה ולבקשות פרטיות, עיון, ייצוא, תיקון או מחיקה: contact@mindful-path.me.',
       ]},
       { title: 'המידע שאנו מעבדים', bullets: [
         'פרטי חשבון כגון שם, כתובת דוא״ל, שפה, העדפות ומזהי התחברות.',
@@ -234,10 +234,10 @@ const he = {
         'Mindful Path והתוכנה והתוכן המקוריים שלה מוגנים בדיני הקניין הרוחני. הזכויות בתוכן שאתם מוסרים נשארות בידיכם, ואתם מתירים את עיבודו רק ככל שנדרש להפעלה, לאבטחה ולשיפור השירות כמתואר בהודעת הפרטיות.',
       ]},
       { title: 'אחריות ודין חל', paragraphs: [
-        'אין בתנאים אלה כדי לשלול זכויות או אחריות שלא ניתן לשלול על פי דין. מפעילת השירות היא דבי יוסף ודבי נצחיה, שותפות מורשה, מספר עוסק 558524088. לפניות: yosephdabby4@gmail.com.',
+        'אין בתנאים אלה כדי לשלול זכויות או אחריות שלא ניתן לשלול על פי דין. מפעילת השירות היא דבי יוסף ודבי נצחיה, שותפות מורשה, מספר עוסק 558524088. לפניות: contact@mindful-path.me.',
       ]},
       { title: 'יצירת קשר ועדכונים', paragraphs: [
-        'שאלות בנושא התנאים ניתן לשלוח ל־yosephdabby4@gmail.com. עדכון מהותי יסומן בתאריך תחילה חדש, ובמידת הצורך גם בהודעה בתוך האפליקציה.',
+        'שאלות בנושא התנאים ניתן לשלוח ל־contact@mindful-path.me. עדכון מהותי יסומן בתאריך תחילה חדש, ובמידת הצורך גם בהודעה בתוך האפליקציה.',
       ]},
     ],
   },
